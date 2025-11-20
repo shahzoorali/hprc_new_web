@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export type HeroAction = {
@@ -12,6 +13,7 @@ type PageHeroProps = {
   description: string;
   actions?: HeroAction[];
   backgroundClassName?: string;
+  backgroundImage?: string;
 };
 
 export function PageHero({
@@ -20,12 +22,26 @@ export function PageHero({
   description,
   actions = [],
   backgroundClassName,
+  backgroundImage,
 }: PageHeroProps) {
   return (
     <section
       className={`relative overflow-hidden rounded-[2.5rem] border border-brand-100 bg-gradient-to-br from-brand-50 to-white px-6 py-20 shadow-[var(--shadow-elevated)] lg:px-16 ${backgroundClassName ?? ""}`}
     >
-      <div className="mx-auto max-w-3xl text-center text-brand-900">
+      {backgroundImage && (
+        <div className="absolute inset-0 z-0">
+          <Image
+            src={backgroundImage}
+            alt=""
+            fill
+            className="object-cover"
+            quality={90}
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-brand-50/90 via-brand-50/80 to-white/90"></div>
+        </div>
+      )}
+      <div className="mx-auto max-w-3xl text-center text-brand-900 relative z-10">
         {eyebrow ? (
           <p className="text-xs font-semibold uppercase tracking-[0.4em] text-brand-600">
             {eyebrow}

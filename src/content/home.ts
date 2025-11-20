@@ -1,5 +1,12 @@
 import type { HeroAction } from "@/components/ui/page-hero";
 
+export type EventItem = {
+  title: string;
+  description: string;
+  href: string;
+  iconName: string;
+};
+
 export const homeContent = {
   hero: {
     eyebrow: "Hyderabad Polo & Riding Club",
@@ -64,6 +71,50 @@ export const homeContent = {
       quote:
         "The Sports Centre rivals leading metropolitan clubs. Our family enjoys weekend tennis clinics while the kids attend riding camp.",
       author: "Family Membership",
+    },
+  ],
+  events: [
+    {
+      title: "Learn Riding",
+      description:
+        "HPRC conducts various training events in riding for members of all age groups in order to help you excel at the sport.",
+      href: "/programmes/beginners",
+      iconName: "book",
+    },
+    {
+      title: "Weekend Getaway",
+      description:
+        "We are coming up with Rooms very soon, that may be booked by our members and their guests for the perfect weekend getaways.",
+      href: "/hospitality/luxury-rooms",
+      iconName: "home",
+    },
+    {
+      title: "Banquet Hall",
+      description:
+        "Elegantly designed to provide a luxurious setting and impeccable service for your special occasions. Perfect for hosting weddings, corporate events and social gatherings.",
+      href: "/hospitality/banquets",
+      iconName: "building",
+    },
+    {
+      title: "Polo",
+      description:
+        "Lose yourself in the glamorous world of polo at the exclusive Hyderabad Polo & Riding Club. Even complete novices are given the strong foundations to excel.",
+      href: "/programmes/polo",
+      iconName: "lightning",
+    },
+    {
+      title: "Sports Center",
+      description:
+        "HPRC has many options for a sports enthusiast to stay engaged. Besides Polo, equestrian and riding facilities we offer Basketball, Tennis, Squash, Badminton, Swimming and Futsal.",
+      href: "/sports-centre",
+      iconName: "check",
+    },
+    {
+      title: "Restaurants",
+      description:
+        "HPRC features two exquisite dining options where members can enjoy a culinary experience. Elegant dining experience at Chukkers and a more relaxed & casual atmosphere at Snaffles Bistro, both offering delicious cuisines.",
+      href: "/hospitality",
+      iconName: "utensils",
     },
   ],
 };

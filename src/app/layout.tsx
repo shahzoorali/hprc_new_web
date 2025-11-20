@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
   },
   other: {
-    "theme-color": "#592019",
+    "theme-color": "#e31e24",
   },
 };
 

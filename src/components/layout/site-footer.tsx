@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { siteConfig } from "@/config/site";
@@ -13,8 +14,13 @@ export function SiteFooter() {
     <footer className="mt-16 border-t border-gray-200 bg-gradient-to-b from-white to-brand-50/60">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:grid-cols-2 lg:grid-cols-4">
         <div>
-          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-800 text-lg font-semibold text-white shadow-md shadow-brand-900/20">
-            HP
+          <div className="relative h-12 w-12 flex-shrink-0">
+            <Image
+              src="/hprc_logo.png"
+              alt="HPRC Logo"
+              fill
+              className="object-contain"
+            />
           </div>
           <p className="mt-4 text-sm text-gray-600">{siteConfig.description}</p>
           <div className="mt-4 space-y-1 text-sm text-gray-600">
