@@ -50,11 +50,6 @@ export default function NewsPage() {
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    onError={(e) => {
-                      // Fallback to stock image if source image fails to load
-                      const target = e.target as HTMLImageElement;
-                      target.src = "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=800&q=80";
-                    }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
                   {article.category && (
