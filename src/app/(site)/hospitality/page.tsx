@@ -46,14 +46,14 @@ export default function HospitalityPage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
                 </div>
-                <div className="p-8">
-                  <h2 className="text-2xl font-semibold text-white relative z-10">{venue.name}</h2>
-                  <p className="mt-3 text-sm text-white/90 relative z-10">{venue.description}</p>
-                  <ul className="mt-4 space-y-3 text-sm text-white/90 relative z-10">
+                <div className="p-8 bg-white">
+                  <h2 className="text-2xl font-semibold text-gray-900">{venue.name}</h2>
+                  <p className="mt-3 text-sm text-gray-600">{venue.description}</p>
+                  <ul className="mt-4 space-y-3 text-sm text-gray-700">
                     {venue.highlights.map((highlight) => (
                       <li key={highlight} className="flex gap-3">
                         <span
-                          className="mt-1 h-2 w-2 rounded-full bg-brand-400"
+                          className="mt-1 h-2 w-2 rounded-full bg-brand-500"
                           aria-hidden="true"
                         />
                         <span>{highlight}</span>
@@ -96,11 +96,11 @@ export default function HospitalityPage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                 </div>
-                <div className="p-6">
-                  <h3 className="text-base font-semibold text-white relative z-10">
+                <div className="p-6 bg-white">
+                  <h3 className="text-base font-semibold text-gray-900">
                     {experience.title}
                   </h3>
-                  <p className="mt-3 text-sm text-white/90 relative z-10">{experience.description}</p>
+                  <p className="mt-3 text-sm text-gray-600">{experience.description}</p>
                 </div>
               </div>
             );

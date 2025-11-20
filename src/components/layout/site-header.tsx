@@ -1,32 +1,13 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect } from "react";
 
 import { MainNav } from "@/components/navigation/main-nav";
 import { siteConfig } from "@/config/site";
 import { utilityNavigation } from "@/content/navigation";
 
 export function SiteHeader() {
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
-    <header
-      className={`sticky top-0 z-50 w-full border-b transition-all duration-300 ${
-        isScrolled
-          ? "border-brand-200/60 bg-white/98 backdrop-blur-lg shadow-md"
-          : "border-brand-200/30 bg-white/95 backdrop-blur-md shadow-sm"
-      }`}
-    >
+    <header className="relative z-50 w-full border-b border-brand-200/30 bg-white/95 backdrop-blur-md shadow-sm">
       {/* Top Bar - Contact Information */}
       <div className="border-b border-brand-100/40 bg-gradient-to-r from-brand-50/70 via-white to-brand-50/50">
         <div className="mx-auto flex max-w-7xl flex-col gap-2.5 px-4 py-3 text-xs font-medium text-gray-700 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:px-6 lg:px-8">

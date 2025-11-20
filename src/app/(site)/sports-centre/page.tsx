@@ -56,18 +56,18 @@ export default function SportsCentrePage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
                 </div>
-                <div className="p-8">
+                <div className="p-8 bg-white">
                   <div className="flex flex-col gap-4">
-                    <h2 className="text-2xl font-semibold text-white relative z-10">{facility.name}</h2>
-                    <p className="text-sm text-white/90 relative z-10">{facility.description}</p>
-                    <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-300 relative z-10">
+                    <h2 className="text-2xl font-semibold text-gray-900">{facility.name}</h2>
+                    <p className="text-sm text-gray-600">{facility.description}</p>
+                    <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-600">
                       {facility.timings}
                     </p>
-                    <ul className="space-y-3 text-sm text-white/90 relative z-10">
+                    <ul className="space-y-3 text-sm text-gray-700">
                       {facility.highlights.map((highlight) => (
                         <li key={highlight} className="flex gap-3">
                           <span
-                            className="mt-1 h-2 w-2 rounded-full bg-brand-400"
+                            className="mt-1 h-2 w-2 rounded-full bg-brand-500"
                             aria-hidden="true"
                           />
                           <span>{highlight}</span>

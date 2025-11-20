@@ -239,14 +239,14 @@ export default function HomePage() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
                     <div className="absolute right-0 top-0 h-32 w-32 sm:h-40 sm:w-40 rounded-bl-full bg-gradient-to-br from-brand-500/20 to-brand-500/10 transition-all duration-500 group-hover:scale-150"></div>
                   </div>
-                  <div className="p-6 sm:p-8 relative">
-                    <h3 className="text-2xl sm:text-3xl font-extrabold text-white mb-4 leading-tight relative z-10">
+                  <div className="p-6 sm:p-8 bg-white relative">
+                    <h3 className="text-2xl sm:text-3xl font-extrabold text-gray-900 mb-4 leading-tight">
                       {pillar.title}
                     </h3>
-                    <p className="text-white/90 leading-relaxed text-sm sm:text-base relative z-10 mb-6">
+                    <p className="text-gray-600 leading-relaxed text-sm sm:text-base mb-6">
                       {pillar.description}
                     </p>
-                    <span className="relative z-10 inline-flex items-center text-sm sm:text-base font-bold text-white group-hover:text-brand-200 transition-colors duration-300">
+                    <span className="inline-flex items-center text-sm sm:text-base font-bold text-brand-500 group-hover:text-brand-600 transition-colors duration-300">
                       Explore
                       <svg
                         className="ml-2 sm:ml-3 h-5 w-5 sm:h-6 sm:w-6 transition-transform duration-300 group-hover:translate-x-2"
