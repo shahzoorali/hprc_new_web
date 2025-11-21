@@ -25,6 +25,11 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   applicationName: siteConfig.name,
   metadataBase: new URL("https://www.hprc.in"),
+  icons: {
+    icon: "/hprc_logo.png",
+    shortcut: "/hprc_logo.png",
+    apple: "/hprc_logo.png",
+  },
   openGraph: {
     title: siteConfig.name,
     description: siteConfig.description,
@@ -32,6 +37,14 @@ export const metadata: Metadata = {
     url: "https://www.hprc.in",
     locale: "en_IN",
     siteName: siteConfig.name,
+    images: [
+      {
+        url: "/hprc_logo.png",
+        width: 527,
+        height: 457,
+        alt: "HPRC Logo",
+      },
+    ],
   },
   other: {
     "theme-color": "#e31e24",

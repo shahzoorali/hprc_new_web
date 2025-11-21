@@ -18,6 +18,57 @@ export const homeContent = {
       { label: "Explore Programmes", href: "/programmes", variant: "outline" },
     ] satisfies HeroAction[],
   },
+  heroSlides: [
+    {
+      video: "https://youtu.be/-N4h3tTNhKo?si=8LeEguH--TrEupfi",
+      image: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=1920&q=80", // Fallback image
+      imageAlt: "Polo and equestrian sports",
+      title: "Where every experience ",
+      titleHighlight: "is extraordinary",
+      description:
+        "Discover a 10-acre equestrian estate where riders, athletes, and families come together for polo, riding programmes, sports, dining, and celebrations.",
+      actions: [
+        { label: "Apply for Membership", href: "/membership", variant: "primary" as const },
+        { label: "Explore Programmes", href: "/programmes", variant: "outline" as const },
+      ],
+    },
+    {
+      image: "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=1920&q=80",
+      imageAlt: "Equestrian riding training",
+      title: "Master the art of ",
+      titleHighlight: "equestrian excellence",
+      description:
+        "From beginner riding camps to advanced polo chukkers, HPRC develops talent with expert coaches, quality horses, and a structured curriculum.",
+      actions: [
+        { label: "Explore Programmes", href: "/programmes", variant: "primary" as const },
+        { label: "View Facilities", href: "/sports-centre", variant: "outline" as const },
+      ],
+    },
+    {
+      image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1920&q=80",
+      imageAlt: "World-class sports facilities",
+      title: "Premium sports and ",
+      titleHighlight: "recreation facilities",
+      description:
+        "Synthetic courts, indoor arenas, and coaching tie-ups create the perfect setting for year-round tennis, badminton, squash, swimming, and more.",
+      actions: [
+        { label: "Discover Sports Centre", href: "/sports-centre", variant: "primary" as const },
+        { label: "Learn More", href: "/about", variant: "outline" as const },
+      ],
+    },
+    {
+      image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=80",
+      imageAlt: "Fine dining and hospitality",
+      title: "Elegant dining and ",
+      titleHighlight: "luxurious hospitality",
+      description:
+        "Chukkers Restaurant, Snaffles Bistro, banquets, and luxury rooms offer curated experiences for members, guests, and visiting teams.",
+      actions: [
+        { label: "Explore Hospitality", href: "/hospitality", variant: "primary" as const },
+        { label: "Contact Us", href: "/contact", variant: "outline" as const },
+      ],
+    },
+  ],
   pillars: [
     {
       title: "Riding & Polo",

@@ -28,6 +28,11 @@ const nextConfig: NextConfig = {
         hostname: "www.newsmeter.in",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "hprc.in",
+        pathname: "/**",
+      },
     ],
     unoptimized: false,
   },

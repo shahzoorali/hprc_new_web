@@ -1,9 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 import { usePathname } from "next/navigation";
 
 import { primaryNavigation, type NavChild } from "@/content/navigation";
+import { MegaMenu } from "./mega-menu";
 
 function NavLink({ href, label, isActive }: { href: string; label: string; isActive?: boolean }) {
   return (
@@ -21,31 +23,41 @@ function NavLink({ href, label, isActive }: { href: string; label: string; isAct
 }
 
 function Submenu({ items }: { items: NavChild[] }) {
+  const pathname = usePathname();
   return (
     <ul className="grid gap-1 p-3 sm:min-w-[220px]">
-      {items.map(({ href, label }) => (
-        <li key={href}>
-          <Link
-            href={href}
-            className="block rounded-lg px-3 py-2 text-sm text-gray-700 transition-colors hover:bg-brand-50 hover:text-brand-700"
-          >
-            {label}
-          </Link>
-        </li>
-      ))}
+      {items.map(({ href, label }) => {
+        const isActive = pathname === href;
+        return (
+          <li key={href}>
+            <Link
+              href={href}
+              className={`block rounded-lg px-3 py-2 text-sm transition-colors ${
+                isActive
+                  ? "bg-brand-50 text-brand-700 font-medium"
+                  : "text-gray-700 hover:bg-brand-50 hover:text-brand-700"
+              }`}
+            >
+              {label}
+            </Link>
+          </li>
+        );
+      })}
     </ul>
   );
 }
 
 function DesktopNav() {
   const pathname = usePathname();
+  const [hoveredItem, setHoveredItem] = useState<string | null>(null);
 
   return (
     <ul className="hidden items-center gap-1 lg:gap-1.5 xl:gap-2 lg:flex" role="list">
       {primaryNavigation.map((item) => {
         const isActive = pathname === item.href;
+        const hasMegaMenu = item.sections || item.featured;
 
-        if (!item.children?.length) {
+        if (!hasMegaMenu && !item.children?.length) {
           return (
             <li key={item.href}>
               <NavLink href={item.href} label={item.label} isActive={isActive} />
@@ -53,12 +65,45 @@ function DesktopNav() {
           );
         }
 
+        // Show mega menu if sections or featured item exist
+        if (hasMegaMenu) {
+          return (
+            <li
+              key={item.href}
+              className="relative group"
+              onMouseEnter={() => setHoveredItem(item.href)}
+              onMouseLeave={(e) => {
+                // Check if mouse is moving to mega menu
+                const relatedTarget = e.relatedTarget as HTMLElement;
+                const megaMenu = relatedTarget?.closest('[data-mega-menu]');
+                if (!megaMenu) {
+                  // Small delay to allow mouse to reach mega menu
+                  setTimeout(() => {
+                    if (!document.querySelector('[data-mega-menu]:hover')) {
+                      setHoveredItem(null);
+                    }
+                  }, 50);
+                }
+              }}
+            >
+              <NavLink href={item.href} label={item.label} isActive={isActive} />
+              <MegaMenu
+                item={item}
+                isOpen={hoveredItem === item.href}
+                onMouseEnter={() => setHoveredItem(item.href)}
+                onMouseLeave={() => setHoveredItem(null)}
+              />
+            </li>
+          );
+        }
+
+        // Fallback to regular submenu
         return (
           <li key={item.href} className="group relative">
             <NavLink href={item.href} label={item.label} isActive={isActive} />
             <div className="pointer-events-none absolute left-0 top-full z-20 mt-2 w-max opacity-0 shadow-xl transition-all duration-200 group-hover:pointer-events-auto group-hover:opacity-100">
               <div className="rounded-2xl border border-brand-200/50 bg-white/98 backdrop-blur-md shadow-lg">
-                <Submenu items={item.children} />
+                <Submenu items={item.children || []} />
               </div>
             </div>
           </li>
@@ -106,7 +151,39 @@ function MobileNav() {
                   >
                     {item.label}
                   </Link>
-                  {item.children?.length ? (
+                  {/* Show sections if available, otherwise fall back to children */}
+                  {item.sections?.length ? (
+                    <div className="mt-1 space-y-2 pl-4">
+                      {item.sections.map((section, sectionIndex) => (
+                        <div key={sectionIndex}>
+                          {section.title && (
+                            <div className="mb-1 text-xs font-semibold uppercase tracking-wide text-brand-900">
+                              {section.title}
+                            </div>
+                          )}
+                          <ul className="space-y-0.5">
+                            {section.items.map((child) => {
+                              const isChildActive = pathname === child.href;
+                              return (
+                                <li key={child.href}>
+                                  <Link
+                                    href={child.href}
+                                    className={`block rounded-lg px-3 py-1.5 text-xs transition-colors ${
+                                      isChildActive
+                                        ? "bg-brand-50 text-brand-700 font-medium"
+                                        : "text-gray-600 hover:bg-brand-50/50 hover:text-brand-700"
+                                    }`}
+                                  >
+                                    {child.label}
+                                  </Link>
+                                </li>
+                              );
+                            })}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                  ) : item.children?.length ? (
                     <ul className="mt-1 space-y-0.5 pl-4">
                       {item.children.map((child) => {
                         const isChildActive = pathname === child.href;
@@ -127,6 +204,17 @@ function MobileNav() {
                       })}
                     </ul>
                   ) : null}
+                  {/* Show featured item on mobile */}
+                  {item.featured && (
+                    <div className="mt-2 pl-4 border-t border-brand-100 pt-2">
+                      <Link
+                        href={item.featured.href}
+                        className="block rounded-lg bg-brand-50 px-3 py-2 text-xs font-semibold text-brand-700 transition-colors hover:bg-brand-100"
+                      >
+                        {item.featured.title}
+                      </Link>
+                    </div>
+                  )}
                 </div>
               );
             })}
