@@ -108,7 +108,7 @@ export default function SportsCentrePage() {
           align="left"
         />
         <div className="grid gap-8 md:grid-cols-2">
-          {sportsContent.packages.map((pkg, index) => {
+          {sportsContent.packages.map((pkg) => {
             const isGold = pkg.name.toLowerCase().includes("gold");
             return (
               <div
@@ -129,7 +129,12 @@ export default function SportsCentrePage() {
                           : "bg-gradient-to-br from-brand-500/10 to-brand-500/5 text-brand-500"
                       }`}
                     >
-                      <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg
+                        className="h-6 w-6"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -138,7 +143,9 @@ export default function SportsCentrePage() {
                         />
                       </svg>
                     </div>
-                    <h3 className={`text-2xl font-extrabold ${isGold ? "text-brand-600" : "text-brand-900"}`}>
+                    <h3
+                      className={`text-2xl font-extrabold ${isGold ? "text-brand-600" : "text-brand-900"}`}
+                    >
                       {pkg.name}
                     </h3>
                   </div>
@@ -146,7 +153,10 @@ export default function SportsCentrePage() {
                   <ul className="mt-6 space-y-3 text-sm text-gray-700">
                     {pkg.benefits.map((benefit) => (
                       <li key={benefit} className="flex gap-3">
-                        <span className="mt-1 h-2 w-2 rounded-full bg-brand-500" aria-hidden="true" />
+                        <span
+                          className="mt-1 h-2 w-2 rounded-full bg-brand-500"
+                          aria-hidden="true"
+                        />
                         <span>{benefit}</span>
                       </li>
                     ))}

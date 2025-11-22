@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 import { primaryNavigation, type NavChild } from "@/content/navigation";
+
 import { MegaMenu } from "./mega-menu";
 
 function NavLink({ href, label, isActive }: { href: string; label: string; isActive?: boolean }) {
@@ -75,11 +76,11 @@ function DesktopNav() {
               onMouseLeave={(e) => {
                 // Check if mouse is moving to mega menu
                 const relatedTarget = e.relatedTarget as HTMLElement;
-                const megaMenu = relatedTarget?.closest('[data-mega-menu]');
+                const megaMenu = relatedTarget?.closest("[data-mega-menu]");
                 if (!megaMenu) {
                   // Small delay to allow mouse to reach mega menu
                   setTimeout(() => {
-                    if (!document.querySelector('[data-mega-menu]:hover')) {
+                    if (!document.querySelector("[data-mega-menu]:hover")) {
                       setHoveredItem(null);
                     }
                   }, 50);

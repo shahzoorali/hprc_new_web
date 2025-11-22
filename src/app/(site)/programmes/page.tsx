@@ -66,33 +66,37 @@ export default function ProgrammesPage() {
                   </div>
                   <div className="flex flex-col gap-6 p-8 lg:flex-row lg:items-start lg:justify-between flex-1">
                     <div className="max-w-2xl space-y-4">
-                  <h2 className="text-2xl font-semibold text-brand-900">{programme.title}</h2>
-                  <p className="text-sm text-gray-600">{programme.excerpt}</p>
-                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-600">
-                    {programme.schedule}
-                  </p>
-                  <ul className="mt-4 space-y-3 text-sm text-gray-700">
-                    {programme.highlights.map((highlight) => (
-                      <li key={highlight} className="flex gap-3">
-                        <span
-                          className="mt-1 h-2 w-2 rounded-full bg-brand-500"
-                          aria-hidden="true"
+                      <h2 className="text-2xl font-semibold text-brand-900">{programme.title}</h2>
+                      <p className="text-sm text-gray-600">{programme.excerpt}</p>
+                      <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-600">
+                        {programme.schedule}
+                      </p>
+                      <ul className="mt-4 space-y-3 text-sm text-gray-700">
+                        {programme.highlights.map((highlight) => (
+                          <li key={highlight} className="flex gap-3">
+                            <span
+                              className="mt-1 h-2 w-2 rounded-full bg-brand-500"
+                              aria-hidden="true"
+                            />
+                            <span>{highlight}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="flex flex-col gap-4 lg:w-[320px]">
+                      <Link
+                        href={`/programmes/${programme.id}`}
+                        className="inline-flex items-center justify-center rounded-full border border-brand-200 px-6 py-3 text-sm font-semibold text-brand-800 transition hover:bg-brand-50"
+                      >
+                        View Details
+                      </Link>
+                      {programme.pricingTables?.map((table) => (
+                        <PricingTable
+                          key={table.heading}
+                          heading={table.heading}
+                          rows={table.rows}
                         />
-                        <span>{highlight}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="flex flex-col gap-4 lg:w-[320px]">
-                  <Link
-                    href={`/programmes/${programme.id}`}
-                    className="inline-flex items-center justify-center rounded-full border border-brand-200 px-6 py-3 text-sm font-semibold text-brand-800 transition hover:bg-brand-50"
-                  >
-                    View Details
-                  </Link>
-                  {programme.pricingTables?.map((table) => (
-                    <PricingTable key={table.heading} heading={table.heading} rows={table.rows} />
-                  ))}
+                      ))}
                     </div>
                   </div>
                 </div>

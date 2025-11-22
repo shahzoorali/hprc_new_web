@@ -127,10 +127,7 @@ export function HeroSlider({ slides, autoPlayInterval = 5000 }: HeroSliderProps)
 
       {/* Content with Fade Transition */}
       <div className="mx-auto max-w-7xl text-center relative z-10">
-        <div
-          key={currentSlide}
-          className="animate-fade-in"
-        >
+        <div key={currentSlide} className="animate-fade-in">
           <h1 className="text-5xl font-extrabold tracking-tight text-gray-900 sm:text-6xl md:text-7xl lg:text-8xl leading-[1.1]">
             {currentSlideData.titleHighlight ? (
               <>
@@ -200,12 +197,7 @@ export function HeroSlider({ slides, autoPlayInterval = 5000 }: HeroSliderProps)
               viewBox="0 0 24 24"
               aria-hidden="true"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </button>
         </>
@@ -219,9 +211,7 @@ export function HeroSlider({ slides, autoPlayInterval = 5000 }: HeroSliderProps)
               key={index}
               onClick={() => goToSlide(index)}
               className={`h-3 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-transparent ${
-                index === currentSlide
-                  ? "w-8 bg-brand-500"
-                  : "w-3 bg-white/60 hover:bg-white/80"
+                index === currentSlide ? "w-8 bg-brand-500" : "w-3 bg-white/60 hover:bg-white/80"
               }`}
               aria-label={`Go to slide ${index + 1}`}
             />
@@ -231,4 +221,3 @@ export function HeroSlider({ slides, autoPlayInterval = 5000 }: HeroSliderProps)
     </section>
   );
 }
-

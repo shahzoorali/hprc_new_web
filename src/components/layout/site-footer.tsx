@@ -15,12 +15,7 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:grid-cols-2 lg:grid-cols-4">
         <div>
           <div className="relative h-12 w-12 flex-shrink-0">
-            <Image
-              src="/hprc_logo.png"
-              alt="HPRC Logo"
-              fill
-              className="object-contain"
-            />
+            <Image src="/hprc_logo.png" alt="HPRC Logo" fill className="object-contain" />
           </div>
           <p className="mt-4 text-sm text-gray-600">{siteConfig.description}</p>
           <div className="mt-4 space-y-1 text-sm text-gray-600">

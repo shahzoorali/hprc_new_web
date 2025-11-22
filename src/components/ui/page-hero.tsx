@@ -30,14 +30,7 @@ export function PageHero({
     >
       {backgroundImage && (
         <div className="absolute inset-0 z-0">
-          <Image
-            src={backgroundImage}
-            alt=""
-            fill
-            className="object-cover"
-            quality={90}
-            priority
-          />
+          <Image src={backgroundImage} alt="" fill className="object-cover" quality={90} priority />
           <div className="absolute inset-0 bg-gradient-to-br from-brand-50/90 via-brand-50/80 to-white/90"></div>
         </div>
       )}

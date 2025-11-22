@@ -36,11 +36,11 @@ export const eventsContent = {
         "The Indian National Arena Polo Team has begun an intensive training camp at HPRC from April 5 to 12, ahead of the zone 'E' playoffs of the II FIP Arena Polo World Championship. The playoffs will be held in Saudi Arabia from April 21 to 26.",
       url: "https://newsmeter.in/hyderabad/hyderabad-hosts-national-polo-teams-intensive-camp-for-fip-world-championship-playoffs-from-april-21-746444",
       category: "International",
-      imageUrl:
-        "https://newsmeter.in/wp-content/uploads/2025/04/national-polo-team-camp.jpg",
+      imageUrl: "https://newsmeter.in/wp-content/uploads/2025/04/national-polo-team-camp.jpg",
     },
     {
-      title: "Sauryaram Varma clinches title in Jumping CH-1 80 cm at Telangana Equestrian Competition",
+      title:
+        "Sauryaram Varma clinches title in Jumping CH-1 80 cm at Telangana Equestrian Competition",
       date: "October 28, 2025",
       source: "Telangana Today",
       excerpt:

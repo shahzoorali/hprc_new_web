@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 
 import { PageHero } from "@/components/ui/page-hero";
 import { SectionHeading } from "@/components/ui/section-heading";

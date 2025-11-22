@@ -1,72 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { HeroVideo } from "@/components/ui/hero-video";
 import { eventsContent } from "@/content/events";
 import { homeContent } from "@/content/home";
-import { HeroVideo } from "@/components/ui/hero-video";
-
-const eventIcons: Record<string, React.ReactNode> = {
-  book: (
-    <svg className="h-12 w-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-      />
-    </svg>
-  ),
-  home: (
-    <svg className="h-12 w-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-      />
-    </svg>
-  ),
-  building: (
-    <svg className="h-12 w-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-      />
-    </svg>
-  ),
-  lightning: (
-    <svg className="h-12 w-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M13 10V3L4 14h7v7l9-11h-7z"
-      />
-    </svg>
-  ),
-  check: (
-    <svg className="h-12 w-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-      />
-    </svg>
-  ),
-  utensils: (
-    <svg className="h-12 w-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-      />
-    </svg>
-  ),
-};
 
 export default function HomePage() {
   const heroSlide = homeContent.heroSlides[0];
@@ -81,10 +18,7 @@ export default function HomePage() {
       />
 
       {/* Events Section - A wide range of events for everyone */}
-      <section
-        className="bg-white py-20 sm:py-24 lg:py-28"
-        aria-labelledby="events-heading"
-      >
+      <section className="bg-white py-20 sm:py-24 lg:py-28" aria-labelledby="events-heading">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16 sm:mb-20">
             <h2
@@ -95,7 +29,7 @@ export default function HomePage() {
             </h2>
             <div className="mx-auto h-1.5 w-20 bg-brand-500 rounded-full"></div>
           </div>
-          
+
           {/* Creative Boxes Layout */}
           <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 list-none p-0 m-0">
             {homeContent.events.map((event, index) => {
@@ -107,9 +41,9 @@ export default function HomePage() {
                 "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80", // Sports Center
                 "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80", // Restaurants
               ];
-              
+
               const animationDelay = index * 0.4;
-              
+
               return (
                 <li
                   key={index}
@@ -134,7 +68,7 @@ export default function HomePage() {
                       {/* Gradient Overlay */}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20 transition-opacity duration-300 group-hover:from-black/90 group-hover:via-black/50"></div>
                     </div>
-                    
+
                     {/* Text Overlay */}
                     <div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-5 text-white">
                       <div className="box-text">
@@ -251,8 +185,8 @@ export default function HomePage() {
               Championing Excellence
             </h2>
             <p className="mx-auto mt-6 max-w-3xl text-lg sm:text-xl text-gray-600 leading-relaxed">
-              HPRC's initiatives go beyond the arena—fostering international partnerships, nurturing
-              young riders, and celebrating Hyderabad's equestrian history.
+              HPRC&apos;s initiatives go beyond the arena—fostering international partnerships,
+              nurturing young riders, and celebrating Hyderabad&apos;s equestrian history.
             </p>
           </div>
           <div className="mt-12 sm:mt-16 grid gap-6 sm:gap-8 md:grid-cols-3">
@@ -294,10 +228,7 @@ export default function HomePage() {
 
       {/* News Section */}
       {eventsContent.news && eventsContent.news.length > 0 && (
-        <section
-          className="bg-white py-20 sm:py-24 lg:py-28"
-          aria-labelledby="news-heading"
-        >
+        <section className="bg-white py-20 sm:py-24 lg:py-28" aria-labelledby="news-heading">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16 sm:mb-20">
               <h2

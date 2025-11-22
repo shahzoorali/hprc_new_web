@@ -76,7 +76,9 @@ export default function EventsPage() {
                 <div className="absolute right-0 top-0 h-32 w-32 rounded-bl-full bg-gradient-to-br from-brand-500/10 to-brand-500/5 transition-all duration-500 group-hover:scale-150"></div>
                 <div className="relative">
                   <h3 className="text-xl font-extrabold text-brand-900">{highlight.title}</h3>
-                  <p className="mt-4 text-sm text-gray-700 leading-relaxed">{highlight.description}</p>
+                  <p className="mt-4 text-sm text-gray-700 leading-relaxed">
+                    {highlight.description}
+                  </p>
                   <Link
                     href={highlight.link}
                     className="mt-6 inline-flex items-center text-sm font-bold text-brand-500 hover:text-brand-600 transition-colors group/link"

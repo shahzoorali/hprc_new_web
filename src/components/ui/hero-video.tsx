@@ -24,18 +24,11 @@ type HeroVideoProps = {
   imageAlt?: string;
 };
 
-export function HeroVideo({
-  videoUrl,
-  fallbackImage,
-  imageAlt = "Hero video",
-}: HeroVideoProps) {
+export function HeroVideo({ videoUrl, fallbackImage, imageAlt = "Hero video" }: HeroVideoProps) {
   const videoId = extractYouTubeId(videoUrl);
 
   return (
-    <section
-      className="relative min-h-[74vh] w-full overflow-hidden"
-      aria-label="Hero section"
-    >
+    <section className="relative min-h-[74vh] w-full overflow-hidden" aria-label="Hero section">
       {/* Background Video/Image */}
       <div className="absolute inset-0 z-0 w-full h-full">
         {/* Fallback Image - always show as background/loading state */}
@@ -67,4 +60,3 @@ export function HeroVideo({
     </section>
   );
 }
-

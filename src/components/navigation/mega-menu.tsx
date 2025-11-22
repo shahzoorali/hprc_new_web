@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 import type { NavItem } from "@/content/navigation";
 
@@ -17,10 +17,10 @@ type MegaMenuProps = {
 export function MegaMenu({ item, isOpen, onMouseEnter, onMouseLeave }: MegaMenuProps) {
   const pathname = usePathname();
   const [navigationTop, setNavigationTop] = useState(0);
-  
+
   const calculatePosition = () => {
     // Find the sticky navigation bar using data attribute
-    const stickyNav = document.querySelector('[data-sticky-nav]') as HTMLElement;
+    const stickyNav = document.querySelector("[data-sticky-nav]") as HTMLElement;
     if (stickyNav) {
       const rect = stickyNav.getBoundingClientRect();
       // Position directly at the bottom of the sticky navigation bar with no gap
@@ -28,7 +28,7 @@ export function MegaMenu({ item, isOpen, onMouseEnter, onMouseLeave }: MegaMenuP
       setNavigationTop(Math.ceil(rect.bottom));
     }
   };
-  
+
   useEffect(() => {
     // Calculate position when menu opens
     if (isOpen) {
@@ -38,32 +38,34 @@ export function MegaMenu({ item, isOpen, onMouseEnter, onMouseLeave }: MegaMenuP
           calculatePosition();
         });
       });
-      
+
       // Update position on scroll and resize
       const handleScroll = () => {
         requestAnimationFrame(calculatePosition);
       };
-      
+
       const handleResize = () => {
         requestAnimationFrame(calculatePosition);
       };
-      
+
       // Also update on any layout changes
       const handleLoad = () => {
         calculatePosition();
       };
-      
-      window.addEventListener('scroll', handleScroll, { passive: true });
-      window.addEventListener('resize', handleResize);
-      window.addEventListener('load', handleLoad);
-      
-      // Initial calculation
-      calculatePosition();
-      
+
+      window.addEventListener("scroll", handleScroll, { passive: true });
+      window.addEventListener("resize", handleResize);
+      window.addEventListener("load", handleLoad);
+
+      // Initial calculation - use requestAnimationFrame to avoid synchronous setState
+      requestAnimationFrame(() => {
+        calculatePosition();
+      });
+
       return () => {
-        window.removeEventListener('scroll', handleScroll);
-        window.removeEventListener('resize', handleResize);
-        window.removeEventListener('load', handleLoad);
+        window.removeEventListener("scroll", handleScroll);
+        window.removeEventListener("resize", handleResize);
+        window.removeEventListener("load", handleLoad);
       };
     }
   }, [isOpen]);
@@ -80,15 +82,13 @@ export function MegaMenu({ item, isOpen, onMouseEnter, onMouseLeave }: MegaMenuP
   return (
     <div
       data-mega-menu
-      className={`fixed z-[60] ${
-        isOpen ? "pointer-events-auto" : "pointer-events-none"
-      }`}
+      className={`fixed z-[60] ${isOpen ? "pointer-events-auto" : "pointer-events-none"}`}
       style={{
         // Center on viewport horizontally
         left: "50%",
         transform: isOpen ? "translateX(-50%)" : "translateX(-50%) translateY(-8px)",
         // Position directly flush with sticky navigation bar (no gap)
-        top: navigationTop > 0 ? `${navigationTop}px` : '0',
+        top: navigationTop > 0 ? `${navigationTop}px` : "0",
         // Constrain to viewport width with padding - make it more compact
         width: "min(85vw, 960px)",
         maxWidth: "min(85vw, 960px)",
@@ -99,7 +99,7 @@ export function MegaMenu({ item, isOpen, onMouseEnter, onMouseLeave }: MegaMenuP
       onMouseLeave={onMouseLeave}
     >
       {/* Invisible bridge area to catch mouse movement when moving from menu item to mega menu */}
-      <div 
+      <div
         className="absolute inset-x-0 bottom-full h-2"
         style={{
           pointerEvents: isOpen ? "auto" : "none",
@@ -109,7 +109,9 @@ export function MegaMenu({ item, isOpen, onMouseEnter, onMouseLeave }: MegaMenuP
       <div className="mx-auto overflow-hidden rounded-b-xl border-x border-b border-brand-200/50 bg-white/98 backdrop-blur-md shadow-xl">
         <div className={`grid grid-cols-1 gap-6 p-6 ${featuredCols}`}>
           {/* Left Column(s) - Navigation Sections */}
-          <div className={`space-y-6 ${sectionsCount > 1 ? "lg:grid lg:grid-cols-2 lg:gap-6 lg:space-y-0" : ""}`}>
+          <div
+            className={`space-y-6 ${sectionsCount > 1 ? "lg:grid lg:grid-cols-2 lg:gap-6 lg:space-y-0" : ""}`}
+          >
             {item.sections?.map((section, sectionIndex) => (
               <div key={sectionIndex}>
                 {section.image && (
@@ -129,7 +131,9 @@ export function MegaMenu({ item, isOpen, onMouseEnter, onMouseLeave }: MegaMenuP
                   </h3>
                 )}
                 {section.description && (
-                  <p className="mb-3 text-xs leading-relaxed text-gray-600 line-clamp-2">{section.description}</p>
+                  <p className="mb-3 text-xs leading-relaxed text-gray-600 line-clamp-2">
+                    {section.description}
+                  </p>
                 )}
                 <ul className="space-y-1.5">
                   {section.items.map((child) => {
@@ -201,4 +205,3 @@ export function MegaMenu({ item, isOpen, onMouseEnter, onMouseLeave }: MegaMenuP
     </div>
   );
 }
-

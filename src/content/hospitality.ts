@@ -22,7 +22,8 @@ export const hospitalityContent = {
         { label: "Food Menu", href: "/documents/chukkers-food-menu.pdf" },
         { label: "Drink Menu", href: "/documents/chukkers-drink-menu.pdf" },
       ],
-      image: "https://hprc.in/documents/20124/101007/chukkers.jpg/a7eb9af5-89d8-165b-bdf8-35d430796ce2?t=1677594793869",
+      image:
+        "https://hprc.in/documents/20124/101007/chukkers.jpg/a7eb9af5-89d8-165b-bdf8-35d430796ce2?t=1677594793869",
       logo: "https://hprc.in/documents/20124/0/chukkers-logo.png",
     },
     {
@@ -37,10 +38,9 @@ export const hospitalityContent = {
         "Cozy indoor seating and charming outdoor patio",
         "Perfect for family gatherings and friendly meet-ups",
       ],
-      menuLinks: [
-        { label: "Menu", href: "/documents/snaffles-bistro-menu.pdf" },
-      ],
-      image: "https://hprc.in/documents/20124/101007/snaffles.jpg/a2ca6417-698b-f7c0-fc03-d2d5e89cab17?t=1677594794999",
+      menuLinks: [{ label: "Menu", href: "/documents/snaffles-bistro-menu.pdf" }],
+      image:
+        "https://hprc.in/documents/20124/101007/snaffles.jpg/a2ca6417-698b-f7c0-fc03-d2d5e89cab17?t=1677594794999",
       logo: "https://hprc.in/documents/20124/0/snaffles-logo.png",
     },
     {
