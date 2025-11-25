@@ -98,11 +98,8 @@ export function SiteHeader() {
         </Link>
       </div>
 
-      {/* Main Header - Navigation and Actions - Sticky */}
-      <div
-        data-sticky-nav
-        className="sticky top-0 z-50 mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-2 sm:px-6 sm:py-3 lg:px-8 border-t border-brand-100/50 bg-white/95 backdrop-blur-md"
-      >
+      {/* Main Header - Navigation and Actions */}
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-2 sm:px-6 sm:py-3 lg:px-8 border-t border-brand-100/50 bg-white/95 backdrop-blur-md">
         {/* Navigation */}
         <div className="flex flex-1 items-center justify-center gap-2 sm:gap-3 lg:gap-4">
           <MainNav />

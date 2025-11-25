@@ -174,58 +174,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Highlights Section */}
-      <section className="bg-white py-20 sm:py-24 lg:py-28" aria-labelledby="highlights-heading">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 sm:mb-20">
-            <h2
-              id="highlights-heading"
-              className="text-4xl font-extrabold text-gray-900 sm:text-5xl lg:text-6xl mb-5 leading-tight"
-            >
-              Championing Excellence
-            </h2>
-            <p className="mx-auto mt-6 max-w-3xl text-lg sm:text-xl text-gray-600 leading-relaxed">
-              HPRC&apos;s initiatives go beyond the arena—fostering international partnerships,
-              nurturing young riders, and celebrating Hyderabad&apos;s equestrian history.
-            </p>
-          </div>
-          <div className="mt-12 sm:mt-16 grid gap-6 sm:gap-8 md:grid-cols-3">
-            {homeContent.highlights.map((item, index) => {
-              const highlightImages = [
-                "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=600&q=80", // Tournaments
-                "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=600&q=80", // Community
-                "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80", // Partnerships
-              ];
-              return (
-                <article
-                  key={item.title}
-                  className="group relative overflow-hidden rounded-2xl bg-white shadow-md border border-gray-100 transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
-                >
-                  <div className="relative h-48 overflow-hidden">
-                    <Image
-                      src={highlightImages[index]}
-                      alt={item.title}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                  </div>
-                  <div className="p-6 sm:p-8">
-                    <h3 className="text-xl sm:text-2xl font-extrabold text-gray-900 leading-tight">
-                      {item.title}
-                    </h3>
-                    <p className="mt-4 text-sm sm:text-base text-gray-600 leading-relaxed">
-                      {item.description}
-                    </p>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
       {/* News Section */}
       {eventsContent.news && eventsContent.news.length > 0 && (
         <section className="bg-white py-20 sm:py-24 lg:py-28" aria-labelledby="news-heading">
@@ -334,71 +282,6 @@ export default function HomePage() {
           </div>
         </section>
       )}
-
-      {/* Testimonials Section */}
-      <section
-        className="bg-gradient-to-br from-brand-50/40 via-white to-brand-50/30 py-20 sm:py-24 lg:py-28"
-        aria-labelledby="testimonials-heading"
-      >
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 sm:mb-20">
-            <h2
-              id="testimonials-heading"
-              className="text-4xl font-extrabold text-gray-900 sm:text-5xl lg:text-6xl mb-5 leading-tight"
-            >
-              Testimonials
-            </h2>
-            <p className="mx-auto mt-6 max-w-3xl text-lg sm:text-xl text-gray-600 leading-relaxed">
-              An unparalleled experience of sophistication and exclusivity where every moment feels
-              extraordinary
-            </p>
-          </div>
-          <div className="mt-12 sm:mt-16 grid gap-6 sm:gap-8 md:grid-cols-2">
-            {homeContent.testimonials.map((testimonial, index) => {
-              const testimonialImages = [
-                "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80",
-                "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80",
-              ];
-              return (
-                <blockquote
-                  key={index}
-                  className="group relative overflow-hidden rounded-2xl bg-white shadow-md border border-gray-100 transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
-                >
-                  <div className="relative h-32 overflow-hidden">
-                    <Image
-                      src={testimonialImages[index]}
-                      alt={testimonial.author}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-transparent"></div>
-                  </div>
-                  <div className="p-6 sm:p-8">
-                    <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
-                      &ldquo;{testimonial.quote}&rdquo;
-                    </p>
-                    <footer className="mt-6 flex items-center gap-3">
-                      <div className="relative h-12 w-12 rounded-full overflow-hidden ring-2 ring-brand-500/20">
-                        <Image
-                          src={testimonialImages[index]}
-                          alt={testimonial.author}
-                          fill
-                          className="object-cover"
-                          sizes="48px"
-                        />
-                      </div>
-                      <p className="text-sm sm:text-base font-bold text-brand-500">
-                        {testimonial.author}
-                      </p>
-                    </footer>
-                  </div>
-                </blockquote>
-              );
-            })}
-          </div>
-        </div>
-      </section>
 
       {/* CTA Section */}
       <section

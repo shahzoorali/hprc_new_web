@@ -68,6 +68,7 @@ function DesktopNav() {
 
         // Show mega menu if sections or featured item exist
         if (hasMegaMenu) {
+          const menuId = `mega-menu-${item.href.replace(/\//g, "-")}`;
           return (
             <li
               key={item.href}
@@ -87,7 +88,19 @@ function DesktopNav() {
                 }
               }}
             >
-              <NavLink href={item.href} label={item.label} isActive={isActive} />
+              <Link
+                href={item.href}
+                aria-haspopup="true"
+                aria-expanded={hoveredItem === item.href}
+                aria-controls={menuId}
+                className={`whitespace-nowrap rounded-full px-2.5 py-1.5 text-xs font-semibold transition-all lg:px-3 lg:py-2 lg:text-sm ${
+                  isActive
+                    ? "bg-brand-600 text-white shadow-sm"
+                    : "text-gray-800 hover:bg-brand-50 hover:text-brand-700"
+                }`}
+              >
+                {item.label}
+              </Link>
               <MegaMenu
                 item={item}
                 isOpen={hoveredItem === item.href}
