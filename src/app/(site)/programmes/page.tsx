@@ -8,7 +8,8 @@ import { programmesContent } from "@/content/programmes";
 
 export default function ProgrammesPage() {
   return (
-    <div className="space-y-16 pb-16">
+    <div className="space-y-20 pb-20">
+      {/* Enhanced Hero Section */}
       <div className="container pt-12">
         <PageHero
           eyebrow={programmesContent.hero.eyebrow}
@@ -22,22 +23,33 @@ export default function ProgrammesPage() {
         />
       </div>
 
+      {/* Overview Section with Modern Design */}
       <section className="container">
-        <div className="space-y-6 text-sm text-gray-700 md:text-base">
-          {programmesContent.overview.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
+        <div className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-brand-50/50 via-white to-brand-50/30 p-8 md:p-12 border border-brand-100/50 shadow-lg">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(227,30,36,0.05),transparent_50%)]"></div>
+          <div className="relative space-y-6 text-base text-gray-700 md:text-lg leading-relaxed">
+            {programmesContent.overview.map((paragraph, idx) => (
+              <p 
+                key={paragraph} 
+                className="animate-fade-in-up"
+                style={{ animationDelay: `${idx * 0.1}s` }}
+              >
+                {paragraph}
+              </p>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="container space-y-12">
+      {/* Programmes Section with Creative Card Design */}
+      <section className="container space-y-16">
         <SectionHeading
           eyebrow="Curriculum"
-          title="Tailored programmes for every stage of the rider’s journey"
+          title="Tailored programmes for every stage of the rider's journey"
           description="Discover the structure, highlights, and investment for each pathway. Speak with our coaches to customise schedules for individuals, families, or competitive teams."
         />
 
-        <div className="grid gap-10">
+        <div className="grid gap-12">
           {programmesContent.programmes.map((programme, index) => {
             const programmeImages = [
               "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=800&q=80",
@@ -46,57 +58,113 @@ export default function ProgrammesPage() {
               "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=800&q=80",
               "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=800&q=80",
             ];
+            const isEven = index % 2 === 0;
+            
             return (
               <article
                 key={programme.id}
-                className="group relative overflow-hidden rounded-[2.5rem] border border-brand-100 bg-white/95 shadow-[var(--shadow-elevated)] transition-all duration-300 hover:shadow-2xl"
+                className="group relative"
                 id={programme.id}
               >
-                <div className="flex flex-col lg:flex-row">
-                  {/* Image */}
-                  <div className="relative h-64 w-full lg:h-auto lg:w-96 flex-shrink-0 overflow-hidden">
+                <div className={`flex flex-col lg:flex-row ${isEven ? '' : 'lg:flex-row-reverse'} gap-0 overflow-hidden rounded-[2.5rem] border border-brand-100/80 bg-white shadow-xl transition-all duration-500 hover:shadow-2xl hover:border-brand-200`}>
+                  {/* Enhanced Image Section */}
+                  <div className="relative h-80 w-full lg:h-auto lg:w-[42%] flex-shrink-0 overflow-hidden bg-gradient-to-br from-brand-100 to-brand-50">
                     <Image
                       src={programmeImages[index % programmeImages.length]}
                       alt={programme.title}
                       fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
-                      sizes="(max-width: 1024px) 100vw, 384px"
+                      className="object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-110"
+                      sizes="(max-width: 1024px) 100vw, 42%"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/50 to-transparent lg:bg-gradient-to-b lg:from-transparent lg:via-transparent lg:to-white/90"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-brand-900/40 via-transparent to-transparent lg:bg-gradient-to-r lg:from-brand-900/40 lg:via-transparent lg:to-transparent"></div>
+                    
+                    {/* Floating Badge */}
+                    <div className="absolute top-6 left-6 lg:top-8 lg:left-8">
+                      <div className="rounded-2xl bg-white/95 backdrop-blur-sm px-4 py-2 shadow-lg border border-brand-100">
+                        <span className="text-xs font-bold uppercase tracking-wider text-brand-600">
+                          Programme {index + 1}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Decorative Element */}
+                    <div className="absolute bottom-0 right-0 h-32 w-32 rounded-tl-full bg-gradient-to-br from-brand-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   </div>
-                  <div className="flex flex-col gap-6 p-8 lg:flex-row lg:items-start lg:justify-between flex-1">
-                    <div className="max-w-2xl space-y-4">
-                      <h2 className="text-2xl font-semibold text-brand-900">{programme.title}</h2>
-                      <p className="text-sm text-gray-600">{programme.excerpt}</p>
-                      <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-600">
-                        {programme.schedule}
-                      </p>
-                      <ul className="mt-4 space-y-3 text-sm text-gray-700">
-                        {programme.highlights.map((highlight) => (
-                          <li key={highlight} className="flex gap-3">
-                            <span
-                              className="mt-1 h-2 w-2 rounded-full bg-brand-500"
-                              aria-hidden="true"
-                            />
-                            <span>{highlight}</span>
+
+                  {/* Content Section */}
+                  <div className="flex flex-col gap-8 p-8 lg:p-12 flex-1 bg-gradient-to-br from-white to-brand-50/20">
+                    {/* Header */}
+                    <div className="space-y-4">
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="flex-1">
+                          <h2 className="text-3xl md:text-4xl font-bold text-brand-900 mb-3 leading-tight">
+                            {programme.title}
+                          </h2>
+                          <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-4">
+                            {programme.excerpt}
+                          </p>
+                        </div>
+                      </div>
+                      
+                      {/* Schedule Badge */}
+                      <div className="inline-flex items-center gap-2 rounded-full bg-brand-100/80 px-4 py-2 border border-brand-200/50">
+                        <svg className="h-4 w-4 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <p className="text-xs font-semibold uppercase tracking-wider text-brand-700">
+                          {programme.schedule}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Highlights with Enhanced Design */}
+                    <div className="space-y-4">
+                      <h3 className="text-sm font-bold uppercase tracking-widest text-brand-600 flex items-center gap-2">
+                        <span className="h-px flex-1 bg-brand-200"></span>
+                        Key Highlights
+                        <span className="h-px flex-1 bg-brand-200"></span>
+                      </h3>
+                      <ul className="space-y-3">
+                        {programme.highlights.map((highlight, idx) => (
+                          <li 
+                            key={highlight} 
+                            className="flex gap-4 group/item"
+                          >
+                            <div className="flex-shrink-0 mt-1.5">
+                              <div className="h-2 w-2 rounded-full bg-brand-500 group-hover/item:scale-150 transition-transform duration-300"></div>
+                            </div>
+                            <span className="text-sm md:text-base text-gray-700 leading-relaxed flex-1">
+                              {highlight}
+                            </span>
                           </li>
                         ))}
                       </ul>
                     </div>
-                    <div className="flex flex-col gap-4 lg:w-[320px]">
+
+                    {/* Action & Pricing Section */}
+                    <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between pt-4 border-t border-brand-100">
                       <Link
                         href={`/programmes/${programme.id}`}
-                        className="inline-flex items-center justify-center rounded-full border border-brand-200 px-6 py-3 text-sm font-semibold text-brand-800 transition hover:bg-brand-50"
+                        className="group/btn inline-flex items-center justify-center gap-2 rounded-full bg-brand-800 px-8 py-4 text-sm font-semibold text-white shadow-lg shadow-brand-900/20 transition-all duration-300 hover:bg-brand-900 hover:shadow-xl hover:shadow-brand-900/30 hover:-translate-y-0.5"
                       >
-                        View Details
+                        <span>View Details</span>
+                        <svg className="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
                       </Link>
-                      {programme.pricingTables?.map((table) => (
-                        <PricingTable
-                          key={table.heading}
-                          heading={table.heading}
-                          rows={table.rows}
-                        />
-                      ))}
+                      
+                      {programme.pricingTables && programme.pricingTables.length > 0 && (
+                        <div className="flex flex-col gap-4 lg:min-w-[320px]">
+                          {programme.pricingTables.map((table) => (
+                            <div key={table.heading} className="transform transition-transform duration-300 hover:scale-[1.02]">
+                              <PricingTable
+                                heading={table.heading}
+                                rows={table.rows}
+                              />
+                            </div>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -106,20 +174,35 @@ export default function ProgrammesPage() {
         </div>
       </section>
 
-      <section className="bg-gradient-to-br from-brand-50/30 via-white to-brand-50/20 py-16">
-        <div className="container space-y-10">
+      {/* Enhanced Knowledge Section */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-brand-50/40 via-white to-brand-50/30 py-20">
+        {/* Background Decorative Elements */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-brand-500/5 blur-3xl"></div>
+          <div className="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-brand-500/5 blur-3xl"></div>
+        </div>
+
+        <div className="container relative space-y-12">
           <SectionHeading
             eyebrow="Ride Smart"
             title={programmesContent.knowledge.title}
             description={programmesContent.knowledge.summary}
             align="left"
           />
+          
           <div className="grid gap-8 lg:grid-cols-2">
-            <div className="group relative overflow-hidden rounded-3xl border border-brand-100 bg-white/95 p-8 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-              <div className="absolute right-0 top-0 h-32 w-32 rounded-bl-full bg-gradient-to-br from-brand-500/10 to-brand-500/5 transition-all duration-500 group-hover:scale-150"></div>
+            {/* Etiquette Card */}
+            <div className="group relative overflow-hidden rounded-3xl border border-brand-100/80 bg-white/95 backdrop-blur-sm p-10 shadow-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:border-brand-200">
+              {/* Animated Background Gradient */}
+              <div className="absolute inset-0 bg-gradient-to-br from-brand-500/5 via-transparent to-brand-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              
+              {/* Decorative Corner Element */}
+              <div className="absolute right-0 top-0 h-40 w-40 rounded-bl-full bg-gradient-to-br from-brand-500/10 to-brand-500/5 transition-all duration-700 group-hover:scale-150 group-hover:from-brand-500/20"></div>
+              
               <div className="relative">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500/10 to-brand-500/5 text-brand-500">
-                  <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {/* Icon */}
+                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-500/15 to-brand-500/5 text-brand-600 shadow-lg transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
+                  <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -128,22 +211,39 @@ export default function ProgrammesPage() {
                     />
                   </svg>
                 </div>
-                <h3 className="text-xl font-extrabold text-brand-900">Etiquette Essentials</h3>
-                <ul className="mt-6 space-y-3 text-sm text-gray-700">
-                  {programmesContent.knowledge.etiquette.map((item) => (
-                    <li key={item} className="flex gap-3">
-                      <span className="mt-1 h-2 w-2 rounded-full bg-brand-500" aria-hidden="true" />
-                      <span>{item}</span>
+                
+                <h3 className="text-2xl font-bold text-brand-900 mb-6">Etiquette Essentials</h3>
+                
+                <ul className="space-y-4">
+                  {programmesContent.knowledge.etiquette.map((item, idx) => (
+                    <li 
+                      key={item} 
+                      className="flex gap-4 group/item"
+                    >
+                      <div className="flex-shrink-0 mt-2">
+                        <div className="h-2.5 w-2.5 rounded-full bg-brand-500 group-hover/item:scale-150 transition-transform duration-300"></div>
+                      </div>
+                      <span className="text-sm md:text-base text-gray-700 leading-relaxed flex-1">
+                        {item}
+                      </span>
                     </li>
                   ))}
                 </ul>
               </div>
             </div>
-            <div className="group relative overflow-hidden rounded-3xl border border-brand-100 bg-white/95 p-8 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-              <div className="absolute right-0 top-0 h-32 w-32 rounded-bl-full bg-gradient-to-br from-brand-500/10 to-brand-500/5 transition-all duration-500 group-hover:scale-150"></div>
+
+            {/* Gear Card */}
+            <div className="group relative overflow-hidden rounded-3xl border border-brand-100/80 bg-white/95 backdrop-blur-sm p-10 shadow-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:border-brand-200">
+              {/* Animated Background Gradient */}
+              <div className="absolute inset-0 bg-gradient-to-br from-brand-500/5 via-transparent to-brand-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              
+              {/* Decorative Corner Element */}
+              <div className="absolute right-0 top-0 h-40 w-40 rounded-bl-full bg-gradient-to-br from-brand-500/10 to-brand-500/5 transition-all duration-700 group-hover:scale-150 group-hover:from-brand-500/20"></div>
+              
               <div className="relative">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500/10 to-brand-500/5 text-brand-500">
-                  <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {/* Icon */}
+                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-500/15 to-brand-500/5 text-brand-600 shadow-lg transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
+                  <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -152,12 +252,21 @@ export default function ProgrammesPage() {
                     />
                   </svg>
                 </div>
-                <h3 className="text-xl font-extrabold text-brand-900">Gear Checklist</h3>
-                <ul className="mt-6 space-y-3 text-sm text-gray-700">
-                  {programmesContent.knowledge.gear.map((item) => (
-                    <li key={item} className="flex gap-3">
-                      <span className="mt-1 h-2 w-2 rounded-full bg-brand-500" aria-hidden="true" />
-                      <span>{item}</span>
+                
+                <h3 className="text-2xl font-bold text-brand-900 mb-6">Gear Checklist</h3>
+                
+                <ul className="space-y-4">
+                  {programmesContent.knowledge.gear.map((item, idx) => (
+                    <li 
+                      key={item} 
+                      className="flex gap-4 group/item"
+                    >
+                      <div className="flex-shrink-0 mt-2">
+                        <div className="h-2.5 w-2.5 rounded-full bg-brand-500 group-hover/item:scale-150 transition-transform duration-300"></div>
+                      </div>
+                      <span className="text-sm md:text-base text-gray-700 leading-relaxed flex-1">
+                        {item}
+                      </span>
                     </li>
                   ))}
                 </ul>
