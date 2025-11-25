@@ -91,3 +91,8 @@ main {
 .animate-fade-in-up {
   animation: fadeInUp 0.8s ease-out forwards;
 }
+
+/* FAQ Details Arrow Rotation */
+details[open] summary svg {
+  transform: rotate(180deg);
+}
