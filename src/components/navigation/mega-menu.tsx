@@ -105,7 +105,7 @@ export function MegaMenu({ item, isOpen, onMouseEnter, onMouseLeave }: MegaMenuP
         opacity: isOpen ? 1 : 0,
         visibility: isOpen ? "visible" : "hidden",
         transition:
-          "opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.25s cubic-bezier(0.4, 0, 0.2, 1)",
+          "opacity 0.15s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.15s cubic-bezier(0.4, 0, 0.2, 1)",
       }}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 import { primaryNavigation, type NavChild } from "@/content/navigation";
 
@@ -51,6 +51,46 @@ function Submenu({ items }: { items: NavChild[] }) {
 function DesktopNav() {
   const pathname = usePathname();
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+  const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleMouseEnter = (itemHref: string) => {
+    // Cancel any pending close operations
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+    // Immediately open the new menu
+    setHoveredItem(itemHref);
+  };
+
+  const handleMouseLeave = (e: React.MouseEvent, itemHref: string) => {
+    // Check if mouse is moving to mega menu or another menu item
+    const relatedTarget = e.relatedTarget as HTMLElement;
+    const megaMenu = relatedTarget?.closest("[data-mega-menu]");
+    const anotherMenuItem = relatedTarget?.closest("li[class*='group']");
+    
+    // If moving to mega menu or another menu item, don't close
+    if (megaMenu || anotherMenuItem) {
+      return;
+    }
+
+    // Clear any existing timeout
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+    }
+
+    // Small delay to allow mouse to reach mega menu or another menu item
+    closeTimeoutRef.current = setTimeout(() => {
+      // Double-check that we're not hovering over any menu or menu item
+      const isHoveringMenu = document.querySelector("[data-mega-menu]:hover");
+      const isHoveringMenuItem = document.querySelector("li[class*='group']:hover");
+      
+      if (!isHoveringMenu && !isHoveringMenuItem && hoveredItem === itemHref) {
+        setHoveredItem(null);
+      }
+      closeTimeoutRef.current = null;
+    }, 100);
+  };
 
   return (
     <ul className="hidden items-center gap-1 lg:gap-1.5 xl:gap-2 lg:flex" role="list">
@@ -73,20 +113,8 @@ function DesktopNav() {
             <li
               key={item.href}
               className="relative group"
-              onMouseEnter={() => setHoveredItem(item.href)}
-              onMouseLeave={(e) => {
-                // Check if mouse is moving to mega menu
-                const relatedTarget = e.relatedTarget as HTMLElement;
-                const megaMenu = relatedTarget?.closest("[data-mega-menu]");
-                if (!megaMenu) {
-                  // Small delay to allow mouse to reach mega menu
-                  setTimeout(() => {
-                    if (!document.querySelector("[data-mega-menu]:hover")) {
-                      setHoveredItem(null);
-                    }
-                  }, 50);
-                }
-              }}
+              onMouseEnter={() => handleMouseEnter(item.href)}
+              onMouseLeave={(e) => handleMouseLeave(e, item.href)}
             >
               <Link
                 href={item.href}
@@ -104,8 +132,19 @@ function DesktopNav() {
               <MegaMenu
                 item={item}
                 isOpen={hoveredItem === item.href}
-                onMouseEnter={() => setHoveredItem(item.href)}
-                onMouseLeave={() => setHoveredItem(null)}
+                onMouseEnter={() => handleMouseEnter(item.href)}
+                onMouseLeave={() => {
+                  if (closeTimeoutRef.current) {
+                    clearTimeout(closeTimeoutRef.current);
+                  }
+                  closeTimeoutRef.current = setTimeout(() => {
+                    if (!document.querySelector("[data-mega-menu]:hover") && 
+                        !document.querySelector("li[class*='group']:hover")) {
+                      setHoveredItem(null);
+                    }
+                    closeTimeoutRef.current = null;
+                  }, 100);
+                }}
               />
             </li>
           );
