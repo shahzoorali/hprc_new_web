@@ -26,9 +26,12 @@ export const metadata: Metadata = {
   applicationName: siteConfig.name,
   metadataBase: new URL("https://www.hprc.in"),
   icons: {
-    icon: "/hprc_logo.png",
-    shortcut: "/hprc_logo.png",
-    apple: "/hprc_logo.png",
+    icon: [
+      { url: "/icon.png", sizes: "512x512", type: "image/png" },
+      { url: "/favicon.png", sizes: "48x48", type: "image/png" },
+    ],
+    shortcut: "/favicon.png",
+    apple: "/apple-icon.png",
   },
   openGraph: {
     title: siteConfig.name,
@@ -57,9 +60,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} bg-background antialiased text-foreground`}
+        suppressHydrationWarning
       >
         <div className="flex min-h-screen flex-col">
           <SiteHeader />
