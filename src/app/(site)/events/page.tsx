@@ -30,12 +30,12 @@ export default function EventsPage() {
             const eventImages = [
               "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=800&q=80",
               "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=800&q=80",
+              "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80",
             ];
-            return (
-              <article
-                key={event.title}
-                className="group relative overflow-hidden rounded-[2.5rem] border border-brand-100 bg-white/95 shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
-              >
+            const commonClasses = "group relative overflow-hidden rounded-[2.5rem] border border-brand-100 bg-white/95 shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 block";
+            
+            const eventContent = (
+              <>
                 <div className="relative h-48 overflow-hidden">
                   <Image
                     src={eventImages[index % eventImages.length]}
@@ -52,7 +52,46 @@ export default function EventsPage() {
                   </p>
                   <h2 className="mt-3 text-2xl font-extrabold text-gray-900">{event.title}</h2>
                   <p className="mt-4 text-sm text-gray-700 leading-relaxed">{event.description}</p>
+                  {event.link && (
+                    <div className="mt-4 inline-flex items-center text-sm font-bold text-brand-500 hover:text-brand-600 transition-colors">
+                      Learn More
+                      <svg
+                        className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M17 8l4 4m0 0l-4 4m4-4H3"
+                        />
+                      </svg>
+                    </div>
+                  )}
                 </div>
+              </>
+            );
+
+            if (event.link) {
+              return (
+                <Link
+                  key={event.title}
+                  href={event.link}
+                  className={commonClasses}
+                >
+                  {eventContent}
+                </Link>
+              );
+            }
+
+            return (
+              <article
+                key={event.title}
+                className={commonClasses}
+              >
+                {eventContent}
               </article>
             );
           })}

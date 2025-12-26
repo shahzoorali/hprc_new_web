@@ -53,10 +53,17 @@ export const eventsContent = {
   ] satisfies NewsArticle[],
   upcoming: [
     {
+      title: "HPRC World Arena Polo Championship 2026",
+      date: "11th – 18th February 2026",
+      description:
+        "A week-long celebration of world-class arena polo featuring teams from USA, India, Germany, France, and Luxembourg. Multiple tournaments including 4 Goal and 6 Goal competitions, plus exhibition matches.",
+      link: "/events/world-arena-polo-championship-2026",
+    },
+    {
       title: "International Arena Polo Cup",
       date: "4 – 10 March 2024",
       description:
-        "Six elite teams from India, USA, Luxembourg, and Spain compete in a week-long spectacle featuring women’s and men’s fixtures, supported by Telangana Tourism, Radha TMT, Inhabit, and more.",
+        "Six elite teams from India, USA, Luxembourg, and Spain compete in a week-long spectacle featuring women's and men's fixtures, supported by Telangana Tourism, Radha TMT, Inhabit, and more.",
     },
     {
       title: "TSEA Regional Equestrian League",
