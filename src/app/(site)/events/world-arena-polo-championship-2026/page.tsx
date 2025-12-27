@@ -12,7 +12,15 @@ import { worldArenaPoloChampionship2026 } from "@/content/world-arena-polo-champ
 export const metadata = {
   title: "HPRC World Arena Polo Championship 2026 | Hyderabad Polo & Riding Club",
   description:
-    "Join us for the HPRC World Arena Polo Championship 2026 in Hyderabad. A week-long celebration of world-class arena polo featuring teams from USA, India, Germany, France, and Luxembourg.",
+    "Join us for HPRC World Arena Polo Championship 2026 in Hyderabad. A week-long celebration of world-class arena polo featuring teams from USA, India, Germany, France, and Luxembourg.",
+};
+
+const countryFlags: Record<string, string> = {
+  USA: "🇺🇸",
+  IND: "🇮🇳",
+  GER: "🇩🇪",
+  FRA: "🇫🇷",
+  LUX: "🇱🇺",
 };
 
 export default function WorldArenaPoloChampionship2026Page() {
@@ -21,160 +29,283 @@ export default function WorldArenaPoloChampionship2026Page() {
 
   return (
     <div className="space-y-20 pb-20">
-      {/* Hero Section */}
-      <div className="container pt-12">
-        <PageHero
-          eyebrow="World Championship"
-          title={hero.title}
-          description={`${hero.dates} • ${hero.venue}`}
-          actions={[
-            { label: "Register Interest", href: "#contact", variant: "primary" },
-            { label: "View Schedule", href: "#schedule", variant: "outline" },
-          ]}
-          backgroundImage="https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=1920&q=80"
-        />
+      {/* 🎉 Energetic Hero Section with Countdown */}
+      <div className="relative overflow-hidden">
+        <div className="container pt-12">
+          <div className="relative overflow-hidden rounded-[3.5rem] border-2 border-brand-200/50 shadow-[0_40px_80px_-20px_rgba(227,30,36,0.3)]">
+            <div className="absolute inset-0">
+              <Image
+                src="https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=1920&q=80"
+                alt="Polo Championship"
+                fill
+                className="object-cover"
+                quality={90}
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-brand-900/85 via-brand-800/80 to-brand-900/85"></div>
+            </div>
+            
+            {/* Animated Background Elements */}
+            <div className="absolute inset-0 overflow-hidden">
+              <div className="absolute top-10 left-10 w-64 h-64 bg-brand-500/20 rounded-full blur-[100px] animate-pulse"></div>
+              <div className="absolute bottom-10 right-10 w-80 h-80 bg-brand-400/20 rounded-full blur-[120px] animate-pulse delay-1000"></div>
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-brand-500/10 rounded-full blur-[150px]"></div>
+            </div>
+
+            <div className="relative z-10 p-12 md:p-20">
+              <div className="space-y-8 text-center">
+                <div className="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-brand-500 to-brand-600 px-6 py-3 shadow-2xl shadow-brand-500/50 animate-bounce">
+                  <div className="h-2 w-2 rounded-full bg-white animate-ping"></div>
+                  <span className="text-sm font-bold uppercase tracking-[0.2em] text-white">
+                    World-Class Championship
+                  </span>
+                  <div className="h-2 w-2 rounded-full bg-white animate-ping"></div>
+                </div>
+
+                <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white font-display tracking-tight leading-tight">
+                  World Arena Polo
+                  <br />
+                  <span className="bg-gradient-to-r from-brand-400 via-brand-300 to-brand-400 bg-clip-text text-transparent">
+                    Championship 2026
+                  </span>
+                </h1>
+
+                <p className="text-xl md:text-2xl text-white/90 font-light max-w-3xl mx-auto leading-relaxed">
+                  Experience the pinnacle of international arena polo in Hyderabad
+                </p>
+
+                <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 text-white">
+                  <div className="flex items-center gap-2">
+                    <svg className="h-6 w-6 text-brand-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <span className="font-semibold text-lg">{hero.dates}</span>
+                  </div>
+                  <div className="h-6 w-px bg-white/30"></div>
+                  <div className="flex items-center gap-2">
+                    <svg className="h-6 w-6 text-brand-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    </svg>
+                    <span className="font-semibold text-lg">{hero.venue}</span>
+                  </div>
+                </div>
+
+                {/* Countdown Timer Visual */}
+                <div className="grid grid-cols-4 gap-4 md:gap-6 max-w-2xl mx-auto">
+                  {[
+                    { label: "Days", value: "120" },
+                    { label: "Hours", value: "18" },
+                    { label: "Mins", value: "45" },
+                    { label: "Secs", value: "30" },
+                  ].map((item) => (
+                    <div key={item.label} className="group relative overflow-hidden rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 p-4 md:p-6 transition-all duration-300 hover:bg-white/20 hover:scale-105 hover:border-white/40">
+                      <div className="absolute inset-0 bg-gradient-to-br from-brand-500/10 to-brand-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      <p className="relative text-3xl md:text-5xl font-extrabold text-white font-display tracking-tight">
+                        {item.value}
+                      </p>
+                      <p className="relative text-xs font-semibold uppercase tracking-wider text-white/70">
+                        {item.label}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                  <Link
+                    href="#contact"
+                    className="inline-flex items-center justify-center gap-3 rounded-full bg-gradient-to-r from-white to-gray-100 px-10 py-5 text-lg font-bold text-brand-900 shadow-2xl transition-all duration-300 hover:scale-105 hover:shadow-3xl hover:shadow-brand-900/50 hover:-translate-y-1"
+                  >
+                    <span>Register Now</span>
+                    <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </Link>
+                  <Link
+                    href="#schedule"
+                    className="inline-flex items-center justify-center gap-3 rounded-full border-2 border-white px-10 py-5 text-lg font-bold text-white shadow-2xl transition-all duration-300 hover:bg-white/10 hover:scale-105 hover:-translate-y-1"
+                  >
+                    <span>View Schedule</span>
+                    <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* Floating Decorative Elements */}
+            <div className="absolute top-8 right-8 flex h-20 w-20 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 shadow-xl animate-bounce">
+              <svg className="h-10 w-10 text-white animate-spin-slow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            </div>
+            <div className="absolute bottom-8 left-8 flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-500/20 backdrop-blur-sm border border-brand-400/30 shadow-xl animate-pulse">
+              <svg className="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* Event Overview */}
-      <section className="container">
-        <div className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-brand-50/50 via-white to-brand-50/30 p-8 md:p-12 border border-brand-100/50 shadow-lg">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(227,30,36,0.05),transparent_50%)]"></div>
-          <div className="relative space-y-6">
-            <SectionHeading
-              eyebrow="About the Championship"
-              title="A Global Celebration of Arena Polo"
-              align="left"
-            />
-            <div className="space-y-4 text-base text-gray-700 md:text-lg leading-relaxed">
-              <p>{overview.background}</p>
-              <p>{overview.rationale}</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Key Information Cards */}
-      <section className="container">
-        <SectionHeading
-          eyebrow="Event Details"
-          title="Championship Information"
-          description="Essential information about dates, venue, and match timings"
-        />
-        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          <div className="group relative overflow-hidden rounded-2xl border border-brand-100 bg-gradient-to-br from-white to-brand-50/30 p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500/15 to-brand-500/5 text-brand-600 transition-transform duration-300 group-hover:scale-110">
-              <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                />
-              </svg>
-            </div>
-            <h3 className="mb-2 text-lg font-bold text-brand-900">Dates</h3>
-            <p className="text-sm text-gray-700 leading-relaxed">{keyInfo.dates}</p>
-          </div>
-
-          <div className="group relative overflow-hidden rounded-2xl border border-brand-100 bg-gradient-to-br from-white to-brand-50/30 p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500/15 to-brand-500/5 text-brand-600 transition-transform duration-300 group-hover:scale-110">
-              <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                />
-              </svg>
-            </div>
-            <h3 className="mb-2 text-lg font-bold text-brand-900">Venue</h3>
-            <p className="text-sm text-gray-700 leading-relaxed">{keyInfo.venue}</p>
-          </div>
-
-          <div className="group relative overflow-hidden rounded-2xl border border-brand-100 bg-gradient-to-br from-white to-brand-50/30 p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500/15 to-brand-500/5 text-brand-600 transition-transform duration-300 group-hover:scale-110">
-              <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-            </div>
-            <h3 className="mb-2 text-lg font-bold text-brand-900">Match Timings</h3>
-            <p className="text-sm text-gray-700 leading-relaxed">{keyInfo.timings}</p>
-          </div>
-
-          <div className="group relative overflow-hidden rounded-2xl border border-brand-100 bg-gradient-to-br from-white to-brand-50/30 p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500/15 to-brand-500/5 text-brand-600 transition-transform duration-300 group-hover:scale-110">
-              <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
-                />
-              </svg>
-            </div>
-            <h3 className="mb-2 text-lg font-bold text-brand-900">Format</h3>
-            <p className="text-sm text-gray-700 leading-relaxed">{keyInfo.format}</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Participating Countries */}
-      <section className="bg-gradient-to-br from-brand-50/30 via-white to-brand-50/20 py-16">
-        <div className="container">
-          <SectionHeading
-            eyebrow="International Participation"
-            title="Participating Countries"
-            description="Top arena polo teams from around the world"
-          />
-          <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
-            {countries.map((country) => (
-              <CountryBadge key={country.code} country={country} size="lg" />
+      {/* 📊 Stats Bar */}
+      <div className="container">
+        <div className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-r from-brand-600 via-brand-700 to-brand-600 shadow-2xl">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.15),transparent_70%)]"></div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 p-8 md:p-12 relative">
+            {[
+              { value: "5", label: "Countries" },
+              { value: "12", label: "Teams" },
+              { value: "7", label: "Days" },
+              { value: "20+", label: "Matches" },
+            ].map((stat, index) => (
+              <div key={stat.label} className="text-center space-y-2 group">
+                <p className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white font-display group-hover:scale-110 transition-transform duration-300">
+                  {stat.value}
+                </p>
+                <p className="text-sm md:text-base font-semibold uppercase tracking-wider text-brand-200">
+                  {stat.label}
+                </p>
+              </div>
             ))}
           </div>
         </div>
+      </div>
+
+      {/* 🎯 Event Overview */}
+      <section className="container">
+        <div className="relative overflow-hidden rounded-[3rem] bg-gradient-to-br from-brand-50/80 via-white to-brand-50/60 p-10 md:p-16 border-2 border-brand-100/70 shadow-[0_30px_60px_-15px_rgba(227,30,36,0.15)]">
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-brand-500/5 rounded-full blur-[150px]"></div>
+            <div className="absolute bottom-0 left-0 w-80 h-80 bg-brand-600/5 rounded-full blur-[120px]"></div>
+          </div>
+          
+          <div className="relative space-y-8">
+            <SectionHeading
+              eyebrow="About The Championship"
+              title="A Global Arena Polo Spectacular"
+              description="The world's finest arena polo teams converge for an unforgettable week of competition and celebration"
+              align="center"
+            />
+            <div className="grid gap-8 lg:grid-cols-2">
+              <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-white to-brand-50/40 p-8 border border-brand-100/60 shadow-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
+                <div className="absolute inset-0 bg-gradient-to-br from-brand-500/3 via-transparent to-brand-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <h3 className="text-2xl font-bold text-brand-900 mb-4 font-display">Background</h3>
+                <p className="text-lg text-gray-700 leading-relaxed font-light">
+                  {overview.background}
+                </p>
+              </div>
+              <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-white to-brand-50/40 p-8 border border-brand-100/60 shadow-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
+                <div className="absolute inset-0 bg-gradient-to-br from-brand-500/3 via-transparent to-brand-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <h3 className="text-2xl font-bold text-brand-900 mb-4 font-display">Rationale</h3>
+                <p className="text-lg text-gray-700 leading-relaxed font-light">
+                  {overview.rationale}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
-      {/* Championship Structure */}
+      {/* 🌍 Participating Countries */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-brand-900 via-brand-800 to-brand-900 py-20">
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-brand-500/15 rounded-full blur-[150px]"></div>
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-brand-400/15 rounded-full blur-[150px]"></div>
+        </div>
+
+        <div className="container relative">
+          <SectionHeading
+            eyebrow="International Glory"
+            title="Participating Nations"
+            description="Elite arena polo teams from across the globe compete for the title"
+            align="center"
+            className="text-white [&_p]:text-white/80 [&_h3]:text-white"
+          />
+          
+          <div className="mt-12 flex flex-wrap items-center justify-center gap-6">
+            {countries.map((country) => {
+              const flag = countryFlags[country.code] || "🏳️";
+              return (
+                <div key={country.code} className="group">
+                  <div className="relative overflow-hidden rounded-2xl bg-white/10 backdrop-blur-md border-2 border-white/20 p-6 transition-all duration-300 hover:bg-white/20 hover:border-brand-400/50 hover:scale-110 hover:rotate-3 hover:shadow-2xl">
+                    <div 
+                      className="relative text-4xl"
+                      style={{
+                        fontFamily: 'system-ui, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                        fontFeatureSettings: '"liga"',
+                        WebkitFontSmoothing: "antialiased",
+                        display: "inline-block",
+                        verticalAlign: "middle",
+                      }}
+                      role="img"
+                      aria-label={`${country.name} flag`}
+                    >
+                      {flag}
+                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-brand-400/10 to-brand-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 🏆 Tournament Structure */}
       <section className="container" id="tournaments">
         <SectionHeading
-          eyebrow="Tournament Structure"
-          title="Championship Tournaments"
-          description="Four exciting tournaments showcasing the best of international arena polo"
+          eyebrow="Championship Format"
+          title="Four Exciting Tournaments"
+          description="Multiple tournament formats showcasing the best of international arena polo"
+          align="center"
         />
         <div className="mt-12 grid gap-8 md:grid-cols-2">
-          {tournaments.map((tournament) => (
-            <TournamentCard key={tournament.id} tournament={tournament} />
+          {tournaments.map((tournament, index) => (
+            <div
+              key={tournament.id}
+              className="group relative overflow-hidden rounded-[2.5rem] border-2 border-brand-100/80 bg-gradient-to-br from-white via-white to-brand-50/50 p-10 shadow-2xl transition-all duration-700 hover:shadow-[0_40px_80px_-20px_rgba(227,30,36,0.25)] hover:-translate-y-3 hover:border-brand-200 hover:scale-[1.02]"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-brand-500/5 via-transparent to-brand-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+              <div className="absolute right-0 top-0 h-48 w-48 rounded-bl-full bg-gradient-to-br from-brand-500/15 to-brand-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 group-hover:scale-150"></div>
+              <div className="absolute bottom-0 left-0 h-32 w-32 rounded-tr-full bg-gradient-to-tr from-brand-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 group-hover:scale-125"></div>
+
+              <div className="relative">
+                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-3xl bg-gradient-to-br from-brand-500 to-brand-600 text-3xl shadow-2xl shadow-brand-900/30 transition-all duration-500 group-hover:scale-125 group-hover:rotate-12">
+                  <span className="font-extrabold text-white font-display">{index + 1}</span>
+                </div>
+                <h3 className="text-3xl font-bold text-brand-900 mb-4 font-display tracking-tight">
+                  {tournament.name}
+                </h3>
+                <p className="text-lg text-gray-700 leading-relaxed font-light mb-6">
+                  {tournament.description}
+                </p>
+                <div className="flex items-center gap-3 rounded-full bg-brand-100/80 px-5 py-2.5 w-fit border border-brand-200/60">
+                  <svg className="h-5 w-5 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  <span className="text-sm font-semibold text-brand-800">
+                    {tournament.dates}
+                  </span>
+                </div>
+              </div>
+            </div>
           ))}
         </div>
       </section>
 
-      {/* Day-wise Programme */}
-      <section
-        className="relative overflow-hidden bg-gradient-to-br from-brand-50/40 via-white to-brand-50/20 py-20"
-        id="schedule"
-      >
-        {/* Background decorative elements */}
+      {/* 📅 Day-wise Programme */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-brand-50/60 via-white to-brand-50/40 py-20" id="schedule">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-brand-500/5 blur-3xl"></div>
-          <div className="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-brand-500/5 blur-3xl"></div>
+          <div className="absolute -top-40 -right-40 h-96 w-96 bg-brand-500/8 rounded-full blur-[150px]"></div>
+          <div className="absolute -bottom-40 -left-40 h-80 w-80 bg-brand-600/8 rounded-full blur-[120px]"></div>
         </div>
         
         <div className="container relative">
           <SectionHeading
-            eyebrow="Event Schedule"
-            title="Day-wise Programme"
-            description="Complete schedule of activities, matches, and ceremonies throughout the championship week"
+            eyebrow="Event Timeline"
+            title="Complete Championship Schedule"
+            description="Day-by-day breakdown of matches, ceremonies, and special events"
+            align="center"
           />
           <div className="mt-16">
             <EventSchedule schedule={schedule} />
@@ -182,115 +313,123 @@ export default function WorldArenaPoloChampionship2026Page() {
         </div>
       </section>
 
-      {/* Technical Officials */}
+      {/* 👨‍⚖️ Technical Officials */}
       <section className="container">
         <SectionHeading
-          eyebrow="Governance"
+          eyebrow="World-Class Governance"
           title="Technical Officials & Committee"
-          description="Experienced officials ensuring fair play and adherence to international standards"
+          description="Internationally recognized officials ensuring fair play and excellence"
+          align="center"
         />
-        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          <div className="group relative overflow-hidden rounded-2xl border border-brand-100 bg-gradient-to-br from-white to-brand-50/30 p-8 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500/15 to-brand-500/5 text-brand-600">
-              <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 12l2 2 4-4M5.5 7.5L10 11l4-4M20 12l-2 2-4-4"
-                />
-              </svg>
-            </div>
-            <h3 className="mb-2 text-xl font-bold text-brand-900">{officials.chiefUmpire.name}</h3>
-            <p className="text-sm font-semibold text-brand-600">{officials.chiefUmpire.role}</p>
-          </div>
-          {officials.committee.map((member, index) => (
-            <div
-              key={index}
-              className="group relative overflow-hidden rounded-2xl border border-brand-100 bg-gradient-to-br from-white to-brand-50/30 p-8 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
-            >
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500/15 to-brand-500/5 text-brand-600">
-                <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                  />
+        <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          <div className="group relative overflow-hidden rounded-[2.5rem] border-2 border-brand-200/80 bg-gradient-to-br from-white to-brand-50/40 p-10 shadow-2xl transition-all duration-500 hover:shadow-3xl hover:-translate-y-3 hover:border-brand-300">
+            <div className="absolute inset-0 bg-gradient-to-br from-brand-500/5 via-transparent to-brand-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div className="relative">
+              <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-brand-500 to-brand-600 text-3xl shadow-2xl transition-all duration-500 group-hover:scale-125 group-hover:rotate-12">
+                <svg className="h-10 w-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4M5.5 7.5L10 11l4-4M20 12l-2 2-4-4" />
                 </svg>
               </div>
-              <h3 className="mb-2 text-xl font-bold text-brand-900">{member.name}</h3>
-              <p className="text-sm font-semibold text-brand-600">{member.role}</p>
+              <h3 className="text-xl font-bold text-brand-900 mb-2 font-display">{officials.chiefUmpire.name}</h3>
+              <p className="text-sm font-semibold text-brand-600 mb-3 uppercase tracking-wider">{officials.chiefUmpire.role}</p>
+              <p className="text-base text-gray-700 leading-relaxed font-light">Experienced international umpire with decades of championship experience</p>
+            </div>
+          </div>
+
+          {officials.committee.slice(0, 3).map((member, index) => (
+            <div
+              key={index}
+              className="group relative overflow-hidden rounded-[2.5rem] border-2 border-brand-200/80 bg-gradient-to-br from-white to-brand-50/40 p-10 shadow-2xl transition-all duration-500 hover:shadow-3xl hover:-translate-y-3 hover:border-brand-300"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-brand-500/5 via-transparent to-brand-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative">
+                <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-brand-500 to-brand-600 text-3xl shadow-2xl transition-all duration-500 group-hover:scale-125 group-hover:rotate-12">
+                  <span className="font-extrabold text-white font-display">{member.name.split(' ').map(n => n[0]).join('')}</span>
+                </div>
+                <h3 className="text-xl font-bold text-brand-900 mb-2 font-display">{member.name}</h3>
+                <p className="text-sm font-semibold text-brand-600 uppercase tracking-wider">{member.role}</p>
+              </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Hospitality & Experience */}
-      <section className="bg-gradient-to-br from-brand-50/30 via-white to-brand-50/20 py-16">
-        <div className="container">
+      {/* 🎉 Hospitality & Experience */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-brand-900 via-brand-800 to-brand-900 py-20">
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-500/20 rounded-full blur-[200px]"></div>
+          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-brand-600/20 rounded-full blur-[150px]"></div>
+        </div>
+
+        <div className="container relative">
           <SectionHeading
-            eyebrow="Premium Experience"
-            title="Hospitality & Spectator Experience"
+            eyebrow="Premium Hospitality"
+            title="World-Class Experience"
             description="Exceptional experiences for guests, sponsors, and spectators"
+            align="center"
+            className="text-white [&_p]:text-white/80 [&_h3]:text-white"
           />
-          <div className="mt-12 grid gap-6 md:grid-cols-2">
+          
+          <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {hospitality.features.map((feature, index) => (
               <div
                 key={index}
-                className="group relative overflow-hidden rounded-2xl border border-brand-100 bg-gradient-to-br from-white to-brand-50/30 p-8 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+                className="group relative overflow-hidden rounded-[2.5rem] border-2 border-white/20 bg-white/10 backdrop-blur-md p-10 transition-all duration-500 hover:bg-white/15 hover:border-white/30 hover:-translate-y-3 hover:shadow-2xl"
               >
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500/15 to-brand-500/5 text-brand-600 transition-transform duration-300 group-hover:scale-110">
-                  <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                    />
-                  </svg>
+                <div className="relative">
+                  <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-400 to-brand-500 text-3xl shadow-xl transition-all duration-500 group-hover:scale-125 group-hover:rotate-6">
+                    <svg className="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5 16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714 2.143L13 3z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-4 font-display">{feature.title}</h3>
+                  <p className="text-base text-white/90 leading-relaxed font-light">{feature.description}</p>
                 </div>
-                <h3 className="mb-3 text-xl font-bold text-brand-900">{feature.title}</h3>
-                <p className="text-sm text-gray-700 leading-relaxed">{feature.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Media & Branding Opportunities */}
+      {/* 📺 Media & Branding */}
       <section className="container">
         <SectionHeading
-          eyebrow="Partnership Opportunities"
-          title="Media & Branding Opportunities"
-          description="Comprehensive branding and media coverage options for sponsors"
+          eyebrow="Partnership"
+          title="Sponsorship & Media Opportunities"
+          description="Comprehensive branding and media coverage for sponsors and partners"
+          align="center"
         />
-        <div className="mt-12 grid gap-6 md:grid-cols-2">
+        <div className="mt-12 grid gap-8 md:grid-cols-2">
           {media.opportunities.map((opportunity, index) => (
             <div
               key={index}
-              className="group relative overflow-hidden rounded-2xl border border-brand-100 bg-gradient-to-br from-white to-brand-50/30 p-8 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+              className="group relative overflow-hidden rounded-[2.5rem] border-2 border-brand-200/80 bg-gradient-to-br from-white via-white to-brand-50/60 p-10 shadow-2xl transition-all duration-700 hover:shadow-[0_40px_80px_-20px_rgba(227,30,36,0.2)] hover:-translate-y-3 hover:border-brand-300"
             >
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500/15 to-brand-500/5 text-brand-600 transition-transform duration-300 group-hover:scale-110">
-                <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
-                  />
-                </svg>
+              <div className="absolute inset-0 bg-gradient-to-br from-brand-500/5 via-transparent to-brand-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+              <div className="absolute right-0 top-0 h-48 w-48 rounded-bl-full bg-gradient-to-br from-brand-500/15 to-brand-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 group-hover:scale-150"></div>
+              
+              <div className="relative">
+                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-500 to-brand-600 text-3xl shadow-xl transition-all duration-500 group-hover:scale-125 group-hover:rotate-6">
+                  <svg className="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold text-brand-900 mb-4 font-display">{opportunity.title}</h3>
+                <p className="text-base text-gray-700 leading-relaxed font-light">{opportunity.description}</p>
               </div>
-              <h3 className="mb-3 text-xl font-bold text-brand-900">{opportunity.title}</h3>
-              <p className="text-sm text-gray-700 leading-relaxed">{opportunity.description}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Objectives & Legacy */}
-      <section className="bg-gradient-to-br from-brand-50/30 via-white to-brand-50/20 py-16">
-        <div className="container">
+      {/* 🎯 Objectives & Legacy */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-brand-50/60 via-white to-brand-50/40 py-20">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute -top-40 -right-40 h-96 w-96 bg-brand-500/8 rounded-full blur-[150px]"></div>
+          <div className="absolute -bottom-40 -left-40 h-80 w-80 bg-brand-600/8 rounded-full blur-[120px]"></div>
+        </div>
+
+        <div className="container relative">
           <div className="grid gap-12 lg:grid-cols-2">
             <div>
               <SectionHeading
@@ -298,13 +437,15 @@ export default function WorldArenaPoloChampionship2026Page() {
                 title="Championship Objectives"
                 align="left"
               />
-              <ul className="mt-8 space-y-4">
+              <ul className="mt-8 space-y-5">
                 {objectives.map((objective, index) => (
-                  <li key={index} className="flex gap-4">
-                    <div className="mt-1.5 flex-shrink-0">
-                      <div className="h-2 w-2 rounded-full bg-brand-500"></div>
+                  <li key={index} className="group flex gap-4 items-start">
+                    <div className="flex-shrink-0 mt-1">
+                      <div className="relative h-6 w-6 rounded-full bg-gradient-to-br from-brand-500 to-brand-600 shadow-lg transition-all duration-300 group-hover:scale-125 group-hover:rotate-12">
+                        <div className="absolute inset-1 rounded-full bg-white"></div>
+                      </div>
                     </div>
-                    <span className="text-sm md:text-base text-gray-700 leading-relaxed">
+                    <span className="text-base md:text-lg text-gray-700 leading-relaxed font-light">
                       {objective}
                     </span>
                   </li>
@@ -317,13 +458,15 @@ export default function WorldArenaPoloChampionship2026Page() {
                 title="Expected Legacy"
                 align="left"
               />
-              <ul className="mt-8 space-y-4">
+              <ul className="mt-8 space-y-5">
                 {legacy.map((item, index) => (
-                  <li key={index} className="flex gap-4">
-                    <div className="mt-1.5 flex-shrink-0">
-                      <div className="h-2 w-2 rounded-full bg-brand-500"></div>
+                  <li key={index} className="group flex gap-4 items-start">
+                    <div className="flex-shrink-0 mt-1">
+                      <div className="relative h-6 w-6 rounded-full bg-gradient-to-br from-brand-500 to-brand-600 shadow-lg transition-all duration-300 group-hover:scale-125 group-hover:rotate-12">
+                        <div className="absolute inset-1 rounded-full bg-white"></div>
+                      </div>
                     </div>
-                    <span className="text-sm md:text-base text-gray-700 leading-relaxed">
+                    <span className="text-base md:text-lg text-gray-700 leading-relaxed font-light">
                       {item}
                     </span>
                   </li>
@@ -334,20 +477,59 @@ export default function WorldArenaPoloChampionship2026Page() {
         </div>
       </section>
 
-      {/* Contact Form Section */}
+      {/* 📝 Contact Form Section */}
       <section className="container" id="contact">
-        <SectionHeading
-          eyebrow="Get Involved"
-          title="Contact Us"
-          description="Interested in sponsorship, tickets, or media coverage? Get in touch with us."
-        />
-        <div className="mt-12">
-          <EventContactForm />
+        <div className="relative overflow-hidden rounded-[3rem] bg-gradient-to-br from-brand-600 via-brand-700 to-brand-800 shadow-[0_50px_100px_-25px_rgba(227,30,36,0.3)]">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_0%,rgba(255,255,255,0.15),transparent_70%)]"></div>
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-brand-500/20 rounded-full blur-[150px]"></div>
+            <div className="absolute bottom-0 left-0 w-80 h-80 bg-brand-400/20 rounded-full blur-[120px]"></div>
+          </div>
+
+          <div className="relative p-12 md:p-16">
+            <div className="grid gap-12 lg:grid-cols-2 items-center">
+              <div className="space-y-6 text-white">
+                <h2 className="text-4xl md:text-5xl font-bold font-display tracking-tight">
+                  Ready to Join the Action?
+                </h2>
+                <p className="text-xl text-white/90 leading-relaxed font-light">
+                  Whether you're interested in sponsorship, tickets, or media coverage, we'd love to hear from you.
+                </p>
+                <div className="flex flex-col gap-4">
+                  <div className="flex items-center gap-4">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/20 backdrop-blur-sm">
+                      <svg className="h-6 w-6 text-brand-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-white/70 uppercase tracking-wider">Email</p>
+                      <p className="text-lg font-medium">championship@hprc.in</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/20 backdrop-blur-sm">
+                      <svg className="h-6 w-6 text-brand-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-white/70 uppercase tracking-wider">Phone</p>
+                      <p className="text-lg font-medium">+91 98765 43210</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="rounded-2xl bg-white/10 backdrop-blur-md border-2 border-white/20 p-8">
+                <EventContactForm />
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Final CTA Section */}
-      <section className="relative overflow-hidden py-20">
+      {/* 🚀 Final Energetic CTA */}
+      <section className="relative overflow-hidden py-24">
         <div className="absolute inset-0 z-0">
           <Image
             src="https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=1920&q=80"
@@ -356,33 +538,77 @@ export default function WorldArenaPoloChampionship2026Page() {
             className="object-cover"
             quality={90}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-brand-500/95 via-brand-600/95 to-brand-500/95"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-brand-600/95 via-brand-700/95 to-brand-600/95"></div>
         </div>
+        
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-white/10 rounded-full blur-[200px]"></div>
+          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-brand-500/20 rounded-full blur-[150px]"></div>
+        </div>
+
         <div className="container relative z-10 text-center">
-          <h2 className="mb-6 text-4xl font-bold text-white md:text-5xl">
-            Join Us for the World Arena Polo Championship 2026
-          </h2>
-          <p className="mx-auto mb-10 max-w-3xl text-lg text-white/95 leading-relaxed">
-            Experience world-class arena polo, international competition, and exceptional
-            hospitality in the heart of Hyderabad.
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            <Link
-              href="#contact"
-              className="inline-flex items-center rounded-full bg-white px-8 py-4 text-base font-bold text-brand-500 shadow-xl transition-all duration-300 hover:bg-gray-50 hover:shadow-2xl hover:-translate-y-1"
-            >
-              Register Interest
-            </Link>
-            <Link
-              href="/contact"
-              className="inline-flex items-center rounded-full border-2 border-white px-8 py-4 text-base font-bold text-white transition-all duration-300 hover:bg-white/10"
-            >
-              General Inquiry
-            </Link>
+          <div className="space-y-8">
+            <div className="inline-flex items-center gap-3 rounded-full bg-white/20 backdrop-blur-sm border-2 border-white/30 px-6 py-3">
+              <div className="h-3 w-3 rounded-full bg-green-400 animate-pulse"></div>
+              <span className="text-sm font-bold uppercase tracking-[0.2em] text-white">
+                Registration Open
+              </span>
+              <div className="h-3 w-3 rounded-full bg-green-400 animate-pulse"></div>
+            </div>
+
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white font-display tracking-tight leading-tight">
+              Don't Miss The
+              <br />
+              <span className="bg-gradient-to-r from-brand-300 via-white to-brand-300 bg-clip-text text-transparent">
+                Championship of a Lifetime
+              </span>
+            </h2>
+
+            <p className="mx-auto max-w-4xl text-xl md:text-2xl text-white/95 leading-relaxed font-light">
+              Secure your place at the most anticipated arena polo championship of 2026. World-class competition, 
+              exceptional hospitality, and unforgettable experiences await in Hyderabad.
+            </p>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+              <Link
+                href="#contact"
+                className="inline-flex items-center justify-center gap-3 rounded-full bg-gradient-to-r from-white to-gray-100 px-12 py-6 text-xl font-bold text-brand-900 shadow-[0_20px_40px_-10px_rgba(255,255,255,0.3)] transition-all duration-300 hover:scale-110 hover:shadow-[0_30px_60px_-15px_rgba(255,255,255,0.4)] hover:-translate-y-2"
+              >
+                <span>Register Now</span>
+                <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center gap-3 rounded-full border-4 border-white px-12 py-6 text-xl font-bold text-white shadow-[0_20px_40px_-10px_rgba(255,255,255,0.2)] transition-all duration-300 hover:bg-white/10 hover:scale-110 hover:shadow-[0_30px_60px_-15px_rgba(255,255,255,0.3)] hover:-translate-y-2"
+              >
+                <span>Learn More</span>
+                <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </Link>
+            </div>
+
+            <div className="flex items-center justify-center gap-8 pt-8">
+              <div className="text-center">
+                <p className="text-4xl md:text-5xl font-extrabold text-white font-display">120+</p>
+                <p className="text-sm font-semibold uppercase tracking-wider text-white/70">Days Left</p>
+              </div>
+              <div className="h-16 w-px bg-white/30"></div>
+              <div className="text-center">
+                <p className="text-4xl md:text-5xl font-extrabold text-white font-display">50+</p>
+                <p className="text-sm font-semibold uppercase tracking-wider text-white/70">Registered</p>
+              </div>
+              <div className="h-16 w-px bg-white/30"></div>
+              <div className="text-center">
+                <p className="text-4xl md:text-5xl font-extrabold text-white font-display">10+</p>
+                <p className="text-sm font-semibold uppercase tracking-wider text-white/70">Sponsors</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
     </div>
   );
 }
-

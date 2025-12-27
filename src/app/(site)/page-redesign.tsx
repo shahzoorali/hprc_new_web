@@ -7,7 +7,7 @@ import { homeContent } from "@/content/home";
 import { worldArenaPoloChampionship2026 } from "@/content/world-arena-polo-championship-2026";
 import { CountryBadge } from "@/components/ui/country-badge";
 
-export default function HomePage() {
+export default function HomePageRedesign() {
   const heroSlide = homeContent.heroSlides[0];
   const featuredEvent = worldArenaPoloChampionship2026;
 
@@ -54,7 +54,7 @@ export default function HomePage() {
                 </h2>
                 <div className="flex items-center gap-4">
                   <span className="h-px flex-1 bg-white/30"></span>
-                  <p className="text-lg font-medium text-white/90 tracking-wide font-body">
+                  <p className="text-lg font-medium text-white/90 tracking-wide">
                     Hyderabad • 11th – 18th February 2026
                   </p>
                   <span className="h-px flex-1 bg-white/30"></span>
@@ -83,7 +83,7 @@ export default function HomePage() {
                         }}>
                           {country.code === "USA" ? "🇺🇸" : country.code === "IND" ? "🇮🇳" : country.code === "GER" ? "🇩🇪" : country.code === "FRA" ? "🇫🇷" : country.code === "LUX" ? "🇱🇺" : "🏳️"}
                         </span>
-                        <span className="text-sm font-semibold text-white tracking-wide font-body">{country.code}</span>
+                        <span className="text-sm font-semibold text-white tracking-wide">{country.code}</span>
                       </div>
                     </div>
                   ))}
@@ -103,7 +103,7 @@ export default function HomePage() {
                       <div className="h-8 w-8 rounded-xl bg-gradient-to-br from-brand-400/20 to-brand-500/10 border border-brand-400/20 flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:border-brand-400/40">
                         <svg className="h-4 w-4 text-brand-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           {item.icon === "trophy" && (
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                           )}
                           {item.icon === "users" && (
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -119,7 +119,7 @@ export default function HomePage() {
                     </div>
                     <div>
                       <p className="font-semibold text-white mb-1.5 font-display">{item.title}</p>
-                      <p className="text-sm text-white/70 font-light font-body">{item.desc}</p>
+                      <p className="text-sm text-white/70 font-light">{item.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -174,11 +174,11 @@ export default function HomePage() {
                 <div className="absolute top-8 left-8 right-8 flex flex-wrap gap-3">
                   <div className="bg-white/98 backdrop-blur-md rounded-2xl px-5 py-3.5 shadow-xl border border-white/40 transition-all duration-300 hover:scale-105">
                     <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-brand-600 mb-1 font-display">Dates</p>
-                    <p className="text-sm font-bold text-brand-900 tracking-wide font-body">11-18 Feb 2026</p>
+                    <p className="text-sm font-bold text-brand-900 tracking-wide">11-18 Feb 2026</p>
                   </div>
                   <div className="bg-white/98 backdrop-blur-md rounded-2xl px-5 py-3.5 shadow-xl border border-white/40 transition-all duration-300 hover:scale-105">
                     <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-brand-600 mb-1 font-display">Venue</p>
-                    <p className="text-sm font-bold text-brand-900 tracking-wide font-body">HPRC Arena</p>
+                    <p className="text-sm font-bold text-brand-900 tracking-wide">HPRC Arena</p>
                   </div>
                 </div>
 
@@ -201,7 +201,7 @@ export default function HomePage() {
 
       {/* Events Section - Sophisticated Design */}
       <section className="bg-gradient-elegant py-24 sm:py-28 lg:py-32" aria-labelledby="events-heading">
-        <div className="container px-6 sm:px-8 lg:px-8">
+        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-8">
           <div className="text-center mb-16 sm:mb-20">
             <h2
               id="events-heading"
@@ -263,7 +263,7 @@ export default function HomePage() {
                           {event.title}
                         </h4>
                         <div className="flex items-center gap-3 opacity-90 group-hover:opacity-100 transition-opacity duration-300">
-                          <span className="text-sm sm:text-base font-medium tracking-wide font-body">Learn More</span>
+                          <span className="text-sm sm:text-base font-medium tracking-wide">Learn More</span>
                           <div className="h-px w-8 bg-white/50"></div>
                           <svg
                             className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-2"
@@ -292,7 +292,7 @@ export default function HomePage() {
 
       {/* Explore Section - Refined Design */}
       <section className="bg-white py-24 sm:py-28 lg:py-32" aria-labelledby="explore-heading">
-        <div className="container px-6 sm:px-8 lg:px-8">
+        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-8">
           <div className="text-center mb-16 sm:mb-20 max-w-4xl mx-auto">
             <h2
               id="explore-heading"
@@ -300,7 +300,7 @@ export default function HomePage() {
             >
               Explore HPRC
             </h2>
-            <p className="text-lg sm:text-xl text-gray-600 leading-relaxed font-light max-w-2xl mx-auto font-body">
+            <p className="text-lg sm:text-xl text-gray-600 leading-relaxed font-light max-w-2xl mx-auto">
               Discover a 10-acre equestrian estate where riders, athletes, and families come
               together for polo, riding programmes, sports, dining, and celebrations.
             </p>
@@ -336,7 +336,7 @@ export default function HomePage() {
                     <h3 className="text-2xl sm:text-3xl font-bold text-brand-900 mb-4 leading-tight font-display tracking-tight">
                       {pillar.title}
                     </h3>
-                    <p className="text-gray-600 leading-relaxed text-base sm:text-lg font-light mb-6 font-body">
+                    <p className="text-gray-600 leading-relaxed text-base sm:text-lg font-light mb-6">
                       {pillar.description}
                     </p>
                     <span className="inline-flex items-center text-sm sm:text-base font-semibold text-brand-500 group-hover:text-brand-600 transition-colors duration-300 tracking-wide font-display">
@@ -367,7 +367,7 @@ export default function HomePage() {
       {/* News Section - Refined Design */}
       {eventsContent.news && eventsContent.news.length > 0 && (
         <section className="bg-gradient-elegant py-24 sm:py-28 lg:py-32" aria-labelledby="news-heading">
-          <div className="container px-6 sm:px-8 lg:px-8">
+          <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-8">
             <div className="text-center mb-16 sm:mb-20 max-w-4xl mx-auto">
               <h2
                 id="news-heading"
@@ -375,7 +375,7 @@ export default function HomePage() {
               >
                 In The Press
               </h2>
-              <p className="text-lg sm:text-xl text-gray-600 leading-relaxed font-light max-w-2xl mx-auto font-body">
+              <p className="text-lg sm:text-xl text-gray-600 leading-relaxed font-light max-w-2xl mx-auto">
                 Latest news coverage and press releases about HPRC tournaments, achievements, and
                 events
               </p>
@@ -398,7 +398,7 @@ export default function HomePage() {
                         className="object-cover transition-transform duration-700 group-hover:scale-110"
                         sizes="(max-width: 768px) 100vw, 33vw"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
                       {article.category && (
                         <div className="absolute top-5 left-5">
                           <span className="inline-flex items-center rounded-full bg-brand-500 px-4 py-2 text-[11px] font-bold text-white tracking-wide uppercase font-display shadow-lg">
@@ -409,14 +409,14 @@ export default function HomePage() {
                     </div>
                     <div className="p-7 relative z-10">
                       <div className="flex items-center gap-2.5 text-xs text-gray-500 mb-3">
-                        <time dateTime={article.date} className="font-medium font-body">{article.date}</time>
+                        <time dateTime={article.date} className="font-medium">{article.date}</time>
                         <span className="w-1 h-1 rounded-full bg-gray-300"></span>
-                        <span className="font-semibold font-body">{article.source}</span>
+                        <span className="font-semibold">{article.source}</span>
                       </div>
                       <h3 className="text-lg font-bold text-brand-900 mb-3 leading-tight line-clamp-2 font-display tracking-tight">
                         {article.title}
                       </h3>
-                      <p className="text-sm text-gray-600 leading-relaxed mb-5 line-clamp-2 font-light font-body">
+                      <p className="text-sm text-gray-600 leading-relaxed mb-5 line-clamp-2 font-light">
                         {article.excerpt}
                       </p>
                       <a
@@ -493,14 +493,14 @@ export default function HomePage() {
             backgroundSize: '24px 24px'
           }}></div>
         </div>
-        <div className="container px-6 sm:px-8 lg:px-8 text-center relative z-10 max-w-5xl mx-auto">
+        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-8 text-center relative z-10 max-w-5xl mx-auto">
           <h2
             id="cta-heading"
-            className="mb-8 text-4xl sm:text-5xl lg:text-6xl font-bold text-white font-display tracking-tight"
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-8 leading-[1.15] font-display tracking-tight"
           >
             {homeContent.spotlight.title}
           </h2>
-          <p className="mx-auto mt-6 max-w-3xl text-lg sm:text-xl text-white/95 leading-relaxed font-light font-body">
+          <p className="mx-auto mt-6 max-w-3xl text-lg sm:text-xl text-white/95 leading-relaxed font-light">
             {homeContent.spotlight.description}
           </p>
           <Link
@@ -528,3 +528,4 @@ export default function HomePage() {
     </div>
   );
 }
+

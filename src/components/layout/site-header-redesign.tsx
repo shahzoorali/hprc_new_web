@@ -1,11 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-
 import { MainNav } from "@/components/navigation/main-nav";
 import { siteConfig } from "@/config/site";
 import { utilityNavigation } from "@/content/navigation";
 
-export function SiteHeader() {
+export function SiteHeaderRedesign() {
   return (
     <header className="relative z-50 w-full transition-all duration-500">
       {/* Elegant Top Bar with Gradient */}
@@ -31,7 +30,7 @@ export function SiteHeader() {
                   d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                 />
               </svg>
-              <span className="font-display font-semibold tracking-wide">{siteConfig.contact.phone}</span>
+              <span className="font-semibold tracking-wide">{siteConfig.contact.phone}</span>
             </a>
             <a
               href={`mailto:${siteConfig.contact.email}`}
@@ -52,8 +51,8 @@ export function SiteHeader() {
                   d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                 />
               </svg>
-              <span className="hidden lg:inline font-display font-semibold tracking-wide">{siteConfig.contact.email}</span>
-              <span className="lg:hidden font-display font-semibold tracking-wide">Email</span>
+              <span className="hidden lg:inline font-semibold tracking-wide">{siteConfig.contact.email}</span>
+              <span className="lg:hidden font-semibold tracking-wide">Email</span>
             </a>
           </div>
           <nav aria-label="Utility navigation" className="flex items-center gap-6 sm:gap-8">
@@ -61,7 +60,7 @@ export function SiteHeader() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="relative font-display font-semibold tracking-wide transition-all duration-300 hover:text-brand-600 hover:after:w-full focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:ring-offset-2 rounded-md px-2 py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-brand-500 after:transition-all after:duration-300"
+                className="relative font-semibold tracking-wide transition-all duration-300 hover:text-brand-600 hover:after:w-full focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:ring-offset-2 rounded-md px-2 py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-brand-500 after:transition-all after:duration-300"
               >
                 {item.label}
               </Link>
@@ -96,7 +95,7 @@ export function SiteHeader() {
             </span>
             <div className="flex items-center justify-center gap-3">
               <span className="h-px w-8 bg-brand-300"></span>
-              <span className="text-[11px] font-medium tracking-[0.15em] text-gray-500 sm:text-xs uppercase font-body transition-all duration-300 group-hover:text-gray-600">
+              <span className="text-[11px] font-medium tracking-[0.15em] text-gray-500 sm:text-xs uppercase transition-all duration-300 group-hover:text-gray-600">
                 Equestrian • Sports • Lifestyle
               </span>
               <span className="h-px w-8 bg-brand-300"></span>
@@ -119,9 +118,9 @@ export function SiteHeader() {
               <Link
                 key={action.href}
                 href={action.href}
-                className={`group relative inline-flex items-center justify-center gap-2 whitespace-nowrap px-7 py-3 text-sm font-bold tracking-wide transition-all duration-300 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:ring-offset-2 rounded-full font-display ${
+                className={`group relative inline-flex items-center justify-center gap-2 whitespace-nowrap px-7 py-3 text-sm font-bold tracking-wide transition-all duration-300 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:ring-offset-2 rounded-full ${
                   action.variant === "primary"
-                    ? "bg-brand-500 text-white shadow-xl shadow-brand-500/30 hover:bg-brand-600 hover:shadow-2xl hover:shadow-brand-600/40"
+                    ? "bg-brand-500 text-white shadow-lg shadow-brand-500/30 hover:bg-brand-600 hover:shadow-xl hover:shadow-brand-600/40"
                     : "border-2 border-brand-300 bg-white text-brand-700 hover:border-brand-400 hover:bg-brand-50"
                 }`}
               >
@@ -154,7 +153,7 @@ export function SiteHeader() {
                 <Link
                   key={action.href}
                   href={action.href}
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-500 px-5 py-2.5 text-xs font-bold tracking-wide text-white shadow-xl shadow-brand-500/30 transition-all duration-300 hover:bg-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:ring-offset-2 font-display"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-500 px-5 py-2.5 text-xs font-bold text-white shadow-lg shadow-brand-500/30 transition-all duration-300 hover:bg-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:ring-offset-2"
                   aria-label="Apply for Membership"
                 >
                   Apply
@@ -180,3 +179,4 @@ export function SiteHeader() {
     </header>
   );
 }
+

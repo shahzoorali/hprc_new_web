@@ -4,7 +4,7 @@ import { PageHero } from "@/components/ui/page-hero";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { membershipContent } from "@/content/membership";
 
-export default function MembershipPage() {
+export default function MembershipPageRedesign() {
   return (
     <div className="space-y-24 pb-24">
       {/* Sophisticated Hero Section */}
@@ -54,7 +54,7 @@ export default function MembershipPage() {
                 
                 <div className="relative">
                   {/* Sophisticated Step Number Badge */}
-                  <div className="mb-8 flex h-20 w-20 items-center justify-center rounded-[2.5rem] bg-gradient-to-br from-brand-800 to-brand-900 text-2xl font-bold text-white shadow-lg shadow-brand-900/30 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 border-2 border-white/20 font-display">
+                  <div className="mb-8 flex h-20 w-20 items-center justify-center rounded-[2.5rem] bg-gradient-to-br from-brand-800 to-brand-900 text-2xl font-bold text-white shadow-lg shadow-brand-900/30 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 border-2 border-white/20">
                     {index + 1}
                   </div>
                   
@@ -95,7 +95,7 @@ export default function MembershipPage() {
             {membershipContent.benefits.map((benefit, index) => (
               <div
                 key={benefit}
-                className="group relative overflow-hidden rounded-2xl border border-brand-100/70 bg-white/98 backdrop-blur-sm p-8 shadow-lg transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 hover:border-brand-200"
+                className="group relative overflow-hidden rounded-2xl border border-brand-100/70 bg-white/98 backdrop-blur-sm p-8 shadow-lg transition-all duration-500 hover:shadow-xl hover:-translate-y-1 hover:border-brand-200"
               >
                 <div className="absolute right-0 top-0 h-32 w-32 rounded-bl-full bg-gradient-to-br from-brand-500/10 to-brand-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div className="relative flex gap-5">
@@ -128,7 +128,7 @@ export default function MembershipPage() {
           {membershipContent.services.map((service, index) => {
             const serviceIcons = [
               <svg key="login" className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3 3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
               </svg>,
               <svg key="apply" className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -145,7 +145,7 @@ export default function MembershipPage() {
               <Link
                 key={service.label}
                 href={service.href}
-                className="group relative overflow-hidden rounded-2xl border border-brand-100/70 bg-white/98 backdrop-blur-sm p-8 shadow-lg transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 hover:border-brand-200 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:ring-offset-4"
+                className="group relative overflow-hidden rounded-2xl border border-brand-100/70 bg-white/98 backdrop-blur-sm p-8 shadow-lg transition-all duration-500 hover:shadow-xl hover:-translate-y-1 hover:border-brand-200 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:ring-offset-4"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-brand-500/4 via-transparent to-brand-500/6 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div className="absolute right-0 top-0 h-32 w-32 rounded-bl-full bg-gradient-to-br from-brand-500/10 to-brand-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -159,7 +159,7 @@ export default function MembershipPage() {
                       {service.label}
                     </h3>
                     <div className="flex items-center gap-2 text-sm text-brand-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <span className="font-medium tracking-wide font-body">Learn more</span>
+                      <span className="font-medium tracking-wide">Learn more</span>
                       <svg className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
@@ -184,7 +184,7 @@ export default function MembershipPage() {
           {membershipContent.faqs.map((faq, index) => (
             <details
               key={faq.question}
-              className="group relative overflow-hidden rounded-[2rem] border border-brand-100/70 bg-white/98 backdrop-blur-sm shadow-lg transition-all duration-500 hover:shadow-2xl hover:border-brand-200 [&[open]]:border-brand-200 [&[open]]:shadow-2xl"
+              className="group relative overflow-hidden rounded-[2rem] border border-brand-100/70 bg-white/98 backdrop-blur-sm shadow-lg transition-all duration-500 hover:shadow-xl hover:border-brand-200 [&[open]]:border-brand-200 [&[open]]:shadow-xl"
             >
               <summary className="cursor-pointer p-8 pr-14 text-lg font-bold text-brand-900 list-none transition-all duration-300 hover:text-brand-800 [&::-webkit-details-marker]:hidden font-display tracking-tight">
                 <div className="flex items-start gap-6">
@@ -198,14 +198,14 @@ export default function MembershipPage() {
                     stroke="currentColor" 
                     viewBox="0 0 24 24"
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7 7" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
                   </svg>
                 </div>
               </summary>
               <div className="px-8 pb-8 pl-20">
                 <div className="relative pl-8 border-l-2 border-brand-200">
                   <div className="absolute -left-2.5 top-0 h-5 w-5 rounded-full bg-brand-500 shadow-md"></div>
-                  <p className="text-base md:text-lg text-gray-700 leading-relaxed pt-3 font-light font-body">
+                  <p className="text-base md:text-lg text-gray-700 leading-relaxed pt-3 font-light">
                     {faq.answer}
                   </p>
                 </div>
@@ -217,3 +217,4 @@ export default function MembershipPage() {
     </div>
   );
 }
+
