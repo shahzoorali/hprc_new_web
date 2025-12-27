@@ -69,23 +69,19 @@ export default function BeginnersRidingProgrammePage() {
               Basic Level Riding Course
             </h3>
             <PricingTable
-              headers={["Particulars", "Price", "GST", "Total"]}
+              heading="Basic Level Riding Course"
               rows={[
                 {
-                  cells: [
-                    { content: "24 Riding Coupon", className: "font-semibold" },
-                    { content: "Rs. 6,000" },
-                    { content: "Rs. 1,080" },
-                    { content: "Rs. 7,080", className: "font-bold text-brand-600" }
-                  ]
+                  label: "24 Riding Coupon",
+                  price: "Rs. 6,000",
+                  gst: "Rs. 1,080",
+                  total: "Rs. 7,080"
                 },
                 {
-                  cells: [
-                    { content: "Coaching", className: "font-semibold" },
-                    { content: "Rs. 2,000" },
-                    { content: "Rs. 360" },
-                    { content: "Rs. 2,360", className: "font-bold text-brand-600" }
-                  ]
+                  label: "Coaching",
+                  price: "Rs. 2,000",
+                  gst: "Rs. 360",
+                  total: "Rs. 2,360"
                 }
               ]}
             />
@@ -97,23 +93,19 @@ export default function BeginnersRidingProgrammePage() {
               Basic Level Riding Course - GUEST
             </h3>
             <PricingTable
-              headers={["Particulars", "Price", "GST", "Total"]}
+              heading="Basic Level Riding Course - GUEST"
               rows={[
                 {
-                  cells: [
-                    { content: "24 Riding Coupon", className: "font-semibold" },
-                    { content: "Rs. 12,000" },
-                    { content: "Rs. 2,160" },
-                    { content: "Rs. 14,160", className: "font-bold text-brand-600" }
-                  ]
+                  label: "24 Riding Coupon",
+                  price: "Rs. 12,000",
+                  gst: "Rs. 2,160",
+                  total: "Rs. 14,160"
                 },
                 {
-                  cells: [
-                    { content: "Coaching", className: "font-semibold" },
-                    { content: "Rs. 2,400" },
-                    { content: "Rs. 432" },
-                    { content: "Rs. 2,832", className: "font-bold text-brand-600" }
-                  ]
+                  label: "Coaching",
+                  price: "Rs. 2,400",
+                  gst: "Rs. 432",
+                  total: "Rs. 2,832"
                 }
               ]}
             />
