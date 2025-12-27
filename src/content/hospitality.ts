@@ -22,9 +22,8 @@ export const hospitalityContent = {
         { label: "Food Menu", href: "/documents/chukkers-food-menu.pdf" },
         { label: "Drink Menu", href: "/documents/chukkers-drink-menu.pdf" },
       ],
-      image:
-        "https://hprc.in/documents/20124/101007/chukkers.jpg/a7eb9af5-89d8-165b-bdf8-35d430796ce2?t=1677594793869",
-      logo: "https://hprc.in/documents/20124/0/chukkers-logo.png",
+      image: "/documents/chukkers.jpg",
+      logo: "/documents/chukkers-logo.png",
     },
     {
       name: "Snaffles Bistro",
@@ -39,9 +38,8 @@ export const hospitalityContent = {
         "Perfect for family gatherings and friendly meet-ups",
       ],
       menuLinks: [{ label: "Menu", href: "/documents/snaffles-bistro-menu.pdf" }],
-      image:
-        "https://hprc.in/documents/20124/101007/snaffles.jpg/a2ca6417-698b-f7c0-fc03-d2d5e89cab17?t=1677594794999",
-      logo: "https://hprc.in/documents/20124/0/snaffles-logo.png",
+      image: "/documents/snaffles.jpg",
+      logo: "/documents/snaffles-logo.png",
     },
     {
       name: "Banquets & Events",
@@ -98,8 +96,8 @@ export const hospitalityContent = {
           ],
         },
       ],
-      image: "https://hprc.in/documents/20124/0/history2.jpg",
-      logo: "https://hprc.in/documents/20124/0/banquets-logo.png",
+      image: "/documents/history2.jpg",
+      logo: "/documents/banquets-logo.png",
     },
   ],
   experiences: [
