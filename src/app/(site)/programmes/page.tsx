@@ -8,7 +8,7 @@ import { programmesContent } from "@/content/programmes";
 
 export default function ProgrammesPage() {
   return (
-    <div className="space-y-20 pb-20">
+    <div className="space-y-16 sm:space-y-20 pb-16 sm:pb-20">
       {/* Enhanced Hero Section */}
       <div className="container pt-12">
         <PageHero
@@ -24,10 +24,10 @@ export default function ProgrammesPage() {
       </div>
 
       {/* Overview Section with Modern Design */}
-      <section className="container">
-        <div className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-brand-50/50 via-white to-brand-50/30 p-8 md:p-12 border border-brand-100/50 shadow-lg">
+      <section className="container space-y-10 sm:space-y-16 pt-8 sm:pt-12">
+        <div className="relative overflow-hidden rounded-[2rem] sm:rounded-[2.5rem] bg-gradient-to-br from-brand-50/50 via-white to-brand-50/30 p-6 sm:p-8 md:p-12 border border-brand-100/50 shadow-lg">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(227,30,36,0.05),transparent_50%)]"></div>
-          <div className="relative space-y-6 text-base text-gray-700 md:text-lg leading-relaxed">
+          <div className="relative space-y-4 sm:space-y-6 text-sm sm:text-base text-gray-700 md:text-lg leading-relaxed">
             {programmesContent.overview.map((paragraph, idx) => (
               <p 
                 key={paragraph} 
@@ -42,7 +42,7 @@ export default function ProgrammesPage() {
       </section>
 
       {/* Programmes Section with Creative Card Design */}
-      <section className="container space-y-16">
+      <section className="container space-y-10 sm:space-y-16">
         <SectionHeading
           eyebrow="Curriculum"
           title="Tailored programmes for every stage of the rider's journey"
@@ -66,9 +66,9 @@ export default function ProgrammesPage() {
                 className="group relative"
                 id={programme.id}
               >
-                <div className={`flex flex-col lg:flex-row ${isEven ? '' : 'lg:flex-row-reverse'} gap-0 overflow-hidden rounded-[2.5rem] border border-brand-100/80 bg-white shadow-xl transition-all duration-500 hover:shadow-2xl hover:border-brand-200`}>
+                <div className={`flex flex-col lg:flex-row ${isEven ? '' : 'lg:flex-row-reverse'} gap-0 overflow-hidden rounded-[1.5rem] sm:rounded-[2.5rem] border border-brand-100/80 bg-white shadow-xl transition-all duration-500 hover:shadow-2xl hover:border-brand-200`}>
                   {/* Enhanced Image Section */}
-                  <div className="relative h-80 w-full lg:h-auto lg:w-[42%] flex-shrink-0 overflow-hidden bg-gradient-to-br from-brand-100 to-brand-50">
+                  <div className="relative h-72 w-full lg:h-auto lg:w-[42%] flex-shrink-0 overflow-hidden bg-gradient-to-br from-brand-100 to-brand-50">
                     <Image
                       src={programmeImages[index % programmeImages.length]}
                       alt={programme.title}
@@ -79,39 +79,39 @@ export default function ProgrammesPage() {
                     <div className="absolute inset-0 bg-gradient-to-t from-brand-900/40 via-transparent to-transparent lg:bg-gradient-to-r lg:from-brand-900/40 lg:via-transparent lg:to-transparent"></div>
                     
                     {/* Floating Badge */}
-                    <div className="absolute top-6 left-6 lg:top-8 lg:left-8">
-                      <div className="rounded-2xl bg-white/95 backdrop-blur-sm px-4 py-2 shadow-lg border border-brand-100">
-                        <span className="text-xs font-bold uppercase tracking-wider text-brand-600">
+                    <div className="absolute top-4 sm:top-6 left-4 sm:left-6 lg:top-8 lg:left-8">
+                      <div className="rounded-2xl bg-white/95 backdrop-blur-sm px-3 sm:px-4 py-1.5 sm:py-2 shadow-lg border border-brand-100">
+                        <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-brand-600">
                           Programme {index + 1}
                         </span>
                       </div>
                     </div>
 
                     {/* Decorative Element */}
-                    <div className="absolute bottom-0 right-0 h-32 w-32 rounded-tl-full bg-gradient-to-br from-brand-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div className="absolute bottom-0 right-0 h-24 w-24 sm:h-32 sm:w-32 rounded-tl-full bg-gradient-to-br from-brand-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   </div>
 
                   {/* Content Section */}
-                  <div className="flex flex-col gap-8 p-8 lg:p-12 flex-1 bg-gradient-to-br from-white to-brand-50/20">
+                  <div className="flex flex-col gap-6 sm:gap-8 p-6 sm:p-8 lg:p-12 flex-1 bg-gradient-to-br from-white to-brand-50/20">
                     {/* Header */}
                     <div className="space-y-4">
                       <div className="flex items-start justify-between gap-4">
                         <div className="flex-1">
-                          <h2 className="text-3xl md:text-4xl font-bold text-brand-900 mb-3 leading-tight">
+                          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-brand-900 mb-2 sm:mb-3 leading-tight">
                             {programme.title}
                           </h2>
-                          <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-4">
+                          <p className="text-sm sm:text-base md:text-lg text-gray-700 leading-relaxed mb-2 sm:mb-4">
                             {programme.excerpt}
                           </p>
                         </div>
                       </div>
                       
                       {/* Schedule Badge */}
-                      <div className="inline-flex items-center gap-2 rounded-full bg-brand-100/80 px-4 py-2 border border-brand-200/50">
-                        <svg className="h-4 w-4 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <div className="inline-flex items-center gap-1 sm:gap-2 rounded-full bg-brand-100/80 px-3 sm:px-4 py-1.5 sm:py-2 border border-brand-200/50">
+                        <svg className="h-3 w-3 sm:h-4 w-3 sm:w-4 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <p className="text-xs font-semibold uppercase tracking-wider text-brand-700">
+                        <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-brand-700">
                           {programme.schedule}
                         </p>
                       </div>
@@ -175,14 +175,14 @@ export default function ProgrammesPage() {
       </section>
 
       {/* Enhanced Knowledge Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-brand-50/40 via-white to-brand-50/30 py-20">
+      <section className="relative overflow-hidden bg-gradient-to-br from-brand-50/40 via-white to-brand-50/30 py-16 sm:py-20">
         {/* Background Decorative Elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-brand-500/5 blur-3xl"></div>
           <div className="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-brand-500/5 blur-3xl"></div>
         </div>
 
-        <div className="container relative space-y-12">
+        <div className="container relative space-y-8 sm:space-y-12">
           <SectionHeading
             eyebrow="Ride Smart"
             title={programmesContent.knowledge.title}
@@ -190,7 +190,7 @@ export default function ProgrammesPage() {
             align="left"
           />
           
-          <div className="grid gap-8 lg:grid-cols-2">
+          <div className="grid gap-6 sm:gap-8 lg:grid-cols-2">
             {/* Etiquette Card */}
             <div className="group relative overflow-hidden rounded-3xl border border-brand-100/80 bg-white/95 backdrop-blur-sm p-10 shadow-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:border-brand-200">
               {/* Animated Background Gradient */}

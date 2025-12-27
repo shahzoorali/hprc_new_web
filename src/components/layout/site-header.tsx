@@ -10,15 +10,15 @@ export function SiteHeader() {
     <header className="relative z-50 w-full transition-all duration-500">
       {/* Elegant Top Bar with Gradient */}
       <div className="border-b border-brand-100/40 bg-gradient-to-r from-brand-50/90 via-white/95 to-brand-50/90 backdrop-blur-md">
-        <div className="mx-auto flex max-w-7xl flex-col gap-3 px-6 py-4 text-xs font-medium text-gray-700 sm:flex-row sm:items-center sm:justify-between sm:gap-8 lg:px-8">
-          <div className="flex flex-wrap items-center gap-6 sm:gap-8">
+        <div className="mx-auto flex max-w-7xl flex-row flex-wrap items-center justify-between gap-2 sm:gap-3 px-4 sm:px-6 py-2.5 sm:py-4 text-[10px] sm:text-xs font-medium text-gray-700 lg:px-8 lg:gap-8">
+          <div className="flex flex-wrap items-center gap-3 sm:gap-6 lg:gap-8">
             <a
               href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`}
-              className="group flex items-center gap-2.5 transition-all duration-300 hover:text-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:ring-offset-2 rounded-md px-2 py-1"
+              className="group flex items-center gap-1.5 sm:gap-2.5 transition-all duration-300 hover:text-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:ring-offset-2 rounded-md px-1.5 sm:px-2 py-0.5 sm:py-1"
               aria-label={`Call ${siteConfig.contact.phone}`}
             >
               <svg
-                className="h-4 w-4 text-brand-500 transition-all duration-300 group-hover:scale-110 group-hover:text-brand-600"
+                className="h-3 w-3 sm:h-4 sm:w-4 text-brand-500 transition-all duration-300 group-hover:scale-110 group-hover:text-brand-600 flex-shrink-0"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -31,15 +31,15 @@ export function SiteHeader() {
                   d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                 />
               </svg>
-              <span className="font-display font-semibold tracking-wide">{siteConfig.contact.phone}</span>
+              <span className="font-display font-semibold tracking-wide whitespace-nowrap">{siteConfig.contact.phone}</span>
             </a>
             <a
               href={`mailto:${siteConfig.contact.email}`}
-              className="group flex items-center gap-2.5 transition-all duration-300 hover:text-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:ring-offset-2 rounded-md px-2 py-1"
+              className="group flex items-center gap-1.5 sm:gap-2.5 transition-all duration-300 hover:text-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:ring-offset-2 rounded-md px-1.5 sm:px-2 py-0.5 sm:py-1"
               aria-label={`Email ${siteConfig.contact.email}`}
             >
               <svg
-                className="h-4 w-4 text-brand-500 transition-all duration-300 group-hover:scale-110 group-hover:text-brand-600"
+                className="h-3 w-3 sm:h-4 sm:w-4 text-brand-500 transition-all duration-300 group-hover:scale-110 group-hover:text-brand-600 flex-shrink-0"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -52,16 +52,16 @@ export function SiteHeader() {
                   d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                 />
               </svg>
-              <span className="hidden lg:inline font-display font-semibold tracking-wide">{siteConfig.contact.email}</span>
-              <span className="lg:hidden font-display font-semibold tracking-wide">Email</span>
+              <span className="hidden lg:inline font-display font-semibold tracking-wide whitespace-nowrap">{siteConfig.contact.email}</span>
+              <span className="lg:hidden font-display font-semibold tracking-wide whitespace-nowrap">Email</span>
             </a>
           </div>
-          <nav aria-label="Utility navigation" className="flex items-center gap-6 sm:gap-8">
+          <nav aria-label="Utility navigation" className="flex flex-wrap items-center gap-2 sm:gap-4 lg:gap-6">
             {utilityNavigation.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="relative font-display font-semibold tracking-wide transition-all duration-300 hover:text-brand-600 hover:after:w-full focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:ring-offset-2 rounded-md px-2 py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-brand-500 after:transition-all after:duration-300"
+                className="relative font-display font-semibold tracking-wide transition-all duration-300 hover:text-brand-600 hover:after:w-full focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:ring-offset-2 rounded-md px-1.5 sm:px-2 py-0.5 sm:py-1 text-[10px] sm:text-xs after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-brand-500 after:transition-all after:duration-300 whitespace-nowrap"
               >
                 {item.label}
               </Link>
@@ -77,8 +77,8 @@ export function SiteHeader() {
           className="group relative flex flex-col items-center gap-3 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:ring-offset-4 rounded-2xl p-3 -m-3"
           aria-label="HPRC Home"
         >
-          {/* Elegant Logo Container with Subtle Shadow */}
-          <div className="relative h-20 w-20 flex-shrink-0 sm:h-24 sm:w-24 lg:h-28 lg:w-28 transition-all duration-500 group-hover:scale-105 group-focus:scale-105 drop-shadow-lg">
+          {/* Elegant Logo Container */}
+          <div className="relative h-20 w-20 flex-shrink-0 sm:h-24 sm:w-24 lg:h-28 lg:w-28 transition-all duration-500 group-hover:scale-105 group-focus:scale-105">
             <Image
               src="/hprc_logo.png"
               alt="HPRC Logo"

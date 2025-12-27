@@ -21,7 +21,7 @@ export default function HomePage() {
       />
 
       {/* Featured Event - World Arena Polo Championship 2026 - Sophisticated Design */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-brand-900 via-brand-800 to-brand-900 py-24 sm:py-32 lg:py-40">
+      <section className="relative overflow-hidden bg-gradient-to-br from-brand-900 via-brand-800 to-brand-900 py-16 sm:py-24 lg:py-32">
         {/* Elegant Subtle Pattern */}
         <div className="absolute inset-0 opacity-5">
           <div className="absolute inset-0" style={{
@@ -29,32 +29,32 @@ export default function HomePage() {
             backgroundSize: '32px 32px'
           }}></div>
         </div>
-        
+
         {/* Sophisticated Decorative Elements */}
-        <div className="absolute top-0 right-0 w-[30rem] h-[30rem] bg-brand-600/8 rounded-full blur-[100px]"></div>
-        <div className="absolute bottom-0 left-0 w-[30rem] h-[30rem] bg-brand-700/8 rounded-full blur-[100px]"></div>
+        <div className="absolute top-0 right-0 w-[20rem] h-[20rem] sm:w-[30rem] sm:h-[30rem] bg-brand-600/8 rounded-full blur-[100px]"></div>
+        <div className="absolute bottom-0 left-0 w-[20rem] h-[20rem] sm:w-[30rem] sm:h-[30rem] bg-brand-700/8 rounded-full blur-[100px]"></div>
 
         <div className="container relative z-10">
-          <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center">
             {/* Elegant Content Side */}
-            <div className="text-white space-y-10">
+            <div className="text-white space-y-6 sm:space-y-10">
               {/* Sophisticated Badge */}
-              <div className="inline-flex items-center gap-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 px-5 py-2.5">
-                <span className="h-2 w-2 rounded-full bg-brand-400 animate-pulse"></span>
-                <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-white/90 font-display">Featured Event</span>
+              <div className="inline-flex items-center gap-2 sm:gap-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 px-3 sm:px-5 py-2 sm:py-2.5">
+                <span className="h-1.5 sm:h-2 w-1.5 sm:w-2 rounded-full bg-brand-400 animate-pulse"></span>
+                <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.15em] sm:tracking-[0.2em] text-white/90 font-display">Featured Event</span>
               </div>
 
               {/* Elegant Typography */}
-              <div className="space-y-6">
-                <h2 className="text-[clamp(2.5rem,5vw,4.5rem)] font-bold leading-[1.1] font-display">
+              <div className="space-y-4 sm:space-y-6">
+                <h2 className="text-[clamp(2rem,5vw,4rem)] sm:text-[clamp(2.5rem,5vw,4.5rem)] font-bold leading-[1.1] font-display">
                   <span className="block">World Arena Polo</span>
-                  <span className="block bg-gradient-to-r from-white via-brand-100 to-white bg-clip-text text-transparent mt-2">
+                  <span className="block bg-gradient-to-r from-white via-brand-100 to-white bg-clip-text text-transparent mt-1 sm:mt-2">
                     Championship 2026
                   </span>
                 </h2>
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2 sm:gap-4">
                   <span className="h-px flex-1 bg-white/30"></span>
-                  <p className="text-lg font-medium text-white/90 tracking-wide font-body">
+                  <p className="text-sm sm:text-lg font-medium text-white/90 tracking-wide font-body">
                     Hyderabad • 11th – 18th February 2026
                   </p>
                   <span className="h-px flex-1 bg-white/30"></span>
@@ -62,28 +62,28 @@ export default function HomePage() {
               </div>
 
               {/* Elegant Description */}
-              <p className="text-lg sm:text-xl text-white/80 leading-relaxed font-light max-w-2xl font-body">
-                A week-long celebration of world-class arena polo featuring top international teams competing for glory. 
+              <p className="text-base sm:text-lg lg:text-xl text-white/80 leading-relaxed font-light max-w-2xl font-body">
+                A week-long celebration of world-class arena polo featuring top international teams competing for glory.
                 Experience the thrill of elite competition, exceptional hospitality, and the finest polo action.
               </p>
 
               {/* Participating Countries - Elegant Layout */}
-              <div className="space-y-6">
-                <p className="text-xs font-bold uppercase tracking-[0.2em] text-white/70 font-display">
+              <div className="space-y-4 sm:space-y-6">
+                <p className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.15em] sm:tracking-[0.2em] text-white/70 font-display">
                   Participating Countries
                 </p>
-                <div className="flex flex-wrap items-center gap-4">
+                <div className="flex flex-wrap items-center gap-2 sm:gap-4">
                   {featuredEvent.countries.map((country) => (
                     <div key={country.code} className="group relative">
-                      <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 transition-all duration-300 hover:bg-white/20 hover:border-white/30 hover:scale-105">
-                        <span className="text-[1.25rem] mr-2.5" style={{
+                      <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-3 sm:px-4 py-1.5 sm:py-2 transition-all duration-300 hover:bg-white/20 hover:border-white/30 hover:scale-105">
+                        <span className="text-[1rem] sm:text-[1.25rem] mr-1.5 sm:mr-2.5" style={{
                           fontFamily: 'system-ui, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", "Twemoji Mozilla", "EmojiOne Color", sans-serif',
                           display: 'inline-block',
                           verticalAlign: 'middle'
                         }}>
                           {country.code === "USA" ? "🇺🇸" : country.code === "IND" ? "🇮🇳" : country.code === "GER" ? "🇩🇪" : country.code === "FRA" ? "🇫🇷" : country.code === "LUX" ? "🇱🇺" : "🏳️"}
                         </span>
-                        <span className="text-sm font-semibold text-white tracking-wide font-body">{country.code}</span>
+                        <span className="text-xs sm:text-sm font-semibold text-white tracking-wide font-body">{country.code}</span>
                       </div>
                     </div>
                   ))}
@@ -91,7 +91,7 @@ export default function HomePage() {
               </div>
 
               {/* Key Highlights - Sophisticated Cards */}
-              <div className="grid sm:grid-cols-2 gap-5 pt-4">
+              <div className="grid sm:grid-cols-2 gap-3 sm:gap-5 pt-3 sm:pt-4">
                 {[
                   { title: "4 & 6 Goal Tournaments", desc: "Multiple competitive formats", icon: "trophy" },
                   { title: "International Teams", desc: "5 countries competing", icon: "users" },
@@ -126,14 +126,14 @@ export default function HomePage() {
               </div>
 
               {/* Elegant CTA Buttons */}
-              <div className="flex flex-wrap items-center gap-5 pt-6">
+              <div className="flex flex-wrap items-center gap-3 sm:gap-5 pt-4 sm:pt-6">
                 <Link
                   href="/events/world-arena-polo-championship-2026"
-                  className="group inline-flex items-center justify-center gap-3 rounded-full bg-white px-9 py-4 text-base font-bold text-brand-800 shadow-2xl transition-all duration-300 hover:bg-gray-50 hover:text-brand-900 hover:shadow-2xl hover:shadow-brand-500/20 hover:-translate-y-1 font-display"
+                  className="group inline-flex items-center justify-center gap-2 sm:gap-3 rounded-full bg-white px-6 sm:px-9 py-3 sm:py-4 text-sm sm:text-base font-bold text-brand-900 shadow-2xl transition-all duration-300 hover:bg-gray-50 hover:text-brand-900 hover:shadow-2xl hover:shadow-brand-500/20 hover:-translate-y-1 font-display"
                 >
-                  <span className="tracking-wide">View Full Details</span>
+                  <span className="tracking-wide text-brand-900">View Full Details</span>
                   <svg
-                    className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1"
+                    className="h-4 sm:h-5 w-4 sm:w-5 transition-transform duration-300 group-hover:translate-x-1"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -148,7 +148,7 @@ export default function HomePage() {
                 </Link>
                 <Link
                   href="/events/world-arena-polo-championship-2026#contact"
-                  className="inline-flex items-center justify-center rounded-full border-2 border-white/30 bg-white/10 backdrop-blur-md px-9 py-4 text-base font-bold text-white transition-all duration-300 hover:bg-white/20 hover:border-white/50 font-display"
+                  className="inline-flex items-center justify-center rounded-full border-2 border-white/30 bg-white/10 backdrop-blur-md px-6 sm:px-9 py-3 sm:py-4 text-sm sm:text-base font-bold text-white transition-all duration-300 hover:bg-white/20 hover:border-white/50 font-display"
                 >
                   Register Interest
                 </Link>
@@ -200,25 +200,25 @@ export default function HomePage() {
       </section>
 
       {/* Events Section - Sophisticated Design */}
-      <section className="bg-gradient-elegant py-24 sm:py-28 lg:py-32" aria-labelledby="events-heading">
-        <div className="container px-6 sm:px-8 lg:px-8">
-          <div className="text-center mb-16 sm:mb-20">
+      <section className="bg-gradient-elegant py-16 sm:py-20 lg:py-28 lg:py-32" aria-labelledby="events-heading">
+        <div className="container">
+          <div className="text-center mb-12 sm:mb-16 lg:mb-20">
             <h2
               id="events-heading"
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold text-brand-900 mb-6 leading-[1.15] font-display tracking-tight"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-brand-900 mb-4 sm:mb-6 leading-[1.15] font-display tracking-tight"
             >
               A Wide Range of Events
-              <span className="block mt-2 text-brand-500">For Everyone</span>
+              <span className="block mt-1 sm:mt-2 text-brand-500">For Everyone</span>
             </h2>
-            <div className="mx-auto flex items-center justify-center gap-4">
-              <span className="h-px w-12 bg-brand-300"></span>
-              <span className="h-px w-12 bg-brand-300"></span>
-              <span className="h-px w-12 bg-brand-500"></span>
+            <div className="mx-auto flex items-center justify-center gap-3 sm:gap-4">
+              <span className="h-px w-8 sm:w-12 bg-brand-300"></span>
+              <span className="h-px w-8 sm:w-12 bg-brand-300"></span>
+              <span className="h-px w-8 sm:w-12 bg-brand-500"></span>
             </div>
           </div>
 
           {/* Sophisticated Cards Layout */}
-          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 list-none p-0 m-0">
+          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 list-none p-0 m-0">
             {homeContent.events.map((event, index) => {
               const eventImages = [
                 "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=800&q=80",
@@ -291,21 +291,21 @@ export default function HomePage() {
       </section>
 
       {/* Explore Section - Refined Design */}
-      <section className="bg-white py-24 sm:py-28 lg:py-32" aria-labelledby="explore-heading">
-        <div className="container px-6 sm:px-8 lg:px-8">
-          <div className="text-center mb-16 sm:mb-20 max-w-4xl mx-auto">
+      <section className="bg-white py-16 sm:py-20 lg:py-28 lg:py-32" aria-labelledby="explore-heading">
+        <div className="container">
+          <div className="text-center mb-12 sm:mb-16 lg:mb-20 max-w-4xl mx-auto">
             <h2
               id="explore-heading"
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold text-brand-900 mb-8 leading-[1.15] font-display tracking-tight"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-brand-900 mb-6 sm:mb-8 leading-[1.15] font-display tracking-tight"
             >
               Explore HPRC
             </h2>
-            <p className="text-lg sm:text-xl text-gray-600 leading-relaxed font-light max-w-2xl mx-auto font-body">
+            <p className="text-base sm:text-lg lg:text-xl text-gray-600 leading-relaxed font-light max-w-2xl mx-auto font-body">
               Discover a 10-acre equestrian estate where riders, athletes, and families come
               together for polo, riding programmes, sports, dining, and celebrations.
             </p>
           </div>
-          <div className="mt-12 sm:mt-16 grid gap-10 sm:gap-12 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-8 sm:mt-12 lg:mt-16 grid gap-6 sm:gap-8 md:gap-10 lg:gap-12 md:grid-cols-2 lg:grid-cols-3">
             {homeContent.pillars.map((pillar, index) => {
               const pillarImages = [
                 "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=800&q=80",
@@ -332,17 +332,17 @@ export default function HomePage() {
                   </div>
                   
                   {/* Elegant Content */}
-                  <div className="p-7 sm:p-9 bg-white relative">
-                    <h3 className="text-2xl sm:text-3xl font-bold text-brand-900 mb-4 leading-tight font-display tracking-tight">
+                  <div className="p-5 sm:p-7 lg:p-9 bg-white relative">
+                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-brand-900 mb-3 sm:mb-4 leading-tight font-display tracking-tight">
                       {pillar.title}
                     </h3>
-                    <p className="text-gray-600 leading-relaxed text-base sm:text-lg font-light mb-6 font-body">
+                    <p className="text-gray-600 leading-relaxed text-sm sm:text-base lg:text-lg font-light mb-4 sm:mb-6 font-body">
                       {pillar.description}
                     </p>
-                    <span className="inline-flex items-center text-sm sm:text-base font-semibold text-brand-500 group-hover:text-brand-600 transition-colors duration-300 tracking-wide font-display">
+                    <span className="inline-flex items-center text-xs sm:text-sm lg:text-base font-semibold text-brand-500 group-hover:text-brand-600 transition-colors duration-300 tracking-wide font-display">
                       Explore
                       <svg
-                        className="ml-3 sm:ml-4 h-5 w-5 sm:h-6 sm:w-6 transition-transform duration-300 group-hover:translate-x-2"
+                        className="ml-2 sm:ml-3 lg:ml-4 h-4 sm:h-5 lg:h-6 w-4 sm:w-5 lg:w-6 transition-transform duration-300 group-hover:translate-x-2"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -366,21 +366,21 @@ export default function HomePage() {
 
       {/* News Section - Refined Design */}
       {eventsContent.news && eventsContent.news.length > 0 && (
-        <section className="bg-gradient-elegant py-24 sm:py-28 lg:py-32" aria-labelledby="news-heading">
-          <div className="container px-6 sm:px-8 lg:px-8">
-            <div className="text-center mb-16 sm:mb-20 max-w-4xl mx-auto">
+        <section className="bg-gradient-elegant py-16 sm:py-20 lg:py-28 lg:py-32" aria-labelledby="news-heading">
+          <div className="container">
+            <div className="text-center mb-12 sm:mb-16 lg:mb-20 max-w-4xl mx-auto">
               <h2
                 id="news-heading"
-                className="text-4xl sm:text-5xl lg:text-6xl font-bold text-brand-900 mb-8 leading-[1.15] font-display tracking-tight"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-brand-900 mb-6 sm:mb-8 leading-[1.15] font-display tracking-tight"
               >
                 In The Press
               </h2>
-              <p className="text-lg sm:text-xl text-gray-600 leading-relaxed font-light max-w-2xl mx-auto font-body">
+              <p className="text-base sm:text-lg lg:text-xl text-gray-600 leading-relaxed font-light max-w-2xl mx-auto font-body">
                 Latest news coverage and press releases about HPRC tournaments, achievements, and
                 events
               </p>
             </div>
-            <div className="mt-12 sm:mt-16 grid gap-8 md:grid-cols-3">
+            <div className="mt-8 sm:mt-12 lg:mt-16 grid gap-4 sm:gap-6 lg:gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
               {eventsContent.news.slice(0, 3).map((article, index) => {
                 const imageUrl =
                   article.imageUrl ||
@@ -474,7 +474,7 @@ export default function HomePage() {
 
       {/* Sophisticated CTA Section */}
       <section
-        className="relative py-24 sm:py-28 lg:py-32 overflow-hidden"
+        className="relative py-16 sm:py-20 lg:py-28 lg:py-32 overflow-hidden"
         aria-labelledby="cta-heading"
       >
         {/* Elegant Background Image */}
@@ -493,23 +493,23 @@ export default function HomePage() {
             backgroundSize: '24px 24px'
           }}></div>
         </div>
-        <div className="container px-6 sm:px-8 lg:px-8 text-center relative z-10 max-w-5xl mx-auto">
+        <div className="container text-center relative z-10 max-w-5xl mx-auto">
           <h2
             id="cta-heading"
-            className="mb-8 text-4xl sm:text-5xl lg:text-6xl font-bold text-white font-display tracking-tight"
+            className="mb-6 sm:mb-8 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white font-display tracking-tight"
           >
             {homeContent.spotlight.title}
           </h2>
-          <p className="mx-auto mt-6 max-w-3xl text-lg sm:text-xl text-white/95 leading-relaxed font-light font-body">
+          <p className="mx-auto mt-4 sm:mt-6 max-w-3xl text-base sm:text-lg lg:text-xl text-white/95 leading-relaxed font-light font-body">
             {homeContent.spotlight.description}
           </p>
           <Link
             href={homeContent.spotlight.cta.href}
-            className="mt-12 inline-flex items-center justify-center rounded-full bg-white px-10 py-4.5 sm:px-12 sm:py-5 text-base sm:text-lg font-bold text-brand-500 shadow-2xl transition-all duration-300 hover:bg-gray-50 hover:shadow-[0_35px_60px_-15px_rgba(255,255,255,0.3)] hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-4 font-display tracking-wide"
+            className="mt-8 sm:mt-12 inline-flex items-center justify-center rounded-full bg-white px-8 sm:px-10 lg:px-12 py-3.5 sm:py-4 lg:py-5 text-sm sm:text-base lg:text-lg font-bold text-brand-500 shadow-2xl transition-all duration-300 hover:bg-gray-50 hover:shadow-[0_35px_60px_-15px_rgba(255,255,255,0.3)] hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-4 font-display tracking-wide"
           >
             {homeContent.spotlight.cta.label}
             <svg
-              className="ml-3 h-5 w-5"
+              className="ml-2 sm:ml-3 h-4 sm:h-5 w-4 sm:w-5"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import { primaryNavigation, type NavChild } from "@/content/navigation";
 
@@ -168,13 +168,41 @@ function DesktopNav() {
 
 function MobileNav() {
   const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(false);
+  const detailsRef = useRef<HTMLDetailsElement>(null);
+
+  // Ensure menu is closed on mount
+  useEffect(() => {
+    if (detailsRef.current) {
+      detailsRef.current.open = false;
+      setIsOpen(false);
+    }
+  }, []);
+
+  const closeMenu = () => {
+    setIsOpen(false);
+    if (detailsRef.current) {
+      detailsRef.current.open = false;
+    }
+  };
+
+  const handleLinkClick = () => {
+    closeMenu();
+  };
 
   return (
     <nav className="relative lg:hidden">
-      <details className="group">
+      <details 
+        ref={detailsRef}
+        className="group"
+        onToggle={(e) => {
+          const target = e.target as HTMLDetailsElement;
+          setIsOpen(target.open);
+        }}
+      >
         <summary className="flex cursor-pointer items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold text-gray-700 transition-colors hover:bg-brand-50 hover:text-brand-700">
           <svg
-            className="h-5 w-5 transition-transform group-open:rotate-90"
+            className={`h-5 w-5 transition-transform ${isOpen ? "rotate-90" : ""}`}
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -196,6 +224,7 @@ function MobileNav() {
                 <div key={item.href}>
                   <Link
                     href={item.href}
+                    onClick={handleLinkClick}
                     className={`block rounded-lg px-3 py-2 text-sm font-semibold transition-colors ${
                       isActive
                         ? "bg-brand-50 text-brand-700"
@@ -221,6 +250,7 @@ function MobileNav() {
                                 <li key={child.href}>
                                   <Link
                                     href={child.href}
+                                    onClick={handleLinkClick}
                                     className={`block rounded-lg px-3 py-1.5 text-xs transition-colors ${
                                       isChildActive
                                         ? "bg-brand-50 text-brand-700 font-medium"
@@ -244,6 +274,7 @@ function MobileNav() {
                           <li key={child.href}>
                             <Link
                               href={child.href}
+                              onClick={handleLinkClick}
                               className={`block rounded-lg px-3 py-1.5 text-xs transition-colors ${
                                 isChildActive
                                   ? "bg-brand-50 text-brand-700 font-medium"
@@ -262,6 +293,7 @@ function MobileNav() {
                     <div className="mt-2 pl-4 border-t border-brand-100 pt-2">
                       <Link
                         href={item.featured.href}
+                        onClick={handleLinkClick}
                         className="block rounded-lg bg-brand-50 px-3 py-2 text-xs font-semibold text-brand-700 transition-colors hover:bg-brand-100"
                       >
                         {item.featured.title}

@@ -6,7 +6,7 @@ import { contactContent } from "@/content/contact";
 
 export default function ContactPage() {
   return (
-    <div className="space-y-24 pb-24">
+    <div className="space-y-16 sm:space-y-24 pb-12 sm:pb-24">
       {/* Sophisticated Hero Section */}
       <div className="container pt-16">
         <PageHero
@@ -21,10 +21,10 @@ export default function ContactPage() {
       </div>
 
       {/* Elegant Information Cards */}
-      <section className="container">
-        <div className="grid gap-10 lg:grid-cols-2">
+      <section className="container space-y-8 sm:space-y-12">
+        <div className="grid gap-6 sm:gap-10 grid-cols-1 lg:grid-cols-2">
           {/* Contact Details Card */}
-          <div className="space-y-6 rounded-[2.5rem] border border-brand-100/60 bg-gradient-to-br from-brand-50/60 via-white to-brand-50/40 p-10 shadow-xl">
+          <div className="space-y-4 sm:space-y-6 rounded-[1.5rem] sm:rounded-[2.5rem] border border-brand-100/60 bg-gradient-to-br from-brand-50/60 via-white to-brand-50/40 p-6 sm:p-10 shadow-xl">
             <SectionHeading
               eyebrow="Visit"
               title="Club Coordinates"
@@ -32,8 +32,8 @@ export default function ContactPage() {
               align="left"
               className="!mb-6"
             />
-            <div className="space-y-5 text-sm md:text-base text-gray-700">
-              <div className="flex items-start gap-4">
+            <div className="space-y-4 sm:space-y-5 text-sm sm:text-base text-gray-700">
+              <div className="flex items-start gap-3 sm:gap-4">
                 <div className="flex-shrink-0 mt-1">
                   <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500/15 to-brand-500/7 text-brand-600 shadow-md transition-transform duration-300 hover:scale-110">
                     <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -132,22 +132,22 @@ export default function ContactPage() {
           </div>
 
           {/* Timings Card */}
-          <div className="space-y-6 rounded-[2.5rem] border border-brand-100/60 bg-gradient-to-br from-brand-50/60 via-white to-brand-50/40 p-10 shadow-xl">
+          <div className="space-y-4 sm:space-y-6 rounded-[1.5rem] sm:rounded-[2.5rem] border border-brand-100/60 bg-gradient-to-br from-brand-50/60 via-white to-brand-50/40 p-6 sm:p-10 shadow-xl">
             <SectionHeading
               eyebrow="Hours"
               title="Operating Hours"
               description=""
               align="left"
-              className="!mb-6"
+              className="!mb-4 sm:!mb-6"
             />
-            <ul className="space-y-4 text-sm md:text-base text-gray-700">
+            <ul className="space-y-3 sm:space-y-4 text-sm sm:text-base text-gray-700">
               {contactContent.hours.map((entry) => (
-                <li key={entry.label} className="flex items-start gap-4 group">
-                  <div className="flex-shrink-0 mt-2">
-                    <div className="h-3 w-3 rounded-full bg-brand-500 group-hover:scale-125 transition-transform duration-300"></div>
+                <li key={entry.label} className="flex items-start gap-3 sm:gap-4 group">
+                  <div className="flex-shrink-0 mt-1.5 sm:mt-2">
+                    <div className="h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full bg-brand-500 group-hover:scale-125 transition-transform duration-300"></div>
                   </div>
                   <div className="flex-1">
-                    <p className="font-semibold text-brand-900 mb-1 font-display">{entry.label}</p>
+                    <p className="font-semibold text-brand-900 mb-0.5 sm:mb-1 font-display">{entry.label}</p>
                     <p className="font-medium text-gray-700">{entry.value}</p>
                   </div>
                 </li>
@@ -158,22 +158,22 @@ export default function ContactPage() {
       </section>
 
       {/* Elegant Enquiry Notes Section */}
-      <section className="container space-y-12">
+      <section className="container space-y-8 sm:space-y-12">
         <SectionHeading
           eyebrow="Plan Ahead"
           title="Helpful Notes for Enquiries"
           description="Share details about your visit, group size, and expectations so our team can craft perfect itinerary."
           align="left"
         />
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-3">
           {contactContent.enquiryNotes.map((note) => (
             <div
               key={note}
-              className="group relative overflow-hidden rounded-[2rem] border border-brand-100/60 bg-gradient-to-br from-white to-brand-50/30 p-8 shadow-lg transition-all duration-500 hover:shadow-xl hover:-translate-y-1 hover:border-brand-200"
+              className="group relative overflow-hidden rounded-[1.5rem] sm:rounded-[2rem] border border-brand-100/60 bg-gradient-to-br from-white to-brand-50/30 p-5 sm:p-8 shadow-lg transition-all duration-500 hover:shadow-xl hover:-translate-y-1 hover:border-brand-200"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-brand-500/4 via-transparent to-brand-500/6 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="absolute right-0 top-0 h-24 w-24 rounded-bl-full bg-gradient-to-br from-brand-500/10 to-brand-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <p className="relative text-base md:text-lg text-gray-700 leading-relaxed font-light">
+              <div className="absolute right-0 top-0 h-20 w-20 sm:h-24 sm:w-24 rounded-bl-full bg-gradient-to-br from-brand-500/10 to-brand-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <p className="relative text-sm sm:text-base md:text-lg text-gray-700 leading-relaxed font-light">
                 {note}
               </p>
             </div>

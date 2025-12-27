@@ -7,7 +7,7 @@ import { eventsContent } from "@/content/events";
 
 export default function EventsPage() {
   return (
-    <div className="space-y-16 pb-16">
+    <div className="space-y-12 sm:space-y-16 pb-12 sm:pb-16">
       <div className="container pt-12">
         <PageHero
           eyebrow={eventsContent.hero.eyebrow}
@@ -25,7 +25,7 @@ export default function EventsPage() {
           description="Mark your calendar and experience the thrill of equestrian sport and club celebrations."
           align="left"
         />
-        <div className="grid gap-8 md:grid-cols-2">
+        <div className="grid gap-6 sm:gap-8 grid-cols-1 md:grid-cols-2">
           {eventsContent.upcoming.map((event, index) => {
             const eventImages = [
               "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=800&q=80",
@@ -36,7 +36,7 @@ export default function EventsPage() {
             
             const eventContent = (
               <>
-                <div className="relative h-48 overflow-hidden">
+                <div className="relative h-44 sm:h-48 overflow-hidden">
                   <Image
                     src={eventImages[index % eventImages.length]}
                     alt={event.title}
@@ -46,14 +46,14 @@ export default function EventsPage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
                 </div>
-                <div className="p-8">
-                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-500">
+                <div className="p-6 sm:p-8">
+                  <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.25em] sm:tracking-[0.3em] text-brand-500">
                     {event.date}
                   </p>
-                  <h2 className="mt-3 text-2xl font-extrabold text-gray-900">{event.title}</h2>
-                  <p className="mt-4 text-sm text-gray-700 leading-relaxed">{event.description}</p>
+                  <h2 className="mt-2 sm:mt-3 text-xl sm:text-2xl font-extrabold text-gray-900">{event.title}</h2>
+                  <p className="mt-3 sm:mt-4 text-sm text-gray-700 leading-relaxed">{event.description}</p>
                   {event.link && (
-                    <div className="mt-4 inline-flex items-center text-sm font-bold text-brand-500 hover:text-brand-600 transition-colors">
+                    <div className="mt-3 sm:mt-4 inline-flex items-center text-xs sm:text-sm font-bold text-brand-500 hover:text-brand-600 transition-colors">
                       Learn More
                       <svg
                         className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
@@ -98,7 +98,7 @@ export default function EventsPage() {
         </div>
       </section>
 
-      <section className="bg-gradient-to-br from-brand-50/30 via-white to-brand-50/20 py-16">
+      <section className="bg-gradient-to-br from-brand-50/30 via-white to-brand-50/20 py-12 sm:py-16">
         <div className="container space-y-8">
           <SectionHeading
             eyebrow="Highlights"
@@ -106,21 +106,21 @@ export default function EventsPage() {
             description="Explore standout initiatives that continue to elevate Hyderabad's equestrian scene."
             align="left"
           />
-          <div className="grid gap-8 md:grid-cols-2">
+          <div className="grid gap-6 sm:gap-8 grid-cols-1 md:grid-cols-2">
             {eventsContent.pastHighlights.map((highlight) => (
               <article
                 key={highlight.title}
                 className="group relative overflow-hidden rounded-3xl border border-brand-100 bg-white/95 p-8 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
               >
-                <div className="absolute right-0 top-0 h-32 w-32 rounded-bl-full bg-gradient-to-br from-brand-500/10 to-brand-500/5 transition-all duration-500 group-hover:scale-150"></div>
+                <div className="absolute right-0 top-0 h-24 w-24 sm:h-32 sm:w-32 rounded-bl-full bg-gradient-to-br from-brand-500/10 to-brand-500/5 transition-all duration-500 group-hover:scale-150"></div>
                 <div className="relative">
-                  <h3 className="text-xl font-extrabold text-brand-900">{highlight.title}</h3>
-                  <p className="mt-4 text-sm text-gray-700 leading-relaxed">
+                  <h3 className="text-lg sm:text-xl font-extrabold text-brand-900">{highlight.title}</h3>
+                  <p className="mt-3 sm:mt-4 text-sm text-gray-700 leading-relaxed">
                     {highlight.description}
                   </p>
                   <Link
                     href={highlight.link}
-                    className="mt-6 inline-flex items-center text-sm font-bold text-brand-500 hover:text-brand-600 transition-colors group/link"
+                    className="mt-4 sm:mt-6 inline-flex items-center text-xs sm:text-sm font-bold text-brand-500 hover:text-brand-600 transition-colors group/link"
                   >
                     Read more
                     <svg
@@ -146,13 +146,13 @@ export default function EventsPage() {
 
       {/* Latest News Section */}
       {eventsContent.news && eventsContent.news.length > 0 && (
-        <section className="container space-y-8">
+        <section className="container space-y-6 sm:space-y-8">
           <SectionHeading
             eyebrow="The Press"
             title="Latest News"
             description="Recent coverage and press releases about HPRC tournaments, achievements, and events."
           />
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
             {eventsContent.news.slice(0, 3).map((article, index) => {
               // Use image from source article, fallback to stock image if not available
               const imageUrl =
@@ -163,7 +163,7 @@ export default function EventsPage() {
                   key={index}
                   className="group relative overflow-hidden rounded-2xl bg-white shadow-md border border-gray-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
                 >
-                  <div className="relative h-40 overflow-hidden">
+                  <div className="relative h-36 sm:h-40 overflow-hidden">
                     <Image
                       src={imageUrl}
                       alt={article.title}
@@ -173,30 +173,30 @@ export default function EventsPage() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                     {article.category && (
-                      <div className="absolute top-3 left-3">
-                        <span className="inline-flex items-center rounded-full bg-brand-500 px-2.5 py-1 text-xs font-bold text-white">
+                      <div className="absolute top-2 sm:top-3 left-2 sm:left-3">
+                        <span className="inline-flex items-center rounded-full bg-brand-500 px-2 sm:px-2.5 py-1 text-[10px] sm:text-xs font-bold text-white">
                           {article.category}
                         </span>
                       </div>
                     )}
                   </div>
-                  <div className="p-5">
-                    <div className="flex items-center gap-2 text-xs text-gray-500 mb-2">
+                  <div className="p-4 sm:p-5">
+                    <div className="flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs text-gray-500 mb-1.5 sm:mb-2">
                       <time dateTime={article.date}>{article.date}</time>
                       <span>•</span>
                       <span className="font-medium">{article.source}</span>
                     </div>
-                    <h3 className="text-base font-extrabold text-gray-900 mb-2 leading-tight line-clamp-2">
+                    <h3 className="text-sm sm:text-base font-extrabold text-gray-900 mb-1.5 sm:mb-2 leading-tight line-clamp-2">
                       {article.title}
                     </h3>
-                    <p className="text-xs text-gray-600 leading-relaxed mb-4 line-clamp-2">
+                    <p className="text-[11px] sm:text-xs text-gray-600 leading-relaxed mb-3 sm:mb-4 line-clamp-2">
                       {article.excerpt}
                     </p>
                     <a
                       href={article.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center text-xs font-bold text-brand-500 hover:text-brand-600 transition-colors"
+                      className="inline-flex items-center text-[10px] sm:text-xs font-bold text-brand-500 hover:text-brand-600 transition-colors"
                     >
                       Read More
                       <svg
@@ -222,7 +222,7 @@ export default function EventsPage() {
           <div className="text-center">
             <Link
               href="/events/news"
-              className="inline-flex items-center rounded-full bg-brand-500 px-6 py-3 text-sm font-bold text-white shadow-md transition-all duration-300 hover:bg-brand-600 hover:shadow-lg hover:-translate-y-0.5"
+              className="inline-flex items-center rounded-full bg-brand-500 px-5 sm:px-6 py-2.5 sm:py-3 text-sm font-bold text-white shadow-md transition-all duration-300 hover:bg-brand-600 hover:shadow-lg hover:-translate-y-0.5"
             >
               View All News
               <svg
@@ -251,17 +251,17 @@ export default function EventsPage() {
           description="Dive into the latest news, insights, and stories from HPRC."
           align="left"
         />
-        <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
           {eventsContent.media.map((entry) => (
             <article
               key={entry.category}
-              className="rounded-3xl border border-brand-100 bg-white/95 p-6 shadow-[var(--shadow-elevated)]"
+              className="rounded-2xl sm:rounded-3xl border border-brand-100 bg-white/95 p-4 sm:p-6 shadow-[var(--shadow-elevated)]"
             >
-              <h3 className="text-lg font-semibold text-brand-900">{entry.category}</h3>
-              <p className="mt-3 text-sm text-gray-700">{entry.summary}</p>
+              <h3 className="text-base sm:text-lg font-semibold text-brand-900">{entry.category}</h3>
+              <p className="mt-2 sm:mt-3 text-sm text-gray-700">{entry.summary}</p>
               <Link
                 href={entry.href}
-                className="mt-4 inline-flex text-sm font-semibold text-brand-800 hover:text-brand-900"
+                className="mt-3 sm:mt-4 inline-flex text-xs sm:text-sm font-semibold text-brand-800 hover:text-brand-900"
               >
                 Browse &rarr;
               </Link>
@@ -277,7 +277,7 @@ export default function EventsPage() {
           description="Photographs and films that capture the passion of our riders, horses, and members."
           align="left"
         />
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-2">
           {eventsContent.galleries.map((gallery) => (
             <article
               key={gallery.type}

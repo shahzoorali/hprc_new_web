@@ -7,7 +7,7 @@ import { sportsContent } from "@/content/sports";
 
 export default function SportsCentrePage() {
   return (
-    <div className="space-y-16 pb-16">
+    <div className="space-y-10 sm:space-y-16 pb-10 sm:pb-16">
       <div className="container pt-12">
         <PageHero
           eyebrow={sportsContent.hero.eyebrow}
@@ -22,13 +22,13 @@ export default function SportsCentrePage() {
         <p>{sportsContent.overview}</p>
       </section>
 
-      <section className="container space-y-12">
+      <section className="container space-y-8 sm:space-y-12">
         <SectionHeading
           eyebrow="Facilities"
           title="World-class infrastructure across every sport"
           description="Book courts, schedule lessons, or participate in leagues guided by certified coaches and partner academies."
         />
-        <div className="grid gap-10 lg:grid-cols-2">
+        <div className="grid gap-6 sm:gap-10 grid-cols-1 md:grid-cols-2">
           {sportsContent.facilities.map((facility, index) => {
             const facilityImages = [
               "https://images.unsplash.com/photo-1534158914592-062992f79e47?w=800&q=80", // Tennis
@@ -107,7 +107,7 @@ export default function SportsCentrePage() {
           description="Choose from Gold or Platinum tiers to unlock preferential booking windows, coaching benefits, and hospitality privileges."
           align="left"
         />
-        <div className="grid gap-8 md:grid-cols-2">
+        <div className="grid gap-6 sm:gap-8 md:grid-cols-2 grid-cols-1">
           {sportsContent.packages.map((pkg) => {
             const isGold = pkg.name.toLowerCase().includes("gold");
             return (
@@ -119,9 +119,9 @@ export default function SportsCentrePage() {
                     : "border-brand-200 bg-gradient-to-br from-white to-brand-50/30"
                 }`}
               >
-                <div className="absolute right-0 top-0 h-32 w-32 rounded-bl-full bg-gradient-to-br from-brand-500/10 to-brand-500/5 transition-all duration-500 group-hover:scale-150"></div>
+                <div className="absolute right-0 top-0 h-24 w-24 sm:h-32 sm:w-32 rounded-bl-full bg-gradient-to-br from-brand-500/10 to-brand-500/5 transition-all duration-500 group-hover:scale-150"></div>
                 <div className="relative">
-                  <div className="mb-4 flex items-center gap-3">
+                  <div className="mb-3 sm:mb-4 flex items-center gap-2 sm:gap-3">
                     <div
                       className={`flex h-12 w-12 items-center justify-center rounded-xl ${
                         isGold

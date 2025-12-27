@@ -22,14 +22,14 @@ export default function MembershipPage() {
       </div>
 
       {/* Elegant Steps Section */}
-      <section className="container space-y-16">
+      <section className="container space-y-10 sm:space-y-16">
         <SectionHeading
           eyebrow="How It Works"
           title="Three Simple Steps to Join HPRC"
           description="Our membership team guides you from enquiry to orientation, tailoring experiences to your interests."
           align="left"
         />
-        <div className="grid gap-10 md:grid-cols-3">
+        <div className="grid gap-6 sm:gap-10 grid-cols-1 md:grid-cols-3">
           {membershipContent.steps.map((step, index) => {
             const stepIcons = [
               <svg key="1" className="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -46,27 +46,27 @@ export default function MembershipPage() {
             return (
               <div
                 key={step.title}
-                className="group relative overflow-hidden rounded-[2.5rem] border border-brand-100/70 bg-white/98 backdrop-blur-sm p-10 shadow-xl transition-all duration-700 hover:shadow-2xl hover:-translate-y-2 hover:border-brand-200"
+                className="group relative overflow-hidden rounded-[1.5rem] sm:rounded-[2.5rem] border border-brand-100/70 bg-white/98 backdrop-blur-sm p-6 sm:p-10 shadow-xl transition-all duration-700 hover:shadow-2xl hover:-translate-y-2 hover:border-brand-200"
               >
                 {/* Elegant Background Gradient */}
                 <div className="absolute inset-0 bg-gradient-to-br from-brand-500/4 via-transparent to-brand-500/6 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="absolute right-0 top-0 h-40 w-40 rounded-bl-full bg-gradient-to-br from-brand-500/10 to-brand-500/5 transition-all duration-700 group-hover:scale-150"></div>
-                
+                <div className="absolute right-0 top-0 h-32 w-32 sm:h-40 sm:w-40 rounded-bl-full bg-gradient-to-br from-brand-500/10 to-brand-500/5 transition-all duration-700 group-hover:scale-150"></div>
+
                 <div className="relative">
                   {/* Sophisticated Step Number Badge */}
-                  <div className="mb-8 flex h-20 w-20 items-center justify-center rounded-[2.5rem] bg-gradient-to-br from-brand-800 to-brand-900 text-2xl font-bold text-white shadow-lg shadow-brand-900/30 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 border-2 border-white/20 font-display">
+                  <div className="mb-6 sm:mb-8 flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-[2rem] sm:rounded-[2.5rem] bg-gradient-to-br from-brand-800 to-brand-900 text-xl sm:text-2xl font-bold text-white shadow-lg shadow-brand-900/30 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 border-2 border-white/20 font-display">
                     {index + 1}
                   </div>
-                  
+
                   {/* Elegant Icon */}
-                  <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-500/15 to-brand-500/7 text-brand-600 transition-colors duration-300 group-hover:bg-brand-200 border border-brand-200/40 shadow-sm">
+                  <div className="mb-4 sm:mb-6 flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-500/15 to-brand-500/7 text-brand-600 transition-colors duration-300 group-hover:bg-brand-200 border border-brand-200/40 shadow-sm">
                     {stepIcons[index]}
                   </div>
-                  
-                  <h3 className="text-2xl font-bold text-brand-900 mb-4 leading-tight font-display tracking-tight">
+
+                  <h3 className="text-xl sm:text-2xl font-bold text-brand-900 mb-3 sm:mb-4 leading-tight font-display tracking-tight">
                     {step.title}
                   </h3>
-                  <p className="text-base md:text-lg text-gray-700 leading-relaxed font-light">
+                  <p className="text-sm sm:text-base md:text-lg text-gray-700 leading-relaxed font-light">
                     {step.description}
                   </p>
                 </div>
@@ -77,21 +77,21 @@ export default function MembershipPage() {
       </section>
 
       {/* Sophisticated Benefits Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-brand-50/40 via-white to-brand-50/30 py-24">
+      <section className="relative overflow-hidden bg-gradient-to-br from-brand-50/40 via-white to-brand-50/30 py-16 sm:py-24">
         {/* Elegant Background Decorative Elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute -top-48 -right-48 h-96 w-96 rounded-full bg-brand-500/4 blur-[120px]"></div>
-          <div className="absolute -bottom-48 -left-48 h-96 w-96 rounded-full bg-brand-600/4 blur-[120px]"></div>
+          <div className="absolute -top-40 -right-40 sm:-top-48 sm:-right-48 h-72 h-72 sm:h-96 sm:w-96 rounded-full bg-brand-500/4 blur-[100px] sm:blur-[120px]"></div>
+          <div className="absolute -bottom-40 -left-40 sm:-bottom-48 sm:-left-48 h-72 h-72 sm:h-96 sm:w-96 rounded-full bg-brand-600/4 blur-[100px] sm:blur-[120px]"></div>
         </div>
 
-        <div className="container relative space-y-12">
+        <div className="container relative space-y-8 sm:space-y-12">
           <SectionHeading
             eyebrow="Privileges"
             title="Membership Benefits"
             description="Unlock access across riding, sports, hospitality, and exclusive events."
             align="left"
           />
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
             {membershipContent.benefits.map((benefit, index) => (
               <div
                 key={benefit}
@@ -117,14 +117,14 @@ export default function MembershipPage() {
       </section>
 
       {/* Sophisticated Quick Links Section */}
-      <section className="container space-y-12">
+      <section className="container space-y-8 sm:space-y-12">
         <SectionHeading
           eyebrow="Member Services"
           title="Quick Links"
           description="Access member tools, make payments, or download resources."
           align="left"
         />
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
           {membershipContent.services.map((service, index) => {
             const serviceIcons = [
               <svg key="login" className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -173,7 +173,7 @@ export default function MembershipPage() {
       </section>
 
       {/* Sophisticated FAQ Section */}
-      <section className="container space-y-12">
+      <section className="container space-y-8 sm:space-y-12">
         <SectionHeading
           eyebrow="FAQs"
           title="Frequently Asked Questions"
@@ -184,16 +184,16 @@ export default function MembershipPage() {
           {membershipContent.faqs.map((faq, index) => (
             <details
               key={faq.question}
-              className="group relative overflow-hidden rounded-[2rem] border border-brand-100/70 bg-white/98 backdrop-blur-sm shadow-lg transition-all duration-500 hover:shadow-2xl hover:border-brand-200 [&[open]]:border-brand-200 [&[open]]:shadow-2xl"
+              className="group relative overflow-hidden rounded-[1.5rem] sm:rounded-[2rem] border border-brand-100/70 bg-white/98 backdrop-blur-sm p-6 sm:p-8 shadow-lg transition-all duration-500 hover:shadow-2xl hover:border-brand-200 [&[open]]:border-brand-200 [&[open]]:shadow-2xl"
             >
-              <summary className="cursor-pointer p-8 pr-14 text-lg font-bold text-brand-900 list-none transition-all duration-300 hover:text-brand-800 [&::-webkit-details-marker]:hidden font-display tracking-tight">
-                <div className="flex items-start gap-6">
-                  <div className="flex-shrink-0 mt-1 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500/15 to-brand-500/7 text-brand-600 text-sm font-bold border border-brand-200/40 shadow-sm">
+              <summary className="cursor-pointer p-6 sm:p-8 pr-10 sm:pr-14 text-base sm:text-lg font-bold text-brand-900 list-none transition-all duration-300 hover:text-brand-800 [&::-webkit-details-marker]:hidden font-display tracking-tight">
+                <div className="flex items-start gap-4 sm:gap-6">
+                  <div className="flex-shrink-0 mt-0.5 sm:mt-1 flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500/15 to-brand-500/7 text-brand-600 text-[10px] sm:text-xs sm:text-sm font-bold border border-brand-200/40 shadow-sm">
                     Q{index + 1}
                   </div>
                   <span className="flex-1 leading-relaxed">{faq.question}</span>
                   <svg 
-                    className="absolute right-8 top-8 h-6 w-6 text-brand-600 transition-transform duration-500 flex-shrink-0" 
+                    className="absolute right-6 sm:right-8 top-6 sm:top-8 h-5 w-5 text-brand-600 transition-transform duration-500 flex-shrink-0" 
                     fill="none" 
                     stroke="currentColor" 
                     viewBox="0 0 24 24"
@@ -202,10 +202,10 @@ export default function MembershipPage() {
                   </svg>
                 </div>
               </summary>
-              <div className="px-8 pb-8 pl-20">
-                <div className="relative pl-8 border-l-2 border-brand-200">
-                  <div className="absolute -left-2.5 top-0 h-5 w-5 rounded-full bg-brand-500 shadow-md"></div>
-                  <p className="text-base md:text-lg text-gray-700 leading-relaxed pt-3 font-light font-body">
+              <div className="px-6 sm:px-8 pb-6 sm:pb-8 pl-14 sm:pl-20">
+                <div className="relative pl-6 sm:pl-8 border-l-2 border-brand-200">
+                  <div className="absolute -left-2 sm:-left-2.5 top-0 h-4 w-4 sm:h-5 sm:w-5 rounded-full bg-brand-500 shadow-md"></div>
+                  <p className="text-sm sm:text-base md:text-lg text-gray-700 leading-relaxed pt-2 sm:pt-3 font-light font-body">
                     {faq.answer}
                   </p>
                 </div>
