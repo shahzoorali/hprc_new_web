@@ -14,8 +14,10 @@ export function SiteFooter() {
     <footer className="mt-16 border-t border-gray-200 bg-gradient-to-b from-white to-brand-50/60">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:grid-cols-2 lg:grid-cols-4">
         <div>
-          <div className="relative h-12 w-12 flex-shrink-0">
-            <Image src="/hprc_logo.png" alt="HPRC Logo" fill className="object-contain" />
+          <div className="flex justify-center">
+            <div className="relative h-[165px] w-[165px] flex-shrink-0">
+              <Image src="/hprc_logo.png" alt="HPRC Logo" fill className="object-contain" />
+            </div>
           </div>
           <p className="mt-4 text-sm text-gray-600">{siteConfig.description}</p>
           <div className="mt-4 space-y-1 text-sm text-gray-600">

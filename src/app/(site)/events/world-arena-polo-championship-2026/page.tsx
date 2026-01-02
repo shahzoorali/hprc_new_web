@@ -319,16 +319,19 @@ export default function WorldArenaPoloChampionship2026Page() {
           align="center"
         />
         <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          <div className="relative overflow-hidden rounded-[2.5rem] border-2 border-brand-200/80 bg-gradient-to-br from-white to-brand-50/40 p-10 shadow-2xl">
+          <div className="relative overflow-hidden rounded-[2.5rem] border-2 border-gray-800/80 bg-gradient-to-br from-gray-900 via-gray-800 to-black p-10 shadow-2xl">
             <div className="relative">
-              <div className="mb-6 flex h-20 w-20 items-center justify-center  bg-gradient-to-br from-brand-500 to-brand-600 text-3xl shadow-2xl">
-                <svg className="h-10 w-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4M5.5 7.5L10 11l4-4M20 12l-2 2-4-4" />
-                </svg>
+              <div className="mb-6 relative w-full aspect-[3/4] overflow-hidden rounded-xl border-2 border-white/20 ring-2 ring-white/10">
+                <Image
+                  src="/images/robin-sanchez.jpg"
+                  alt={officials.chiefUmpire.name}
+                  fill
+                  className="object-cover"
+                  quality={90}
+                />
               </div>
-              <h3 className="text-xl font-bold text-brand-900 mb-2 font-display">{officials.chiefUmpire.name}</h3>
-              <p className="text-sm font-semibold text-brand-600 mb-3 uppercase tracking-wider">{officials.chiefUmpire.role}</p>
-              <p className="text-base text-gray-700 leading-relaxed font-light">Experienced international umpire with decades of championship experience</p>
+              <h3 className="text-xl font-bold text-white mb-2 font-display">{officials.chiefUmpire.name}</h3>
+              <p className="text-sm font-semibold text-gray-300 mb-3 uppercase tracking-wider">{officials.chiefUmpire.role}</p>
             </div>
           </div>
 
@@ -479,15 +482,15 @@ export default function WorldArenaPoloChampionship2026Page() {
           </div>
 
           <div className="relative p-12 md:p-16">
-            <div className="grid gap-12 lg:grid-cols-2 items-center">
-              <div className="space-y-6 text-white">
+            <div className="flex flex-col gap-12">
+              <div className="space-y-6 text-white text-center">
                 <h2 className="text-4xl md:text-5xl font-bold font-display tracking-tight">
                   Ready to Join the Action?
                 </h2>
                 <p className="text-xl text-white/90 leading-relaxed font-light">
                   Whether you're interested in sponsorship, tickets, or media coverage, we'd love to hear from you.
                 </p>
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-4 items-center">
                   <div className="flex items-center gap-4">
                     <div className="flex h-12 w-12 items-center justify-center  bg-white/20 backdrop-blur-sm">
                       <svg className="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -512,7 +515,7 @@ export default function WorldArenaPoloChampionship2026Page() {
                   </div>
                 </div>
               </div>
-              <div className=" bg-white/10 backdrop-blur-md border-2 border-white/20 p-8">
+              <div className="bg-white/10 backdrop-blur-md border-2 border-white/20 p-8">
                 <EventContactForm />
               </div>
             </div>
@@ -549,10 +552,10 @@ export default function WorldArenaPoloChampionship2026Page() {
             </div>
 
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white font-display tracking-tight leading-tight">
-              Don't Miss The
+              Join Us for the
               <br />
               <span className="bg-gradient-to-r from-brand-300 via-white to-brand-300 bg-clip-text text-transparent">
-                Championship of a Lifetime
+                World Arena Polo Championship 2026
               </span>
             </h2>
 
