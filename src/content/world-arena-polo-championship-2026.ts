@@ -64,8 +64,8 @@ export const worldArenaPoloChampionship2026 = {
     format: "Multiple tournaments including 4 Goal and 6 Goal competitions, plus exhibition matches",
   },
   countries: [
-    { name: "United States of America", code: "USA" },
     { name: "India", code: "IND" },
+    { name: "United States of America", code: "USA" },
     { name: "Germany", code: "GER" },
     { name: "France", code: "FRA" },
     { name: "Luxembourg", code: "LUX" },
@@ -320,6 +320,10 @@ export const worldArenaPoloChampionship2026 = {
 };
 
 export type WorldArenaPoloChampionship2026 = typeof worldArenaPoloChampionship2026;
+
+
+
+
 
 
 

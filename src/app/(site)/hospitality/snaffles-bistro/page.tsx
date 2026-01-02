@@ -22,7 +22,7 @@ export default function SnafflesBistroPage() {
       {/* Main Content */}
       <section className="container space-y-8 sm:space-y-12">
         <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
-          <div className="relative h-80 sm:h-96 lg:h-[500px] rounded-2xl overflow-hidden order-2 lg:order-1">
+          <div className="relative h-80 sm:h-96 lg:h-[500px]  overflow-hidden order-2 lg:order-1">
             <Image
               src={venue.image || "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1200&q=80"}
               alt={venue.name}
@@ -73,7 +73,7 @@ export default function SnafflesBistroPage() {
                       key={idx}
                       href={menu.href}
                       target={menu.href.startsWith('http') ? '_blank' : undefined}
-                      className="inline-flex items-center gap-2 rounded-full border-2 border-brand-500 bg-white px-6 py-3 text-sm font-bold text-brand-600 transition-all duration-300 hover:bg-brand-500 hover:text-white hover:shadow-lg"
+                      className="inline-flex items-center gap-2  border-2 border-brand-500 bg-white px-6 py-3 text-sm font-bold text-brand-600 transition-all duration-300 hover:bg-brand-500 hover:text-white hover:shadow-lg"
                     >
                       {menu.label}
                       <svg
@@ -101,7 +101,7 @@ export default function SnafflesBistroPage() {
       {/* CTA Section */}
       <section className="container">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="rounded-3xl bg-gradient-to-br from-brand-50 to-brand-100/50 p-8 sm:p-12 border border-brand-200/60 shadow-lg">
+          <div className=" bg-gradient-to-br from-brand-50 to-brand-100/50 p-8 sm:p-12 border border-brand-200/60 shadow-lg">
             <h3 className="text-2xl sm:text-3xl font-bold text-brand-900 mb-4 sm:mb-6 font-display">
               Visit Snaffles Bistro
             </h3>
@@ -111,7 +111,7 @@ export default function SnafflesBistroPage() {
             <div className="flex flex-wrap justify-center gap-4">
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-brand-500 to-brand-600 px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-bold text-white shadow-xl shadow-brand-500/30 transition-all duration-300 hover:from-brand-600 hover:to-brand-700 hover:shadow-2xl hover:-translate-y-1"
+                className="inline-flex items-center justify-center gap-2  bg-gradient-to-r from-brand-500 to-brand-600 px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-bold text-white shadow-xl shadow-brand-500/30 transition-all duration-300 hover:from-brand-600 hover:to-brand-700 hover:shadow-2xl hover:-translate-y-1"
               >
                 Contact Us
                 <svg
@@ -130,7 +130,7 @@ export default function SnafflesBistroPage() {
               </Link>
               <Link
                 href="/hospitality"
-                className="inline-flex items-center justify-center rounded-full border-2 border-brand-500 bg-white px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-bold text-brand-600 shadow-lg transition-all duration-300 hover:bg-brand-50 hover:border-brand-600"
+                className="inline-flex items-center justify-center  border-2 border-brand-500 bg-white px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-bold text-brand-600 shadow-lg transition-all duration-300 hover:bg-brand-50 hover:border-brand-600"
               >
                 View All Venues
               </Link>

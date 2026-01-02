@@ -67,7 +67,7 @@ export default function SportsCentrePage() {
                       {facility.highlights.map((highlight) => (
                         <li key={highlight} className="flex gap-3">
                           <span
-                            className="mt-1 h-2 w-2 rounded-full bg-brand-500"
+                            className="mt-1 h-2 w-2  bg-brand-500"
                             aria-hidden="true"
                           />
                           <span>{highlight}</span>
@@ -93,7 +93,7 @@ export default function SportsCentrePage() {
         <ul className="space-y-3 text-sm text-gray-600">
           {sportsContent.pricing.notes.map((note) => (
             <li key={note} className="flex gap-3">
-              <span className="mt-1 h-2 w-2 rounded-full bg-brand-500" aria-hidden="true" />
+              <span className="mt-1 h-2 w-2  bg-brand-500" aria-hidden="true" />
               <span>{note}</span>
             </li>
           ))}
@@ -113,17 +113,17 @@ export default function SportsCentrePage() {
             return (
               <div
                 key={pkg.name}
-                className={`group relative overflow-hidden rounded-3xl border-2 p-8 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${
+                className={`group relative overflow-hidden  border-2 p-8 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${
                   isGold
                     ? "border-brand-300 bg-gradient-to-br from-brand-50/50 to-white"
                     : "border-brand-200 bg-gradient-to-br from-white to-brand-50/30"
                 }`}
               >
-                <div className="absolute right-0 top-0 h-24 w-24 sm:h-32 sm:w-32 rounded-bl-full bg-gradient-to-br from-brand-500/10 to-brand-500/5 transition-all duration-500 group-hover:scale-150"></div>
+                <div className="absolute right-0 top-0 h-24 w-24 sm:h-32 sm:w-32  bg-gradient-to-br from-brand-500/10 to-brand-500/5 transition-all duration-500 group-hover:scale-150"></div>
                 <div className="relative">
                   <div className="mb-3 sm:mb-4 flex items-center gap-2 sm:gap-3">
                     <div
-                      className={`flex h-12 w-12 items-center justify-center rounded-xl ${
+                      className={`flex h-12 w-12 items-center justify-center  ${
                         isGold
                           ? "bg-gradient-to-br from-brand-500/20 to-brand-500/10 text-brand-600"
                           : "bg-gradient-to-br from-brand-500/10 to-brand-500/5 text-brand-500"
@@ -154,7 +154,7 @@ export default function SportsCentrePage() {
                     {pkg.benefits.map((benefit) => (
                       <li key={benefit} className="flex gap-3">
                         <span
-                          className="mt-1 h-2 w-2 rounded-full bg-brand-500"
+                          className="mt-1 h-2 w-2  bg-brand-500"
                           aria-hidden="true"
                         />
                         <span>{benefit}</span>

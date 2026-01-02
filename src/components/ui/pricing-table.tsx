@@ -15,7 +15,7 @@ export function PricingTable({ heading, rows }: PricingTableProps) {
   const hasTotal = rows.some((row) => row.total);
 
   return (
-    <div className="group/table overflow-hidden rounded-2xl border border-brand-100/80 bg-white/95 backdrop-blur-sm shadow-lg transition-all duration-300 hover:shadow-xl hover:border-brand-200">
+    <div className="group/table overflow-hidden border border-brand-100/80 bg-white/95 backdrop-blur-sm shadow-lg transition-all duration-300 hover:shadow-xl hover:border-brand-200">
       <div className="border-b border-brand-100 bg-gradient-to-r from-brand-50/80 to-brand-50/40 px-4 sm:px-6 py-3 sm:py-4">
         <h3 className="text-sm sm:text-base font-bold text-brand-900">{heading}</h3>
       </div>

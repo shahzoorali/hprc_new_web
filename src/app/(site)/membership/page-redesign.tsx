@@ -46,20 +46,20 @@ export default function MembershipPageRedesign() {
             return (
               <div
                 key={step.title}
-                className="group relative overflow-hidden rounded-[2.5rem] border border-brand-100/70 bg-white/98 backdrop-blur-sm p-10 shadow-xl transition-all duration-700 hover:shadow-2xl hover:-translate-y-2 hover:border-brand-200"
+                className="group relative overflow-hidden  border border-brand-100/70 bg-white/98 backdrop-blur-sm p-10 shadow-xl transition-all duration-700 hover:shadow-2xl hover:-translate-y-2 hover:border-brand-200"
               >
                 {/* Elegant Background Gradient */}
                 <div className="absolute inset-0 bg-gradient-to-br from-brand-500/4 via-transparent to-brand-500/6 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="absolute right-0 top-0 h-40 w-40 rounded-bl-full bg-gradient-to-br from-brand-500/10 to-brand-500/5 transition-all duration-700 group-hover:scale-150"></div>
+                <div className="absolute right-0 top-0 h-40 w-40  bg-gradient-to-br from-brand-500/10 to-brand-500/5 transition-all duration-700 group-hover:scale-150"></div>
                 
                 <div className="relative">
                   {/* Sophisticated Step Number Badge */}
-                  <div className="mb-8 flex h-20 w-20 items-center justify-center rounded-[2.5rem] bg-gradient-to-br from-brand-800 to-brand-900 text-2xl font-bold text-white shadow-lg shadow-brand-900/30 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 border-2 border-white/20">
+                  <div className="mb-8 flex h-20 w-20 items-center justify-center  bg-gradient-to-br from-brand-800 to-brand-900 text-2xl font-bold text-white shadow-lg shadow-brand-900/30 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 border-2 border-white/20">
                     {index + 1}
                   </div>
                   
                   {/* Elegant Icon */}
-                  <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-500/15 to-brand-500/7 text-brand-600 transition-colors duration-300 group-hover:bg-brand-200 border border-brand-200/40 shadow-sm">
+                  <div className="mb-6 flex h-14 w-14 items-center justify-center  bg-gradient-to-br from-brand-500/15 to-brand-500/7 text-brand-600 transition-colors duration-300 group-hover:bg-brand-200 border border-brand-200/40 shadow-sm">
                     {stepIcons[index]}
                   </div>
                   
@@ -80,8 +80,8 @@ export default function MembershipPageRedesign() {
       <section className="relative overflow-hidden bg-gradient-to-br from-brand-50/40 via-white to-brand-50/30 py-24">
         {/* Elegant Background Decorative Elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute -top-48 -right-48 h-96 w-96 rounded-full bg-brand-500/4 blur-[120px]"></div>
-          <div className="absolute -bottom-48 -left-48 h-96 w-96 rounded-full bg-brand-600/4 blur-[120px]"></div>
+          <div className="absolute -top-48 -right-48 h-96 w-96  bg-brand-500/4 blur-[120px]"></div>
+          <div className="absolute -bottom-48 -left-48 h-96 w-96  bg-brand-600/4 blur-[120px]"></div>
         </div>
 
         <div className="container relative space-y-12">
@@ -95,12 +95,12 @@ export default function MembershipPageRedesign() {
             {membershipContent.benefits.map((benefit, index) => (
               <div
                 key={benefit}
-                className="group relative overflow-hidden rounded-2xl border border-brand-100/70 bg-white/98 backdrop-blur-sm p-8 shadow-lg transition-all duration-500 hover:shadow-xl hover:-translate-y-1 hover:border-brand-200"
+                className="group relative overflow-hidden  border border-brand-100/70 bg-white/98 backdrop-blur-sm p-8 shadow-lg transition-all duration-500 hover:shadow-xl hover:-translate-y-1 hover:border-brand-200"
               >
-                <div className="absolute right-0 top-0 h-32 w-32 rounded-bl-full bg-gradient-to-br from-brand-500/10 to-brand-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute right-0 top-0 h-32 w-32  bg-gradient-to-br from-brand-500/10 to-brand-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div className="relative flex gap-5">
                   <div className="flex-shrink-0 mt-1.5">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500/15 to-brand-500/7 text-brand-600 transition-transform duration-300 group-hover:scale-110 border border-brand-200/40 shadow-sm">
+                    <div className="flex h-10 w-10 items-center justify-center  bg-gradient-to-br from-brand-500/15 to-brand-500/7 text-brand-600 transition-transform duration-300 group-hover:scale-110 border border-brand-200/40 shadow-sm">
                       <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
                       </svg>
@@ -145,13 +145,13 @@ export default function MembershipPageRedesign() {
               <Link
                 key={service.label}
                 href={service.href}
-                className="group relative overflow-hidden rounded-2xl border border-brand-100/70 bg-white/98 backdrop-blur-sm p-8 shadow-lg transition-all duration-500 hover:shadow-xl hover:-translate-y-1 hover:border-brand-200 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:ring-offset-4"
+                className="group relative overflow-hidden  border border-brand-100/70 bg-white/98 backdrop-blur-sm p-8 shadow-lg transition-all duration-500 hover:shadow-xl hover:-translate-y-1 hover:border-brand-200 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:ring-offset-4"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-brand-500/4 via-transparent to-brand-500/6 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="absolute right-0 top-0 h-32 w-32 rounded-bl-full bg-gradient-to-br from-brand-500/10 to-brand-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute right-0 top-0 h-32 w-32  bg-gradient-to-br from-brand-500/10 to-brand-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 
                 <div className="relative flex flex-col items-start gap-6">
-                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-500/15 to-brand-500/7 text-brand-600 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 border border-brand-200/40 shadow-md">
+                  <div className="flex h-16 w-16 items-center justify-center  bg-gradient-to-br from-brand-500/15 to-brand-500/7 text-brand-600 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 border border-brand-200/40 shadow-md">
                     {serviceIcons[index]}
                   </div>
                   <div>
@@ -188,7 +188,7 @@ export default function MembershipPageRedesign() {
             >
               <summary className="cursor-pointer p-8 pr-14 text-lg font-bold text-brand-900 list-none transition-all duration-300 hover:text-brand-800 [&::-webkit-details-marker]:hidden font-display tracking-tight">
                 <div className="flex items-start gap-6">
-                  <div className="flex-shrink-0 mt-1 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500/15 to-brand-500/7 text-brand-600 text-sm font-bold border border-brand-200/40 shadow-sm">
+                  <div className="flex-shrink-0 mt-1 flex h-12 w-12 items-center justify-center  bg-gradient-to-br from-brand-500/15 to-brand-500/7 text-brand-600 text-sm font-bold border border-brand-200/40 shadow-sm">
                     Q{index + 1}
                   </div>
                   <span className="flex-1 leading-relaxed">{faq.question}</span>
@@ -204,7 +204,7 @@ export default function MembershipPageRedesign() {
               </summary>
               <div className="px-8 pb-8 pl-20">
                 <div className="relative pl-8 border-l-2 border-brand-200">
-                  <div className="absolute -left-2.5 top-0 h-5 w-5 rounded-full bg-brand-500 shadow-md"></div>
+                  <div className="absolute -left-2.5 top-0 h-5 w-5  bg-brand-500 shadow-md"></div>
                   <p className="text-base md:text-lg text-gray-700 leading-relaxed pt-3 font-light">
                     {faq.answer}
                   </p>
@@ -217,4 +217,8 @@ export default function MembershipPageRedesign() {
     </div>
   );
 }
+
+
+
+
 

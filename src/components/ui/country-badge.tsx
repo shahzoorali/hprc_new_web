@@ -1,16 +1,22 @@
+import React from "react";
 import type { Country } from "@/content/world-arena-polo-championship-2026";
+import US from "country-flag-icons/react/3x2/US";
+import IN from "country-flag-icons/react/3x2/IN";
+import DE from "country-flag-icons/react/3x2/DE";
+import FR from "country-flag-icons/react/3x2/FR";
+import LU from "country-flag-icons/react/3x2/LU";
 
 type CountryBadgeProps = {
   country: Country;
   size?: "sm" | "md" | "lg";
 };
 
-const countryFlags: Record<string, string> = {
-  USA: "🇺🇸",
-  IND: "🇮🇳",
-  GER: "🇩🇪",
-  FRA: "🇫🇷",
-  LUX: "🇱🇺",
+const countryFlagComponents: Record<string, React.ComponentType<{ className?: string; title?: string }>> = {
+  USA: US,
+  IND: IN,
+  GER: DE,
+  FRA: FR,
+  LUX: LU,
 };
 
 export function CountryBadge({ country, size = "md" }: CountryBadgeProps) {
@@ -20,32 +26,26 @@ export function CountryBadge({ country, size = "md" }: CountryBadgeProps) {
     lg: "px-6 py-3 text-base",
   };
 
-  const flagEmojiSizes = {
-    sm: "text-xl",
-    md: "text-2xl",
-    lg: "text-3xl",
+  const flagSizes = {
+    sm: "w-4 h-4",
+    md: "w-5 h-5",
+    lg: "w-6 h-6",
   };
 
-  const flag = countryFlags[country.code] || "🏳️";
+  const FlagComponent = countryFlagComponents[country.code];
 
   return (
     <div
-      className={`group inline-flex items-center gap-3 rounded-full border border-brand-200 bg-gradient-to-br from-white to-brand-50/50 px-4 py-2 text-sm font-semibold text-brand-900 shadow-sm transition-all duration-300 hover:border-brand-300 hover:shadow-md hover:-translate-y-0.5 ${sizeClasses[size]}`}
+      className={`group inline-flex items-center gap-3 border border-brand-200 bg-gradient-to-br from-white to-brand-50/50 px-4 py-2 text-sm font-semibold text-brand-900 shadow-sm transition-all duration-300 hover:border-brand-300 hover:shadow-md hover:-translate-y-0.5 ${sizeClasses[size]}`}
     >
-      <span
-        className={`${flagEmojiSizes[size]} transition-transform duration-300 group-hover:scale-110 inline-block leading-none`}
-        style={{
-          fontFamily: 'system-ui, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
-          fontFeatureSettings: '"liga"',
-          WebkitFontSmoothing: "antialiased",
-          display: "inline-block",
-          verticalAlign: "middle",
-        }}
-        role="img"
-        aria-label={`${country.name} flag`}
-      >
-        {flag}
-      </span>
+      {FlagComponent ? (
+        <FlagComponent
+          className={`${flagSizes[size]} transition-transform duration-300 group-hover:scale-110`}
+          title={`${country.name} flag`}
+        />
+      ) : (
+        <span className="text-xs">🏳️</span>
+      )}
       <span className="font-bold">{country.code}</span>
       <span className="hidden sm:inline text-gray-600">{country.name}</span>
     </div>

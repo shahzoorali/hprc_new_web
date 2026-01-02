@@ -12,7 +12,7 @@ function NavLink({ href, label, isActive }: { href: string; label: string; isAct
   return (
     <Link
       href={href}
-      className={`whitespace-nowrap rounded-full px-2.5 py-1.5 text-xs font-semibold transition-all lg:px-3 lg:py-2 lg:text-sm ${
+      className={`whitespace-nowrap px-2.5 py-1.5 text-xs font-semibold transition-all lg:px-3 lg:py-2 lg:text-sm ${
         isActive
           ? "bg-brand-600 text-white shadow-sm"
           : "text-gray-800 hover:bg-brand-50 hover:text-brand-700"
@@ -33,7 +33,7 @@ function Submenu({ items }: { items: NavChild[] }) {
           <li key={href}>
             <Link
               href={href}
-              className={`block rounded-lg px-3 py-2 text-sm transition-colors ${
+              className={`block px-3 py-2 text-sm transition-colors ${
                 isActive
                   ? "bg-brand-50 text-brand-700 font-medium"
                   : "text-gray-700 hover:bg-brand-50 hover:text-brand-700"
@@ -121,7 +121,7 @@ function DesktopNav() {
                 aria-haspopup="true"
                 aria-expanded={hoveredItem === item.href}
                 aria-controls={menuId}
-                className={`whitespace-nowrap rounded-full px-2.5 py-1.5 text-xs font-semibold transition-all lg:px-3 lg:py-2 lg:text-sm ${
+                className={`whitespace-nowrap px-2.5 py-1.5 text-xs font-semibold transition-all lg:px-3 lg:py-2 lg:text-sm ${
                   isActive
                     ? "bg-brand-600 text-white shadow-sm"
                     : "text-gray-800 hover:bg-brand-50 hover:text-brand-700"
@@ -155,7 +155,7 @@ function DesktopNav() {
           <li key={item.href} className="group relative">
             <NavLink href={item.href} label={item.label} isActive={isActive} />
             <div className="pointer-events-none absolute left-0 top-full z-20 mt-2 w-max opacity-0 shadow-xl transition-all duration-200 group-hover:pointer-events-auto group-hover:opacity-100">
-              <div className="rounded-2xl border border-brand-200/50 bg-white/98 backdrop-blur-md shadow-lg">
+              <div className="border border-brand-200/50 bg-white/98 backdrop-blur-md shadow-lg">
                 <Submenu items={item.children || []} />
               </div>
             </div>
@@ -200,7 +200,7 @@ function MobileNav() {
           setIsOpen(target.open);
         }}
       >
-        <summary className="flex cursor-pointer items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold text-gray-700 transition-colors hover:bg-brand-50 hover:text-brand-700">
+        <summary className="flex cursor-pointer items-center gap-2 px-3 py-2 text-sm font-semibold text-gray-700 transition-colors hover:bg-brand-50 hover:text-brand-700">
           <svg
             className={`h-5 w-5 transition-transform ${isOpen ? "rotate-90" : ""}`}
             fill="none"
@@ -216,7 +216,7 @@ function MobileNav() {
           </svg>
           <span>Menu</span>
         </summary>
-        <div className="absolute right-0 top-full mt-2 w-72 max-w-[calc(100vw-2rem)] rounded-2xl border border-brand-200/50 bg-white/98 p-4 shadow-xl backdrop-blur-md z-50">
+        <div className="absolute right-0 top-full mt-2 w-72 max-w-[calc(100vw-2rem)] border border-brand-200/50 bg-white/98 p-4 shadow-xl backdrop-blur-md z-50">
           <div className="space-y-1">
             {primaryNavigation.map((item) => {
               const isActive = pathname === item.href;
@@ -225,7 +225,7 @@ function MobileNav() {
                   <Link
                     href={item.href}
                     onClick={handleLinkClick}
-                    className={`block rounded-lg px-3 py-2 text-sm font-semibold transition-colors ${
+                    className={`block px-3 py-2 text-sm font-semibold transition-colors ${
                       isActive
                         ? "bg-brand-50 text-brand-700"
                         : "text-gray-800 hover:bg-brand-50 hover:text-brand-700"
@@ -251,7 +251,7 @@ function MobileNav() {
                                   <Link
                                     href={child.href}
                                     onClick={handleLinkClick}
-                                    className={`block rounded-lg px-3 py-1.5 text-xs transition-colors ${
+                                    className={`block px-3 py-1.5 text-xs transition-colors ${
                                       isChildActive
                                         ? "bg-brand-50 text-brand-700 font-medium"
                                         : "text-gray-600 hover:bg-brand-50/50 hover:text-brand-700"
@@ -275,7 +275,7 @@ function MobileNav() {
                             <Link
                               href={child.href}
                               onClick={handleLinkClick}
-                              className={`block rounded-lg px-3 py-1.5 text-xs transition-colors ${
+                              className={`block px-3 py-1.5 text-xs transition-colors ${
                                 isChildActive
                                   ? "bg-brand-50 text-brand-700 font-medium"
                                   : "text-gray-600 hover:bg-brand-50/50 hover:text-brand-700"
@@ -294,7 +294,7 @@ function MobileNav() {
                       <Link
                         href={item.featured.href}
                         onClick={handleLinkClick}
-                        className="block rounded-lg bg-brand-50 px-3 py-2 text-xs font-semibold text-brand-700 transition-colors hover:bg-brand-100"
+                        className="block bg-brand-50 px-3 py-2 text-xs font-semibold text-brand-700 transition-colors hover:bg-brand-100"
                       >
                         {item.featured.title}
                       </Link>

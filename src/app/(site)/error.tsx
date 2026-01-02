@@ -19,7 +19,7 @@ export default function Error({ error, reset }: ErrorProps) {
         </div>
 
         {error && (
-          <div className="rounded-lg bg-red-50 border border-red-200 p-4 text-left">
+          <div className=" bg-red-50 border border-red-200 p-4 text-left">
             <p className="text-sm font-medium text-red-800 mb-1">Error Details:</p>
             <p className="text-xs text-red-600 break-all">{error.message}</p>
           </div>
@@ -28,13 +28,13 @@ export default function Error({ error, reset }: ErrorProps) {
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <button
             onClick={reset}
-            className="inline-flex items-center justify-center rounded-full bg-brand-500 px-6 py-3 text-sm font-bold text-white shadow-md transition-all duration-200 hover:bg-brand-600 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
+            className="inline-flex items-center justify-center  bg-brand-500 px-6 py-3 text-sm font-bold text-white shadow-md transition-all duration-200 hover:bg-brand-600 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
           >
             Try Again
           </button>
           <Link
             href="/"
-            className="inline-flex items-center justify-center rounded-full border-2 border-brand-300 bg-white px-6 py-3 text-sm font-bold text-brand-600 transition-all duration-200 hover:bg-brand-50 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
+            className="inline-flex items-center justify-center  border-2 border-brand-300 bg-white px-6 py-3 text-sm font-bold text-brand-600 transition-all duration-200 hover:bg-brand-50 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
           >
             Go Home
           </Link>

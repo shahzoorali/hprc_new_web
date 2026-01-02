@@ -31,16 +31,16 @@ export default function HomePage() {
         </div>
 
         {/* Sophisticated Decorative Elements */}
-        <div className="absolute top-0 right-0 w-[20rem] h-[20rem] sm:w-[30rem] sm:h-[30rem] bg-brand-600/8 rounded-full blur-[100px]"></div>
-        <div className="absolute bottom-0 left-0 w-[20rem] h-[20rem] sm:w-[30rem] sm:h-[30rem] bg-brand-700/8 rounded-full blur-[100px]"></div>
+        <div className="absolute top-0 right-0 w-[20rem] h-[20rem] sm:w-[30rem] sm:h-[30rem] bg-brand-600/8  blur-[100px]"></div>
+        <div className="absolute bottom-0 left-0 w-[20rem] h-[20rem] sm:w-[30rem] sm:h-[30rem] bg-brand-700/8  blur-[100px]"></div>
 
         <div className="container relative z-10">
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center">
             {/* Elegant Content Side */}
             <div className="text-white space-y-6 sm:space-y-10">
               {/* Sophisticated Badge */}
-              <div className="inline-flex items-center gap-2 sm:gap-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 px-3 sm:px-5 py-2 sm:py-2.5">
-                <span className="h-1.5 sm:h-2 w-1.5 sm:w-2 rounded-full bg-brand-400 animate-pulse"></span>
+              <div className="inline-flex items-center gap-2 sm:gap-3  bg-white/10 backdrop-blur-md border border-white/20 px-3 sm:px-5 py-2 sm:py-2.5">
+                <span className="h-1.5 sm:h-2 w-1.5 sm:w-2  bg-brand-400 animate-pulse"></span>
                 <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.15em] sm:tracking-[0.2em] text-white/90 font-display">Featured Event</span>
               </div>
 
@@ -75,7 +75,7 @@ export default function HomePage() {
                 <div className="flex flex-wrap items-center gap-2 sm:gap-4">
                   {featuredEvent.countries.map((country) => (
                     <div key={country.code} className="group relative">
-                      <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-3 sm:px-4 py-1.5 sm:py-2 transition-all duration-300 hover:bg-white/20 hover:border-white/30 hover:scale-105">
+                      <div className="bg-white/10 backdrop-blur-md border border-white/20  px-3 sm:px-4 py-1.5 sm:py-2 transition-all duration-300 hover:bg-white/20 hover:border-white/30 hover:scale-105">
                         <span className="text-[1rem] sm:text-[1.25rem] mr-1.5 sm:mr-2.5" style={{
                           fontFamily: 'system-ui, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", "Twemoji Mozilla", "EmojiOne Color", sans-serif',
                           display: 'inline-block',
@@ -100,7 +100,7 @@ export default function HomePage() {
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-start gap-4 group">
                     <div className="flex-shrink-0 mt-1.5">
-                      <div className="h-8 w-8 rounded-xl bg-gradient-to-br from-brand-400/20 to-brand-500/10 border border-brand-400/20 flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:border-brand-400/40">
+                      <div className="h-8 w-8  bg-gradient-to-br from-brand-400/20 to-brand-500/10 border border-brand-400/20 flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:border-brand-400/40">
                         <svg className="h-4 w-4 text-brand-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           {item.icon === "trophy" && (
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138z" />
@@ -129,7 +129,7 @@ export default function HomePage() {
               <div className="flex flex-wrap items-center gap-3 sm:gap-5 pt-4 sm:pt-6">
                 <Link
                   href="/events/world-arena-polo-championship-2026"
-                  className="group inline-flex items-center justify-center gap-2 sm:gap-3 rounded-full bg-white px-6 sm:px-9 py-3 sm:py-4 text-sm sm:text-base font-bold text-brand-900 shadow-2xl transition-all duration-300 hover:bg-gray-50 hover:text-brand-900 hover:shadow-2xl hover:shadow-brand-500/20 hover:-translate-y-1 font-display"
+                  className="group inline-flex items-center justify-center gap-2 sm:gap-3  bg-white px-6 sm:px-9 py-3 sm:py-4 text-sm sm:text-base font-bold text-brand-900 shadow-2xl transition-all duration-300 hover:bg-gray-50 hover:text-brand-900 hover:shadow-2xl hover:shadow-brand-500/20 hover:-translate-y-1 font-display"
                 >
                   <span className="tracking-wide text-brand-900">View Full Details</span>
                   <svg
@@ -148,7 +148,7 @@ export default function HomePage() {
                 </Link>
                 <Link
                   href="/events/world-arena-polo-championship-2026#contact"
-                  className="inline-flex items-center justify-center rounded-full border-2 border-white/30 bg-white/10 backdrop-blur-md px-6 sm:px-9 py-3 sm:py-4 text-sm sm:text-base font-bold text-white transition-all duration-300 hover:bg-white/20 hover:border-white/50 font-display"
+                  className="inline-flex items-center justify-center  border-2 border-white/30 bg-white/10 backdrop-blur-md px-6 sm:px-9 py-3 sm:py-4 text-sm sm:text-base font-bold text-white transition-all duration-300 hover:bg-white/20 hover:border-white/50 font-display"
                 >
                   Register Interest
                 </Link>
@@ -172,11 +172,11 @@ export default function HomePage() {
                 
                 {/* Elegant Floating Info Cards */}
                 <div className="absolute top-8 left-8 right-8 flex flex-wrap gap-3">
-                  <div className="bg-white/98 backdrop-blur-md rounded-2xl px-5 py-3.5 shadow-xl border border-white/40 transition-all duration-300 hover:scale-105">
+                  <div className="bg-white/98 backdrop-blur-md  px-5 py-3.5 shadow-xl border border-white/40 transition-all duration-300 hover:scale-105">
                     <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-brand-600 mb-1 font-display">Dates</p>
                     <p className="text-sm font-bold text-brand-900 tracking-wide font-body">11-18 Feb 2026</p>
                   </div>
-                  <div className="bg-white/98 backdrop-blur-md rounded-2xl px-5 py-3.5 shadow-xl border border-white/40 transition-all duration-300 hover:scale-105">
+                  <div className="bg-white/98 backdrop-blur-md  px-5 py-3.5 shadow-xl border border-white/40 transition-all duration-300 hover:scale-105">
                     <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-brand-600 mb-1 font-display">Venue</p>
                     <p className="text-sm font-bold text-brand-900 tracking-wide font-body">HPRC Arena</p>
                   </div>
@@ -184,7 +184,7 @@ export default function HomePage() {
 
                 {/* Elegant Bottom Badge */}
                 <div className="absolute bottom-8 left-8 right-8">
-                  <div className="bg-gradient-to-r from-brand-600 to-brand-500 rounded-2xl px-7 py-4 shadow-2xl border border-white/20 backdrop-blur-sm">
+                  <div className="bg-gradient-to-r from-brand-600 to-brand-500  px-7 py-4 shadow-2xl border border-white/20 backdrop-blur-sm">
                     <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/90 mb-1 font-display">Event of the Year</p>
                     <p className="text-base font-bold text-white font-display">Hyderabad's Premier Polo Championship</p>
                   </div>
@@ -192,8 +192,8 @@ export default function HomePage() {
               </div>
 
               {/* Decorative Elements */}
-              <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-brand-500/15 rounded-full blur-2xl -z-10"></div>
-              <div className="absolute -top-10 -left-10 w-28 h-28 bg-white/8 rounded-full blur-xl -z-10"></div>
+              <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-brand-500/15  blur-2xl -z-10"></div>
+              <div className="absolute -top-10 -left-10 w-28 h-28 bg-white/8  blur-xl -z-10"></div>
             </div>
           </div>
         </div>
@@ -241,7 +241,7 @@ export default function HomePage() {
                 >
                   <Link
                     href={event.href}
-                    className="group relative block overflow-hidden rounded-3xl shadow-lg transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-4"
+                    className="group relative block overflow-hidden  shadow-lg transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-4"
                   >
                     {/* Elegant Image */}
                     <div className="relative h-56 sm:h-64 lg:h-72 overflow-hidden">
@@ -328,7 +328,7 @@ export default function HomePage() {
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
-                    <div className="absolute right-0 top-0 h-40 w-40 sm:h-48 sm:w-48 rounded-bl-full bg-gradient-to-br from-brand-500/20 to-brand-500/5 transition-all duration-700 group-hover:scale-150"></div>
+                    <div className="absolute right-0 top-0 h-40 w-40 sm:h-48 sm:w-48  bg-gradient-to-br from-brand-500/20 to-brand-500/5 transition-all duration-700 group-hover:scale-150"></div>
                   </div>
                   
                   {/* Elegant Content */}
@@ -388,7 +388,7 @@ export default function HomePage() {
                 return (
                   <article
                     key={index}
-                    className="group relative overflow-hidden rounded-3xl bg-white shadow-xl border border-gray-100 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2"
+                    className="group relative overflow-hidden  bg-white shadow-xl border border-gray-100 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2"
                   >
                     <div className="relative h-56 overflow-hidden">
                       <Image
@@ -401,7 +401,7 @@ export default function HomePage() {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20"></div>
                       {article.category && (
                         <div className="absolute top-5 left-5">
-                          <span className="inline-flex items-center rounded-full bg-brand-500 px-4 py-2 text-[11px] font-bold text-white tracking-wide uppercase font-display shadow-lg">
+                          <span className="inline-flex items-center  bg-brand-500 px-4 py-2 text-[11px] font-bold text-white tracking-wide uppercase font-display shadow-lg">
                             {article.category}
                           </span>
                         </div>
@@ -410,7 +410,7 @@ export default function HomePage() {
                     <div className="p-7 relative z-10">
                       <div className="flex items-center gap-2.5 text-xs text-gray-500 mb-3">
                         <time dateTime={article.date} className="font-medium font-body">{article.date}</time>
-                        <span className="w-1 h-1 rounded-full bg-gray-300"></span>
+                        <span className="w-1 h-1  bg-gray-300"></span>
                         <span className="font-semibold font-body">{article.source}</span>
                       </div>
                       <h3 className="text-lg font-bold text-brand-900 mb-3 leading-tight line-clamp-2 font-display tracking-tight">
@@ -449,7 +449,7 @@ export default function HomePage() {
             <div className="mt-16 text-center">
               <Link
                 href="/events/news"
-                className="inline-flex items-center rounded-full bg-brand-500 px-10 py-4 text-base font-bold text-white shadow-xl shadow-brand-500/30 transition-all duration-300 hover:bg-brand-600 hover:shadow-2xl hover:-translate-y-1 font-display tracking-wide"
+                className="inline-flex items-center  bg-brand-500 px-10 py-4 text-base font-bold text-white shadow-xl shadow-brand-500/30 transition-all duration-300 hover:bg-brand-600 hover:shadow-2xl hover:-translate-y-1 font-display tracking-wide"
               >
                 View All News
                 <svg
@@ -505,7 +505,7 @@ export default function HomePage() {
           </p>
           <Link
             href={homeContent.spotlight.cta.href}
-            className="mt-8 sm:mt-12 inline-flex items-center justify-center rounded-full bg-white px-8 sm:px-10 lg:px-12 py-3.5 sm:py-4 lg:py-5 text-sm sm:text-base lg:text-lg font-bold text-brand-500 shadow-2xl transition-all duration-300 hover:bg-gray-50 hover:shadow-[0_35px_60px_-15px_rgba(255,255,255,0.3)] hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-4 font-display tracking-wide"
+            className="mt-8 sm:mt-12 inline-flex items-center justify-center  bg-white px-8 sm:px-10 lg:px-12 py-3.5 sm:py-4 lg:py-5 text-sm sm:text-base lg:text-lg font-bold text-brand-500 shadow-2xl transition-all duration-300 hover:bg-gray-50 hover:shadow-[0_35px_60px_-15px_rgba(255,255,255,0.3)] hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-4 font-display tracking-wide"
           >
             {homeContent.spotlight.cta.label}
             <svg

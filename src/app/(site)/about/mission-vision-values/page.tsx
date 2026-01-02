@@ -18,11 +18,11 @@ export default function MissionVisionPage() {
 
       <section className="container space-y-12">
         <div className="grid gap-8 lg:grid-cols-2">
-          <div className="rounded-3xl border border-brand-100 bg-white/95 p-8 shadow-[var(--shadow-elevated)]">
+          <div className=" border border-brand-100 bg-white/95 p-8 shadow-[var(--shadow-elevated)]">
             <h2 className="text-lg font-semibold text-brand-900">Mission</h2>
             <p className="mt-4 text-sm text-gray-700">{aboutContent.mission}</p>
           </div>
-          <div className="rounded-3xl border border-brand-100 bg-white/95 p-8 shadow-[var(--shadow-elevated)]">
+          <div className=" border border-brand-100 bg-white/95 p-8 shadow-[var(--shadow-elevated)]">
             <h2 className="text-lg font-semibold text-brand-900">Vision</h2>
             <p className="mt-4 text-sm text-gray-700">{aboutContent.vision}</p>
           </div>
@@ -38,7 +38,7 @@ export default function MissionVisionPage() {
           {aboutContent.values.map((value) => (
             <div
               key={value.title}
-              className="rounded-3xl border border-brand-100 bg-white/95 p-6 shadow-[var(--shadow-elevated)]"
+              className=" border border-brand-100 bg-white/95 p-6 shadow-[var(--shadow-elevated)]"
             >
               <h3 className="text-base font-semibold text-brand-900">{value.title}</h3>
               <p className="mt-3 text-sm text-gray-700">{value.description}</p>

@@ -49,10 +49,13 @@
   --shadow-brand-soft: 0 20px 25px -5px rgba(227, 30, 36, 0.1), 0 10px 10px -5px rgba(227, 30, 36, 0.04);
   --shadow-luxury: 0 25px 50px -12px rgba(227, 30, 36, 0.25);
   
-  /* Refined radii */
-  --radius-md: 1.25rem;
-  --radius-lg: 2rem;
-  --radius-xl: 2.5rem;
+  /* Refined radii - all set to 0 */
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+  --radius-2xl: 0;
+  --radius-3xl: 0;
   
   /* Enhanced font stack */
   --font-display: 'Playfair Display', var(--font-geist-sans);
@@ -247,7 +250,7 @@ details[open] summary svg {
 :focus-visible {
   outline: 2px solid var(--color-brand-500);
   outline-offset: 2px;
-  border-radius: 0.25rem;
+  border-radius: 0;
 }
 
 /* Custom scrollbar for elegance */
@@ -261,10 +264,11 @@ details[open] summary svg {
 
 ::-webkit-scrollbar-thumb {
   background: var(--color-brand-200);
-  border-radius: 5px;
+  border-radius: 0;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-brand-300);
 }
+
 

@@ -39,7 +39,7 @@ export default function NewsPage() {
             return (
               <article
                 key={index}
-                className="group relative overflow-hidden rounded-3xl bg-white shadow-lg border border-gray-100 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+                className="group relative overflow-hidden  bg-white shadow-lg border border-gray-100 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
               >
                 {/* Image */}
                 <div className="relative h-56 overflow-hidden">
@@ -53,7 +53,7 @@ export default function NewsPage() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
                   {article.category && (
                     <div className="absolute top-4 left-4">
-                      <span className="inline-flex items-center rounded-full bg-brand-500 px-3 py-1 text-xs font-bold text-white">
+                      <span className="inline-flex items-center  bg-brand-500 px-3 py-1 text-xs font-bold text-white">
                         {article.category}
                       </span>
                     </div>
@@ -103,7 +103,7 @@ export default function NewsPage() {
       </section>
 
       <section className="container">
-        <div className="rounded-3xl border border-brand-100 bg-gradient-to-br from-brand-50/50 to-white p-8 sm:p-10 shadow-lg">
+        <div className=" border border-brand-100 bg-gradient-to-br from-brand-50/50 to-white p-8 sm:p-10 shadow-lg">
           <h3 className="text-2xl font-extrabold text-gray-900 mb-4">Media Inquiries</h3>
           <p className="text-gray-600 mb-6">
             For press releases, interview requests, or media partnerships, please contact our media
@@ -112,13 +112,13 @@ export default function NewsPage() {
           <div className="flex flex-wrap gap-4">
             <a
               href="mailto:info@hprc.co.in"
-              className="inline-flex items-center rounded-full bg-brand-500 px-6 py-3 text-sm font-bold text-white shadow-md transition-all duration-300 hover:bg-brand-600 hover:shadow-lg hover:-translate-y-0.5"
+              className="inline-flex items-center  bg-brand-500 px-6 py-3 text-sm font-bold text-white shadow-md transition-all duration-300 hover:bg-brand-600 hover:shadow-lg hover:-translate-y-0.5"
             >
               Contact Media Team
             </a>
             <a
               href="/events"
-              className="inline-flex items-center rounded-full border-2 border-brand-300 bg-white px-6 py-3 text-sm font-bold text-brand-600 transition-all duration-300 hover:bg-brand-50"
+              className="inline-flex items-center  border-2 border-brand-300 bg-white px-6 py-3 text-sm font-bold text-brand-600 transition-all duration-300 hover:bg-brand-50"
             >
               View All Events
             </a>

@@ -29,7 +29,7 @@ export default function BeginnersRidingProgrammePage() {
 
             {/* Timings */}
             <div className="flex justify-center">
-              <div className="inline-flex items-center gap-3 sm:gap-4 rounded-2xl bg-gradient-to-r from-brand-600 to-brand-700 px-6 sm:px-8 py-4 sm:py-5 shadow-xl">
+              <div className="inline-flex items-center gap-3 sm:gap-4  bg-gradient-to-r from-brand-600 to-brand-700 px-6 sm:px-8 py-4 sm:py-5 shadow-xl">
                 <svg
                   className="h-5 w-5 sm:h-6 sm:w-6 text-white"
                   fill="none"
@@ -116,7 +116,7 @@ export default function BeginnersRidingProgrammePage() {
       {/* CTA Section */}
       <section className="container">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="rounded-3xl bg-gradient-to-br from-brand-50 to-brand-100/50 p-8 sm:p-12 border border-brand-200/60 shadow-lg">
+          <div className=" bg-gradient-to-br from-brand-50 to-brand-100/50 p-8 sm:p-12 border border-brand-200/60 shadow-lg">
             <h3 className="text-2xl sm:text-3xl font-bold text-brand-900 mb-4 sm:mb-6 font-display">
               Ready to Start Your Journey?
             </h3>
@@ -126,7 +126,7 @@ export default function BeginnersRidingProgrammePage() {
             <div className="flex flex-wrap justify-center gap-4">
               <Link
                 href="/membership"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-brand-500 to-brand-600 px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-bold text-white shadow-xl shadow-brand-500/30 transition-all duration-300 hover:from-brand-600 hover:to-brand-700 hover:shadow-2xl hover:-translate-y-1"
+                className="inline-flex items-center justify-center gap-2  bg-gradient-to-r from-brand-500 to-brand-600 px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-bold text-white shadow-xl shadow-brand-500/30 transition-all duration-300 hover:from-brand-600 hover:to-brand-700 hover:shadow-2xl hover:-translate-y-1"
               >
                 Apply for Membership
                 <svg
@@ -145,7 +145,7 @@ export default function BeginnersRidingProgrammePage() {
               </Link>
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center rounded-full border-2 border-brand-500 bg-white px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-bold text-brand-600 shadow-lg transition-all duration-300 hover:bg-brand-50 hover:border-brand-600"
+                className="inline-flex items-center justify-center  border-2 border-brand-500 bg-white px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-bold text-brand-600 shadow-lg transition-all duration-300 hover:bg-brand-50 hover:border-brand-600"
               >
                 Contact Us
               </Link>

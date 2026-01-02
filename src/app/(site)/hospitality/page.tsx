@@ -27,7 +27,7 @@ export default function HospitalityPage() {
         />
 
         {/* Chukkers Restaurant - Featured */}
-        <article className="group relative overflow-hidden rounded-2xl sm:rounded-3xl border border-brand-200/50 bg-white shadow-xl">
+        <article className="group relative overflow-hidden  sm: border border-brand-200/50 bg-white shadow-xl">
           <div className="grid lg:grid-cols-2 gap-0">
             <div className="relative h-72 sm:h-80 lg:h-auto overflow-hidden order-2 lg:order-1">
               <Image
@@ -91,7 +91,7 @@ export default function HospitalityPage() {
                     <Link
                       key={idx}
                       href={menu.href}
-                      className="inline-flex items-center rounded-full border-2 border-brand-500 bg-white px-4 sm:px-6 py-2 sm:py-2.5 text-xs sm:text-sm font-bold text-brand-600 transition-all duration-300 hover:bg-brand-500 hover:text-white hover:shadow-lg"
+                      className="inline-flex items-center  border-2 border-brand-500 bg-white px-4 sm:px-6 py-2 sm:py-2.5 text-xs sm:text-sm font-bold text-brand-600 transition-all duration-300 hover:bg-brand-500 hover:text-white hover:shadow-lg"
                     >
                       {menu.label}
                       <svg
@@ -116,7 +116,7 @@ export default function HospitalityPage() {
         </article>
 
         {/* Snaffles Bistro - Featured (Reversed) */}
-        <article className="group relative overflow-hidden rounded-2xl sm:rounded-3xl border border-brand-200/50 bg-white shadow-xl">
+        <article className="group relative overflow-hidden  sm: border border-brand-200/50 bg-white shadow-xl">
           <div className="grid lg:grid-cols-2 gap-0">
             <div className="relative h-72 sm:h-80 lg:h-auto overflow-hidden order-1 lg:order-2">
               <Image
@@ -180,7 +180,7 @@ export default function HospitalityPage() {
                     <Link
                       key={idx}
                       href={menu.href}
-                      className="inline-flex items-center rounded-full border-2 border-brand-500 bg-white px-4 sm:px-6 py-2 sm:py-2.5 text-xs sm:text-sm font-bold text-brand-600 transition-all duration-300 hover:bg-brand-500 hover:text-white hover:shadow-lg"
+                      className="inline-flex items-center  border-2 border-brand-500 bg-white px-4 sm:px-6 py-2 sm:py-2.5 text-xs sm:text-sm font-bold text-brand-600 transition-all duration-300 hover:bg-brand-500 hover:text-white hover:shadow-lg"
                     >
                       {menu.label}
                       <svg
@@ -258,7 +258,7 @@ export default function HospitalityPage() {
                   ))}
                 </ul>
               </div>
-              <div className="relative h-64 sm:h-80 lg:h-full rounded-2xl overflow-hidden">
+              <div className="relative h-64 sm:h-80 lg:h-full  overflow-hidden">
                 <Image
                   src={
                     hospitalityContent.venues[2].image ||
@@ -282,7 +282,7 @@ export default function HospitalityPage() {
                   {hospitalityContent.venues[2].menuPackages.map((pkg, idx) => (
                     <div
                       key={idx}
-                      className={`relative overflow-hidden rounded-2xl border-2 ${
+                      className={`relative overflow-hidden  border-2 ${
                         idx === 1
                           ? "border-brand-500 bg-white shadow-2xl scale-105 lg:scale-110"
                           : "border-brand-200 bg-white/95 shadow-lg"
@@ -354,7 +354,7 @@ export default function HospitalityPage() {
             return (
               <div
                 key={experience.title}
-                className="group relative overflow-hidden rounded-2xl border border-brand-200/50 bg-white shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
+                className="group relative overflow-hidden  border border-brand-200/50 bg-white shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
               >
                 <div className="relative h-48 sm:h-56 overflow-hidden">
                   <Image

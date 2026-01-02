@@ -56,7 +56,7 @@ export default function BanquetsPage() {
             </div>
           </div>
 
-          <div className="relative h-80 sm:h-96 lg:h-[500px] rounded-2xl overflow-hidden">
+          <div className="relative h-80 sm:h-96 lg:h-[500px]  overflow-hidden">
             <Image
               src={venue.image || "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1200&q=80"}
               alt={venue.name}
@@ -83,7 +83,7 @@ export default function BanquetsPage() {
               {venue.menuPackages.map((pkg, idx) => (
                 <div
                   key={idx}
-                  className={`relative overflow-hidden rounded-2xl border-2 ${
+                  className={`relative overflow-hidden  border-2 ${
                     idx === 1
                       ? "border-brand-500 bg-white shadow-2xl scale-105 lg:scale-110"
                       : "border-brand-200 bg-white/95 shadow-lg"
@@ -138,7 +138,7 @@ export default function BanquetsPage() {
       {/* CTA Section */}
       <section className="container">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="rounded-3xl bg-gradient-to-br from-brand-50 to-brand-100/50 p-8 sm:p-12 border border-brand-200/60 shadow-lg">
+          <div className=" bg-gradient-to-br from-brand-50 to-brand-100/50 p-8 sm:p-12 border border-brand-200/60 shadow-lg">
             <h3 className="text-2xl sm:text-3xl font-bold text-brand-900 mb-4 sm:mb-6 font-display">
               Plan Your Event at HPRC
             </h3>
@@ -148,7 +148,7 @@ export default function BanquetsPage() {
             <div className="flex flex-wrap justify-center gap-4">
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-brand-500 to-brand-600 px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-bold text-white shadow-xl shadow-brand-500/30 transition-all duration-300 hover:from-brand-600 hover:to-brand-700 hover:shadow-2xl hover:-translate-y-1"
+                className="inline-flex items-center justify-center gap-2  bg-gradient-to-r from-brand-500 to-brand-600 px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-bold text-white shadow-xl shadow-brand-500/30 transition-all duration-300 hover:from-brand-600 hover:to-brand-700 hover:shadow-2xl hover:-translate-y-1"
               >
                 Contact Us
                 <svg
@@ -167,7 +167,7 @@ export default function BanquetsPage() {
               </Link>
               <Link
                 href="/hospitality"
-                className="inline-flex items-center justify-center rounded-full border-2 border-brand-500 bg-white px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-bold text-brand-600 shadow-lg transition-all duration-300 hover:bg-brand-50 hover:border-brand-600"
+                className="inline-flex items-center justify-center  border-2 border-brand-500 bg-white px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-bold text-brand-600 shadow-lg transition-all duration-300 hover:bg-brand-50 hover:border-brand-600"
               >
                 View All Venues
               </Link>

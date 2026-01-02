@@ -13,7 +13,7 @@ export function SiteHeaderRedesign() {
           <div className="flex flex-wrap items-center gap-6 sm:gap-8">
             <a
               href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`}
-              className="group flex items-center gap-2.5 transition-all duration-300 hover:text-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:ring-offset-2 rounded-md px-2 py-1"
+              className="group flex items-center gap-2.5 transition-all duration-300 hover:text-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:ring-offset-2 px-2 py-1"
               aria-label={`Call ${siteConfig.contact.phone}`}
             >
               <svg
@@ -34,7 +34,7 @@ export function SiteHeaderRedesign() {
             </a>
             <a
               href={`mailto:${siteConfig.contact.email}`}
-              className="group flex items-center gap-2.5 transition-all duration-300 hover:text-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:ring-offset-2 rounded-md px-2 py-1"
+              className="group flex items-center gap-2.5 transition-all duration-300 hover:text-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:ring-offset-2 px-2 py-1"
               aria-label={`Email ${siteConfig.contact.email}`}
             >
               <svg
@@ -60,7 +60,7 @@ export function SiteHeaderRedesign() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="relative font-semibold tracking-wide transition-all duration-300 hover:text-brand-600 hover:after:w-full focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:ring-offset-2 rounded-md px-2 py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-brand-500 after:transition-all after:duration-300"
+                className="relative font-semibold tracking-wide transition-all duration-300 hover:text-brand-600 hover:after:w-full focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:ring-offset-2 px-2 py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-brand-500 after:transition-all after:duration-300"
               >
                 {item.label}
               </Link>
@@ -73,7 +73,7 @@ export function SiteHeaderRedesign() {
       <div className="mx-auto flex max-w-7xl justify-center px-6 py-5 sm:px-8 lg:py-6">
         <Link
           href="/"
-          className="group relative flex flex-col items-center gap-3 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:ring-offset-4 rounded-2xl p-3 -m-3"
+          className="group relative flex flex-col items-center gap-3 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:ring-offset-4 p-3 -m-3"
           aria-label="HPRC Home"
         >
           {/* Elegant Logo Container with Subtle Shadow */}
@@ -118,7 +118,7 @@ export function SiteHeaderRedesign() {
               <Link
                 key={action.href}
                 href={action.href}
-                className={`group relative inline-flex items-center justify-center gap-2 whitespace-nowrap px-7 py-3 text-sm font-bold tracking-wide transition-all duration-300 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:ring-offset-2 rounded-full ${
+                className={`group relative inline-flex items-center justify-center gap-2 whitespace-nowrap px-7 py-3 text-sm font-bold tracking-wide transition-all duration-300 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:ring-offset-2 ${
                   action.variant === "primary"
                     ? "bg-brand-500 text-white shadow-lg shadow-brand-500/30 hover:bg-brand-600 hover:shadow-xl hover:shadow-brand-600/40"
                     : "border-2 border-brand-300 bg-white text-brand-700 hover:border-brand-400 hover:bg-brand-50"
@@ -153,7 +153,7 @@ export function SiteHeaderRedesign() {
                 <Link
                   key={action.href}
                   href={action.href}
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-500 px-5 py-2.5 text-xs font-bold text-white shadow-lg shadow-brand-500/30 transition-all duration-300 hover:bg-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:ring-offset-2"
+                  className="inline-flex items-center justify-center gap-2 bg-brand-500 px-5 py-2.5 text-xs font-bold text-white shadow-lg shadow-brand-500/30 transition-all duration-300 hover:bg-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:ring-offset-2"
                   aria-label="Apply for Membership"
                 >
                   Apply
@@ -179,4 +179,8 @@ export function SiteHeaderRedesign() {
     </header>
   );
 }
+
+
+
+
 

@@ -18,7 +18,7 @@ export default function LeadershipPage() {
           {aboutContent.leadership.map((leader) => (
             <div
               key={leader.name}
-              className="rounded-3xl border border-brand-100 bg-white/95 p-8 shadow-[var(--shadow-elevated)]"
+              className=" border border-brand-100 bg-white/95 p-8 shadow-[var(--shadow-elevated)]"
             >
               <h3 className="text-xl font-semibold text-brand-900">{leader.name}</h3>
               <p className="mt-2 text-sm uppercase tracking-[0.2em] text-brand-600">

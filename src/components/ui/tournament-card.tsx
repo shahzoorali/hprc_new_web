@@ -42,18 +42,18 @@ export function TournamentCard({ tournament }: TournamentCardProps) {
   const icon = activityTypeIcons[tournament.goal] || activityTypeIcons.Exhibition;
 
   return (
-    <article className="group relative overflow-hidden rounded-[2.5rem] border border-brand-100 bg-gradient-to-br from-white via-white to-brand-50/30 p-8 shadow-lg transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:border-brand-200">
+    <article className="group relative overflow-hidden border border-brand-100 bg-gradient-to-br from-white via-white to-brand-50/30 p-8 shadow-lg transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:border-brand-200">
       {/* Decorative Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-br from-brand-500/5 via-transparent to-brand-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-      <div className="absolute right-0 top-0 h-32 w-32 rounded-bl-full bg-gradient-to-br from-brand-500/10 to-brand-500/5 transition-all duration-700 group-hover:scale-150"></div>
+      <div className="absolute right-0 top-0 h-32 w-32 bg-gradient-to-br from-brand-500/10 to-brand-500/5 transition-all duration-700 group-hover:scale-150"></div>
 
       {/* Header */}
       <div className="relative mb-6">
         <div className="mb-4 flex items-center gap-3">
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-500/15 to-brand-500/5 text-brand-600 shadow-md transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
+          <div className="flex h-12 w-12 items-center justify-center bg-gradient-to-br from-brand-500/15 to-brand-500/5 text-brand-600 shadow-md transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
             {icon}
           </div>
-          <div className="rounded-full bg-brand-100 px-3 py-1">
+          <div className="bg-brand-100 px-3 py-1">
             <span className="text-xs font-bold uppercase tracking-wider text-brand-700">
               {tournament.goal}
             </span>
@@ -67,7 +67,7 @@ export function TournamentCard({ tournament }: TournamentCardProps) {
       <p className="relative mb-6 text-sm leading-relaxed text-gray-700">{tournament.description}</p>
 
       {/* Format */}
-      <div className="relative mb-6 rounded-xl bg-brand-50/50 p-4 border border-brand-100">
+      <div className="relative mb-6 bg-brand-50/50 p-4 border border-brand-100">
         <p className="text-xs font-semibold uppercase tracking-wider text-brand-600 mb-2">Format</p>
         <p className="text-sm text-gray-700">{tournament.format}</p>
       </div>
@@ -81,7 +81,7 @@ export function TournamentCard({ tournament }: TournamentCardProps) {
           {tournament.teams.map((team) => (
             <span
               key={team}
-              className="inline-flex items-center rounded-full bg-brand-100 px-3 py-1 text-xs font-semibold text-brand-700"
+              className="inline-flex items-center bg-brand-100 px-3 py-1 text-xs font-semibold text-brand-700"
             >
               {team}
             </span>

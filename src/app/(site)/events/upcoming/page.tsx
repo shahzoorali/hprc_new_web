@@ -16,7 +16,7 @@ export default function UpcomingEventsPage() {
         {eventsContent.upcoming.map((event) => (
           <article
             key={event.title}
-            className="rounded-3xl border border-brand-100 bg-white/95 p-6 shadow-[var(--shadow-elevated)]"
+            className=" border border-brand-100 bg-white/95 p-6 shadow-[var(--shadow-elevated)]"
           >
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-600">
               {event.date}

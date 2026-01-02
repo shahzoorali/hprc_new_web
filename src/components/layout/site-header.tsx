@@ -14,7 +14,7 @@ export function SiteHeader() {
           <div className="flex flex-wrap items-center gap-3 sm:gap-6 lg:gap-8">
             <a
               href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`}
-              className="group flex items-center gap-1.5 sm:gap-2.5 transition-all duration-300 hover:text-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:ring-offset-2 rounded-md px-1.5 sm:px-2 py-0.5 sm:py-1"
+              className="group flex items-center gap-1.5 sm:gap-2.5 transition-all duration-300 hover:text-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:ring-offset-2 px-1.5 sm:px-2 py-0.5 sm:py-1"
               aria-label={`Call ${siteConfig.contact.phone}`}
             >
               <svg
@@ -35,7 +35,7 @@ export function SiteHeader() {
             </a>
             <a
               href={`mailto:${siteConfig.contact.email}`}
-              className="group flex items-center gap-1.5 sm:gap-2.5 transition-all duration-300 hover:text-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:ring-offset-2 rounded-md px-1.5 sm:px-2 py-0.5 sm:py-1"
+              className="group flex items-center gap-1.5 sm:gap-2.5 transition-all duration-300 hover:text-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:ring-offset-2 px-1.5 sm:px-2 py-0.5 sm:py-1"
               aria-label={`Email ${siteConfig.contact.email}`}
             >
               <svg
@@ -61,7 +61,7 @@ export function SiteHeader() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="relative font-display font-semibold tracking-wide transition-all duration-300 hover:text-brand-600 hover:after:w-full focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:ring-offset-2 rounded-md px-1.5 sm:px-2 py-0.5 sm:py-1 text-[10px] sm:text-xs after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-brand-500 after:transition-all after:duration-300 whitespace-nowrap"
+                className="relative font-display font-semibold tracking-wide transition-all duration-300 hover:text-brand-600 hover:after:w-full focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:ring-offset-2 px-1.5 sm:px-2 py-0.5 sm:py-1 text-[10px] sm:text-xs after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-brand-500 after:transition-all after:duration-300 whitespace-nowrap"
               >
                 {item.label}
               </Link>
@@ -74,7 +74,7 @@ export function SiteHeader() {
       <div className="mx-auto flex max-w-7xl justify-center px-6 py-5 sm:px-8 lg:py-6">
         <Link
           href="/"
-          className="group relative flex flex-col items-center gap-3 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:ring-offset-4 rounded-2xl p-3 -m-3"
+          className="group relative flex flex-col items-center gap-3 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:ring-offset-4 p-3 -m-3"
           aria-label="HPRC Home"
         >
           {/* Elegant Logo Container */}
@@ -119,9 +119,9 @@ export function SiteHeader() {
               <Link
                 key={action.href}
                 href={action.href}
-                className={`group relative inline-flex items-center justify-center gap-2 whitespace-nowrap px-7 py-3 text-sm font-bold tracking-wide transition-all duration-300 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:ring-offset-2 rounded-full font-display ${
+                className={`group relative inline-flex items-center justify-center gap-2 whitespace-nowrap px-7 py-3 text-sm font-bold tracking-wide transition-all duration-300 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:ring-offset-2 font-display ${
                   action.variant === "primary"
-                    ? "bg-brand-500 text-white shadow-xl shadow-brand-500/30 hover:bg-brand-600 hover:shadow-2xl hover:shadow-brand-600/40"
+                    ? "bg-white text-red-600 border-2 border-red-600 shadow-xl shadow-red-600/30 hover:bg-red-50 hover:shadow-2xl hover:shadow-red-600/40"
                     : "border-2 border-brand-300 bg-white text-brand-700 hover:border-brand-400 hover:bg-brand-50"
                 }`}
               >
@@ -154,7 +154,7 @@ export function SiteHeader() {
                 <Link
                   key={action.href}
                   href={action.href}
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-500 px-5 py-2.5 text-xs font-bold tracking-wide text-white shadow-xl shadow-brand-500/30 transition-all duration-300 hover:bg-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:ring-offset-2 font-display"
+                  className="inline-flex items-center justify-center gap-2 bg-white px-5 py-2.5 text-xs font-bold tracking-wide text-red-600 border-2 border-red-600 shadow-xl shadow-red-600/30 transition-all duration-300 hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:ring-offset-2 font-display"
                   aria-label="Apply for Membership"
                 >
                   Apply

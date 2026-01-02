@@ -150,8 +150,8 @@ export function HeroSlider({ slides, autoPlayInterval = 5000 }: HeroSliderProps)
                   href={action.href}
                   className={
                     action.variant === "primary"
-                      ? "inline-flex items-center justify-center rounded-full bg-brand-500 px-8 py-4 text-base font-bold text-white shadow-xl shadow-brand-500/40 transition-all duration-300 hover:bg-brand-600 hover:shadow-2xl hover:shadow-brand-500/50 hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-brand-500/50 focus:ring-offset-2"
-                      : "inline-flex items-center justify-center rounded-full border-2 border-gray-300 bg-white px-8 py-4 text-base font-bold text-gray-900 transition-all duration-300 hover:border-brand-500 hover:text-brand-500 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-brand-500/50 focus:ring-offset-2"
+                      ? "inline-flex items-center justify-center bg-brand-500 px-8 py-4 text-base font-bold text-white shadow-xl shadow-brand-500/40 transition-all duration-300 hover:bg-brand-600 hover:shadow-2xl hover:shadow-brand-500/50 hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-brand-500/50 focus:ring-offset-2"
+                      : "inline-flex items-center justify-center border-2 border-gray-300 bg-white px-8 py-4 text-base font-bold text-gray-900 transition-all duration-300 hover:border-brand-500 hover:text-brand-500 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-brand-500/50 focus:ring-offset-2"
                   }
                 >
                   {action.label}
@@ -167,7 +167,7 @@ export function HeroSlider({ slides, autoPlayInterval = 5000 }: HeroSliderProps)
         <>
           <button
             onClick={prevSlide}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 flex h-12 w-12 items-center justify-center rounded-full bg-white/90 backdrop-blur-sm text-gray-900 shadow-lg transition-all duration-300 hover:bg-white hover:scale-110 focus:outline-none focus:ring-4 focus:ring-brand-500/50 focus:ring-offset-2"
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 flex h-12 w-12 items-center justify-center bg-white/90 backdrop-blur-sm text-gray-900 shadow-lg transition-all duration-300 hover:bg-white hover:scale-110 focus:outline-none focus:ring-4 focus:ring-brand-500/50 focus:ring-offset-2"
             aria-label="Previous slide"
           >
             <svg
@@ -187,7 +187,7 @@ export function HeroSlider({ slides, autoPlayInterval = 5000 }: HeroSliderProps)
           </button>
           <button
             onClick={nextSlide}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 flex h-12 w-12 items-center justify-center rounded-full bg-white/90 backdrop-blur-sm text-gray-900 shadow-lg transition-all duration-300 hover:bg-white hover:scale-110 focus:outline-none focus:ring-4 focus:ring-brand-500/50 focus:ring-offset-2"
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 flex h-12 w-12 items-center justify-center bg-white/90 backdrop-blur-sm text-gray-900 shadow-lg transition-all duration-300 hover:bg-white hover:scale-110 focus:outline-none focus:ring-4 focus:ring-brand-500/50 focus:ring-offset-2"
             aria-label="Next slide"
           >
             <svg
@@ -210,7 +210,7 @@ export function HeroSlider({ slides, autoPlayInterval = 5000 }: HeroSliderProps)
             <button
               key={index}
               onClick={() => goToSlide(index)}
-              className={`h-3 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-transparent ${
+              className={`h-3 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-transparent ${
                 index === currentSlide ? "w-8 bg-brand-500" : "w-3 bg-white/60 hover:bg-white/80"
               }`}
               aria-label={`Go to slide ${index + 1}`}

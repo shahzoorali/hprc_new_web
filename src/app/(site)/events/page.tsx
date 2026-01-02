@@ -110,9 +110,9 @@ export default function EventsPage() {
             {eventsContent.pastHighlights.map((highlight) => (
               <article
                 key={highlight.title}
-                className="group relative overflow-hidden rounded-3xl border border-brand-100 bg-white/95 p-8 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+                className="group relative overflow-hidden  border border-brand-100 bg-white/95 p-8 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
               >
-                <div className="absolute right-0 top-0 h-24 w-24 sm:h-32 sm:w-32 rounded-bl-full bg-gradient-to-br from-brand-500/10 to-brand-500/5 transition-all duration-500 group-hover:scale-150"></div>
+                <div className="absolute right-0 top-0 h-24 w-24 sm:h-32 sm:w-32  bg-gradient-to-br from-brand-500/10 to-brand-500/5 transition-all duration-500 group-hover:scale-150"></div>
                 <div className="relative">
                   <h3 className="text-lg sm:text-xl font-extrabold text-brand-900">{highlight.title}</h3>
                   <p className="mt-3 sm:mt-4 text-sm text-gray-700 leading-relaxed">
@@ -161,7 +161,7 @@ export default function EventsPage() {
               return (
                 <article
                   key={index}
-                  className="group relative overflow-hidden rounded-2xl bg-white shadow-md border border-gray-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                  className="group relative overflow-hidden  bg-white shadow-md border border-gray-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
                 >
                   <div className="relative h-36 sm:h-40 overflow-hidden">
                     <Image
@@ -174,7 +174,7 @@ export default function EventsPage() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                     {article.category && (
                       <div className="absolute top-2 sm:top-3 left-2 sm:left-3">
-                        <span className="inline-flex items-center rounded-full bg-brand-500 px-2 sm:px-2.5 py-1 text-[10px] sm:text-xs font-bold text-white">
+                        <span className="inline-flex items-center  bg-brand-500 px-2 sm:px-2.5 py-1 text-[10px] sm:text-xs font-bold text-white">
                           {article.category}
                         </span>
                       </div>
@@ -222,7 +222,7 @@ export default function EventsPage() {
           <div className="text-center">
             <Link
               href="/events/news"
-              className="inline-flex items-center rounded-full bg-brand-500 px-5 sm:px-6 py-2.5 sm:py-3 text-sm font-bold text-white shadow-md transition-all duration-300 hover:bg-brand-600 hover:shadow-lg hover:-translate-y-0.5"
+              className="inline-flex items-center  bg-brand-500 px-5 sm:px-6 py-2.5 sm:py-3 text-sm font-bold text-white shadow-md transition-all duration-300 hover:bg-brand-600 hover:shadow-lg hover:-translate-y-0.5"
             >
               View All News
               <svg
@@ -255,7 +255,7 @@ export default function EventsPage() {
           {eventsContent.media.map((entry) => (
             <article
               key={entry.category}
-              className="rounded-2xl sm:rounded-3xl border border-brand-100 bg-white/95 p-4 sm:p-6 shadow-[var(--shadow-elevated)]"
+              className=" sm: border border-brand-100 bg-white/95 p-4 sm:p-6 shadow-[var(--shadow-elevated)]"
             >
               <h3 className="text-base sm:text-lg font-semibold text-brand-900">{entry.category}</h3>
               <p className="mt-2 sm:mt-3 text-sm text-gray-700">{entry.summary}</p>
@@ -281,7 +281,7 @@ export default function EventsPage() {
           {eventsContent.galleries.map((gallery) => (
             <article
               key={gallery.type}
-              className="rounded-3xl border border-brand-100 bg-white/95 p-6 shadow-[var(--shadow-elevated)]"
+              className=" border border-brand-100 bg-white/95 p-6 shadow-[var(--shadow-elevated)]"
             >
               <h3 className="text-lg font-semibold text-brand-900">{gallery.type}</h3>
               <p className="mt-3 text-sm text-gray-700">{gallery.description}</p>

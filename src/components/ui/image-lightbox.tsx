@@ -62,7 +62,7 @@ export function ImageLightbox({ images, initialIndex = 0, isOpen, onClose }: Ima
       {/* Close Button */}
       <button
         onClick={onClose}
-        className="absolute top-4 right-4 sm:top-6 sm:right-6 z-50 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 backdrop-blur-md text-white transition-all duration-300 hover:bg-white/20 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white/50"
+        className="absolute top-4 right-4 sm:top-6 sm:right-6 z-50 flex h-10 w-10 items-center justify-center bg-white/10 backdrop-blur-md text-white transition-all duration-300 hover:bg-white/20 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white/50"
         aria-label="Close lightbox"
       >
         <svg
@@ -88,7 +88,7 @@ export function ImageLightbox({ images, initialIndex = 0, isOpen, onClose }: Ima
               e.stopPropagation();
               setCurrentIndex((prev) => (prev > 0 ? prev - 1 : images.length - 1));
             }}
-            className="absolute left-4 sm:left-6 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 backdrop-blur-md text-white transition-all duration-300 hover:bg-white/20 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white/50"
+            className="absolute left-4 sm:left-6 z-50 flex h-12 w-12 items-center justify-center bg-white/10 backdrop-blur-md text-white transition-all duration-300 hover:bg-white/20 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white/50"
             aria-label="Previous image"
           >
             <svg
@@ -110,7 +110,7 @@ export function ImageLightbox({ images, initialIndex = 0, isOpen, onClose }: Ima
               e.stopPropagation();
               setCurrentIndex((prev) => (prev < images.length - 1 ? prev + 1 : 0));
             }}
-            className="absolute right-4 sm:right-6 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 backdrop-blur-md text-white transition-all duration-300 hover:bg-white/20 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white/50"
+            className="absolute right-4 sm:right-6 z-50 flex h-12 w-12 items-center justify-center bg-white/10 backdrop-blur-md text-white transition-all duration-300 hover:bg-white/20 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white/50"
             aria-label="Next image"
           >
             <svg
@@ -140,7 +140,7 @@ export function ImageLightbox({ images, initialIndex = 0, isOpen, onClose }: Ima
           alt={currentImage.alt}
           width={1920}
           height={1080}
-          className="max-h-full max-w-full object-contain rounded-lg"
+          className="max-h-full max-w-full object-contain"
           priority
           quality={95}
         />
@@ -148,7 +148,7 @@ export function ImageLightbox({ images, initialIndex = 0, isOpen, onClose }: Ima
 
       {/* Image Counter */}
       {images.length > 1 && (
-        <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-50 rounded-full bg-white/10 backdrop-blur-md px-4 py-2 text-white text-sm font-medium">
+        <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-50 bg-white/10 backdrop-blur-md px-4 py-2 text-white text-sm font-medium">
           {currentIndex + 1} / {images.length}
         </div>
       )}

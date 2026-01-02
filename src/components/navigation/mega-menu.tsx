@@ -122,7 +122,7 @@ export function MegaMenu({ item, isOpen, onMouseEnter, onMouseLeave }: MegaMenuP
       />
       {/* Menu container - no top border, starts flush with header */}
       <div
-        className="mx-auto overflow-hidden rounded-b-xl border-x border-b border-brand-200/50 bg-white/98 backdrop-blur-md shadow-2xl ring-1 ring-black/5"
+        className="mx-auto overflow-hidden border-x border-b border-brand-200/50 bg-white/98 backdrop-blur-md shadow-2xl ring-1 ring-black/5"
         style={{ marginTop: "0", paddingTop: "0" }}
       >
         <div className={`grid grid-cols-1 gap-8 p-8 ${featuredCols}`}>
@@ -133,7 +133,7 @@ export function MegaMenu({ item, isOpen, onMouseEnter, onMouseLeave }: MegaMenuP
             {item.sections?.map((section, sectionIndex) => (
               <div key={sectionIndex}>
                 {section.image && (
-                  <div className="relative aspect-video w-full mb-4 rounded-lg overflow-hidden bg-gray-100">
+                  <div className="relative aspect-[32/9] w-full mb-4 overflow-hidden bg-gray-100">
                     <Image
                       src={section.image}
                       alt={section.title || "Section image"}
@@ -161,7 +161,7 @@ export function MegaMenu({ item, isOpen, onMouseEnter, onMouseLeave }: MegaMenuP
                         <Link
                           href={child.href}
                           aria-current={isActive ? "page" : undefined}
-                          className={`block rounded-lg px-3 py-2.5 text-sm font-medium transition-colors duration-150 ease-in-out ${
+                          className={`block px-3 py-2.5 text-sm font-medium transition-colors duration-150 ease-in-out ${
                             isActive
                               ? "bg-brand-100 text-brand-800 font-semibold"
                               : "text-gray-700 hover:bg-brand-100 hover:text-brand-800"
@@ -179,9 +179,9 @@ export function MegaMenu({ item, isOpen, onMouseEnter, onMouseLeave }: MegaMenuP
 
           {/* Right Column - Featured Item */}
           {item.featured && (
-            <div className="border-l-2 border-brand-400 bg-gradient-to-br from-brand-50 to-brand-50/50 p-8 rounded-lg lg:pl-8 lg:pt-8">
+            <div className="border-l-2 border-brand-400 bg-gradient-to-br from-brand-50 to-brand-50/50 p-8 lg:pl-8 lg:pt-8">
               {item.featured.image && (
-                <div className="relative aspect-video w-full mb-4 rounded-lg overflow-hidden bg-gray-100">
+                <div className="relative aspect-video w-full mb-4 overflow-hidden bg-gray-100">
                   <Image
                     src={item.featured.image}
                     alt={item.featured.title}
@@ -199,7 +199,7 @@ export function MegaMenu({ item, isOpen, onMouseEnter, onMouseLeave }: MegaMenuP
               </p>
               <Link
                 href={item.featured.href}
-                className="group inline-flex items-center rounded-full bg-brand-500 px-6 py-3 text-sm font-bold text-white shadow-md transition-all duration-200 hover:bg-brand-600 hover:shadow-lg hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
+                className="group inline-flex items-center bg-brand-500 px-6 py-3 text-sm font-bold text-white shadow-md transition-all duration-200 hover:bg-brand-600 hover:shadow-lg hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
               >
                 {item.featured.label || "Learn More"}
                 <svg

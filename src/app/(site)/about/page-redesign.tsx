@@ -30,11 +30,11 @@ export default function AboutPageRedesign() {
         />
         
         {/* Sophisticated Content */}
-        <div className="relative overflow-hidden rounded-[3rem] bg-gradient-to-br from-brand-50/60 via-white to-brand-50/40 p-10 md:p-16 border border-brand-100/60 shadow-xl">
+        <div className="relative overflow-hidden  bg-gradient-to-br from-brand-50/60 via-white to-brand-50/40 p-10 md:p-16 border border-brand-100/60 shadow-xl">
           {/* Elegant Decorative Elements */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-brand-500/3 rounded-full blur-[100px]"></div>
-            <div className="absolute bottom-0 left-0 w-48 h-48 bg-brand-600/3 rounded-full blur-[80px]"></div>
+            <div className="absolute top-0 right-0 w-64 h-64 bg-brand-500/3  blur-[100px]"></div>
+            <div className="absolute bottom-0 left-0 w-48 h-48 bg-brand-600/3  blur-[80px]"></div>
           </div>
           
           <div className="relative space-y-8 text-base text-gray-700 md:text-xl leading-relaxed font-light">
@@ -67,13 +67,13 @@ export default function AboutPageRedesign() {
             return (
               <div
                 key={facility}
-                className="group relative overflow-hidden rounded-[2rem] border border-brand-100/70 bg-white/98 backdrop-blur-sm p-8 shadow-lg transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:border-brand-200"
+                className="group relative overflow-hidden  border border-brand-100/70 bg-white/98 backdrop-blur-sm p-8 shadow-lg transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:border-brand-200"
               >
                 {/* Elegant Gradient Background */}
                 <div className="absolute inset-0 bg-gradient-to-br from-brand-500/3 via-transparent to-brand-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="absolute right-0 top-0 h-28 w-28 rounded-bl-full bg-gradient-to-br from-brand-500/8 to-brand-500/3 opacity-0 group-hover:opacity-100 transition-opacity duration-700 group-hover:scale-150"></div>
+                <div className="absolute right-0 top-0 h-28 w-28  bg-gradient-to-br from-brand-500/8 to-brand-500/3 opacity-0 group-hover:opacity-100 transition-opacity duration-700 group-hover:scale-150"></div>
                 <div className="relative flex items-start gap-5">
-                  <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-500/12 to-brand-500/5 text-brand-600 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 border border-brand-200/30 shadow-sm">
+                  <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center  bg-gradient-to-br from-brand-500/12 to-brand-500/5 text-brand-600 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 border border-brand-200/30 shadow-sm">
                     {facilityIcons[index % facilityIcons.length]}
                   </div>
                   <p className="flex-1 font-medium text-base md:text-lg text-gray-700 leading-relaxed font-light">
@@ -90,8 +90,8 @@ export default function AboutPageRedesign() {
       <section className="relative overflow-hidden bg-gradient-to-br from-brand-50/50 via-white to-brand-50/40 py-24">
         {/* Elegant Background Decorative Elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute -top-48 -right-48 h-96 w-96 rounded-full bg-brand-500/4 blur-[120px]"></div>
-          <div className="absolute -bottom-48 -left-48 h-96 w-96 rounded-full bg-brand-600/4 blur-[120px]"></div>
+          <div className="absolute -top-48 -right-48 h-96 w-96  bg-brand-500/4 blur-[120px]"></div>
+          <div className="absolute -bottom-48 -left-48 h-96 w-96  bg-brand-600/4 blur-[120px]"></div>
         </div>
 
         <div className="container relative space-y-16">
@@ -104,14 +104,14 @@ export default function AboutPageRedesign() {
 
           {/* Elegant Mission & Vision Cards */}
           <div className="grid gap-10 lg:grid-cols-2">
-            <div className="group relative overflow-hidden rounded-[3rem] border border-brand-100/70 bg-white/98 backdrop-blur-sm p-12 shadow-xl transition-all duration-700 hover:shadow-2xl hover:-translate-y-2 hover:border-brand-200">
+            <div className="group relative overflow-hidden  border border-brand-100/70 bg-white/98 backdrop-blur-sm p-12 shadow-xl transition-all duration-700 hover:shadow-2xl hover:-translate-y-2 hover:border-brand-200">
               {/* Elegant Background Gradient */}
               <div className="absolute inset-0 bg-gradient-to-br from-brand-500/4 via-transparent to-brand-500/6 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="absolute right-0 top-0 h-48 w-48 rounded-bl-full bg-gradient-to-br from-brand-500/10 to-brand-500/5 transition-all duration-700 group-hover:scale-150 group-hover:from-brand-500/15"></div>
+              <div className="absolute right-0 top-0 h-48 w-48  bg-gradient-to-br from-brand-500/10 to-brand-500/5 transition-all duration-700 group-hover:scale-150 group-hover:from-brand-500/15"></div>
               
               <div className="relative">
                 {/* Elegant Icon */}
-                <div className="mb-8 flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-brand-500/15 to-brand-500/7 text-brand-600 shadow-lg transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 border border-brand-200/40">
+                <div className="mb-8 flex h-20 w-20 items-center justify-center  bg-gradient-to-br from-brand-500/15 to-brand-500/7 text-brand-600 shadow-lg transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 border border-brand-200/40">
                   <svg className="h-10 w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                   </svg>
@@ -125,14 +125,14 @@ export default function AboutPageRedesign() {
               </div>
             </div>
             
-            <div className="group relative overflow-hidden rounded-[3rem] border border-brand-100/70 bg-white/98 backdrop-blur-sm p-12 shadow-xl transition-all duration-700 hover:shadow-2xl hover:-translate-y-2 hover:border-brand-200">
+            <div className="group relative overflow-hidden  border border-brand-100/70 bg-white/98 backdrop-blur-sm p-12 shadow-xl transition-all duration-700 hover:shadow-2xl hover:-translate-y-2 hover:border-brand-200">
               {/* Elegant Background Gradient */}
               <div className="absolute inset-0 bg-gradient-to-br from-brand-500/4 via-transparent to-brand-500/6 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="absolute right-0 top-0 h-48 w-48 rounded-bl-full bg-gradient-to-br from-brand-500/10 to-brand-500/5 transition-all duration-700 group-hover:scale-150 group-hover:from-brand-500/15"></div>
+              <div className="absolute right-0 top-0 h-48 w-48  bg-gradient-to-br from-brand-500/10 to-brand-500/5 transition-all duration-700 group-hover:scale-150 group-hover:from-brand-500/15"></div>
               
               <div className="relative">
                 {/* Elegant Icon */}
-                <div className="mb-8 flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-brand-500/15 to-brand-500/7 text-brand-600 shadow-lg transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 border border-brand-200/40">
+                <div className="mb-8 flex h-20 w-20 items-center justify-center  bg-gradient-to-br from-brand-500/15 to-brand-500/7 text-brand-600 shadow-lg transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 border border-brand-200/40">
                   <svg className="h-10 w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
@@ -167,15 +167,15 @@ export default function AboutPageRedesign() {
                 return (
                   <div
                     key={value.title}
-                    className="group relative overflow-hidden rounded-[2rem] border border-brand-100/70 bg-white/98 backdrop-blur-sm p-9 shadow-lg transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:border-brand-200"
+                    className="group relative overflow-hidden  border border-brand-100/70 bg-white/98 backdrop-blur-sm p-9 shadow-lg transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:border-brand-200"
                   >
                     {/* Elegant Background Gradient */}
                     <div className="absolute inset-0 bg-gradient-to-br from-brand-500/4 via-transparent to-brand-500/6 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    <div className="absolute right-0 top-0 h-28 w-28 rounded-bl-full bg-gradient-to-br from-brand-500/10 to-brand-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 group-hover:scale-150"></div>
+                    <div className="absolute right-0 top-0 h-28 w-28  bg-gradient-to-br from-brand-500/10 to-brand-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 group-hover:scale-150"></div>
                     
                     <div className="relative">
                       {/* Elegant Icon */}
-                      <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-500/15 to-brand-500/7 text-brand-600 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 border border-brand-200/40 shadow-sm">
+                      <div className="mb-5 flex h-14 w-14 items-center justify-center  bg-gradient-to-br from-brand-500/15 to-brand-500/7 text-brand-600 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 border border-brand-200/40 shadow-sm">
                         {valueIcons[index % valueIcons.length]}
                       </div>
                       
@@ -206,4 +206,8 @@ export default function AboutPageRedesign() {
     </div>
   );
 }
+
+
+
+
 

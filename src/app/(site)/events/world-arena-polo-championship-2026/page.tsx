@@ -1,3 +1,4 @@
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -7,7 +8,14 @@ import { CountryBadge } from "@/components/ui/country-badge";
 import { TournamentCard } from "@/components/ui/tournament-card";
 import { EventSchedule } from "@/components/ui/event-schedule";
 import { EventContactForm } from "@/components/ui/event-contact-form";
+import { CountdownTimer } from "@/components/ui/countdown-timer";
 import { worldArenaPoloChampionship2026 } from "@/content/world-arena-polo-championship-2026";
+
+import US from "country-flag-icons/react/3x2/US";
+import IN from "country-flag-icons/react/3x2/IN";
+import DE from "country-flag-icons/react/3x2/DE";
+import FR from "country-flag-icons/react/3x2/FR";
+import LU from "country-flag-icons/react/3x2/LU";
 
 export const metadata = {
   title: "HPRC World Arena Polo Championship 2026 | Hyderabad Polo & Riding Club",
@@ -15,24 +23,34 @@ export const metadata = {
     "Join us for HPRC World Arena Polo Championship 2026 in Hyderabad. A week-long celebration of world-class arena polo featuring teams from USA, India, Germany, France, and Luxembourg.",
 };
 
-const countryFlags: Record<string, string> = {
-  USA: "🇺🇸",
-  IND: "🇮🇳",
-  GER: "🇩🇪",
-  FRA: "🇫🇷",
-  LUX: "🇱🇺",
+const countryFlagComponents: Record<string, React.ComponentType<{ className?: string; title?: string }>> = {
+  USA: US,
+  IND: IN,
+  GER: DE,
+  FRA: FR,
+  LUX: LU,
 };
 
 export default function WorldArenaPoloChampionship2026Page() {
   const { hero, overview, keyInfo, countries, tournaments, schedule, officials, hospitality, media, objectives, legacy } =
     worldArenaPoloChampionship2026;
 
+  // Event starts on February 11, 2026 at 00:00 IST (UTC+5:30)
+  // Converting to UTC for accurate countdown
+  const targetDate = new Date("2026-02-11T00:00:00+05:30");
+  
+  // Calculate days remaining for static display
+  const now = new Date().getTime();
+  const target = targetDate.getTime();
+  const difference = target - now;
+  const daysRemaining = Math.max(0, Math.floor(difference / (1000 * 60 * 60 * 24)));
+
   return (
     <div className="space-y-20 pb-20">
       {/* 🎉 Energetic Hero Section with Countdown */}
       <div className="relative overflow-hidden">
         <div className="container pt-12">
-          <div className="relative overflow-hidden rounded-[3.5rem] border-2 border-brand-200/50 shadow-[0_40px_80px_-20px_rgba(227,30,36,0.3)]">
+          <div className="relative overflow-hidden  border-2 border-brand-200/50 shadow-[0_40px_80px_-20px_rgba(227,30,36,0.3)]">
             <div className="absolute inset-0">
               <Image
                 src="https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=1920&q=80"
@@ -44,27 +62,27 @@ export default function WorldArenaPoloChampionship2026Page() {
               <div className="absolute inset-0 bg-gradient-to-br from-brand-900/85 via-brand-800/80 to-brand-900/85"></div>
             </div>
             
-            {/* Animated Background Elements */}
+            {/* Background Elements */}
             <div className="absolute inset-0 overflow-hidden">
-              <div className="absolute top-10 left-10 w-64 h-64 bg-brand-500/20 rounded-full blur-[100px] animate-pulse"></div>
-              <div className="absolute bottom-10 right-10 w-80 h-80 bg-brand-400/20 rounded-full blur-[120px] animate-pulse delay-1000"></div>
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-brand-500/10 rounded-full blur-[150px]"></div>
+              <div className="absolute top-10 left-10 w-64 h-64 bg-brand-500/20  blur-[100px]"></div>
+              <div className="absolute bottom-10 right-10 w-80 h-80 bg-brand-400/20  blur-[120px]"></div>
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-brand-500/10  blur-[150px]"></div>
             </div>
 
             <div className="relative z-10 p-12 md:p-20">
               <div className="space-y-8 text-center">
-                <div className="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-brand-500 to-brand-600 px-6 py-3 shadow-2xl shadow-brand-500/50 animate-bounce">
-                  <div className="h-2 w-2 rounded-full bg-white animate-ping"></div>
+                <div className="inline-flex items-center gap-3  bg-gradient-to-r from-brand-500 to-brand-600 px-6 py-3 shadow-2xl shadow-brand-500/50">
+                  <div className="h-2 w-2  bg-white"></div>
                   <span className="text-sm font-bold uppercase tracking-[0.2em] text-white">
                     World-Class Championship
                   </span>
-                  <div className="h-2 w-2 rounded-full bg-white animate-ping"></div>
+                  <div className="h-2 w-2  bg-white"></div>
                 </div>
 
                 <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white font-display tracking-tight leading-tight">
                   World Arena Polo
                   <br />
-                  <span className="bg-gradient-to-r from-brand-400 via-brand-300 to-brand-400 bg-clip-text text-transparent">
+                  <span className="text-white">
                     Championship 2026
                   </span>
                 </h1>
@@ -90,29 +108,12 @@ export default function WorldArenaPoloChampionship2026Page() {
                 </div>
 
                 {/* Countdown Timer Visual */}
-                <div className="grid grid-cols-4 gap-4 md:gap-6 max-w-2xl mx-auto">
-                  {[
-                    { label: "Days", value: "120" },
-                    { label: "Hours", value: "18" },
-                    { label: "Mins", value: "45" },
-                    { label: "Secs", value: "30" },
-                  ].map((item) => (
-                    <div key={item.label} className="group relative overflow-hidden rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 p-4 md:p-6 transition-all duration-300 hover:bg-white/20 hover:scale-105 hover:border-white/40">
-                      <div className="absolute inset-0 bg-gradient-to-br from-brand-500/10 to-brand-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                      <p className="relative text-3xl md:text-5xl font-extrabold text-white font-display tracking-tight">
-                        {item.value}
-                      </p>
-                      <p className="relative text-xs font-semibold uppercase tracking-wider text-white/70">
-                        {item.label}
-                      </p>
-                    </div>
-                  ))}
-                </div>
+                <CountdownTimer targetDate={targetDate} />
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                   <Link
                     href="#contact"
-                    className="inline-flex items-center justify-center gap-3 rounded-full bg-gradient-to-r from-white to-gray-100 px-10 py-5 text-lg font-bold text-brand-900 shadow-2xl transition-all duration-300 hover:scale-105 hover:shadow-3xl hover:shadow-brand-900/50 hover:-translate-y-1"
+                    className="inline-flex items-center justify-center gap-3  bg-gradient-to-r from-white to-gray-100 px-10 py-5 text-lg font-bold text-brand-900 shadow-2xl"
                   >
                     <span>Register Now</span>
                     <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -121,7 +122,7 @@ export default function WorldArenaPoloChampionship2026Page() {
                   </Link>
                   <Link
                     href="#schedule"
-                    className="inline-flex items-center justify-center gap-3 rounded-full border-2 border-white px-10 py-5 text-lg font-bold text-white shadow-2xl transition-all duration-300 hover:bg-white/10 hover:scale-105 hover:-translate-y-1"
+                    className="inline-flex items-center justify-center gap-3  border-2 border-white px-10 py-5 text-lg font-bold text-white shadow-2xl"
                   >
                     <span>View Schedule</span>
                     <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -133,12 +134,12 @@ export default function WorldArenaPoloChampionship2026Page() {
             </div>
 
             {/* Floating Decorative Elements */}
-            <div className="absolute top-8 right-8 flex h-20 w-20 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 shadow-xl animate-bounce">
-              <svg className="h-10 w-10 text-white animate-spin-slow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="absolute top-8 right-8 flex h-20 w-20 items-center justify-center  bg-white/10 backdrop-blur-sm border border-white/20 shadow-xl">
+              <svg className="h-10 w-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
               </svg>
             </div>
-            <div className="absolute bottom-8 left-8 flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-500/20 backdrop-blur-sm border border-brand-400/30 shadow-xl animate-pulse">
+            <div className="absolute bottom-8 left-8 flex h-16 w-16 items-center justify-center  bg-brand-500/20 backdrop-blur-sm border border-brand-400/30 shadow-xl">
               <svg className="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
@@ -158,8 +159,8 @@ export default function WorldArenaPoloChampionship2026Page() {
               { value: "7", label: "Days" },
               { value: "20+", label: "Matches" },
             ].map((stat, index) => (
-              <div key={stat.label} className="text-center space-y-2 group">
-                <p className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white font-display group-hover:scale-110 transition-transform duration-300">
+              <div key={stat.label} className="text-center space-y-2">
+                <p className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white font-display">
                   {stat.value}
                 </p>
                 <p className="text-sm md:text-base font-semibold uppercase tracking-wider text-brand-200">
@@ -173,10 +174,10 @@ export default function WorldArenaPoloChampionship2026Page() {
 
       {/* 🎯 Event Overview */}
       <section className="container">
-        <div className="relative overflow-hidden rounded-[3rem] bg-gradient-to-br from-brand-50/80 via-white to-brand-50/60 p-10 md:p-16 border-2 border-brand-100/70 shadow-[0_30px_60px_-15px_rgba(227,30,36,0.15)]">
+        <div className="relative overflow-hidden  bg-gradient-to-br from-brand-50/80 via-white to-brand-50/60 p-10 md:p-16 border-2 border-brand-100/70 shadow-[0_30px_60px_-15px_rgba(227,30,36,0.15)]">
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-brand-500/5 rounded-full blur-[150px]"></div>
-            <div className="absolute bottom-0 left-0 w-80 h-80 bg-brand-600/5 rounded-full blur-[120px]"></div>
+            <div className="absolute top-0 right-0 w-96 h-96 bg-brand-500/5  blur-[150px]"></div>
+            <div className="absolute bottom-0 left-0 w-80 h-80 bg-brand-600/5  blur-[120px]"></div>
           </div>
           
           <div className="relative space-y-8">
@@ -187,15 +188,13 @@ export default function WorldArenaPoloChampionship2026Page() {
               align="center"
             />
             <div className="grid gap-8 lg:grid-cols-2">
-              <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-white to-brand-50/40 p-8 border border-brand-100/60 shadow-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
-                <div className="absolute inset-0 bg-gradient-to-br from-brand-500/3 via-transparent to-brand-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative overflow-hidden  bg-gradient-to-br from-white to-brand-50/40 p-8 border border-brand-100/60 shadow-xl">
                 <h3 className="text-2xl font-bold text-brand-900 mb-4 font-display">Background</h3>
                 <p className="text-lg text-gray-700 leading-relaxed font-light">
                   {overview.background}
                 </p>
               </div>
-              <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-white to-brand-50/40 p-8 border border-brand-100/60 shadow-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
-                <div className="absolute inset-0 bg-gradient-to-br from-brand-500/3 via-transparent to-brand-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative overflow-hidden  bg-gradient-to-br from-white to-brand-50/40 p-8 border border-brand-100/60 shadow-xl">
                 <h3 className="text-2xl font-bold text-brand-900 mb-4 font-display">Rationale</h3>
                 <p className="text-lg text-gray-700 leading-relaxed font-light">
                   {overview.rationale}
@@ -209,8 +208,8 @@ export default function WorldArenaPoloChampionship2026Page() {
       {/* 🌍 Participating Countries */}
       <section className="relative overflow-hidden bg-gradient-to-br from-brand-900 via-brand-800 to-brand-900 py-20">
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-brand-500/15 rounded-full blur-[150px]"></div>
-          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-brand-400/15 rounded-full blur-[150px]"></div>
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-brand-500/15  blur-[150px]"></div>
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-brand-400/15  blur-[150px]"></div>
         </div>
 
         <div className="container relative">
@@ -219,31 +218,33 @@ export default function WorldArenaPoloChampionship2026Page() {
             title="Participating Nations"
             description="Elite arena polo teams from across the globe compete for the title"
             align="center"
-            className="text-white [&_p]:text-white/80 [&_h3]:text-white"
+            className="text-white"
           />
           
           <div className="mt-12 flex flex-wrap items-center justify-center gap-6">
             {countries.map((country) => {
-              const flag = countryFlags[country.code] || "🏳️";
+              const FlagComponent = countryFlagComponents[country.code];
               return (
-                <div key={country.code} className="group">
-                  <div className="relative overflow-hidden rounded-2xl bg-white/10 backdrop-blur-md border-2 border-white/20 p-6 transition-all duration-300 hover:bg-white/20 hover:border-brand-400/50 hover:scale-110 hover:rotate-3 hover:shadow-2xl">
-                    <div 
-                      className="relative text-4xl"
-                      style={{
-                        fontFamily: 'system-ui, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
-                        fontFeatureSettings: '"liga"',
-                        WebkitFontSmoothing: "antialiased",
-                        display: "inline-block",
-                        verticalAlign: "middle",
-                      }}
-                      role="img"
-                      aria-label={`${country.name} flag`}
-                    >
-                      {flag}
-                    </div>
-                    <div className="absolute inset-0 bg-gradient-to-br from-brand-400/10 to-brand-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div key={country.code} className="flex flex-col items-center gap-3">
+                  <div className="bg-white/10 backdrop-blur-md border-2 border-white/20 p-6">
+                    {FlagComponent ? (
+                      <FlagComponent
+                        className="w-12 h-12 md:w-16 md:h-16"
+                        title={`${country.name} flag`}
+                      />
+                    ) : (
+                      <div 
+                        className="relative text-4xl leading-none"
+                        role="img"
+                        aria-label={`${country.name} flag`}
+                      >
+                        🏳️
+                      </div>
+                    )}
                   </div>
+                  <span className="text-white text-sm font-semibold text-center">
+                    {country.name}
+                  </span>
                 </div>
               );
             })}
@@ -263,14 +264,10 @@ export default function WorldArenaPoloChampionship2026Page() {
           {tournaments.map((tournament, index) => (
             <div
               key={tournament.id}
-              className="group relative overflow-hidden rounded-[2.5rem] border-2 border-brand-100/80 bg-gradient-to-br from-white via-white to-brand-50/50 p-10 shadow-2xl transition-all duration-700 hover:shadow-[0_40px_80px_-20px_rgba(227,30,36,0.25)] hover:-translate-y-3 hover:border-brand-200 hover:scale-[1.02]"
+              className="relative overflow-hidden rounded-[2.5rem] border-2 border-brand-100/80 bg-gradient-to-br from-white via-white to-brand-50/50 p-10 shadow-2xl"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-brand-500/5 via-transparent to-brand-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-              <div className="absolute right-0 top-0 h-48 w-48 rounded-bl-full bg-gradient-to-br from-brand-500/15 to-brand-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 group-hover:scale-150"></div>
-              <div className="absolute bottom-0 left-0 h-32 w-32 rounded-tr-full bg-gradient-to-tr from-brand-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 group-hover:scale-125"></div>
-
               <div className="relative">
-                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-3xl bg-gradient-to-br from-brand-500 to-brand-600 text-3xl shadow-2xl shadow-brand-900/30 transition-all duration-500 group-hover:scale-125 group-hover:rotate-12">
+                <div className="mb-6 flex h-16 w-16 items-center justify-center  bg-gradient-to-br from-brand-500 to-brand-600 text-3xl shadow-2xl shadow-brand-900/30">
                   <span className="font-extrabold text-white font-display">{index + 1}</span>
                 </div>
                 <h3 className="text-3xl font-bold text-brand-900 mb-4 font-display tracking-tight">
@@ -279,7 +276,7 @@ export default function WorldArenaPoloChampionship2026Page() {
                 <p className="text-lg text-gray-700 leading-relaxed font-light mb-6">
                   {tournament.description}
                 </p>
-                <div className="flex items-center gap-3 rounded-full bg-brand-100/80 px-5 py-2.5 w-fit border border-brand-200/60">
+                <div className="flex items-center gap-3  bg-brand-100/80 px-5 py-2.5 w-fit border border-brand-200/60">
                   <svg className="h-5 w-5 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
@@ -296,8 +293,8 @@ export default function WorldArenaPoloChampionship2026Page() {
       {/* 📅 Day-wise Programme */}
       <section className="relative overflow-hidden bg-gradient-to-br from-brand-50/60 via-white to-brand-50/40 py-20" id="schedule">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute -top-40 -right-40 h-96 w-96 bg-brand-500/8 rounded-full blur-[150px]"></div>
-          <div className="absolute -bottom-40 -left-40 h-80 w-80 bg-brand-600/8 rounded-full blur-[120px]"></div>
+          <div className="absolute -top-40 -right-40 h-96 w-96 bg-brand-500/8  blur-[150px]"></div>
+          <div className="absolute -bottom-40 -left-40 h-80 w-80 bg-brand-600/8  blur-[120px]"></div>
         </div>
         
         <div className="container relative">
@@ -322,10 +319,9 @@ export default function WorldArenaPoloChampionship2026Page() {
           align="center"
         />
         <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          <div className="group relative overflow-hidden rounded-[2.5rem] border-2 border-brand-200/80 bg-gradient-to-br from-white to-brand-50/40 p-10 shadow-2xl transition-all duration-500 hover:shadow-3xl hover:-translate-y-3 hover:border-brand-300">
-            <div className="absolute inset-0 bg-gradient-to-br from-brand-500/5 via-transparent to-brand-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div className="relative overflow-hidden rounded-[2.5rem] border-2 border-brand-200/80 bg-gradient-to-br from-white to-brand-50/40 p-10 shadow-2xl">
             <div className="relative">
-              <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-brand-500 to-brand-600 text-3xl shadow-2xl transition-all duration-500 group-hover:scale-125 group-hover:rotate-12">
+              <div className="mb-6 flex h-20 w-20 items-center justify-center  bg-gradient-to-br from-brand-500 to-brand-600 text-3xl shadow-2xl">
                 <svg className="h-10 w-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4M5.5 7.5L10 11l4-4M20 12l-2 2-4-4" />
                 </svg>
@@ -339,11 +335,10 @@ export default function WorldArenaPoloChampionship2026Page() {
           {officials.committee.slice(0, 3).map((member, index) => (
             <div
               key={index}
-              className="group relative overflow-hidden rounded-[2.5rem] border-2 border-brand-200/80 bg-gradient-to-br from-white to-brand-50/40 p-10 shadow-2xl transition-all duration-500 hover:shadow-3xl hover:-translate-y-3 hover:border-brand-300"
+              className="relative overflow-hidden rounded-[2.5rem] border-2 border-brand-200/80 bg-gradient-to-br from-white to-brand-50/40 p-10 shadow-2xl"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-brand-500/5 via-transparent to-brand-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <div className="relative">
-                <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-brand-500 to-brand-600 text-3xl shadow-2xl transition-all duration-500 group-hover:scale-125 group-hover:rotate-12">
+                <div className="mb-6 flex h-20 w-20 items-center justify-center  bg-gradient-to-br from-brand-500 to-brand-600 text-3xl shadow-2xl">
                   <span className="font-extrabold text-white font-display">{member.name.split(' ').map(n => n[0]).join('')}</span>
                 </div>
                 <h3 className="text-xl font-bold text-brand-900 mb-2 font-display">{member.name}</h3>
@@ -357,8 +352,8 @@ export default function WorldArenaPoloChampionship2026Page() {
       {/* 🎉 Hospitality & Experience */}
       <section className="relative overflow-hidden bg-gradient-to-br from-brand-900 via-brand-800 to-brand-900 py-20">
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-500/20 rounded-full blur-[200px]"></div>
-          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-brand-600/20 rounded-full blur-[150px]"></div>
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-500/20  blur-[200px]"></div>
+          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-brand-600/20  blur-[150px]"></div>
         </div>
 
         <div className="container relative">
@@ -374,10 +369,10 @@ export default function WorldArenaPoloChampionship2026Page() {
             {hospitality.features.map((feature, index) => (
               <div
                 key={index}
-                className="group relative overflow-hidden rounded-[2.5rem] border-2 border-white/20 bg-white/10 backdrop-blur-md p-10 transition-all duration-500 hover:bg-white/15 hover:border-white/30 hover:-translate-y-3 hover:shadow-2xl"
+                className="relative overflow-hidden rounded-[2.5rem] border-2 border-white/20 bg-white/10 backdrop-blur-md p-10"
               >
                 <div className="relative">
-                  <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-400 to-brand-500 text-3xl shadow-xl transition-all duration-500 group-hover:scale-125 group-hover:rotate-6">
+                  <div className="mb-6 flex h-16 w-16 items-center justify-center  bg-gradient-to-br from-brand-400 to-brand-500 text-3xl shadow-xl">
                     <svg className="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5 16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714 2.143L13 3z" />
                     </svg>
@@ -403,13 +398,10 @@ export default function WorldArenaPoloChampionship2026Page() {
           {media.opportunities.map((opportunity, index) => (
             <div
               key={index}
-              className="group relative overflow-hidden rounded-[2.5rem] border-2 border-brand-200/80 bg-gradient-to-br from-white via-white to-brand-50/60 p-10 shadow-2xl transition-all duration-700 hover:shadow-[0_40px_80px_-20px_rgba(227,30,36,0.2)] hover:-translate-y-3 hover:border-brand-300"
+              className="relative overflow-hidden rounded-[2.5rem] border-2 border-brand-200/80 bg-gradient-to-br from-white via-white to-brand-50/60 p-10 shadow-2xl"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-brand-500/5 via-transparent to-brand-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-              <div className="absolute right-0 top-0 h-48 w-48 rounded-bl-full bg-gradient-to-br from-brand-500/15 to-brand-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 group-hover:scale-150"></div>
-              
               <div className="relative">
-                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-500 to-brand-600 text-3xl shadow-xl transition-all duration-500 group-hover:scale-125 group-hover:rotate-6">
+                <div className="mb-6 flex h-16 w-16 items-center justify-center  bg-gradient-to-br from-brand-500 to-brand-600 text-3xl shadow-xl">
                   <svg className="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
                   </svg>
@@ -425,8 +417,8 @@ export default function WorldArenaPoloChampionship2026Page() {
       {/* 🎯 Objectives & Legacy */}
       <section className="relative overflow-hidden bg-gradient-to-br from-brand-50/60 via-white to-brand-50/40 py-20">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute -top-40 -right-40 h-96 w-96 bg-brand-500/8 rounded-full blur-[150px]"></div>
-          <div className="absolute -bottom-40 -left-40 h-80 w-80 bg-brand-600/8 rounded-full blur-[120px]"></div>
+          <div className="absolute -top-40 -right-40 h-96 w-96 bg-brand-500/8  blur-[150px]"></div>
+          <div className="absolute -bottom-40 -left-40 h-80 w-80 bg-brand-600/8  blur-[120px]"></div>
         </div>
 
         <div className="container relative">
@@ -439,10 +431,10 @@ export default function WorldArenaPoloChampionship2026Page() {
               />
               <ul className="mt-8 space-y-5">
                 {objectives.map((objective, index) => (
-                  <li key={index} className="group flex gap-4 items-start">
+                  <li key={index} className="flex gap-4 items-start">
                     <div className="flex-shrink-0 mt-1">
-                      <div className="relative h-6 w-6 rounded-full bg-gradient-to-br from-brand-500 to-brand-600 shadow-lg transition-all duration-300 group-hover:scale-125 group-hover:rotate-12">
-                        <div className="absolute inset-1 rounded-full bg-white"></div>
+                      <div className="relative h-6 w-6  bg-gradient-to-br from-brand-500 to-brand-600 shadow-lg">
+                        <div className="absolute inset-1  bg-white"></div>
                       </div>
                     </div>
                     <span className="text-base md:text-lg text-gray-700 leading-relaxed font-light">
@@ -460,10 +452,10 @@ export default function WorldArenaPoloChampionship2026Page() {
               />
               <ul className="mt-8 space-y-5">
                 {legacy.map((item, index) => (
-                  <li key={index} className="group flex gap-4 items-start">
+                  <li key={index} className="flex gap-4 items-start">
                     <div className="flex-shrink-0 mt-1">
-                      <div className="relative h-6 w-6 rounded-full bg-gradient-to-br from-brand-500 to-brand-600 shadow-lg transition-all duration-300 group-hover:scale-125 group-hover:rotate-12">
-                        <div className="absolute inset-1 rounded-full bg-white"></div>
+                      <div className="relative h-6 w-6  bg-gradient-to-br from-brand-500 to-brand-600 shadow-lg">
+                        <div className="absolute inset-1  bg-white"></div>
                       </div>
                     </div>
                     <span className="text-base md:text-lg text-gray-700 leading-relaxed font-light">
@@ -479,11 +471,11 @@ export default function WorldArenaPoloChampionship2026Page() {
 
       {/* 📝 Contact Form Section */}
       <section className="container" id="contact">
-        <div className="relative overflow-hidden rounded-[3rem] bg-gradient-to-br from-brand-600 via-brand-700 to-brand-800 shadow-[0_50px_100px_-25px_rgba(227,30,36,0.3)]">
+        <div className="relative overflow-hidden  bg-gradient-to-br from-brand-600 via-brand-700 to-brand-800 shadow-[0_50px_100px_-25px_rgba(227,30,36,0.3)]">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_0%,rgba(255,255,255,0.15),transparent_70%)]"></div>
           <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-brand-500/20 rounded-full blur-[150px]"></div>
-            <div className="absolute bottom-0 left-0 w-80 h-80 bg-brand-400/20 rounded-full blur-[120px]"></div>
+            <div className="absolute top-0 right-0 w-96 h-96 bg-brand-500/20  blur-[150px]"></div>
+            <div className="absolute bottom-0 left-0 w-80 h-80 bg-brand-400/20  blur-[120px]"></div>
           </div>
 
           <div className="relative p-12 md:p-16">
@@ -497,8 +489,8 @@ export default function WorldArenaPoloChampionship2026Page() {
                 </p>
                 <div className="flex flex-col gap-4">
                   <div className="flex items-center gap-4">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/20 backdrop-blur-sm">
-                      <svg className="h-6 w-6 text-brand-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="flex h-12 w-12 items-center justify-center  bg-white/20 backdrop-blur-sm">
+                      <svg className="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                       </svg>
                     </div>
@@ -508,8 +500,8 @@ export default function WorldArenaPoloChampionship2026Page() {
                     </div>
                   </div>
                   <div className="flex items-center gap-4">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/20 backdrop-blur-sm">
-                      <svg className="h-6 w-6 text-brand-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="flex h-12 w-12 items-center justify-center  bg-white/20 backdrop-blur-sm">
+                      <svg className="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                       </svg>
                     </div>
@@ -520,7 +512,7 @@ export default function WorldArenaPoloChampionship2026Page() {
                   </div>
                 </div>
               </div>
-              <div className="rounded-2xl bg-white/10 backdrop-blur-md border-2 border-white/20 p-8">
+              <div className=" bg-white/10 backdrop-blur-md border-2 border-white/20 p-8">
                 <EventContactForm />
               </div>
             </div>
@@ -542,18 +534,18 @@ export default function WorldArenaPoloChampionship2026Page() {
         </div>
         
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-white/10 rounded-full blur-[200px]"></div>
-          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-brand-500/20 rounded-full blur-[150px]"></div>
+          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-white/10  blur-[200px]"></div>
+          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-brand-500/20  blur-[150px]"></div>
         </div>
 
         <div className="container relative z-10 text-center">
           <div className="space-y-8">
-            <div className="inline-flex items-center gap-3 rounded-full bg-white/20 backdrop-blur-sm border-2 border-white/30 px-6 py-3">
-              <div className="h-3 w-3 rounded-full bg-green-400 animate-pulse"></div>
+            <div className="inline-flex items-center gap-3  bg-white/20 backdrop-blur-sm border-2 border-white/30 px-6 py-3">
+              <div className="h-3 w-3  bg-green-400"></div>
               <span className="text-sm font-bold uppercase tracking-[0.2em] text-white">
                 Registration Open
               </span>
-              <div className="h-3 w-3 rounded-full bg-green-400 animate-pulse"></div>
+              <div className="h-3 w-3  bg-green-400"></div>
             </div>
 
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white font-display tracking-tight leading-tight">
@@ -572,7 +564,7 @@ export default function WorldArenaPoloChampionship2026Page() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
               <Link
                 href="#contact"
-                className="inline-flex items-center justify-center gap-3 rounded-full bg-gradient-to-r from-white to-gray-100 px-12 py-6 text-xl font-bold text-brand-900 shadow-[0_20px_40px_-10px_rgba(255,255,255,0.3)] transition-all duration-300 hover:scale-110 hover:shadow-[0_30px_60px_-15px_rgba(255,255,255,0.4)] hover:-translate-y-2"
+                className="inline-flex items-center justify-center gap-3  bg-gradient-to-r from-white to-gray-100 px-12 py-6 text-xl font-bold text-brand-900 shadow-[0_20px_40px_-10px_rgba(255,255,255,0.3)]"
               >
                 <span>Register Now</span>
                 <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -581,7 +573,7 @@ export default function WorldArenaPoloChampionship2026Page() {
               </Link>
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center gap-3 rounded-full border-4 border-white px-12 py-6 text-xl font-bold text-white shadow-[0_20px_40px_-10px_rgba(255,255,255,0.2)] transition-all duration-300 hover:bg-white/10 hover:scale-110 hover:shadow-[0_30px_60px_-15px_rgba(255,255,255,0.3)] hover:-translate-y-2"
+                className="inline-flex items-center justify-center gap-3  border-4 border-white px-12 py-6 text-xl font-bold text-white shadow-[0_20px_40px_-10px_rgba(255,255,255,0.2)]"
               >
                 <span>Learn More</span>
                 <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -592,7 +584,7 @@ export default function WorldArenaPoloChampionship2026Page() {
 
             <div className="flex items-center justify-center gap-8 pt-8">
               <div className="text-center">
-                <p className="text-4xl md:text-5xl font-extrabold text-white font-display">120+</p>
+                <p className="text-4xl md:text-5xl font-extrabold text-white font-display">{daysRemaining}+</p>
                 <p className="text-sm font-semibold uppercase tracking-wider text-white/70">Days Left</p>
               </div>
               <div className="h-16 w-px bg-white/30"></div>

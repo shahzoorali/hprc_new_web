@@ -198,24 +198,24 @@ export function EventSchedule({ schedule }: EventScheduleProps) {
               >
                 <div className="relative flex-shrink-0">
                   {/* Multi-layer glow effects */}
-                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-brand-400 via-brand-600 to-brand-800 blur-2xl opacity-40 group-hover:opacity-70 transition-opacity duration-700 -z-10"></div>
-                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-brand-500 to-brand-700 blur-xl opacity-50 group-hover:opacity-80 transition-opacity duration-500 -z-10"></div>
-                  <div className="absolute -inset-1 rounded-3xl bg-gradient-to-br from-brand-300/30 via-brand-500/30 to-brand-700/30 blur-lg opacity-60 group-hover:opacity-100 transition-opacity duration-500 -z-10"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-brand-400 via-brand-600 to-brand-800 blur-2xl opacity-40 group-hover:opacity-70 transition-opacity duration-700 -z-10"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-brand-500 to-brand-700 blur-xl opacity-50 group-hover:opacity-80 transition-opacity duration-500 -z-10"></div>
+                  <div className="absolute -inset-1 bg-gradient-to-br from-brand-300/30 via-brand-500/30 to-brand-700/30 blur-lg opacity-60 group-hover:opacity-100 transition-opacity duration-500 -z-10"></div>
                   
                   {/* Date Badge */}
                   <div
-                    className={`relative flex h-28 w-28 flex-col items-center justify-center rounded-3xl bg-gradient-to-br from-brand-600 via-brand-700 to-brand-900 text-white shadow-2xl shadow-brand-900/60 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 ring-4 ring-brand-500/40 overflow-hidden ${
+                    className={`relative flex h-28 w-28 flex-col items-center justify-center bg-gradient-to-br from-brand-600 via-brand-700 to-brand-900 text-white shadow-2xl shadow-brand-900/60 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 ring-4 ring-brand-500/40 overflow-hidden ${
                       isSpecialDay ? "ring-brand-400/60 ring-4 shadow-brand-500/40" : ""
                     }`}
                   >
                     {/* Base gradient background */}
-                    <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-brand-600 via-brand-700 to-brand-900"></div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-brand-600 via-brand-700 to-brand-900"></div>
                     
                     {/* Inner glow layer */}
-                    <div className="absolute inset-[2px] rounded-[1.35rem] bg-gradient-to-br from-brand-500/20 via-transparent to-brand-800/20 pointer-events-none"></div>
+                    <div className="absolute inset-[2px] bg-gradient-to-br from-brand-500/20 via-transparent to-brand-800/20 pointer-events-none"></div>
                     
                     {/* Refined pattern overlay - better integrated */}
-                    <div className="absolute inset-0 rounded-3xl opacity-[0.08] pointer-events-none" 
+                    <div className="absolute inset-0 opacity-[0.08] pointer-events-none" 
                       style={{
                         backgroundImage: 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.4) 1px, transparent 1px)',
                         backgroundSize: '6px 6px',
@@ -224,15 +224,15 @@ export function EventSchedule({ schedule }: EventScheduleProps) {
                     ></div>
                     
                     {/* Animated shine effects - properly layered */}
-                    <div className="absolute inset-0 rounded-3xl overflow-hidden pointer-events-none">
+                    <div className="absolute inset-0 overflow-hidden pointer-events-none">
                       {/* Primary shine */}
-                      <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/25 via-white/8 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-500"></div>
+                      <div className="absolute inset-0 bg-gradient-to-br from-white/25 via-white/8 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-500"></div>
                       
                       {/* Secondary diagonal shine */}
-                      <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-transparent via-white/6 to-white/15 opacity-50 group-hover:opacity-70 transition-opacity duration-500"></div>
+                      <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/6 to-white/15 opacity-50 group-hover:opacity-70 transition-opacity duration-500"></div>
                       
                       {/* Animated shimmer sweep */}
-                      <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-transparent via-white/25 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-shimmer transition-opacity duration-500" 
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-shimmer transition-opacity duration-500" 
                         style={{
                           transform: 'translateX(-100%) translateY(-100%) rotate(45deg)',
                           width: '200%',
@@ -255,8 +255,8 @@ export function EventSchedule({ schedule }: EventScheduleProps) {
                     {isSpecialDay && (
                       <div className="absolute -top-2 -right-2 z-30 pointer-events-none">
                         <div className="relative">
-                          <div className="absolute inset-0 h-7 w-7 rounded-full bg-gradient-to-br from-brand-400 to-brand-600 ring-3 ring-white shadow-xl animate-pulse"></div>
-                          <div className="absolute inset-0 h-5 w-5 rounded-full bg-white/40 blur-sm animate-ping -top-1 -right-1"></div>
+                          <div className="absolute inset-0 h-7 w-7 bg-gradient-to-br from-brand-400 to-brand-600 ring-3 ring-white shadow-xl animate-pulse"></div>
+                          <div className="absolute inset-0 h-5 w-5 bg-white/40 blur-sm animate-ping -top-1 -right-1"></div>
                         </div>
                       </div>
                     )}
@@ -264,9 +264,9 @@ export function EventSchedule({ schedule }: EventScheduleProps) {
                   
                   {/* Enhanced special badge */}
                   {specialBadge && (
-                    <div className={`absolute -bottom-4 left-1/2 -translate-x-1/2 rounded-full px-4 py-1.5 text-xs font-bold shadow-xl ring-2 ring-white/30 backdrop-blur-sm ${specialBadge.color} transition-all duration-300 group-hover:scale-110 group-hover:shadow-2xl whitespace-nowrap`}>
+                    <div className={`absolute -bottom-4 left-1/2 -translate-x-1/2 px-4 py-1.5 text-xs font-bold shadow-xl ring-2 ring-white/30 backdrop-blur-sm ${specialBadge.color} transition-all duration-300 group-hover:scale-110 group-hover:shadow-2xl whitespace-nowrap`}>
                       <span className="relative z-10 inline-block">{specialBadge.text}</span>
-                      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/20 to-transparent pointer-events-none"></div>
+                      <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent pointer-events-none"></div>
                     </div>
                   )}
                 </div>
@@ -274,24 +274,10 @@ export function EventSchedule({ schedule }: EventScheduleProps) {
 
               {/* Enhanced Content Card */}
               <div className={`relative sm:w-3/5 ${isEven ? "" : "sm:order-first"}`}>
-                {/* Enhanced Connecting Dot */}
-                <div className="absolute left-0 top-8 -translate-x-1/2 sm:left-1/2 sm:translate-x-0 z-20">
-                  <div className="relative">
-                    {/* Outer glow */}
-                    <div className="absolute inset-0 rounded-full bg-brand-500 blur-xl opacity-40 group-hover:opacity-70 transition-opacity duration-300"></div>
-                    {/* Inner glow */}
-                    <div className="absolute inset-0 rounded-full bg-brand-400 blur-md opacity-60 group-hover:opacity-90 transition-opacity duration-300"></div>
-                    {/* Dot */}
-                    <div className="relative h-8 w-8 rounded-full border-4 border-white bg-gradient-to-br from-brand-500 to-brand-600 shadow-2xl ring-4 ring-brand-500/20 transition-all duration-300 group-hover:scale-125 group-hover:ring-brand-400/40">
-                      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/30 to-transparent"></div>
-                    </div>
-                  </div>
-                </div>
-
                 {/* Content Card */}
-                <div className="ml-10 sm:ml-0 sm:mr-10">
+                <div className="sm:mr-10">
                   <div
-                    className={`group/card relative overflow-hidden rounded-[2.5rem] border-2 ${
+                    className={`group/card relative overflow-hidden border-2 ${
                       isSpecialDay
                         ? "border-brand-300 bg-gradient-to-br from-brand-50/50 via-white to-brand-50/30"
                         : "border-brand-200/80 bg-gradient-to-br from-white via-white to-brand-50/40"
@@ -326,7 +312,7 @@ export function EventSchedule({ schedule }: EventScheduleProps) {
                               </p>
                             </div>
                             {isSpecialDay && (
-                              <span className="rounded-full bg-brand-500 px-4 py-2 text-xs font-bold uppercase tracking-wider text-white shadow-xl ring-2 ring-white/20">
+                              <span className="bg-brand-500 px-4 py-2 text-xs font-bold uppercase tracking-wider text-white shadow-xl ring-2 ring-white/20">
                                 ⭐ Special Day
                               </span>
                             )}
@@ -334,7 +320,7 @@ export function EventSchedule({ schedule }: EventScheduleProps) {
                         </div>
                         
                         {/* Corner accent */}
-                        <div className="absolute top-4 right-4 h-16 w-16 rounded-full bg-brand-500/20 blur-2xl"></div>
+                        <div className="absolute top-4 right-4 h-16 w-16 bg-brand-500/20 blur-2xl"></div>
                       </div>
                     )}
 
@@ -342,8 +328,8 @@ export function EventSchedule({ schedule }: EventScheduleProps) {
                     <div className="absolute inset-0 bg-gradient-to-br from-brand-500/5 via-transparent to-brand-500/10 opacity-0 group-hover/card:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
                     
                     {/* Decorative corner elements */}
-                    <div className="absolute right-0 top-0 h-40 w-40 rounded-bl-full bg-gradient-to-br from-brand-500/10 to-brand-500/5 opacity-0 group-hover/card:opacity-100 transition-all duration-700 group-hover/card:scale-150 pointer-events-none"></div>
-                    <div className="absolute bottom-0 left-0 h-32 w-32 rounded-tr-full bg-gradient-to-tl from-brand-500/5 to-transparent opacity-0 group-hover/card:opacity-100 transition-all duration-700 pointer-events-none"></div>
+                    <div className="absolute right-0 top-0 h-40 w-40 bg-gradient-to-br from-brand-500/10 to-brand-500/5 opacity-0 group-hover/card:opacity-100 transition-all duration-700 group-hover/card:scale-150 pointer-events-none"></div>
+                    <div className="absolute bottom-0 left-0 h-32 w-32 bg-gradient-to-tl from-brand-500/5 to-transparent opacity-0 group-hover/card:opacity-100 transition-all duration-700 pointer-events-none"></div>
 
                     <div className={`relative ${dayImages[day.day] ? "p-6 md:p-8 pt-6" : "p-8 md:p-10"}`}>
                       {/* Date Header (shown only if no image) */}
@@ -353,7 +339,7 @@ export function EventSchedule({ schedule }: EventScheduleProps) {
                             {day.dateFull}
                           </p>
                           {isSpecialDay && (
-                            <span className="rounded-full bg-brand-500/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-brand-700">
+                            <span className="bg-brand-500/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-brand-700">
                               ⭐ Special
                             </span>
                           )}
@@ -368,12 +354,12 @@ export function EventSchedule({ schedule }: EventScheduleProps) {
                           return (
                             <div
                               key={actIndex}
-                              className={`group/activity relative flex gap-4 rounded-2xl border-2 ${style.borderColor} ${style.bg} p-5 transition-all duration-300 hover:shadow-lg hover:scale-[1.02] hover:border-opacity-100`}
+                              className={`group/activity relative flex gap-4 border-2 ${style.borderColor} ${style.bg} p-5 transition-all duration-300 hover:shadow-lg hover:scale-[1.02] hover:border-opacity-100`}
                             >
                               {/* Icon Container */}
                               <div className="flex-shrink-0">
                                 <div
-                                  className={`flex h-12 w-12 items-center justify-center rounded-xl ${style.iconBg} text-white shadow-lg transition-all duration-300 group-hover/activity:scale-110 group-hover/activity:rotate-3`}
+                                  className={`flex h-12 w-12 items-center justify-center ${style.iconBg} text-white shadow-lg transition-all duration-300 group-hover/activity:scale-110 group-hover/activity:rotate-3`}
                                 >
                                   {style.icon}
                                 </div>
@@ -384,7 +370,7 @@ export function EventSchedule({ schedule }: EventScheduleProps) {
                                 <div className="mb-2 flex items-center gap-2 flex-wrap">
                                   {style.badge && (
                                     <span
-                                      className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-bold uppercase tracking-wider ${style.iconColor} bg-white/80`}
+                                      className={`inline-flex items-center px-2.5 py-0.5 text-xs font-bold uppercase tracking-wider ${style.iconColor} bg-white/80`}
                                     >
                                       {style.badge}
                                     </span>
