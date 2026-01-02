@@ -335,20 +335,56 @@ export default function WorldArenaPoloChampionship2026Page() {
             </div>
           </div>
 
-          {officials.committee.slice(0, 3).map((member, index) => (
-            <div
-              key={index}
-              className="relative overflow-hidden rounded-[2.5rem] border-2 border-brand-200/80 bg-gradient-to-br from-white to-brand-50/40 p-10 shadow-2xl"
-            >
-              <div className="relative">
-                <div className="mb-6 flex h-20 w-20 items-center justify-center  bg-gradient-to-br from-brand-500 to-brand-600 text-3xl shadow-2xl">
-                  <span className="font-extrabold text-white font-display">{member.name.split(' ').map(n => n[0]).join('')}</span>
+          {officials.committee.slice(0, 3).map((member, index) => {
+            const isArsalanKhan = member.name === "Arsalan Khan";
+            const isChaitaniaKumar = member.name === "Chaitania Kumar";
+            return (
+              <div
+                key={index}
+                className={`relative overflow-hidden rounded-[2.5rem] border-2 p-10 shadow-2xl ${
+                  isArsalanKhan
+                    ? "border-blue-800/80 bg-gradient-to-br from-blue-900 via-blue-800 to-slate-900"
+                    : isChaitaniaKumar
+                    ? "border-emerald-800/80 bg-gradient-to-br from-emerald-900 via-emerald-800 to-teal-900"
+                    : "border-brand-200/80 bg-gradient-to-br from-white to-brand-50/40"
+                }`}
+              >
+                <div className="relative">
+                  {isArsalanKhan ? (
+                    <div className="mb-6 relative w-full aspect-[3/4] overflow-hidden rounded-xl border-2 border-white/20 ring-2 ring-white/10">
+                      <Image
+                        src="/images/arsalan-khan.png"
+                        alt={member.name}
+                        fill
+                        className="object-cover"
+                        quality={90}
+                      />
+                    </div>
+                  ) : isChaitaniaKumar ? (
+                    <div className="mb-6 relative w-full aspect-[3/4] overflow-hidden rounded-xl border-2 border-white/20 ring-2 ring-white/10">
+                      <Image
+                        src="/images/chaitania-kumar.jpg"
+                        alt={member.name}
+                        fill
+                        className="object-cover"
+                        quality={90}
+                      />
+                    </div>
+                  ) : (
+                    <div className="mb-6 flex h-20 w-20 items-center justify-center  bg-gradient-to-br from-brand-500 to-brand-600 text-3xl shadow-2xl">
+                      <span className="font-extrabold text-white font-display">{member.name.split(' ').map(n => n[0]).join('')}</span>
+                    </div>
+                  )}
+                  <h3 className={`text-xl font-bold mb-2 font-display ${
+                    isArsalanKhan || isChaitaniaKumar ? "text-white" : "text-brand-900"
+                  }`}>{member.name}</h3>
+                  <p className={`text-sm font-semibold uppercase tracking-wider ${
+                    isArsalanKhan ? "text-blue-200" : isChaitaniaKumar ? "text-emerald-200" : "text-brand-600"
+                  }`}>{member.role}</p>
                 </div>
-                <h3 className="text-xl font-bold text-brand-900 mb-2 font-display">{member.name}</h3>
-                <p className="text-sm font-semibold text-brand-600 uppercase tracking-wider">{member.role}</p>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 

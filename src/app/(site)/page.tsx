@@ -1,3 +1,4 @@
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -6,6 +7,20 @@ import { eventsContent } from "@/content/events";
 import { homeContent } from "@/content/home";
 import { worldArenaPoloChampionship2026 } from "@/content/world-arena-polo-championship-2026";
 import { CountryBadge } from "@/components/ui/country-badge";
+
+import US from "country-flag-icons/react/3x2/US";
+import IN from "country-flag-icons/react/3x2/IN";
+import DE from "country-flag-icons/react/3x2/DE";
+import FR from "country-flag-icons/react/3x2/FR";
+import LU from "country-flag-icons/react/3x2/LU";
+
+const countryFlagComponents: Record<string, React.ComponentType<{ className?: string; title?: string }>> = {
+  USA: US,
+  IND: IN,
+  GER: DE,
+  FRA: FR,
+  LUX: LU,
+};
 
 export default function HomePage() {
   const heroSlide = homeContent.heroSlides[0];
@@ -73,20 +88,24 @@ export default function HomePage() {
                   Participating Countries
                 </p>
                 <div className="flex flex-wrap items-center gap-2 sm:gap-4">
-                  {featuredEvent.countries.map((country) => (
-                    <div key={country.code} className="group relative">
-                      <div className="bg-white/10 backdrop-blur-md border border-white/20  px-3 sm:px-4 py-1.5 sm:py-2 transition-all duration-300 hover:bg-white/20 hover:border-white/30 hover:scale-105">
-                        <span className="text-[1rem] sm:text-[1.25rem] mr-1.5 sm:mr-2.5" style={{
-                          fontFamily: 'system-ui, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", "Twemoji Mozilla", "EmojiOne Color", sans-serif',
-                          display: 'inline-block',
-                          verticalAlign: 'middle'
-                        }}>
-                          {country.code === "USA" ? "🇺🇸" : country.code === "IND" ? "🇮🇳" : country.code === "GER" ? "🇩🇪" : country.code === "FRA" ? "🇫🇷" : country.code === "LUX" ? "🇱🇺" : "🏳️"}
-                        </span>
-                        <span className="text-xs sm:text-sm font-semibold text-white tracking-wide font-body">{country.code}</span>
+                  {featuredEvent.countries.map((country) => {
+                    const FlagComponent = countryFlagComponents[country.code];
+                    return (
+                      <div key={country.code} className="group relative">
+                        <div className="bg-white/10 backdrop-blur-md border border-white/20 px-3 sm:px-4 py-1.5 sm:py-2 transition-all duration-300 hover:bg-white/20 hover:border-white/30 hover:scale-105 flex items-center gap-1.5 sm:gap-2.5">
+                          {FlagComponent ? (
+                            <FlagComponent
+                              className="w-4 h-4 sm:w-5 sm:h-5"
+                              title={`${country.name} flag`}
+                            />
+                          ) : (
+                            <span className="text-[1rem] sm:text-[1.25rem]">🏳️</span>
+                          )}
+                          <span className="text-xs sm:text-sm font-semibold text-white tracking-wide font-body">{country.code}</span>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
 
