@@ -91,6 +91,7 @@ export default function HospitalityPage() {
                     <Link
                       key={idx}
                       href={menu.href}
+                      target={menu.href.startsWith('http') || menu.href.endsWith('.pdf') ? '_blank' : undefined}
                       className="inline-flex items-center  border-2 border-brand-500 bg-white px-4 sm:px-6 py-2 sm:py-2.5 text-xs sm:text-sm font-bold text-brand-600 transition-all duration-300 hover:bg-brand-500 hover:text-white hover:shadow-lg"
                     >
                       {menu.label}
@@ -180,6 +181,7 @@ export default function HospitalityPage() {
                     <Link
                       key={idx}
                       href={menu.href}
+                      target={menu.href.startsWith('http') || menu.href.endsWith('.pdf') ? '_blank' : undefined}
                       className="inline-flex items-center  border-2 border-brand-500 bg-white px-4 sm:px-6 py-2 sm:py-2.5 text-xs sm:text-sm font-bold text-brand-600 transition-all duration-300 hover:bg-brand-500 hover:text-white hover:shadow-lg"
                     >
                       {menu.label}

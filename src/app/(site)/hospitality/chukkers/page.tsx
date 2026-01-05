@@ -145,7 +145,7 @@ export default function ChukkersPage() {
                     <Link
                       key={idx}
                       href={menu.href}
-                      target={menu.href.startsWith('http') ? '_blank' : undefined}
+                      target={menu.href.startsWith('http') || menu.href.endsWith('.pdf') ? '_blank' : undefined}
                       className="inline-flex items-center gap-2 rounded-full border-2 border-brand-500 bg-white px-6 py-3 text-sm font-bold text-brand-600 transition-all duration-300 hover:bg-brand-500 hover:text-white hover:shadow-lg"
                     >
                       {menu.label}
