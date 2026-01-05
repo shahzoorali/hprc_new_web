@@ -517,41 +517,41 @@ export default function WorldArenaPoloChampionship2026Page() {
             <div className="absolute bottom-0 left-0 w-80 h-80 bg-brand-400/20  blur-[120px]"></div>
           </div>
 
-          <div className="relative p-12 md:p-16">
-            <div className="flex flex-col gap-12">
-              <div className="space-y-6 text-white text-center">
-                <h2 className="text-4xl md:text-5xl font-bold font-display tracking-tight">
+          <div className="relative p-6 sm:p-8 md:p-12 lg:p-16">
+            <div className="flex flex-col gap-6 sm:gap-8 md:gap-12">
+              <div className="space-y-4 sm:space-y-6 text-white text-center">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-display tracking-tight">
                   Ready to Join the Action?
                 </h2>
-                <p className="text-xl text-white/90 leading-relaxed font-light">
+                <p className="text-base sm:text-lg md:text-xl text-white/90 leading-relaxed font-light">
                   Whether you're interested in sponsorship, tickets, or media coverage, we'd love to hear from you.
                 </p>
-                <div className="flex flex-col gap-4 items-center">
-                  <div className="flex items-center gap-4">
-                    <div className="flex h-12 w-12 items-center justify-center  bg-white/20 backdrop-blur-sm">
-                      <svg className="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="flex flex-col gap-3 sm:gap-4 items-center">
+                  <div className="flex items-center gap-3 sm:gap-4">
+                    <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center bg-white/20 backdrop-blur-sm">
+                      <svg className="h-5 w-5 sm:h-6 sm:w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                       </svg>
                     </div>
                     <div>
-                      <p className="text-sm font-semibold text-white/70 uppercase tracking-wider">Email</p>
-                      <p className="text-lg font-medium">championship@hprc.in</p>
+                      <p className="text-xs sm:text-sm font-semibold text-white/70 uppercase tracking-wider">Email</p>
+                      <p className="text-base sm:text-lg font-medium break-all">championship@hprc.in</p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-4">
-                    <div className="flex h-12 w-12 items-center justify-center  bg-white/20 backdrop-blur-sm">
-                      <svg className="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="flex items-center gap-3 sm:gap-4">
+                    <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center bg-white/20 backdrop-blur-sm">
+                      <svg className="h-5 w-5 sm:h-6 sm:w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                       </svg>
                     </div>
                     <div>
-                      <p className="text-sm font-semibold text-white/70 uppercase tracking-wider">Phone</p>
-                      <p className="text-lg font-medium">+91 98765 43210</p>
+                      <p className="text-xs sm:text-sm font-semibold text-white/70 uppercase tracking-wider">Phone</p>
+                      <p className="text-base sm:text-lg font-medium">+91 98765 43210</p>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="bg-white/10 backdrop-blur-md border-2 border-white/20 p-8">
+              <div className="bg-white/10 backdrop-blur-md border-2 border-white/20 p-4 sm:p-6 md:p-8">
                 <EventContactForm />
               </div>
             </div>

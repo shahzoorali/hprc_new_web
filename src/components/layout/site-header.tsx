@@ -147,7 +147,7 @@ export function SiteHeader() {
           </div>
 
           {/* Primary Action Button - Mobile */}
-          <div className="lg:hidden">
+          <div className="hidden">
             {siteConfig.primaryActions
               .filter((action) => action.variant === "primary")
               .map((action) => (
