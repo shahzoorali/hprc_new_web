@@ -1,13 +1,35 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 import { PageHero } from "@/components/ui/page-hero";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { ImageLightbox } from "@/components/ui/image-lightbox";
 import { hospitalityContent } from "@/content/hospitality";
 import { MenuSection } from "./menu-section";
 
 export default function SnafflesBistroPage() {
   const venue = hospitalityContent.venues[1]; // Snaffles Bistro
+  
+  const galleryImages = [
+    {
+      src: "/documents/gallery/snaffles/bis01.jpeg",
+      alt: "Snaffles Bistro Interior",
+    },
+    {
+      src: "/documents/gallery/snaffles/bis02.jpeg",
+      alt: "Snaffles Bistro Dining Area",
+    },
+    {
+      src: "/documents/gallery/snaffles/bis03.jpeg",
+      alt: "Snaffles Bistro Ambiance",
+    },
+  ];
+
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
 
   return (
     <div className="space-y-16 sm:space-y-20 pb-16 sm:pb-20">
@@ -98,6 +120,62 @@ export default function SnafflesBistroPage() {
           </div>
         </div>
       </section>
+
+      {/* Gallery Section */}
+      <section className="container space-y-8 sm:space-y-12">
+        <SectionHeading
+          eyebrow="Gallery"
+          title="Experience Snaffles Bistro"
+          description="Take a visual journey through our cozy dining space and relaxed ambiance."
+        />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          {galleryImages.map((image, index) => (
+            <div
+              key={index}
+              onClick={() => {
+                setLightboxIndex(index);
+                setLightboxOpen(true);
+              }}
+              className="relative h-64 sm:h-80 lg:h-96 rounded-2xl overflow-hidden group cursor-pointer"
+            >
+              <Image
+                src={image.src}
+                alt={image.alt}
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-110"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              {/* Click indicator */}
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="rounded-full bg-white/20 backdrop-blur-sm p-3">
+                  <svg
+                    className="h-8 w-8 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Lightbox */}
+      <ImageLightbox
+        images={galleryImages}
+        initialIndex={lightboxIndex}
+        isOpen={lightboxOpen}
+        onClose={() => setLightboxOpen(false)}
+      />
 
       {/* Menu Section */}
       <MenuSection />
