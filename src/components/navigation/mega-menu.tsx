@@ -153,7 +153,7 @@ export function MegaMenu({ item, isOpen, onMouseEnter, onMouseLeave }: MegaMenuP
                     {section.description}
                   </p>
                 )}
-                <ul className="space-y-1">
+                <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1">
                   {section.items.map((child) => {
                     const isActive = pathname === child.href;
                     return (
