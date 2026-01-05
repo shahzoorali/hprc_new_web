@@ -4,6 +4,7 @@ import Link from "next/link";
 import { PageHero } from "@/components/ui/page-hero";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { hospitalityContent } from "@/content/hospitality";
+import { MenuSection } from "./menu-section";
 
 export default function SnafflesBistroPage() {
   const venue = hospitalityContent.venues[1]; // Snaffles Bistro
@@ -97,6 +98,9 @@ export default function SnafflesBistroPage() {
           </div>
         </div>
       </section>
+
+      {/* Menu Section */}
+      <MenuSection />
 
       {/* CTA Section */}
       <section className="container">

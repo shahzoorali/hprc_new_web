@@ -67,12 +67,20 @@ export default function HomePage() {
                     Championship 2026
                   </span>
                 </h2>
-                <div className="flex items-center gap-2 sm:gap-4">
-                  <span className="h-px flex-1 bg-white/30"></span>
-                  <p className="text-sm sm:text-lg font-medium text-white/90 tracking-wide font-body">
-                    Hyderabad • 11th – 18th February 2026
-                  </p>
-                  <span className="h-px flex-1 bg-white/30"></span>
+                <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+                  <div className="flex items-center gap-2 sm:gap-3 bg-white/10 backdrop-blur-md border border-white/20 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full">
+                    <svg className="h-4 w-4 sm:h-5 sm:w-5 text-brand-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    <span className="text-sm sm:text-base font-semibold text-white tracking-wide">Hyderabad</span>
+                  </div>
+                  <div className="flex items-center gap-2 sm:gap-3 bg-white/10 backdrop-blur-md border border-white/20 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full">
+                    <svg className="h-4 w-4 sm:h-5 sm:w-5 text-brand-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <span className="text-sm sm:text-base font-semibold text-white tracking-wide">11th – 18th February 2026</span>
+                  </div>
                 </div>
               </div>
 
