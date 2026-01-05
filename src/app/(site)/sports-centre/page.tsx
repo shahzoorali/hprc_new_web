@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import { PageHero } from "@/components/ui/page-hero";
 import { PricingTable } from "@/components/ui/pricing-table";
@@ -40,10 +41,22 @@ export default function SportsCentrePage() {
               "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80", // Gym
               "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800&q=80", // Sauna
             ];
+            // All major facilities have dedicated pages, others use the dynamic route
+            const facilityHref = 
+              facility.id === "swimming" ? "/sports-centre/swimming" :
+              facility.id === "tennis" ? "/sports-centre/tennis" :
+              facility.id === "badminton" ? "/sports-centre/badminton" :
+              facility.id === "squash" ? "/sports-centre/squash" :
+              facility.id === "basketball" ? "/sports-centre/basketball" :
+              facility.id === "futsal" ? "/sports-centre/futsal" :
+              facility.id === "gym" ? "/sports-centre/gym" :
+              facility.id === "sauna" ? "/sports-centre/sauna" :
+              `/sports-centre/${facility.id}`;
             return (
-              <article
+              <Link
                 key={facility.id}
-                className="group relative overflow-hidden rounded-[2.5rem] border border-brand-100 bg-white/95 shadow-[var(--shadow-elevated)] transition-all duration-300 hover:shadow-2xl"
+                href={facilityHref}
+                className="group relative overflow-hidden rounded-[2.5rem] border border-brand-100 bg-white/95 shadow-[var(--shadow-elevated)] transition-all duration-300 hover:shadow-2xl block"
                 id={facility.id}
               >
                 <div className="relative h-56 overflow-hidden">
@@ -76,7 +89,7 @@ export default function SportsCentrePage() {
                     </ul>
                   </div>
                 </div>
-              </article>
+              </Link>
             );
           })}
         </div>
