@@ -7,6 +7,7 @@ import { PageHero } from "@/components/ui/page-hero";
 import { PricingTable } from "@/components/ui/pricing-table";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { ImageLightbox } from "@/components/ui/image-lightbox";
+import { RulesSection } from "@/components/ui/rules-section";
 import { swimmingContent } from "@/content/swimming";
 
 export default function SwimmingPoolPage() {
@@ -129,38 +130,12 @@ export default function SwimmingPoolPage() {
       </section>
 
       {/* Rules Section */}
-      <section className="container space-y-8">
-        <SectionHeading
-          eyebrow="Safety First"
-          title="Swimming Pool Rules And Etiquette"
-          description="Please follow these guidelines to ensure a safe and enjoyable experience for everyone."
-          align="left"
-        />
-        <div className="space-y-8">
-          {swimmingContent.rules.map((ruleCategory) => (
-            <div
-              key={ruleCategory.category}
-              className="overflow-hidden border border-brand-200 bg-white rounded-2xl shadow-sm"
-            >
-              <div className="border-b border-brand-200 bg-gradient-to-r from-brand-50/80 to-brand-50/40 px-6 py-4">
-                <h3 className="text-lg font-semibold text-brand-900">
-                  {ruleCategory.category}
-                </h3>
-              </div>
-              <div className="p-6">
-                <ul className="space-y-3 text-sm text-gray-700">
-                  {ruleCategory.items.map((item) => (
-                    <li key={item} className="flex gap-3">
-                      <span className="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-brand-500" aria-hidden="true" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+      <RulesSection
+        categories={swimmingContent.rules}
+        eyebrow="Safety First"
+        title="Swimming Pool Rules And Etiquette"
+        description="Please follow these guidelines to ensure a safe and enjoyable experience for everyone."
+      />
 
       {/* Gallery Section */}
       <section className="container space-y-8">
