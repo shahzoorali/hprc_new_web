@@ -55,9 +55,11 @@ export default function HospitalityPage() {
                     />
                   </div>
                 )}
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900">
-                  {hospitalityContent.venues[0].name}
-                </h2>
+                <Link href="/hospitality/chukkers" className="hover:text-brand-600 transition-colors">
+                  <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900">
+                    {hospitalityContent.venues[0].name}
+                  </h2>
+                </Link>
               </div>
               <p className="text-base sm:text-lg text-gray-700 leading-relaxed mb-3 sm:mb-4">
                 {hospitalityContent.venues[0].description}
@@ -145,9 +147,11 @@ export default function HospitalityPage() {
                     />
                   </div>
                 )}
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900">
-                  {hospitalityContent.venues[1].name}
-                </h2>
+                <Link href="/hospitality/snaffles-bistro" className="hover:text-brand-600 transition-colors">
+                  <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900">
+                    {hospitalityContent.venues[1].name}
+                  </h2>
+                </Link>
               </div>
               <p className="text-base sm:text-lg text-gray-700 leading-relaxed mb-3 sm:mb-4">
                 {hospitalityContent.venues[1].description}
@@ -207,134 +211,174 @@ export default function HospitalityPage() {
         </article>
       </section>
 
-      {/* Banquets Section with Packages */}
+      {/* Banquets Section with Packages - Redesigned */}
       {hospitalityContent.venues[2] && (
-        <section className="bg-gradient-to-br from-brand-50/30 via-white to-brand-50/20 py-16 sm:py-20">
-          <div className="container space-y-8 sm:space-y-12">
-            <div className="text-center space-y-3 sm:space-y-4">
-              {"logo" in hospitalityContent.venues[2] && hospitalityContent.venues[2].logo && (
-                <div className="flex justify-center mb-3 sm:mb-4">
-                  <div className="relative h-16 w-16 sm:h-20 sm:w-20">
-                    <Image
-                      src={hospitalityContent.venues[2].logo as string}
-                      alt={`${hospitalityContent.venues[2].name} Logo`}
-                      fill
-                      className="object-contain"
-                      sizes="(max-width: 640px) 64px, 80px"
-                    />
-                  </div>
+        <section className="relative overflow-hidden">
+          {/* Hero Banner with Full-width Image */}
+          <div className="relative h-[50vh] min-h-[400px] sm:min-h-[500px]">
+            <Image
+              src={
+                hospitalityContent.venues[2].image ||
+                "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1200&q=80"
+              }
+              alt={hospitalityContent.venues[2].name}
+              fill
+              className="object-cover"
+              sizes="100vw"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20"></div>
+            
+            {/* Floating Content Over Image */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="container text-center text-white px-4">
+                <span className="inline-block px-4 py-1.5 bg-brand-500/90 text-white text-xs sm:text-sm font-semibold tracking-wider uppercase rounded-full mb-4">
+                  Banquets & Events
+                </span>
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-4 drop-shadow-lg">
+                  {hospitalityContent.venues[2].name}
+                </h2>
+                <p className="text-base sm:text-lg lg:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
+                  {hospitalityContent.venues[2].fullDescription ||
+                    hospitalityContent.venues[2].description}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Features & Highlights Grid */}
+          <div className="bg-gradient-to-b from-gray-900 to-gray-800 py-12 sm:py-16">
+            <div className="container">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+                {hospitalityContent.venues[2].highlights.slice(0, 4).map((highlight, idx) => {
+                  const icons = [
+                    <svg key="icon1" className="h-8 w-8 sm:h-10 sm:w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>,
+                    <svg key="icon2" className="h-8 w-8 sm:h-10 sm:w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" /></svg>,
+                    <svg key="icon3" className="h-8 w-8 sm:h-10 sm:w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>,
+                    <svg key="icon4" className="h-8 w-8 sm:h-10 sm:w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>,
+                  ];
+                  return (
+                    <div
+                      key={idx}
+                      className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4 sm:p-6 text-center hover:bg-white/10 transition-all duration-300 hover:scale-105"
+                    >
+                      <div className="text-brand-400 mb-3 flex justify-center">
+                        {icons[idx]}
+                      </div>
+                      <p className="text-white/90 text-xs sm:text-sm font-medium leading-snug">{highlight}</p>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
+          {/* Menu Packages - Premium Cards */}
+          {hospitalityContent.venues[2].menuPackages && (
+            <div className="bg-gradient-to-b from-gray-800 via-gray-900 to-black py-16 sm:py-20">
+              <div className="container">
+                <div className="text-center mb-10 sm:mb-14">
+                  <span className="inline-block px-3 py-1 bg-brand-500/20 text-brand-400 text-xs font-semibold tracking-wider uppercase rounded-full mb-3">
+                    Pricing
+                  </span>
+                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mb-3">
+                    Menu Packages
+                  </h3>
+                  <p className="text-gray-400 max-w-xl mx-auto text-sm sm:text-base">
+                    Choose the perfect package for your celebration
+                  </p>
                 </div>
-              )}
-              <SectionHeading
-                eyebrow="Banquets & Events"
-                title={hospitalityContent.venues[2].name}
-                description={
-                  hospitalityContent.venues[2].fullDescription ||
-                  hospitalityContent.venues[2].description
-                }
-                align="center"
-              />
-            </div>
 
-            <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-12">
-              <div className="space-y-3 sm:space-y-4">
-                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">Why Choose HPRC Banquets?</h3>
-                <ul className="space-y-2 sm:space-y-3">
-                  {hospitalityContent.venues[2].highlights.map((highlight, idx) => (
-                    <li key={idx} className="flex items-start gap-2 sm:gap-3">
-                      <svg
-                        className="h-5 w-5 sm:h-6 sm:w-6 text-brand-500 mt-0.5 flex-shrink-0"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M5 13l4 4L19 7"
-                        />
-                      </svg>
-                      <span className="text-sm sm:text-base lg:text-lg text-gray-700">{highlight}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="relative h-64 sm:h-80 lg:h-full  overflow-hidden">
-                <Image
-                  src={
-                    hospitalityContent.venues[2].image ||
-                    "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1200&q=80"
-                  }
-                  alt={hospitalityContent.venues[2].name}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-              </div>
-            </div>
-
-            {/* Menu Packages */}
-            {hospitalityContent.venues[2].menuPackages && (
-              <div>
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-center text-gray-900 mb-6 sm:mb-10">
-                  Menu Packages
-                </h3>
-                <div className="grid gap-4 sm:gap-6 md:gap-8 grid-cols-1 md:grid-cols-3">
+                <div className="grid gap-6 sm:gap-8 grid-cols-1 md:grid-cols-3 max-w-5xl mx-auto">
                   {hospitalityContent.venues[2].menuPackages.map((pkg, idx) => (
                     <div
                       key={idx}
-                      className={`relative overflow-hidden  border-2 ${
-                        idx === 1
-                          ? "border-brand-500 bg-white shadow-2xl scale-105 lg:scale-110"
-                          : "border-brand-200 bg-white/95 shadow-lg"
-                      } transition-all duration-300 hover:shadow-xl`}
+                      className={`relative group ${
+                        idx === 1 ? "md:-mt-4 md:mb-4" : ""
+                      }`}
                     >
                       {idx === 1 && (
-                        <div className="absolute top-0 right-0 bg-brand-500 text-white px-3 sm:px-4 py-1 rounded-bl-lg text-[10px] sm:text-xs font-bold">
-                          POPULAR
+                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
+                          <span className="bg-gradient-to-r from-amber-500 to-orange-500 text-white px-4 py-1 rounded-full text-xs font-bold shadow-lg">
+                            ★ MOST POPULAR
+                          </span>
                         </div>
                       )}
-                      <div className="p-4 sm:p-6">
-                        <h4 className="text-xl sm:text-2xl font-extrabold text-gray-900 mb-2">{pkg.name}</h4>
-                        <div className="mb-4 sm:mb-6">
-                          <span className="text-2xl sm:text-3xl font-bold text-brand-600">{pkg.price}</span>
-                          <span className="text-xs sm:text-sm text-gray-600 ml-1">{pkg.gst}</span>
-                        </div>
-                        <ul className="space-y-1.5 sm:space-y-2">
-                          {pkg.features.map((feature, featureIdx) => (
-                            <li
-                              key={featureIdx}
-                              className="flex items-start gap-2 text-xs sm:text-sm text-gray-700"
-                            >
-                              <svg
-                                className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-brand-500 mt-0.5 flex-shrink-0"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
+                      <div
+                        className={`relative h-full overflow-hidden rounded-2xl ${
+                          idx === 1
+                            ? "bg-gradient-to-br from-brand-500 via-brand-600 to-brand-700 shadow-2xl shadow-brand-500/30 ring-2 ring-brand-400"
+                            : "bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700/50 hover:border-gray-600"
+                        } transition-all duration-500 hover:shadow-xl hover:-translate-y-1`}
+                      >
+                        <div className="p-6 sm:p-8">
+                          <h4 className={`text-xl sm:text-2xl font-bold mb-1 ${idx === 1 ? "text-white" : "text-white"}`}>
+                            {pkg.name}
+                          </h4>
+                          <div className="mb-6 pb-6 border-b border-white/20">
+                            <span className={`text-4xl sm:text-5xl font-extrabold ${idx === 1 ? "text-white" : "text-brand-400"}`}>
+                              {pkg.price}
+                            </span>
+                            <span className={`text-sm ml-1 ${idx === 1 ? "text-white/70" : "text-gray-500"}`}>
+                              {pkg.gst}
+                            </span>
+                          </div>
+                          <ul className="space-y-3">
+                            {pkg.features.map((feature, featureIdx) => (
+                              <li
+                                key={featureIdx}
+                                className={`flex items-start gap-3 text-sm ${idx === 1 ? "text-white/90" : "text-gray-300"}`}
                               >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth={2}
-                                  d="M5 13l4 4L19 7"
-                                />
-                              </svg>
-                              <span>{feature}</span>
-                            </li>
-                          ))}
-                        </ul>
+                                <svg
+                                  className={`h-5 w-5 flex-shrink-0 ${idx === 1 ? "text-white" : "text-brand-400"}`}
+                                  fill="currentColor"
+                                  viewBox="0 0 20 20"
+                                >
+                                  <path
+                                    fillRule="evenodd"
+                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                    clipRule="evenodd"
+                                  />
+                                </svg>
+                                <span>{feature}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        {idx === 1 && (
+                          <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl"></div>
+                        )}
                       </div>
                     </div>
                   ))}
                 </div>
-                <p className="text-center text-xs sm:text-sm text-gray-600 mt-4 sm:mt-6">
-                  <strong>Note:</strong> Kindly choose & select items from the menu. Plain rice,
-                  Sambar, Mirchi ka salan, Raitha, Curd, Papad, pickles are accompaniments.
-                </p>
+
+                <div className="mt-10 sm:mt-12 text-center">
+                  <p className="inline-flex items-center gap-2 text-gray-400 text-xs sm:text-sm bg-white/5 px-4 py-2 rounded-full">
+                    <svg className="h-4 w-4 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>
+                      <strong className="text-gray-300">Note:</strong> Plain rice, Sambar, Mirchi ka salan, Raitha, Curd, Papad, pickles are accompaniments.
+                    </span>
+                  </p>
+                </div>
+
+                {/* CTA Button */}
+                <div className="mt-8 sm:mt-10 text-center">
+                  <Link
+                    href="/contact"
+                    className="inline-flex items-center gap-2 bg-brand-500 hover:bg-brand-600 text-white px-8 py-3.5 rounded-full font-semibold text-sm sm:text-base transition-all duration-300 hover:shadow-lg hover:shadow-brand-500/30 hover:-translate-y-0.5"
+                  >
+                    Plan Your Event
+                    <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </Link>
+                </div>
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </section>
       )}
 
