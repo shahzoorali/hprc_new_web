@@ -117,22 +117,41 @@ export default function NewsPage() {
                   <span className="font-medium">{featuredArticle.source}</span>
                 </div>
 
-                <a
-                  href={featuredArticle.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-6 py-3 rounded-full font-semibold text-sm transition-all duration-300 hover:shadow-lg group/btn"
-                >
-                  Read Full Story
-                  <svg
-                    className="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
-                </a>
+                {featuredArticle.url && featuredArticle.url !== "#" ? (
+                  featuredArticle.url.startsWith("/") ? (
+                    <Link
+                      href={featuredArticle.url}
+                      className="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-6 py-3 rounded-full font-semibold text-sm transition-all duration-300 hover:shadow-lg group/btn"
+                    >
+                      Read Full Story
+                      <svg
+                        className="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </Link>
+                  ) : (
+                    <a
+                      href={featuredArticle.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-6 py-3 rounded-full font-semibold text-sm transition-all duration-300 hover:shadow-lg group/btn"
+                    >
+                      Read Full Story
+                      <svg
+                        className="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    </a>
+                  )
+                ) : null}
               </div>
             </div>
           </div>
@@ -204,22 +223,41 @@ export default function NewsPage() {
                       <span>{article.source}</span>
                     </div>
 
-                    <a
-                      href={article.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-brand-600 hover:text-brand-700 text-sm font-semibold transition-colors group/link"
-                    >
-                      Read
-                      <svg
-                        className="h-4 w-4 transition-transform duration-300 group-hover/link:translate-x-0.5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                      </svg>
-                    </a>
+                    {article.url && article.url !== "#" ? (
+                      article.url.startsWith("/") ? (
+                        <Link
+                          href={article.url}
+                          className="inline-flex items-center gap-1 text-brand-600 hover:text-brand-700 text-sm font-semibold transition-colors group/link"
+                        >
+                          Read
+                          <svg
+                            className="h-4 w-4 transition-transform duration-300 group-hover/link:translate-x-0.5"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                          </svg>
+                        </Link>
+                      ) : (
+                        <a
+                          href={article.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-brand-600 hover:text-brand-700 text-sm font-semibold transition-colors group/link"
+                        >
+                          Read
+                          <svg
+                            className="h-4 w-4 transition-transform duration-300 group-hover/link:translate-x-0.5"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                          </svg>
+                        </a>
+                      )
+                    ) : null}
                   </div>
                 </div>
               </article>

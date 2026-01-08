@@ -17,6 +17,126 @@ export const eventsContent = {
   },
   news: [
     {
+      title: "Chaitania Kumar and Arsalan Khan shine on the international stage",
+      date: "2024",
+      source: "HPRC News",
+      excerpt:
+        "Two Hyderabadis - Chaitania R. Kumar and Arsalan Khan are part of the three-member Indian Arena Polo team which will participate in international competitions.",
+      url: "/events/news/chaitania-kumar-arsalan-khan-international-stage",
+      category: "International",
+      imageUrl: "/documents/news/dcmain.jpg",
+    },
+    {
+      title: "HPRC to launch all inclusive Silver Spur Sports Arena",
+      date: "2024",
+      source: "HPRC News",
+      excerpt:
+        "Hyderabad Polo & Riding Club announces the launch of the all-inclusive Silver Spur Sports Arena, expanding its world-class sports facilities.",
+      url: "/events/news/hprc-silver-spur-sports-arena",
+      category: "Facilities",
+      imageUrl: "/documents/news/news01.jpeg",
+    },
+    {
+      title: "Academia Sports Village Certificate Distribution Ceremony",
+      date: "2024",
+      source: "HPRC News",
+      excerpt:
+        "Certificate distribution ceremony for Junior Camp Workshop participants at Academia Sports Village, celebrating the achievements of young athletes.",
+      url: "/events/news/academia-sports-village-certificate-distribution",
+      category: "Events",
+      imageUrl: "/documents/news/academia-Sports-Village-Certificate-Distribution-Ceremony01.png",
+    },
+    {
+      title: "HPRC joins hands with Academia Sports Village",
+      date: "2024",
+      source: "HPRC News",
+      excerpt:
+        "A strategic partnership between HPRC and Academia Sports Village to deliver year-round coaching programmes, international camps, and athlete development pathways.",
+      url: "/events/news/hprc-academia-sports-village",
+      category: "Partnership",
+      imageUrl: "/documents/news/HPRC-joins-hands-with-Sports-Village-02.png",
+    },
+    {
+      title: "1st Regional Equestrian League & 10th Hyderabad Horse Show",
+      date: "September 22-23, 2018",
+      source: "HPRC News",
+      excerpt:
+        "Hyderabad Polo & Riding Club hosted the 1st Regional Equestrian League in association with TSEA. Events such as Dressage, Show Jumping & Tent Pegging in different categories were conducted.",
+      url: "/events/1st-rel-10th-hyd-horse-show",
+      category: "Tournament",
+      imageUrl: "/documents/news/News-1st-rel-Thumb01.jpg",
+    },
+    {
+      title: "Tennis Camp by Sports Village at HPRC",
+      date: "2024",
+      source: "HPRC News",
+      excerpt:
+        "Sports Village conducted a comprehensive tennis camp at HPRC, providing training and development opportunities for tennis enthusiasts.",
+      url: "/events/news/tennis-camp-sports-village-hprc",
+      category: "Training",
+      imageUrl: "/documents/news/Sports-Village-HPRC-02.jpg",
+    },
+    {
+      title: "HPRC Partners with Sports Village",
+      date: "2024",
+      source: "HPRC News",
+      excerpt:
+        "Hyderabad Polo & Riding Club announces partnership with Sports Village to enhance sports training and development programs.",
+      url: "/events/news/hprc-partners-sports-village",
+      category: "Partnership",
+      imageUrl: "/documents/news/SportsVillage01.jpg",
+    },
+    {
+      title: "ARENA POLO TOURNAMENT 2016",
+      date: "April 11-17, 2016",
+      source: "HPRC News",
+      excerpt:
+        "Multiple exciting tournaments including HPRC Rolling Trophy (4 Goal), Telangana Cup (6 Goal), and Sponsor's Exhibition Match held at HPRC.",
+      url: "/events/arena-polo-tournament-2016",
+      category: "Tournament",
+      imageUrl: "/documents/news/arena-polo-tournament-2016-01.jpg",
+    },
+    {
+      title: "Press Coverage Articles - National Equestrian Championship 2016",
+      date: "2016",
+      source: "HPRC News",
+      excerpt:
+        "Comprehensive press coverage and articles highlighting the National Equestrian Championship 2016 held at HPRC.",
+      url: "/events/news/press-coverage-nec-2016",
+      category: "Media",
+      imageUrl: "/documents/news/News-NEC-2016.jpg",
+    },
+    {
+      title: "National Equestrian Championship, 2016",
+      date: "2016",
+      source: "HPRC News",
+      excerpt:
+        "HPRC and TSEA co-hosted a landmark national championship with 200 horses and the country's leading riders competing across five categories.",
+      url: "/events/news/national-equestrian-championship-2016-news",
+      category: "Championship",
+      imageUrl: "/documents/news/national-equestrian-championship16.jpg",
+    },
+    {
+      title: "All about Olympic Equestrian Sports",
+      date: "2016",
+      source: "HPRC News",
+      excerpt:
+        "An informative article covering Olympic equestrian sports, disciplines, and the journey of equestrian athletes in competitive sports.",
+      url: "/events/news/all-about-olympic-equestrian-sports",
+      category: "Education",
+      imageUrl: "/documents/news/all-about-olympic-equestrian-sports.jpg",
+    },
+    {
+      title: "National Equestrian Championship Kicks off!",
+      date: "2016",
+      source: "HPRC News",
+      excerpt:
+        "The National Equestrian Championship 2016 officially kicks off at HPRC, marking the beginning of an exciting competition season.",
+      url: "/events/news/national-equestrian-championship-kicks-off",
+      category: "Championship",
+      imageUrl: "/documents/news/NewsNEC-kicks-off.jpg",
+    },
+    {
       title: "Hyderabad Polo and Riding Club clinch 14-9 win over Telangana",
       date: "November 18, 2025",
       source: "Telangana Today",
@@ -76,6 +196,30 @@ export const eventsContent = {
       description:
         "Hyderabad Polo & Riding Club hosted the 1st Regional Equestrian League in association with TSEA on 22nd & 23rd September, 2018. Events such as Dressage, Show Jumping & Tent Pegging in different categories were conducted with 157 participations.",
       link: "/events/1st-rel-10th-hyd-horse-show",
+    },
+    {
+      title: "Arena Polo Tournament 2016",
+      description:
+        "Multiple exciting tournaments including HPRC Rolling Trophy (4 Goal), Telangana Cup (6 Goal), and Sponsor's Exhibition Match held from 11th to 17th April, 2016.",
+      link: "/events/arena-polo-tournament-2016",
+    },
+    {
+      title: "National Equestrian Championship Calendar 2016",
+      description:
+        "Comprehensive equestrian competitions and events throughout 2016 featuring national-level championships and tournaments.",
+      link: "/events/nec-calendar-2016",
+    },
+    {
+      title: "HPRC International Arena Polo Championship",
+      description:
+        "Elite international arena polo competition bringing together world-class players for an unforgettable championship experience.",
+      link: "/events/hprc-international-arena-polo-championship",
+    },
+    {
+      title: "HPRC Sport Complex",
+      description:
+        "World-class sports facilities featuring tennis, badminton, squash, swimming, basketball, futsal, gym, and sauna facilities.",
+      link: "/events/hprc-sport-complex",
     },
     {
       title: "HPRC joins hands with Academia Sports Village",

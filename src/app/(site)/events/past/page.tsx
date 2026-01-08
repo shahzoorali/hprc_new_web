@@ -27,39 +27,80 @@ export default function PastEventsPage() {
           align="left"
         />
         <div className="grid gap-6 sm:gap-8 grid-cols-1 md:grid-cols-2">
-          {eventsContent.pastHighlights.map((highlight) => (
-            <Link
-              key={highlight.title}
-              href={highlight.link}
-              className="group relative overflow-hidden rounded-[2.5rem] border border-brand-100 bg-white/95 p-8 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
-            >
-              <div className="absolute right-0 top-0 h-24 w-24 sm:h-32 sm:w-32 bg-gradient-to-br from-brand-500/10 to-brand-500/5 transition-all duration-500 group-hover:scale-150"></div>
-              <div className="relative">
-                <h3 className="text-lg sm:text-xl font-extrabold text-brand-900 group-hover:text-brand-600 transition-colors">
-                  {highlight.title}
-                </h3>
-                <p className="mt-3 sm:mt-4 text-sm text-gray-700 leading-relaxed">
-                  {highlight.description}
-                </p>
-                <div className="mt-4 sm:mt-6 inline-flex items-center text-xs sm:text-sm font-bold text-brand-500 hover:text-brand-600 transition-colors group/link">
-                  Read more
-                  <svg
-                    className="ml-2 h-4 w-4 transition-transform duration-300 group-hover/link:translate-x-1"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+          {eventsContent.pastHighlights.map((highlight, index) => {
+            // Get event image based on link
+            const getEventImage = (link: string) => {
+              if (link.includes('1st-rel-10th-hyd-horse-show')) {
+                return '/documents/gallery/events/1st-rel-gallery/gallery-001.jpg';
+              }
+              if (link.includes('arena-polo-tournament-2016')) {
+                return '/documents/gallery/events/arena-polo-tournament-2016/001.jpg';
+              }
+              if (link.includes('nec-calendar-2016')) {
+                return '/documents/gallery/events/nec-calendar-2016/001.jpg';
+              }
+              if (link.includes('hprc-international-arena-polo-championship')) {
+                return '/documents/gallery/events/hprc-international-arena-polo-championship/001.jpeg';
+              }
+              if (link.includes('hprc-sport-complex')) {
+                return '/documents/gallery/events/hprc-sport-complex/01.jpg';
+              }
+              // Fallback images
+              const fallbackImages = [
+                'https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=800&q=80',
+                'https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=800&q=80',
+                'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80',
+              ];
+              return fallbackImages[index % fallbackImages.length];
+            };
+
+            const eventImage = getEventImage(highlight.link);
+
+            return (
+              <Link
+                key={highlight.title}
+                href={highlight.link}
+                className="group relative overflow-hidden rounded-[2.5rem] border border-brand-100 bg-white/95 shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 block"
+              >
+                <article>
+                  <div className="relative h-44 sm:h-48 overflow-hidden">
+                    <Image
+                      src={eventImage}
+                      alt={highlight.title}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                      sizes="(max-width: 768px) 100vw, 50vw"
                     />
-                  </svg>
-                </div>
-              </div>
-            </Link>
-          ))}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+                  </div>
+                  <div className="p-6 sm:p-8">
+                    <h3 className="mt-2 sm:mt-3 text-xl sm:text-2xl font-extrabold text-gray-900 group-hover:text-brand-600 transition-colors">
+                      {highlight.title}
+                    </h3>
+                    <p className="mt-3 sm:mt-4 text-sm text-gray-700 leading-relaxed">
+                      {highlight.description}
+                    </p>
+                    <div className="mt-3 sm:mt-4 inline-flex items-center text-xs sm:text-sm font-bold text-brand-500 hover:text-brand-600 transition-colors">
+                      Read More
+                      <svg
+                        className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M17 8l4 4m0 0l-4 4m4-4H3"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </article>
+              </Link>
+            );
+          })}
         </div>
       </section>
 
