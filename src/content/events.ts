@@ -24,8 +24,7 @@ export const eventsContent = {
         "Hyderabad Polo and Riding Club defeated Telangana Polo Club 14-9 in the MSN Realty Arena Polo Championship at HPRC. Arsalan Khan starred with six goals, while Chaitania Kumar and Saif Attari added crucial strikes to seal the victory.",
       url: "https://telanganatoday.com/hyderabad-polo-and-riding-club-clinch-14-9-win-over-telangana",
       category: "Tournament",
-      imageUrl:
-        "https://telanganatoday.com/wp-content/uploads/2025/11/hyderabad-polo-riding-club-win.jpg",
+      imageUrl: "/documents/news/hyderabad-polo-riding-club-win.jpg",
     },
     {
       title:
@@ -36,7 +35,7 @@ export const eventsContent = {
         "The Indian National Arena Polo Team has begun an intensive training camp at HPRC from April 5 to 12, ahead of the zone 'E' playoffs of the II FIP Arena Polo World Championship. The playoffs will be held in Saudi Arabia from April 21 to 26.",
       url: "https://newsmeter.in/hyderabad/hyderabad-hosts-national-polo-teams-intensive-camp-for-fip-world-championship-playoffs-from-april-21-746444",
       category: "International",
-      imageUrl: "https://newsmeter.in/wp-content/uploads/2025/04/national-polo-team-camp.jpg",
+      imageUrl: "/documents/news/national-polo-team-camp.jpg",
     },
     {
       title:
@@ -47,8 +46,7 @@ export const eventsContent = {
         "Sauryaram Varma of Archi Horse Riding School claimed the Jumping CH-1 80 cm category title at the Regional Equestrian League (REL) and Telangana State Equestrian Competition held at the Hyderabad Polo and Riding Club in Moinabad.",
       url: "https://telanganatoday.com/sauryaram-varma-clinches-title-in-jumping-ch-1-80-cm-at-telangana-equestrian-competition",
       category: "Competition",
-      imageUrl:
-        "https://telanganatoday.com/wp-content/uploads/2025/10/sauryaram-varma-equestrian.jpg",
+      imageUrl: "/documents/news/sauryaram-varma-equestrian.jpg",
     },
   ] satisfies NewsArticle[],
   upcoming: [
