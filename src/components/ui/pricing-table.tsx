@@ -26,18 +26,21 @@ export function PricingTable({ heading, rows }: PricingTableProps) {
               <th className="px-3 sm:px-6 py-2 sm:py-3.5">Particulars</th>
               <th className="px-3 sm:px-6 py-2 sm:py-3.5">Price</th>
               {hasGst ? <th className="px-3 sm:px-6 py-2 sm:py-3.5">GST</th> : null}
-              {hasTotal ? <th className="px-3 sm:px-6 py-2 sm:py-3.5 font-semibold text-brand-800">Total</th> : null}
+              {hasTotal ? (
+                <th className="px-3 sm:px-6 py-2 sm:py-3.5 font-semibold text-brand-800">Total</th>
+              ) : null}
             </tr>
           </thead>
           <tbody className="divide-y divide-brand-50/60 bg-white">
             {rows.map((row, idx) => (
-              <tr
-                key={row.label}
-                className="transition-colors duration-200 hover:bg-brand-50/30"
-              >
-                <td className="px-3 sm:px-6 py-3 sm:py-4 font-medium text-brand-900">{row.label}</td>
+              <tr key={row.label} className="transition-colors duration-200 hover:bg-brand-50/30">
+                <td className="px-3 sm:px-6 py-3 sm:py-4 font-medium text-brand-900">
+                  {row.label}
+                </td>
                 <td className="px-3 sm:px-6 py-3 sm:py-4 text-gray-700">{row.price}</td>
-                {hasGst ? <td className="px-3 sm:px-6 py-3 sm:py-4 text-gray-600">{row.gst ?? "—"}</td> : null}
+                {hasGst ? (
+                  <td className="px-3 sm:px-6 py-3 sm:py-4 text-gray-600">{row.gst ?? "—"}</td>
+                ) : null}
                 {hasTotal ? (
                   <td className="px-3 sm:px-6 py-3 sm:py-4 font-semibold text-brand-800">
                     {row.total ?? "—"}

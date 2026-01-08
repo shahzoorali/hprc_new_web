@@ -14,7 +14,9 @@ const generateGalleryImages = () => {
   }
   // Additional images
   images.push(`/documents/gallery/events/hprc-international-arena-polo-championship/events-02.png`);
-  images.push(`/documents/gallery/events/hprc-international-arena-polo-championship/gallery-01.jpg`);
+  images.push(
+    `/documents/gallery/events/hprc-international-arena-polo-championship/gallery-01.jpg`,
+  );
   return images;
 };
 
@@ -32,8 +34,7 @@ export const hprcInternationalArenaPoloChampionship = {
   },
   gallery: {
     title: "Event Gallery",
-    description:
-      "Browse through images from the HPRC International Arena Polo Championship event.",
+    description: "Browse through images from the HPRC International Arena Polo Championship event.",
     images: generateGalleryImages(),
   },
 };

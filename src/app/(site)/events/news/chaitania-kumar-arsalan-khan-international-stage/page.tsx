@@ -46,13 +46,14 @@ export default function ChaitaniaKumarArsalanKhanPage() {
             />
             <div className="prose prose-lg max-w-none mt-8">
               <p className="text-gray-700 leading-relaxed">
-                Chaitania Kumar and Arsalan Khan, both from Hyderabad, have been selected as part of the 
-                three-member Indian Arena Polo team. Their selection represents a significant achievement for 
-                Hyderabad Polo & Riding Club and showcases the talent emerging from the region.
+                Chaitania Kumar and Arsalan Khan, both from Hyderabad, have been selected as part of
+                the three-member Indian Arena Polo team. Their selection represents a significant
+                achievement for Hyderabad Polo & Riding Club and showcases the talent emerging from
+                the region.
               </p>
               <p className="text-gray-700 leading-relaxed mt-6">
-                The team will compete in international arena polo competitions, representing India on the 
-                global stage and demonstrating the growing strength of Indian polo players.
+                The team will compete in international arena polo competitions, representing India
+                on the global stage and demonstrating the growing strength of Indian polo players.
               </p>
             </div>
           </div>
@@ -66,7 +67,12 @@ export default function ChaitaniaKumarArsalanKhanPage() {
             className="inline-flex items-center gap-2 text-brand-600 hover:text-brand-700 font-semibold transition-colors"
           >
             <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              />
             </svg>
             <span>Back to News</span>
           </Link>

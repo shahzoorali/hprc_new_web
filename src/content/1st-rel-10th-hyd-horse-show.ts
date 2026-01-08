@@ -26,7 +26,8 @@ export const firstRelTenthHydHorseShow = {
     dates: "22nd - 23rd September, 2018",
     time: "Time: 09:00 hrs to 18:00 hrs",
     venue: "HYDERABAD POLO & RIDING CLUB",
-    address: "Aziz Nagar, Moinabad Road, Near Mrugavani National Park (Deer Park), Hyderabad, Telangana India, 5000075",
+    address:
+      "Aziz Nagar, Moinabad Road, Near Mrugavani National Park (Deer Park), Hyderabad, Telangana India, 5000075",
     phone: "+91 9177000056",
   },
   overview: {

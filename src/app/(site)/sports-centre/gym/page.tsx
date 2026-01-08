@@ -1,13 +1,13 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
+import { useState } from "react";
 
+import { ImageLightbox } from "@/components/ui/image-lightbox";
 import { PageHero } from "@/components/ui/page-hero";
 import { PricingTable } from "@/components/ui/pricing-table";
-import { SectionHeading } from "@/components/ui/section-heading";
-import { ImageLightbox } from "@/components/ui/image-lightbox";
 import { RulesSection } from "@/components/ui/rules-section";
+import { SectionHeading } from "@/components/ui/section-heading";
 import { gymContent } from "@/content/gym";
 
 export default function GymPage() {
@@ -58,12 +58,7 @@ export default function GymPage() {
           href="#"
           className="inline-flex items-center gap-2 text-sm font-semibold text-brand-600 hover:text-brand-700 transition-colors"
         >
-          <svg
-            className="h-5 w-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
+          <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -89,12 +84,8 @@ export default function GymPage() {
               key={timing.label}
               className="p-6 rounded-2xl border-2 border-brand-200 bg-gradient-to-br from-brand-50/30 to-white hover:border-brand-300 hover:shadow-lg transition-all duration-300"
             >
-              <h3 className="text-lg font-semibold mb-2 text-brand-900">
-                {timing.label}
-              </h3>
-              <p className="text-sm text-gray-700">
-                {timing.time}
-              </p>
+              <h3 className="text-lg font-semibold mb-2 text-brand-900">{timing.label}</h3>
+              <p className="text-sm text-gray-700">{timing.time}</p>
             </div>
           ))}
         </div>
@@ -185,11 +176,10 @@ export default function GymPage() {
       {/* CTA Section */}
       <section className="container">
         <div className="rounded-3xl bg-gradient-to-r from-brand-600 to-brand-700 p-8 sm:p-12 text-center text-white shadow-xl">
-          <h2 className="text-2xl sm:text-3xl font-bold mb-4">
-            Ready to Get Fit?
-          </h2>
+          <h2 className="text-2xl sm:text-3xl font-bold mb-4">Ready to Get Fit?</h2>
           <p className="text-sm sm:text-base text-white/90 mb-6 max-w-2xl mx-auto">
-            Contact us to book a session, enroll in coaching programs, or learn more about our gym facilities.
+            Contact us to book a session, enroll in coaching programs, or learn more about our gym
+            facilities.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a

@@ -1,20 +1,22 @@
-import React from "react";
+import DE from "country-flag-icons/react/3x2/DE";
+import FR from "country-flag-icons/react/3x2/FR";
+import IN from "country-flag-icons/react/3x2/IN";
+import LU from "country-flag-icons/react/3x2/LU";
+import US from "country-flag-icons/react/3x2/US";
 import Image from "next/image";
 import Link from "next/link";
+import React from "react";
 
+import { CountryBadge } from "@/components/ui/country-badge";
 import { HeroVideo } from "@/components/ui/hero-video";
 import { eventsContent } from "@/content/events";
 import { homeContent } from "@/content/home";
 import { worldArenaPoloChampionship2026 } from "@/content/world-arena-polo-championship-2026";
-import { CountryBadge } from "@/components/ui/country-badge";
 
-import US from "country-flag-icons/react/3x2/US";
-import IN from "country-flag-icons/react/3x2/IN";
-import DE from "country-flag-icons/react/3x2/DE";
-import FR from "country-flag-icons/react/3x2/FR";
-import LU from "country-flag-icons/react/3x2/LU";
-
-const countryFlagComponents: Record<string, React.ComponentType<{ className?: string; title?: string }>> = {
+const countryFlagComponents: Record<
+  string,
+  React.ComponentType<{ className?: string; title?: string }>
+> = {
   USA: US,
   IND: IN,
   GER: DE,
@@ -39,12 +41,15 @@ export default function HomePageRedesign() {
       <section className="relative overflow-hidden bg-gradient-to-br from-brand-900 via-brand-800 to-brand-900 py-24 sm:py-32 lg:py-40">
         {/* Elegant Subtle Pattern */}
         <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0" style={{
-            backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
-            backgroundSize: '32px 32px'
-          }}></div>
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)",
+              backgroundSize: "32px 32px",
+            }}
+          ></div>
         </div>
-        
+
         {/* Sophisticated Decorative Elements */}
         <div className="absolute top-0 right-0 w-[30rem] h-[30rem] bg-brand-600/8  blur-[100px]"></div>
         <div className="absolute bottom-0 left-0 w-[30rem] h-[30rem] bg-brand-700/8  blur-[100px]"></div>
@@ -56,7 +61,9 @@ export default function HomePageRedesign() {
               {/* Sophisticated Badge */}
               <div className="inline-flex items-center gap-3  bg-white/10 backdrop-blur-md border border-white/20 px-5 py-2.5">
                 <span className="h-2 w-2  bg-brand-400 animate-pulse"></span>
-                <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-white/90 font-display">Featured Event</span>
+                <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-white/90 font-display">
+                  Featured Event
+                </span>
               </div>
 
               {/* Elegant Typography */}
@@ -78,8 +85,9 @@ export default function HomePageRedesign() {
 
               {/* Elegant Description */}
               <p className="text-lg sm:text-xl text-white/80 leading-relaxed font-light max-w-2xl font-body">
-                A week-long celebration of world-class arena polo featuring top international teams competing for glory. 
-                Experience the thrill of elite competition, exceptional hospitality, and the finest polo action.
+                A week-long celebration of world-class arena polo featuring top international teams
+                competing for glory. Experience the thrill of elite competition, exceptional
+                hospitality, and the finest polo action.
               </p>
 
               {/* Participating Countries - Elegant Layout */}
@@ -94,14 +102,13 @@ export default function HomePageRedesign() {
                       <div key={country.code} className="group relative">
                         <div className="bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 transition-all duration-300 hover:bg-white/20 hover:border-white/30 hover:scale-105 flex items-center gap-2.5">
                           {FlagComponent ? (
-                            <FlagComponent
-                              className="w-5 h-5"
-                              title={`${country.name} flag`}
-                            />
+                            <FlagComponent className="w-5 h-5" title={`${country.name} flag`} />
                           ) : (
                             <span className="text-[1.25rem]">🏳️</span>
                           )}
-                          <span className="text-sm font-semibold text-white tracking-wide">{country.code}</span>
+                          <span className="text-sm font-semibold text-white tracking-wide">
+                            {country.code}
+                          </span>
                         </div>
                       </div>
                     );
@@ -112,26 +119,59 @@ export default function HomePageRedesign() {
               {/* Key Highlights - Sophisticated Cards */}
               <div className="grid sm:grid-cols-2 gap-5 pt-4">
                 {[
-                  { title: "4 & 6 Goal Tournaments", desc: "Multiple competitive formats", icon: "trophy" },
+                  {
+                    title: "4 & 6 Goal Tournaments",
+                    desc: "Multiple competitive formats",
+                    icon: "trophy",
+                  },
                   { title: "International Teams", desc: "5 countries competing", icon: "users" },
                   { title: "Exhibition Matches", desc: "Women's & Best of Best", icon: "star" },
-                  { title: "Premium Hospitality", desc: "VIP experiences available", icon: "sparkles" },
+                  {
+                    title: "Premium Hospitality",
+                    desc: "VIP experiences available",
+                    icon: "sparkles",
+                  },
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-start gap-4 group">
                     <div className="flex-shrink-0 mt-1.5">
                       <div className="h-8 w-8  bg-gradient-to-br from-brand-400/20 to-brand-500/10 border border-brand-400/20 flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:border-brand-400/40">
-                        <svg className="h-4 w-4 text-brand-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg
+                          className="h-4 w-4 text-brand-300"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
                           {item.icon === "trophy" && (
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={1.5}
+                              d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
+                            />
                           )}
                           {item.icon === "users" && (
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={1.5}
+                              d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                            />
                           )}
                           {item.icon === "star" && (
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={1.5}
+                              d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+                            />
                           )}
                           {item.icon === "sparkles" && (
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={1.5}
+                              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                            />
                           )}
                         </svg>
                       </div>
@@ -188,15 +228,19 @@ export default function HomePageRedesign() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-brand-900/70 via-brand-900/10 to-transparent"></div>
                 </div>
-                
+
                 {/* Elegant Floating Info Cards */}
                 <div className="absolute top-8 left-8 right-8 flex flex-wrap gap-3">
                   <div className="bg-white/98 backdrop-blur-md  px-5 py-3.5 shadow-xl border border-white/40 transition-all duration-300 hover:scale-105">
-                    <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-brand-600 mb-1 font-display">Dates</p>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-brand-600 mb-1 font-display">
+                      Dates
+                    </p>
                     <p className="text-sm font-bold text-brand-900 tracking-wide">11-18 Feb 2026</p>
                   </div>
                   <div className="bg-white/98 backdrop-blur-md  px-5 py-3.5 shadow-xl border border-white/40 transition-all duration-300 hover:scale-105">
-                    <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-brand-600 mb-1 font-display">Venue</p>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-brand-600 mb-1 font-display">
+                      Venue
+                    </p>
                     <p className="text-sm font-bold text-brand-900 tracking-wide">HPRC Arena</p>
                   </div>
                 </div>
@@ -204,8 +248,12 @@ export default function HomePageRedesign() {
                 {/* Elegant Bottom Badge */}
                 <div className="absolute bottom-8 left-8 right-8">
                   <div className="bg-gradient-to-r from-brand-600 to-brand-500  px-7 py-4 shadow-2xl border border-white/20 backdrop-blur-sm">
-                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/90 mb-1 font-display">Event of the Year</p>
-                    <p className="text-base font-bold text-white font-display">Hyderabad's Premier Polo Championship</p>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/90 mb-1 font-display">
+                      Event of the Year
+                    </p>
+                    <p className="text-base font-bold text-white font-display">
+                      Hyderabad's Premier Polo Championship
+                    </p>
                   </div>
                 </div>
               </div>
@@ -219,7 +267,10 @@ export default function HomePageRedesign() {
       </section>
 
       {/* Events Section - Sophisticated Design */}
-      <section className="bg-gradient-elegant py-24 sm:py-28 lg:py-32" aria-labelledby="events-heading">
+      <section
+        className="bg-gradient-elegant py-24 sm:py-28 lg:py-32"
+        aria-labelledby="events-heading"
+      >
         <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-8">
           <div className="text-center mb-16 sm:mb-20">
             <h2
@@ -282,7 +333,9 @@ export default function HomePageRedesign() {
                           {event.title}
                         </h4>
                         <div className="flex items-center gap-3 opacity-90 group-hover:opacity-100 transition-opacity duration-300">
-                          <span className="text-sm sm:text-base font-medium tracking-wide">Learn More</span>
+                          <span className="text-sm sm:text-base font-medium tracking-wide">
+                            Learn More
+                          </span>
                           <div className="h-px w-8 bg-white/50"></div>
                           <svg
                             className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-2"
@@ -349,7 +402,7 @@ export default function HomePageRedesign() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
                     <div className="absolute right-0 top-0 h-40 w-40 sm:h-48 sm:w-48  bg-gradient-to-br from-brand-500/20 to-brand-500/5 transition-all duration-700 group-hover:scale-150"></div>
                   </div>
-                  
+
                   {/* Elegant Content */}
                   <div className="p-7 sm:p-9 bg-white relative">
                     <h3 className="text-2xl sm:text-3xl font-bold text-brand-900 mb-4 leading-tight font-display tracking-tight">
@@ -385,7 +438,10 @@ export default function HomePageRedesign() {
 
       {/* News Section - Refined Design */}
       {eventsContent.news && eventsContent.news.length > 0 && (
-        <section className="bg-gradient-elegant py-24 sm:py-28 lg:py-32" aria-labelledby="news-heading">
+        <section
+          className="bg-gradient-elegant py-24 sm:py-28 lg:py-32"
+          aria-labelledby="news-heading"
+        >
           <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-8">
             <div className="text-center mb-16 sm:mb-20 max-w-4xl mx-auto">
               <h2
@@ -428,7 +484,9 @@ export default function HomePageRedesign() {
                     </div>
                     <div className="p-7 relative z-10">
                       <div className="flex items-center gap-2.5 text-xs text-gray-500 mb-3">
-                        <time dateTime={article.date} className="font-medium">{article.date}</time>
+                        <time dateTime={article.date} className="font-medium">
+                          {article.date}
+                        </time>
                         <span className="w-1 h-1  bg-gray-300"></span>
                         <span className="font-semibold">{article.source}</span>
                       </div>
@@ -507,10 +565,13 @@ export default function HomePageRedesign() {
           />
           <div className="absolute inset-0 bg-gradient-to-br from-brand-600/97 via-brand-700/97 to-brand-600/97"></div>
           {/* Elegant texture overlay */}
-          <div className="absolute inset-0 opacity-5" style={{
-            backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
-            backgroundSize: '24px 24px'
-          }}></div>
+          <div
+            className="absolute inset-0 opacity-5"
+            style={{
+              backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)",
+              backgroundSize: "24px 24px",
+            }}
+          ></div>
         </div>
         <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-8 text-center relative z-10 max-w-5xl mx-auto">
           <h2
@@ -547,8 +608,3 @@ export default function HomePageRedesign() {
     </div>
   );
 }
-
-
-
-
-

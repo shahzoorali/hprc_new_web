@@ -55,7 +55,10 @@ export default function HospitalityPage() {
                     />
                   </div>
                 )}
-                <Link href="/hospitality/chukkers" className="hover:text-brand-600 transition-colors">
+                <Link
+                  href="/hospitality/chukkers"
+                  className="hover:text-brand-600 transition-colors"
+                >
                   <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900">
                     {hospitalityContent.venues[0].name}
                   </h2>
@@ -93,7 +96,11 @@ export default function HospitalityPage() {
                     <Link
                       key={idx}
                       href={menu.href}
-                      target={menu.href.startsWith('http') || menu.href.endsWith('.pdf') ? '_blank' : undefined}
+                      target={
+                        menu.href.startsWith("http") || menu.href.endsWith(".pdf")
+                          ? "_blank"
+                          : undefined
+                      }
                       className="inline-flex items-center  border-2 border-brand-500 bg-white px-4 sm:px-6 py-2 sm:py-2.5 text-xs sm:text-sm font-bold text-brand-600 transition-all duration-300 hover:bg-brand-500 hover:text-white hover:shadow-lg"
                     >
                       {menu.label}
@@ -147,7 +154,10 @@ export default function HospitalityPage() {
                     />
                   </div>
                 )}
-                <Link href="/hospitality/snaffles-bistro" className="hover:text-brand-600 transition-colors">
+                <Link
+                  href="/hospitality/snaffles-bistro"
+                  className="hover:text-brand-600 transition-colors"
+                >
                   <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900">
                     {hospitalityContent.venues[1].name}
                   </h2>
@@ -185,7 +195,11 @@ export default function HospitalityPage() {
                     <Link
                       key={idx}
                       href={menu.href}
-                      target={menu.href.startsWith('http') || menu.href.endsWith('.pdf') ? '_blank' : undefined}
+                      target={
+                        menu.href.startsWith("http") || menu.href.endsWith(".pdf")
+                          ? "_blank"
+                          : undefined
+                      }
                       className="inline-flex items-center  border-2 border-brand-500 bg-white px-4 sm:px-6 py-2 sm:py-2.5 text-xs sm:text-sm font-bold text-brand-600 transition-all duration-300 hover:bg-brand-500 hover:text-white hover:shadow-lg"
                     >
                       {menu.label}
@@ -228,7 +242,7 @@ export default function HospitalityPage() {
               priority
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20"></div>
-            
+
             {/* Floating Content Over Image */}
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="container text-center text-white px-4">
@@ -252,20 +266,72 @@ export default function HospitalityPage() {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
                 {hospitalityContent.venues[2].highlights.slice(0, 4).map((highlight, idx) => {
                   const icons = [
-                    <svg key="icon1" className="h-8 w-8 sm:h-10 sm:w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>,
-                    <svg key="icon2" className="h-8 w-8 sm:h-10 sm:w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" /></svg>,
-                    <svg key="icon3" className="h-8 w-8 sm:h-10 sm:w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>,
-                    <svg key="icon4" className="h-8 w-8 sm:h-10 sm:w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>,
+                    <svg
+                      key="icon1"
+                      className="h-8 w-8 sm:h-10 sm:w-10"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={1.5}
+                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                      />
+                    </svg>,
+                    <svg
+                      key="icon2"
+                      className="h-8 w-8 sm:h-10 sm:w-10"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={1.5}
+                        d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"
+                      />
+                    </svg>,
+                    <svg
+                      key="icon3"
+                      className="h-8 w-8 sm:h-10 sm:w-10"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={1.5}
+                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                      />
+                    </svg>,
+                    <svg
+                      key="icon4"
+                      className="h-8 w-8 sm:h-10 sm:w-10"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={1.5}
+                        d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+                      />
+                    </svg>,
                   ];
                   return (
                     <div
                       key={idx}
                       className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4 sm:p-6 text-center hover:bg-white/10 transition-all duration-300 hover:scale-105"
                     >
-                      <div className="text-brand-400 mb-3 flex justify-center">
-                        {icons[idx]}
-                      </div>
-                      <p className="text-white/90 text-xs sm:text-sm font-medium leading-snug">{highlight}</p>
+                      <div className="text-brand-400 mb-3 flex justify-center">{icons[idx]}</div>
+                      <p className="text-white/90 text-xs sm:text-sm font-medium leading-snug">
+                        {highlight}
+                      </p>
                     </div>
                   );
                 })}
@@ -293,9 +359,7 @@ export default function HospitalityPage() {
                   {hospitalityContent.venues[2].menuPackages.map((pkg, idx) => (
                     <div
                       key={idx}
-                      className={`relative group ${
-                        idx === 1 ? "md:-mt-4 md:mb-4" : ""
-                      }`}
+                      className={`relative group ${idx === 1 ? "md:-mt-4 md:mb-4" : ""}`}
                     >
                       {idx === 1 && (
                         <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
@@ -312,14 +376,20 @@ export default function HospitalityPage() {
                         } transition-all duration-500 hover:shadow-xl hover:-translate-y-1`}
                       >
                         <div className="p-6 sm:p-8">
-                          <h4 className={`text-xl sm:text-2xl font-bold mb-1 ${idx === 1 ? "text-white" : "text-white"}`}>
+                          <h4
+                            className={`text-xl sm:text-2xl font-bold mb-1 ${idx === 1 ? "text-white" : "text-white"}`}
+                          >
                             {pkg.name}
                           </h4>
                           <div className="mb-6 pb-6 border-b border-white/20">
-                            <span className={`text-4xl sm:text-5xl font-extrabold ${idx === 1 ? "text-white" : "text-brand-400"}`}>
+                            <span
+                              className={`text-4xl sm:text-5xl font-extrabold ${idx === 1 ? "text-white" : "text-brand-400"}`}
+                            >
                               {pkg.price}
                             </span>
-                            <span className={`text-sm ml-1 ${idx === 1 ? "text-white/70" : "text-gray-500"}`}>
+                            <span
+                              className={`text-sm ml-1 ${idx === 1 ? "text-white/70" : "text-gray-500"}`}
+                            >
                               {pkg.gst}
                             </span>
                           </div>
@@ -355,11 +425,22 @@ export default function HospitalityPage() {
 
                 <div className="mt-10 sm:mt-12 text-center">
                   <p className="inline-flex items-center gap-2 text-gray-400 text-xs sm:text-sm bg-white/5 px-4 py-2 rounded-full">
-                    <svg className="h-4 w-4 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    <svg
+                      className="h-4 w-4 text-brand-400"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
                     </svg>
                     <span>
-                      <strong className="text-gray-300">Note:</strong> Plain rice, Sambar, Mirchi ka salan, Raitha, Curd, Papad, pickles are accompaniments.
+                      <strong className="text-gray-300">Note:</strong> Plain rice, Sambar, Mirchi ka
+                      salan, Raitha, Curd, Papad, pickles are accompaniments.
                     </span>
                   </p>
                 </div>
@@ -372,7 +453,12 @@ export default function HospitalityPage() {
                   >
                     Plan Your Event
                     <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
                     </svg>
                   </Link>
                 </div>
@@ -413,8 +499,12 @@ export default function HospitalityPage() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
                 </div>
                 <div className="p-4 sm:p-6 bg-white">
-                  <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">{experience.title}</h3>
-                  <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">{experience.description}</p>
+                  <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">
+                    {experience.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                    {experience.description}
+                  </p>
                 </div>
               </div>
             );

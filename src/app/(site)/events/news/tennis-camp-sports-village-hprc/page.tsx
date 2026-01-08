@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import React, { useState } from "react";
 
+import { ImageLightbox } from "@/components/ui/image-lightbox";
 import { PageHero } from "@/components/ui/page-hero";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { ImageLightbox } from "@/components/ui/image-lightbox";
 
 export default function TennisCampSportsVillageHPRCPage() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -69,14 +69,16 @@ export default function TennisCampSportsVillageHPRCPage() {
 
               <div className="prose prose-lg max-w-none mt-8">
                 <p className="text-gray-700 leading-relaxed">
-                  The Tennis Camp organized by Sports Village at Hyderabad Polo & Riding Club brought together 
-                  tennis enthusiasts for an intensive training program. The camp featured professional coaching, 
-                  skill development sessions, and competitive play opportunities.
+                  The Tennis Camp organized by Sports Village at Hyderabad Polo & Riding Club
+                  brought together tennis enthusiasts for an intensive training program. The camp
+                  featured professional coaching, skill development sessions, and competitive play
+                  opportunities.
                 </p>
 
                 <p className="text-gray-700 leading-relaxed mt-6">
-                  Participants benefited from world-class facilities at HPRC and expert guidance from Sports Village 
-                  coaches, enhancing their tennis skills and passion for the sport.
+                  Participants benefited from world-class facilities at HPRC and expert guidance
+                  from Sports Village coaches, enhancing their tennis skills and passion for the
+                  sport.
                 </p>
               </div>
             </div>

@@ -8,7 +8,9 @@ const generateGalleryImages = () => {
   }
   // 010-019
   for (let i = 10; i <= 19; i++) {
-    images.push(`/documents/gallery/events/hprc-sport-complex/${i.toString().padStart(3, "0")}.jpg`);
+    images.push(
+      `/documents/gallery/events/hprc-sport-complex/${i.toString().padStart(3, "0")}.jpg`,
+    );
   }
   // Additional images
   images.push(`/documents/gallery/events/hprc-sport-complex/events-02.png`);
@@ -30,8 +32,7 @@ export const hprcSportComplex = {
   },
   gallery: {
     title: "Event Gallery",
-    description:
-      "Browse through images of the HPRC Sport Complex facilities.",
+    description: "Browse through images of the HPRC Sport Complex facilities.",
     images: generateGalleryImages(),
   },
 };

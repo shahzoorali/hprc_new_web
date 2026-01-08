@@ -26,8 +26,7 @@ export const necCalendar2016 = {
   },
   gallery: {
     title: "Event Gallery",
-    description:
-      "Browse through images from the National Equestrian Championship Calendar 2016.",
+    description: "Browse through images from the National Equestrian Championship Calendar 2016.",
     images: generateGalleryImages(),
   },
 };

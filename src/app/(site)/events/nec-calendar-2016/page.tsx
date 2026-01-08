@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import React, { useState } from "react";
 
+import { ImageLightbox } from "@/components/ui/image-lightbox";
 import { PageHero } from "@/components/ui/page-hero";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { ImageLightbox } from "@/components/ui/image-lightbox";
 import { necCalendar2016 } from "@/content/nec-calendar-2016";
 
 export default function NecCalendar2016Page() {

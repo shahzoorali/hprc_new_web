@@ -61,7 +61,8 @@ export const worldArenaPoloChampionship2026 = {
     dates: "11th – 18th February 2026",
     venue: "HPRC Arena Polo Stadium, Hyderabad Polo & Riding Club, Hyderabad, India",
     timings: "Primarily evening matches under floodlights (approximately 6:00–9:00 pm)",
-    format: "Multiple tournaments including 4 Goal and 6 Goal competitions, plus exhibition matches",
+    format:
+      "Multiple tournaments including 4 Goal and 6 Goal competitions, plus exhibition matches",
   },
   countries: [
     { name: "India", code: "IND" },
@@ -131,7 +132,8 @@ export const worldArenaPoloChampionship2026 = {
           type: "practice",
         },
         {
-          activity: "Technical briefing on rules and regulations of all tournaments by the head umpire",
+          activity:
+            "Technical briefing on rules and regulations of all tournaments by the head umpire",
           type: "practice",
         },
       ],
@@ -221,7 +223,8 @@ export const worldArenaPoloChampionship2026 = {
       dateFull: "Tuesday, 17 February 2026",
       activities: [
         {
-          activity: "League matches continue – 6-Goal Telangana Tourism International Arena Polo Cup 2026",
+          activity:
+            "League matches continue – 6-Goal Telangana Tourism International Arena Polo Cup 2026",
           type: "match",
         },
       ],
@@ -320,11 +323,3 @@ export const worldArenaPoloChampionship2026 = {
 };
 
 export type WorldArenaPoloChampionship2026 = typeof worldArenaPoloChampionship2026;
-
-
-
-
-
-
-
-

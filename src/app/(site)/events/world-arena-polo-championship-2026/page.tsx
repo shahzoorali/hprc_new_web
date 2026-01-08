@@ -1,21 +1,20 @@
-import React from "react";
-import Image from "next/image";
-import Link from "next/link";
-
-import { PageHero } from "@/components/ui/page-hero";
-import { SectionHeading } from "@/components/ui/section-heading";
-import { CountryBadge } from "@/components/ui/country-badge";
-import { TournamentCard } from "@/components/ui/tournament-card";
-import { EventSchedule } from "@/components/ui/event-schedule";
-import { EventContactForm } from "@/components/ui/event-contact-form";
-import { CountdownTimer } from "@/components/ui/countdown-timer";
-import { worldArenaPoloChampionship2026 } from "@/content/world-arena-polo-championship-2026";
-
-import US from "country-flag-icons/react/3x2/US";
-import IN from "country-flag-icons/react/3x2/IN";
 import DE from "country-flag-icons/react/3x2/DE";
 import FR from "country-flag-icons/react/3x2/FR";
+import IN from "country-flag-icons/react/3x2/IN";
 import LU from "country-flag-icons/react/3x2/LU";
+import US from "country-flag-icons/react/3x2/US";
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
+
+import { CountdownTimer } from "@/components/ui/countdown-timer";
+import { CountryBadge } from "@/components/ui/country-badge";
+import { EventContactForm } from "@/components/ui/event-contact-form";
+import { EventSchedule } from "@/components/ui/event-schedule";
+import { PageHero } from "@/components/ui/page-hero";
+import { SectionHeading } from "@/components/ui/section-heading";
+import { TournamentCard } from "@/components/ui/tournament-card";
+import { worldArenaPoloChampionship2026 } from "@/content/world-arena-polo-championship-2026";
 
 export const metadata = {
   title: "HPRC World Arena Polo Championship 2026 | Hyderabad Polo & Riding Club",
@@ -23,7 +22,10 @@ export const metadata = {
     "Join us for HPRC World Arena Polo Championship 2026 in Hyderabad. A week-long celebration of world-class arena polo featuring teams from USA, India, Germany, France, and Luxembourg.",
 };
 
-const countryFlagComponents: Record<string, React.ComponentType<{ className?: string; title?: string }>> = {
+const countryFlagComponents: Record<
+  string,
+  React.ComponentType<{ className?: string; title?: string }>
+> = {
   USA: US,
   IND: IN,
   GER: DE,
@@ -32,13 +34,24 @@ const countryFlagComponents: Record<string, React.ComponentType<{ className?: st
 };
 
 export default function WorldArenaPoloChampionship2026Page() {
-  const { hero, overview, keyInfo, countries, tournaments, schedule, officials, hospitality, media, objectives, legacy } =
-    worldArenaPoloChampionship2026;
+  const {
+    hero,
+    overview,
+    keyInfo,
+    countries,
+    tournaments,
+    schedule,
+    officials,
+    hospitality,
+    media,
+    objectives,
+    legacy,
+  } = worldArenaPoloChampionship2026;
 
   // Event starts on February 11, 2026 at 00:00 IST (UTC+5:30)
   // Converting to UTC for accurate countdown
   const targetDate = new Date("2026-02-11T00:00:00+05:30");
-  
+
   // Calculate days remaining for static display
   const now = new Date().getTime();
   const target = targetDate.getTime();
@@ -61,7 +74,7 @@ export default function WorldArenaPoloChampionship2026Page() {
               />
               <div className="absolute inset-0 bg-gradient-to-br from-brand-900/85 via-brand-800/80 to-brand-900/85"></div>
             </div>
-            
+
             {/* Background Elements */}
             <div className="absolute inset-0 overflow-hidden">
               <div className="absolute top-10 left-10 w-64 h-64 bg-brand-500/20  blur-[100px]"></div>
@@ -82,9 +95,7 @@ export default function WorldArenaPoloChampionship2026Page() {
                 <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white font-display tracking-tight leading-tight">
                   World Arena Polo
                   <br />
-                  <span className="text-white">
-                    Championship 2026
-                  </span>
+                  <span className="text-white">Championship 2026</span>
                 </h1>
 
                 <p className="text-xl md:text-2xl text-white/90 font-light max-w-3xl mx-auto leading-relaxed">
@@ -93,15 +104,35 @@ export default function WorldArenaPoloChampionship2026Page() {
 
                 <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 text-white">
                   <div className="flex items-center gap-2">
-                    <svg className="h-6 w-6 text-brand-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    <svg
+                      className="h-6 w-6 text-brand-300"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                      />
                     </svg>
                     <span className="font-semibold text-lg">{hero.dates}</span>
                   </div>
                   <div className="h-6 w-px bg-white/30"></div>
                   <div className="flex items-center gap-2">
-                    <svg className="h-6 w-6 text-brand-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <svg
+                      className="h-6 w-6 text-brand-300"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                      />
                     </svg>
                     <span className="font-semibold text-lg">{hero.venue}</span>
                   </div>
@@ -117,7 +148,12 @@ export default function WorldArenaPoloChampionship2026Page() {
                   >
                     <span>Register Now</span>
                     <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
                     </svg>
                   </Link>
                   <Link
@@ -126,7 +162,12 @@ export default function WorldArenaPoloChampionship2026Page() {
                   >
                     <span>View Schedule</span>
                     <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
                     </svg>
                   </Link>
                 </div>
@@ -135,13 +176,33 @@ export default function WorldArenaPoloChampionship2026Page() {
 
             {/* Floating Decorative Elements */}
             <div className="absolute top-8 right-8 flex h-20 w-20 items-center justify-center  bg-white/10 backdrop-blur-sm border border-white/20 shadow-xl">
-              <svg className="h-10 w-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              <svg
+                className="h-10 w-10 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={1.5}
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                />
               </svg>
             </div>
             <div className="absolute bottom-8 left-8 flex h-16 w-16 items-center justify-center  bg-brand-500/20 backdrop-blur-sm border border-brand-400/30 shadow-xl">
-              <svg className="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              <svg
+                className="h-8 w-8 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={1.5}
+                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
               </svg>
             </div>
           </div>
@@ -179,7 +240,7 @@ export default function WorldArenaPoloChampionship2026Page() {
             <div className="absolute top-0 right-0 w-96 h-96 bg-brand-500/5  blur-[150px]"></div>
             <div className="absolute bottom-0 left-0 w-80 h-80 bg-brand-600/5  blur-[120px]"></div>
           </div>
-          
+
           <div className="relative space-y-8">
             <SectionHeading
               eyebrow="About The Championship"
@@ -220,7 +281,7 @@ export default function WorldArenaPoloChampionship2026Page() {
             align="center"
             className="text-white"
           />
-          
+
           <div className="mt-12 flex flex-wrap items-center justify-center gap-6">
             {countries.map((country) => {
               const FlagComponent = countryFlagComponents[country.code];
@@ -233,7 +294,7 @@ export default function WorldArenaPoloChampionship2026Page() {
                         title={`${country.name} flag`}
                       />
                     ) : (
-                      <div 
+                      <div
                         className="relative text-4xl leading-none"
                         role="img"
                         aria-label={`${country.name} flag`}
@@ -277,12 +338,20 @@ export default function WorldArenaPoloChampionship2026Page() {
                   {tournament.description}
                 </p>
                 <div className="flex items-center gap-3  bg-brand-100/80 px-5 py-2.5 w-fit border border-brand-200/60">
-                  <svg className="h-5 w-5 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  <svg
+                    className="h-5 w-5 text-brand-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                    />
                   </svg>
-                  <span className="text-sm font-semibold text-brand-800">
-                    {tournament.dates}
-                  </span>
+                  <span className="text-sm font-semibold text-brand-800">{tournament.dates}</span>
                 </div>
               </div>
             </div>
@@ -291,12 +360,15 @@ export default function WorldArenaPoloChampionship2026Page() {
       </section>
 
       {/* 📅 Day-wise Programme */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-brand-50/60 via-white to-brand-50/40 py-20" id="schedule">
+      <section
+        className="relative overflow-hidden bg-gradient-to-br from-brand-50/60 via-white to-brand-50/40 py-20"
+        id="schedule"
+      >
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute -top-40 -right-40 h-96 w-96 bg-brand-500/8  blur-[150px]"></div>
           <div className="absolute -bottom-40 -left-40 h-80 w-80 bg-brand-600/8  blur-[120px]"></div>
         </div>
-        
+
         <div className="container relative">
           <SectionHeading
             eyebrow="Event Timeline"
@@ -322,7 +394,8 @@ export default function WorldArenaPoloChampionship2026Page() {
           <div
             className="relative overflow-hidden rounded-[2.5rem] border-2 border-gray-800/80 p-10 shadow-2xl"
             style={{
-              backgroundImage: 'repeating-linear-gradient(90deg, #000 0px, #000 25px, #fff 25px, #fff 50px)'
+              backgroundImage:
+                "repeating-linear-gradient(90deg, #000 0px, #000 25px, #fff 25px, #fff 50px)",
             }}
           >
             {/* Overlay for better text readability */}
@@ -337,8 +410,12 @@ export default function WorldArenaPoloChampionship2026Page() {
                   quality={90}
                 />
               </div>
-              <h3 className="text-xl font-bold text-white mb-2 font-display">{officials.chiefUmpire.name}</h3>
-              <p className="text-sm font-semibold text-gray-300 mb-3 uppercase tracking-wider">{officials.chiefUmpire.role}</p>
+              <h3 className="text-xl font-bold text-white mb-2 font-display">
+                {officials.chiefUmpire.name}
+              </h3>
+              <p className="text-sm font-semibold text-gray-300 mb-3 uppercase tracking-wider">
+                {officials.chiefUmpire.role}
+              </p>
             </div>
           </div>
 
@@ -352,8 +429,8 @@ export default function WorldArenaPoloChampionship2026Page() {
                   isArsalanKhan
                     ? "border-blue-800/80 bg-gradient-to-br from-blue-900 via-blue-800 to-slate-900"
                     : isChaitaniaKumar
-                    ? "border-emerald-800/80 bg-gradient-to-br from-emerald-900 via-emerald-800 to-teal-900"
-                    : "border-brand-200/80 bg-gradient-to-br from-white to-brand-50/40"
+                      ? "border-emerald-800/80 bg-gradient-to-br from-emerald-900 via-emerald-800 to-teal-900"
+                      : "border-brand-200/80 bg-gradient-to-br from-white to-brand-50/40"
                 }`}
               >
                 <div className="relative">
@@ -379,15 +456,32 @@ export default function WorldArenaPoloChampionship2026Page() {
                     </div>
                   ) : (
                     <div className="mb-6 flex h-20 w-20 items-center justify-center  bg-gradient-to-br from-brand-500 to-brand-600 text-3xl shadow-2xl">
-                      <span className="font-extrabold text-white font-display">{member.name.split(' ').map(n => n[0]).join('')}</span>
+                      <span className="font-extrabold text-white font-display">
+                        {member.name
+                          .split(" ")
+                          .map((n) => n[0])
+                          .join("")}
+                      </span>
                     </div>
                   )}
-                  <h3 className={`text-xl font-bold mb-2 font-display ${
-                    isArsalanKhan || isChaitaniaKumar ? "text-white" : "text-brand-900"
-                  }`}>{member.name}</h3>
-                  <p className={`text-sm font-semibold uppercase tracking-wider ${
-                    isArsalanKhan ? "text-blue-200" : isChaitaniaKumar ? "text-emerald-200" : "text-brand-600"
-                  }`}>{member.role}</p>
+                  <h3
+                    className={`text-xl font-bold mb-2 font-display ${
+                      isArsalanKhan || isChaitaniaKumar ? "text-white" : "text-brand-900"
+                    }`}
+                  >
+                    {member.name}
+                  </h3>
+                  <p
+                    className={`text-sm font-semibold uppercase tracking-wider ${
+                      isArsalanKhan
+                        ? "text-blue-200"
+                        : isChaitaniaKumar
+                          ? "text-emerald-200"
+                          : "text-brand-600"
+                    }`}
+                  >
+                    {member.role}
+                  </p>
                 </div>
               </div>
             );
@@ -410,7 +504,7 @@ export default function WorldArenaPoloChampionship2026Page() {
             align="center"
             className="text-white [&_p]:text-white/80 [&_h3]:text-white"
           />
-          
+
           <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {hospitality.features.map((feature, index) => (
               <div
@@ -419,12 +513,26 @@ export default function WorldArenaPoloChampionship2026Page() {
               >
                 <div className="relative">
                   <div className="mb-6 flex h-16 w-16 items-center justify-center  bg-gradient-to-br from-brand-400 to-brand-500 text-3xl shadow-xl">
-                    <svg className="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5 16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714 2.143L13 3z" />
+                    <svg
+                      className="h-8 w-8 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M5 3v4M3 5h4M6 17v4m-2-2h4m5 16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714 2.143L13 3z"
+                      />
                     </svg>
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-4 font-display">{feature.title}</h3>
-                  <p className="text-base text-white/90 leading-relaxed font-light">{feature.description}</p>
+                  <h3 className="text-2xl font-bold text-white mb-4 font-display">
+                    {feature.title}
+                  </h3>
+                  <p className="text-base text-white/90 leading-relaxed font-light">
+                    {feature.description}
+                  </p>
                 </div>
               </div>
             ))}
@@ -448,12 +556,26 @@ export default function WorldArenaPoloChampionship2026Page() {
             >
               <div className="relative">
                 <div className="mb-6 flex h-16 w-16 items-center justify-center  bg-gradient-to-br from-brand-500 to-brand-600 text-3xl shadow-xl">
-                  <svg className="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  <svg
+                    className="h-8 w-8 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+                    />
                   </svg>
                 </div>
-                <h3 className="text-2xl font-bold text-brand-900 mb-4 font-display">{opportunity.title}</h3>
-                <p className="text-base text-gray-700 leading-relaxed font-light">{opportunity.description}</p>
+                <h3 className="text-2xl font-bold text-brand-900 mb-4 font-display">
+                  {opportunity.title}
+                </h3>
+                <p className="text-base text-gray-700 leading-relaxed font-light">
+                  {opportunity.description}
+                </p>
               </div>
             </div>
           ))}
@@ -470,11 +592,7 @@ export default function WorldArenaPoloChampionship2026Page() {
         <div className="container relative">
           <div className="grid gap-12 lg:grid-cols-2">
             <div>
-              <SectionHeading
-                eyebrow="Our Goals"
-                title="Championship Objectives"
-                align="left"
-              />
+              <SectionHeading eyebrow="Our Goals" title="Championship Objectives" align="left" />
               <ul className="mt-8 space-y-5">
                 {objectives.map((objective, index) => (
                   <li key={index} className="flex gap-4 items-start">
@@ -491,11 +609,7 @@ export default function WorldArenaPoloChampionship2026Page() {
               </ul>
             </div>
             <div>
-              <SectionHeading
-                eyebrow="Long-term Impact"
-                title="Expected Legacy"
-                align="left"
-              />
+              <SectionHeading eyebrow="Long-term Impact" title="Expected Legacy" align="left" />
               <ul className="mt-8 space-y-5">
                 {legacy.map((item, index) => (
                   <li key={index} className="flex gap-4 items-start">
@@ -531,28 +645,55 @@ export default function WorldArenaPoloChampionship2026Page() {
                   Ready to Join the Action?
                 </h2>
                 <p className="text-base sm:text-lg md:text-xl text-white/90 leading-relaxed font-light">
-                  Whether you're interested in sponsorship, tickets, or media coverage, we'd love to hear from you.
+                  Whether you're interested in sponsorship, tickets, or media coverage, we'd love to
+                  hear from you.
                 </p>
                 <div className="flex flex-col gap-3 sm:gap-4 items-center">
                   <div className="flex items-center gap-3 sm:gap-4">
                     <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center bg-white/20 backdrop-blur-sm">
-                      <svg className="h-5 w-5 sm:h-6 sm:w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      <svg
+                        className="h-5 w-5 sm:h-6 sm:w-6 text-white"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                        />
                       </svg>
                     </div>
                     <div>
-                      <p className="text-xs sm:text-sm font-semibold text-white/70 uppercase tracking-wider">Email</p>
-                      <p className="text-base sm:text-lg font-medium break-all">championship@hprc.in</p>
+                      <p className="text-xs sm:text-sm font-semibold text-white/70 uppercase tracking-wider">
+                        Email
+                      </p>
+                      <p className="text-base sm:text-lg font-medium break-all">
+                        championship@hprc.in
+                      </p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3 sm:gap-4">
                     <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center bg-white/20 backdrop-blur-sm">
-                      <svg className="h-5 w-5 sm:h-6 sm:w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                      <svg
+                        className="h-5 w-5 sm:h-6 sm:w-6 text-white"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                        />
                       </svg>
                     </div>
                     <div>
-                      <p className="text-xs sm:text-sm font-semibold text-white/70 uppercase tracking-wider">Phone</p>
+                      <p className="text-xs sm:text-sm font-semibold text-white/70 uppercase tracking-wider">
+                        Phone
+                      </p>
                       <p className="text-base sm:text-lg font-medium">+91 98765 43210</p>
                     </div>
                   </div>
@@ -578,7 +719,7 @@ export default function WorldArenaPoloChampionship2026Page() {
           />
           <div className="absolute inset-0 bg-gradient-to-br from-brand-600/95 via-brand-700/95 to-brand-600/95"></div>
         </div>
-        
+
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-white/10  blur-[200px]"></div>
           <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-brand-500/20  blur-[150px]"></div>
@@ -603,8 +744,9 @@ export default function WorldArenaPoloChampionship2026Page() {
             </h2>
 
             <p className="mx-auto max-w-4xl text-xl md:text-2xl text-white/95 leading-relaxed font-light">
-              Secure your place at the most anticipated arena polo championship of 2026. World-class competition, 
-              exceptional hospitality, and unforgettable experiences await in Hyderabad.
+              Secure your place at the most anticipated arena polo championship of 2026. World-class
+              competition, exceptional hospitality, and unforgettable experiences await in
+              Hyderabad.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
@@ -614,7 +756,12 @@ export default function WorldArenaPoloChampionship2026Page() {
               >
                 <span>Register Now</span>
                 <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
                 </svg>
               </Link>
               <Link
@@ -623,25 +770,38 @@ export default function WorldArenaPoloChampionship2026Page() {
               >
                 <span>Learn More</span>
                 <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
                 </svg>
               </Link>
             </div>
 
             <div className="flex items-center justify-center gap-8 pt-8">
               <div className="text-center">
-                <p className="text-4xl md:text-5xl font-extrabold text-white font-display">{daysRemaining}+</p>
-                <p className="text-sm font-semibold uppercase tracking-wider text-white/70">Days Left</p>
+                <p className="text-4xl md:text-5xl font-extrabold text-white font-display">
+                  {daysRemaining}+
+                </p>
+                <p className="text-sm font-semibold uppercase tracking-wider text-white/70">
+                  Days Left
+                </p>
               </div>
               <div className="h-16 w-px bg-white/30"></div>
               <div className="text-center">
                 <p className="text-4xl md:text-5xl font-extrabold text-white font-display">50+</p>
-                <p className="text-sm font-semibold uppercase tracking-wider text-white/70">Registered</p>
+                <p className="text-sm font-semibold uppercase tracking-wider text-white/70">
+                  Registered
+                </p>
               </div>
               <div className="h-16 w-px bg-white/30"></div>
               <div className="text-center">
                 <p className="text-4xl md:text-5xl font-extrabold text-white font-display">10+</p>
-                <p className="text-sm font-semibold uppercase tracking-wider text-white/70">Sponsors</p>
+                <p className="text-sm font-semibold uppercase tracking-wider text-white/70">
+                  Sponsors
+                </p>
               </div>
             </div>
           </div>

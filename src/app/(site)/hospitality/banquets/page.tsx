@@ -225,26 +225,31 @@ export default function BanquetsPage() {
             priority
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-stone-950" />
-      </div>
+        </div>
 
         {/* Hero Content */}
         <div className="relative z-10 container px-4 text-center">
           <div className="max-w-4xl mx-auto">
             <span className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm text-white/90 px-4 py-2 rounded-full text-sm font-medium mb-6 border border-white/20">
               <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+                />
               </svg>
               Outdoor & Indoor Options Available
             </span>
 
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-              Banquets &{" "}
-              <span className="text-amber-400">Events</span>
+              Banquets & <span className="text-amber-400">Events</span>
             </h1>
 
             <p className="text-lg sm:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed mb-10">
-              At the Hyderabad Polo & Riding Club, we offer banquet facilities with Outdoor & Indoor 
-              options for our guests to choose from. Our versatile and elegant space is perfect for any occasion.
+              At the Hyderabad Polo & Riding Club, we offer banquet facilities with Outdoor & Indoor
+              options for our guests to choose from. Our versatile and elegant space is perfect for
+              any occasion.
             </p>
 
             <div className="flex flex-wrap justify-center gap-4">
@@ -254,7 +259,12 @@ export default function BanquetsPage() {
               >
                 Plan Your Event
                 <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
                 </svg>
               </Link>
               <a
@@ -262,7 +272,12 @@ export default function BanquetsPage() {
                 className="inline-flex items-center gap-2 border-2 border-white/30 hover:border-white/60 text-white hover:bg-white/10 px-8 py-4 rounded-full font-semibold transition-all duration-300"
               >
                 <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                  />
                 </svg>
                 +91 9177 00 00 56
               </a>
@@ -272,8 +287,18 @@ export default function BanquetsPage() {
 
         {/* Scroll Indicator */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-          <svg className="h-8 w-8 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+          <svg
+            className="h-8 w-8 text-white/50"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={1.5}
+              d="M19 14l-7 7m0 0l-7-7m7 7V3"
+            />
           </svg>
         </div>
       </section>
@@ -290,13 +315,14 @@ export default function BanquetsPage() {
                 Host Unforgettable Events at HPRC
               </h2>
               <p className="text-stone-600 text-lg leading-relaxed mb-6">
-                Whether it&apos;s an intimate soiree, a gala dinner, a corporate gathering, or a family 
-                get-together, our venues can be tailored to meet your needs. With state-of-the-art 
-                amenities and a dedicated team to ensure seamless execution, we guarantee a memorable 
-                event for you and your guests.
+                Whether it&apos;s an intimate soiree, a gala dinner, a corporate gathering, or a
+                family get-together, our venues can be tailored to meet your needs. With
+                state-of-the-art amenities and a dedicated team to ensure seamless execution, we
+                guarantee a memorable event for you and your guests.
               </p>
               <p className="text-stone-600 text-lg leading-relaxed mb-8">
-                Host your next celebration at HPRC, where sophistication and impeccable service come together.
+                Host your next celebration at HPRC, where sophistication and impeccable service come
+                together.
               </p>
 
               <div className="grid grid-cols-2 gap-4">
@@ -306,21 +332,24 @@ export default function BanquetsPage() {
                   { icon: "👨‍🍳", label: "Expert Catering" },
                   { icon: "🎵", label: "Entertainment" },
                 ].map((item) => (
-                  <div key={item.label} className="flex items-center gap-3 bg-stone-50 rounded-lg p-4">
+                  <div
+                    key={item.label}
+                    className="flex items-center gap-3 bg-stone-50 rounded-lg p-4"
+                  >
                     <span className="text-2xl">{item.icon}</span>
                     <span className="font-medium text-stone-700">{item.label}</span>
                   </div>
                 ))}
+              </div>
             </div>
-          </div>
 
             <div className="relative">
               <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-2xl">
-            <Image
+                <Image
                   src="/documents/gallery/chukkers/cha4.jpeg"
                   alt="HPRC Banquet Venue"
-              fill
-              className="object-cover"
+                  fill
+                  className="object-cover"
                 />
               </div>
               {/* Floating Card */}
@@ -340,9 +369,7 @@ export default function BanquetsPage() {
             <span className="inline-block text-amber-600 text-sm font-semibold tracking-wider uppercase mb-3">
               Our Spaces
             </span>
-            <h2 className="text-3xl sm:text-4xl font-bold text-stone-900 mb-4">
-              Venue Gallery
-            </h2>
+            <h2 className="text-3xl sm:text-4xl font-bold text-stone-900 mb-4">Venue Gallery</h2>
             <p className="text-stone-600 max-w-2xl mx-auto">
               Explore our elegant spaces perfect for your special occasions
             </p>
@@ -371,13 +398,27 @@ export default function BanquetsPage() {
                     alt={image.alt}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
-                    sizes={index === 0 ? "(max-width: 768px) 100vw, 50vw" : "(max-width: 768px) 50vw, 25vw"}
+                    sizes={
+                      index === 0
+                        ? "(max-width: 768px) 100vw, 50vw"
+                        : "(max-width: 768px) 50vw, 25vw"
+                    }
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300" />
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="bg-white/90 backdrop-blur-sm rounded-full p-3">
-                      <svg className="h-6 w-6 text-stone-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                      <svg
+                        className="h-6 w-6 text-stone-800"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"
+                        />
                       </svg>
                     </div>
                   </div>
@@ -393,7 +434,12 @@ export default function BanquetsPage() {
             >
               View Full Gallery
               <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
               </svg>
             </Link>
           </div>
@@ -428,7 +474,7 @@ export default function BanquetsPage() {
                     </span>
                   </div>
                 )}
-                
+
                 <div
                   className={`relative h-full rounded-2xl overflow-hidden ${
                     pkg.popular
@@ -437,18 +483,24 @@ export default function BanquetsPage() {
                   } transition-all duration-500 hover:shadow-xl hover:-translate-y-1`}
                 >
                   <div className="p-6 sm:p-8">
-                    <h3 className={`text-2xl font-bold mb-2 ${pkg.popular ? "text-stone-950" : "text-white"}`}>
+                    <h3
+                      className={`text-2xl font-bold mb-2 ${pkg.popular ? "text-stone-950" : "text-white"}`}
+                    >
                       {pkg.name}
                     </h3>
                     <div className="mb-6 pb-6 border-b border-white/20">
-                      <span className={`text-4xl sm:text-5xl font-extrabold ${pkg.popular ? "text-stone-950" : "text-amber-400"}`}>
+                      <span
+                        className={`text-4xl sm:text-5xl font-extrabold ${pkg.popular ? "text-stone-950" : "text-amber-400"}`}
+                      >
                         {pkg.price}
                       </span>
-                      <span className={`text-sm ml-2 ${pkg.popular ? "text-stone-800" : "text-stone-500"}`}>
+                      <span
+                        className={`text-sm ml-2 ${pkg.popular ? "text-stone-800" : "text-stone-500"}`}
+                      >
                         {pkg.gst}
                       </span>
                     </div>
-                    
+
                     <ul className="space-y-3">
                       {pkg.features.map((feature, featureIdx) => (
                         <li
@@ -471,23 +523,34 @@ export default function BanquetsPage() {
                       ))}
                     </ul>
                   </div>
-                  </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
+          </div>
 
           <div className="mt-10 text-center">
             <p className="inline-flex items-center gap-2 text-stone-400 text-sm bg-stone-800/50 px-5 py-3 rounded-full">
-              <svg className="h-4 w-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              <svg
+                className="h-4 w-4 text-amber-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
               </svg>
               <span>
-                <strong className="text-stone-300">Note:</strong> Plain rice, Sambar, Mirchi ka salan, Raitha, Curd, Papad, pickles are accompaniments.
+                <strong className="text-stone-300">Note:</strong> Plain rice, Sambar, Mirchi ka
+                salan, Raitha, Curd, Papad, pickles are accompaniments.
               </span>
             </p>
           </div>
-          </div>
-        </section>
+        </div>
+      </section>
 
       {/* Full Menu Section */}
       <section className="py-16 sm:py-24 bg-white">
@@ -496,9 +559,7 @@ export default function BanquetsPage() {
             <span className="inline-block text-amber-600 text-sm font-semibold tracking-wider uppercase mb-3">
               Complete Selection
             </span>
-            <h2 className="text-3xl sm:text-4xl font-bold text-stone-900 mb-4">
-              Banquet Menu
-            </h2>
+            <h2 className="text-3xl sm:text-4xl font-bold text-stone-900 mb-4">Banquet Menu</h2>
             <p className="text-stone-600 max-w-2xl mx-auto">
               Explore our extensive menu selection and customize your event catering
             </p>
@@ -507,31 +568,31 @@ export default function BanquetsPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-7xl mx-auto">
             {/* Welcome Drinks */}
             <MenuCard title="Welcome Drinks" items={banquetMenu.welcomeDrinks} icon="🍹" />
-            
+
             {/* Soups Veg */}
             <MenuCard title="Soups (Veg)" items={banquetMenu.soupsVeg} icon="🥣" />
-            
+
             {/* Soups Non-Veg */}
             <MenuCard title="Soups (Non-Veg)" items={banquetMenu.soupsNonVeg} icon="🍲" />
-            
+
             {/* Starters Veg */}
             <MenuCard title="Starters (Veg)" items={banquetMenu.startersVeg} icon="🥗" />
-            
+
             {/* Starters Non-Veg */}
             <MenuCard title="Starters (Non-Veg)" items={banquetMenu.startersNonVeg} icon="🍗" />
-            
+
             {/* Main Course Veg */}
             <MenuCard title="Main Course (Veg)" items={banquetMenu.mainCourseVeg} icon="🍛" />
-            
+
             {/* Paneer */}
             <MenuCard title="Paneer Dishes" items={banquetMenu.paneer} icon="🧀" />
-            
+
             {/* Rice */}
             <MenuCard title="Rice & Biryani" items={banquetMenu.rice} icon="🍚" />
-            
+
             {/* Desserts */}
             <MenuCard title="Desserts" items={banquetMenu.desserts} icon="🍮" />
-            
+
             {/* Ice Cream */}
             <MenuCard title="Ice Cream" items={banquetMenu.iceCream} icon="🍨" />
           </div>
@@ -566,20 +627,50 @@ export default function BanquetsPage() {
               <div className="mt-8 pt-6 border-t border-stone-200">
                 <div className="flex flex-wrap gap-4 text-sm text-stone-500">
                   <div className="flex items-center gap-2">
-                    <svg className="h-5 w-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    <svg
+                      className="h-5 w-5 text-amber-500"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
                     </svg>
                     <span>Buffet closes at 22:30 hrs</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <svg className="h-5 w-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    <svg
+                      className="h-5 w-5 text-amber-500"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
                     </svg>
                     <span>100% advance payment required</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <svg className="h-5 w-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+                    <svg
+                      className="h-5 w-5 text-amber-500"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"
+                      />
                     </svg>
                     <span>No outside food allowed</span>
                   </div>
@@ -605,12 +696,11 @@ export default function BanquetsPage() {
         <div className="container px-4 relative">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6">
-              Ready to Plan Your{" "}
-              <span className="text-amber-400">Perfect Event?</span>
+              Ready to Plan Your <span className="text-amber-400">Perfect Event?</span>
             </h2>
             <p className="text-stone-300 text-lg mb-10 max-w-xl mx-auto">
-              Contact us today to discuss your requirements and let our team create 
-              an unforgettable celebration for you and your guests.
+              Contact us today to discuss your requirements and let our team create an unforgettable
+              celebration for you and your guests.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
@@ -619,7 +709,12 @@ export default function BanquetsPage() {
               >
                 Get in Touch
                 <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
                 </svg>
               </Link>
               <a
@@ -627,7 +722,12 @@ export default function BanquetsPage() {
                 className="inline-flex items-center gap-2 border-2 border-white/30 hover:border-white/60 text-white hover:bg-white/10 px-8 py-4 rounded-full font-semibold transition-all duration-300"
               >
                 <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  />
                 </svg>
                 info@hprc.co.in
               </a>

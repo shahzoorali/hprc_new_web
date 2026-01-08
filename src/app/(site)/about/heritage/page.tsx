@@ -38,21 +38,31 @@ export default function HeritagePage() {
             <span className="inline-block text-amber-500 text-sm sm:text-base font-semibold tracking-[0.3em] uppercase mb-4">
               Est. 1877
             </span>
-            
+
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-white mb-6 leading-tight">
               A Legacy of
               <span className="block text-amber-400 italic">Equestrian Excellence</span>
             </h1>
-            
+
             <p className="text-lg sm:text-xl text-stone-300 max-w-2xl mx-auto leading-relaxed mb-10">
-              From the Paigah nobles to modern-day championships, Hyderabad&apos;s polo story 
-              is woven into every stride at HPRC—a journey spanning nearly 150 years.
+              From the Paigah nobles to modern-day championships, Hyderabad&apos;s polo story is
+              woven into every stride at HPRC—a journey spanning nearly 150 years.
             </p>
 
             {/* Scroll indicator */}
             <div className="animate-bounce">
-              <svg className="h-8 w-8 mx-auto text-amber-500/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+              <svg
+                className="h-8 w-8 mx-auto text-amber-500/70"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={1.5}
+                  d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                />
               </svg>
             </div>
           </div>
@@ -67,11 +77,15 @@ export default function HeritagePage() {
       <section className="relative py-20 sm:py-28 bg-gradient-to-b from-stone-950 to-stone-900">
         <div className="container px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <svg className="h-12 w-12 mx-auto text-amber-500/40 mb-6" fill="currentColor" viewBox="0 0 24 24">
+            <svg
+              className="h-12 w-12 mx-auto text-amber-500/40 mb-6"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
               <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
             </svg>
             <blockquote className="text-2xl sm:text-3xl md:text-4xl font-serif text-stone-200 italic leading-relaxed mb-6">
-              &ldquo;The game of polo is like life itself—it requires courage, skill, and an 
+              &ldquo;The game of polo is like life itself—it requires courage, skill, and an
               unwavering bond between horse and rider.&rdquo;
             </blockquote>
             <cite className="text-amber-500 font-medium not-italic">
@@ -83,11 +97,11 @@ export default function HeritagePage() {
 
       {/* Timeline Eras */}
       {eras.map((era, eraIndex) => (
-        <section 
+        <section
           key={era.name}
           className={`relative py-20 sm:py-28 ${
-            eraIndex % 2 === 0 
-              ? "bg-stone-900" 
+            eraIndex % 2 === 0
+              ? "bg-stone-900"
               : "bg-gradient-to-br from-stone-900 via-stone-800 to-stone-900"
           }`}
         >
@@ -132,19 +146,23 @@ export default function HeritagePage() {
                     </div>
 
                     {/* Content Card */}
-                    <div className={`flex-1 pl-20 sm:pl-0 ${index % 2 === 0 ? "sm:pr-12 sm:text-right" : "sm:pl-12 sm:text-left"}`}>
+                    <div
+                      className={`flex-1 pl-20 sm:pl-0 ${index % 2 === 0 ? "sm:pr-12 sm:text-right" : "sm:pl-12 sm:text-left"}`}
+                    >
                       <div className="group relative">
                         {/* Glow effect */}
                         <div className="absolute -inset-1 bg-gradient-to-r from-amber-500/20 to-amber-600/20 rounded-lg blur opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                        
+
                         <div className="relative bg-stone-800/80 backdrop-blur-sm border border-stone-700/50 rounded-lg p-6 sm:p-8 hover:border-amber-500/30 transition-all duration-500">
                           {/* Year - Desktop */}
-                          <div className={`hidden sm:block mb-4 ${index % 2 === 0 ? "text-right" : "text-left"}`}>
+                          <div
+                            className={`hidden sm:block mb-4 ${index % 2 === 0 ? "text-right" : "text-left"}`}
+                          >
                             <span className="inline-block bg-gradient-to-r from-amber-500 to-amber-600 text-stone-950 px-4 py-1.5 font-bold text-sm rounded">
                               {item.year}
                             </span>
                           </div>
-                          
+
                           <p className="text-stone-300 text-base sm:text-lg leading-relaxed">
                             {item.summary}
                           </p>
@@ -174,9 +192,12 @@ export default function HeritagePage() {
       <section className="relative py-20 sm:py-28 bg-stone-950 overflow-hidden">
         {/* Background pattern */}
         <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0" style={{ 
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")` 
-          }} />
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            }}
+          />
         </div>
 
         <div className="container px-4 relative">
@@ -196,10 +217,7 @@ export default function HeritagePage() {
               { number: "10", label: "Acres of Estate" },
               { number: "2005", label: "HPRC Founded" },
             ].map((stat, index) => (
-              <div 
-                key={index}
-                className="group relative text-center p-6 sm:p-8"
-              >
+              <div key={index} className="group relative text-center p-6 sm:p-8">
                 <div className="absolute inset-0 border border-amber-500/20 rounded-lg group-hover:border-amber-500/40 group-hover:bg-amber-500/5 transition-all duration-500" />
                 <div className="relative">
                   <span className="block text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-amber-500 mb-2">
@@ -237,10 +255,7 @@ export default function HeritagePage() {
               "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=600&q=80",
               "https://images.unsplash.com/photo-1534307671554-9a6d81f4d629?w=600&q=80",
             ].map((src, index) => (
-              <div 
-                key={index}
-                className="group relative aspect-square overflow-hidden rounded-lg"
-              >
+              <div key={index} className="group relative aspect-square overflow-hidden rounded-lg">
                 <Image
                   src={src}
                   alt={`Heritage gallery image ${index + 1}`}
@@ -261,7 +276,12 @@ export default function HeritagePage() {
             >
               View Full Gallery
               <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
               </svg>
             </Link>
           </div>
@@ -277,8 +297,8 @@ export default function HeritagePage() {
               <span className="text-amber-500"> Continuing Legacy</span>
             </h2>
             <p className="text-stone-300 text-lg mb-10 max-w-xl mx-auto">
-              Experience the tradition, passion, and excellence that has defined 
-              Hyderabad&apos;s equestrian heritage for over a century.
+              Experience the tradition, passion, and excellence that has defined Hyderabad&apos;s
+              equestrian heritage for over a century.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
@@ -287,7 +307,12 @@ export default function HeritagePage() {
               >
                 Plan Your Visit
                 <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
                 </svg>
               </Link>
               <Link

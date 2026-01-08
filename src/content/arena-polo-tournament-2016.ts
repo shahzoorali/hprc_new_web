@@ -69,8 +69,7 @@ export const arenaPoloTournament2016 = {
   ] satisfies DownloadLink[],
   gallery: {
     title: "Event Gallery",
-    description:
-      "Browse through images from the Arena Polo Tournament 2016 event.",
+    description: "Browse through images from the Arena Polo Tournament 2016 event.",
     images: generateGalleryImages(),
   },
 };

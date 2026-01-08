@@ -39,32 +39,29 @@ export default function ProgrammesPage() {
         <div className="relative bg-white border-t-4 border-brand-500 shadow-2xl">
           {/* Decorative Top Border Accent */}
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-500 via-brand-400 to-brand-500"></div>
-          
+
           {/* Background Elements */}
           <div className="absolute inset-0 bg-gradient-to-br from-white via-brand-50/20 to-white"></div>
           <div className="absolute top-0 right-0 w-full sm:w-1/2 h-full bg-gradient-to-l from-brand-500/3 to-transparent opacity-50"></div>
-          
+
           {/* Content Container */}
           <div className="relative px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20 py-10 sm:py-12 md:py-16 lg:py-20">
             {/* Content Grid - Responsive Layout */}
             <div className="grid gap-8 sm:gap-10 md:gap-12 lg:grid-cols-2">
               {programmesContent.overview.map((paragraph, idx) => (
-                <div
-                  key={paragraph}
-                  className="group relative"
-                >
+                <div key={paragraph} className="group relative">
                   {/* Number Badge */}
                   <div className="absolute -left-2 sm:-left-3 top-0 flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-brand-600 to-brand-700 text-white text-sm sm:text-base font-bold shadow-lg">
                     {idx + 1}
                   </div>
-                  
+
                   {/* Content Card */}
                   <div className="pl-10 sm:pl-12 pt-2 pb-6 border-l-2 border-brand-200 group-hover:border-brand-400 transition-colors duration-300">
                     <p className="text-sm sm:text-base md:text-lg text-gray-700 leading-relaxed font-light">
                       {paragraph}
                     </p>
                   </div>
-                  
+
                   {/* Decorative Line */}
                   <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-gradient-to-b from-brand-500 via-brand-300 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
@@ -94,7 +91,8 @@ export default function ProgrammesPage() {
             Tailored programmes for every stage of rider's journey
           </h2>
           <p className="text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto">
-            Discover the structure, highlights, and investment for each pathway. Speak with our coaches to customise schedules for individuals, families, or competitive teams.
+            Discover the structure, highlights, and investment for each pathway. Speak with our
+            coaches to customise schedules for individuals, families, or competitive teams.
           </p>
         </div>
 
@@ -109,22 +107,27 @@ export default function ProgrammesPage() {
               "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=800&q=80",
             ];
             const isEven = index % 2 === 0;
-            
+
             return (
-              <article
-                key={programme.id}
-                className="group relative"
-                id={programme.id}
-              >
+              <article key={programme.id} className="group relative" id={programme.id}>
                 {/* Main Card - Responsive Layout */}
-                <div className={`flex flex-col lg:flex-row ${isEven ? '' : 'lg:flex-row-reverse'} gap-0 overflow-hidden rounded-2xl sm:rounded-3xl lg:rounded-[2.5rem] border border-brand-100/80 bg-white shadow-2xl transition-all duration-500 hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.15)] hover:border-brand-200/60`}>
+                <div
+                  className={`flex flex-col lg:flex-row ${isEven ? "" : "lg:flex-row-reverse"} gap-0 overflow-hidden rounded-2xl sm:rounded-3xl lg:rounded-[2.5rem] border border-brand-100/80 bg-white shadow-2xl transition-all duration-500 hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.15)] hover:border-brand-200/60`}
+                >
                   {/* Image Section - Responsive Height */}
                   <div className="relative h-56 sm:h-72 lg:h-auto lg:w-[45%] xl:w-[40%] flex-shrink-0 overflow-hidden bg-gradient-to-br from-brand-100 via-brand-50 to-white">
                     {/* Background Pattern */}
                     <div className="absolute inset-0 opacity-10">
-                      <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(227,30,36,0.3) 1px, transparent 0)', backgroundSize: '24px 24px' }}></div>
+                      <div
+                        className="absolute inset-0"
+                        style={{
+                          backgroundImage:
+                            "radial-gradient(circle at 2px 2px, rgba(227,30,36,0.3) 1px, transparent 0)",
+                          backgroundSize: "24px 24px",
+                        }}
+                      ></div>
                     </div>
-                    
+
                     {/* Main Image */}
                     <Image
                       src={programmeImages[index % programmeImages.length]}
@@ -134,10 +137,10 @@ export default function ProgrammesPage() {
                       sizes="(max-width: 1024px) 100vw, 45vw"
                       priority={index === 0}
                     />
-                    
+
                     {/* Gradient Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-brand-900/60 via-brand-900/20 to-transparent lg:bg-gradient-to-br lg:from-brand-900/50 lg:via-brand-900/10 lg:to-transparent"></div>
-                    
+
                     {/* Floating Badge - Responsive */}
                     <div className="absolute top-3 sm:top-4 lg:top-6 left-3 sm:left-4 lg:left-6 z-10">
                       <div className="bg-white/95 backdrop-blur-md px-3 py-1.5 sm:px-4 sm:py-2 shadow-lg border border-brand-200/50 rounded-full">
@@ -156,7 +159,7 @@ export default function ProgrammesPage() {
                   <div className="flex flex-col gap-6 sm:gap-8 p-5 sm:p-6 lg:p-8 xl:p-10 flex-1 bg-gradient-to-br from-white via-white to-brand-50/30 relative overflow-hidden">
                     {/* Subtle Background Pattern */}
                     <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-brand-500/5 to-transparent rounded-full blur-3xl opacity-50"></div>
-                    
+
                     {/* Content - Relative for z-index */}
                     <div className="relative space-y-5 sm:space-y-6">
                       {/* Header */}
@@ -168,11 +171,21 @@ export default function ProgrammesPage() {
                           {programme.excerpt}
                         </p>
                       </div>
-                      
+
                       {/* Schedule Badge - Enhanced */}
                       <div className="inline-flex items-center gap-2 bg-gradient-to-r from-brand-50 to-brand-100/50 px-4 py-2.5 border border-brand-200/50 rounded-full">
-                        <svg className="h-4 w-4 text-brand-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        <svg
+                          className="h-4 w-4 text-brand-600 flex-shrink-0"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
                         </svg>
                         <p className="text-xs sm:text-sm font-semibold text-brand-800">
                           {programme.schedule}
@@ -189,10 +202,7 @@ export default function ProgrammesPage() {
                       </h3>
                       <ul className="space-y-3 sm:space-y-4">
                         {programme.highlights.map((highlight, idx) => (
-                          <li 
-                            key={highlight} 
-                            className="flex gap-3 sm:gap-4 group/item"
-                          >
+                          <li key={highlight} className="flex gap-3 sm:gap-4 group/item">
                             <div className="flex-shrink-0 mt-1 sm:mt-1.5">
                               <div className="h-2.5 w-2.5 sm:h-3 sm:w-3 bg-gradient-to-br from-brand-500 to-brand-600 rounded-full group-hover/item:scale-125 transition-transform duration-300 shadow-sm"></div>
                             </div>
@@ -212,20 +222,30 @@ export default function ProgrammesPage() {
                         className="group/btn inline-flex items-center justify-center gap-2 bg-gradient-to-r from-brand-600 to-brand-700 hover:from-brand-700 hover:to-brand-800 px-6 py-3.5 sm:px-8 sm:py-4 text-sm sm:text-base font-semibold text-white shadow-xl shadow-brand-900/20 transition-all duration-300 hover:shadow-2xl hover:shadow-brand-900/30 hover:-translate-y-0.5 rounded-xl sm:rounded-xl"
                       >
                         <span>View Full Programme Details</span>
-                        <svg className="h-4 w-4 sm:h-5 sm:w-5 transition-transform duration-300 group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        <svg
+                          className="h-4 w-4 sm:h-5 sm:w-5 transition-transform duration-300 group-hover/btn:translate-x-1"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 5l7 7-7 7"
+                          />
                         </svg>
                       </Link>
-                      
+
                       {/* Pricing Tables - Responsive */}
                       {programme.pricingTables && programme.pricingTables.length > 0 && (
                         <div className="flex flex-col gap-3 sm:gap-4">
                           {programme.pricingTables.map((table) => (
-                            <div key={table.heading} className="transform transition-all duration-300 hover:scale-[1.01]">
-                              <PricingTable
-                                heading={table.heading}
-                                rows={table.rows}
-                              />
+                            <div
+                              key={table.heading}
+                              className="transform transition-all duration-300 hover:scale-[1.01]"
+                            >
+                              <PricingTable heading={table.heading} rows={table.rows} />
                             </div>
                           ))}
                         </div>
@@ -254,16 +274,16 @@ export default function ProgrammesPage() {
             description={programmesContent.knowledge.summary}
             align="left"
           />
-          
+
           <div className="grid gap-6 sm:gap-8 lg:grid-cols-2">
             {/* Etiquette Card */}
             <div className="group relative overflow-hidden  border border-brand-100/80 bg-white/95 backdrop-blur-sm p-10 shadow-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:border-brand-200">
               {/* Animated Background Gradient */}
               <div className="absolute inset-0 bg-gradient-to-br from-brand-500/5 via-transparent to-brand-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              
+
               {/* Decorative Corner Element */}
               <div className="absolute right-0 top-0 h-40 w-40  bg-gradient-to-br from-brand-500/10 to-brand-500/5 transition-all duration-700 group-hover:scale-150 group-hover:from-brand-500/20"></div>
-              
+
               <div className="relative">
                 {/* Icon */}
                 <div className="mb-6 flex h-16 w-16 items-center justify-center  bg-gradient-to-br from-brand-500/15 to-brand-500/5 text-brand-600 shadow-lg transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
@@ -276,15 +296,12 @@ export default function ProgrammesPage() {
                     />
                   </svg>
                 </div>
-                
+
                 <h3 className="text-2xl font-bold text-brand-900 mb-6">Etiquette Essentials</h3>
-                
+
                 <ul className="space-y-4">
                   {programmesContent.knowledge.etiquette.map((item, idx) => (
-                    <li 
-                      key={item} 
-                      className="flex gap-4 group/item"
-                    >
+                    <li key={item} className="flex gap-4 group/item">
                       <div className="flex-shrink-0 mt-2">
                         <div className="h-2.5 w-2.5  bg-brand-500 group-hover/item:scale-150 transition-transform duration-300"></div>
                       </div>
@@ -301,10 +318,10 @@ export default function ProgrammesPage() {
             <div className="group relative overflow-hidden  border border-brand-100/80 bg-white/95 backdrop-blur-sm p-10 shadow-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:border-brand-200">
               {/* Animated Background Gradient */}
               <div className="absolute inset-0 bg-gradient-to-br from-brand-500/5 via-transparent to-brand-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              
+
               {/* Decorative Corner Element */}
               <div className="absolute right-0 top-0 h-40 w-40  bg-gradient-to-br from-brand-500/10 to-brand-500/5 transition-all duration-700 group-hover:scale-150 group-hover:from-brand-500/20"></div>
-              
+
               <div className="relative">
                 {/* Icon */}
                 <div className="mb-6 flex h-16 w-16 items-center justify-center  bg-gradient-to-br from-brand-500/15 to-brand-500/5 text-brand-600 shadow-lg transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
@@ -317,15 +334,12 @@ export default function ProgrammesPage() {
                     />
                   </svg>
                 </div>
-                
+
                 <h3 className="text-2xl font-bold text-brand-900 mb-6">Gear Checklist</h3>
-                
+
                 <ul className="space-y-4">
                   {programmesContent.knowledge.gear.map((item, idx) => (
-                    <li 
-                      key={item} 
-                      className="flex gap-4 group/item"
-                    >
+                    <li key={item} className="flex gap-4 group/item">
                       <div className="flex-shrink-0 mt-2">
                         <div className="h-2.5 w-2.5  bg-brand-500 group-hover/item:scale-150 transition-transform duration-300"></div>
                       </div>

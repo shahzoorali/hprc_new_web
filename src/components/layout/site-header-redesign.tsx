@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+
 import { MainNav } from "@/components/navigation/main-nav";
 import { siteConfig } from "@/config/site";
 import { utilityNavigation } from "@/content/navigation";
@@ -51,7 +52,9 @@ export function SiteHeaderRedesign() {
                   d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                 />
               </svg>
-              <span className="hidden lg:inline font-semibold tracking-wide">{siteConfig.contact.email}</span>
+              <span className="hidden lg:inline font-semibold tracking-wide">
+                {siteConfig.contact.email}
+              </span>
               <span className="lg:hidden font-semibold tracking-wide">Email</span>
             </a>
           </div>
@@ -87,7 +90,7 @@ export function SiteHeaderRedesign() {
               sizes="(max-width: 640px) 80px, (max-width: 1024px) 96px, 112px"
             />
           </div>
-          
+
           {/* Elegant Typography */}
           <div className="text-center space-y-1">
             <span className="block text-sm font-bold uppercase tracking-[0.25em] text-brand-600 sm:text-base lg:text-lg font-display transition-all duration-300 group-hover:text-brand-700">
@@ -179,8 +182,3 @@ export function SiteHeaderRedesign() {
     </header>
   );
 }
-
-
-
-
-

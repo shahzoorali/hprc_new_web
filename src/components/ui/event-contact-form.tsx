@@ -39,7 +39,7 @@ export function EventContactForm() {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -58,7 +58,10 @@ export function EventContactForm() {
       <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
         <div className="grid gap-4 sm:gap-6 md:grid-cols-2">
           <div>
-            <label htmlFor="name" className="mb-1.5 sm:mb-2 block text-sm font-semibold text-gray-900">
+            <label
+              htmlFor="name"
+              className="mb-1.5 sm:mb-2 block text-sm font-semibold text-gray-900"
+            >
               Name <span className="text-brand-500">*</span>
             </label>
             <input
@@ -74,7 +77,10 @@ export function EventContactForm() {
           </div>
 
           <div>
-            <label htmlFor="email" className="mb-1.5 sm:mb-2 block text-sm font-semibold text-gray-900">
+            <label
+              htmlFor="email"
+              className="mb-1.5 sm:mb-2 block text-sm font-semibold text-gray-900"
+            >
               Email <span className="text-brand-500">*</span>
             </label>
             <input
@@ -92,7 +98,10 @@ export function EventContactForm() {
 
         <div className="grid gap-4 sm:gap-6 md:grid-cols-2">
           <div>
-            <label htmlFor="phone" className="mb-1.5 sm:mb-2 block text-sm font-semibold text-gray-900">
+            <label
+              htmlFor="phone"
+              className="mb-1.5 sm:mb-2 block text-sm font-semibold text-gray-900"
+            >
               Phone
             </label>
             <input
@@ -107,7 +116,10 @@ export function EventContactForm() {
           </div>
 
           <div>
-            <label htmlFor="inquiryType" className="mb-1.5 sm:mb-2 block text-sm font-semibold text-gray-900">
+            <label
+              htmlFor="inquiryType"
+              className="mb-1.5 sm:mb-2 block text-sm font-semibold text-gray-900"
+            >
               Inquiry Type <span className="text-brand-500">*</span>
             </label>
             <select
@@ -127,7 +139,10 @@ export function EventContactForm() {
         </div>
 
         <div>
-          <label htmlFor="message" className="mb-1.5 sm:mb-2 block text-sm font-semibold text-gray-900">
+          <label
+            htmlFor="message"
+            className="mb-1.5 sm:mb-2 block text-sm font-semibold text-gray-900"
+          >
             Message <span className="text-brand-500">*</span>
           </label>
           <textarea
@@ -169,11 +184,3 @@ export function EventContactForm() {
     </div>
   );
 }
-
-
-
-
-
-
-
-

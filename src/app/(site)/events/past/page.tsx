@@ -1,5 +1,5 @@
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 
 import { PageHero } from "@/components/ui/page-hero";
 import { SectionHeading } from "@/components/ui/section-heading";
@@ -30,26 +30,26 @@ export default function PastEventsPage() {
           {eventsContent.pastHighlights.map((highlight, index) => {
             // Get event image based on link
             const getEventImage = (link: string) => {
-              if (link.includes('1st-rel-10th-hyd-horse-show')) {
-                return '/documents/gallery/events/1st-rel-gallery/gallery-001.jpg';
+              if (link.includes("1st-rel-10th-hyd-horse-show")) {
+                return "/documents/gallery/events/1st-rel-gallery/gallery-001.jpg";
               }
-              if (link.includes('arena-polo-tournament-2016')) {
-                return '/documents/gallery/events/arena-polo-tournament-2016/001.jpg';
+              if (link.includes("arena-polo-tournament-2016")) {
+                return "/documents/gallery/events/arena-polo-tournament-2016/001.jpg";
               }
-              if (link.includes('nec-calendar-2016')) {
-                return '/documents/gallery/events/nec-calendar-2016/001.jpg';
+              if (link.includes("nec-calendar-2016")) {
+                return "/documents/gallery/events/nec-calendar-2016/001.jpg";
               }
-              if (link.includes('hprc-international-arena-polo-championship')) {
-                return '/documents/gallery/events/hprc-international-arena-polo-championship/001.jpeg';
+              if (link.includes("hprc-international-arena-polo-championship")) {
+                return "/documents/gallery/events/hprc-international-arena-polo-championship/001.jpeg";
               }
-              if (link.includes('hprc-sport-complex')) {
-                return '/documents/gallery/events/hprc-sport-complex/01.jpg';
+              if (link.includes("hprc-sport-complex")) {
+                return "/documents/gallery/events/hprc-sport-complex/01.jpg";
               }
               // Fallback images
               const fallbackImages = [
-                'https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=800&q=80',
-                'https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=800&q=80',
-                'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80',
+                "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=800&q=80",
+                "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=800&q=80",
+                "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80",
               ];
               return fallbackImages[index % fallbackImages.length];
             };
@@ -106,9 +106,9 @@ export default function PastEventsPage() {
 
       <section className="container space-y-4 text-sm text-gray-700">
         <p>
-          Additional highlights include the Hyderabad Polo and Riding Club International Arena Polo Cup,
-          and collaborative showcases with leading academies. Comprehensive archives with photos, results,
-          and press releases are available for each event.
+          Additional highlights include the Hyderabad Polo and Riding Club International Arena Polo
+          Cup, and collaborative showcases with leading academies. Comprehensive archives with
+          photos, results, and press releases are available for each event.
         </p>
       </section>
     </div>

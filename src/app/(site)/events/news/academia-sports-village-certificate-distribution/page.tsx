@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import React, { useState } from "react";
 
+import { ImageLightbox } from "@/components/ui/image-lightbox";
 import { PageHero } from "@/components/ui/page-hero";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { ImageLightbox } from "@/components/ui/image-lightbox";
 
 export default function AcademiaSportsVillageCertificatePage() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -66,14 +66,16 @@ export default function AcademiaSportsVillageCertificatePage() {
               />
               <div className="prose prose-lg max-w-none mt-8">
                 <p className="text-gray-700 leading-relaxed">
-                  The Academia Sports Village Certificate Distribution Ceremony was held to recognize and 
-                  celebrate the achievements of participants in the Junior Camp Workshop. Young athletes 
-                  were honored for their dedication, progress, and commitment to their sports training.
+                  The Academia Sports Village Certificate Distribution Ceremony was held to
+                  recognize and celebrate the achievements of participants in the Junior Camp
+                  Workshop. Young athletes were honored for their dedication, progress, and
+                  commitment to their sports training.
                 </p>
 
                 <p className="text-gray-700 leading-relaxed mt-6">
-                  The ceremony highlighted the successful partnership between HPRC and Academia Sports Village, 
-                  showcasing the positive impact of collaborative sports development programs on young athletes.
+                  The ceremony highlighted the successful partnership between HPRC and Academia
+                  Sports Village, showcasing the positive impact of collaborative sports development
+                  programs on young athletes.
                 </p>
               </div>
             </div>
@@ -140,7 +142,12 @@ export default function AcademiaSportsVillageCertificatePage() {
               className="inline-flex items-center gap-2 text-brand-600 hover:text-brand-700 font-semibold transition-colors"
             >
               <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                />
               </svg>
               <span>Back to News</span>
             </Link>

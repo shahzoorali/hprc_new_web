@@ -11,7 +11,10 @@ export function Timeline({ items }: TimelineProps) {
   return (
     <div className="relative">
       {/* Simple gradient line for timeline */}
-      <div className="absolute left-6 sm:left-8 md:left-12 lg:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-brand-200 via-brand-400 to-brand-200 lg:-translate-x-1/2" aria-hidden="true" />
+      <div
+        className="absolute left-6 sm:left-8 md:left-12 lg:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-brand-200 via-brand-400 to-brand-200 lg:-translate-x-1/2"
+        aria-hidden="true"
+      />
 
       {/* Timeline items */}
       <div className="space-y-8 sm:space-y-10 md:space-y-12">
@@ -19,10 +22,10 @@ export function Timeline({ items }: TimelineProps) {
           <div
             key={`${item.year}-${index}`}
             className="relative pl-16 sm:pl-20 md:pl-24 lg:pl-0 lg:w-1/2"
-            style={{ 
-              marginLeft: index % 2 === 0 ? '0' : 'auto',
-              marginRight: index % 2 === 0 ? 'auto' : '0',
-              textAlign: index % 2 === 0 ? 'left' : 'right'
+            style={{
+              marginLeft: index % 2 === 0 ? "0" : "auto",
+              marginRight: index % 2 === 0 ? "auto" : "0",
+              textAlign: index % 2 === 0 ? "left" : "right",
             }}
           >
             {/* Timeline dot */}
@@ -64,8 +67,14 @@ export function Timeline({ items }: TimelineProps) {
       </div>
 
       {/* Decorative start/end caps for the line */}
-      <div className="absolute left-4 sm:left-5 md:left-6 lg:left-1/2 lg:-translate-x-1/2 top-0 h-3 w-3 sm:h-4 sm:w-4 bg-brand-300" aria-hidden="true" />
-      <div className="absolute left-4 sm:left-5 md:left-6 lg:left-1/2 lg:-translate-x-1/2 bottom-0 h-3 w-3 sm:h-4 sm:w-4 bg-brand-300" aria-hidden="true" />
+      <div
+        className="absolute left-4 sm:left-5 md:left-6 lg:left-1/2 lg:-translate-x-1/2 top-0 h-3 w-3 sm:h-4 sm:w-4 bg-brand-300"
+        aria-hidden="true"
+      />
+      <div
+        className="absolute left-4 sm:left-5 md:left-6 lg:left-1/2 lg:-translate-x-1/2 bottom-0 h-3 w-3 sm:h-4 sm:w-4 bg-brand-300"
+        aria-hidden="true"
+      />
     </div>
   );
 }

@@ -1,20 +1,22 @@
-import React from "react";
+import DE from "country-flag-icons/react/3x2/DE";
+import FR from "country-flag-icons/react/3x2/FR";
+import IN from "country-flag-icons/react/3x2/IN";
+import LU from "country-flag-icons/react/3x2/LU";
+import US from "country-flag-icons/react/3x2/US";
 import Image from "next/image";
 import Link from "next/link";
+import React from "react";
 
+import { CountryBadge } from "@/components/ui/country-badge";
 import { HeroVideo } from "@/components/ui/hero-video";
 import { eventsContent } from "@/content/events";
 import { homeContent } from "@/content/home";
 import { worldArenaPoloChampionship2026 } from "@/content/world-arena-polo-championship-2026";
-import { CountryBadge } from "@/components/ui/country-badge";
 
-import US from "country-flag-icons/react/3x2/US";
-import IN from "country-flag-icons/react/3x2/IN";
-import DE from "country-flag-icons/react/3x2/DE";
-import FR from "country-flag-icons/react/3x2/FR";
-import LU from "country-flag-icons/react/3x2/LU";
-
-const countryFlagComponents: Record<string, React.ComponentType<{ className?: string; title?: string }>> = {
+const countryFlagComponents: Record<
+  string,
+  React.ComponentType<{ className?: string; title?: string }>
+> = {
   USA: US,
   IND: IN,
   GER: DE,
@@ -39,10 +41,13 @@ export default function HomePage() {
       <section className="relative overflow-hidden bg-gradient-to-br from-brand-900 via-brand-800 to-brand-900 py-16 sm:py-24 lg:py-32">
         {/* Elegant Subtle Pattern */}
         <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0" style={{
-            backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
-            backgroundSize: '32px 32px'
-          }}></div>
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)",
+              backgroundSize: "32px 32px",
+            }}
+          ></div>
         </div>
 
         {/* Sophisticated Decorative Elements */}
@@ -56,7 +61,9 @@ export default function HomePage() {
               {/* Sophisticated Badge */}
               <div className="inline-flex items-center gap-2 sm:gap-3  bg-white/10 backdrop-blur-md border border-white/20 px-3 sm:px-5 py-2 sm:py-2.5">
                 <span className="h-1.5 sm:h-2 w-1.5 sm:w-2  bg-brand-400 animate-pulse"></span>
-                <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.15em] sm:tracking-[0.2em] text-white/90 font-display">Featured Event</span>
+                <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.15em] sm:tracking-[0.2em] text-white/90 font-display">
+                  Featured Event
+                </span>
               </div>
 
               {/* Elegant Typography */}
@@ -69,25 +76,55 @@ export default function HomePage() {
                 </h2>
                 <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
                   <div className="flex items-center gap-2 sm:gap-3 bg-white/10 backdrop-blur-md border border-white/20 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full">
-                    <svg className="h-4 w-4 sm:h-5 sm:w-5 text-brand-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <svg
+                      className="h-4 w-4 sm:h-5 sm:w-5 text-brand-300 flex-shrink-0"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                      />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
                     </svg>
-                    <span className="text-sm sm:text-base font-semibold text-white tracking-wide">Hyderabad</span>
+                    <span className="text-sm sm:text-base font-semibold text-white tracking-wide">
+                      Hyderabad
+                    </span>
                   </div>
                   <div className="flex items-center gap-2 sm:gap-3 bg-white/10 backdrop-blur-md border border-white/20 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full">
-                    <svg className="h-4 w-4 sm:h-5 sm:w-5 text-brand-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    <svg
+                      className="h-4 w-4 sm:h-5 sm:w-5 text-brand-300 flex-shrink-0"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                      />
                     </svg>
-                    <span className="text-sm sm:text-base font-semibold text-white tracking-wide">11th – 18th February 2026</span>
+                    <span className="text-sm sm:text-base font-semibold text-white tracking-wide">
+                      11th – 18th February 2026
+                    </span>
                   </div>
                 </div>
               </div>
 
               {/* Elegant Description */}
               <p className="text-base sm:text-lg lg:text-xl text-white/80 leading-relaxed font-light max-w-2xl font-body">
-                A week-long celebration of world-class arena polo featuring top international teams competing for glory.
-                Experience the thrill of elite competition, exceptional hospitality, and the finest polo action.
+                A week-long celebration of world-class arena polo featuring top international teams
+                competing for glory. Experience the thrill of elite competition, exceptional
+                hospitality, and the finest polo action.
               </p>
 
               {/* Participating Countries - Elegant Layout */}
@@ -109,7 +146,9 @@ export default function HomePage() {
                           ) : (
                             <span className="text-[1rem] sm:text-[1.25rem]">🏳️</span>
                           )}
-                          <span className="text-xs sm:text-sm font-semibold text-white tracking-wide font-body">{country.code}</span>
+                          <span className="text-xs sm:text-sm font-semibold text-white tracking-wide font-body">
+                            {country.code}
+                          </span>
                         </div>
                       </div>
                     );
@@ -120,26 +159,59 @@ export default function HomePage() {
               {/* Key Highlights - Sophisticated Cards */}
               <div className="grid sm:grid-cols-2 gap-3 sm:gap-5 pt-3 sm:pt-4">
                 {[
-                  { title: "4 & 6 Goal Tournaments", desc: "Multiple competitive formats", icon: "trophy" },
+                  {
+                    title: "4 & 6 Goal Tournaments",
+                    desc: "Multiple competitive formats",
+                    icon: "trophy",
+                  },
                   { title: "International Teams", desc: "5 countries competing", icon: "users" },
                   { title: "Exhibition Matches", desc: "Women's & Best of Best", icon: "star" },
-                  { title: "Premium Hospitality", desc: "VIP experiences available", icon: "sparkles" },
+                  {
+                    title: "Premium Hospitality",
+                    desc: "VIP experiences available",
+                    icon: "sparkles",
+                  },
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-start gap-4 group">
                     <div className="flex-shrink-0 mt-1.5">
                       <div className="h-8 w-8  bg-gradient-to-br from-brand-400/20 to-brand-500/10 border border-brand-400/20 flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:border-brand-400/40">
-                        <svg className="h-4 w-4 text-brand-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg
+                          className="h-4 w-4 text-brand-300"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
                           {item.icon === "trophy" && (
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138z" />
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={1.5}
+                              d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138z"
+                            />
                           )}
                           {item.icon === "users" && (
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={1.5}
+                              d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                            />
                           )}
                           {item.icon === "star" && (
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={1.5}
+                              d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+                            />
                           )}
                           {item.icon === "sparkles" && (
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={1.5}
+                              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                            />
                           )}
                         </svg>
                       </div>
@@ -196,24 +268,36 @@ export default function HomePage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-brand-900/70 via-brand-900/10 to-transparent"></div>
                 </div>
-                
+
                 {/* Elegant Floating Info Cards */}
                 <div className="absolute top-8 left-8 right-8 flex flex-wrap gap-3">
                   <div className="bg-white/98 backdrop-blur-md  px-5 py-3.5 shadow-xl border border-white/40 transition-all duration-300 hover:scale-105">
-                    <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-brand-600 mb-1 font-display">Dates</p>
-                    <p className="text-sm font-bold text-brand-900 tracking-wide font-body">11-18 Feb 2026</p>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-brand-600 mb-1 font-display">
+                      Dates
+                    </p>
+                    <p className="text-sm font-bold text-brand-900 tracking-wide font-body">
+                      11-18 Feb 2026
+                    </p>
                   </div>
                   <div className="bg-white/98 backdrop-blur-md  px-5 py-3.5 shadow-xl border border-white/40 transition-all duration-300 hover:scale-105">
-                    <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-brand-600 mb-1 font-display">Venue</p>
-                    <p className="text-sm font-bold text-brand-900 tracking-wide font-body">HPRC Arena</p>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-brand-600 mb-1 font-display">
+                      Venue
+                    </p>
+                    <p className="text-sm font-bold text-brand-900 tracking-wide font-body">
+                      HPRC Arena
+                    </p>
                   </div>
                 </div>
 
                 {/* Elegant Bottom Badge */}
                 <div className="absolute bottom-8 left-8 right-8">
                   <div className="bg-gradient-to-r from-brand-600 to-brand-500  px-7 py-4 shadow-2xl border border-white/20 backdrop-blur-sm">
-                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/90 mb-1 font-display">Event of the Year</p>
-                    <p className="text-base font-bold text-white font-display">Hyderabad's Premier Polo Championship</p>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/90 mb-1 font-display">
+                      Event of the Year
+                    </p>
+                    <p className="text-base font-bold text-white font-display">
+                      Hyderabad's Premier Polo Championship
+                    </p>
                   </div>
                 </div>
               </div>
@@ -227,7 +311,10 @@ export default function HomePage() {
       </section>
 
       {/* Events Section - Sophisticated Design */}
-      <section className="bg-gradient-elegant py-16 sm:py-20 lg:py-28 lg:py-32" aria-labelledby="events-heading">
+      <section
+        className="bg-gradient-elegant py-16 sm:py-20 lg:py-28 lg:py-32"
+        aria-labelledby="events-heading"
+      >
         <div className="container">
           <div className="text-center mb-12 sm:mb-16 lg:mb-20">
             <h2
@@ -290,7 +377,9 @@ export default function HomePage() {
                           {event.title}
                         </h4>
                         <div className="flex items-center gap-3 opacity-90 group-hover:opacity-100 transition-opacity duration-300">
-                          <span className="text-sm sm:text-base font-medium tracking-wide font-body">Learn More</span>
+                          <span className="text-sm sm:text-base font-medium tracking-wide font-body">
+                            Learn More
+                          </span>
                           <div className="h-px w-8 bg-white/50"></div>
                           <svg
                             className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-2"
@@ -318,7 +407,10 @@ export default function HomePage() {
       </section>
 
       {/* Explore Section - Refined Design */}
-      <section className="bg-white py-16 sm:py-20 lg:py-28 lg:py-32" aria-labelledby="explore-heading">
+      <section
+        className="bg-white py-16 sm:py-20 lg:py-28 lg:py-32"
+        aria-labelledby="explore-heading"
+      >
         <div className="container">
           <div className="text-center mb-12 sm:mb-16 lg:mb-20 max-w-4xl mx-auto">
             <h2
@@ -357,7 +449,7 @@ export default function HomePage() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
                     <div className="absolute right-0 top-0 h-40 w-40 sm:h-48 sm:w-48  bg-gradient-to-br from-brand-500/20 to-brand-500/5 transition-all duration-700 group-hover:scale-150"></div>
                   </div>
-                  
+
                   {/* Elegant Content */}
                   <div className="p-5 sm:p-7 lg:p-9 bg-white relative">
                     <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-brand-900 mb-3 sm:mb-4 leading-tight font-display tracking-tight">
@@ -393,7 +485,10 @@ export default function HomePage() {
 
       {/* News Section - Refined Design */}
       {eventsContent.news && eventsContent.news.length > 0 && (
-        <section className="bg-gradient-elegant py-16 sm:py-20 lg:py-28 lg:py-32" aria-labelledby="news-heading">
+        <section
+          className="bg-gradient-elegant py-16 sm:py-20 lg:py-28 lg:py-32"
+          aria-labelledby="news-heading"
+        >
           <div className="container">
             <div className="text-center mb-12 sm:mb-16 lg:mb-20 max-w-4xl mx-auto">
               <h2
@@ -436,7 +531,9 @@ export default function HomePage() {
                     </div>
                     <div className="p-7 relative z-10">
                       <div className="flex items-center gap-2.5 text-xs text-gray-500 mb-3">
-                        <time dateTime={article.date} className="font-medium font-body">{article.date}</time>
+                        <time dateTime={article.date} className="font-medium font-body">
+                          {article.date}
+                        </time>
                         <span className="w-1 h-1  bg-gray-300"></span>
                         <span className="font-semibold font-body">{article.source}</span>
                       </div>
@@ -515,10 +612,13 @@ export default function HomePage() {
           />
           <div className="absolute inset-0 bg-gradient-to-br from-brand-600/97 via-brand-700/97 to-brand-600/97"></div>
           {/* Elegant texture overlay */}
-          <div className="absolute inset-0 opacity-5" style={{
-            backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
-            backgroundSize: '24px 24px'
-          }}></div>
+          <div
+            className="absolute inset-0 opacity-5"
+            style={{
+              backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)",
+              backgroundSize: "24px 24px",
+            }}
+          ></div>
         </div>
         <div className="container text-center relative z-10 max-w-5xl mx-auto">
           <h2

@@ -12,14 +12,14 @@ export default function AboutPage() {
           {/* Left - Dark Content Panel */}
           <div className="relative flex items-center justify-center p-8 sm:p-12 lg:p-20 order-2 lg:order-1 bg-[#0a0a0a]">
             {/* Subtle Grid Pattern */}
-            <div 
+            <div
               className="absolute inset-0 opacity-[0.03]"
               style={{
                 backgroundImage: `linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)`,
-                backgroundSize: '60px 60px'
+                backgroundSize: "60px 60px",
               }}
             />
-            
+
             <div className="relative max-w-xl">
               {/* Accent Line */}
               <div className="flex items-center gap-4 mb-8">
@@ -51,7 +51,9 @@ export default function AboutPage() {
                 ].map((stat) => (
                   <div key={stat.label}>
                     <div className="text-2xl sm:text-3xl font-light text-white">{stat.value}</div>
-                    <div className="text-[10px] text-white/40 uppercase tracking-wider mt-1">{stat.label}</div>
+                    <div className="text-[10px] text-white/40 uppercase tracking-wider mt-1">
+                      {stat.label}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -63,8 +65,18 @@ export default function AboutPage() {
                   className="group inline-flex items-center gap-3 bg-gradient-to-r from-emerald-500 to-teal-500 text-black px-6 py-3 text-sm font-medium transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/25"
                 >
                   Explore Heritage
-                  <svg className="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  <svg
+                    className="h-4 w-4 transition-transform group-hover:translate-x-1"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    />
                   </svg>
                 </Link>
                 <Link
@@ -88,7 +100,7 @@ export default function AboutPage() {
             />
             <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-transparent to-transparent lg:bg-gradient-to-l" />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent lg:hidden" />
-            
+
             {/* Floating Label */}
             <div className="absolute bottom-8 right-8 bg-black/60 backdrop-blur-md border border-white/10 px-4 py-2">
               <span className="text-white/60 text-xs font-mono">HPRC Arena</span>
@@ -102,9 +114,13 @@ export default function AboutPage() {
         <div className="container px-4">
           {/* Section Label */}
           <div className="flex items-center gap-4 mb-16">
-            <span className="text-emerald-400 text-xs font-mono tracking-[0.2em] uppercase">01</span>
+            <span className="text-emerald-400 text-xs font-mono tracking-[0.2em] uppercase">
+              01
+            </span>
             <div className="w-12 h-[1px] bg-white/20" />
-            <span className="text-white/40 text-xs font-mono tracking-[0.2em] uppercase">Our Story</span>
+            <span className="text-white/40 text-xs font-mono tracking-[0.2em] uppercase">
+              Our Story
+            </span>
           </div>
 
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-20">
@@ -112,8 +128,8 @@ export default function AboutPage() {
             <div className="lg:col-span-7">
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-light text-white mb-12 leading-[1.1]">
                 Where passion for{" "}
-                <span className="font-bold text-emerald-400">equestrian excellence</span>{" "}
-                meets heritage
+                <span className="font-bold text-emerald-400">equestrian excellence</span> meets
+                heritage
               </h2>
 
               <div className="space-y-8 text-white/60 text-lg leading-relaxed">
@@ -145,7 +161,9 @@ export default function AboutPage() {
                 <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-emerald-500/20 to-teal-500/20 flex items-center justify-center">
                   <div className="text-center p-6">
                     <div className="text-5xl font-light text-white mb-2">147</div>
-                    <div className="text-xs text-white/40 uppercase tracking-wider">Years of Polo Heritage</div>
+                    <div className="text-xs text-white/40 uppercase tracking-wider">
+                      Years of Polo Heritage
+                    </div>
                   </div>
                 </div>
               </div>
@@ -159,25 +177,41 @@ export default function AboutPage() {
         <div className="container px-4">
           {/* Section Label */}
           <div className="flex items-center gap-4 mb-16">
-            <span className="text-emerald-400 text-xs font-mono tracking-[0.2em] uppercase">02</span>
+            <span className="text-emerald-400 text-xs font-mono tracking-[0.2em] uppercase">
+              02
+            </span>
             <div className="w-12 h-[1px] bg-white/20" />
-            <span className="text-white/40 text-xs font-mono tracking-[0.2em] uppercase">Purpose</span>
+            <span className="text-white/40 text-xs font-mono tracking-[0.2em] uppercase">
+              Purpose
+            </span>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-8">
             {/* Mission */}
             <div className="group relative bg-white/[0.02] border border-white/5 p-10 sm:p-14 hover:border-emerald-500/30 transition-all duration-500">
               <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-emerald-500 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-              
+
               <div className="flex items-center gap-3 mb-8">
                 <div className="w-10 h-10 border border-emerald-500/30 flex items-center justify-center">
-                  <svg className="h-5 w-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  <svg
+                    className="h-5 w-5 text-emerald-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.5}
+                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                    />
                   </svg>
                 </div>
-                <h3 className="text-xs font-mono text-white/40 uppercase tracking-[0.2em]">Mission</h3>
+                <h3 className="text-xs font-mono text-white/40 uppercase tracking-[0.2em]">
+                  Mission
+                </h3>
               </div>
-              
+
               <p className="text-xl sm:text-2xl text-white/80 leading-relaxed font-light">
                 {aboutContent.mission}
               </p>
@@ -186,17 +220,34 @@ export default function AboutPage() {
             {/* Vision */}
             <div className="group relative bg-white/[0.02] border border-white/5 p-10 sm:p-14 hover:border-emerald-500/30 transition-all duration-500 lg:mt-20">
               <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-emerald-500 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-              
+
               <div className="flex items-center gap-3 mb-8">
                 <div className="w-10 h-10 border border-emerald-500/30 flex items-center justify-center">
-                  <svg className="h-5 w-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  <svg
+                    className="h-5 w-5 text-emerald-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.5}
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.5}
+                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                    />
                   </svg>
                 </div>
-                <h3 className="text-xs font-mono text-white/40 uppercase tracking-[0.2em]">Vision</h3>
+                <h3 className="text-xs font-mono text-white/40 uppercase tracking-[0.2em]">
+                  Vision
+                </h3>
               </div>
-              
+
               <p className="text-xl sm:text-2xl text-white/80 leading-relaxed font-light">
                 {aboutContent.vision}
               </p>
@@ -210,14 +261,17 @@ export default function AboutPage() {
         <div className="container px-4">
           {/* Section Label */}
           <div className="flex items-center gap-4 mb-16">
-            <span className="text-emerald-400 text-xs font-mono tracking-[0.2em] uppercase">03</span>
+            <span className="text-emerald-400 text-xs font-mono tracking-[0.2em] uppercase">
+              03
+            </span>
             <div className="w-12 h-[1px] bg-white/20" />
-            <span className="text-white/40 text-xs font-mono tracking-[0.2em] uppercase">Values</span>
+            <span className="text-white/40 text-xs font-mono tracking-[0.2em] uppercase">
+              Values
+            </span>
           </div>
 
           <h2 className="text-4xl sm:text-5xl font-light text-white mb-16 max-w-2xl">
-            The principles that{" "}
-            <span className="text-emerald-400">define us</span>
+            The principles that <span className="text-emerald-400">define us</span>
           </h2>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-px bg-white/5">
@@ -227,7 +281,7 @@ export default function AboutPage() {
                 className="group bg-[#0a0a0a] p-8 hover:bg-white/[0.02] transition-colors duration-300"
               >
                 <div className="text-emerald-400/40 text-6xl font-light mb-6">
-                  {String(index + 1).padStart(2, '0')}
+                  {String(index + 1).padStart(2, "0")}
                 </div>
                 <h3 className="text-lg font-medium text-white mb-3">{value.title}</h3>
                 <p className="text-sm text-white/50 leading-relaxed">{value.description}</p>
@@ -242,16 +296,19 @@ export default function AboutPage() {
         <div className="container px-4">
           {/* Section Label */}
           <div className="flex items-center gap-4 mb-16">
-            <span className="text-emerald-400 text-xs font-mono tracking-[0.2em] uppercase">04</span>
+            <span className="text-emerald-400 text-xs font-mono tracking-[0.2em] uppercase">
+              04
+            </span>
             <div className="w-12 h-[1px] bg-white/20" />
-            <span className="text-white/40 text-xs font-mono tracking-[0.2em] uppercase">Facilities</span>
+            <span className="text-white/40 text-xs font-mono tracking-[0.2em] uppercase">
+              Facilities
+            </span>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-20">
             <div>
               <h2 className="text-4xl sm:text-5xl font-light text-white mb-8">
-                World-class{" "}
-                <span className="text-emerald-400">amenities</span>
+                World-class <span className="text-emerald-400">amenities</span>
               </h2>
               <p className="text-white/50 text-lg leading-relaxed mb-10">
                 Every detail crafted for extraordinary experiences across our 10-acre estate.
@@ -261,8 +318,18 @@ export default function AboutPage() {
                 className="group inline-flex items-center gap-3 text-emerald-400 text-sm font-medium"
               >
                 Explore Sports Centre
-                <svg className="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                <svg
+                  className="h-4 w-4 transition-transform group-hover:translate-x-1"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
                 </svg>
               </Link>
             </div>
@@ -281,19 +348,33 @@ export default function AboutPage() {
                   "Covered swimming pool": "/sports-centre/swimming",
                   "Showers with steam facilities": "/sports-centre/sauna",
                 };
-                
+
                 const link = facilityLinks[facility];
-                
+
                 return link ? (
                   <Link
                     key={facility}
                     href={link}
                     className="group flex items-center gap-3 py-3 border-b border-white/5 hover:border-emerald-500/30 transition-colors"
                   >
-                    <span className="text-emerald-500/50 text-xs font-mono">{String(index + 1).padStart(2, '0')}</span>
-                    <span className="text-white/70 text-sm group-hover:text-emerald-400 transition-colors">{facility}</span>
-                    <svg className="h-3 w-3 text-emerald-500/50 opacity-0 group-hover:opacity-100 transition-opacity ml-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    <span className="text-emerald-500/50 text-xs font-mono">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span className="text-white/70 text-sm group-hover:text-emerald-400 transition-colors">
+                      {facility}
+                    </span>
+                    <svg
+                      className="h-3 w-3 text-emerald-500/50 opacity-0 group-hover:opacity-100 transition-opacity ml-auto"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
                     </svg>
                   </Link>
                 ) : (
@@ -301,7 +382,9 @@ export default function AboutPage() {
                     key={facility}
                     className="group flex items-center gap-3 py-3 border-b border-white/5"
                   >
-                    <span className="text-emerald-500/50 text-xs font-mono">{String(index + 1).padStart(2, '0')}</span>
+                    <span className="text-emerald-500/50 text-xs font-mono">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
                     <span className="text-white/50 text-sm">{facility}</span>
                   </div>
                 );
@@ -317,17 +400,31 @@ export default function AboutPage() {
           {/* Section Label */}
           <div className="flex items-center justify-between mb-16">
             <div className="flex items-center gap-4">
-              <span className="text-emerald-400 text-xs font-mono tracking-[0.2em] uppercase">05</span>
+              <span className="text-emerald-400 text-xs font-mono tracking-[0.2em] uppercase">
+                05
+              </span>
               <div className="w-12 h-[1px] bg-white/20" />
-              <span className="text-white/40 text-xs font-mono tracking-[0.2em] uppercase">Leadership</span>
+              <span className="text-white/40 text-xs font-mono tracking-[0.2em] uppercase">
+                Leadership
+              </span>
             </div>
             <Link
               href="/about/leadership"
               className="group hidden sm:inline-flex items-center gap-2 text-white/40 hover:text-emerald-400 text-sm transition-colors"
             >
               View All
-              <svg className="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              <svg
+                className="h-4 w-4 transition-transform group-hover:translate-x-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
               </svg>
             </Link>
           </div>
@@ -345,47 +442,51 @@ export default function AboutPage() {
                 if (name === "Mohammed Nayeem Uddin") return "/images/mohammed.jpg";
                 return null;
               };
-              
+
               const imagePath = getImagePath(leader.name);
-              
+
               return (
-              <div
-                key={leader.name}
-                className="group relative"
-              >
-                {/* Image */}
-                <div className="relative aspect-[3/4] bg-gradient-to-br from-white/5 to-white/[0.02] mb-6 overflow-hidden rounded-lg">
-                  {imagePath ? (
-                    <>
-                      <Image
-                        src={imagePath}
-                        alt={leader.name}
-                        fill
-                        className="object-cover object-top"
-                        quality={90}
-                      />
-                      {/* Hover Overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-emerald-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    </>
-                  ) : (
-                    <>
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <span className="text-6xl font-light text-white/10">
-                          {leader.name.split(' ').map(n => n[0]).join('')}
-                        </span>
-                      </div>
-                      {/* Hover Overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-emerald-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    </>
-                  )}
+                <div key={leader.name} className="group relative">
+                  {/* Image */}
+                  <div className="relative aspect-[3/4] bg-gradient-to-br from-white/5 to-white/[0.02] mb-6 overflow-hidden rounded-lg">
+                    {imagePath ? (
+                      <>
+                        <Image
+                          src={imagePath}
+                          alt={leader.name}
+                          fill
+                          className="object-cover object-top"
+                          quality={90}
+                        />
+                        {/* Hover Overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-emerald-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      </>
+                    ) : (
+                      <>
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <span className="text-6xl font-light text-white/10">
+                            {leader.name
+                              .split(" ")
+                              .map((n) => n[0])
+                              .join("")}
+                          </span>
+                        </div>
+                        {/* Hover Overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-emerald-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      </>
+                    )}
+                  </div>
+
+                  <div>
+                    <h3 className="text-xl text-white mb-1">{leader.name}</h3>
+                    <p className="text-emerald-400 text-xs font-mono uppercase tracking-wider mb-3">
+                      {leader.role}
+                    </p>
+                    <p className="text-white/50 text-sm leading-relaxed line-clamp-2">
+                      {leader.bio}
+                    </p>
+                  </div>
                 </div>
-                
-                <div>
-                  <h3 className="text-xl text-white mb-1">{leader.name}</h3>
-                  <p className="text-emerald-400 text-xs font-mono uppercase tracking-wider mb-3">{leader.role}</p>
-                  <p className="text-white/50 text-sm leading-relaxed line-clamp-2">{leader.bio}</p>
-                </div>
-              </div>
               );
             })}
           </div>
@@ -397,7 +498,12 @@ export default function AboutPage() {
             >
               View Full Team
               <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
               </svg>
             </Link>
           </div>
@@ -409,19 +515,22 @@ export default function AboutPage() {
         <div className="container px-4">
           {/* Section Label */}
           <div className="flex items-center gap-4 mb-16">
-            <span className="text-emerald-400 text-xs font-mono tracking-[0.2em] uppercase">06</span>
+            <span className="text-emerald-400 text-xs font-mono tracking-[0.2em] uppercase">
+              06
+            </span>
             <div className="w-12 h-[1px] bg-white/20" />
-            <span className="text-white/40 text-xs font-mono tracking-[0.2em] uppercase">Heritage</span>
+            <span className="text-white/40 text-xs font-mono tracking-[0.2em] uppercase">
+              Heritage
+            </span>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
               <h2 className="text-4xl sm:text-5xl font-light text-white mb-8">
-                Nearly 150 years of{" "}
-                <span className="text-emerald-400">polo excellence</span>
+                Nearly 150 years of <span className="text-emerald-400">polo excellence</span>
               </h2>
               <p className="text-white/50 text-lg leading-relaxed mb-10">
-                From the Paigah nobles of 1877 to modern-day championships, Hyderabad&apos;s 
+                From the Paigah nobles of 1877 to modern-day championships, Hyderabad&apos;s
                 equestrian journey is woven into every stride at HPRC.
               </p>
               <Link
@@ -429,8 +538,18 @@ export default function AboutPage() {
                 className="group inline-flex items-center gap-3 bg-emerald-500 text-black px-6 py-3 text-sm font-medium hover:bg-emerald-400 transition-colors"
               >
                 Explore Full Timeline
-                <svg className="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                <svg
+                  className="h-4 w-4 transition-transform group-hover:translate-x-1"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
                 </svg>
               </Link>
             </div>
@@ -439,7 +558,7 @@ export default function AboutPage() {
             <div className="relative">
               {/* Vertical Line */}
               <div className="absolute left-4 top-0 bottom-0 w-px bg-gradient-to-b from-emerald-500/50 via-emerald-500/20 to-transparent" />
-              
+
               <div className="space-y-8">
                 {aboutContent.heritage.slice(0, 4).map((item, index) => (
                   <div key={item.year} className="relative pl-12">
@@ -447,7 +566,7 @@ export default function AboutPage() {
                     <div className="absolute left-0 top-1 w-8 h-8 border border-emerald-500/30 flex items-center justify-center bg-[#0a0a0a]">
                       <div className="w-2 h-2 bg-emerald-500" />
                     </div>
-                    
+
                     <div className="text-emerald-400 text-sm font-mono mb-1">{item.year}</div>
                     <p className="text-white/60 text-sm leading-relaxed">{item.summary}</p>
                   </div>
@@ -463,12 +582,11 @@ export default function AboutPage() {
         <div className="container px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-light text-white mb-8">
-              Ready to experience{" "}
-              <span className="block text-emerald-400">HPRC?</span>
+              Ready to experience <span className="block text-emerald-400">HPRC?</span>
             </h2>
             <p className="text-white/50 text-lg mb-12 max-w-xl mx-auto">
-              Join a community that celebrates heritage, champions excellence, 
-              and creates unforgettable experiences.
+              Join a community that celebrates heritage, champions excellence, and creates
+              unforgettable experiences.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link
@@ -476,8 +594,18 @@ export default function AboutPage() {
                 className="group inline-flex items-center gap-3 bg-white text-black px-8 py-4 font-medium hover:bg-emerald-400 transition-colors"
               >
                 Apply for Membership
-                <svg className="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                <svg
+                  className="h-4 w-4 transition-transform group-hover:translate-x-1"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
                 </svg>
               </Link>
               <Link

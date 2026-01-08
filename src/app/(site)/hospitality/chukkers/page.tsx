@@ -1,18 +1,18 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
+import { MenuSection } from "@/app/(site)/hospitality/chukkers/menu-section";
+import { ImageLightbox } from "@/components/ui/image-lightbox";
 import { PageHero } from "@/components/ui/page-hero";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { ImageLightbox } from "@/components/ui/image-lightbox";
-import { MenuSection } from "@/app/(site)/hospitality/chukkers/menu-section";
 import { hospitalityContent } from "@/content/hospitality";
 
 export default function ChukkersPage() {
   const venue = hospitalityContent.venues[0]; // Chukkers Restaurant
-  
+
   const galleryImages = [
     {
       src: "/documents/gallery/chukkers/cha01.jpeg",
@@ -40,7 +40,7 @@ export default function ChukkersPage() {
           description={venue.description}
           actions={[
             { label: "View Gallery", href: "#menu-section", variant: "outline" },
-            { label: "View Menu", href: "#menu-section", variant: "primary" }
+            { label: "View Menu", href: "#menu-section", variant: "primary" },
           ]}
         />
       </div>
@@ -48,7 +48,9 @@ export default function ChukkersPage() {
       {/* About Section */}
       <section className="container space-y-8 sm:space-y-12">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-brand-900 mb-4 font-display">About {venue.name}</h2>
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-brand-900 mb-4 font-display">
+            About {venue.name}
+          </h2>
           <div className="grid gap-6 sm:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
             <div className="space-y-4">
               <div className="text-base sm:text-lg text-gray-700 leading-relaxed mb-4">
@@ -97,7 +99,10 @@ export default function ChukkersPage() {
         <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
           <div className="relative h-80 sm:h-96 lg:h-[500px] rounded-2xl overflow-hidden">
             <Image
-              src={venue.image || "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=80"}
+              src={
+                venue.image ||
+                "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=80"
+              }
               alt={venue.name}
               fill
               className="object-cover"
@@ -107,7 +112,9 @@ export default function ChukkersPage() {
 
           <div className="space-y-6 order-1 lg:order-2">
             <div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-brand-900 mb-4 font-display">About {venue.name}</h2>
+              <h2 className="text-2xl sm:text-3xl font-bold text-brand-900 mb-4 font-display">
+                About {venue.name}
+              </h2>
               <p className="text-base sm:text-lg text-gray-700 leading-relaxed mb-4">
                 {venue.fullDescription || venue.description}
               </p>
@@ -145,7 +152,11 @@ export default function ChukkersPage() {
                     <Link
                       key={idx}
                       href={menu.href}
-                      target={menu.href.startsWith('http') || menu.href.endsWith('.pdf') ? '_blank' : undefined}
+                      target={
+                        menu.href.startsWith("http") || menu.href.endsWith(".pdf")
+                          ? "_blank"
+                          : undefined
+                      }
                       className="inline-flex items-center gap-2 rounded-full border-2 border-brand-500 bg-white px-6 py-3 text-sm font-bold text-brand-600 transition-all duration-300 hover:bg-brand-500 hover:text-white hover:shadow-lg"
                     >
                       {menu.label}

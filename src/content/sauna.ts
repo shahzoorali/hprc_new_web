@@ -29,9 +29,7 @@ export const saunaContent = {
         price: "₹750",
       },
     ] satisfies PricingRow[],
-    notes: [
-      "Guest access subject to member accompaniment and facility availability.",
-    ],
+    notes: ["Guest access subject to member accompaniment and facility availability."],
   },
   rules: [
     {

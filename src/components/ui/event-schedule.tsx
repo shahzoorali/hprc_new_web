@@ -1,6 +1,7 @@
 import Image from "next/image";
-import type { ScheduleDay } from "@/content/world-arena-polo-championship-2026";
 import type { ReactElement } from "react";
+
+import type { ScheduleDay } from "@/content/world-arena-polo-championship-2026";
 
 type EventScheduleProps = {
   schedule: ScheduleDay[];
@@ -174,7 +175,7 @@ export function EventSchedule({ schedule }: EventScheduleProps) {
       {/* Enhanced Timeline Line with animated gradient */}
       <div className="absolute left-8 top-0 h-full w-1.5 bg-gradient-to-b from-brand-300 via-brand-500 to-brand-300 sm:left-1/2 sm:-translate-x-1/2 shadow-lg"></div>
       <div className="absolute left-8 top-0 h-full w-3 bg-gradient-to-b from-brand-500/30 via-brand-500/50 to-brand-500/30 blur-lg sm:left-1/2 sm:-translate-x-1/2"></div>
-      
+
       {/* Animated pulse effect on timeline */}
       <div className="absolute left-8 top-0 h-full w-1.5 bg-brand-500/20 animate-pulse sm:left-1/2 sm:-translate-x-1/2"></div>
 
@@ -201,7 +202,7 @@ export function EventSchedule({ schedule }: EventScheduleProps) {
                   <div className="absolute inset-0 bg-gradient-to-br from-brand-400 via-brand-600 to-brand-800 blur-2xl opacity-40 group-hover:opacity-70 transition-opacity duration-700 -z-10"></div>
                   <div className="absolute inset-0 bg-gradient-to-br from-brand-500 to-brand-700 blur-xl opacity-50 group-hover:opacity-80 transition-opacity duration-500 -z-10"></div>
                   <div className="absolute -inset-1 bg-gradient-to-br from-brand-300/30 via-brand-500/30 to-brand-700/30 blur-lg opacity-60 group-hover:opacity-100 transition-opacity duration-500 -z-10"></div>
-                  
+
                   {/* Date Badge */}
                   <div
                     className={`relative flex h-28 w-28 flex-col items-center justify-center bg-gradient-to-br from-brand-600 via-brand-700 to-brand-900 text-white shadow-2xl shadow-brand-900/60 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 ring-4 ring-brand-500/40 overflow-hidden ${
@@ -210,37 +211,40 @@ export function EventSchedule({ schedule }: EventScheduleProps) {
                   >
                     {/* Base gradient background */}
                     <div className="absolute inset-0 bg-gradient-to-br from-brand-600 via-brand-700 to-brand-900"></div>
-                    
+
                     {/* Inner glow layer */}
                     <div className="absolute inset-[2px] bg-gradient-to-br from-brand-500/20 via-transparent to-brand-800/20 pointer-events-none"></div>
-                    
+
                     {/* Refined pattern overlay - better integrated */}
-                    <div className="absolute inset-0 opacity-[0.08] pointer-events-none" 
+                    <div
+                      className="absolute inset-0 opacity-[0.08] pointer-events-none"
                       style={{
-                        backgroundImage: 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.4) 1px, transparent 1px)',
-                        backgroundSize: '6px 6px',
-                        backgroundPosition: 'center'
+                        backgroundImage:
+                          "radial-gradient(circle at 50% 50%, rgba(255,255,255,0.4) 1px, transparent 1px)",
+                        backgroundSize: "6px 6px",
+                        backgroundPosition: "center",
                       }}
                     ></div>
-                    
+
                     {/* Animated shine effects - properly layered */}
                     <div className="absolute inset-0 overflow-hidden pointer-events-none">
                       {/* Primary shine */}
                       <div className="absolute inset-0 bg-gradient-to-br from-white/25 via-white/8 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-500"></div>
-                      
+
                       {/* Secondary diagonal shine */}
                       <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/6 to-white/15 opacity-50 group-hover:opacity-70 transition-opacity duration-500"></div>
-                      
+
                       {/* Animated shimmer sweep */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-shimmer transition-opacity duration-500" 
+                      <div
+                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-shimmer transition-opacity duration-500"
                         style={{
-                          transform: 'translateX(-100%) translateY(-100%) rotate(45deg)',
-                          width: '200%',
-                          height: '200%'
+                          transform: "translateX(-100%) translateY(-100%) rotate(45deg)",
+                          width: "200%",
+                          height: "200%",
                         }}
                       ></div>
                     </div>
-                    
+
                     {/* Content wrapper with proper z-index */}
                     <div className="relative z-20 flex flex-col items-center justify-center gap-1 pointer-events-none">
                       <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-white/95 drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]">
@@ -250,7 +254,7 @@ export function EventSchedule({ schedule }: EventScheduleProps) {
                         {day.date}
                       </span>
                     </div>
-                    
+
                     {/* Corner accent for special days - properly positioned */}
                     {isSpecialDay && (
                       <div className="absolute -top-2 -right-2 z-30 pointer-events-none">
@@ -261,10 +265,12 @@ export function EventSchedule({ schedule }: EventScheduleProps) {
                       </div>
                     )}
                   </div>
-                  
+
                   {/* Enhanced special badge */}
                   {specialBadge && (
-                    <div className={`absolute -bottom-4 left-1/2 -translate-x-1/2 px-4 py-1.5 text-xs font-bold shadow-xl ring-2 ring-white/30 backdrop-blur-sm ${specialBadge.color} transition-all duration-300 group-hover:scale-110 group-hover:shadow-2xl whitespace-nowrap`}>
+                    <div
+                      className={`absolute -bottom-4 left-1/2 -translate-x-1/2 px-4 py-1.5 text-xs font-bold shadow-xl ring-2 ring-white/30 backdrop-blur-sm ${specialBadge.color} transition-all duration-300 group-hover:scale-110 group-hover:shadow-2xl whitespace-nowrap`}
+                    >
                       <span className="relative z-10 inline-block">{specialBadge.text}</span>
                       <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent pointer-events-none"></div>
                     </div>
@@ -296,10 +302,10 @@ export function EventSchedule({ schedule }: EventScheduleProps) {
                         />
                         {/* Gradient overlay for better text readability */}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20"></div>
-                        
+
                         {/* Decorative overlay pattern */}
                         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,transparent_0%,rgba(0,0,0,0.1)_100%)]"></div>
-                        
+
                         {/* Content overlay */}
                         <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
                           <div className="flex items-center justify-between flex-wrap gap-3">
@@ -318,7 +324,7 @@ export function EventSchedule({ schedule }: EventScheduleProps) {
                             )}
                           </div>
                         </div>
-                        
+
                         {/* Corner accent */}
                         <div className="absolute top-4 right-4 h-16 w-16 bg-brand-500/20 blur-2xl"></div>
                       </div>
@@ -326,12 +332,14 @@ export function EventSchedule({ schedule }: EventScheduleProps) {
 
                     {/* Animated Background Gradient */}
                     <div className="absolute inset-0 bg-gradient-to-br from-brand-500/5 via-transparent to-brand-500/10 opacity-0 group-hover/card:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
-                    
+
                     {/* Decorative corner elements */}
                     <div className="absolute right-0 top-0 h-40 w-40 bg-gradient-to-br from-brand-500/10 to-brand-500/5 opacity-0 group-hover/card:opacity-100 transition-all duration-700 group-hover/card:scale-150 pointer-events-none"></div>
                     <div className="absolute bottom-0 left-0 h-32 w-32 bg-gradient-to-tl from-brand-500/5 to-transparent opacity-0 group-hover/card:opacity-100 transition-all duration-700 pointer-events-none"></div>
 
-                    <div className={`relative ${dayImages[day.day] ? "p-6 md:p-8 pt-6" : "p-8 md:p-10"}`}>
+                    <div
+                      className={`relative ${dayImages[day.day] ? "p-6 md:p-8 pt-6" : "p-8 md:p-10"}`}
+                    >
                       {/* Date Header (shown only if no image) */}
                       {!dayImages[day.day] && (
                         <div className="mb-6 flex items-center justify-between">
@@ -417,4 +425,3 @@ export function EventSchedule({ schedule }: EventScheduleProps) {
     </div>
   );
 }
-

@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import React, { useState } from "react";
 
+import { ImageLightbox } from "@/components/ui/image-lightbox";
 import { PageHero } from "@/components/ui/page-hero";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { ImageLightbox } from "@/components/ui/image-lightbox";
 
 export default function PressCoverageNEC2016Page() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -64,13 +64,15 @@ export default function PressCoverageNEC2016Page() {
               />
               <div className="prose prose-lg max-w-none mt-8">
                 <p className="text-gray-700 leading-relaxed">
-                  The National Equestrian Championship 2016 received extensive media coverage, with numerous 
-                  press articles highlighting the significance of the event. The championship brought together 
-                  the country's leading equestrian athletes and showcased the excellence of Indian equestrian sports.
+                  The National Equestrian Championship 2016 received extensive media coverage, with
+                  numerous press articles highlighting the significance of the event. The
+                  championship brought together the country's leading equestrian athletes and
+                  showcased the excellence of Indian equestrian sports.
                 </p>
                 <p className="text-gray-700 leading-relaxed mt-6">
-                  Media outlets covered various aspects of the championship, including competition results, 
-                  athlete achievements, and the overall impact of the event on the equestrian community.
+                  Media outlets covered various aspects of the championship, including competition
+                  results, athlete achievements, and the overall impact of the event on the
+                  equestrian community.
                 </p>
               </div>
             </div>
@@ -137,7 +139,12 @@ export default function PressCoverageNEC2016Page() {
               className="inline-flex items-center gap-2 text-brand-600 hover:text-brand-700 font-semibold transition-colors"
             >
               <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                />
               </svg>
               <span>Back to News</span>
             </Link>

@@ -46,12 +46,14 @@ export default function NationalEquestrianChampionshipKicksOffPage() {
             />
             <div className="prose prose-lg max-w-none mt-8">
               <p className="text-gray-700 leading-relaxed text-lg">
-                National Equestrian Championship Kicks off successfully today on <strong>03rd Feb 2016</strong>, 
-                organized by <strong>Telangana State Equestrian Association</strong> in association with 
+                National Equestrian Championship Kicks off successfully today on{" "}
+                <strong>03rd Feb 2016</strong>, organized by{" "}
+                <strong>Telangana State Equestrian Association</strong> in association with
                 <strong> Hyderabad Polo & Riding Club</strong> at Aziz Nagar, Gandipet, Hyderabad.
               </p>
               <p className="text-gray-700 leading-relaxed mt-6 text-lg">
-                All are invited for this event, which has huge crowd pouring in across India to witness this great event.
+                All are invited for this event, which has huge crowd pouring in across India to
+                witness this great event.
               </p>
             </div>
           </div>
@@ -65,7 +67,12 @@ export default function NationalEquestrianChampionshipKicksOffPage() {
             className="inline-flex items-center gap-2 text-brand-600 hover:text-brand-700 font-semibold transition-colors"
           >
             <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              />
             </svg>
             <span>Back to News</span>
           </Link>

@@ -1,8 +1,8 @@
 import Link from "next/link";
 
 import { PageHero } from "@/components/ui/page-hero";
-import { SectionHeading } from "@/components/ui/section-heading";
 import { PricingTable } from "@/components/ui/pricing-table";
+import { SectionHeading } from "@/components/ui/section-heading";
 
 export default function BeginnersRidingProgrammePage() {
   return (
@@ -44,8 +44,12 @@ export default function BeginnersRidingProgrammePage() {
                   />
                 </svg>
                 <div className="text-white">
-                  <p className="text-xs sm:text-sm font-semibold uppercase tracking-wide opacity-90 mb-1">Operating Hours</p>
-                  <p className="text-base sm:text-lg font-bold">6:00am - 10:00am & 4:00pm - 9:00pm</p>
+                  <p className="text-xs sm:text-sm font-semibold uppercase tracking-wide opacity-90 mb-1">
+                    Operating Hours
+                  </p>
+                  <p className="text-base sm:text-lg font-bold">
+                    6:00am - 10:00am & 4:00pm - 9:00pm
+                  </p>
                 </div>
               </div>
             </div>
@@ -75,14 +79,14 @@ export default function BeginnersRidingProgrammePage() {
                   label: "24 Riding Coupon",
                   price: "Rs. 6,000",
                   gst: "Rs. 1,080",
-                  total: "Rs. 7,080"
+                  total: "Rs. 7,080",
                 },
                 {
                   label: "Coaching",
                   price: "Rs. 2,000",
                   gst: "Rs. 360",
-                  total: "Rs. 2,360"
-                }
+                  total: "Rs. 2,360",
+                },
               ]}
             />
           </div>
@@ -99,14 +103,14 @@ export default function BeginnersRidingProgrammePage() {
                   label: "24 Riding Coupon",
                   price: "Rs. 12,000",
                   gst: "Rs. 2,160",
-                  total: "Rs. 14,160"
+                  total: "Rs. 14,160",
                 },
                 {
                   label: "Coaching",
                   price: "Rs. 2,400",
                   gst: "Rs. 432",
-                  total: "Rs. 2,832"
-                }
+                  total: "Rs. 2,832",
+                },
               ]}
             />
           </div>
@@ -156,4 +160,3 @@ export default function BeginnersRidingProgrammePage() {
     </div>
   );
 }
-

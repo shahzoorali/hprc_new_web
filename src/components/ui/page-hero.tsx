@@ -27,26 +27,17 @@ export function PageHero({
   return (
     <section
       className={`relative overflow-hidden border border-brand-100/60 shadow-[0_30px_60px_-15px_rgba(227,30,36,0.15)] ${
-        backgroundImage 
-          ? "" 
-          : "bg-gradient-to-br from-brand-900 via-brand-800 to-brand-900"
+        backgroundImage ? "" : "bg-gradient-to-br from-brand-900 via-brand-800 to-brand-900"
       } ${backgroundClassName ?? ""}`}
     >
       {backgroundImage && (
         <div className="absolute inset-0 z-0">
-          <Image 
-            src={backgroundImage} 
-            alt="" 
-            fill 
-            className="object-cover" 
-            quality={90} 
-            priority 
-          />
+          <Image src={backgroundImage} alt="" fill className="object-cover" quality={90} priority />
           {/* Darker overlay for better text contrast */}
           <div className="absolute inset-0 bg-gradient-to-br from-brand-900/70 via-brand-800/75 to-brand-900/70"></div>
         </div>
       )}
-      
+
       <div className="relative z-10 px-4 sm:px-6 md:px-16 lg:px-20 py-10 sm:py-12 md:py-20 lg:py-24 pb-12 sm:pb-16 md:pb-24 lg:pb-28">
         <div className="mx-auto max-w-4xl text-center space-y-4 sm:space-y-6 md:space-y-8">
           {eyebrow && (
@@ -78,8 +69,18 @@ export function PageHero({
                   }`}
                 >
                   {action.label}
-                  <svg className="h-3.5 sm:h-4 w-3.5 sm:w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  <svg
+                    className="h-3.5 sm:h-4 w-3.5 sm:w-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    />
                   </svg>
                 </Link>
               ))}

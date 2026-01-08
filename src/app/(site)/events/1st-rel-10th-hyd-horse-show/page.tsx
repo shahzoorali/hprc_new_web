@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import React, { useState } from "react";
 
+import { ImageLightbox } from "@/components/ui/image-lightbox";
 import { PageHero } from "@/components/ui/page-hero";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { ImageLightbox } from "@/components/ui/image-lightbox";
 import { firstRelTenthHydHorseShow } from "@/content/1st-rel-10th-hyd-horse-show";
 
 export default function FirstRelTenthHydHorseShowPage() {
@@ -102,17 +102,13 @@ export default function FirstRelTenthHydHorseShowPage() {
                     <td className="py-4 px-6 font-bold text-gray-900 bg-gray-50 min-w-[120px]">
                       Date :
                     </td>
-                    <td className="py-4 px-6 text-gray-700">
-                      {hero.dates}
-                    </td>
+                    <td className="py-4 px-6 text-gray-700">{hero.dates}</td>
                   </tr>
                   <tr className="border-b border-gray-200">
                     <td className="py-4 px-6 font-bold text-gray-900 bg-gray-50 min-w-[120px]">
                       Time :
                     </td>
-                    <td className="py-4 px-6 text-gray-700">
-                      {hero.time}
-                    </td>
+                    <td className="py-4 px-6 text-gray-700">{hero.time}</td>
                   </tr>
                   <tr className="border-b border-gray-200">
                     <td className="py-4 px-6 font-bold text-gray-900 bg-gray-50 min-w-[120px]">

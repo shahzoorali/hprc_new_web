@@ -46,13 +46,14 @@ export default function HPRCSilverSpurSportsArenaPage() {
             />
             <div className="prose prose-lg max-w-none mt-8">
               <p className="text-gray-700 leading-relaxed">
-                Hyderabad Polo & Riding Club is proud to announce the launch of the all-inclusive Silver Spur 
-                Sports Arena. This new facility represents a significant expansion of HPRC's world-class 
-                sports infrastructure.
+                Hyderabad Polo & Riding Club is proud to announce the launch of the all-inclusive
+                Silver Spur Sports Arena. This new facility represents a significant expansion of
+                HPRC's world-class sports infrastructure.
               </p>
               <p className="text-gray-700 leading-relaxed mt-6">
-                The Silver Spur Sports Arena will provide comprehensive sports facilities and amenities, 
-                further enhancing HPRC's position as a premier destination for sports and recreation in Hyderabad.
+                The Silver Spur Sports Arena will provide comprehensive sports facilities and
+                amenities, further enhancing HPRC's position as a premier destination for sports and
+                recreation in Hyderabad.
               </p>
             </div>
           </div>
@@ -66,7 +67,12 @@ export default function HPRCSilverSpurSportsArenaPage() {
             className="inline-flex items-center gap-2 text-brand-600 hover:text-brand-700 font-semibold transition-colors"
           >
             <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              />
             </svg>
             <span>Back to News</span>
           </Link>

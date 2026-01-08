@@ -1,17 +1,21 @@
-import React from "react";
-import type { Country } from "@/content/world-arena-polo-championship-2026";
-import US from "country-flag-icons/react/3x2/US";
-import IN from "country-flag-icons/react/3x2/IN";
 import DE from "country-flag-icons/react/3x2/DE";
 import FR from "country-flag-icons/react/3x2/FR";
+import IN from "country-flag-icons/react/3x2/IN";
 import LU from "country-flag-icons/react/3x2/LU";
+import US from "country-flag-icons/react/3x2/US";
+import React from "react";
+
+import type { Country } from "@/content/world-arena-polo-championship-2026";
 
 type CountryBadgeProps = {
   country: Country;
   size?: "sm" | "md" | "lg";
 };
 
-const countryFlagComponents: Record<string, React.ComponentType<{ className?: string; title?: string }>> = {
+const countryFlagComponents: Record<
+  string,
+  React.ComponentType<{ className?: string; title?: string }>
+> = {
   USA: US,
   IND: IN,
   GER: DE,
@@ -51,4 +55,3 @@ export function CountryBadge({ country, size = "md" }: CountryBadgeProps) {
     </div>
   );
 }
-

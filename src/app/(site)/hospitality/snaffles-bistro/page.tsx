@@ -1,18 +1,19 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
+import { ImageLightbox } from "@/components/ui/image-lightbox";
 import { PageHero } from "@/components/ui/page-hero";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { ImageLightbox } from "@/components/ui/image-lightbox";
 import { hospitalityContent } from "@/content/hospitality";
+
 import { MenuSection } from "./menu-section";
 
 export default function SnafflesBistroPage() {
   const venue = hospitalityContent.venues[1]; // Snaffles Bistro
-  
+
   const galleryImages = [
     {
       src: "/documents/gallery/snaffles/bis01.jpeg",
@@ -38,7 +39,9 @@ export default function SnafflesBistroPage() {
           eyebrow="Dining"
           title={venue.name}
           description={venue.description}
-          actions={[{ label: "View Menu", href: venue.menuLinks?.[0]?.href || "#", variant: "primary" }]}
+          actions={[
+            { label: "View Menu", href: venue.menuLinks?.[0]?.href || "#", variant: "primary" },
+          ]}
         />
       </div>
 
@@ -47,7 +50,10 @@ export default function SnafflesBistroPage() {
         <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
           <div className="relative h-80 sm:h-96 lg:h-[500px]  overflow-hidden order-2 lg:order-1">
             <Image
-              src={venue.image || "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1200&q=80"}
+              src={
+                venue.image ||
+                "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1200&q=80"
+              }
               alt={venue.name}
               fill
               className="object-cover"
@@ -57,7 +63,9 @@ export default function SnafflesBistroPage() {
 
           <div className="space-y-6 order-1 lg:order-2">
             <div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-brand-900 mb-4 font-display">About {venue.name}</h2>
+              <h2 className="text-2xl sm:text-3xl font-bold text-brand-900 mb-4 font-display">
+                About {venue.name}
+              </h2>
               <p className="text-base sm:text-lg text-gray-700 leading-relaxed mb-4">
                 {venue.fullDescription || venue.description}
               </p>
@@ -95,7 +103,11 @@ export default function SnafflesBistroPage() {
                     <Link
                       key={idx}
                       href={menu.href}
-                      target={menu.href.startsWith('http') || menu.href.endsWith('.pdf') ? '_blank' : undefined}
+                      target={
+                        menu.href.startsWith("http") || menu.href.endsWith(".pdf")
+                          ? "_blank"
+                          : undefined
+                      }
                       className="inline-flex items-center gap-2  border-2 border-brand-500 bg-white px-6 py-3 text-sm font-bold text-brand-600 transition-all duration-300 hover:bg-brand-500 hover:text-white hover:shadow-lg"
                     >
                       {menu.label}
@@ -188,7 +200,8 @@ export default function SnafflesBistroPage() {
               Visit Snaffles Bistro
             </h3>
             <p className="text-base sm:text-lg text-gray-700 mb-6 sm:mb-8 leading-relaxed">
-              Join us for a casual and relaxed dining experience. Perfect for family gatherings and friendly meet-ups.
+              Join us for a casual and relaxed dining experience. Perfect for family gatherings and
+              friendly meet-ups.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link
@@ -223,4 +236,3 @@ export default function SnafflesBistroPage() {
     </div>
   );
 }
-

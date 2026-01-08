@@ -99,9 +99,7 @@ export const gymContent = {
     },
     {
       category: "Membership and Access",
-      items: [
-        "Always check in at the front desk or use your membership card",
-      ],
+      items: ["Always check in at the front desk or use your membership card"],
     },
   ],
   gallery: {

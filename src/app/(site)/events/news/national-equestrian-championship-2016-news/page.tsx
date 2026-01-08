@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import React, { useState } from "react";
 
+import { ImageLightbox } from "@/components/ui/image-lightbox";
 import { PageHero } from "@/components/ui/page-hero";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { ImageLightbox } from "@/components/ui/image-lightbox";
 
 export default function NationalEquestrianChampionship2016NewsPage() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -64,14 +64,16 @@ export default function NationalEquestrianChampionship2016NewsPage() {
               />
               <div className="prose prose-lg max-w-none mt-8">
                 <p className="text-gray-700 leading-relaxed">
-                  The National Equestrian Championship 2016 was a landmark event co-hosted by Hyderabad Polo & 
-                  Riding Club and the Telangana State Equestrian Association. The championship featured 200 
-                  horses and brought together the country's leading equestrian riders.
+                  The National Equestrian Championship 2016 was a landmark event co-hosted by
+                  Hyderabad Polo & Riding Club and the Telangana State Equestrian Association. The
+                  championship featured 200 horses and brought together the country's leading
+                  equestrian riders.
                 </p>
                 <p className="text-gray-700 leading-relaxed mt-6">
-                  Competitions were held across five categories, showcasing the diversity and excellence of 
-                  equestrian sports in India. The event demonstrated HPRC's capability to host major national 
-                  championships and its commitment to promoting equestrian sports.
+                  Competitions were held across five categories, showcasing the diversity and
+                  excellence of equestrian sports in India. The event demonstrated HPRC's capability
+                  to host major national championships and its commitment to promoting equestrian
+                  sports.
                 </p>
               </div>
             </div>
@@ -138,7 +140,12 @@ export default function NationalEquestrianChampionship2016NewsPage() {
               className="inline-flex items-center gap-2 text-brand-600 hover:text-brand-700 font-semibold transition-colors"
             >
               <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                />
               </svg>
               <span>Back to News</span>
             </Link>

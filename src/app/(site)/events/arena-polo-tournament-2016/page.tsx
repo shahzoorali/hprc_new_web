@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import React, { useState } from "react";
 
+import { ImageLightbox } from "@/components/ui/image-lightbox";
 import { PageHero } from "@/components/ui/page-hero";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { ImageLightbox } from "@/components/ui/image-lightbox";
 import { arenaPoloTournament2016 } from "@/content/arena-polo-tournament-2016";
 
 export default function ArenaPoloTournament2016Page() {
@@ -133,9 +133,7 @@ export default function ArenaPoloTournament2016Page() {
                 <p className="text-sm font-semibold text-brand-600 mb-3 uppercase tracking-wider">
                   {tournament.dates}
                 </p>
-                <p className="text-sm font-semibold text-gray-600 mb-3">
-                  {tournament.goal}
-                </p>
+                <p className="text-sm font-semibold text-gray-600 mb-3">{tournament.goal}</p>
                 <p className="text-base text-gray-700 leading-relaxed font-light">
                   {tournament.description}
                 </p>

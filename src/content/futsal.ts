@@ -29,10 +29,7 @@ export const futsalContent = {
         price: "₹2,000",
       },
     ] satisfies PricingRow[],
-    notes: [
-      "Booking subject to court availability.",
-      "Rates are per hour.",
-    ],
+    notes: ["Booking subject to court availability.", "Rates are per hour."],
   },
   rules: [
     {

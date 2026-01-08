@@ -68,7 +68,7 @@ function DesktopNav() {
     const relatedTarget = e.relatedTarget as HTMLElement;
     const megaMenu = relatedTarget?.closest("[data-mega-menu]");
     const anotherMenuItem = relatedTarget?.closest("li[class*='group']");
-    
+
     // If moving to mega menu or another menu item, don't close
     if (megaMenu || anotherMenuItem) {
       return;
@@ -84,7 +84,7 @@ function DesktopNav() {
       // Double-check that we're not hovering over any menu or menu item
       const isHoveringMenu = document.querySelector("[data-mega-menu]:hover");
       const isHoveringMenuItem = document.querySelector("li[class*='group']:hover");
-      
+
       if (!isHoveringMenu && !isHoveringMenuItem && hoveredItem === itemHref) {
         setHoveredItem(null);
       }
@@ -138,8 +138,10 @@ function DesktopNav() {
                     clearTimeout(closeTimeoutRef.current);
                   }
                   closeTimeoutRef.current = setTimeout(() => {
-                    if (!document.querySelector("[data-mega-menu]:hover") && 
-                        !document.querySelector("li[class*='group']:hover")) {
+                    if (
+                      !document.querySelector("[data-mega-menu]:hover") &&
+                      !document.querySelector("li[class*='group']:hover")
+                    ) {
                       setHoveredItem(null);
                     }
                     closeTimeoutRef.current = null;
@@ -192,7 +194,7 @@ function MobileNav() {
 
   return (
     <nav className="relative lg:hidden">
-      <details 
+      <details
         ref={detailsRef}
         className="group"
         onToggle={(e) => {

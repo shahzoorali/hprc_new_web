@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+
 import { SectionHeading } from "@/components/ui/section-heading";
 
 interface MenuItem {
@@ -20,7 +21,8 @@ interface MenuCategory {
   items: MenuItem[];
 }
 
-const loungeBarDescription = "Since initiation, Chukker Lounge has been a beacon for those seeking a welcoming atmosphere, delicious food and expertly crafted drinks. Featuring everything from artisanal cocktails and fine wines to a diverse range of craft beers. Our warm and inviting ambience is perfect for any gathering, whether it's an intimate date night, a lively group outing, a solo retreat or simply enjoying a night out with friends. Our skilled bartenders are here to mix the perfect drink to suit your mood. Chukker Lounge is more than just a place to eat and drink; it's a social hub where connections are made, and stories are shared. Cheers!";
+const loungeBarDescription =
+  "Since initiation, Chukker Lounge has been a beacon for those seeking a welcoming atmosphere, delicious food and expertly crafted drinks. Featuring everything from artisanal cocktails and fine wines to a diverse range of craft beers. Our warm and inviting ambience is perfect for any gathering, whether it's an intimate date night, a lively group outing, a solo retreat or simply enjoying a night out with friends. Our skilled bartenders are here to mix the perfect drink to suit your mood. Chukker Lounge is more than just a place to eat and drink; it's a social hub where connections are made, and stories are shared. Cheers!";
 
 const loungeBarCategories: MenuCategory[] = [
   {
@@ -127,9 +129,7 @@ const loungeBarCategories: MenuCategory[] = [
   },
   {
     name: "LIQUEUR",
-    items: [
-      { name: "Jagermeister", priceBottle: "₹6,375" },
-    ],
+    items: [{ name: "Jagermeister", priceBottle: "₹6,375" }],
   },
   {
     name: "SODA & WATER",
@@ -205,7 +205,8 @@ const loungeBarCategories: MenuCategory[] = [
   },
 ];
 
-const foodDescription = "Welcome to Chukker Lounge, where culinary artistry meets exquisite flavors to tantalize your taste buds. From the sizzle of perfectly roasted chicken to the delicate balance of spices in our vegetarian dishes, each plate tells a story of culinary mastery. An adventure of gastronomic proportions awaits, encouraging you to explore our carefully curated menu, designed to satisfy every palate and craving. Whether you're seeking a romantic dinner for two, a celebratory feast with friends, or a casual lunch with colleagues, Chukker Lounge promises an unforgettable dining experience filled with flavor, flair, and unparalleled hospitality. So, Go Ahead, Indulge!";
+const foodDescription =
+  "Welcome to Chukker Lounge, where culinary artistry meets exquisite flavors to tantalize your taste buds. From the sizzle of perfectly roasted chicken to the delicate balance of spices in our vegetarian dishes, each plate tells a story of culinary mastery. An adventure of gastronomic proportions awaits, encouraging you to explore our carefully curated menu, designed to satisfy every palate and craving. Whether you're seeking a romantic dinner for two, a celebratory feast with friends, or a casual lunch with colleagues, Chukker Lounge promises an unforgettable dining experience filled with flavor, flair, and unparalleled hospitality. So, Go Ahead, Indulge!";
 
 const foodCategories: MenuCategory[] = [
   {
@@ -476,26 +477,26 @@ const foodCategories: MenuCategory[] = [
   {
     name: "WOOD FIRED PIZZAS",
     items: [
-      { name: "Classic Margherita 1889 (9\")", price: "₹250" },
-      { name: "Classic Margherita 1889 (12\")", price: "₹350" },
-      { name: "Onion, Garlic, Mushroom & Cheese (9\")", price: "₹350" },
-      { name: "Onion, Garlic, Mushroom & Cheese (12\")", price: "₹450" },
-      { name: "Paneer Tikka, Olives & Jalapenos (9\")", price: "₹350" },
-      { name: "Paneer Tikka, Olives & Jalapenos (12\")", price: "₹450" },
-      { name: "Farm Fresh Exotica (9\")", price: "₹350" },
-      { name: "Farm Fresh Exotica (12\")", price: "₹450" },
-      { name: "Garlic Lovers (9\")", price: "₹350" },
-      { name: "Garlic Lovers (12\")", price: "₹450" },
-      { name: "Make Your Own Pizza - Any 4 Veggies (9\")", price: "₹450" },
-      { name: "Make Your Own Pizza - Any 4 Veggies (12\")", price: "₹550" },
-      { name: "BBQ Chicken Tikka Pizza (9\")", price: "₹350" },
-      { name: "BBQ Chicken Tikka Pizza (12\")", price: "₹450" },
-      { name: "Tandoori Chicken Pizza (9\")", price: "₹375" },
-      { name: "Tandoori Chicken Pizza (12\")", price: "₹495" },
-      { name: "Mana Andhra, Mana Telangana Pizza (APTG) (9\")", price: "₹375" },
-      { name: "Mana Andhra, Mana Telangana Pizza (APTG) (12\")", price: "₹495" },
-      { name: "Make Your Own Pizza - Any 2 Non-veg (9\")", price: "₹495" },
-      { name: "Make Your Own Pizza - Any 2 Non-veg (12\")", price: "₹595" },
+      { name: 'Classic Margherita 1889 (9")', price: "₹250" },
+      { name: 'Classic Margherita 1889 (12")', price: "₹350" },
+      { name: 'Onion, Garlic, Mushroom & Cheese (9")', price: "₹350" },
+      { name: 'Onion, Garlic, Mushroom & Cheese (12")', price: "₹450" },
+      { name: 'Paneer Tikka, Olives & Jalapenos (9")', price: "₹350" },
+      { name: 'Paneer Tikka, Olives & Jalapenos (12")', price: "₹450" },
+      { name: 'Farm Fresh Exotica (9")', price: "₹350" },
+      { name: 'Farm Fresh Exotica (12")', price: "₹450" },
+      { name: 'Garlic Lovers (9")', price: "₹350" },
+      { name: 'Garlic Lovers (12")', price: "₹450" },
+      { name: 'Make Your Own Pizza - Any 4 Veggies (9")', price: "₹450" },
+      { name: 'Make Your Own Pizza - Any 4 Veggies (12")', price: "₹550" },
+      { name: 'BBQ Chicken Tikka Pizza (9")', price: "₹350" },
+      { name: 'BBQ Chicken Tikka Pizza (12")', price: "₹450" },
+      { name: 'Tandoori Chicken Pizza (9")', price: "₹375" },
+      { name: 'Tandoori Chicken Pizza (12")', price: "₹495" },
+      { name: 'Mana Andhra, Mana Telangana Pizza (APTG) (9")', price: "₹375" },
+      { name: 'Mana Andhra, Mana Telangana Pizza (APTG) (12")', price: "₹495" },
+      { name: 'Make Your Own Pizza - Any 2 Non-veg (9")', price: "₹495" },
+      { name: 'Make Your Own Pizza - Any 2 Non-veg (12")', price: "₹595" },
     ],
   },
 ];
@@ -523,9 +524,10 @@ export function MenuSection() {
         <SectionHeading
           eyebrow="Our Menu"
           title={activeMenuType}
-          description={isLoungeBar 
-            ? "Explore our carefully curated selection of beverages, from classic favorites to innovative concoctions."
-            : "Discover our exquisite culinary offerings, featuring traditional recipes and contemporary fusion dishes."
+          description={
+            isLoungeBar
+              ? "Explore our carefully curated selection of beverages, from classic favorites to innovative concoctions."
+              : "Discover our exquisite culinary offerings, featuring traditional recipes and contemporary fusion dishes."
           }
         />
 
@@ -553,9 +555,7 @@ export function MenuSection() {
           <h3 className="text-xl sm:text-2xl font-bold text-brand-900 mb-4 font-display">
             {isLoungeBar ? "About Chukker Lounge" : "Welcome to Chukker Lounge"}
           </h3>
-          <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
-            {currentDescription}
-          </p>
+          <p className="text-base sm:text-lg text-gray-700 leading-relaxed">{currentDescription}</p>
         </div>
 
         {/* Category Tabs */}
@@ -588,9 +588,7 @@ export function MenuSection() {
                     <h3 className="text-xl sm:text-2xl font-bold text-brand-900 font-display">
                       {category.name}
                     </h3>
-                    <span className="text-sm text-gray-500">
-                      {category.items.length} items
-                    </span>
+                    <span className="text-sm text-gray-500">{category.items.length} items</span>
                   </div>
 
                   {/* Category Items */}
@@ -627,12 +625,18 @@ export function MenuSection() {
                               <div className="space-y-1">
                                 {item.price30ml && (
                                   <div className="text-lg sm:text-xl font-bold text-brand-600">
-                                    {item.price30ml} <span className="text-sm font-normal text-gray-500">(30ml)</span>
+                                    {item.price30ml}{" "}
+                                    <span className="text-sm font-normal text-gray-500">
+                                      (30ml)
+                                    </span>
                                   </div>
                                 )}
                                 {item.priceBottle && (
                                   <div className="text-base sm:text-lg font-semibold text-gray-700">
-                                    {item.priceBottle} <span className="text-xs font-normal text-gray-500">(Bottle)</span>
+                                    {item.priceBottle}{" "}
+                                    <span className="text-xs font-normal text-gray-500">
+                                      (Bottle)
+                                    </span>
                                   </div>
                                 )}
                               </div>
@@ -643,7 +647,7 @@ export function MenuSection() {
                     ))}
                   </div>
                 </div>
-              )
+              ),
           )}
         </div>
 
@@ -668,7 +672,9 @@ export function MenuSection() {
                   </svg>
                 </div>
                 <div className="flex-1">
-                  <h4 className="text-lg sm:text-xl font-bold text-amber-900 mb-2">Special Notes</h4>
+                  <h4 className="text-lg sm:text-xl font-bold text-amber-900 mb-2">
+                    Special Notes
+                  </h4>
                   <ul className="space-y-2 text-gray-700">
                     <li className="flex items-start gap-2">
                       <span className="text-amber-600">•</span>
@@ -746,7 +752,9 @@ export function MenuSection() {
                 </div>
                 <div className="flex-1">
                   <h4 className="text-lg sm:text-xl font-bold text-red-900 mb-1">Warning</h4>
-                  <p className="text-base text-red-800 font-semibold">Never mix drinks with driving</p>
+                  <p className="text-base text-red-800 font-semibold">
+                    Never mix drinks with driving
+                  </p>
                   <p className="text-sm text-red-700">It is a deadly cocktail</p>
                 </div>
               </div>

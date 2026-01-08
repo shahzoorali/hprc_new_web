@@ -477,16 +477,17 @@ export default function PhotoGalleryPage() {
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState<string>("all");
 
-  const allAlbums: AlbumWithCategory[] = galleryCategories.flatMap((cat) => 
-    cat.albums.map((album) => ({ ...album, category: cat.id }))
+  const allAlbums: AlbumWithCategory[] = galleryCategories.flatMap((cat) =>
+    cat.albums.map((album) => ({ ...album, category: cat.id })),
   );
 
-  const filteredAlbums = activeCategory === "all" 
-    ? allAlbums 
-    : allAlbums.filter((album) => album.category === activeCategory);
+  const filteredAlbums =
+    activeCategory === "all"
+      ? allAlbums
+      : allAlbums.filter((album) => album.category === activeCategory);
 
-  const currentAlbum: AlbumWithCategory | undefined = selectedAlbum 
-    ? allAlbums.find((a) => a.id === selectedAlbum) 
+  const currentAlbum: AlbumWithCategory | undefined = selectedAlbum
+    ? allAlbums.find((a) => a.id === selectedAlbum)
     : undefined;
 
   return (
@@ -496,7 +497,7 @@ export default function PhotoGalleryPage() {
         {/* Background */}
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-950 to-black" />
-          <div 
+          <div
             className="absolute inset-0 opacity-10"
             style={{
               backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
@@ -521,8 +522,8 @@ export default function PhotoGalleryPage() {
             </h1>
 
             <p className="text-xl text-slate-300 max-w-2xl leading-relaxed mb-8">
-              Browse curated albums of our world-class facilities, tournaments, training camps, 
-              and memorable events at Hyderabad Polo & Riding Club.
+              Browse curated albums of our world-class facilities, tournaments, training camps, and
+              memorable events at Hyderabad Polo & Riding Club.
             </p>
 
             <a
@@ -530,7 +531,12 @@ export default function PhotoGalleryPage() {
               className="inline-flex items-center gap-2 border border-white/20 hover:border-white/40 text-white hover:bg-white/5 px-6 py-3 rounded-full text-sm font-medium transition-all"
             >
               <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                />
               </svg>
               Request High-Res Images
             </a>
@@ -631,7 +637,12 @@ export default function PhotoGalleryPage() {
                   className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
                 >
                   <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
                   </svg>
                 </button>
               </div>
@@ -655,8 +666,18 @@ export default function PhotoGalleryPage() {
                     />
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
                       <div className="opacity-0 group-hover:opacity-100 transition-opacity">
-                        <svg className="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                        <svg
+                          className="h-8 w-8 text-white"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"
+                          />
                         </svg>
                       </div>
                     </div>
@@ -670,7 +691,7 @@ export default function PhotoGalleryPage() {
 
       {/* Lightbox */}
       {lightboxImage && (
-        <div 
+        <div
           className="fixed inset-0 z-[60] bg-black/95 flex items-center justify-center p-4"
           onClick={() => setLightboxImage(null)}
         >
@@ -679,7 +700,12 @@ export default function PhotoGalleryPage() {
             className="absolute top-4 right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
           >
             <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
             </svg>
           </button>
           <div className="relative max-w-5xl max-h-[90vh] w-full h-full">
@@ -689,8 +715,8 @@ export default function PhotoGalleryPage() {
               fill
               className="object-contain"
               sizes="100vw"
-        />
-      </div>
+            />
+          </div>
         </div>
       )}
 
@@ -702,8 +728,8 @@ export default function PhotoGalleryPage() {
               Want to Share Your Photos?
             </h2>
             <p className="text-slate-400 text-lg mb-8">
-              If you have photos from HPRC events that you&apos;d like to share, 
-              or need high-resolution images for press or personal use, get in touch with our media team.
+              If you have photos from HPRC events that you&apos;d like to share, or need
+              high-resolution images for press or personal use, get in touch with our media team.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <a
@@ -711,7 +737,12 @@ export default function PhotoGalleryPage() {
                 className="inline-flex items-center gap-2 bg-brand-500 hover:bg-brand-600 text-white px-6 py-3 rounded-full font-semibold transition-all"
               >
                 <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  />
                 </svg>
                 Contact Media Team
               </a>
@@ -720,8 +751,18 @@ export default function PhotoGalleryPage() {
                 className="inline-flex items-center gap-2 border border-white/20 hover:border-white/40 text-white hover:bg-white/5 px-6 py-3 rounded-full font-semibold transition-all"
               >
                 <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
                 </svg>
                 View Video Gallery
               </Link>
@@ -734,23 +775,23 @@ export default function PhotoGalleryPage() {
 }
 
 // Album Card Component
-function AlbumCard({ 
-  album, 
-  onClick 
-}: { 
-  album: { 
-    id: string; 
-    title: string; 
-    coverImage: string; 
-    images: string[]; 
+function AlbumCard({
+  album,
+  onClick,
+}: {
+  album: {
+    id: string;
+    title: string;
+    coverImage: string;
+    images: string[];
     year?: string;
     date?: string;
-  }; 
+  };
   onClick: () => void;
 }) {
   const hasImages = album.images.length > 0;
   const displayDate = album.date || album.year || "";
-  
+
   return (
     <button
       onClick={onClick}
@@ -768,12 +809,14 @@ function AlbumCard({
         }`}
         sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
       />
-      
+
       {/* Overlay */}
-      <div className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent ${
-        hasImages ? "group-hover:from-black/90" : ""
-      } transition-colors duration-300`} />
-      
+      <div
+        className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent ${
+          hasImages ? "group-hover:from-black/90" : ""
+        } transition-colors duration-300`}
+      />
+
       {/* Content */}
       <div className="absolute inset-0 p-4 flex flex-col justify-end">
         {displayDate && (
@@ -783,23 +826,27 @@ function AlbumCard({
           {album.title}
         </h3>
         {hasImages && (
-          <span className="text-white/60 text-xs mt-1">
-            {album.images.length} photos
-          </span>
+          <span className="text-white/60 text-xs mt-1">{album.images.length} photos</span>
         )}
-        {!hasImages && (
-          <span className="text-white/40 text-xs mt-1 italic">
-            Coming soon
-          </span>
-        )}
+        {!hasImages && <span className="text-white/40 text-xs mt-1 italic">Coming soon</span>}
       </div>
 
       {/* Hover Icon */}
       {hasImages && (
         <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
           <div className="bg-white/20 backdrop-blur-sm rounded-full p-2">
-            <svg className="h-4 w-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+            <svg
+              className="h-4 w-4 text-white"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
+              />
             </svg>
           </div>
         </div>

@@ -114,8 +114,7 @@ const videoCategories = [
       {
         id: "training-1",
         title: "Learn Riding @ HPRC with Asu Singh",
-        description:
-          "Professional horse riding lessons with expert coach Asu Singh at HPRC.",
+        description: "Professional horse riding lessons with expert coach Asu Singh at HPRC.",
         youtubeId: "R_HXpHNhg_k",
         duration: "5:30",
         views: "5.6K",
@@ -132,8 +131,7 @@ const videoCategories = [
       {
         id: "training-3",
         title: "Sports - Hyderabad Polo & Riding Club",
-        description:
-          "Overview of sports activities and training programs available at HPRC.",
+        description: "Overview of sports activities and training programs available at HPRC.",
         youtubeId: "C6eJosttdGQ",
         duration: "4:37",
         views: "2.1K",
@@ -148,8 +146,7 @@ const videoCategories = [
       {
         id: "facilities-1",
         title: "Sports - Hyderabad Polo & Riding Club Overview",
-        description:
-          "Comprehensive overview of the world-class sports facilities at HPRC.",
+        description: "Comprehensive overview of the world-class sports facilities at HPRC.",
         youtubeId: "C6eJosttdGQ",
         duration: "4:37",
         views: "4.8K",
@@ -157,8 +154,7 @@ const videoCategories = [
       {
         id: "facilities-2",
         title: "HPRC World Arena Polo Championship Venue",
-        description:
-          "Tour of the arena polo championship venue and facilities at HPRC.",
+        description: "Tour of the arena polo championship venue and facilities at HPRC.",
         youtubeId: "-N4h3tTNhKo",
         duration: "2:55",
         views: "1.4K",
@@ -166,8 +162,7 @@ const videoCategories = [
       {
         id: "facilities-3",
         title: "Telangana State Competition at HPRC",
-        description:
-          "Experience the competition-ready facilities at Hyderabad Polo & Riding Club.",
+        description: "Experience the competition-ready facilities at Hyderabad Polo & Riding Club.",
         youtubeId: "y7TG7VDBLDc",
         duration: "2:32",
         views: "2.3K",
@@ -185,7 +180,7 @@ export default function VideoGalleryPage() {
       ...video,
       categoryId: cat.id,
       categoryName: cat.name,
-    }))
+    })),
   );
 
   const filteredVideos =
@@ -225,8 +220,8 @@ export default function VideoGalleryPage() {
             </h1>
 
             <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed mb-10">
-              Match highlights, rider spotlights, training tutorials, and
-              behind-the-scenes footage from Hyderabad Polo & Riding Club.
+              Match highlights, rider spotlights, training tutorials, and behind-the-scenes footage
+              from Hyderabad Polo & Riding Club.
             </p>
 
             <a
@@ -310,12 +305,7 @@ export default function VideoGalleryPage() {
                 </p>
                 <div className="flex items-center gap-4 text-sm text-gray-500">
                   <span className="flex items-center gap-1">
-                    <svg
-                      className="h-4 w-4"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
+                    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -326,12 +316,7 @@ export default function VideoGalleryPage() {
                     {featuredVideos[0].category}
                   </span>
                   <span className="flex items-center gap-1">
-                    <svg
-                      className="h-4 w-4"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
+                    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -390,9 +375,7 @@ export default function VideoGalleryPage() {
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center gap-3">
                     <span className="text-2xl">{category.icon}</span>
-                    <h2 className="text-xl font-bold text-white">
-                      {category.name}
-                    </h2>
+                    <h2 className="text-xl font-bold text-white">{category.name}</h2>
                   </div>
                   <button
                     onClick={() => setActiveCategory(category.id)}
@@ -440,12 +423,7 @@ export default function VideoGalleryPage() {
             onClick={() => setPlayingVideo(null)}
             className="absolute top-4 right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors z-10"
           >
-            <svg
-              className="h-8 w-8"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
+            <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -476,20 +454,14 @@ export default function VideoGalleryPage() {
         <div className="container px-4">
           <div className="max-w-3xl mx-auto text-center">
             <div className="inline-flex items-center justify-center w-20 h-20 bg-red-600 rounded-full mb-8">
-              <svg
-                className="h-10 w-10 text-white"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
+              <svg className="h-10 w-10 text-white" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
               </svg>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-              Never Miss an Update
-            </h2>
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">Never Miss an Update</h2>
             <p className="text-gray-400 text-lg mb-10 max-w-xl mx-auto">
-              Subscribe to our YouTube channel for the latest match highlights,
-              training videos, and exclusive behind-the-scenes content.
+              Subscribe to our YouTube channel for the latest match highlights, training videos, and
+              exclusive behind-the-scenes content.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <a
@@ -498,11 +470,7 @@ export default function VideoGalleryPage() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-3 bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300"
               >
-                <svg
-                  className="h-6 w-6"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
+                <svg className="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
                 </svg>
                 Subscribe Now
@@ -511,12 +479,7 @@ export default function VideoGalleryPage() {
                 href="/events/photo-gallery"
                 className="inline-flex items-center gap-2 border border-white/20 hover:border-white/40 text-white hover:bg-white/5 px-8 py-4 rounded-full font-semibold transition-all"
               >
-                <svg
-                  className="h-5 w-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
+                <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -567,11 +530,7 @@ function VideoCard({
         {/* Play Button */}
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
           <div className="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center shadow-lg">
-            <svg
-              className="h-6 w-6 text-white ml-0.5"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-            >
+            <svg className="h-6 w-6 text-white ml-0.5" viewBox="0 0 24 24" fill="currentColor">
               <path d="M8 5v14l11-7z" />
             </svg>
           </div>

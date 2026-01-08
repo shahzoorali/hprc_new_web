@@ -31,14 +31,18 @@ export default function LuxuryRoomsPage() {
 
           <div className="space-y-6">
             <div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-brand-900 mb-4 font-display">Luxury Accommodation</h2>
+              <h2 className="text-2xl sm:text-3xl font-bold text-brand-900 mb-4 font-display">
+                Luxury Accommodation
+              </h2>
               <p className="text-base sm:text-lg text-gray-700 leading-relaxed mb-4">
-                We are coming up with Rooms very soon, that may be booked by our members and their guests for the perfect weekend getaways. 
-                Our luxury rooms will feature modern amenities, elegant furnishings, and stunning views of the club's beautiful grounds.
+                We are coming up with Rooms very soon, that may be booked by our members and their
+                guests for the perfect weekend getaways. Our luxury rooms will feature modern
+                amenities, elegant furnishings, and stunning views of the club's beautiful grounds.
               </p>
               <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
-                Whether you're visiting for a polo tournament, a family celebration, or simply to enjoy the club's facilities, 
-                our accommodation will provide a comfortable and memorable stay.
+                Whether you're visiting for a polo tournament, a family celebration, or simply to
+                enjoy the club's facilities, our accommodation will provide a comfortable and
+                memorable stay.
               </p>
             </div>
 
@@ -50,7 +54,7 @@ export default function LuxuryRoomsPage() {
                   "Stunning views of the club grounds and polo fields",
                   "Complimentary access to club facilities",
                   "Perfect for weekend getaways and extended stays",
-                  "Priority booking for members and their guests"
+                  "Priority booking for members and their guests",
                 ].map((feature, idx) => (
                   <li key={idx} className="flex items-start gap-3">
                     <svg
@@ -83,7 +87,8 @@ export default function LuxuryRoomsPage() {
               Stay Updated
             </h3>
             <p className="text-base sm:text-lg text-gray-700 mb-6 sm:mb-8 leading-relaxed">
-              Our luxury rooms are coming soon! Contact us to be notified when bookings open and to learn more about our accommodation options.
+              Our luxury rooms are coming soon! Contact us to be notified when bookings open and to
+              learn more about our accommodation options.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link
@@ -118,4 +123,3 @@ export default function LuxuryRoomsPage() {
     </div>
   );
 }
-

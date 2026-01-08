@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import React, { useState } from "react";
 
+import { ImageLightbox } from "@/components/ui/image-lightbox";
 import { PageHero } from "@/components/ui/page-hero";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { ImageLightbox } from "@/components/ui/image-lightbox";
 
 export default function HPRCAcademiaSportsVillagePage() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -69,15 +69,17 @@ export default function HPRCAcademiaSportsVillagePage() {
 
               <div className="prose prose-lg max-w-none mt-8">
                 <p className="text-gray-700 leading-relaxed">
-                  Hyderabad Polo & Riding Club is proud to announce a strategic partnership with Academia Sports 
-                  Village. This collaboration brings together HPRC's world-class facilities and Academia Sports 
-                  Village's expertise in sports training and development.
+                  Hyderabad Polo & Riding Club is proud to announce a strategic partnership with
+                  Academia Sports Village. This collaboration brings together HPRC's world-class
+                  facilities and Academia Sports Village's expertise in sports training and
+                  development.
                 </p>
 
                 <p className="text-gray-700 leading-relaxed mt-6">
-                  The partnership will deliver comprehensive year-round coaching programmes, international training 
-                  camps, and structured athlete development pathways. This initiative aims to enhance sports 
-                  excellence and provide enhanced opportunities for athletes across various disciplines.
+                  The partnership will deliver comprehensive year-round coaching programmes,
+                  international training camps, and structured athlete development pathways. This
+                  initiative aims to enhance sports excellence and provide enhanced opportunities
+                  for athletes across various disciplines.
                 </p>
               </div>
             </div>

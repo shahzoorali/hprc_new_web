@@ -42,16 +42,24 @@ export default function SportsCentrePage() {
               "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800&q=80", // Sauna
             ];
             // All major facilities have dedicated pages, others use the dynamic route
-            const facilityHref = 
-              facility.id === "swimming" ? "/sports-centre/swimming" :
-              facility.id === "tennis" ? "/sports-centre/tennis" :
-              facility.id === "badminton" ? "/sports-centre/badminton" :
-              facility.id === "squash" ? "/sports-centre/squash" :
-              facility.id === "basketball" ? "/sports-centre/basketball" :
-              facility.id === "futsal" ? "/sports-centre/futsal" :
-              facility.id === "gym" ? "/sports-centre/gym" :
-              facility.id === "sauna" ? "/sports-centre/sauna" :
-              `/sports-centre/${facility.id}`;
+            const facilityHref =
+              facility.id === "swimming"
+                ? "/sports-centre/swimming"
+                : facility.id === "tennis"
+                  ? "/sports-centre/tennis"
+                  : facility.id === "badminton"
+                    ? "/sports-centre/badminton"
+                    : facility.id === "squash"
+                      ? "/sports-centre/squash"
+                      : facility.id === "basketball"
+                        ? "/sports-centre/basketball"
+                        : facility.id === "futsal"
+                          ? "/sports-centre/futsal"
+                          : facility.id === "gym"
+                            ? "/sports-centre/gym"
+                            : facility.id === "sauna"
+                              ? "/sports-centre/sauna"
+                              : `/sports-centre/${facility.id}`;
             return (
               <Link
                 key={facility.id}
@@ -79,10 +87,7 @@ export default function SportsCentrePage() {
                     <ul className="space-y-3 text-sm text-gray-700">
                       {facility.highlights.map((highlight) => (
                         <li key={highlight} className="flex gap-3">
-                          <span
-                            className="mt-1 h-2 w-2  bg-brand-500"
-                            aria-hidden="true"
-                          />
+                          <span className="mt-1 h-2 w-2  bg-brand-500" aria-hidden="true" />
                           <span>{highlight}</span>
                         </li>
                       ))}
@@ -166,10 +171,7 @@ export default function SportsCentrePage() {
                   <ul className="mt-6 space-y-3 text-sm text-gray-700">
                     {pkg.benefits.map((benefit) => (
                       <li key={benefit} className="flex gap-3">
-                        <span
-                          className="mt-1 h-2 w-2  bg-brand-500"
-                          aria-hidden="true"
-                        />
+                        <span className="mt-1 h-2 w-2  bg-brand-500" aria-hidden="true" />
                         <span>{benefit}</span>
                       </li>
                     ))}

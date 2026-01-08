@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+
 import { SectionHeading } from "@/components/ui/section-heading";
 
 interface MenuItem {
@@ -15,7 +16,8 @@ interface MenuCategory {
   items: MenuItem[];
 }
 
-const snafflesBistroDescription = "Welcome to Snaffles Bistro, your neighborhood coffee shop and casual dining destination. Whether you're starting your day with a hearty breakfast, grabbing a quick lunch, or enjoying a relaxed dinner with friends and family, Snaffles Bistro offers delicious comfort food prepared with care and served with warmth. From our signature rolls and sandwiches to our freshly brewed coffee and refreshing milkshakes, every item on our menu is crafted to bring a smile to your face.";
+const snafflesBistroDescription =
+  "Welcome to Snaffles Bistro, your neighborhood coffee shop and casual dining destination. Whether you're starting your day with a hearty breakfast, grabbing a quick lunch, or enjoying a relaxed dinner with friends and family, Snaffles Bistro offers delicious comfort food prepared with care and served with warmth. From our signature rolls and sandwiches to our freshly brewed coffee and refreshing milkshakes, every item on our menu is crafted to bring a smile to your face.";
 
 const snafflesBistroCategories: MenuCategory[] = [
   {
@@ -67,7 +69,11 @@ const snafflesBistroCategories: MenuCategory[] = [
       { name: "Paneer Dosa", price: "₹95" },
       { name: "Mysore Masala Dosa", price: "₹95" },
       { name: "Cheese Dosa", price: "₹115" },
-      { name: "Rava Dosa (20–25 Mins to Prepare)", price: "₹115", note: "Special preparation time" },
+      {
+        name: "Rava Dosa (20–25 Mins to Prepare)",
+        price: "₹115",
+        note: "Special preparation time",
+      },
       { name: "Egg Dosa (2 Eggs)", price: "₹130" },
     ],
   },
@@ -133,8 +139,14 @@ const snafflesBistroCategories: MenuCategory[] = [
       { name: "Chicken Tikka Burger with Fries", price: "₹195" },
       { name: "Chicken & Cheese Burger with Fries", price: "₹195" },
       { name: "Mixed Veg Quinoa Cheese Burger with Fries", price: "₹225" },
-      { name: "3 Layered HPRC Club Sandwich with Fries (Fried Egg, Chicken, Tomato & Cheese)", price: "₹256" },
-      { name: "Hyderabadi Exclusive Sheermal Grilled Sandwich (Served with House Salad & Mint Mayo)", price: "₹206 / ₹256" },
+      {
+        name: "3 Layered HPRC Club Sandwich with Fries (Fried Egg, Chicken, Tomato & Cheese)",
+        price: "₹256",
+      },
+      {
+        name: "Hyderabadi Exclusive Sheermal Grilled Sandwich (Served with House Salad & Mint Mayo)",
+        price: "₹206 / ₹256",
+      },
     ],
   },
   {
@@ -148,9 +160,7 @@ const snafflesBistroCategories: MenuCategory[] = [
   },
   {
     name: "DESSERT OF THE DAY",
-    items: [
-      { name: "Chef's Choice", price: "₹195", note: "**Chef's Recommendation**" },
-    ],
+    items: [{ name: "Chef's Choice", price: "₹195", note: "**Chef's Recommendation**" }],
   },
 ];
 
@@ -168,7 +178,9 @@ export function MenuSection() {
 
         {/* About Section */}
         <div className="mb-8 p-6 sm:p-8 bg-white rounded-2xl border border-brand-200 shadow-lg">
-          <h3 className="text-xl sm:text-2xl font-bold text-brand-900 mb-4 font-display">About Snaffles Bistro</h3>
+          <h3 className="text-xl sm:text-2xl font-bold text-brand-900 mb-4 font-display">
+            About Snaffles Bistro
+          </h3>
           <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
             {snafflesBistroDescription}
           </p>
@@ -204,9 +216,7 @@ export function MenuSection() {
                     <h3 className="text-xl sm:text-2xl font-bold text-brand-900 font-display">
                       {category.name}
                     </h3>
-                    <span className="text-sm text-gray-500">
-                      {category.items.length} items
-                    </span>
+                    <span className="text-sm text-gray-500">{category.items.length} items</span>
                   </div>
 
                   {/* Category Items */}
@@ -245,7 +255,7 @@ export function MenuSection() {
                     ))}
                   </div>
                 </div>
-              )
+              ),
           )}
         </div>
 
@@ -308,7 +318,9 @@ export function MenuSection() {
                 </svg>
               </div>
               <div className="flex-1">
-                <h4 className="text-lg sm:text-xl font-bold text-green-900 mb-1">Menu Highlights</h4>
+                <h4 className="text-lg sm:text-xl font-bold text-green-900 mb-1">
+                  Menu Highlights
+                </h4>
                 <ul className="space-y-2 text-gray-700">
                   <li className="flex items-start gap-2">
                     <span className="text-green-600">✓</span>

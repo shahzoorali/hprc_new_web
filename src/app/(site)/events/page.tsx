@@ -32,8 +32,9 @@ export default function EventsPage() {
               "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=800&q=80",
               "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80",
             ];
-            const commonClasses = "group relative overflow-hidden rounded-[2.5rem] border border-brand-100 bg-white/95 shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 block";
-            
+            const commonClasses =
+              "group relative overflow-hidden rounded-[2.5rem] border border-brand-100 bg-white/95 shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 block";
+
             const eventContent = (
               <>
                 <div className="relative h-44 sm:h-48 overflow-hidden">
@@ -50,8 +51,12 @@ export default function EventsPage() {
                   <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.25em] sm:tracking-[0.3em] text-brand-500">
                     {event.date}
                   </p>
-                  <h2 className="mt-2 sm:mt-3 text-xl sm:text-2xl font-extrabold text-gray-900">{event.title}</h2>
-                  <p className="mt-3 sm:mt-4 text-sm text-gray-700 leading-relaxed">{event.description}</p>
+                  <h2 className="mt-2 sm:mt-3 text-xl sm:text-2xl font-extrabold text-gray-900">
+                    {event.title}
+                  </h2>
+                  <p className="mt-3 sm:mt-4 text-sm text-gray-700 leading-relaxed">
+                    {event.description}
+                  </p>
                   {event.link && (
                     <div className="mt-3 sm:mt-4 inline-flex items-center text-xs sm:text-sm font-bold text-brand-500 hover:text-brand-600 transition-colors">
                       Learn More
@@ -76,21 +81,14 @@ export default function EventsPage() {
 
             if (event.link) {
               return (
-                <Link
-                  key={event.title}
-                  href={event.link}
-                  className={commonClasses}
-                >
+                <Link key={event.title} href={event.link} className={commonClasses}>
                   {eventContent}
                 </Link>
               );
             }
 
             return (
-              <article
-                key={event.title}
-                className={commonClasses}
-              >
+              <article key={event.title} className={commonClasses}>
                 {eventContent}
               </article>
             );
@@ -112,12 +110,7 @@ export default function EventsPage() {
               className="hidden md:inline-flex items-center text-sm font-semibold text-brand-600 hover:text-brand-700 transition-colors"
             >
               View All Past Events
-              <svg
-                className="ml-2 h-4 w-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
+              <svg className="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -131,26 +124,26 @@ export default function EventsPage() {
             {eventsContent.pastHighlights.slice(0, 6).map((highlight, index) => {
               // Get event image based on link
               const getEventImage = (link: string) => {
-                if (link.includes('1st-rel-10th-hyd-horse-show')) {
-                  return '/documents/gallery/events/1st-rel-gallery/gallery-001.jpg';
+                if (link.includes("1st-rel-10th-hyd-horse-show")) {
+                  return "/documents/gallery/events/1st-rel-gallery/gallery-001.jpg";
                 }
-                if (link.includes('arena-polo-tournament-2016')) {
-                  return '/documents/gallery/events/arena-polo-tournament-2016/001.jpg';
+                if (link.includes("arena-polo-tournament-2016")) {
+                  return "/documents/gallery/events/arena-polo-tournament-2016/001.jpg";
                 }
-                if (link.includes('nec-calendar-2016')) {
-                  return '/documents/gallery/events/nec-calendar-2016/001.jpg';
+                if (link.includes("nec-calendar-2016")) {
+                  return "/documents/gallery/events/nec-calendar-2016/001.jpg";
                 }
-                if (link.includes('hprc-international-arena-polo-championship')) {
-                  return '/documents/gallery/events/hprc-international-arena-polo-championship/001.jpeg';
+                if (link.includes("hprc-international-arena-polo-championship")) {
+                  return "/documents/gallery/events/hprc-international-arena-polo-championship/001.jpeg";
                 }
-                if (link.includes('hprc-sport-complex')) {
-                  return '/documents/gallery/events/hprc-sport-complex/01.jpg';
+                if (link.includes("hprc-sport-complex")) {
+                  return "/documents/gallery/events/hprc-sport-complex/01.jpg";
                 }
                 // Fallback images
                 const fallbackImages = [
-                  'https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=800&q=80',
-                  'https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=800&q=80',
-                  'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80',
+                  "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=800&q=80",
+                  "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=800&q=80",
+                  "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80",
                 ];
                 return fallbackImages[index % fallbackImages.length];
               };
@@ -209,12 +202,7 @@ export default function EventsPage() {
               className="inline-flex items-center text-sm font-semibold text-brand-600 hover:text-brand-700 transition-colors"
             >
               View All Past Events
-              <svg
-                className="ml-2 h-4 w-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
+              <svg className="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -334,13 +322,15 @@ export default function EventsPage() {
           description="Dive into the latest news, insights, and stories from HPRC."
           align="left"
         />
-          <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+        <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
           {eventsContent.media.map((entry) => (
             <article
               key={entry.category}
               className=" sm: border border-brand-100 bg-white/95 p-4 sm:p-6 shadow-[var(--shadow-elevated)]"
             >
-              <h3 className="text-base sm:text-lg font-semibold text-brand-900">{entry.category}</h3>
+              <h3 className="text-base sm:text-lg font-semibold text-brand-900">
+                {entry.category}
+              </h3>
               <p className="mt-2 sm:mt-3 text-sm text-gray-700">{entry.summary}</p>
               <Link
                 href={entry.href}

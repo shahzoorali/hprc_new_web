@@ -1,5 +1,6 @@
-import type { Tournament } from "@/content/world-arena-polo-championship-2026";
 import type { ReactElement } from "react";
+
+import type { Tournament } from "@/content/world-arena-polo-championship-2026";
 
 type TournamentCardProps = {
   tournament: Tournament;
@@ -64,7 +65,9 @@ export function TournamentCard({ tournament }: TournamentCardProps) {
       </div>
 
       {/* Description */}
-      <p className="relative mb-6 text-sm leading-relaxed text-gray-700">{tournament.description}</p>
+      <p className="relative mb-6 text-sm leading-relaxed text-gray-700">
+        {tournament.description}
+      </p>
 
       {/* Format */}
       <div className="relative mb-6 bg-brand-50/50 p-4 border border-brand-100">
@@ -91,4 +94,3 @@ export function TournamentCard({ tournament }: TournamentCardProps) {
     </article>
   );
 }
-

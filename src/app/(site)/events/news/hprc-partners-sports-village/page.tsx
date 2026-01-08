@@ -46,8 +46,9 @@ export default function HPRCPartnersSportsVillagePage() {
             />
             <div className="prose prose-lg max-w-none mt-8">
               <p className="text-gray-700 leading-relaxed">
-                This strategic partnership brings together HPRC's world-class facilities and Sports Village's 
-                expertise in sports training, creating enhanced opportunities for athletes and sports enthusiasts.
+                This strategic partnership brings together HPRC's world-class facilities and Sports
+                Village's expertise in sports training, creating enhanced opportunities for athletes
+                and sports enthusiasts.
               </p>
             </div>
           </div>
@@ -61,7 +62,12 @@ export default function HPRCPartnersSportsVillagePage() {
             className="inline-flex items-center gap-2 text-brand-600 hover:text-brand-700 font-semibold transition-colors"
           >
             <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              />
             </svg>
             <span>Back to News</span>
           </Link>
