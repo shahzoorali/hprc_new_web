@@ -1,11 +1,24 @@
 "use client";
 
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import React, { useState } from "react";
 
 import { PageHero } from "@/components/ui/page-hero";
-import { PDFFlipbookViewer } from "@/components/ui/pdf-flipbook-viewer";
 import { SectionHeading } from "@/components/ui/section-heading";
+
+// Dynamically import PDF viewer only on client side to avoid canvas dependency issue
+const PDFFlipbookViewer = dynamic(
+  () => import("@/components/ui/pdf-flipbook-viewer").then((mod) => mod.PDFFlipbookViewer),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90">
+        <div className="text-white">Loading PDF viewer...</div>
+      </div>
+    ),
+  }
+);
 
 export default function NewslettersPage() {
   const [selectedNewsletter, setSelectedNewsletter] = useState<{
