@@ -333,20 +333,51 @@ export default function AboutPage() {
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {aboutContent.leadership.slice(0, 3).map((leader, index) => (
+            {aboutContent.leadership.slice(0, 3).map((leader, index) => {
+              // Get image path for leader
+              const getImagePath = (name: string) => {
+                if (name === "Chaitanya R. Kumar") return "/images/chaitania.jpg";
+                if (name === "Kunwar Sai Vijender Singh") return "/images/kunwar.jpg";
+                if (name === "C. Sanjay Reddy") return "/images/sanjay.jpg";
+                if (name === "Rupesh Y. Shah") return "/images/rupesh.jpg";
+                if (name === "Syed Ahmed (Shahbaz)") return "/images/syed.jpg";
+                if (name === "Sanjeev Kumar Agarwal") return "/images/madhu.jpg";
+                if (name === "Mohammed Nayeem Uddin") return "/images/mohammed.jpg";
+                return null;
+              };
+              
+              const imagePath = getImagePath(leader.name);
+              
+              return (
               <div
                 key={leader.name}
                 className="group relative"
               >
-                {/* Image Placeholder */}
-                <div className="relative aspect-[3/4] bg-gradient-to-br from-white/5 to-white/[0.02] mb-6 overflow-hidden">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-6xl font-light text-white/10">
-                      {leader.name.split(' ').map(n => n[0]).join('')}
-                    </span>
-                  </div>
-                  {/* Hover Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-emerald-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                {/* Image */}
+                <div className="relative aspect-[3/4] bg-gradient-to-br from-white/5 to-white/[0.02] mb-6 overflow-hidden rounded-lg">
+                  {imagePath ? (
+                    <>
+                      <Image
+                        src={imagePath}
+                        alt={leader.name}
+                        fill
+                        className="object-cover object-top"
+                        quality={90}
+                      />
+                      {/* Hover Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-emerald-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    </>
+                  ) : (
+                    <>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="text-6xl font-light text-white/10">
+                          {leader.name.split(' ').map(n => n[0]).join('')}
+                        </span>
+                      </div>
+                      {/* Hover Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-emerald-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    </>
+                  )}
                 </div>
                 
                 <div>
@@ -355,7 +386,8 @@ export default function AboutPage() {
                   <p className="text-white/50 text-sm leading-relaxed line-clamp-2">{leader.bio}</p>
                 </div>
               </div>
-            ))}
+              );
+            })}
           </div>
 
           <div className="mt-12 sm:hidden">
