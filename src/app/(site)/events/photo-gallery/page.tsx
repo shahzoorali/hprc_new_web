@@ -4,6 +4,20 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
+// Type definitions
+type Album = {
+  id: string;
+  title: string;
+  coverImage: string;
+  images: string[];
+  year?: string;
+  date?: string;
+};
+
+type AlbumWithCategory = Album & {
+  category: string;
+};
+
 // Gallery categories based on HPRC website
 const galleryCategories = [
   {
@@ -463,7 +477,7 @@ export default function PhotoGalleryPage() {
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState<string>("all");
 
-  const allAlbums = galleryCategories.flatMap((cat) => 
+  const allAlbums: AlbumWithCategory[] = galleryCategories.flatMap((cat) => 
     cat.albums.map((album) => ({ ...album, category: cat.id }))
   );
 
@@ -471,9 +485,9 @@ export default function PhotoGalleryPage() {
     ? allAlbums 
     : allAlbums.filter((album) => album.category === activeCategory);
 
-  const currentAlbum = selectedAlbum 
+  const currentAlbum: AlbumWithCategory | undefined = selectedAlbum 
     ? allAlbums.find((a) => a.id === selectedAlbum) 
-    : null;
+    : undefined;
 
   return (
     <div className="min-h-screen bg-slate-950">
