@@ -72,6 +72,12 @@ export const eventsContent = {
   ],
   pastHighlights: [
     {
+      title: "1st Regional Equestrian League & 10th Hyderabad Horse Show",
+      description:
+        "Hyderabad Polo & Riding Club hosted the 1st Regional Equestrian League in association with TSEA on 22nd & 23rd September, 2018. Events such as Dressage, Show Jumping & Tent Pegging in different categories were conducted with 157 participations.",
+      link: "/events/1st-rel-10th-hyd-horse-show",
+    },
+    {
       title: "HPRC joins hands with Academia Sports Village",
       description:
         "A strategic partnership to deliver year-round coaching programmes, international camps, and athlete development pathways across tennis, badminton, and more.",
@@ -80,7 +86,7 @@ export const eventsContent = {
     {
       title: "National Equestrian Competition 2016",
       description:
-        "HPRC and TSEA co-hosted a landmark national championship with 200 horses and the country’s leading riders competing across five categories.",
+        "HPRC and TSEA co-hosted a landmark national championship with 200 horses and the country's leading riders competing across five categories.",
       link: "/events/past/national-equestrian-2016",
     },
   ],
