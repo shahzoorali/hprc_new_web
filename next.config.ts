@@ -33,6 +33,16 @@ const nextConfig: NextConfig = {
         hostname: "hprc.in",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "img.youtube.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "i.ytimg.com",
+        pathname: "/**",
+      },
     ],
     unoptimized: false,
   },
