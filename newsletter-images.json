@@ -1,0 +1,70 @@
+{
+  "newsletters": [
+    {
+      "title": "NATIONAL EQUESTRIAN CHAMPIONSHIP 2016",
+      "images": [
+        "https://hprc.in/images/gallery/NewsLetter02.jpg",
+        "https://hprc.in/images/gallery/NewsLetter03.jpg",
+        "https://hprc.in/images/gallery/NewsLetter04.jpg",
+        "https://hprc.in/images/gallery/NewsLetter05.jpg",
+        "https://hprc.in/images/gallery/NewsLetter06.jpg",
+        "https://hprc.in/images/Gallery01.jpg"
+      ],
+      "pdfUrl": "https://hprc.in/pdf/4th-HYDERABAD-HORSE-SHOW-OCTOBER-2015-EDITION.pdf"
+    },
+    {
+      "title": "4th HYDERABAD HORSE SHOW OCTOBER 2015 EDITION",
+      "images": [
+        "https://hprc.in/images/gallery/NewsLetter03.jpg",
+        "https://hprc.in/images/gallery/NewsLetter04.jpg",
+        "https://hprc.in/images/gallery/NewsLetter05.jpg",
+        "https://hprc.in/images/gallery/NewsLetter06.jpg",
+        "https://hprc.in/images/Gallery01.jpg"
+      ],
+      "pdfUrl": "https://hprc.in/pdf/HPRC-NEWSLETTER-18th-MAY-2015-EDITION.pdf"
+    },
+    {
+      "title": "HPRC NEWSLETTER 18th MAY 2015 EDITION",
+      "images": [
+        "https://hprc.in/images/gallery/NewsLetter04.jpg",
+        "https://hprc.in/images/gallery/NewsLetter05.jpg",
+        "https://hprc.in/images/gallery/NewsLetter06.jpg",
+        "https://hprc.in/images/Gallery01.jpg"
+      ],
+      "pdfUrl": "https://hprc.in/pdf/HPRC-NEWSLETTER-20th-MARCH-2015-EDITION.pdf"
+    },
+    {
+      "title": "HPRC NEWSLETTER 20th MARCH 2015 EDITION",
+      "images": [
+        "https://hprc.in/images/gallery/NewsLetter05.jpg",
+        "https://hprc.in/images/gallery/NewsLetter06.jpg",
+        "https://hprc.in/images/Gallery01.jpg"
+      ],
+      "pdfUrl": "https://hprc.in/pdf/EQUESTRIAN-ESSENTIALITY-JANUARY- 2015-EDITION.pdf"
+    },
+    {
+      "title": "EQUESTRIAN ESSENTIALITY JANUARY 2015 EDITION",
+      "images": [
+        "https://hprc.in/images/gallery/NewsLetter06.jpg",
+        "https://hprc.in/images/Gallery01.jpg"
+      ],
+      "pdfUrl": "https://hprc.in/pdf/THE-FIRST-HYDERABAD-HORSE-SHOW-DECEMBER-2014-EDITION.pdf"
+    },
+    {
+      "title": "THE FIRST HYDERABAD HORSE SHOW DECEMBER 2014 EDITION",
+      "images": [
+        "https://hprc.in/images/Gallery01.jpg"
+      ],
+      "pdfUrl": "https://hprc.in/pdf/final-brochure.pdf"
+    }
+  ],
+  "allImages": [
+    "https://hprc.in/images/gallery/NewsLetter01.jpg",
+    "https://hprc.in/images/gallery/NewsLetter02.jpg",
+    "https://hprc.in/images/gallery/NewsLetter03.jpg",
+    "https://hprc.in/images/gallery/NewsLetter04.jpg",
+    "https://hprc.in/images/gallery/NewsLetter05.jpg",
+    "https://hprc.in/images/gallery/NewsLetter06.jpg",
+    "https://hprc.in/images/Gallery01.jpg"
+  ]
+}
