@@ -63,22 +63,49 @@ export default function LeadershipPage() {
                 <div className="absolute -inset-1 bg-gradient-to-r from-brand-500/30 to-brand-600/30 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 
                 <div className="relative bg-white rounded-2xl shadow-2xl overflow-hidden border border-slate-100">
-                  {/* Image Placeholder */}
+                  {/* Image */}
                   <div className="relative h-72 sm:h-80 bg-gradient-to-br from-slate-200 to-slate-300 overflow-hidden">
-                    {/* Placeholder Pattern */}
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="text-center">
-                        <div className="w-24 h-24 sm:w-32 sm:h-32 mx-auto rounded-full bg-slate-400/50 flex items-center justify-center mb-3">
-                          <svg className="h-12 w-12 sm:h-16 sm:w-16 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                          </svg>
+                    {leader.name === "Chaitanya R. Kumar" ? (
+                      <>
+                        <Image
+                          src="/images/chaitania.jpg"
+                          alt={leader.name}
+                          fill
+                          className="object-cover object-top"
+                          quality={90}
+                        />
+                        {/* Decorative overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent" />
+                      </>
+                    ) : leader.name === "Kunwar Sai Vijender Singh" ? (
+                      <>
+                        <Image
+                          src="/images/kunwar.jpg"
+                          alt={leader.name}
+                          fill
+                          className="object-cover object-top"
+                          quality={90}
+                        />
+                        {/* Decorative overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent" />
+                      </>
+                    ) : (
+                      <>
+                        {/* Placeholder Pattern */}
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <div className="text-center">
+                            <div className="w-24 h-24 sm:w-32 sm:h-32 mx-auto rounded-full bg-slate-400/50 flex items-center justify-center mb-3">
+                              <svg className="h-12 w-12 sm:h-16 sm:w-16 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                              </svg>
+                            </div>
+                            <span className="text-slate-500 text-sm font-medium">Photo Coming Soon</span>
+                          </div>
                         </div>
-                        <span className="text-slate-500 text-sm font-medium">Photo Coming Soon</span>
-                      </div>
-                    </div>
-                    
-                    {/* Decorative overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent" />
+                        {/* Decorative overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent" />
+                      </>
+                    )}
                     
                     {/* Role Badge */}
                     <div className="absolute top-4 left-4">
@@ -155,18 +182,82 @@ export default function LeadershipPage() {
                 key={member.name}
                 className="group bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-slate-100 hover:border-brand-200"
               >
-                {/* Image Placeholder */}
-                <div className="relative h-48 sm:h-56 bg-gradient-to-br from-slate-100 to-slate-200 overflow-hidden">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-20 h-20 rounded-full bg-slate-300/70 flex items-center justify-center">
-                      <svg className="h-10 w-10 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                      </svg>
-                    </div>
-                  </div>
-                  
-                  {/* Hover Overlay */}
-                  <div className="absolute inset-0 bg-brand-600/0 group-hover:bg-brand-600/10 transition-colors duration-300" />
+                {/* Image */}
+                <div className="relative aspect-[3/4] bg-gradient-to-br from-slate-100 to-slate-200 overflow-hidden">
+                  {member.name === "C. Sanjay Reddy" ? (
+                    <>
+                      <Image
+                        src="/images/sanjay.jpg"
+                        alt={member.name}
+                        fill
+                        className="object-cover object-top"
+                        quality={90}
+                      />
+                      {/* Hover Overlay */}
+                      <div className="absolute inset-0 bg-brand-600/0 group-hover:bg-brand-600/10 transition-colors duration-300" />
+                    </>
+                  ) : member.name === "Rupesh Y. Shah" ? (
+                    <>
+                      <Image
+                        src="/images/rupesh.jpg"
+                        alt={member.name}
+                        fill
+                        className="object-cover object-top"
+                        quality={90}
+                      />
+                      {/* Hover Overlay */}
+                      <div className="absolute inset-0 bg-brand-600/0 group-hover:bg-brand-600/10 transition-colors duration-300" />
+                    </>
+                  ) : member.name === "Syed Ahmed (Shahbaz)" ? (
+                    <>
+                      <Image
+                        src="/images/syed.jpg"
+                        alt={member.name}
+                        fill
+                        className="object-cover object-top"
+                        quality={90}
+                      />
+                      {/* Hover Overlay */}
+                      <div className="absolute inset-0 bg-brand-600/0 group-hover:bg-brand-600/10 transition-colors duration-300" />
+                    </>
+                  ) : member.name === "Sanjeev Kumar Agarwal" ? (
+                    <>
+                      <Image
+                        src="/images/madhu.jpg"
+                        alt={member.name}
+                        fill
+                        className="object-cover object-top"
+                        quality={90}
+                      />
+                      {/* Hover Overlay */}
+                      <div className="absolute inset-0 bg-brand-600/0 group-hover:bg-brand-600/10 transition-colors duration-300" />
+                    </>
+                  ) : member.name === "Mohammed Nayeem Uddin" ? (
+                    <>
+                      <Image
+                        src="/images/mohammed.jpg"
+                        alt={member.name}
+                        fill
+                        className="object-cover object-top"
+                        quality={90}
+                      />
+                      {/* Hover Overlay */}
+                      <div className="absolute inset-0 bg-brand-600/0 group-hover:bg-brand-600/10 transition-colors duration-300" />
+                    </>
+                  ) : (
+                    <>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="w-20 h-20 rounded-full bg-slate-300/70 flex items-center justify-center">
+                          <svg className="h-10 w-10 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                          </svg>
+                        </div>
+                      </div>
+                      
+                      {/* Hover Overlay */}
+                      <div className="absolute inset-0 bg-brand-600/0 group-hover:bg-brand-600/10 transition-colors duration-300" />
+                    </>
+                  )}
                   
                   {/* Role Tag */}
                   <div className="absolute bottom-3 left-3">
@@ -187,6 +278,238 @@ export default function LeadershipPage() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Sub-Committees Section */}
+      <section className="py-16 sm:py-20 bg-white">
+        <div className="container px-4">
+          <div className="space-y-16 max-w-6xl mx-auto">
+            {/* Equestrian Committee */}
+            <div>
+              <div className="text-center mb-8">
+                <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-2">
+                  Equestrian Committee Members
+                </h3>
+                <p className="text-slate-600">
+                  Overseeing equestrian activities, training programs, and horse welfare
+                </p>
+              </div>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                {aboutContent.subCommittees.equestrian.map((member, index) => {
+                  // Get image path for member
+                  const getImagePath = (name: string) => {
+                    if (name === "Chaitanya R. Kumar") return "/images/chaitania.jpg";
+                    if (name === "Kunwar Sai Vijender Singh") return "/images/kunwar.jpg";
+                    if (name === "C. Sanjay Reddy") return "/images/sanjay.jpg";
+                    return null;
+                  };
+                  
+                  const imagePath = getImagePath(member.name);
+                  
+                  return (
+                    <div
+                      key={index}
+                      className="group bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-slate-200 hover:border-brand-300"
+                    >
+                      {/* Image */}
+                      <div className="relative aspect-[3/4] bg-gradient-to-br from-slate-100 to-slate-200 overflow-hidden">
+                        {imagePath ? (
+                          <>
+                            <Image
+                              src={imagePath}
+                              alt={member.name}
+                              fill
+                              className="object-cover object-top"
+                              quality={90}
+                            />
+                            {/* Hover Overlay */}
+                            <div className="absolute inset-0 bg-brand-600/0 group-hover:bg-brand-600/10 transition-colors duration-300" />
+                          </>
+                        ) : (
+                          <>
+                            <div className="absolute inset-0 flex items-center justify-center">
+                              <div className="w-20 h-20 rounded-full bg-slate-300/70 flex items-center justify-center">
+                                <svg className="h-10 w-10 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                </svg>
+                              </div>
+                            </div>
+                            {/* Hover Overlay */}
+                            <div className="absolute inset-0 bg-brand-600/0 group-hover:bg-brand-600/10 transition-colors duration-300" />
+                          </>
+                        )}
+                        
+                        {/* Role Tag */}
+                        <div className="absolute bottom-3 left-3">
+                          <span className="inline-block bg-white/90 backdrop-blur-sm text-slate-700 px-3 py-1 rounded-full text-xs font-semibold shadow-sm">
+                            {member.role}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Content */}
+                      <div className="p-5 sm:p-6">
+                        <h4 className="text-lg sm:text-xl font-bold text-slate-900 mb-2 group-hover:text-brand-600 transition-colors">
+                          {member.name}
+                        </h4>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Polo Committee */}
+            <div>
+              <div className="text-center mb-8">
+                <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-2">
+                  Polo Committee Members
+                </h3>
+                <p className="text-slate-600">
+                  Overseeing polo activities, tournaments, and player development
+                </p>
+              </div>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                {aboutContent.subCommittees.polo.map((member, index) => {
+                  // Get image path for member
+                  const getImagePath = (name: string) => {
+                    if (name === "Chaitanya R. Kumar") return "/images/chaitania.jpg";
+                    if (name === "Kunwar Sai Vijender Singh") return "/images/kunwar.jpg";
+                    if (name === "C. Sanjay Reddy") return "/images/sanjay.jpg";
+                    if (name === "Arsalan Khan") return "/images/arsalan-khan.jpeg";
+                    return null;
+                  };
+                  
+                  const imagePath = getImagePath(member.name);
+                  
+                  return (
+                    <div
+                      key={index}
+                      className="group bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-slate-200 hover:border-brand-300"
+                    >
+                      {/* Image */}
+                      <div className="relative aspect-[3/4] bg-gradient-to-br from-slate-100 to-slate-200 overflow-hidden">
+                        {imagePath ? (
+                          <>
+                            <Image
+                              src={imagePath}
+                              alt={member.name}
+                              fill
+                              className="object-cover object-top"
+                              quality={90}
+                            />
+                            {/* Hover Overlay */}
+                            <div className="absolute inset-0 bg-brand-600/0 group-hover:bg-brand-600/10 transition-colors duration-300" />
+                          </>
+                        ) : (
+                          <>
+                            <div className="absolute inset-0 flex items-center justify-center">
+                              <div className="w-20 h-20 rounded-full bg-slate-300/70 flex items-center justify-center">
+                                <svg className="h-10 w-10 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                </svg>
+                              </div>
+                            </div>
+                            {/* Hover Overlay */}
+                            <div className="absolute inset-0 bg-brand-600/0 group-hover:bg-brand-600/10 transition-colors duration-300" />
+                          </>
+                        )}
+                        
+                        {/* Role Tag */}
+                        <div className="absolute bottom-3 left-3">
+                          <span className="inline-block bg-white/90 backdrop-blur-sm text-slate-700 px-3 py-1 rounded-full text-xs font-semibold shadow-sm">
+                            {member.role}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Content */}
+                      <div className="p-5 sm:p-6">
+                        <h4 className="text-lg sm:text-xl font-bold text-slate-900 mb-2 group-hover:text-brand-600 transition-colors">
+                          {member.name}
+                        </h4>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Sports Arena Committee */}
+            <div>
+              <div className="text-center mb-8">
+                <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-2">
+                  Sports Arena Committee Members
+                </h3>
+                <p className="text-slate-600">
+                  Managing sports facilities, programs, and athletic activities
+                </p>
+              </div>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                {aboutContent.subCommittees.sportsArena.map((member, index) => {
+                  // Get image path for member
+                  const getImagePath = (name: string) => {
+                    if (name === "Chaitanya R. Kumar") return "/images/chaitania.jpg";
+                    if (name === "Kunwar Sai Vijender Singh") return "/images/kunwar.jpg";
+                    return null;
+                  };
+                  
+                  const imagePath = getImagePath(member.name);
+                  
+                  return (
+                    <div
+                      key={index}
+                      className="group bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-slate-200 hover:border-brand-300"
+                    >
+                      {/* Image */}
+                      <div className="relative aspect-[3/4] bg-gradient-to-br from-slate-100 to-slate-200 overflow-hidden">
+                        {imagePath ? (
+                          <>
+                            <Image
+                              src={imagePath}
+                              alt={member.name}
+                              fill
+                              className="object-cover object-top"
+                              quality={90}
+                            />
+                            {/* Hover Overlay */}
+                            <div className="absolute inset-0 bg-brand-600/0 group-hover:bg-brand-600/10 transition-colors duration-300" />
+                          </>
+                        ) : (
+                          <>
+                            <div className="absolute inset-0 flex items-center justify-center">
+                              <div className="w-20 h-20 rounded-full bg-slate-300/70 flex items-center justify-center">
+                                <svg className="h-10 w-10 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                </svg>
+                              </div>
+                            </div>
+                            {/* Hover Overlay */}
+                            <div className="absolute inset-0 bg-brand-600/0 group-hover:bg-brand-600/10 transition-colors duration-300" />
+                          </>
+                        )}
+                        
+                        {/* Role Tag */}
+                        <div className="absolute bottom-3 left-3">
+                          <span className="inline-block bg-white/90 backdrop-blur-sm text-slate-700 px-3 py-1 rounded-full text-xs font-semibold shadow-sm">
+                            {member.role}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Content */}
+                      <div className="p-5 sm:p-6">
+                        <h4 className="text-lg sm:text-xl font-bold text-slate-900 mb-2 group-hover:text-brand-600 transition-colors">
+                          {member.name}
+                        </h4>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
       </section>

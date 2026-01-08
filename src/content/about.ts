@@ -144,4 +144,44 @@ export const aboutContent = {
       bio: "International polo competitor and philanthropist dedicated to youth development and equestrian excellence.",
     },
   ],
+  subCommittees: {
+    equestrian: [
+      {
+        name: "Chaitanya R. Kumar",
+        role: "Equestrian Committee Member",
+      },
+      {
+        name: "Chandra Rama Rao",
+        role: "Equestrian Committee Member",
+      },
+      {
+        name: "Amogh Datla",
+        role: "Equestrian Committee Member",
+      },
+    ],
+    polo: [
+      {
+        name: "Chaitanya R. Kumar",
+        role: "Polo Committee Member",
+      },
+      {
+        name: "Saif Attari",
+        role: "Polo Committee Member",
+      },
+      {
+        name: "Arsalan Khan",
+        role: "Polo Committee Member",
+      },
+    ],
+    sportsArena: [
+      {
+        name: "Chaitanya R. Kumar",
+        role: "Sports Arena Committee Member",
+      },
+      {
+        name: "Kunwar Sai Vijender Singh",
+        role: "Sports Arena Committee Member",
+      },
+    ],
+  },
 };
