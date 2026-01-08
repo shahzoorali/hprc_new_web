@@ -215,17 +215,17 @@ export default function BanquetsPage() {
     <div className="bg-stone-50">
       {/* Hero Section */}
       <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
+        {/* Background Image - Using Chukkers venue image */}
         <div className="absolute inset-0">
           <Image
-            src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1920&q=80"
-            alt="HPRC Banquets"
+            src="/documents/gallery/chukkers/cha01.jpeg"
+            alt="HPRC Banquets Venue"
             fill
             className="object-cover"
             priority
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-stone-950" />
-        </div>
+      </div>
 
         {/* Hero Content */}
         <div className="relative z-10 container px-4 text-center">
@@ -311,16 +311,16 @@ export default function BanquetsPage() {
                     <span className="font-medium text-stone-700">{item.label}</span>
                   </div>
                 ))}
-              </div>
             </div>
+          </div>
 
             <div className="relative">
               <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-2xl">
-                <Image
-                  src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&q=80"
-                  alt="Banquet Setup"
-                  fill
-                  className="object-cover"
+            <Image
+                  src="/documents/gallery/chukkers/cha4.jpeg"
+                  alt="HPRC Banquet Venue"
+              fill
+              className="object-cover"
                 />
               </div>
               {/* Floating Card */}
@@ -329,6 +329,73 @@ export default function BanquetsPage() {
                 <div className="text-sm font-medium">Acres of Scenic Venue</div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Venue Gallery Section */}
+      <section className="py-16 sm:py-24 bg-stone-100">
+        <div className="container px-4">
+          <div className="text-center mb-12">
+            <span className="inline-block text-amber-600 text-sm font-semibold tracking-wider uppercase mb-3">
+              Our Spaces
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-bold text-stone-900 mb-4">
+              Venue Gallery
+            </h2>
+            <p className="text-stone-600 max-w-2xl mx-auto">
+              Explore our elegant spaces perfect for your special occasions
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
+            {[
+              { src: "/documents/gallery/chukkers/cha01.jpeg", alt: "HPRC Venue - Main Hall" },
+              { src: "/documents/gallery/chukkers/cha4.jpeg", alt: "HPRC Venue - Dining Area" },
+              { src: "/documents/gallery/chukkers/cha5.jpeg", alt: "HPRC Venue - Event Space" },
+              { src: "/documents/gallery/snaffles/bis01.jpeg", alt: "HPRC Bistro Setting" },
+              { src: "/documents/gallery/snaffles/bis02.jpeg", alt: "HPRC Indoor Dining" },
+              { src: "/documents/gallery/snaffles/bis03.jpeg", alt: "HPRC Restaurant Ambiance" },
+              { src: "/documents/gallery/swimming/pool1.jpg", alt: "HPRC Poolside Venue" },
+              { src: "/documents/gallery/swimming/pool2.jpg", alt: "HPRC Outdoor Area" },
+            ].map((image, index) => (
+              <div
+                key={index}
+                className={`group relative overflow-hidden rounded-xl shadow-lg ${
+                  index === 0 ? "col-span-2 row-span-2" : ""
+                }`}
+              >
+                <div className={`relative ${index === 0 ? "h-80 md:h-full" : "h-40 md:h-48"}`}>
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    sizes={index === 0 ? "(max-width: 768px) 100vw, 50vw" : "(max-width: 768px) 50vw, 25vw"}
+                  />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300" />
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="bg-white/90 backdrop-blur-sm rounded-full p-3">
+                      <svg className="h-6 w-6 text-stone-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-10">
+            <Link
+              href="/events/photo-gallery"
+              className="inline-flex items-center gap-2 text-amber-600 hover:text-amber-700 font-semibold transition-colors"
+            >
+              View Full Gallery
+              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
           </div>
         </div>
       </section>
@@ -404,10 +471,10 @@ export default function BanquetsPage() {
                       ))}
                     </ul>
                   </div>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
 
           <div className="mt-10 text-center">
             <p className="inline-flex items-center gap-2 text-stone-400 text-sm bg-stone-800/50 px-5 py-3 rounded-full">
@@ -419,8 +486,8 @@ export default function BanquetsPage() {
               </span>
             </p>
           </div>
-        </div>
-      </section>
+          </div>
+        </section>
 
       {/* Full Menu Section */}
       <section className="py-16 sm:py-24 bg-white">
@@ -527,8 +594,8 @@ export default function BanquetsPage() {
       <section className="relative py-20 sm:py-28 overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=1920&q=80"
-            alt="Celebration"
+            src="/documents/gallery/chukkers/cha5.jpeg"
+            alt="HPRC Event Venue"
             fill
             className="object-cover"
           />
