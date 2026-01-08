@@ -202,6 +202,5 @@ export const primaryNavigation: NavItem[] = [
 ];
 
 export const utilityNavigation: NavChild[] = [
-  { label: "Member Login", href: "/membership/login" },
-  { label: "Pay Now", href: "/membership/pay-now" },
+  { label: "Featured Event: World Arena Polo Championship 2026", href: "/events/world-arena-polo-championship-2026" },
 ];

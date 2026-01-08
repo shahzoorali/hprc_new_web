@@ -9,6 +9,7 @@ import { TournamentCard } from "@/components/ui/tournament-card";
 import { EventSchedule } from "@/components/ui/event-schedule";
 import { EventContactForm } from "@/components/ui/event-contact-form";
 import { CountdownTimer } from "@/components/ui/countdown-timer";
+import { TeamAccordion } from "@/components/ui/team-accordion";
 import { worldArenaPoloChampionship2026 } from "@/content/world-arena-polo-championship-2026";
 
 import US from "country-flag-icons/react/3x2/US";
@@ -32,7 +33,7 @@ const countryFlagComponents: Record<string, React.ComponentType<{ className?: st
 };
 
 export default function WorldArenaPoloChampionship2026Page() {
-  const { hero, overview, keyInfo, countries, tournaments, schedule, officials, hospitality, media, objectives, legacy } =
+  const { hero, overview, keyInfo, countries, tournaments, schedule, officials, teams, hospitality, media, objectives, legacy } =
     worldArenaPoloChampionship2026;
 
   // Event starts on February 11, 2026 at 00:00 IST (UTC+5:30)
@@ -319,7 +320,14 @@ export default function WorldArenaPoloChampionship2026Page() {
           align="center"
         />
         <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          <div className="relative overflow-hidden rounded-[2.5rem] border-2 border-gray-800/80 bg-gradient-to-br from-gray-900 via-gray-800 to-black p-10 shadow-2xl">
+          <div
+            className="relative overflow-hidden rounded-[2.5rem] border-2 border-gray-800/80 p-10 shadow-2xl"
+            style={{
+              backgroundImage: 'repeating-linear-gradient(90deg, #000 0px, #000 25px, #fff 25px, #fff 50px)'
+            }}
+          >
+            {/* Overlay for better text readability */}
+            <div className="absolute inset-0 bg-black/50" />
             <div className="relative">
               <div className="mb-6 relative w-full aspect-[3/4] overflow-hidden rounded-xl border-2 border-white/20 ring-2 ring-white/10">
                 <Image
@@ -385,6 +393,61 @@ export default function WorldArenaPoloChampionship2026Page() {
               </div>
             );
           })}
+          </div>
+        </section>
+
+      {/* 🏆 Participating Teams */}
+      <section className="container py-16 bg-slate-50">
+        <SectionHeading
+          eyebrow="Participating Teams"
+          title="World Arena Polo Championship 2026"
+          align="center"
+        />
+        <div className="mt-12 space-y-6">
+          {/* Gold Cup Teams */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+              <span className="inline-block w-8 h-8 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-lg flex items-center justify-center text-white">
+                🏆
+              </span>
+              Gold Cup – 4 to 6 Goal Tournament
+            </h3>
+            <div className="grid gap-4 md:grid-cols-2">
+              {championshipData.teams.goldCup.teams.map((team, index) => (
+                <TeamAccordion
+                  key={`${team.country}-gold-${index}`}
+                  team={team}
+                  tournament="Gold Cup"
+                  isOpen={index === 0}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Silver Cup Teams */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+              <span className="inline-block w-8 h-8 bg-gradient-to-br from-gray-300 to-gray-400 rounded-lg flex items-center justify-center text-white">
+                🥈
+              </span>
+              Silver Cup – 2 to 4 Goal Tournament
+            </h3>
+            <div className="grid gap-4 md:grid-cols-2">
+              {championshipData.teams.silverCup.teams.map((team, index) => (
+                <TeamAccordion
+                  key={`${team.country}-silver-${index}`}
+                  team={team}
+                  tournament="Silver Cup"
+                  isOpen={index === 0}
+                />
+              ))}
+            </div>
+          </div>
+
+          <div className="text-center text-sm text-slate-600">
+            <p className="font-semibold mb-1">Player Numbers shown where available</p>
+            <p className="text-slate-500">TBD = To Be Determined • TC = Team Captain</p>
+          </div>
         </div>
       </section>
 

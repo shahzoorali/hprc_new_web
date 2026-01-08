@@ -256,6 +256,81 @@ export const worldArenaPoloChampionship2026 = {
       { name: "Alexander Ludorf", role: "Tournament Committee" },
     ],
   },
+  teams: {
+    goldCup: {
+      name: "Gold Cup – 4 to 6 Goal Tournament",
+      teams: [
+        {
+          country: "India",
+          flag: "🇮🇳",
+          players: [
+            { name: "Arsalan Khan", number: "(TC)", role: "Team Captain" },
+            { name: "Salim Azmi", number: "", role: "" },
+            { name: "Lt. Colonel Vishal Chauhan", number: "", role: "" },
+          ],
+        },
+        {
+          country: "USA",
+          flag: "🇺🇸",
+          players: [
+            { name: "TBD", number: "", role: "" },
+            { name: "TBD", number: "", role: "" },
+            { name: "TBD", number: "", role: "" },
+          ],
+        },
+        {
+          country: "Germany",
+          flag: "🇩🇪",
+          players: [
+            { name: "Leopold Ludorf", number: "", role: "" },
+            { name: "Antoni Kisieleński", number: "", role: "" },
+            { name: "Daniel Hauss", number: "", role: "" },
+          ],
+        },
+        {
+          country: "France",
+          flag: "🇫🇷",
+          players: [
+            { name: "Hugo Bastard", number: "", role: "" },
+            { name: "Pierre Hamelin", number: "", role: "" },
+            { name: "Romain Darroux", number: "", role: "" },
+          ],
+        },
+      ],
+    },
+    silverCup: {
+      name: "Silver Cup – 2 to 4 Goal Tournament",
+      teams: [
+        {
+          country: "India",
+          flag: "🇮🇳",
+          players: [
+            { name: "Chaitania Kumar", number: "(TC)", role: "" },
+            { name: "Yusuf Azmi", number: "(TBD)", role: "" },
+            { name: "Arsalan Khan", number: "", role: "" },
+          ],
+        },
+        {
+          country: "USA",
+          flag: "🇺🇸",
+          players: [
+            { name: "TBD", number: "", role: "" },
+            { name: "TBD", number: "", role: "" },
+            { name: "TBD", number: "", role: "" },
+          ],
+        },
+        {
+          country: "Luxembourg",
+          flag: "🇱🇺",
+          players: [
+            { name: "Alexander Ludorf", number: "", role: "" },
+            { name: "Clothilde Ludorf", number: "", role: "" },
+            { name: "Leopold Ludorf", number: "", role: "" },
+          ],
+        },
+      ],
+    },
+  },
   hospitality: {
     features: [
       {
