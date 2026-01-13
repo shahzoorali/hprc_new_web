@@ -259,7 +259,7 @@ export default function HomePage() {
               <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white/20 transition-all duration-700 group-hover:shadow-[0_35px_60px_-15px_rgba(227,30,36,0.25)]">
                 <div className="aspect-[4/3] relative">
                   <Image
-                    src="https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=1200&q=80"
+                    src="/documents/gallery/events/hprc-international-arena-polo-championship/001.jpeg"
                     alt="World Arena Polo Championship 2026"
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -334,13 +334,14 @@ export default function HomePage() {
           {/* Sophisticated Cards Layout */}
           <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 list-none p-0 m-0">
             {homeContent.events.map((event, index) => {
+              // Use actual images from the project
               const eventImages = [
-                "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=800&q=80",
-                "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80",
-                "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800&q=80",
-                "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=800&q=80",
-                "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80",
-                "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80",
+                "/documents/gallery/events/cross-country-2015/001.jpg", // Learn Riding - using cross-country training image
+                "/documents/gallery/events/hprc-sport-complex/01.jpg", // Weekend Getaway - using facility image
+                "/documents/gallery/chukkers/cha4.jpeg", // Banquet Hall - using Chukkers event space image
+                "/documents/gallery/events/hprc-international-arena-polo-championship/001.jpeg", // Polo - using polo championship image
+                "/documents/gallery/tennis/001.jpeg", // Sports Center - using sports facility image
+                "/documents/gallery/chukkers/cha01.jpeg", // Restaurants - using Chukkers restaurant image
               ];
 
               const animationDelay = index * 0.15;
@@ -426,10 +427,11 @@ export default function HomePage() {
           </div>
           <div className="mt-8 sm:mt-12 lg:mt-16 grid gap-6 sm:gap-8 md:gap-10 lg:gap-12 md:grid-cols-2 lg:grid-cols-3">
             {homeContent.pillars.map((pillar, index) => {
+              // Use actual images from the project
               const pillarImages = [
-                "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=800&q=80",
-                "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80",
-                "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80",
+                "/documents/gallery/events/hprc-international-arena-polo-championship/001.jpeg", // Riding & Polo
+                "/documents/gallery/tennis/001.jpeg", // Sports Centre
+                "/documents/gallery/chukkers/cha01.jpeg", // Hospitality
               ];
               return (
                 <Link
@@ -604,7 +606,7 @@ export default function HomePage() {
         {/* Elegant Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=1920&q=80"
+            src="/documents/gallery/events/hprc-international-arena-polo-championship/001.jpeg"
             alt="Polo event"
             fill
             className="object-cover"
