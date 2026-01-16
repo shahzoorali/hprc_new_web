@@ -5,11 +5,12 @@ import { PricingTable } from "@/components/ui/pricing-table";
 import { programmesContent } from "@/content/programmes";
 
 type ProgrammePageProps = {
-  params: { programmeId: string };
+  params: Promise<{ programmeId: string }>;
 };
 
-export default function ProgrammeDetailPage({ params }: ProgrammePageProps) {
-  const programme = programmesContent.programmes.find((item) => item.id === params.programmeId);
+export default async function ProgrammeDetailPage({ params }: ProgrammePageProps) {
+  const { programmeId } = await params;
+  const programme = programmesContent.programmes.find((item) => item.id === programmeId);
 
   if (!programme) {
     notFound();

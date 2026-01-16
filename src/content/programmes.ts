@@ -141,19 +141,19 @@ export const programmesContent = {
       id: "chukkers",
       title: "Chukkers",
       excerpt:
-        "Regular chukker sets for seasoned players to hone strategy, team synergy, and competitive resilience.",
-      schedule: "2 chukkers per week • Timings: 6:00 – 10:00 AM & 4:00 – 9:00 PM",
+        "Explore the artistry of chukkers at HPRC Club, where riders and horses engage in dynamic play across immaculate fields.",
+      schedule: "2 chukkers per week • Timings: 6:00 AM – 10:00 AM & 4:00 PM – 9:00 PM",
       highlights: [
-        "Match-focused sessions with umpire guidance and tactical reviews.",
-        "Horse allocation and rotation strategies tailored to player strengths.",
-        "Performance feedback and conditioning plans for tournament readiness.",
+        "Strategize plays and execute precise shots in fast-paced match settings.",
+        "Experience the thrill and camaraderie of polo with seasoned players.",
+        "Facilities designed for dynamic chukker play and competitive readiness.",
       ],
       pricingTables: [
         {
-          heading: "Chukker Packages",
+          heading: "Chukkers Charges",
           rows: [
             {
-              label: "8 Chukkers per month",
+              label: "2 chukkers per week x 4 weeks (8 chukkers p.m.)",
               price: "₹1,180 per chukker",
               total: "₹9,440",
             },
