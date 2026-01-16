@@ -7,8 +7,9 @@ import { primaryNavigation, utilityNavigation } from "@/content/navigation";
 const quickLinks = primaryNavigation.filter((item) => item.label !== "Home").slice(0, 5);
 
 export function SiteFooter() {
+  const programmesNav = primaryNavigation.find((item) => item.label === "Programmes");
   const programmeLinks =
-    primaryNavigation.find((item) => item.label === "Programmes")?.children ?? [];
+    programmesNav?.sections?.[0]?.items ?? programmesNav?.children ?? [];
 
   return (
     <footer className="mt-16 border-t border-gray-200 bg-gradient-to-b from-white to-brand-50/60">
@@ -58,7 +59,7 @@ export function SiteFooter() {
             Programmes
           </h3>
           <ul className="mt-4 space-y-2 text-sm text-gray-600">
-            {programmeLinks.slice(0, 6).map((child) => (
+            {programmeLinks.map((child) => (
               <li key={child.href}>
                 <Link href={child.href} className="hover:text-brand-900">
                   {child.label}
