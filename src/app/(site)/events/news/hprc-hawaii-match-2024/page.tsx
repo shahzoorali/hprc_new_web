@@ -10,155 +10,155 @@ import { SectionHeading } from "@/components/ui/section-heading";
 const galleryImages = [
   {
     src: "/documents/news/hawaii-2024/DayPoloAction01.jpeg",
-    alt: "HPRC Hawaii 2024 - day polo action",
+    alt: "HPRC San Diego 2024 - day polo action",
   },
   {
     src: "/documents/news/hawaii-2024/DayPoloStrike01.jpeg",
-    alt: "HPRC Hawaii 2024 - day polo strike",
+    alt: "HPRC San Diego 2024 - day polo strike",
   },
   {
     src: "/documents/news/hawaii-2024/DayRideDuel01.jpeg",
-    alt: "HPRC Hawaii 2024 - day ride duel",
+    alt: "HPRC San Diego 2024 - day ride duel",
   },
   {
     src: "/documents/news/hawaii-2024/DayRiderWithBall01.jpeg",
-    alt: "HPRC Hawaii 2024 - rider with ball",
+    alt: "HPRC San Diego 2024 - rider with ball",
   },
   {
     src: "/documents/news/hawaii-2024/DayRiderMalletUp01.jpeg",
-    alt: "HPRC Hawaii 2024 - rider with mallet raised",
+    alt: "HPRC San Diego 2024 - rider with mallet raised",
   },
   {
     src: "/documents/news/hawaii-2024/DayBallChase01.jpeg",
-    alt: "HPRC Hawaii 2024 - day ball chase",
+    alt: "HPRC San Diego 2024 - day ball chase",
   },
   {
     src: "/documents/news/hawaii-2024/DayBallChase02.jpeg",
-    alt: "HPRC Hawaii 2024 - day ball chase",
+    alt: "HPRC San Diego 2024 - day ball chase",
   },
   {
     src: "/documents/news/hawaii-2024/DayRiderLineup01.jpeg",
-    alt: "HPRC Hawaii 2024 - riders in lineup",
+    alt: "HPRC San Diego 2024 - riders in lineup",
   },
   {
     src: "/documents/news/hawaii-2024/DayRiderRedShirt01.jpeg",
-    alt: "HPRC Hawaii 2024 - rider in red shirt",
+    alt: "HPRC San Diego 2024 - rider in red shirt",
   },
   {
     src: "/documents/news/hawaii-2024/DayRiderRedShirt02.jpeg",
-    alt: "HPRC Hawaii 2024 - rider in red shirt",
+    alt: "HPRC San Diego 2024 - rider in red shirt",
   },
   {
     src: "/documents/news/hawaii-2024/DayRiderRedShirt03.jpeg",
-    alt: "HPRC Hawaii 2024 - rider in red shirt",
+    alt: "HPRC San Diego 2024 - rider in red shirt",
   },
   {
     src: "/documents/news/hawaii-2024/DayRiderBrownHorse01.jpeg",
-    alt: "HPRC Hawaii 2024 - rider on brown horse",
+    alt: "HPRC San Diego 2024 - rider on brown horse",
   },
   {
     src: "/documents/news/hawaii-2024/IndiaFlagGroup01.jpeg",
-    alt: "HPRC Hawaii 2024 - India flag group photo",
+    alt: "HPRC San Diego 2024 - India flag group photo",
   },
   {
     src: "/documents/news/hawaii-2024/IndiaFlagTeam01.jpeg",
-    alt: "HPRC Hawaii 2024 - India flag team photo",
+    alt: "HPRC San Diego 2024 - India flag team photo",
   },
   {
     src: "/documents/news/hawaii-2024/IndiaFlagWithGuest01.jpeg",
-    alt: "HPRC Hawaii 2024 - India flag with guest",
+    alt: "HPRC San Diego 2024 - India flag with guest",
   },
   {
     src: "/documents/news/hawaii-2024/TeamLineup01.jpeg",
-    alt: "HPRC Hawaii 2024 - team lineup",
+    alt: "HPRC San Diego 2024 - team lineup",
   },
   {
     src: "/documents/news/hawaii-2024/TeamDinner01.jpeg",
-    alt: "HPRC Hawaii 2024 - team dinner",
+    alt: "HPRC San Diego 2024 - team dinner",
   },
   {
     src: "/documents/news/hawaii-2024/LakesidePoloSelfie01.jpeg",
-    alt: "HPRC Hawaii 2024 - Lakeside polo selfie",
+    alt: "HPRC San Diego 2024 - Lakeside Polo Club selfie",
   },
   {
     src: "/documents/news/hawaii-2024/LakesidePoloSelfie02.jpeg",
-    alt: "HPRC Hawaii 2024 - Lakeside polo selfie",
+    alt: "HPRC San Diego 2024 - Lakeside Polo Club selfie",
   },
   {
     src: "/documents/news/hawaii-2024/LakesidePoloTrio01.jpeg",
-    alt: "HPRC Hawaii 2024 - Lakeside polo trio",
+    alt: "HPRC San Diego 2024 - Lakeside Polo Club trio",
   },
   {
     src: "/documents/news/hawaii-2024/PlayerPortraitWithHorse01.jpeg",
-    alt: "HPRC Hawaii 2024 - player portrait with horse",
+    alt: "HPRC San Diego 2024 - player portrait with horse",
   },
   {
     src: "/documents/news/hawaii-2024/AwardPresentation01.jpeg",
-    alt: "HPRC Hawaii 2024 - award presentation",
+    alt: "HPRC San Diego 2024 - award presentation",
   },
   {
     src: "/documents/news/hawaii-2024/PoloPrizeBag01.jpeg",
-    alt: "HPRC Hawaii 2024 - polo prize bag",
+    alt: "HPRC San Diego 2024 - polo prize bag",
   },
   {
     src: "/documents/news/hawaii-2024/SidelineOfficials01.jpeg",
-    alt: "HPRC Hawaii 2024 - sideline officials",
+    alt: "HPRC San Diego 2024 - sideline officials",
   },
   {
     src: "/documents/news/hawaii-2024/NightRidersSideBySide01.jpeg",
-    alt: "HPRC Hawaii 2024 - night riders side by side",
+    alt: "HPRC San Diego 2024 - night riders side by side",
   },
   {
     src: "/documents/news/hawaii-2024/NightFourRiders01.jpeg",
-    alt: "HPRC Hawaii 2024 - night four riders",
+    alt: "HPRC San Diego 2024 - night four riders",
   },
   {
     src: "/documents/news/hawaii-2024/NightPoloScrum01.jpeg",
-    alt: "HPRC Hawaii 2024 - night polo scrum",
+    alt: "HPRC San Diego 2024 - night polo scrum",
   },
   {
     src: "/documents/news/hawaii-2024/NightBallChase01.jpeg",
-    alt: "HPRC Hawaii 2024 - night ball chase",
+    alt: "HPRC San Diego 2024 - night ball chase",
   },
   {
     src: "/documents/news/hawaii-2024/NightBallChase02.jpeg",
-    alt: "HPRC Hawaii 2024 - night ball chase",
+    alt: "HPRC San Diego 2024 - night ball chase",
   },
   {
     src: "/documents/news/hawaii-2024/NightBallChase03.jpeg",
-    alt: "HPRC Hawaii 2024 - night ball chase",
+    alt: "HPRC San Diego 2024 - night ball chase",
   },
   {
     src: "/documents/news/hawaii-2024/NightPlayChase03.jpeg",
-    alt: "HPRC Hawaii 2024 - night play chase",
+    alt: "HPRC San Diego 2024 - night play chase",
   },
   {
     src: "/documents/news/hawaii-2024/NightPlayChase04.jpeg",
-    alt: "HPRC Hawaii 2024 - night play chase",
+    alt: "HPRC San Diego 2024 - night play chase",
   },
   {
     src: "/documents/news/hawaii-2024/NightRideDuel01.jpeg",
-    alt: "HPRC Hawaii 2024 - night ride duel",
+    alt: "HPRC San Diego 2024 - night ride duel",
   },
   {
     src: "/documents/news/hawaii-2024/NightRiderCloseup01.jpeg",
-    alt: "HPRC Hawaii 2024 - night rider closeup",
+    alt: "HPRC San Diego 2024 - night rider closeup",
   },
   {
     src: "/documents/news/hawaii-2024/NightRiderCloseup02.jpeg",
-    alt: "HPRC Hawaii 2024 - night rider closeup",
+    alt: "HPRC San Diego 2024 - night rider closeup",
   },
   {
     src: "/documents/news/hawaii-2024/NightRiderPortrait01.jpeg",
-    alt: "HPRC Hawaii 2024 - night rider portrait",
+    alt: "HPRC San Diego 2024 - night rider portrait",
   },
   {
     src: "/documents/news/hawaii-2024/NightTeamHuddle01.jpeg",
-    alt: "HPRC Hawaii 2024 - night team huddle",
+    alt: "HPRC San Diego 2024 - night team huddle",
   },
 ];
 
-export default function HprcHawaiiMatch2024Page() {
+export default function HprcSanDiegoMatch2024Page() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
 
@@ -202,16 +202,17 @@ export default function HprcHawaiiMatch2024Page() {
             <div className="space-y-10">
               <SectionHeading
                 eyebrow="Match Recap"
-                title="India battles to a thrilling finish in Hawaii, USA"
+                title="India battles to a thrilling finish at Lakeside Polo Club, San Diego"
                 description="A dramatic four-chukker contest featured sustained leads, a late tie, and standout individual honors."
                 align="center"
               />
               <div className="prose prose-lg max-w-none">
                 <p className="text-gray-700 leading-relaxed">
                   HPRC riders represented India at the Buddy Combs International Arena Challenge in
-                  2024, taking on a strong USA side in Hawaii, USA. Team India featured Arsalan
-                  Khan, Chaitania R. Kumar, and Prithvi Rathore, while the hosts fielded Nicole
-                  Bankhead, Robbie Pizarro, and David Brooks.
+                  2024, taking on a strong USA side at the Lakeside Polo Club in San Diego,
+                  California. Team India featured Arsalan Khan, Chaitania R. Kumar, and Prithvi
+                  Rathore, while the hosts fielded Nicole Bankhead, Robbie Pizarro, and David
+                  Brooks.
                 </p>
                 <p className="text-gray-700 leading-relaxed">
                   India opened with a four-goal handicap advantage and held a 9-7 lead after two
@@ -294,7 +295,7 @@ export default function HprcHawaiiMatch2024Page() {
           <div className="space-y-8 text-center">
             <SectionHeading
               eyebrow="Photo Gallery"
-              title="HPRC in Hawaii 2024"
+              title="HPRC at Lakeside Polo Club, San Diego 2024"
               description="On-field action, team moments, and celebrations from the USA-India arena polo clash."
               align="center"
             />
