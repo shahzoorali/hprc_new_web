@@ -296,7 +296,7 @@ export default function HomePage() {
                       Event of the Year
                     </p>
                     <p className="text-base font-bold text-white font-display">
-                      Hyderabad's Premier Polo Championship
+                      World Arena Polo Championship 2026
                     </p>
                   </div>
                 </div>

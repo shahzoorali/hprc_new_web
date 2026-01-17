@@ -17,6 +17,16 @@ export const eventsContent = {
   },
   news: [
     {
+      title: "HPRC represents India at the 2024 USA-India arena polo challenge",
+      date: "October 6, 2024",
+      source: "Deccan Chronicle",
+      excerpt:
+        "HPRC riders represented India at the Buddy Combs International Arena Challenge, where Arsalan Khan earned MVP honors in a thrilling 14-12 finish.",
+      url: "/events/news/hprc-hawaii-match-2024",
+      category: "International",
+      imageUrl: "/documents/news/hawaii-2024/DayPoloAction01.jpeg",
+    },
+    {
       title: "Chaitania Kumar and Arsalan Khan shine on the international stage",
       date: "2024",
       source: "HPRC News",
