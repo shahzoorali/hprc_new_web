@@ -17,6 +17,26 @@ export const eventsContent = {
   },
   news: [
     {
+      title: "International Arena Polo Championship 2026: HPRC Unveils Official Tournament T-Shirt",
+      date: "30 January, 2026",
+      source: "HPRC News",
+      excerpt:
+        "HPRC has advanced its preparations for the International Arena Polo Championship 2026 with the unveiling of the official tournament T-shirt and the formal presentation of the event invitation to Mohammed Azharuddin, Hon'ble Minister for Public Enterprises and Minority Affairs, Government of Telangana, at the Telangana Secretariat.",
+      url: "/events/news/international-arena-polo-championship-2026-tshirt-unveiling",
+      category: "Championship",
+      imageUrl: "/documents/news/azharuddin-2026/tshirt-unveiling.png",
+    },
+    {
+      title: "Championship Weekend to Feature 4-Goal Final and “Galloping Wheels” Showcase",
+      date: "31 January, 2026",
+      source: "HPRC News",
+      excerpt:
+        "HPRC has invited Ponnam Prabhakar, Hon'ble Minister for Transport & BC Welfare, Government of Telangana, as Guest of Honour for the 4-goal final on 15 February 2026. The weekend will also feature the Galloping Wheels Vintage & Super Cars Display.",
+      url: "/events/news/championship-weekend-4-goal-galloping-wheels",
+      category: "Championship",
+      imageUrl: "/documents/news/galloping-wheels-2026/championship-weekend-chukker.png",
+    },
+    {
       title: "HPRC represents India at the 2024 USA-India arena polo challenge",
       date: "October 6, 2024",
       source: "Deccan Chronicle",
