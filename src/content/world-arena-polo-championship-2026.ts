@@ -116,130 +116,157 @@ export const worldArenaPoloChampionship2026 = {
   schedule: [
     {
       day: "Day 1",
-      date: "11 Feb",
-      dateFull: "Wednesday, 11 February 2026",
+      date: "12 Feb",
+      dateFull: "Thursday, 12 February 2026",
       activities: [
         {
-          activity: "Arrival of players and teams from all participating countries",
-          type: "arrival",
-        },
-        {
-          activity: "Horse trials, arena familiarisation and practice sessions",
-          type: "practice",
-        },
-        {
-          activity: "Tournament draws",
-          type: "practice",
-        },
-        {
-          activity:
-            "Technical briefing on rules and regulations of all tournaments by the head umpire",
-          type: "practice",
+          time: "6:00–6:45 PM",
+          activity: "Opening League Match",
+          type: "match",
         },
       ],
     },
     {
       day: "Day 2",
-      date: "12 Feb",
-      dateFull: "Thursday, 12 February 2026",
+      date: "13 Feb",
+      dateFull: "Friday, 13 February 2026",
       activities: [
         {
-          time: "12:00 noon",
-          activity: "Press conference at Snaffles Banquets, HPRC",
-          type: "media",
+          time: "5:00–5:45 PM",
+          activity: "Exhibition Match",
+          type: "match",
         },
         {
-          activity: "Lunch with media and invited guests at Snaffles, HPRC",
-          type: "hospitality",
-        },
-        {
-          time: "6:00 pm onwards",
-          activity:
-            "Opening ceremony and first league matches of the HPRC International Arena Polo Cup 2026 (4 Goal) at the HPRC Arena Polo Stadium",
-          type: "ceremony",
+          time: "6:00–6:45 PM",
+          activity: "Knockout League Match",
+          type: "match",
         },
       ],
     },
     {
       day: "Day 3",
-      date: "13 Feb",
-      dateFull: "Friday, 13 February 2026",
-      activities: [
-        {
-          time: "Evening",
-          activity: "League matches – HPRC International Arena Polo Cup 2026 (4 Goal)",
-          type: "match",
-        },
-      ],
-    },
-    {
-      day: "Day 4",
       date: "14 Feb",
       dateFull: "Saturday, 14 February 2026",
       activities: [
         {
-          activity: "All-Women's International Arena Polo Exhibition Match",
+          time: "4:15 PM",
+          activity: "Horse Breeds Parade",
+          type: "ceremony",
+        },
+        {
+          time: "5:00–5:45 PM",
+          activity: "Ladies Exhibition Match",
           type: "match",
         },
         {
-          activity: '"Best of the Best" International Arena Polo Exhibition Match',
+          time: "5:45–6:00 PM",
+          activity: "Tractor Stunt Show",
+          type: "ceremony",
+        },
+        {
+          time: "6:15–7:00 PM",
+          activity: "“Best of the Best” Match",
           type: "match",
         },
         {
-          activity: "Curated hospitality for guests, sponsors and media",
+          time: "7:30–8:00 PM",
+          activity: "Prize Distribution Ceremony",
+          type: "ceremony",
+        },
+        {
+          activity: "Valentine’s Special Polo Evening (marketing highlight)",
           type: "hospitality",
         },
       ],
     },
     {
-      day: "Day 5",
+      day: "Day 4",
       date: "15 Feb",
       dateFull: "Sunday, 15 February 2026",
       activities: [
         {
-          activity: "Final of the 4-Goal HPRC International Arena Polo Cup 2026",
-          type: "final",
+          time: "1:00 PM",
+          activity: "Public entry for Car Show",
+          type: "hospitality",
         },
         {
-          activity: "Prize distribution ceremony followed by dinner at HPRC",
+          time: "3:00 PM",
+          activity: "Car Show Memento Ceremony",
+          type: "ceremony",
+        },
+        {
+          time: "5:00–5:30 PM",
+          activity: "Tractor Stunt Show",
+          type: "ceremony",
+        },
+        {
+          time: "6:00–7:00 PM",
+          activity: "Main Polo Match (4 chukkers)",
+          type: "match",
+        },
+        {
+          time: "7:30–8:00 PM",
+          activity: "Prize Distribution",
           type: "ceremony",
         },
       ],
     },
     {
-      day: "Day 6",
+      day: "Day 5",
       date: "16 Feb",
       dateFull: "Monday, 16 February 2026",
       activities: [
         {
-          activity: "League matches – Telangana Tourism International Arena Polo Cup 2026 (6 Goal)",
+          time: "6:00–7:00 PM",
+          activity: "League Match (6 goal)",
+          type: "match",
+        },
+      ],
+    },
+    {
+      day: "Day 6",
+      date: "17 Feb",
+      dateFull: "Tuesday, 17 February 2026",
+      activities: [
+        {
+          time: "5:00–6:00 PM",
+          activity: "Exhibition Match",
+          type: "match",
+        },
+        {
+          time: "6:00–7:00 PM",
+          activity: "League Match",
           type: "match",
         },
       ],
     },
     {
       day: "Day 7",
-      date: "17 Feb",
-      dateFull: "Tuesday, 17 February 2026",
-      activities: [
-        {
-          activity:
-            "League matches continue – 6-Goal Telangana Tourism International Arena Polo Cup 2026",
-          type: "match",
-        },
-      ],
-    },
-    {
-      day: "Day 8",
       date: "18 Feb",
       dateFull: "Wednesday, 18 February 2026",
       activities: [
         {
-          activity: "Final of the 6-Goal Telangana Tourism International Arena Polo Cup 2026",
+          time: "5:00 PM",
+          activity: "Public entry + Teams Parade",
+          type: "ceremony",
+        },
+        {
+          time: "5:45 PM",
+          activity: "National Anthem",
+          type: "ceremony",
+        },
+        {
+          time: "6:00–7:00 PM",
+          activity: "FINAL Match",
           type: "final",
         },
         {
-          activity: "Closing ceremony, prize distribution and farewell dinner",
+          activity: "Post-match — Firecracker / Laser Show",
+          type: "ceremony",
+        },
+        {
+          time: "7:00–8:00 PM",
+          activity: "Grand Prize Distribution",
           type: "ceremony",
         },
       ],
