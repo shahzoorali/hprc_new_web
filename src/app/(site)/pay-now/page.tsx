@@ -187,7 +187,6 @@ export default function PayNowPage() {
                     name="merchant_param5"
                     rows={2}
                     required
-                    pattern="^[a-zA-Z0-9_ ]*$"
                     className="block w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm sm:text-base text-slate-900 shadow-sm outline-none ring-0 transition focus:border-brand-500 focus:ring-2 focus:ring-brand-100"
                   />
                 </div>
