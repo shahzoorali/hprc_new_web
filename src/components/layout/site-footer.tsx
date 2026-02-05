@@ -51,6 +51,11 @@ export function SiteFooter() {
                 </Link>
               </li>
             ))}
+            <li>
+              <Link href="/pay-now" className="hover:text-brand-900">
+                Pay Now
+              </Link>
+            </li>
           </ul>
         </div>
 
