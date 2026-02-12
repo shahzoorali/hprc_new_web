@@ -84,7 +84,7 @@ export default function WorldArenaPoloChampionship2026Page() {
 
             <div className="relative z-10 p-12 md:p-20">
               <div className="space-y-8 text-center">
-                <div className="inline-flex items-center gap-3  bg-gradient-to-r from-brand-500 to-brand-600 px-6 py-3 shadow-2xl shadow-brand-500/50">
+                <div className="inline-flex items-center gap-3 bg-gradient-to-r from-brand-500 to-brand-600 px-6 py-3 shadow-2xl shadow-brand-500/50 mt-16 md:mt-20">
                   <div className="h-2 w-2  bg-white"></div>
                   <span className="text-sm font-bold uppercase tracking-[0.2em] text-white">
                     World-Class Championship
@@ -174,21 +174,22 @@ export default function WorldArenaPoloChampionship2026Page() {
               </div>
             </div>
 
-            {/* Floating Decorative Elements */}
-            <div className="absolute top-8 right-8 flex h-20 w-20 items-center justify-center  bg-white/10 backdrop-blur-sm border border-white/20 shadow-xl">
-              <svg
-                className="h-10 w-10 text-white"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={1.5}
-                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                />
-              </svg>
+            {/* Governing body logos */}
+            <div className="absolute top-6 left-1/2 -translate-x-1/2 z-20 flex items-center justify-center gap-6 rounded-2xl bg-white/95 backdrop-blur-sm border border-white/60 px-6 py-4 shadow-2xl">
+              <Image
+                src="/logos/fip-logo.svg"
+                alt="Federation of International Polo"
+                width={72}
+                height={72}
+                className="h-16 w-auto"
+              />
+              <Image
+                src="/logos/ipa-logo.png"
+                alt="Indian Polo Association"
+                width={72}
+                height={72}
+                className="h-16 w-auto"
+              />
             </div>
             <div className="absolute bottom-8 left-8 flex h-16 w-16 items-center justify-center  bg-brand-500/20 backdrop-blur-sm border border-brand-400/30 shadow-xl">
               <svg
@@ -248,6 +249,22 @@ export default function WorldArenaPoloChampionship2026Page() {
               description="The world's finest arena polo teams converge for an unforgettable week of competition and celebration"
               align="center"
             />
+            <div className="flex items-center justify-center gap-8">
+              <Image
+                src="/logos/fip-logo.svg"
+                alt="Federation of International Polo"
+                width={56}
+                height={56}
+                className="h-14 w-auto"
+              />
+              <Image
+                src="/logos/ipa-logo.png"
+                alt="Indian Polo Association"
+                width={56}
+                height={56}
+                className="h-14 w-auto"
+              />
+            </div>
             <div className="grid gap-8 lg:grid-cols-2">
               <div className="relative overflow-hidden  bg-gradient-to-br from-white to-brand-50/40 p-8 border border-brand-100/60 shadow-xl">
                 <h3 className="text-2xl font-bold text-brand-900 mb-4 font-display">Background</h3>

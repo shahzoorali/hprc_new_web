@@ -54,7 +54,25 @@ export default function HomePage() {
         <div className="absolute top-0 right-0 w-[20rem] h-[20rem] sm:w-[30rem] sm:h-[30rem] bg-brand-600/8  blur-[100px]"></div>
         <div className="absolute bottom-0 left-0 w-[20rem] h-[20rem] sm:w-[30rem] sm:h-[30rem] bg-brand-700/8  blur-[100px]"></div>
 
-        <div className="container relative z-10">
+        {/* FIP & IPA logos - centered, white background for visibility */}
+        <div className="absolute top-6 left-1/2 -translate-x-1/2 z-20 flex items-center justify-center gap-6 rounded-2xl bg-white/95 backdrop-blur-sm border border-white/60 px-6 py-4 shadow-2xl">
+          <Image
+            src="/logos/fip-logo.svg"
+            alt="Federation of International Polo"
+            width={72}
+            height={72}
+            className="h-16 w-auto"
+          />
+          <Image
+            src="/logos/ipa-logo.png"
+            alt="Indian Polo Association"
+            width={72}
+            height={72}
+            className="h-16 w-auto"
+          />
+        </div>
+
+        <div className="container relative z-10 pt-20 sm:pt-24">
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center">
             {/* Elegant Content Side */}
             <div className="text-white space-y-6 sm:space-y-10">
