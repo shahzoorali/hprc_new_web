@@ -49,13 +49,12 @@ export default function WorldArenaPoloChampionship2026Page() {
   } = worldArenaPoloChampionship2026;
 
   // Event starts on February 11, 2026 at 00:00 IST (UTC+5:30)
-  // Converting to UTC for accurate countdown
   const targetDate = new Date("2026-02-11T00:00:00+05:30");
 
-  // Calculate days remaining for static display
   const now = new Date().getTime();
   const target = targetDate.getTime();
   const difference = target - now;
+  const eventHasStarted = difference <= 0;
   const daysRemaining = Math.max(0, Math.floor(difference / (1000 * 60 * 60 * 24)));
 
   return (
@@ -138,15 +137,30 @@ export default function WorldArenaPoloChampionship2026Page() {
                   </div>
                 </div>
 
-                {/* Countdown Timer Visual */}
-                <CountdownTimer targetDate={targetDate} />
+                {/* Countdown or Live indicator */}
+                {eventHasStarted ? (
+                  <div className="inline-flex items-center gap-3 bg-white/15 backdrop-blur-md border-2 border-white/40 px-8 py-5 rounded-2xl">
+                    <span className="relative flex h-4 w-4">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
+                      <span className="relative inline-flex h-4 w-4 rounded-full bg-green-500"></span>
+                    </span>
+                    <span className="text-2xl md:text-3xl font-bold uppercase tracking-wider text-white">
+                      Live Now
+                    </span>
+                    <span className="text-white/90 font-medium">— Happening this week</span>
+                  </div>
+                ) : (
+                  <CountdownTimer targetDate={targetDate} />
+                )}
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                   <Link
-                    href="#contact"
+                    href="https://in.bookmyshow.com/sports/hprc-international-arena-polo-championship/ET00486496"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-3  bg-gradient-to-r from-white to-gray-100 px-10 py-5 text-lg font-bold text-brand-900 shadow-2xl"
                   >
-                    <span>Register Now</span>
+                    <span>Buy Tickets</span>
                     <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path
                         strokeLinecap="round"
@@ -745,11 +759,17 @@ export default function WorldArenaPoloChampionship2026Page() {
         <div className="container relative z-10 text-center">
           <div className="space-y-8">
             <div className="inline-flex items-center gap-3  bg-white/20 backdrop-blur-sm border-2 border-white/30 px-6 py-3">
-              <div className="h-3 w-3  bg-green-400"></div>
-              <span className="text-sm font-bold uppercase tracking-[0.2em] text-white">
-                Registration Open
+              <span className="relative flex h-3 w-3">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex h-3 w-3 rounded-full bg-green-500"></span>
               </span>
-              <div className="h-3 w-3  bg-green-400"></div>
+              <span className="text-sm font-bold uppercase tracking-[0.2em] text-white">
+                Live Now
+              </span>
+              <span className="relative flex h-3 w-3">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex h-3 w-3 rounded-full bg-green-500"></span>
+              </span>
             </div>
 
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white font-display tracking-tight leading-tight">
@@ -768,10 +788,12 @@ export default function WorldArenaPoloChampionship2026Page() {
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
               <Link
-                href="#contact"
+                href="https://in.bookmyshow.com/sports/hprc-international-arena-polo-championship/ET00486496"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-3  bg-gradient-to-r from-white to-gray-100 px-12 py-6 text-xl font-bold text-brand-900 shadow-[0_20px_40px_-10px_rgba(255,255,255,0.3)]"
               >
-                <span>Register Now</span>
+                <span>Buy Tickets</span>
                 <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     strokeLinecap="round"
@@ -781,30 +803,29 @@ export default function WorldArenaPoloChampionship2026Page() {
                   />
                 </svg>
               </Link>
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center gap-3  border-4 border-white px-12 py-6 text-xl font-bold text-white shadow-[0_20px_40px_-10px_rgba(255,255,255,0.2)]"
-              >
-                <span>Learn More</span>
-                <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-              </Link>
             </div>
 
             <div className="flex items-center justify-center gap-8 pt-8">
               <div className="text-center">
-                <p className="text-4xl md:text-5xl font-extrabold text-white font-display">
-                  {daysRemaining}+
-                </p>
-                <p className="text-sm font-semibold uppercase tracking-wider text-white/70">
-                  Days Left
-                </p>
+                {eventHasStarted ? (
+                  <>
+                    <p className="text-4xl md:text-5xl font-extrabold text-white font-display tracking-tight">
+                      LIVE
+                    </p>
+                    <p className="text-sm font-semibold uppercase tracking-wider text-white/70">
+                      Happening Now
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <p className="text-4xl md:text-5xl font-extrabold text-white font-display">
+                      {daysRemaining}+
+                    </p>
+                    <p className="text-sm font-semibold uppercase tracking-wider text-white/70">
+                      Days Left
+                    </p>
+                  </>
+                )}
               </div>
               <div className="h-16 w-px bg-white/30"></div>
               <div className="text-center">

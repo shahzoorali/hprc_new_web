@@ -264,10 +264,12 @@ export default function HomePage() {
                   </svg>
                 </Link>
                 <Link
-                  href="/events/world-arena-polo-championship-2026#contact"
+                  href="https://in.bookmyshow.com/sports/hprc-international-arena-polo-championship/ET00486496"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center justify-center  border-2 border-white/30 bg-white/10 backdrop-blur-md px-6 sm:px-9 py-3 sm:py-4 text-sm sm:text-base font-bold text-white transition-all duration-300 hover:bg-white/20 hover:border-white/50 font-display"
                 >
-                  Register Interest
+                  Buy Tickets
                 </Link>
               </div>
             </div>
