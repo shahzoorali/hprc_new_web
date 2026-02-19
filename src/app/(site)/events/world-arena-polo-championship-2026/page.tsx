@@ -19,7 +19,7 @@ import { worldArenaPoloChampionship2026 } from "@/content/world-arena-polo-champ
 export const metadata = {
   title: "HPRC World Arena Polo Championship 2026 | Hyderabad Polo & Riding Club",
   description:
-    "Join us for HPRC World Arena Polo Championship 2026 in Hyderabad. A week-long celebration of world-class arena polo featuring teams from USA, India, Germany, France, and Luxembourg.",
+    "Relive the HPRC World Arena Polo Championship 2026. India won both the Radha TMT (4-Goal) and Telangana Tourism (6-Goal) cups. Full results, schedule, and coverage.",
 };
 
 const countryFlagComponents: Record<
@@ -35,12 +35,15 @@ const countryFlagComponents: Record<
 
 export default function WorldArenaPoloChampionship2026Page() {
   const {
+    eventStatus,
     hero,
     overview,
     keyInfo,
     countries,
     tournaments,
     schedule,
+    results,
+    pressCoverage,
     officials,
     hospitality,
     media,
@@ -48,11 +51,10 @@ export default function WorldArenaPoloChampionship2026Page() {
     legacy,
   } = worldArenaPoloChampionship2026;
 
-  // Event starts on February 11, 2026 at 00:00 IST (UTC+5:30)
-  // Converting to UTC for accurate countdown
-  const targetDate = new Date("2026-02-11T00:00:00+05:30");
+  const isCompleted = eventStatus === "completed";
 
-  // Calculate days remaining for static display
+  // Event started on February 11, 2026 at 00:00 IST (UTC+5:30)
+  const targetDate = new Date("2026-02-11T00:00:00+05:30");
   const now = new Date().getTime();
   const target = targetDate.getTime();
   const difference = target - now;
@@ -99,7 +101,9 @@ export default function WorldArenaPoloChampionship2026Page() {
                 </h1>
 
                 <p className="text-xl md:text-2xl text-white/90 font-light max-w-3xl mx-auto leading-relaxed">
-                  Experience the pinnacle of international arena polo in Hyderabad
+                  {isCompleted
+                    ? "India won both the Radha TMT and Telangana Tourism cups. Relive the championship."
+                    : "Experience the pinnacle of international arena polo in Hyderabad"}
                 </p>
 
                 <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 text-white">
@@ -138,15 +142,20 @@ export default function WorldArenaPoloChampionship2026Page() {
                   </div>
                 </div>
 
-                {/* Countdown Timer Visual */}
-                <CountdownTimer targetDate={targetDate} />
+                {isCompleted ? (
+                  <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/30 px-6 py-4 text-white font-semibold">
+                    <span>Event concluded 18 February 2026</span>
+                  </div>
+                ) : (
+                  <CountdownTimer targetDate={targetDate} />
+                )}
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                   <Link
-                    href="#contact"
+                    href={isCompleted ? "#results" : "#contact"}
                     className="inline-flex items-center justify-center gap-3  bg-gradient-to-r from-white to-gray-100 px-10 py-5 text-lg font-bold text-brand-900 shadow-2xl"
                   >
-                    <span>Register Now</span>
+                    <span>{isCompleted ? "View Results" : "Register Now"}</span>
                     <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path
                         strokeLinecap="round"
@@ -160,7 +169,7 @@ export default function WorldArenaPoloChampionship2026Page() {
                     href="#schedule"
                     className="inline-flex items-center justify-center gap-3  border-2 border-white px-10 py-5 text-lg font-bold text-white shadow-2xl"
                   >
-                    <span>View Schedule</span>
+                    <span>{isCompleted ? "View Schedule & Results" : "View Schedule"}</span>
                     <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path
                         strokeLinecap="round"
@@ -374,6 +383,111 @@ export default function WorldArenaPoloChampionship2026Page() {
             </div>
           ))}
         </div>
+      </section>
+
+      {/* 🏆 Championship Results */}
+      <section className="container" id="results">
+        <SectionHeading
+          eyebrow="Final Standings"
+          title="Championship Results"
+          description="Official results from the 2026 Hyderabad International Polo Cup. India claimed both the Radha TMT (4-Goal) and Telangana Tourism (6-Goal) championships."
+          align="center"
+        />
+        <div className="mt-12 relative overflow-hidden rounded-[2.5rem] border-2 border-brand-100/80 bg-white shadow-2xl">
+          <div className="relative aspect-[16/9] max-h-[420px] w-full">
+            <Image
+              src="/images/india-team-trophy-2026.png"
+              alt="Indian team with trophy at International Arena Polo Championship 2026 – HPRC"
+              fill
+              className="object-cover object-center"
+              sizes="(max-width: 1024px) 100vw, 1024px"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-brand-900/60 via-transparent to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+              <p className="text-white font-semibold text-lg drop-shadow-lg">
+                Team India — Champions, Radha TMT & Telangana Tourism cups
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="mt-12 space-y-12">
+          {results.map((cup) => (
+            <div
+              key={cup.tournamentId}
+              className="relative overflow-hidden rounded-[2.5rem] border-2 border-brand-100/80 bg-gradient-to-br from-white via-white to-brand-50/50 p-8 md:p-10 shadow-2xl"
+            >
+              <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
+                <h3 className="text-2xl md:text-3xl font-bold text-brand-900 font-display tracking-tight">
+                  {cup.tournamentName}
+                </h3>
+                <div className="flex flex-wrap items-center gap-3">
+                  <span className="inline-flex items-center gap-2 bg-brand-100 px-4 py-2 text-brand-800 font-bold">
+                    🏆 Champion: {cup.champion}
+                  </span>
+                  {cup.mvp && (
+                    <span className="inline-flex items-center gap-2 bg-amber-100 px-4 py-2 text-amber-800 font-semibold">
+                      MVP: {cup.mvp}
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full min-w-[480px] text-left border-collapse">
+                  <thead>
+                    <tr className="border-b-2 border-brand-200 bg-brand-50/80">
+                      <th className="py-3 px-4 font-semibold text-brand-900">Date</th>
+                      <th className="py-3 px-4 font-semibold text-brand-900">Round</th>
+                      <th className="py-3 px-4 font-semibold text-brand-900 text-right">Team</th>
+                      <th className="py-3 px-4 font-semibold text-brand-900 text-center">Goals</th>
+                      <th className="py-3 px-4 font-semibold text-brand-900 text-center">—</th>
+                      <th className="py-3 px-4 font-semibold text-brand-900 text-center">Goals</th>
+                      <th className="py-3 px-4 font-semibold text-brand-900 text-left">Team</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {cup.matches.map((m, i) => (
+                      <tr key={i} className="border-b border-brand-100 hover:bg-brand-50/50">
+                        <td className="py-3 px-4 text-gray-700">{m.dateLabel}</td>
+                        <td className="py-3 px-4 font-medium text-brand-800">{m.round}</td>
+                        <td className="py-3 px-4 text-right font-medium">{m.teamA}</td>
+                        <td className="py-3 px-4 text-center font-bold text-brand-700">{m.goalsA}</td>
+                        <td className="py-3 px-2 text-gray-400">vs</td>
+                        <td className="py-3 px-4 text-center font-bold text-brand-700">{m.goalsB}</td>
+                        <td className="py-3 px-4 text-left font-medium">{m.teamB}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          ))}
+        </div>
+        {pressCoverage && (
+          <div className="mt-8 text-center">
+            <p className="text-sm text-gray-600 mb-3">Coverage</p>
+            <a
+              href={pressCoverage.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 text-brand-600 font-semibold hover:underline"
+            >
+              <Image
+                src="https://lapoloin.s3.ap-south-1.amazonaws.com/wp-content/uploads/2024/09/lapolo-logo-retina.png"
+                alt="LA POLO"
+                width={120}
+                height={36}
+                className="h-8 w-auto object-contain"
+              />
+              <span>
+                {pressCoverage.title} — {pressCoverage.source}
+              </span>
+              <svg className="h-4 w-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+          </div>
+        )}
       </section>
 
       {/* 📅 Day-wise Programme */}

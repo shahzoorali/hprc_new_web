@@ -43,6 +43,11 @@ const nextConfig: NextConfig = {
         hostname: "i.ytimg.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "lapoloin.s3.ap-south-1.amazonaws.com",
+        pathname: "/**",
+      },
     ],
     unoptimized: false,
   },

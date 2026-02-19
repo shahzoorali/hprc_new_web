@@ -42,7 +42,27 @@ export type MediaOpportunity = {
   description: string;
 };
 
+export type MatchResult = {
+  date: string;
+  dateLabel: string;
+  round: "League" | "Final";
+  teamA: string;
+  goalsA: number;
+  teamB: string;
+  goalsB: number;
+  winner: string;
+};
+
+export type TournamentResults = {
+  tournamentId: string;
+  tournamentName: string;
+  champion: string;
+  mvp?: string;
+  matches: MatchResult[];
+};
+
 export const worldArenaPoloChampionship2026 = {
+  eventStatus: "completed" as const,
   hero: {
     title: "HPRC World Arena Polo Championship 2026",
     subtitle: "Hyderabad",
@@ -74,7 +94,7 @@ export const worldArenaPoloChampionship2026 = {
   tournaments: [
     {
       id: "4-goal-cup",
-      name: "HPRC International Arena Polo Cup 2026",
+      name: "Radha TMT International Arena Polo Championship",
       dates: "12th – 15th February 2026",
       format: "League matches followed by a final",
       goal: "4 Goal",
@@ -121,7 +141,7 @@ export const worldArenaPoloChampionship2026 = {
       activities: [
         {
           time: "6:00–6:45 PM",
-          activity: "Opening League Match",
+          activity: "France vs USA (8–7) — League",
           type: "match",
         },
       ],
@@ -138,7 +158,7 @@ export const worldArenaPoloChampionship2026 = {
         },
         {
           time: "6:00–6:45 PM",
-          activity: "Knockout League Match",
+          activity: "India vs Luxembourg (15–5) — League",
           type: "match",
         },
       ],
@@ -201,7 +221,7 @@ export const worldArenaPoloChampionship2026 = {
         },
         {
           time: "6:00–7:00 PM",
-          activity: "Main Polo Match (4 chukkers)",
+          activity: "India vs France (21–14) — 4-Goal Final",
           type: "match",
         },
         {
@@ -218,7 +238,7 @@ export const worldArenaPoloChampionship2026 = {
       activities: [
         {
           time: "6:00–7:00 PM",
-          activity: "League Match (6 goal)",
+          activity: "India vs USA (12–3) — 6-Goal League",
           type: "match",
         },
       ],
@@ -235,7 +255,7 @@ export const worldArenaPoloChampionship2026 = {
         },
         {
           time: "6:00–7:00 PM",
-          activity: "League Match",
+          activity: "France vs Germany (10–2) — League",
           type: "match",
         },
       ],
@@ -257,7 +277,7 @@ export const worldArenaPoloChampionship2026 = {
         },
         {
           time: "6:00–7:00 PM",
-          activity: "FINAL Match",
+          activity: "India vs France (18–15) — 6-Goal Final",
           type: "final",
         },
         {
@@ -272,6 +292,34 @@ export const worldArenaPoloChampionship2026 = {
       ],
     },
   ] satisfies ScheduleDay[],
+  results: [
+    {
+      tournamentId: "4-goal-cup",
+      tournamentName: "Radha TMT International Arena Polo Championship (4-Goal)",
+      champion: "India",
+      matches: [
+        { date: "2026-02-12", dateLabel: "12 February 2026", round: "League", teamA: "France", goalsA: 8, teamB: "USA", goalsB: 7, winner: "France" },
+        { date: "2026-02-13", dateLabel: "13 February 2026", round: "League", teamA: "India", goalsA: 15, teamB: "Luxembourg", goalsB: 5, winner: "India" },
+        { date: "2026-02-15", dateLabel: "15 February 2026", round: "Final", teamA: "India", goalsA: 21, teamB: "France", goalsB: 14, winner: "India" },
+      ],
+    },
+    {
+      tournamentId: "6-goal-cup",
+      tournamentName: "Telangana Tourism International Arena Polo Championship (6-Goal)",
+      champion: "India",
+      mvp: "Salim Azmi",
+      matches: [
+        { date: "2026-02-16", dateLabel: "16 February 2026", round: "League", teamA: "India", goalsA: 12, teamB: "USA", goalsB: 3, winner: "India" },
+        { date: "2026-02-17", dateLabel: "17 February 2026", round: "League", teamA: "France", goalsA: 10, teamB: "Germany", goalsB: 2, winner: "France" },
+        { date: "2026-02-18", dateLabel: "18 February 2026", round: "Final", teamA: "India", goalsA: 18, teamB: "France", goalsB: 15, winner: "India" },
+      ],
+    },
+  ] satisfies TournamentResults[],
+  pressCoverage: {
+    title: "Close Quarters, Pure Fury: The Hyderabad International Polo Cup",
+    url: "https://lapolo.in/blog/close-quarters-pure-fury-the-hyderabad-international-polo-cup/",
+    source: "LA POLO",
+  },
   officials: {
     chiefUmpire: {
       name: "Robin Sanchez",
