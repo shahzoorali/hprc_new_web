@@ -17,6 +17,16 @@ export const eventsContent = {
   },
   news: [
     {
+      title: "India wins both cups at Hyderabad International Polo Cup 2026",
+      date: "19 February, 2026",
+      source: "LA POLO",
+      excerpt:
+        "India claimed the Radha TMT (4-Goal) and Telangana Tourism (6-Goal) championships. Salim Azmi was named MVP in the 6-goal final. Full results and coverage on the championship page.",
+      url: "/events/news/hyderabad-international-polo-cup-2026-india-wins-both-cups",
+      category: "Championship",
+      imageUrl: "/images/india-team-trophy-2026.png",
+    },
+    {
       title: "International Arena Polo Championship 2026: HPRC Unveils Official Tournament T-Shirt",
       date: "30 January, 2026",
       source: "HPRC News",
@@ -202,9 +212,9 @@ export const eventsContent = {
   upcoming: [
     {
       title: "HPRC World Arena Polo Championship 2026",
-      date: "11th – 18th February 2026",
+      date: "11th – 18th February 2026 (Concluded)",
       description:
-        "A week-long celebration of world-class arena polo featuring teams from USA, India, Germany, France, and Luxembourg. Multiple tournaments including 4 Goal and 6 Goal competitions, plus exhibition matches.",
+        "Event concluded. India won both the Radha TMT (4-Goal) and Telangana Tourism (6-Goal) cups. Full results, schedule, and press coverage on the event page.",
       link: "/events/world-arena-polo-championship-2026",
     },
     {

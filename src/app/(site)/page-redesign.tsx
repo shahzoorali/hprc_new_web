@@ -85,9 +85,9 @@ export default function HomePageRedesign() {
 
               {/* Elegant Description */}
               <p className="text-lg sm:text-xl text-white/80 leading-relaxed font-light max-w-2xl font-body">
-                A week-long celebration of world-class arena polo featuring top international teams
-                competing for glory. Experience the thrill of elite competition, exceptional
-                hospitality, and the finest polo action.
+                India won both the Radha TMT (4-Goal) and Telangana Tourism (6-Goal) championships.
+                Relive the week-long celebration of world-class arena polo, full results, and press
+                coverage.
               </p>
 
               {/* Participating Countries - Elegant Layout */}
@@ -187,10 +187,10 @@ export default function HomePageRedesign() {
               {/* Elegant CTA Buttons */}
               <div className="flex flex-wrap items-center gap-5 pt-6">
                 <Link
-                  href="/events/world-arena-polo-championship-2026"
+                  href="/events/world-arena-polo-championship-2026#results"
                   className="group inline-flex items-center justify-center gap-3  bg-white px-9 py-4 text-base font-bold text-brand-800 shadow-2xl transition-all duration-300 hover:bg-gray-50 hover:text-brand-900 hover:shadow-2xl hover:shadow-brand-500/20 hover:-translate-y-1 font-display"
                 >
-                  <span className="tracking-wide">View Full Details</span>
+                  <span className="tracking-wide">View 2026 Results</span>
                   <svg
                     className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1"
                     fill="none"
@@ -206,12 +206,10 @@ export default function HomePageRedesign() {
                   </svg>
                 </Link>
                 <Link
-                  href="https://in.bookmyshow.com/sports/hprc-international-arena-polo-championship/ET00486496"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="/events/world-arena-polo-championship-2026"
                   className="inline-flex items-center justify-center  border-2 border-white/30 bg-white/10 backdrop-blur-md px-9 py-4 text-base font-bold text-white transition-all duration-300 hover:bg-white/20 hover:border-white/50 font-display"
                 >
-                  Buy Tickets
+                  Schedule & Full Details
                 </Link>
               </div>
             </div>
@@ -221,10 +219,10 @@ export default function HomePageRedesign() {
               <div className="relative  overflow-hidden shadow-2xl border-4 border-white/20 transition-all duration-700 group-hover:shadow-[0_35px_60px_-15px_rgba(227,30,36,0.25)]">
                 <div className="aspect-[4/3] relative">
                   <Image
-                    src="https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=1200&q=80"
-                    alt="World Arena Polo Championship 2026"
+                    src="/images/india-team-trophy-2026.png"
+                    alt="Team India with trophy – World Arena Polo Championship 2026"
                     fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     priority
                   />
@@ -251,7 +249,7 @@ export default function HomePageRedesign() {
                 <div className="absolute bottom-8 left-8 right-8">
                   <div className="bg-gradient-to-r from-brand-600 to-brand-500  px-7 py-4 shadow-2xl border border-white/20 backdrop-blur-sm">
                     <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/90 mb-1 font-display">
-                      Event of the Year
+                      India won both cups
                     </p>
                     <p className="text-base font-bold text-white font-display">
                       World Arena Polo Championship 2026
