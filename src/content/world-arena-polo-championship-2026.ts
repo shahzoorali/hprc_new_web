@@ -14,7 +14,7 @@ export type Tournament = {
   goal: string;
 };
 
-export type ScheduleActivity = {
+type ScheduleActivity = {
   time?: string;
   activity: string;
   type: "arrival" | "practice" | "match" | "ceremony" | "hospitality" | "media" | "final";
@@ -27,22 +27,7 @@ export type ScheduleDay = {
   activities: ScheduleActivity[];
 };
 
-export type Official = {
-  name: string;
-  role: string;
-};
-
-export type HospitalityFeature = {
-  title: string;
-  description: string;
-};
-
-export type MediaOpportunity = {
-  title: string;
-  description: string;
-};
-
-export type MatchResult = {
+type MatchResult = {
   date: string;
   dateLabel: string;
   round: "League" | "Final";
@@ -53,7 +38,7 @@ export type MatchResult = {
   winner: string;
 };
 
-export type TournamentResults = {
+type TournamentResults = {
   tournamentId: string;
   tournamentName: string;
   champion: string;
@@ -397,4 +382,3 @@ export const worldArenaPoloChampionship2026 = {
   ],
 };
 
-export type WorldArenaPoloChampionship2026 = typeof worldArenaPoloChampionship2026;
