@@ -38,37 +38,31 @@ export default function HomePage() {
       />
 
       {/* Featured Event - World Arena Polo Championship 2026 - Sophisticated Design */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-brand-900 via-brand-800 to-brand-900 py-16 sm:py-24 lg:py-32">
-        {/* Elegant Subtle Pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)",
-              backgroundSize: "32px 32px",
-            }}
-          ></div>
+      {/* Featured Award - Indian Polo Awards - Sophisticated Design */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-neutral-900 via-brand-900 to-neutral-900 py-16 sm:py-24 lg:py-32">
+        {/* Subtle Background Image of the Award Ceremony */}
+        <div className="absolute inset-0 opacity-20">
+          <Image
+            src="/documents/news/arena-polo-club-of-the-season.jpg"
+            alt="Award Ceremony Background"
+            fill
+            className="object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-neutral-900/70 backdrop-blur-sm"></div>
         </div>
 
         {/* Sophisticated Decorative Elements */}
-        <div className="absolute top-0 right-0 w-[20rem] h-[20rem] sm:w-[30rem] sm:h-[30rem] bg-brand-600/8  blur-[100px]"></div>
-        <div className="absolute bottom-0 left-0 w-[20rem] h-[20rem] sm:w-[30rem] sm:h-[30rem] bg-brand-700/8  blur-[100px]"></div>
+        <div className="absolute top-0 right-0 w-[20rem] h-[20rem] sm:w-[30rem] sm:h-[30rem] bg-brand-600/10 blur-[100px]"></div>
+        <div className="absolute bottom-0 left-0 w-[20rem] h-[20rem] sm:w-[30rem] sm:h-[30rem] bg-[#d97706]/10 blur-[100px]"></div>
 
-        {/* FIP & IPA logos - centered, white background for visibility */}
-        <div className="absolute top-6 left-1/2 -translate-x-1/2 z-20 flex items-center justify-center gap-6 rounded-2xl bg-white/95 backdrop-blur-sm border border-white/60 px-6 py-4 shadow-2xl">
+        {/* Award Logo - centered */}
+        <div className="absolute top-6 left-1/2 -translate-x-1/2 z-20 flex items-center justify-center rounded-[1.5rem] bg-white/5 backdrop-blur-md border border-white/10 px-6 py-4 shadow-2xl">
           <Image
-            src="/logos/fip-logo.svg"
-            alt="Federation of International Polo"
-            width={72}
-            height={72}
-            className="h-16 w-auto"
-          />
-          <Image
-            src="/logos/ipa-logo.png"
-            alt="Indian Polo Association"
-            width={72}
-            height={72}
-            className="h-16 w-auto"
+            src="/TIPA.png"
+            alt="The Indian Polo Awards"
+            width={120}
+            height={80}
+            className="h-10 sm:h-12 w-auto object-contain"
           />
         </div>
 
@@ -77,62 +71,30 @@ export default function HomePage() {
             {/* Elegant Content Side */}
             <div className="text-white space-y-6 sm:space-y-10">
               {/* Sophisticated Badge */}
-              <div className="inline-flex items-center gap-2 sm:gap-3  bg-white/10 backdrop-blur-md border border-white/20 px-3 sm:px-5 py-2 sm:py-2.5">
-                <span className="h-1.5 sm:h-2 w-1.5 sm:w-2  bg-brand-400 animate-pulse"></span>
-                <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.15em] sm:tracking-[0.2em] text-white/90 font-display">
-                  Featured Event
+              <div className="inline-flex items-center gap-2 sm:gap-3 bg-[#d97706]/15 backdrop-blur-md border border-[#d97706]/30 px-3 sm:px-5 py-2 sm:py-2.5 rounded-full">
+                <span className="h-1.5 sm:h-2 w-1.5 sm:w-2 bg-[#d97706] animate-pulse rounded-full shadow-[0_0_8px_#d97706]"></span>
+                <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.15em] sm:tracking-[0.2em] text-[#d97706] font-display">
+                  Recent Achievement
                 </span>
               </div>
 
               {/* Elegant Typography */}
               <div className="space-y-4 sm:space-y-6">
-                <h2 className="text-[clamp(2rem,5vw,4rem)] sm:text-[clamp(2.5rem,5vw,4.5rem)] font-bold leading-[1.1] font-display">
-                  <span className="block">World Arena Polo</span>
-                  <span className="block bg-gradient-to-r from-white via-brand-100 to-white bg-clip-text text-transparent mt-1 sm:mt-2">
-                    Championship 2026
+                <h2 className="text-[clamp(2rem,5vw,3.5rem)] sm:text-[clamp(2.5rem,5vw,4rem)] font-bold leading-[1.1] font-display tracking-tight">
+                  <span className="block text-white">Arena Polo Club</span>
+                  <span className="block bg-gradient-to-r from-[#fbbf24] via-[#d97706] to-[#fbbf24] bg-clip-text text-transparent mt-1 sm:mt-2 pb-2">
+                    Of The Season
                   </span>
                 </h2>
-                <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
-                  <div className="flex items-center gap-2 sm:gap-3 bg-white/10 backdrop-blur-md border border-white/20 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full">
-                    <svg
-                      className="h-4 w-4 sm:h-5 sm:w-5 text-brand-300 flex-shrink-0"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                      />
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                      />
-                    </svg>
-                    <span className="text-sm sm:text-base font-semibold text-white tracking-wide">
-                      Hyderabad
+                <div className="flex flex-wrap items-center gap-3 sm:gap-4">
+                  <div className="flex items-center gap-2 sm:gap-3 bg-white/5 backdrop-blur-md border border-white/10 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full">
+                    <span className="text-sm sm:text-base font-semibold text-white tracking-wide font-display">
+                      Season V Winner
                     </span>
                   </div>
-                  <div className="flex items-center gap-2 sm:gap-3 bg-white/10 backdrop-blur-md border border-white/20 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full">
-                    <svg
-                      className="h-4 w-4 sm:h-5 sm:w-5 text-brand-300 flex-shrink-0"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                      />
-                    </svg>
-                    <span className="text-sm sm:text-base font-semibold text-white tracking-wide">
-                      11th – 18th February 2026
+                  <div className="flex items-center gap-2 sm:gap-3 bg-white/5 backdrop-blur-md border border-white/10 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full">
+                    <span className="text-sm sm:text-base font-semibold text-white tracking-wide font-display">
+                      The Indian Polo Awards
                     </span>
                   </div>
                 </div>
@@ -140,189 +102,70 @@ export default function HomePage() {
 
               {/* Elegant Description */}
               <p className="text-base sm:text-lg lg:text-xl text-white/80 leading-relaxed font-light max-w-2xl font-body">
-                India won both the Radha TMT (4-Goal) and Telangana Tourism (6-Goal) championships.
-                Relive the week-long celebration of world-class arena polo, full results, and press
-                coverage.
+                A season defined by precision and poise. Hyderabad Polo &amp; Riding Club takes home the prestigious <strong>Arena Polo Club of the Season</strong> award, recognizing our world-class facilities, competitive spirit, and unparalleled hospitality in the sport.
               </p>
-
-              {/* Participating Countries - Elegant Layout */}
-              <div className="space-y-4 sm:space-y-6">
-                <p className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.15em] sm:tracking-[0.2em] text-white/70 font-display">
-                  Participating Countries
-                </p>
-                <div className="flex flex-wrap items-center gap-2 sm:gap-4">
-                  {featuredEvent.countries.map((country) => {
-                    const FlagComponent = countryFlagComponents[country.code];
-                    return (
-                      <div key={country.code} className="group relative">
-                        <div className="bg-white/10 backdrop-blur-md border border-white/20 px-3 sm:px-4 py-1.5 sm:py-2 transition-all duration-300 hover:bg-white/20 hover:border-white/30 hover:scale-105 flex items-center gap-1.5 sm:gap-2.5">
-                          {FlagComponent ? (
-                            <FlagComponent
-                              className="w-4 h-4 sm:w-5 sm:h-5"
-                              title={`${country.name} flag`}
-                            />
-                          ) : (
-                            <span className="text-[1rem] sm:text-[1.25rem]">🏳️</span>
-                          )}
-                          <span className="text-xs sm:text-sm font-semibold text-white tracking-wide font-body">
-                            {country.code}
-                          </span>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Key Highlights - Sophisticated Cards */}
-              <div className="grid sm:grid-cols-2 gap-3 sm:gap-5 pt-3 sm:pt-4">
-                {[
-                  {
-                    title: "4 & 6 Goal Tournaments",
-                    desc: "Multiple competitive formats",
-                    icon: "trophy",
-                  },
-                  { title: "International Teams", desc: "5 countries competing", icon: "users" },
-                  { title: "Exhibition Matches", desc: "Women's & Best of Best", icon: "star" },
-                  {
-                    title: "Premium Hospitality",
-                    desc: "VIP experiences available",
-                    icon: "sparkles",
-                  },
-                ].map((item, idx) => (
-                  <div key={idx} className="flex items-start gap-4 group">
-                    <div className="flex-shrink-0 mt-1.5">
-                      <div className="h-8 w-8  bg-gradient-to-br from-brand-400/20 to-brand-500/10 border border-brand-400/20 flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:border-brand-400/40">
-                        <svg
-                          className="h-4 w-4 text-brand-300"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          {item.icon === "trophy" && (
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={1.5}
-                              d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138z"
-                            />
-                          )}
-                          {item.icon === "users" && (
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={1.5}
-                              d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                            />
-                          )}
-                          {item.icon === "star" && (
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={1.5}
-                              d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
-                            />
-                          )}
-                          {item.icon === "sparkles" && (
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={1.5}
-                              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                            />
-                          )}
-                        </svg>
-                      </div>
-                    </div>
-                    <div>
-                      <p className="font-semibold text-white mb-1.5 font-display">{item.title}</p>
-                      <p className="text-sm text-white/70 font-light font-body">{item.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
 
               {/* Elegant CTA Buttons */}
               <div className="flex flex-wrap items-center gap-3 sm:gap-5 pt-4 sm:pt-6">
                 <Link
-                  href="/events/world-arena-polo-championship-2026#results"
-                  className="group inline-flex items-center justify-center gap-2 sm:gap-3  bg-white px-6 sm:px-9 py-3 sm:py-4 text-sm sm:text-base font-bold text-brand-900 shadow-2xl transition-all duration-300 hover:bg-gray-50 hover:text-brand-900 hover:shadow-2xl hover:shadow-brand-500/20 hover:-translate-y-1 font-display"
+                  href="/events/news"
+                  className="group inline-flex items-center justify-center gap-2 sm:gap-3 bg-gradient-to-r from-[#d97706] to-[#b45309] px-6 sm:px-9 py-3 sm:py-4 text-sm sm:text-base font-bold text-white shadow-2xl transition-all duration-300 hover:shadow-[0_10px_30px_-10px_#d97706] hover:-translate-y-1 font-display rounded-full border border-white/10"
                 >
-                  <span className="tracking-wide text-brand-900">View 2026 Results</span>
+                  <span className="tracking-wide text-white">View News Coverage</span>
                   <svg
                     className="h-4 sm:h-5 w-4 sm:w-5 transition-transform duration-300 group-hover:translate-x-1"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={1.5}
-                      d="M17 8l4 4m0 0l-4 4m4-4H3"
-                    />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </Link>
-                <Link
-                  href="/events/world-arena-polo-championship-2026"
-                  className="inline-flex items-center justify-center  border-2 border-white/30 bg-white/10 backdrop-blur-md px-6 sm:px-9 py-3 sm:py-4 text-sm sm:text-base font-bold text-white transition-all duration-300 hover:bg-white/20 hover:border-white/50 font-display"
+                <a
+                  href="https://www.instagram.com/p/DWQf6T6COAc/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center border border-white/20 bg-white/5 backdrop-blur-md px-6 sm:px-9 py-3 sm:py-4 text-sm sm:text-base font-bold text-white transition-all duration-300 hover:bg-white/10 hover:border-white/40 font-display rounded-full gap-2 hover:-translate-y-1"
                 >
-                  Schedule & Full Details
-                </Link>
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                     <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                  </svg>
+                  View on Instagram
+                </a>
               </div>
             </div>
 
             {/* Sophisticated Image Side */}
-            <div className="relative group">
-              <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white/20 transition-all duration-700 group-hover:shadow-[0_35px_60px_-15px_rgba(227,30,36,0.25)]">
-                <div className="aspect-[4/3] relative">
+            <div className="relative group mt-8 lg:mt-0">
+              <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/10 transition-all duration-700 group-hover:shadow-[0_35px_60px_-15px_rgba(217,119,6,0.25)]">
+                <div className="aspect-[4/5] sm:aspect-square lg:aspect-[4/5] relative">
                   <Image
-                    src="/images/india-team-trophy-2026.png"
-                    alt="Team India with trophy – World Arena Polo Championship 2026"
+                    src="/documents/news/arena-polo-club-of-the-season.jpg"
+                    alt="Arena Polo Club of the Season Award"
                     fill
                     className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     priority
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-brand-900/70 via-brand-900/10 to-transparent"></div>
-                </div>
-
-                {/* Elegant Floating Info Cards */}
-                <div className="absolute top-8 left-8 right-8 flex flex-wrap gap-3">
-                  <div className="bg-white/98 backdrop-blur-md  px-5 py-3.5 shadow-xl border border-white/40 transition-all duration-300 hover:scale-105">
-                    <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-brand-600 mb-1 font-display">
-                      Dates
-                    </p>
-                    <p className="text-sm font-bold text-brand-900 tracking-wide font-body">
-                      11-18 Feb 2026
-                    </p>
-                  </div>
-                  <div className="bg-white/98 backdrop-blur-md  px-5 py-3.5 shadow-xl border border-white/40 transition-all duration-300 hover:scale-105">
-                    <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-brand-600 mb-1 font-display">
-                      Venue
-                    </p>
-                    <p className="text-sm font-bold text-brand-900 tracking-wide font-body">
-                      HPRC Arena
-                    </p>
-                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/95 via-neutral-900/20 to-transparent"></div>
                 </div>
 
                 {/* Elegant Bottom Badge */}
-                <div className="absolute bottom-8 left-8 right-8">
-                  <div className="bg-gradient-to-r from-brand-600 to-brand-500  px-7 py-4 shadow-2xl border border-white/20 backdrop-blur-sm">
-                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/90 mb-1 font-display">
-                      India won both cups
+                <div className="absolute bottom-6 left-6 right-6">
+                  <div className="bg-gradient-to-r from-neutral-900/95 to-neutral-800/95 px-6 py-4 rounded-[1.5rem] border border-white/5 backdrop-blur-xl shadow-2xl">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#d97706] mb-1 font-display">
+                      Presented To
                     </p>
-                    <p className="text-base font-bold text-white font-display">
-                      World Arena Polo Championship 2026
+                    <p className="text-base sm:text-lg font-bold text-white font-display leading-tight">
+                      Hyderabad Polo &amp; Riding Club
                     </p>
                   </div>
                 </div>
               </div>
 
               {/* Decorative Elements */}
-              <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-brand-500/15  blur-2xl -z-10"></div>
-              <div className="absolute -top-10 -left-10 w-28 h-28 bg-white/8  blur-xl -z-10"></div>
+              <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-[#d97706]/20 blur-2xl -z-10 transition-opacity duration-500 group-hover:bg-[#d97706]/30"></div>
+              <div className="absolute -top-10 -left-10 w-28 h-28 bg-white/10 blur-xl -z-10"></div>
             </div>
           </div>
         </div>

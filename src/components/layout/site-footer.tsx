@@ -30,6 +30,38 @@ export function SiteFooter() {
               </a>
             </p>
           </div>
+          
+          <div className="mt-10 w-full">
+            <div className="group relative overflow-hidden rounded-[1.5rem] border border-neutral-800 bg-gradient-to-b from-[#2b2626] to-[#1a1919] p-6 shadow-2xl transition-all duration-500 hover:-translate-y-1 hover:shadow-luxury">
+              {/* Subtle light effects */}
+              <div className="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-[#d97706] opacity-[0.08] blur-2xl transition-opacity duration-500 group-hover:opacity-20" />
+              <div className="absolute -bottom-8 -left-8 h-32 w-32 rounded-full bg-brand-500 opacity-[0.05] blur-2xl transition-opacity duration-500 group-hover:opacity-[0.15]" />
+              
+              <div className="relative z-10 flex flex-col items-center justify-center space-y-5 text-center">
+                <div className="relative h-20 w-36 flex-shrink-0 transition-transform duration-700 ease-out group-hover:scale-105">
+                  <Image 
+                    src="/TIPA.png" 
+                    alt="The Indian Polo Awards" 
+                    fill 
+                    className="object-contain drop-shadow-2xl" 
+                  />
+                </div>
+                
+                <div className="space-y-2">
+                  <div className="flex items-center justify-center gap-2">
+                    <span className="h-px w-4 bg-[#d97706]/50"></span>
+                    <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-[#d97706]">
+                      Winner • Season V
+                    </span>
+                    <span className="h-px w-4 bg-[#d97706]/50"></span>
+                  </div>
+                  <h4 className="font-display text-base font-medium tracking-wide text-[#faf9f7] leading-snug">
+                    Arena Polo Club <br /> Of The Season
+                  </h4>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div>

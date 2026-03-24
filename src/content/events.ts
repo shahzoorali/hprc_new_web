@@ -17,6 +17,15 @@ export const eventsContent = {
   },
   news: [
     {
+      title: "HPRC Wins Arena Polo Club of the Season at The Indian Polo Awards",
+      date: "March 24, 2026",
+      source: "LA POLO",
+      excerpt: "A season defined by precision and poise. Hyderabad Polo & Riding Club (HPRC) takes home 'Arena Polo Club of the Season' at The Indian Polo Awards Season V, with Chaitania R. Kumar receiving the honour.",
+      url: "https://www.instagram.com/p/DWQf6T6COAc/",
+      category: "Awards",
+      imageUrl: "/documents/news/arena-polo-club-of-the-season.jpg",
+    },
+    {
       title: "India wins both cups at Hyderabad International Polo Cup 2026",
       date: "19 February, 2026",
       source: "LA POLO",
