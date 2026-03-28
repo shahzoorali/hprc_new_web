@@ -1,14 +1,12 @@
 <?php
+$dbhost = '103.21.59.27';
+$dbuser = 'hprcin_hyd';
+$dbpass = 'Hyd@hprc!12';
+$dbname = 'hprcin_hyd';
 
- $dbhost = 'localhost';
-   $dbuser = 'hprcin_hyd';
-   $dbpass = 'Hyd@hprc!12';
-   $conn = mysqli_connect($dbhost, $dbuser, $dbpass);
-   
-   if(! $conn ) {
-		die('Could not connect: ' . mysql_error());
-   }else{
-		mysqli_select_db($conn, 'hprcin_hyd') or die(mysqli_error($con));
-		
-   }
+$conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+
+if(!$conn) {
+    die('Could not connect: ' . mysqli_connect_error());
+}
 ?>
