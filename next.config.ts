@@ -59,6 +59,14 @@ const nextConfig: NextConfig = {
     return config;
   },
   turbopack: {},
+  async rewrites() {
+    return [
+      {
+        source: "/payment/:path*",
+        destination: "http://localhost:8000/payment/:path*",
+      },
+    ];
+  },
   async headers() {
     return [
       {
