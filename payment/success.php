@@ -52,7 +52,8 @@ if ($order_id) {
 $redirect_url = '/pay-now/success?status=' . urlencode($order_status) . 
                 '&order_id=' . urlencode($order_id) . 
                 '&amount=' . urlencode($mer_amount) . 
-                '&tracking_id=' . urlencode($tracking_id);
+                '&tracking_id=' . urlencode($tracking_id) .
+                '&status_message=' . urlencode($status_message);
 
 header("Location: " . $redirect_url);
 exit();

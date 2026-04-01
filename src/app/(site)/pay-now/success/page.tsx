@@ -11,6 +11,7 @@ function SuccessContent() {
   const orderId = searchParams.get("order_id") || "-";
   const amount = searchParams.get("amount") || "-";
   const trackingId = searchParams.get("tracking_id") || "-";
+  const statusMessage = searchParams.get("status_message") || "";
 
   const isSuccess = status === "Success";
   const isAborted = status === "Aborted";
@@ -66,6 +67,24 @@ function SuccessContent() {
             <span className="text-sm font-medium text-gray-900">₹{amount}</span>
           </div>
         </div>
+
+        {!isSuccess && statusMessage && (
+          <div className="mt-4">
+            <details className="group border border-gray-200 rounded-lg bg-gray-50 overflow-hidden">
+              <summary className="flex justify-between items-center font-medium cursor-pointer list-none p-4 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
+                <span>What went wrong?</span>
+                <span className="transition group-open:rotate-180">
+                  <svg fill="none" height="20" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" viewBox="0 0 24 24" width="20"><path d="M6 9l6 6 6-6"></path></svg>
+                </span>
+              </summary>
+              <div className="p-4 pt-0">
+                <div className="bg-red-50 text-red-800 p-3 rounded border border-red-100 font-mono text-xs break-words">
+                  {statusMessage}
+                </div>
+              </div>
+            </details>
+          </div>
+        )}
 
         <div className="mt-8 text-center pt-4">
           <Link
