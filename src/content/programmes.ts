@@ -44,7 +44,7 @@ export const programmesContent = {
         {
           heading: "Basic Level Riding Course — Guest",
           rows: [
-            { label: "24 Riding Coupon", price: "₹12,000", gst: "₹2,160", total: "₹14,160" },
+            { label: "12 Riding Coupons", price: "₹12,000", gst: "₹2,160", total: "₹14,160" },
             { label: "Coaching", price: "₹2,400", gst: "₹432", total: "₹2,832" },
           ],
         },

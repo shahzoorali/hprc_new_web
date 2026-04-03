@@ -100,7 +100,7 @@ export default function BeginnersRidingProgrammePage() {
               heading="Basic Level Riding Course - GUEST"
               rows={[
                 {
-                  label: "24 Riding Coupon",
+                  label: "12 Riding Coupons",
                   price: "Rs. 12,000",
                   gst: "Rs. 2,160",
                   total: "Rs. 14,160",
