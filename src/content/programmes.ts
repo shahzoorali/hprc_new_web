@@ -4,6 +4,7 @@ export type Programme = {
   id: string;
   title: string;
   excerpt: string;
+  image: string;
   schedule: string;
   highlights: string[];
   pricingTables?: { heading: string; rows: PricingRow[] }[];
@@ -26,6 +27,7 @@ export const programmesContent = {
       title: "Start Riding",
       excerpt:
         "An introductory journey covering horse handling, posture, balance, and safety to unlock the joy of riding.",
+      image: "/images/programmes/start-riding.png",
       schedule: "Four-week curriculum • Timings: 6:00 – 10:00 AM & 4:00 – 9:00 PM",
       highlights: [
         "Week 1: Approaching, handling, mounting, dismounting, walking with assistance, grooming & tack care.",
@@ -55,6 +57,7 @@ export const programmesContent = {
       title: "Intermediate Riding Programme",
       excerpt:
         "For riders consolidating control, rhythm, and independence in the saddle while preparing for advanced aids.",
+      image: "/images/programmes/intermediate-riding.png",
       schedule: "Four-week curriculum • Timings: 6:00 – 10:00 AM & 4:00 – 9:00 PM",
       highlights: [
         "Independent trotting with transitions and tempo control.",
@@ -77,6 +80,7 @@ export const programmesContent = {
       title: "Advanced Polo Programme",
       excerpt:
         "High-performance coaching for riders pursuing competitive polo, focusing on mallet work, strategy, and teamwork.",
+      image: "/images/programmes/advanced-polo.png",
       schedule: "Monthly packages • Timings: 6:00 – 10:00 AM & 4:00 – 9:00 PM",
       highlights: [
         "Advanced riding drills tailored to polo dynamics and match fitness.",
@@ -106,6 +110,7 @@ export const programmesContent = {
       title: "Equestrian Programme",
       excerpt:
         "Show jumping, dressage, and tent pegging training in association with Telangana State Equestrian Association (TSEA).",
+      image: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=800&q=80",
       schedule: "Year-round coaching • Timings: 6:00 – 10:00 AM & 4:00 – 9:00 PM",
       highlights: [
         "Talent identification and preparation for EFI-recognised competitions.",
@@ -118,6 +123,7 @@ export const programmesContent = {
       title: "Stick & Ball",
       excerpt:
         "Focused sessions to refine mallet control, agility, and accuracy for aspiring and experienced polo players.",
+      image: "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=800&q=80",
       schedule: "8 sessions / month • Timings: 6:00 – 10:00 AM & 4:00 – 9:00 PM",
       highlights: [
         "Structured drills covering forehand, backhand, nearside, and offsides.",
@@ -142,6 +148,7 @@ export const programmesContent = {
       title: "Chukkers",
       excerpt:
         "Explore the artistry of chukkers at HPRC Club, where riders and horses engage in dynamic play across immaculate fields.",
+      image: "https://images.unsplash.com/photo-1518467166778-b88f373ffec7?w=800&q=80",
       schedule: "2 chukkers per week • Timings: 6:00 AM – 10:00 AM & 4:00 PM – 9:00 PM",
       highlights: [
         "Strategize plays and execute precise shots in fast-paced match settings.",

@@ -99,13 +99,6 @@ export default function ProgrammesPage() {
         {/* Responsive Grid Layout - Stacked on mobile, alternating on desktop */}
         <div className="space-y-12 sm:space-y-16">
           {programmesContent.programmes.map((programme, index) => {
-            const programmeImages = [
-              "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=800&q=80",
-              "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=800&q=80",
-              "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=800&q=80",
-              "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=800&q=80",
-              "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=800&q=80",
-            ];
             const isEven = index % 2 === 0;
 
             return (
@@ -130,7 +123,7 @@ export default function ProgrammesPage() {
 
                     {/* Main Image */}
                     <Image
-                      src={programmeImages[index % programmeImages.length]}
+                      src={programme.image}
                       alt={programme.title}
                       fill
                       className="object-cover transition-all duration-700 group-hover:scale-105 group-hover:brightness-105"
