@@ -186,6 +186,16 @@ export const eventsContent = {
       imageUrl: "/documents/news/NewsNEC-kicks-off.jpg",
     },
     {
+      title: "HPRC Wins 'Best Arena Polo Club' in India at The Indian Polo Awards 2025",
+      date: "February 22, 2025",
+      source: "LA POLO",
+      excerpt:
+        "At the historic City Palace, Jaipur, HPRC was recognized as the first-ever winner of the 'Arena Polo Club of the Season' award, a testament to the club's pioneering role in the evolution of Arena Polo in India.",
+      url: "/events/news/best-arena-polo-club-india-awards-2025",
+      category: "Awards",
+      imageUrl: "/images/hprc-tipa-award2025.jpeg",
+    },
+    {
       title: "Hyderabad Polo and Riding Club clinch 14-9 win over Telangana",
       date: "November 18, 2025",
       source: "Telangana Today",

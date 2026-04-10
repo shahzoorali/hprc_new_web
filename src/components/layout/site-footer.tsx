@@ -147,6 +147,40 @@ export function SiteFooter() {
               </a>
             </li>
           </ul>
+
+          <div className="mt-8">
+            <h3 className="mb-4 text-sm font-semibold uppercase tracking-widest text-brand-900">
+              The Chukker Magazine
+            </h3>
+            <Link
+              href="https://heyzine.com/flip-book/212e8e98e4.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative block w-full max-w-[160px] overflow-hidden rounded-lg shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+            >
+              <div className="relative aspect-[3/4.2]">
+                <Image
+                  src="/images/chukker-2026.png"
+                  alt="Chukker 2026 Magazine Cover"
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                {/* Gold Ribbon */}
+                <div className="absolute -right-12 top-5 w-[180px] rotate-45 bg-[#d97706] py-1 text-center shadow-lg ring-1 ring-white/20 z-10">
+                  <p className="text-[9px] font-black uppercase tracking-[0.2em] text-white leading-none">
+                    2026 Edition
+                  </p>
+                </div>
+                {/* Subtle Overlay */}
+                <div className="absolute inset-0 bg-brand-900/0 transition-colors duration-300 group-hover:bg-brand-900/10" />
+              </div>
+              <div className="bg-brand-900 py-1.5 text-center transition-colors duration-300 group-hover:bg-brand-800">
+                <span className="text-[10px] font-bold uppercase tracking-widest text-white">
+                  Read Magazine
+                </span>
+              </div>
+            </Link>
+          </div>
         </div>
       </div>
 
