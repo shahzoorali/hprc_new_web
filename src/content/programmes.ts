@@ -110,7 +110,7 @@ export const programmesContent = {
       title: "Equestrian Programme",
       excerpt:
         "Show jumping, dressage, and tent pegging training in association with Telangana State Equestrian Association (TSEA).",
-      image: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=800&q=80",
+      image: "/images/programmes/equestrian.png",
       schedule: "Year-round coaching • Timings: 6:00 – 10:00 AM & 4:00 – 9:00 PM",
       highlights: [
         "Talent identification and preparation for EFI-recognised competitions.",
@@ -123,7 +123,7 @@ export const programmesContent = {
       title: "Stick & Ball",
       excerpt:
         "Focused sessions to refine mallet control, agility, and accuracy for aspiring and experienced polo players.",
-      image: "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=800&q=80",
+      image: "/images/programmes/stick-and-ball.png",
       schedule: "8 sessions / month • Timings: 6:00 – 10:00 AM & 4:00 – 9:00 PM",
       highlights: [
         "Structured drills covering forehand, backhand, nearside, and offsides.",
@@ -148,7 +148,7 @@ export const programmesContent = {
       title: "Chukkers",
       excerpt:
         "Explore the artistry of chukkers at HPRC Club, where riders and horses engage in dynamic play across immaculate fields.",
-      image: "https://images.unsplash.com/photo-1518467166778-b88f373ffec7?w=800&q=80",
+      image: "/images/programmes/chukkers.png",
       schedule: "2 chukkers per week • Timings: 6:00 AM – 10:00 AM & 4:00 PM – 9:00 PM",
       highlights: [
         "Strategize plays and execute precise shots in fast-paced match settings.",

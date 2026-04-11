@@ -25,75 +25,87 @@ export default function EventsPage() {
           description="Mark your calendar and experience the thrill of equestrian sport and club celebrations."
           align="left"
         />
-        <div className="grid gap-6 sm:gap-8 grid-cols-1 md:grid-cols-2">
-          {eventsContent.upcoming.map((event, index) => {
-            const eventImages = [
-              "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=800&q=80",
-              "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=800&q=80",
-              "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80",
-            ];
-            const commonClasses =
-              "group relative overflow-hidden rounded-[2.5rem] border border-brand-100 bg-white/95 shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 block";
+        {eventsContent.upcoming && eventsContent.upcoming.length > 0 ? (
+          <div className="grid gap-6 sm:gap-8 grid-cols-1 md:grid-cols-2">
+            {eventsContent.upcoming.map((event, index) => {
+              const eventImages = [
+                "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=800&q=80",
+                "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=800&q=80",
+                "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80",
+              ];
+              const commonClasses =
+                "group relative overflow-hidden rounded-[2.5rem] border border-brand-100 bg-white/95 shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 block";
 
-            const eventContent = (
-              <>
-                <div className="relative h-44 sm:h-48 overflow-hidden">
-                  <Image
-                    src={eventImages[index % eventImages.length]}
-                    alt={event.title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-                </div>
-                <div className="p-6 sm:p-8">
-                  <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.25em] sm:tracking-[0.3em] text-brand-500">
-                    {event.date}
-                  </p>
-                  <h2 className="mt-2 sm:mt-3 text-xl sm:text-2xl font-extrabold text-gray-900">
-                    {event.title}
-                  </h2>
-                  <p className="mt-3 sm:mt-4 text-sm text-gray-700 leading-relaxed">
-                    {event.description}
-                  </p>
-                  {event.link && (
-                    <div className="mt-3 sm:mt-4 inline-flex items-center text-xs sm:text-sm font-bold text-brand-500 hover:text-brand-600 transition-colors">
-                      Learn More
-                      <svg
-                        className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M17 8l4 4m0 0l-4 4m4-4H3"
-                        />
-                      </svg>
-                    </div>
-                  )}
-                </div>
-              </>
-            );
-
-            if (event.link) {
-              return (
-                <Link key={event.title} href={event.link} className={commonClasses}>
-                  {eventContent}
-                </Link>
+              const eventContent = (
+                <>
+                  <div className="relative h-44 sm:h-48 overflow-hidden">
+                    <Image
+                      src={eventImages[index % eventImages.length]}
+                      alt={event.title}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+                  </div>
+                  <div className="p-6 sm:p-8">
+                    <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.25em] sm:tracking-[0.3em] text-brand-500">
+                      {event.date}
+                    </p>
+                    <h2 className="mt-2 sm:mt-3 text-xl sm:text-2xl font-extrabold text-gray-900">
+                      {event.title}
+                    </h2>
+                    <p className="mt-3 sm:mt-4 text-sm text-gray-700 leading-relaxed">
+                      {event.description}
+                    </p>
+                    {event.link && (
+                      <div className="mt-3 sm:mt-4 inline-flex items-center text-xs sm:text-sm font-bold text-brand-500 hover:text-brand-600 transition-colors">
+                        Learn More
+                        <svg
+                          className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M17 8l4 4m0 0l-4 4m4-4H3"
+                          />
+                        </svg>
+                      </div>
+                    )}
+                  </div>
+                </>
               );
-            }
 
-            return (
-              <article key={event.title} className={commonClasses}>
-                {eventContent}
-              </article>
-            );
-          })}
-        </div>
+              if (event.link) {
+                return (
+                  <Link key={event.title} href={event.link} className={commonClasses}>
+                    {eventContent}
+                  </Link>
+                );
+              }
+
+              return (
+                <article key={event.title} className={commonClasses}>
+                  {eventContent}
+                </article>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="flex flex-col items-center justify-center rounded-[2.5rem] border border-gray-100 bg-white/50 py-16 px-6 text-center shadow-inner">
+            <svg className="h-12 w-12 text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            <h3 className="text-xl font-bold text-gray-900">No upcoming events</h3>
+            <p className="mt-2 text-sm text-gray-500 max-w-md">
+              There are currently no featured upcoming events. Please check back later or subscribe to our newsletter to stay updated.
+            </p>
+          </div>
+        )}
       </section>
 
       <section className="bg-gradient-to-br from-brand-50/30 via-white to-brand-50/20 py-12 sm:py-16">
@@ -121,9 +133,13 @@ export default function EventsPage() {
             </Link>
           </div>
           <div className="grid gap-6 sm:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-            {eventsContent.pastHighlights.slice(0, 6).map((highlight, index) => {
+            {eventsContent.pastHighlights.slice(0, 6).map((highlight: any, index) => {
               // Get event image based on link
-              const getEventImage = (link: string) => {
+              const getEventImage = (highlight: any, index: number) => {
+                if (highlight.image) {
+                  return highlight.image;
+                }
+                const link = highlight.link;
                 if (link.includes("1st-rel-10th-hyd-horse-show")) {
                   return "/documents/gallery/events/1st-rel-gallery/gallery-001.jpg";
                 }
@@ -148,7 +164,7 @@ export default function EventsPage() {
                 return fallbackImages[index % fallbackImages.length];
               };
 
-              const eventImage = getEventImage(highlight.link);
+              const eventImage = getEventImage(highlight, index);
 
               return (
                 <Link

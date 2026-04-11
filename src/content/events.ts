@@ -228,28 +228,15 @@ export const eventsContent = {
       imageUrl: "/documents/news/sauryaram-varma-equestrian.webp",
     },
   ] satisfies NewsArticle[],
-  upcoming: [
+  upcoming: [],
+  pastHighlights: [
     {
       title: "HPRC World Arena Polo Championship 2026",
-      date: "11th – 18th February 2026 (Concluded)",
       description:
         "Event concluded. India won both the Radha TMT (4-Goal) and Telangana Tourism (6-Goal) cups. Full results, schedule, and press coverage on the event page.",
       link: "/events/world-arena-polo-championship-2026",
+      image: "/images/india-team-trophy-2026.png",
     },
-    {
-      title: "International Arena Polo Cup",
-      date: "4 – 10 March 2024",
-      description:
-        "Six elite teams from India, USA, Luxembourg, and Spain compete in a week-long spectacle featuring women's and men's fixtures, supported by Telangana Tourism, Radha TMT, Inhabit, and more.",
-    },
-    {
-      title: "TSEA Regional Equestrian League",
-      date: "October 27, 2018 (Archive Highlight)",
-      description:
-        "Hosted in partnership with Telangana State Equestrian Association featuring dressage, tent pegging, and show jumping categories.",
-    },
-  ],
-  pastHighlights: [
     {
       title: "1st Regional Equestrian League & 10th Hyderabad Horse Show",
       description:

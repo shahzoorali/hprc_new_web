@@ -4,6 +4,7 @@ type SportFacility = {
   id: string;
   name: string;
   description: string;
+  image: string;
   timings: string;
   highlights: string[];
 };
@@ -33,6 +34,7 @@ export const sportsContent = {
       name: "Tennis",
       description:
         "Synthetic courts, year-round camps with Academia Sports Village, and international guest coaches delivering clinics and matchplay strategy.",
+      image: "/images/sports/tennis.png",
       timings: "Daily • 6:00 – 10:00 AM & 4:00 – 9:00 PM",
       highlights: [
         "ITF-compliant surfaces with LED floodlighting.",
@@ -45,6 +47,7 @@ export const sportsContent = {
       name: "Badminton",
       description:
         "Indoor courts with shock-absorbent flooring, optimised lighting, and coaching pathways for beginners to state-level aspirants.",
+      image: "/images/sports/badminton.png",
       timings: "Daily • 6:00 – 10:00 AM & 4:00 – 9:00 PM",
       highlights: [
         "Feather and synthetic shuttle stock with on-site pro shop.",
@@ -57,6 +60,7 @@ export const sportsContent = {
       name: "Squash",
       description:
         "Premium courts engineered for consistent bounce and visibility, paired with specialised conditioning programmes.",
+      image: "/images/sports/squash.png",
       timings: "Daily • 6:00 – 10:00 AM & 4:00 – 9:00 PM",
       highlights: [
         "Glass-back viewing for coaching and spectators.",
@@ -69,6 +73,7 @@ export const sportsContent = {
       name: "Swimming Pool",
       description:
         "Covered temperature-controlled pool ideal for lap training, aqua fitness, and family recreation regardless of season.",
+      image: "/images/sports/swimming.png",
       timings: "Daily • 6:00 – 10:00 AM & 4:00 – 9:00 PM",
       highlights: [
         "Certified lifeguards and safety protocols on duty.",
@@ -81,6 +86,7 @@ export const sportsContent = {
       name: "Basketball",
       description:
         "Full-sized court with professional glass boards, line markings, and evening league runs for all age groups.",
+      image: "/images/sports/basketball.png",
       timings: "Daily • 6:00 – 10:00 AM & 4:00 – 9:00 PM",
       highlights: [
         "Skill development clinics from partner academies.",
@@ -93,6 +99,7 @@ export const sportsContent = {
       name: "Futsal",
       description:
         "Multipurpose synthetic turf configured for futsal, cricket nets, and small-sided soccer matches.",
+      image: "/images/sports/futsal.png",
       timings: "Daily • 6:00 – 10:00 AM & 4:00 – 9:00 PM",
       highlights: [
         "Five-a-side leagues, youth development squads, and weekend drop-ins.",
@@ -105,6 +112,7 @@ export const sportsContent = {
       name: "Gym",
       description:
         "Air-conditioned fitness studio with strength, cardio, and functional training zones plus personalised coaching.",
+      image: "/images/sports/gym.png",
       timings: "Daily • 6:00 – 10:00 AM & 4:00 – 9:00 PM",
       highlights: [
         "TRX, free weights, and endurance equipment curated for riders and athletes.",
@@ -117,6 +125,7 @@ export const sportsContent = {
       name: "Sauna",
       description:
         "Relaxation suite complementing the gym and pool, ideal for post-workout recovery and wellness routines.",
+      image: "/images/sports/sauna.png",
       timings: "Daily • 6:00 – 10:00 AM & 9:00 PM",
       highlights: [
         "Temperature-controlled environment with aromatherapy options.",

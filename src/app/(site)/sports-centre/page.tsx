@@ -30,17 +30,7 @@ export default function SportsCentrePage() {
           description="Book courts, schedule lessons, or participate in leagues guided by certified coaches and partner academies."
         />
         <div className="grid gap-6 sm:gap-10 grid-cols-1 md:grid-cols-2">
-          {sportsContent.facilities.map((facility, index) => {
-            const facilityImages = [
-              "https://images.unsplash.com/photo-1534158914592-062992f79e47?w=800&q=80", // Tennis
-              "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=800&q=80", // Badminton
-              "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=800&q=80", // Squash
-              "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800&q=80", // Swimming
-              "https://images.unsplash.com/photo-1519869325930-2811486e6f9a?w=800&q=80", // Basketball
-              "https://images.unsplash.com/photo-1574629810360-7efbbe237e16?w=800&q=80", // Futsal
-              "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80", // Gym
-              "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800&q=80", // Sauna
-            ];
+          {sportsContent.facilities.map((facility) => {
             // All major facilities have dedicated pages, others use the dynamic route
             const facilityHref =
               facility.id === "swimming"
@@ -69,7 +59,7 @@ export default function SportsCentrePage() {
               >
                 <div className="relative h-56 overflow-hidden">
                   <Image
-                    src={facilityImages[index % facilityImages.length]}
+                    src={facility.image}
                     alt={facility.name}
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
