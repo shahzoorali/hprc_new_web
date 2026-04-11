@@ -8,6 +8,20 @@ export type NewsArticle = {
   imageUrl?: string;
 };
 
+export type UpcomingEvent = {
+  title: string;
+  date: string;
+  description: string;
+  link?: string;
+};
+
+export type EventHighlight = {
+  title: string;
+  description: string;
+  link: string;
+  image?: string;
+};
+
 export const eventsContent = {
   hero: {
     eyebrow: "Events & Media",
@@ -228,7 +242,7 @@ export const eventsContent = {
       imageUrl: "/documents/news/sauryaram-varma-equestrian.webp",
     },
   ] satisfies NewsArticle[],
-  upcoming: [],
+  upcoming: [] as UpcomingEvent[],
   pastHighlights: [
     {
       title: "HPRC World Arena Polo Championship 2026",
@@ -279,7 +293,7 @@ export const eventsContent = {
         "HPRC and TSEA co-hosted a landmark national championship with 200 horses and the country's leading riders competing across five categories.",
       link: "/events/past/national-equestrian-2016",
     },
-  ],
+  ] as EventHighlight[],
   media: [
     {
       category: "News",

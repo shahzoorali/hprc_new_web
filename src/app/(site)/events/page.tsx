@@ -133,7 +133,7 @@ export default function EventsPage() {
             </Link>
           </div>
           <div className="grid gap-6 sm:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-            {eventsContent.pastHighlights.slice(0, 6).map((highlight: any, index) => {
+            {eventsContent.pastHighlights.slice(0, 6).map((highlight, index) => {
               // Get event image based on link
               const getEventImage = (highlight: any, index: number) => {
                 if (highlight.image) {
