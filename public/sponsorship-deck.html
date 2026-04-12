@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sponsorship Proposal | HPRC Equestrian Challenge 2026</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --gold: #C5A059;
+            --gold-light: #E6C887;
+            --black: #050505;
+            --dark-gray: #111111;
+            --text-gray: #AAAAAA;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--black);
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* --- Animations --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Hero Section --- */
+        header {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.8)), url('./hero-horse.png');
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            z-index: 2;
+        }
+
+        .hero-logo {
+            width: 140px;
+            margin-bottom: 2rem;
+            filter: drop-shadow(0 0 20px rgba(197, 160, 89, 0.4));
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            letter-spacing: 8px;
+            color: var(--gold);
+            text-transform: uppercase;
+            font-weight: 400;
+            margin-bottom: 3rem;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0) translateX(-50%);}
+            40% {transform: translateY(-10px) translateX(-50%);}
+            60% {transform: translateY(-5px) translateX(-50%);}
+        }
+
+        /* --- Main Sections --- */
+        section {
+            padding: 120px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header span {
+            display: block;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        /* --- About Event --- */
+        .event-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 60px;
+        }
+
+        .event-card {
+            background: var(--dark-gray);
+            padding: 40px;
+            border: 1px solid rgba(197, 160, 89, 0.1);
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .event-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-5px);
+        }
+
+        .event-card h3 {
+            color: var(--gold);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .event-card p {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- Why Sponsor --- */
+        .reason-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .reason-item {
+            display: flex;
+            gap: 25px;
+            align-items: flex-start;
+        }
+
+        .reason-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--gold);
+            font-style: italic;
+            opacity: 0.6;
+            margin-top: -10px;
+        }
+
+        .reason-content h4 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--gold-light);
+        }
+
+        .reason-content p {
+            color: var(--text-gray);
+            font-size: 1rem;
+        }
+
+        /* --- Sponsorship Tiers --- */
+        .tiers-container {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px;
+            align-items: stretch;
+        }
+
+        .tier-card {
+            background: #111;
+            padding: 60px;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tier-card.featured {
+            background: #1a1a1a;
+            border: 2px solid var(--gold);
+        }
+
+        .tier-card h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--gold);
+        }
+
+        .tier-price {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 30px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .tier-price span {
+            font-size: 1rem;
+            color: var(--gold-light);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: block;
+            margin-top: -5px;
+        }
+
+        .tier-features {
+            list-style: none;
+            margin-bottom: 40px;
+            flex-grow: 1;
+        }
+
+        .tier-features li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 0.95rem;
+        }
+
+        .tier-features li::before {
+            content: "•";
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        .cta-button {
+            display: block;
+            text-align: center;
+            background: var(--gold);
+            color: black;
+            padding: 18px;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .cta-button:hover {
+            background: var(--gold-light);
+        }
+
+        /* --- New Tiers Design --- */
+        .tiers-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            margin-top: 80px;
+            background: #0a0a0a;
+            border: 1px solid rgba(197, 160, 89, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.8);
+        }
+
+        .tier-panel {
+            padding: 80px 60px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            transition: 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .tier-panel.gold {
+            background: linear-gradient(135deg, #111 0%, #050505 100%);
+            border-right: 1px solid rgba(197, 160, 89, 0.1);
+            z-index: 2;
+        }
+
+        .tier-panel.gold::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .tier-panel h3 {
+            font-size: 0.8rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .tier-panel h3::after {
+            content: "";
+            height: 1px;
+            flex-grow: 1;
+            background: rgba(197, 160, 89, 0.2);
+        }
+
+        .tier-main-title {
+            font-size: 3rem;
+            line-height: 1;
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .tier-value {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 40px;
+            font-family: 'Inter', sans-serif;
+            color: var(--gold-light);
+        }
+
+        .tier-status {
+            display: inline-block;
+            padding: 6px 15px;
+            background: rgba(197, 160, 89, 0.1);
+            color: var(--gold);
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 50px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(197, 160, 89, 0.3);
+        }
+
+        .tier-list {
+            list-style: none;
+            margin-bottom: 60px;
+            flex-grow: 1;
+        }
+
+        .tier-list li {
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            font-size: 0.95rem;
+            color: #ddd;
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .tier-list li strong {
+            color: var(--white);
+            display: block;
+        }
+
+        .tier-list li::before {
+            content: "→";
+            color: var(--gold);
+            font-weight: 300;
+        }
+
+        .tier-panel:hover {
+            background: #0f0f0f;
+        }
+
+        .tier-panel.gold:hover {
+            box-shadow: inset 0 0 50px rgba(197, 160, 89, 0.05);
+        }
+
+        @media (max-width: 900px) {
+            .tiers-wrapper {
+                grid-template-columns: 1fr;
+            }
+            .tier-panel {
+                padding: 60px 40px;
+            }
+            .tier-panel.gold {
+                border-right: none;
+                border-bottom: 1px solid rgba(197, 160, 89, 0.1);
+            }
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: #000;
+            padding: 100px 0 50px;
+            text-align: center;
+            border-top: 1px solid rgba(197, 160, 89, 0.1);
+        }
+
+        .footer-logo {
+            width: 100px;
+            margin-bottom: 30px;
+        }
+
+        .contact-info {
+            margin: 40px 0;
+        }
+
+        .contact-info p {
+            font-size: 1.2rem;
+            margin: 10px 0;
+            color: var(--gold-light);
+        }
+
+        .footer-address {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            max-width: 500px;
+            margin: 20px auto;
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            .reason-list, .tiers-container {
+                grid-template-columns: 1fr;
+            }
+            .section-header h2 {
+                font-size: 2.2rem;
+            }
+            .tier-card {
+                padding: 40px;
+            }
+        }
+
+        /* --- Gallery Section --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-auto-rows: 250px;
+            gap: 15px;
+            margin-top: 60px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+            background: #111;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+            filter: grayscale(20%);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+            filter: grayscale(0%);
+        }
+
+        .gallery-item.large {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .gallery-item.tall {
+            grid-row: span 2;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            opacity: 0;
+            transition: 0.3s;
+            pointer-events: none;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay p {
+            font-size: 0.75rem;
+            color: var(--gold-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .testimonial-box {
+            margin-top: 60px;
+            padding: 40px;
+            border-left: 3px solid var(--gold);
+            background: rgba(197, 160, 89, 0.05);
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+        }
+
+        .testimonial-box blockquote {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--white);
+        }
+
+        .testimonial-box cite {
+            font-size: 1rem;
+            color: var(--gold);
+            font-style: normal;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .media-card {
+            background: rgba(255,255,255,0.03);
+            padding: 40px;
+            border-top: 1px solid rgba(197, 160, 89, 0.2);
+            transition: 0.3s;
+        }
+
+        .media-card:hover {
+            background: rgba(197, 160, 89, 0.05);
+            border-top-color: var(--gold);
+        }
+
+        .media-source {
+            font-size: 0.8rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .media-card h4 {
+            font-size: 1.3rem;
+            line-height: 1.4;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+
+        .media-card p {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            font-style: italic;
+        }
+
+        /* --- Awards Ribbon --- */
+        .awards-ribbon {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 50px;
+            padding-top: 50px;
+            border-top: 1px solid rgba(197, 160, 89, 0.1);
+        }
+
+        .award-badge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 150px;
+        }
+
+        .award-icon {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            color: var(--gold);
+            font-size: 1rem;
+        }
+
+        .award-badge h5 {
+            font-size: 0.65rem;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        .award-badge p {
+            font-size: 0.55rem;
+            color: var(--gold-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero -->
+    <header>
+        <div class="hero-content">
+            <img src="./hprc_logo.png" alt="HPRC" class="hero-logo">
+            <h1 class="hero-title">Equestrian<br>Challenge 2026</h1>
+            <p class="hero-subtitle">Sponsorship Proposal</p>
+        </div>
+        <div class="scroll-indicator">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:white; opacity: 0.5;">
+                <path d="M7 13l5 5 5-5M7 6l5 5 5-5"></path>
+            </svg>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <!-- About -->
+        <section id="about" class="reveal">
+            <div class="section-header">
+                <span>The Occasion</span>
+                <h2>One Flagship Event</h2>
+                <p style="max-width: 700px; margin: 20px auto; color: var(--text-gray);">Bringing together the finest riders for two days of world-class equestrian competition at the prestigious HPRC grounds.</p>
+            </div>
+            
+            <div class="event-grid">
+                <div class="event-card">
+                    <h3>16-17</h3>
+                    <p>May 2026</p>
+                </div>
+                <div class="event-card">
+                    <h3>5</h3>
+                    <p>Disciplines</p>
+                </div>
+                <div class="event-card">
+                    <h3>Night</h3>
+                    <p>Floodlit Sessions</p>
+                </div>
+                <div class="event-card">
+                    <h3>Elite</h3>
+                    <p>Sporting Audience</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery -->
+        <section id="gallery" class="reveal">
+            <div class="section-header">
+                <span>The Legacy</span>
+                <h2>Past Event Highlights</h2>
+                <p style="max-width: 700px; margin: 20px auto; color: var(--text-gray);">Capturing the spirit of competition and excellence from our previous championship editions.</p>
+            </div>
+
+            <div class="gallery-grid">
+                <div class="gallery-item large">
+                    <img src="./images/gallery-1.png" alt="Show Jumping Action">
+                    <div class="gallery-overlay"><p>Elite Show Jumping</p></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="./images/gallery-2.png" alt="Arena Action">
+                    <div class="gallery-overlay"><p>Fast-Paced Chukkers</p></div>
+                </div>
+                <div class="gallery-item tall">
+                    <img src="./images/gallery-3.jpg" alt="Award Ceremony">
+                    <div class="gallery-overlay"><p>Arena Polo Club of the Season</p></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="./images/gallery-4.png" alt="Trophy Presentation">
+                    <div class="gallery-overlay"><p>Grand Finale Trophies</p></div>
+                </div>
+                <div class="gallery-item large">
+                    <img src="./images/gallery-5.jpg" alt="TIPA Awards">
+                    <div class="gallery-overlay"><p>TIPA Awards 2025 Ceremony</p></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="./images/gallery-6.png" alt="Advanced Training">
+                    <div class="gallery-overlay"><p>Nurturing Future Champions</p></div>
+                </div>
+            </div>
+
+            <div class="testimonial-box">
+                <blockquote>"HPRC is one of the best clubs in India nurturing this fantastic sport."</blockquote>
+                <cite>— Deccan Chronicle</cite>
+            </div>
+        </section>
+
+        <!-- Media Coverage -->
+        <section id="media" class="reveal">
+            <div class="section-header">
+                <span>Press & Recognition</span>
+                <h2>Media Coverage</h2>
+            </div>
+
+            <div class="media-grid">
+                <div class="media-card">
+                    <span class="media-source">LA POLO</span>
+                    <h4>HPRC Wins Arena Polo Club of the Season</h4>
+                    <p>"A season defined by precision and poise. Hyderabad Polo & Riding Club takes home the top honor at The Indian Polo Awards Season V."</p>
+                </div>
+                <div class="media-card">
+                    <span class="media-source">Deccan Chronicle</span>
+                    <h4>Representing India in the USA</h4>
+                    <p>"HPRC riders represented India at the Buddy Combs International Arena Challenge in San Diego, securing major MVP honors."</p>
+                </div>
+                <div class="media-card">
+                    <span class="media-source">Telangana Today</span>
+                    <h4>Regional Championship Dominance</h4>
+                    <p>"Hyderabad Polo and Riding Club clinch a decisive 14-9 win over Telangana in the MSN Realty Arena Polo Championship."</p>
+                </div>
+                <div class="media-card">
+                    <span class="media-source">NewsMeter</span>
+                    <h4>Hub for World Championship Prep</h4>
+                    <p>"HPRC selected as the intensive training camp base for the Indian National Arena Polo Team ahead of FIP World Championship."</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Sponsor -->
+        <section id="why" class="reveal">
+            <div class="section-header">
+                <span>The Opportunity</span>
+                <h2>Why HPRC?</h2>
+            </div>
+            
+            <div class="reason-list">
+                <div class="reason-item">
+                    <div class="reason-number">01</div>
+                    <div class="reason-content">
+                        <h4>Premium Audience</h4>
+                        <p>Access high-net-worth families, industry decision-makers, and elite equestrian professionals.</p>
+                    </div>
+                </div>
+                <div class="reason-item">
+                    <div class="reason-number">02</div>
+                    <div class="reason-content">
+                        <h4>Brand Prestige</h4>
+                        <p>Align your brand with the legacy and elegance of Hyderabad's most iconic riding institution.</p>
+                    </div>
+                </div>
+                <div class="reason-item">
+                    <div class="reason-number">03</div>
+                    <div class="reason-content">
+                        <h4>High Visibility</h4>
+                        <p>Aggressive logo placement across high-traffic signage, digital assets, and entry forms.</p>
+                    </div>
+                </div>
+                <div class="reason-item">
+                    <div class="reason-number">04</div>
+                    <div class="reason-content">
+                        <h4>Media Footprint</h4>
+                        <p>Benefit from coverage across regional TV news and leading publications like Deccan Chronicle.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tiers -->
+        <section id="tiers" class="reveal">
+            <div class="section-header">
+                <span>Partnership</span>
+                <h2>Choose Your Impact</h2>
+            </div>
+
+            <div class="tiers-wrapper">
+                <!-- Title Sponsor -->
+                <div class="tier-panel gold">
+                    <h3>Premium</h3>
+                    <h2 class="tier-main-title">Title Sponsor</h2>
+                    <div class="tier-status">Exclusive Offering</div>
+                    <div class="tier-value">₹ 5,00,000</div>
+                    
+                    <ul class="tier-list">
+                        <li><span><strong>Naming Rights</strong> Official title "HPRC Challenge Presented by [Sponsor]"</span></li>
+                        <li><span><strong>Premier Visibility</strong> Largest brand presence on all arena signage & backdrops</span></li>
+                        <li><span><strong>Exclusive Ceremony</strong> Official chief guest introduction and stage presence</span></li>
+                        <li><span><strong>Elite Hospitality</strong> 10 VIP all-access passes across both days</span></li>
+                        <li><span><strong>Digital Strategy</strong> Dedicated solo spotlight series on HPRC social media</span></li>
+                        <li><span><strong>Future Rights</strong> Right of first refusal for all upcoming championships</span></li>
+                    </ul>
+
+                    <a href="tel:+919949000085" class="cta-button">Secure Exclusivity</a>
+                </div>
+
+                <!-- Associate Sponsor -->
+                <div class="tier-panel">
+                    <h3>Strategic</h3>
+                    <h2 class="tier-main-title">Associate</h2>
+                    <div class="tier-status">2 Slots Available</div>
+                    <div class="tier-value">₹ 2,50,000</div>
+                    
+                    <ul class="tier-list">
+                        <li><span><strong>Brand Association</strong> Prominent signage at both main arena and ground zones</span></li>
+                        <li><span><strong>Multi-Asset Branding</strong> Logo on Prospectus, Entry Forms, and Posters</span></li>
+                        <li><span><strong>Stage Presence</strong> Official brand acknowledgement during prize distribution</span></li>
+                        <li><span><strong>Event Audio</strong> Dedicated sponsor mentions during key tournament moments</span></li>
+                        <li><span><strong>Member Hospitality</strong> 6 VIP event passes for your directors & guests</span></li>
+                        <li><span><strong>Social Reach</strong> Brand tagged in all post-event reels & coverage</span></li>
+                    </ul>
+
+                    <a href="tel:+919177000056" class="cta-button" style="background: transparent; color: var(--gold); border: 1px solid var(--gold);">Download Prospectus</a>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Contact & Footer -->
+    <footer class="reveal">
+        <img src="./hprc_logo.png" alt="HPRC" class="footer-logo">
+        <h2>Partner with HPRC 2026</h2>
+        <p style="color: var(--text-gray); margin-top: 20px;">Limited positions available for maximum brand distinction.</p>
+        
+        <div class="contact-info">
+            <p>+91 9949000085</p>
+            <p>+91 9177000056</p>
+            <p>+91 7799259000</p>
+        </div>
+
+        <div class="awards-ribbon">
+            <div class="award-badge">
+                <div class="award-icon">🏆</div>
+                <h5>Best Arena Polo Club</h5>
+                <p>Indian Polo Awards 2025</p>
+            </div>
+            <div class="award-badge">
+                <div class="award-icon">🏇</div>
+                <h5>Indian Open</h5>
+                <p>Championship Winners</p>
+            </div>
+            <div class="award-badge">
+                <div class="award-icon">🏅</div>
+                <h5>National SJ</h5>
+                <p>Gold Medallists</p>
+            </div>
+            <div class="award-badge">
+                <div class="award-icon">🌍</div>
+                <h5>India Rep</h5>
+                <p>Buddy Combs Cup, USA</p>
+            </div>
+        </div>
+
+        <div class="footer-address">
+            Aziznagar Sy. No. 177, Gandipet, Moinabad, Ranga Reddy, Telangana – 500074
+        </div>
+        
+        <p style="font-size: 0.7rem; color: #444; margin-top: 50px;">© 2026 Hyderabad Polo & Riding Club</p>
+    </footer>
+
+    <script>
+        // Simple Scroll Reveal Logic
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
