@@ -28,11 +28,18 @@ export default function EventsPage() {
         {eventsContent.upcoming && eventsContent.upcoming.length > 0 ? (
           <div className="grid gap-6 sm:gap-8 grid-cols-1 md:grid-cols-2">
             {eventsContent.upcoming.map((event, index) => {
-              const eventImages = [
-                "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=800&q=80",
-                "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=800&q=80",
-                "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80",
-              ];
+              // Use equestrian-specific image for the EC2026 event
+              const getUpcomingImage = (ev: typeof eventsContent.upcoming[number], i: number) => {
+                if (ev.link?.includes("equestrian-challenge-2026")) {
+                  return "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=800&q=80";
+                }
+                const imgs = [
+                  "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=800&q=80",
+                  "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=800&q=80",
+                  "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80",
+                ];
+                return imgs[i % imgs.length];
+              };
               const commonClasses =
                 "group relative overflow-hidden rounded-[2.5rem] border border-brand-100 bg-white/95 shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 block";
 
@@ -40,7 +47,7 @@ export default function EventsPage() {
                 <>
                   <div className="relative h-44 sm:h-48 overflow-hidden">
                     <Image
-                      src={eventImages[index % eventImages.length]}
+                      src={getUpcomingImage(event, index)}
                       alt={event.title}
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-110"
