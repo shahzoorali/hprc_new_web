@@ -123,9 +123,31 @@ const INITIAL_FORM: FormData = {
 
 function RegistrationForm() {
   const { events, declaration, event } = equestrianChallenge2026;
+  const formRef = React.useRef<HTMLFormElement | null>(null);
   const [form, setForm] = useState<FormData>(INITIAL_FORM);
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});
+  const [draftExists, setDraftExists] = useState(false);
+
+  React.useEffect(() => {
+    // Check if there is a saved registration in localStorage
+    try {
+      const existing = JSON.parse(localStorage.getItem("ec2026-registrations") ?? "[]");
+      if (existing && existing.length > 0) setDraftExists(true);
+    } catch {}
+  }, []);
+
+  const restoreDraft = () => {
+    try {
+      const existing = JSON.parse(localStorage.getItem("ec2026-registrations") ?? "[]");
+      if (existing && existing.length > 0) {
+        // Remove submittedAt and totalFee if present in the stored object to match FormData
+        const lastEntry = existing[existing.length - 1];
+        setForm(lastEntry);
+        setDraftExists(false);
+      }
+    } catch {}
+  };
 
   const riderAge = useMemo(() => {
     if (!form.dob) return null;
@@ -176,41 +198,6 @@ function RegistrationForm() {
     e.preventDefault();
     if (!validate()) return;
 
-    const selectedEventDetails = eligibleEvents
-      .filter((ev) => form.selectedEvents.includes(ev.id))
-      .map((ev) => {
-        const hName = form.eventHorses[ev.id]?.trim() || form.horseName || "Not specified";
-        return `#${ev.id} ${ev.discipline} — ${ev.category} (₹${ev.fee.toLocaleString("en-IN")}) — Horse: ${hName}`;
-      })
-      .join("\n");
-
-    const body = encodeURIComponent(
-      `HPRC EQUESTRIAN CHALLENGE 2026 — ENTRY FORM\n` +
-        `=============================================\n\n` +
-        `RIDER DETAILS\n` +
-        `Name: ${form.name}\n` +
-        `Father's Name: ${form.fatherName}\n` +
-        `Date of Birth: ${form.dob}\n` +
-        `Address: ${form.address}\n` +
-        `Mobile: ${form.mobile}\n` +
-        `Email: ${form.email}\n` +
-        `Emergency Contact: ${form.emergencyContact} (${form.emergencyRelation})\n` +
-        `EFI Membership No.: ${form.efiMemberNo}\n` +
-        `EFI Grade: ${form.efiGrade}\n` +
-        `Club / Unit: ${form.clubName}\n\n` +
-        `EVENTS SELECTED\n` +
-        `${selectedEventDetails}\n` +
-        `Total Fee: ₹${totalFee.toLocaleString("en-IN")}\n\n` +
-        `HORSE DETAILS\n` +
-        `Name: ${form.horseName}\n` +
-        `EFI Reg. No.: ${form.horseEfiReg}\n` +
-        `Colour: ${form.horseColour}  |  Sex: ${form.horseSex}  |  Age: ${form.horseAge}\n\n` +
-        `Declaration accepted: Yes\n`
-    );
-
-    const subject = encodeURIComponent(`EC2026 Entry — ${form.name} — ${form.selectedEvents.length} event(s)`);
-    window.location.href = `mailto:${event.email}?subject=${subject}&body=${body}`;
-
     // Save to localStorage as backup
     try {
       const existing = JSON.parse(localStorage.getItem("ec2026-registrations") ?? "[]");
@@ -218,7 +205,10 @@ function RegistrationForm() {
       localStorage.setItem("ec2026-registrations", JSON.stringify(existing));
     } catch {}
 
-    setSubmitted(true);
+    // Submit to CCAvenue via PHP handler
+    if (formRef.current) {
+        formRef.current.submit();
+    }
   };
 
   if (submitted) {
@@ -264,7 +254,66 @@ function RegistrationForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-10" noValidate>
+    <form 
+      ref={formRef} 
+      onSubmit={handleSubmit} 
+      action="https://hprc.in/payment/ec2026RequestHandler.php" 
+      method="POST" 
+      className="space-y-10" 
+      noValidate>
+      
+      {/* Hidden Fields for PHP Processing */}
+      <input type="hidden" name="name" value={form.name} />
+      <input type="hidden" name="fatherName" value={form.fatherName} />
+      <input type="hidden" name="dob" value={form.dob} />
+      <input type="hidden" name="address" value={form.address} />
+      <input type="hidden" name="mobile" value={form.mobile} />
+      <input type="hidden" name="email" value={form.email} />
+      <input type="hidden" name="emergencyContact" value={form.emergencyContact} />
+      <input type="hidden" name="emergencyRelation" value={form.emergencyRelation} />
+      <input type="hidden" name="efiMemberNo" value={form.efiMemberNo} />
+      <input type="hidden" name="efiGrade" value={form.efiGrade} />
+      <input type="hidden" name="clubName" value={form.clubName} />
+      <input type="hidden" name="selectedEvents" value={JSON.stringify(form.selectedEvents)} />
+      <input type="hidden" name="eventHorses" value={JSON.stringify(form.eventHorses)} />
+      <input type="hidden" name="horseName" value={form.horseName} />
+      <input type="hidden" name="horseEfiReg" value={form.horseEfiReg} />
+      <input type="hidden" name="horseColour" value={form.horseColour} />
+      <input type="hidden" name="horseSex" value={form.horseSex} />
+      <input type="hidden" name="horseAge" value={form.horseAge} />
+      <input type="hidden" name="amount" value={totalFee} />
+
+      {/* ── Draft Restore Notice ─────────────────────── */}
+      {draftExists && (
+        <div className="bg-blue-50 border border-blue-200 p-4 rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <svg className="h-6 w-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            <div>
+              <p className="text-sm font-bold text-blue-900">Unsaved draft recovered</p>
+              <p className="text-xs text-blue-700">We found an incomplete entry on your device.</p>
+            </div>
+          </div>
+          <div className="flex gap-2">
+            <button
+              type="button"
+              onClick={() => setDraftExists(false)}
+              className="px-3 py-1.5 text-xs font-bold text-blue-700 hover:bg-blue-100 rounded-md transition"
+            >
+              Discard
+            </button>
+            <button
+              type="button"
+              onClick={restoreDraft}
+              className="px-3 py-1.5 text-xs font-bold bg-blue-600 text-white hover:bg-blue-700 rounded-md transition"
+            >
+              Restore Draft
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* ── Rider Details ─────────────────────────────── */}
       <div className="space-y-6">
         <h3 className="text-xl font-bold text-brand-900 font-display flex items-center gap-3">
