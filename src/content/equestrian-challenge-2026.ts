@@ -72,28 +72,28 @@ export const equestrianChallenge2026 = {
 
   events: [
     // HACKS
-    { id: 1, discipline: "HACKS", category: "Under 10 years", date: "16 May · AM", fee: 1500 },
-    { id: 2, discipline: "HACKS", category: "Under 14 years", date: "16 May · AM", fee: 1500 },
+    { id: 1, discipline: "HACKS", category: "Under 10 years", date: "16 May · AM", fee: 1500, minAge: 0, maxAge: 9 },
+    { id: 2, discipline: "HACKS", category: "Under 14 years", date: "16 May · AM", fee: 1500, minAge: 0, maxAge: 13 },
     // DRESSAGE
-    { id: 3, discipline: "DRESSAGE", category: "Children I (10–12 yrs)", date: "16 May · PM", fee: 2000 },
-    { id: 4, discipline: "DRESSAGE", category: "Children II (12–14 yrs)", date: "16 May · PM", fee: 2000 },
-    { id: 5, discipline: "DRESSAGE", category: "Junior (14–18 yrs)", date: "16 May · PM", fee: 2000 },
+    { id: 3, discipline: "DRESSAGE", category: "Children I (10–12 yrs)", date: "16 May · PM", fee: 2000, minAge: 10, maxAge: 12 },
+    { id: 4, discipline: "DRESSAGE", category: "Children II (12–14 yrs)", date: "16 May · PM", fee: 2000, minAge: 12, maxAge: 14 },
+    { id: 5, discipline: "DRESSAGE", category: "Junior (14–18 yrs)", date: "16 May · PM", fee: 2000, minAge: 14, maxAge: 18 },
     // SHOW JUMPING
-    { id: 6, discipline: "SHOW JUMPING", category: "Children II – 40 cm (10–12 yrs)", date: "17 May · AM", fee: 2000 },
-    { id: 7, discipline: "SHOW JUMPING", category: "Children I – 40 cm (12–14 yrs)", date: "17 May · AM", fee: 2000 },
-    { id: 8, discipline: "SHOW JUMPING", category: "40 cm Open", date: "17 May · AM", fee: 2000 },
-    { id: 9, discipline: "SHOW JUMPING", category: "Children II – 60 cm (10–12 yrs)", date: "17 May · AM", fee: 2000 },
-    { id: 10, discipline: "SHOW JUMPING", category: "Children I – 60 cm (12–14 yrs)", date: "17 May · AM", fee: 2000 },
-    { id: 11, discipline: "SHOW JUMPING", category: "60 cm Open", date: "17 May · AM", fee: 2000 },
-    { id: 12, discipline: "SHOW JUMPING", category: "Children II – 80 cm (10–12 yrs)", date: "17 May · AM", fee: 2000 },
-    { id: 13, discipline: "SHOW JUMPING", category: "80 cm Open", date: "17 May · AM", fee: 2000 },
-    { id: 14, discipline: "SHOW JUMPING", category: "Children I – 90 cm (12–14 yrs)", date: "17 May · PM", fee: 2000 },
-    { id: 15, discipline: "SHOW JUMPING", category: "90 cm Open", date: "17 May · PM", fee: 2000 },
-    { id: 16, discipline: "SHOW JUMPING", category: "Junior – 105 cm (14–18 yrs)", date: "17 May · PM", fee: 2000 },
-    { id: 17, discipline: "SHOW JUMPING", category: "105 cm Open", date: "17 May · PM", fee: 2000 },
+    { id: 6, discipline: "SHOW JUMPING", category: "Children II – 40 cm (10–12 yrs)", date: "17 May · AM", fee: 2000, minAge: 10, maxAge: 12 },
+    { id: 7, discipline: "SHOW JUMPING", category: "Children I – 40 cm (12–14 yrs)", date: "17 May · AM", fee: 2000, minAge: 12, maxAge: 14 },
+    { id: 8, discipline: "SHOW JUMPING", category: "40 cm Open", date: "17 May · AM", fee: 2000, minAge: 0, maxAge: 99 },
+    { id: 9, discipline: "SHOW JUMPING", category: "Children II – 60 cm (10–12 yrs)", date: "17 May · AM", fee: 2000, minAge: 10, maxAge: 12 },
+    { id: 10, discipline: "SHOW JUMPING", category: "Children I – 60 cm (12–14 yrs)", date: "17 May · AM", fee: 2000, minAge: 12, maxAge: 14 },
+    { id: 11, discipline: "SHOW JUMPING", category: "60 cm Open", date: "17 May · AM", fee: 2000, minAge: 0, maxAge: 99 },
+    { id: 12, discipline: "SHOW JUMPING", category: "Children II – 80 cm (10–12 yrs)", date: "17 May · AM", fee: 2000, minAge: 10, maxAge: 12 },
+    { id: 13, discipline: "SHOW JUMPING", category: "80 cm Open", date: "17 May · AM", fee: 2000, minAge: 0, maxAge: 99 },
+    { id: 14, discipline: "SHOW JUMPING", category: "Children I – 90 cm (12–14 yrs)", date: "17 May · PM", fee: 2000, minAge: 12, maxAge: 14 },
+    { id: 15, discipline: "SHOW JUMPING", category: "90 cm Open", date: "17 May · PM", fee: 2000, minAge: 0, maxAge: 99 },
+    { id: 16, discipline: "SHOW JUMPING", category: "Junior – 105 cm (14–18 yrs)", date: "17 May · PM", fee: 2000, minAge: 14, maxAge: 18 },
+    { id: 17, discipline: "SHOW JUMPING", category: "105 cm Open", date: "17 May · PM", fee: 2000, minAge: 0, maxAge: 99 },
     // TOP SCORE OPEN
-    { id: 18, discipline: "TOP SCORE", category: "Children (Below 14 yrs)", date: "17 May · PM", fee: 2000 },
-    { id: 19, discipline: "TOP SCORE", category: "Open (14 yrs & above)", date: "17 May · PM", fee: 2000 },
+    { id: 18, discipline: "TOP SCORE", category: "Children (Below 14 yrs)", date: "17 May · PM", fee: 2000, minAge: 0, maxAge: 13 },
+    { id: 19, discipline: "TOP SCORE", category: "Open (14 yrs & above)", date: "17 May · PM", fee: 2000, minAge: 14, maxAge: 99 },
   ],
 
   prizeMoney: {

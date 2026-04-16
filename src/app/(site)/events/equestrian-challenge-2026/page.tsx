@@ -90,6 +90,7 @@ type FormData = {
   efiGrade: string;
   clubName: string;
   selectedEvents: number[];
+  eventHorses: Record<number, string>;
   horseName: string;
   horseEfiReg: string;
   horseColour: string;
@@ -111,6 +112,7 @@ const INITIAL_FORM: FormData = {
   efiGrade: "",
   clubName: "",
   selectedEvents: [],
+  eventHorses: {},
   horseName: "",
   horseEfiReg: "",
   horseColour: "",
@@ -125,13 +127,25 @@ function RegistrationForm() {
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});
 
+  const riderAge = useMemo(() => {
+    if (!form.dob) return null;
+    const birthYear = new Date(form.dob).getFullYear();
+    const eventYear = 2026;
+    return eventYear - birthYear;
+  }, [form.dob]);
+
+  const eligibleEvents = useMemo(() => {
+    if (riderAge === null) return [];
+    return events.filter(e => riderAge >= (e.minAge ?? 0) && riderAge <= (e.maxAge ?? 99));
+  }, [events, riderAge]);
+
   const totalFee = useMemo(
     () =>
       form.selectedEvents.reduce((sum, id) => {
-        const ev = events.find((e) => e.id === id);
+        const ev = eligibleEvents.find((e) => e.id === id);
         return sum + (ev?.fee ?? 0);
       }, 0),
-    [form.selectedEvents, events]
+    [form.selectedEvents, eligibleEvents]
   );
 
   const toggleEvent = useCallback((id: number) => {
@@ -149,7 +163,10 @@ function RegistrationForm() {
     if (!form.dob) e.dob = "Date of birth is required";
     if (!form.mobile.trim()) e.mobile = "Mobile number is required";
     if (!form.efiMemberNo.trim()) e.efiMemberNo = "EFI Membership No. is required";
-    if (form.selectedEvents.length === 0) e.selectedEvents = "Please select at least one event";
+    
+    const activeSelected = form.selectedEvents.filter(id => eligibleEvents.some(e => e.id === id));
+    if (activeSelected.length === 0) e.selectedEvents = "Please select at least one eligible event";
+    
     if (!form.declaration) e.declaration = "You must accept the declaration";
     setErrors(e);
     return Object.keys(e).length === 0;
@@ -159,9 +176,12 @@ function RegistrationForm() {
     e.preventDefault();
     if (!validate()) return;
 
-    const selectedEventDetails = events
+    const selectedEventDetails = eligibleEvents
       .filter((ev) => form.selectedEvents.includes(ev.id))
-      .map((ev) => `#${ev.id} ${ev.discipline} — ${ev.category} (₹${ev.fee.toLocaleString("en-IN")})`)
+      .map((ev) => {
+        const hName = form.eventHorses[ev.id]?.trim() || form.horseName || "Not specified";
+        return `#${ev.id} ${ev.discipline} — ${ev.category} (₹${ev.fee.toLocaleString("en-IN")}) — Horse: ${hName}`;
+      })
       .join("\n");
 
     const body = encodeURIComponent(
@@ -421,51 +441,75 @@ function RegistrationForm() {
           <span className="flex h-8 w-8 items-center justify-center bg-brand-500 text-white text-sm font-bold">3</span>
           Select Events
         </h3>
-        {errors.selectedEvents && (
-          <p className="text-sm text-red-500 font-medium">{errors.selectedEvents}</p>
+
+        {!form.dob ? (
+          <div className="bg-amber-50 border border-amber-200 text-amber-800 p-4 rounded-xl text-sm font-medium flex items-center gap-3">
+            <svg className="h-5 w-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Please enter your Date of Birth in the Rider Details section above to view eligible events.
+          </div>
+        ) : eligibleEvents.length === 0 ? (
+          <div className="bg-gray-50 border border-gray-200 text-gray-600 p-4 rounded-xl text-sm font-medium text-center">
+            No eligible events found for your age category ({riderAge} years old).
+          </div>
+        ) : (
+          <>
+            {errors.selectedEvents && (
+              <p className="text-sm text-red-500 font-medium">{errors.selectedEvents}</p>
+            )}
+            <div className="space-y-4">
+              {disciplineGroups.map((disc) => {
+                const discEvents = eligibleEvents.filter((e) => e.discipline === disc);
+                if (discEvents.length === 0) return null;
+                
+                return (
+                  <div key={disc} className={`border rounded-xl p-4 sm:p-5 ${disciplineColors[disc] ?? "bg-gray-50 border-gray-200"}`}>
+                    <div className="flex items-center gap-2 mb-3">
+                      <DisciplineIcon discipline={disc} />
+                      <h4 className="font-bold text-gray-900 text-sm uppercase tracking-wider">{disc}</h4>
+                    </div>
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      {discEvents.map((ev) => {
+                        const checked = form.selectedEvents.includes(ev.id);
+                        return (
+                          <div key={ev.id} className={`flex flex-col border transition-all ${checked ? "border-brand-400 bg-white shadow-sm" : "border-transparent bg-white/50 hover:bg-white/80"}`}>
+                            <label className="flex items-start gap-3 p-3 cursor-pointer">
+                              <input
+                                type="checkbox"
+                                checked={checked}
+                                onChange={() => toggleEvent(ev.id)}
+                                className="mt-0.5 h-4 w-4 accent-brand-500 flex-shrink-0"
+                              />
+                              <div className="flex-1 min-w-0">
+                                <p className="text-sm font-medium text-gray-900 leading-tight">{ev.category}</p>
+                                <p className="text-xs text-gray-500 mt-0.5">{ev.date}</p>
+                              </div>
+                              <span className="text-sm font-bold text-brand-600 flex-shrink-0">
+                                ₹{ev.fee.toLocaleString("en-IN")}
+                              </span>
+                            </label>
+                            {checked && (
+                              <div className="px-3 pb-3 pt-1 border-t border-gray-100 bg-gray-50/50 mt-1">
+                                <input 
+                                  type="text" 
+                                  placeholder="Horse Name (if different)" 
+                                  value={form.eventHorses[ev.id] || ""}
+                                  onChange={(e) => setForm(f => ({ ...f, eventHorses: { ...f.eventHorses, [ev.id]: e.target.value } }))}
+                                  className="w-full text-xs px-3 py-2 border border-gray-200 rounded focus:border-brand-400 outline-none transition"
+                                />
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </>
         )}
-        <div className="space-y-4">
-          {disciplineGroups.map((disc) => {
-            const discEvents = events.filter((e) => e.discipline === disc);
-            return (
-              <div key={disc} className={`border rounded-xl p-4 sm:p-5 ${disciplineColors[disc] ?? "bg-gray-50 border-gray-200"}`}>
-                <div className="flex items-center gap-2 mb-3">
-                  <DisciplineIcon discipline={disc} />
-                  <h4 className="font-bold text-gray-900 text-sm uppercase tracking-wider">{disc}</h4>
-                </div>
-                <div className="grid gap-2 sm:grid-cols-2">
-                  {discEvents.map((ev) => {
-                    const checked = form.selectedEvents.includes(ev.id);
-                    return (
-                      <label
-                        key={ev.id}
-                        className={`flex items-start gap-3 p-3 cursor-pointer border transition-all ${
-                          checked
-                            ? "border-brand-400 bg-white shadow-sm"
-                            : "border-transparent bg-white/50 hover:bg-white/80"
-                        }`}
-                      >
-                        <input
-                          type="checkbox"
-                          checked={checked}
-                          onChange={() => toggleEvent(ev.id)}
-                          className="mt-0.5 h-4 w-4 accent-brand-500 flex-shrink-0"
-                        />
-                        <div className="flex-1 min-w-0">
-                          <p className="text-sm font-medium text-gray-900 leading-tight">{ev.category}</p>
-                          <p className="text-xs text-gray-500 mt-0.5">{ev.date}</p>
-                        </div>
-                        <span className="text-sm font-bold text-brand-600 flex-shrink-0">
-                          ₹{ev.fee.toLocaleString("en-IN")}
-                        </span>
-                      </label>
-                    );
-                  })}
-                </div>
-              </div>
-            );
-          })}
-        </div>
 
         {/* Fee Summary */}
         {form.selectedEvents.length > 0 && (
@@ -482,10 +526,13 @@ function RegistrationForm() {
 
       {/* ── Horse Details ──────────────────────────────── */}
       <div className="space-y-6">
-        <h3 className="text-xl font-bold text-brand-900 font-display flex items-center gap-3">
-          <span className="flex h-8 w-8 items-center justify-center bg-brand-500 text-white text-sm font-bold">4</span>
-          Horse Details
-        </h3>
+        <div className="flex flex-col gap-1">
+          <h3 className="text-xl font-bold text-brand-900 font-display flex items-center gap-3">
+            <span className="flex h-8 w-8 items-center justify-center bg-brand-500 text-white text-sm font-bold">4</span>
+            Primary / Default Horse Details
+          </h3>
+          <p className="text-sm text-gray-500 ml-11">If you are using a single horse, enter its details here. To use different horses, specify their names under the selected events above.</p>
+        </div>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           <div className="sm:col-span-2 lg:col-span-1">
             <label className="block text-sm font-semibold text-gray-700 mb-1.5" htmlFor="ec-horse-name">
