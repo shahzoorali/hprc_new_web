@@ -780,19 +780,19 @@ export default function EquestrianChallenge2026Page() {
               <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
                 <a
                   href="#register"
-                  className="inline-flex items-center justify-center gap-2 bg-brand-500 text-white px-8 py-4 text-base font-bold shadow-2xl transition-all duration-300 hover:bg-brand-600 hover:-translate-y-0.5 hover:shadow-brand-500/40"
+                  className="inline-flex items-center justify-center gap-2 bg-brand-500 !text-white px-8 py-4 text-base font-bold shadow-2xl transition-all duration-300 hover:bg-brand-600 hover:-translate-y-0.5 hover:shadow-brand-500/40"
                 >
                   Register Now
-                  <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="h-5 w-5 !text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </a>
                 <a
                   href="#schedule"
-                  className="inline-flex items-center justify-center gap-2 border-2 border-white text-white px-8 py-4 text-base font-bold backdrop-blur-sm transition-all duration-300 hover:bg-white/10"
+                  className="inline-flex items-center justify-center gap-2 border-2 border-white !text-white px-8 py-4 text-base font-bold backdrop-blur-sm transition-all duration-300 hover:bg-white/10"
                 >
                   View Schedule
-                  <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="h-5 w-5 !text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
                 </a>
