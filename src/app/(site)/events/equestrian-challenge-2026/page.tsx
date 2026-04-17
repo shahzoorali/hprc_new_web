@@ -724,8 +724,8 @@ export default function EquestrianChallenge2026Page() {
             </div>
 
             {/* Governing body badge */}
-            <div className="absolute top-6 left-1/2 -translate-x-1/2 z-20 bg-white/95 backdrop-blur-sm border border-white/60 px-5 py-2.5 shadow-xl">
-              <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-brand-700 text-center">
+            <div className="absolute top-4 sm:top-6 left-1/2 -translate-x-1/2 z-20 bg-white/95 backdrop-blur-sm border border-white/60 px-4 sm:px-5 py-2 sm:py-2.5 shadow-xl w-[90%] sm:w-auto">
+              <p className="text-[9px] sm:text-xs font-semibold uppercase tracking-[0.15em] sm:tracking-[0.2em] text-brand-700 text-center leading-tight">
                 Organised under the aegis of EFI &amp; TSEA
               </p>
             </div>
@@ -956,21 +956,21 @@ export default function EquestrianChallenge2026Page() {
             <h2 className="text-3xl sm:text-4xl font-extrabold text-brand-900 font-display">Prize Money</h2>
             <p className="mt-3 text-sm text-gray-500 max-w-lg mx-auto">{prizeMoney.note}</p>
           </div>
-          <div className="max-w-2xl mx-auto overflow-hidden border-2 border-brand-200 shadow-2xl">
-            <table className="w-full text-sm border-collapse">
+          <div className="max-w-2xl mx-auto border-2 border-brand-200 shadow-2xl overflow-x-auto bg-white">
+            <table className="w-full text-sm border-collapse min-w-[500px] sm:min-w-0">
               <thead>
                 <tr className="bg-gradient-to-r from-brand-600 to-brand-700 text-white">
                   <th className="py-3 px-4 text-left font-bold">Class</th>
-                  <th className="py-3 px-4 text-center font-bold">🥇 Gold</th>
-                  <th className="py-3 px-4 text-center font-bold">🥈 Silver</th>
-                  <th className="py-3 px-4 text-center font-bold">🥉 Bronze</th>
-                  <th className="py-3 px-4 text-center font-bold">4th</th>
+                  <th className="py-3 px-4 text-center font-bold whitespace-nowrap">🥇 Gold</th>
+                  <th className="py-3 px-4 text-center font-bold whitespace-nowrap">🥈 Silver</th>
+                  <th className="py-3 px-4 text-center font-bold whitespace-nowrap">🥉 Bronze</th>
+                  <th className="py-3 px-4 text-center font-bold whitespace-nowrap">4th</th>
                 </tr>
               </thead>
               <tbody>
                 {prizeMoney.table.map((row, i) => (
                   <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-brand-50/60"}>
-                    <td className="py-3 px-4 font-semibold text-brand-900">{row.height}</td>
+                    <td className="py-3 px-4 font-semibold text-brand-900 whitespace-nowrap">{row.height}</td>
                     <td className="py-3 px-4 text-center font-bold text-brand-700">₹{row.gold.toLocaleString("en-IN")}</td>
                     <td className="py-3 px-4 text-center font-semibold text-gray-700">₹{row.silver.toLocaleString("en-IN")}</td>
                     <td className="py-3 px-4 text-center font-semibold text-gray-600">₹{row.bronze.toLocaleString("en-IN")}</td>
