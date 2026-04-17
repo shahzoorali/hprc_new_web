@@ -45,17 +45,25 @@ if ($order_id) {
 
     // 2. Transmit success data automatically to Google Sheets via Webhook
     if($order_status === "Success" || $order_status === "Successful") {
-        $result = $conn->query("SELECT name, mobile, email, efiMemberNo, horseName, selectedEvents FROM ec2026 WHERE id='".$conn->real_escape_string($order_id)."'");
+        $result = $conn->query("SELECT name, parentName, dob, address, mobile, email, emergencyContact, emergencyRelation, clubName, selectedEvents, eventHorses, ageProofPath FROM ec2026 WHERE id='".$conn->real_escape_string($order_id)."'");
         if ($result && $row = $result->fetch_assoc()) {
             
             $webhook_url = "https://script.google.com/macros/s/AKfycbzw65SAMdxZpVqp5TcIKvcLIZVdDDcybqkMAUnjM7-wSqvjmo0Pw2Lgz7nC_2ttDN33/exec";
+            $ageProofLink = !empty($row['ageProofPath']) ? "https://hprc.in/payment/" . $row['ageProofPath'] : "";
+            
             $data = array(
                 "name" => $row['name'],
+                "parentName" => $row['parentName'],
+                "dob" => $row['dob'],
+                "address" => $row['address'],
                 "mobile" => $row['mobile'],
                 "email" => $row['email'],
-                "efiMemberNo" => $row['efiMemberNo'],
-                "horseName" => $row['horseName'],
+                "emergencyContact" => $row['emergencyContact'],
+                "emergencyRelation" => $row['emergencyRelation'],
+                "clubName" => $row['clubName'],
                 "events" => $row['selectedEvents'],
+                "eventHorses" => $row['eventHorses'],
+                "ageProofLink" => $ageProofLink,
                 "amount" => $mer_amount,
                 "tracking_id" => $tracking_id
             );
