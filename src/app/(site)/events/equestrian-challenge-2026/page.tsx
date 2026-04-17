@@ -147,13 +147,26 @@ function RegistrationForm() {
     return events.filter(e => riderAge >= (e.minAge ?? 0) && riderAge <= (e.maxAge ?? 99));
   }, [events, riderAge]);
 
+  const entryStatus = useMemo(() => {
+    const now = new Date();
+    const standardDeadline = new Date("2026-05-14T18:00:00+05:30");
+    const finalDeadline = new Date("2026-05-15T18:00:00+05:30");
+    
+    if (now > finalDeadline) return "CLOSED";
+    if (now > standardDeadline) return "POST_ENTRY";
+    return "STANDARD";
+  }, []);
+
   const totalFee = useMemo(
     () =>
       form.selectedEvents.reduce((sum, id) => {
         const ev = eligibleEvents.find((e) => e.id === id);
-        return sum + (ev?.fee ?? 0);
+        if (!ev) return sum;
+        const baseFee = ev.fee;
+        const postEntrySurcharge = entryStatus === "POST_ENTRY" ? 500 : 0;
+        return sum + baseFee + postEntrySurcharge;
       }, 0),
-    [form.selectedEvents, eligibleEvents]
+    [form.selectedEvents, eligibleEvents, entryStatus]
   );
 
   const toggleEvent = useCallback((id: number) => {
@@ -490,10 +503,19 @@ function RegistrationForm() {
 
       {/* ── Event Selection ────────────────────────────── */}
       <div className="space-y-6">
-        <h3 className="text-xl font-bold text-brand-900 font-display flex items-center gap-3">
-          <span className="flex h-8 w-8 items-center justify-center bg-brand-500 text-white text-sm font-bold">3</span>
-          Select Events
-        </h3>
+        <div className="flex items-center justify-between flex-wrap gap-4">
+          <h3 className="text-xl font-bold text-brand-900 font-display flex items-center gap-3">
+            <span className="flex h-8 w-8 items-center justify-center bg-brand-500 text-white text-sm font-bold">3</span>
+            Select Events
+          </h3>
+          
+          {entryStatus === "POST_ENTRY" && (
+            <div className="bg-amber-100 border border-amber-200 text-amber-800 px-3 py-1.5 text-xs font-bold uppercase tracking-wider flex items-center gap-2">
+              <span className="h-2 w-2 rounded-full bg-amber-500 animate-pulse" />
+              Post-Entry Pricing Active (+ ₹500/event)
+            </div>
+          )}
+        </div>
 
         {!form.dob ? (
           <div className="bg-amber-50 border border-amber-200 text-amber-800 p-4 rounded-xl text-sm font-medium flex items-center gap-3">
@@ -621,19 +643,30 @@ function RegistrationForm() {
 
       {/* ── Submit ─────────────────────────────────────── */}
       <div className="text-center pt-2">
-        <button
-          type="submit"
-          id="ec-submit"
-          className="inline-flex items-center gap-3 bg-gradient-to-r from-brand-500 to-brand-600 text-white px-10 py-4 text-base font-bold shadow-xl shadow-brand-500/30 hover:from-brand-600 hover:to-brand-700 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-2xl hover:shadow-brand-500/40"
-        >
-          <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-          </svg>
-          Submit Entry Form
-        </button>
-        <p className="mt-3 text-xs text-gray-500">
-          Your email client will open with your details pre-filled. Please send the email to complete registration.
-        </p>
+        {entryStatus === "CLOSED" ? (
+          <div className="bg-red-50 border border-red-200 p-6 max-w-lg mx-auto">
+            <p className="text-red-700 font-bold mb-1">Registration Closed</p>
+            <p className="text-xs text-red-600">The final deadline (15 May, 6:00 PM) has passed. We are no longer accepting entries.</p>
+          </div>
+        ) : (
+          <>
+            <button
+              type="submit"
+              id="ec-submit"
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-brand-500 to-brand-600 text-white px-10 py-4 text-base font-bold shadow-xl shadow-brand-500/30 hover:from-brand-600 hover:to-brand-700 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-2xl hover:shadow-brand-500/40"
+            >
+              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              Submit Entry Form
+            </button>
+            <p className="mt-3 text-xs text-gray-500">
+              {entryStatus === "POST_ENTRY" 
+                ? "Post-entry window is open. Standard fees have been increased by ₹500 per event." 
+                : "Standard entry is open. Ensure all details are correct before submitting."}
+            </p>
+          </>
+        )}
       </div>
     </form>
   );
