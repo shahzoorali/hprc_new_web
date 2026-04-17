@@ -79,45 +79,31 @@ function DisciplineIcon({ discipline }: { discipline: string }) {
 
 type FormData = {
   name: string;
-  fatherName: string;
+  parentName: string;
   dob: string;
   address: string;
   mobile: string;
   email: string;
   emergencyContact: string;
   emergencyRelation: string;
-  efiMemberNo: string;
-  efiGrade: string;
   clubName: string;
   selectedEvents: number[];
   eventHorses: Record<number, string>;
-  horseName: string;
-  horseEfiReg: string;
-  horseColour: string;
-  horseSex: string;
-  horseAge: string;
   declaration: boolean;
 };
 
 const INITIAL_FORM: FormData = {
   name: "",
-  fatherName: "",
+  parentName: "",
   dob: "",
   address: "",
   mobile: "",
   email: "",
   emergencyContact: "",
   emergencyRelation: "",
-  efiMemberNo: "",
-  efiGrade: "",
   clubName: "",
   selectedEvents: [],
   eventHorses: {},
-  horseName: "",
-  horseEfiReg: "",
-  horseColour: "",
-  horseSex: "",
-  horseAge: "",
   declaration: false,
 };
 
@@ -126,7 +112,7 @@ function RegistrationForm() {
   const formRef = React.useRef<HTMLFormElement | null>(null);
   const [form, setForm] = useState<FormData>(INITIAL_FORM);
   const [submitted, setSubmitted] = useState(false);
-  const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});
+  const [errors, setErrors] = useState<Partial<Record<keyof FormData | "ageProof" | "eventHorsesGlobal", string>>>({});
   const [draftExists, setDraftExists] = useState(false);
 
   React.useEffect(() => {
@@ -180,19 +166,43 @@ function RegistrationForm() {
   }, []);
 
   const validate = () => {
-    const e: Partial<Record<keyof FormData, string>> = {};
+    const e: Partial<Record<keyof FormData | "ageProof" | "eventHorsesGlobal", string>> = {};
     if (!form.name.trim()) e.name = "Full name is required";
     if (!form.dob) e.dob = "Date of birth is required";
     if (!form.mobile.trim()) e.mobile = "Mobile number is required";
-    if (!form.efiMemberNo.trim()) e.efiMemberNo = "EFI Membership No. is required";
     
-    const activeSelected = form.selectedEvents.filter(id => eligibleEvents.some(e => e.id === id));
+    const activeSelected = form.selectedEvents.filter(id => eligibleEvents.some(eve => eve.id === id));
     if (activeSelected.length === 0) e.selectedEvents = "Please select at least one eligible event";
     
+    const missingHorse = form.selectedEvents.some(id => !form.eventHorses[id] || !form.eventHorses[id].trim());
+    if (missingHorse) {
+      e.eventHorsesGlobal = "Horse Name is required for all selected events";
+      e.selectedEvents = "Please provide the horse name for all selected events";
+    }
+
+    const hasAgeBasedEvent = form.selectedEvents.some(id => {
+      const ev = eligibleEvents.find(eve => eve.id === id);
+      return ev && ev.maxAge !== undefined && ev.maxAge < 99;
+    });
+    
+    if (hasAgeBasedEvent) {
+      const fileInput = document.getElementById('ec-age-proof') as HTMLInputElement;
+      if (!fileInput || !fileInput.files || fileInput.files.length === 0) {
+        e.ageProof = "Age proof document is required for age-category events";
+      }
+    }
+    
     if (!form.declaration) e.declaration = "You must accept the declaration";
-    setErrors(e);
+    setErrors(e as any);
     return Object.keys(e).length === 0;
   };
+
+  const showAgeProof = useMemo(() => {
+    return form.selectedEvents.some(id => {
+      const ev = eligibleEvents.find(eve => eve.id === id);
+      return ev && ev.maxAge !== undefined && ev.maxAge < 99;
+    });
+  }, [form.selectedEvents, eligibleEvents]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -259,28 +269,22 @@ function RegistrationForm() {
       onSubmit={handleSubmit} 
       action="https://hprc.in/payment/ec2026RequestHandler.php" 
       method="POST" 
+      encType="multipart/form-data"
       className="space-y-10" 
       noValidate>
       
       {/* Hidden Fields for PHP Processing */}
       <input type="hidden" name="name" value={form.name} />
-      <input type="hidden" name="fatherName" value={form.fatherName} />
+      <input type="hidden" name="parentName" value={form.parentName} />
       <input type="hidden" name="dob" value={form.dob} />
       <input type="hidden" name="address" value={form.address} />
       <input type="hidden" name="mobile" value={form.mobile} />
       <input type="hidden" name="email" value={form.email} />
       <input type="hidden" name="emergencyContact" value={form.emergencyContact} />
       <input type="hidden" name="emergencyRelation" value={form.emergencyRelation} />
-      <input type="hidden" name="efiMemberNo" value={form.efiMemberNo} />
-      <input type="hidden" name="efiGrade" value={form.efiGrade} />
       <input type="hidden" name="clubName" value={form.clubName} />
       <input type="hidden" name="selectedEvents" value={JSON.stringify(form.selectedEvents)} />
       <input type="hidden" name="eventHorses" value={JSON.stringify(form.eventHorses)} />
-      <input type="hidden" name="horseName" value={form.horseName} />
-      <input type="hidden" name="horseEfiReg" value={form.horseEfiReg} />
-      <input type="hidden" name="horseColour" value={form.horseColour} />
-      <input type="hidden" name="horseSex" value={form.horseSex} />
-      <input type="hidden" name="horseAge" value={form.horseAge} />
       <input type="hidden" name="amount" value={totalFee} />
 
       {/* ── Draft Restore Notice ─────────────────────── */}
@@ -331,21 +335,21 @@ function RegistrationForm() {
               type="text"
               value={form.name}
               onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
-              placeholder="As per EFI records"
+              placeholder="Full Name"
               className={`w-full border px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition ${errors.name ? "border-red-400 bg-red-50" : "border-gray-200 bg-white"}`}
             />
             {errors.name && <p className="mt-1 text-xs text-red-500">{errors.name}</p>}
           </div>
-          {/* Father */}
+          {/* Parent */}
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1.5" htmlFor="ec-father">
-              Father&apos;s Name
+            <label className="block text-sm font-semibold text-gray-700 mb-1.5" htmlFor="ec-parent">
+              Parent&apos;s Name
             </label>
             <input
-              id="ec-father"
+              id="ec-parent"
               type="text"
-              value={form.fatherName}
-              onChange={(e) => setForm((f) => ({ ...f, fatherName: e.target.value }))}
+              value={form.parentName}
+              onChange={(e) => setForm((f) => ({ ...f, parentName: e.target.value }))}
               className="w-full border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition"
             />
           </div>
@@ -435,39 +439,13 @@ function RegistrationForm() {
         </div>
       </div>
 
-      {/* ── EFI & Club Details ────────────────────────── */}
+      {/* ── Club Details ────────────────────────── */}
       <div className="space-y-6">
         <h3 className="text-xl font-bold text-brand-900 font-display flex items-center gap-3">
           <span className="flex h-8 w-8 items-center justify-center bg-brand-500 text-white text-sm font-bold">2</span>
-          EFI & Club Details
+          Club Details
         </h3>
-        <div className="grid gap-5 sm:grid-cols-2">
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1.5" htmlFor="ec-efi">
-              EFI Membership / Licence No. <span className="text-brand-500">*</span>
-            </label>
-            <input
-              id="ec-efi"
-              type="text"
-              value={form.efiMemberNo}
-              onChange={(e) => setForm((f) => ({ ...f, efiMemberNo: e.target.value }))}
-              className={`w-full border px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition ${errors.efiMemberNo ? "border-red-400 bg-red-50" : "border-gray-200 bg-white"}`}
-            />
-            {errors.efiMemberNo && <p className="mt-1 text-xs text-red-500">{errors.efiMemberNo}</p>}
-          </div>
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1.5" htmlFor="ec-grade">
-              EFI Grade
-            </label>
-            <input
-              id="ec-grade"
-              type="text"
-              value={form.efiGrade}
-              onChange={(e) => setForm((f) => ({ ...f, efiGrade: e.target.value }))}
-              placeholder="e.g. A, B, C"
-              className="w-full border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition"
-            />
-          </div>
+        <div className="grid gap-5">
           <div className="sm:col-span-2">
             <label className="block text-sm font-semibold text-gray-700 mb-1.5" htmlFor="ec-club">
               Unit / Establishment / Club
@@ -475,6 +453,7 @@ function RegistrationForm() {
             <input
               id="ec-club"
               type="text"
+              name="clubName"
               value={form.clubName}
               onChange={(e) => setForm((f) => ({ ...f, clubName: e.target.value }))}
               placeholder="e.g. HPRC / Army Riding School"
@@ -542,10 +521,10 @@ function RegistrationForm() {
                               <div className="px-3 pb-3 pt-1 border-t border-gray-100 bg-gray-50/50 mt-1">
                                 <input 
                                   type="text" 
-                                  placeholder="Horse Name (if different)" 
+                                  placeholder="Horse Name *" 
                                   value={form.eventHorses[ev.id] || ""}
                                   onChange={(e) => setForm(f => ({ ...f, eventHorses: { ...f.eventHorses, [ev.id]: e.target.value } }))}
-                                  className="w-full text-xs px-3 py-2 border border-gray-200 rounded focus:border-brand-400 outline-none transition"
+                                  className={`w-full text-xs px-3 py-2 border rounded outline-none transition ${errors.eventHorsesGlobal && !form.eventHorses[ev.id]?.trim() ? 'border-red-300 focus:border-red-400 bg-red-50' : 'border-gray-200 focus:border-brand-400'}`}
                                 />
                               </div>
                             )}
@@ -573,85 +552,28 @@ function RegistrationForm() {
         )}
       </div>
 
-      {/* ── Horse Details ──────────────────────────────── */}
-      <div className="space-y-6">
-        <div className="flex flex-col gap-1">
+      {showAgeProof && (
+        <div className="space-y-6">
           <h3 className="text-xl font-bold text-brand-900 font-display flex items-center gap-3">
             <span className="flex h-8 w-8 items-center justify-center bg-brand-500 text-white text-sm font-bold">4</span>
-            Primary / Default Horse Details
+            Age Proof Upload
           </h3>
-          <p className="text-sm text-gray-500 ml-11">If you are using a single horse, enter its details here. To use different horses, specify their names under the selected events above.</p>
-        </div>
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          <div className="sm:col-span-2 lg:col-span-1">
-            <label className="block text-sm font-semibold text-gray-700 mb-1.5" htmlFor="ec-horse-name">
-              Name of Horse
+          <div className="bg-amber-50 border border-amber-200 p-5 rounded-xl">
+            <label className="block text-sm font-semibold text-amber-900 mb-1.5" htmlFor="ec-age-proof">
+              Govt ID (Aadhaar, Passport, or Birth Certificate) <span className="text-brand-500">*</span>
             </label>
+            <p className="text-xs text-amber-800/80 mb-3 block">Required because you have selected one or more age-category events.</p>
             <input
-              id="ec-horse-name"
-              type="text"
-              value={form.horseName}
-              onChange={(e) => setForm((f) => ({ ...f, horseName: e.target.value }))}
-              className="w-full border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition"
+              id="ec-age-proof"
+              name="ageProof"
+              type="file"
+              accept=".pdf,image/*"
+              className="block w-full text-sm text-amber-900 file:mr-4 file:py-2.5 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-white file:text-brand-700 hover:file:bg-brand-50 transition shadow-sm cursor-pointer"
             />
-          </div>
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1.5" htmlFor="ec-horse-efi">
-              EFI Reg. No.
-            </label>
-            <input
-              id="ec-horse-efi"
-              type="text"
-              value={form.horseEfiReg}
-              onChange={(e) => setForm((f) => ({ ...f, horseEfiReg: e.target.value }))}
-              className="w-full border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1.5" htmlFor="ec-horse-colour">
-              Colour
-            </label>
-            <input
-              id="ec-horse-colour"
-              type="text"
-              value={form.horseColour}
-              onChange={(e) => setForm((f) => ({ ...f, horseColour: e.target.value }))}
-              placeholder="e.g. Bay, Chestnut"
-              className="w-full border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1.5" htmlFor="ec-horse-sex">
-              Sex
-            </label>
-            <select
-              id="ec-horse-sex"
-              value={form.horseSex}
-              onChange={(e) => setForm((f) => ({ ...f, horseSex: e.target.value }))}
-              className="w-full border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition"
-            >
-              <option value="">Select</option>
-              <option value="Mare">Mare</option>
-              <option value="Gelding">Gelding</option>
-              <option value="Stallion">Stallion</option>
-            </select>
-          </div>
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1.5" htmlFor="ec-horse-age">
-              Age (years)
-            </label>
-            <input
-              id="ec-horse-age"
-              type="number"
-              min={1}
-              max={30}
-              value={form.horseAge}
-              onChange={(e) => setForm((f) => ({ ...f, horseAge: e.target.value }))}
-              className="w-full border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition"
-            />
+            {errors.ageProof && <p className="mt-2 text-xs text-red-500 font-bold">{errors.ageProof}</p>}
           </div>
         </div>
-      </div>
+      )}
 
       {/* ── Declaration ─────────────────────────────────── */}
       <div className="bg-gray-50 border border-gray-200 rounded-xl p-5 sm:p-6 space-y-4">
@@ -695,7 +617,7 @@ function RegistrationForm() {
 // ─── Main Page ────────────────────────────────────────────────────────────────
 
 export default function EquestrianChallenge2026Page() {
-  const { event, stats, schedule, events, prizeMoney, requirements, stabling, coachingProgramme, importantNotes } =
+  const { event, stats, schedule, events, prizeMoney, requirements, stabling, importantNotes } =
     equestrianChallenge2026;
 
   const countdown = useCountdown(event.dateRange.start);
@@ -1060,41 +982,6 @@ export default function EquestrianChallenge2026Page() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════ COACHING PROGRAMME */}
-      <section className="container mt-16">
-        <div className="relative overflow-hidden bg-gradient-to-br from-brand-900 via-brand-800 to-brand-900 p-8 sm:p-12 shadow-2xl">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-brand-500/20 blur-[150px] pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-brand-600/20 blur-[120px] pointer-events-none" />
-          <div className="relative">
-            {/* Members badge */}
-            <div className="inline-flex items-center gap-2 bg-amber-500 text-white px-4 py-1.5 text-xs font-bold uppercase tracking-widest mb-5">
-              <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-              </svg>
-              HPRC Members Only
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-white font-display mb-1">{coachingProgramme.heading}</h2>
-            <p className="text-brand-300 text-sm font-semibold mb-2">{coachingProgramme.subheading}</p>
-            <p className="text-white/70 text-sm mb-8">
-              📅 Preparation Period: <span className="text-white font-semibold">{coachingProgramme.period}</span>
-            </p>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {coachingProgramme.steps.map((step, i) => (
-                <div key={i} className="flex items-start gap-3 bg-white/10 backdrop-blur-sm border border-white/10 p-4">
-                  <div className="flex-shrink-0 flex h-7 w-7 items-center justify-center bg-brand-500 text-white text-xs font-bold font-display">
-                    {i + 1}
-                  </div>
-                  <p className="text-sm text-white/90 leading-relaxed">{step}</p>
-                </div>
-              ))}
-            </div>
-            <p className="mt-6 text-sm text-white/60">
-              Contact the Riding School office to collect your Advance Coaching Course Coupon.
-            </p>
-          </div>
-        </div>
-      </section>
-
       {/* ═══════════════════════════════════════════════ REGISTER FORM */}
       <section className="container mt-16" id="register">
         <div className="relative overflow-hidden border-2 border-brand-100 bg-white p-6 sm:p-10 md:p-14 shadow-2xl">
@@ -1108,9 +995,9 @@ export default function EquestrianChallenge2026Page() {
               </p>
               <div className="mt-4 inline-flex items-center gap-2 bg-amber-50 border border-amber-200 px-4 py-2 text-xs text-amber-800 font-medium">
                 <svg className="h-4 w-4 text-amber-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                Birth Certificate &amp; EFI Licence must be submitted physically to the Riding School office
+                Age Proof documents must be submitted along with the entry.
               </div>
             </div>
             <RegistrationForm />

@@ -2,45 +2,49 @@
 require("dbconnect.php");
 
 $name = isset($_POST['name']) ? $_POST['name'] : '';
-$fatherName = isset($_POST['fatherName']) ? $_POST['fatherName'] : '';
+$parentName = isset($_POST['parentName']) ? $_POST['parentName'] : '';
 $dob = isset($_POST['dob']) ? $_POST['dob'] : '';
 $address = isset($_POST['address']) ? $_POST['address'] : '';
 $mobile = isset($_POST['mobile']) ? $_POST['mobile'] : '';
 $email = isset($_POST['email']) ? $_POST['email'] : '';
 $emergencyContact = isset($_POST['emergencyContact']) ? $_POST['emergencyContact'] : '';
 $emergencyRelation = isset($_POST['emergencyRelation']) ? $_POST['emergencyRelation'] : '';
-$efiMemberNo = isset($_POST['efiMemberNo']) ? $_POST['efiMemberNo'] : '';
-$efiGrade = isset($_POST['efiGrade']) ? $_POST['efiGrade'] : '';
 $clubName = isset($_POST['clubName']) ? $_POST['clubName'] : '';
 $selectedEvents = isset($_POST['selectedEvents']) ? $_POST['selectedEvents'] : ''; 
 $eventHorses = isset($_POST['eventHorses']) ? $_POST['eventHorses'] : ''; 
-$horseName = isset($_POST['horseName']) ? $_POST['horseName'] : '';
-$horseEfiReg = isset($_POST['horseEfiReg']) ? $_POST['horseEfiReg'] : '';
-$horseColour = isset($_POST['horseColour']) ? $_POST['horseColour'] : '';
-$horseSex = isset($_POST['horseSex']) ? $_POST['horseSex'] : '';
-$horseAge = isset($_POST['horseAge']) ? $_POST['horseAge'] : '';
 $amount = isset($_POST['amount']) ? $_POST['amount'] : 0;
 $currency = "INR";
 
-$sql = "INSERT INTO ec2026 (name, fatherName, dob, address, mobile, email, emergencyContact, emergencyRelation, efiMemberNo, efiGrade, clubName, selectedEvents, eventHorses, horseName, horseEfiReg, horseColour, horseSex, horseAge, amount, currency) 
+// Handle Age Proof Upload
+$ageProofPath = '';
+if (isset($_FILES['ageProof']) && $_FILES['ageProof']['error'] == 0) {
+    $uploadDir = 'uploads/ec2026/age_proofs/';
+    if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0755, true);
+    }
+    $safeName = preg_replace('/[^a-zA-Z0-9]/', '_', $name);
+    $fileExtension = pathinfo($_FILES['ageProof']['name'], PATHINFO_EXTENSION);
+    $fileName = $safeName . '_age_proof_' . time() . '.' . $fileExtension;
+    $targetPath = $uploadDir . $fileName;
+    
+    if (move_uploaded_file($_FILES['ageProof']['tmp_name'], $targetPath)) {
+        $ageProofPath = $targetPath;
+    }
+}
+
+$sql = "INSERT INTO ec2026 (name, parentName, dob, address, mobile, email, emergencyContact, emergencyRelation, clubName, selectedEvents, eventHorses, ageProofPath, amount, currency) 
         VALUES ('".$conn->real_escape_string($name)."', 
-                '".$conn->real_escape_string($fatherName)."', 
+                '".$conn->real_escape_string($parentName)."', 
                 '".$conn->real_escape_string($dob)."', 
                 '".$conn->real_escape_string($address)."', 
                 '".$conn->real_escape_string($mobile)."', 
                 '".$conn->real_escape_string($email)."', 
                 '".$conn->real_escape_string($emergencyContact)."', 
                 '".$conn->real_escape_string($emergencyRelation)."', 
-                '".$conn->real_escape_string($efiMemberNo)."', 
-                '".$conn->real_escape_string($efiGrade)."', 
                 '".$conn->real_escape_string($clubName)."', 
                 '".$conn->real_escape_string($selectedEvents)."', 
                 '".$conn->real_escape_string($eventHorses)."', 
-                '".$conn->real_escape_string($horseName)."', 
-                '".$conn->real_escape_string($horseEfiReg)."', 
-                '".$conn->real_escape_string($horseColour)."', 
-                '".$conn->real_escape_string($horseSex)."', 
-                '".$conn->real_escape_string($horseAge)."', 
+                '".$conn->real_escape_string($ageProofPath)."', 
                 '".$conn->real_escape_string($amount)."', 
                 '$currency')";
 
