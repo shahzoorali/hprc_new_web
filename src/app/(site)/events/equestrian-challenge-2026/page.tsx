@@ -168,12 +168,21 @@ function RegistrationForm() {
   const validate = () => {
     const e: Partial<Record<keyof FormData | "ageProof" | "eventHorsesGlobal", string>> = {};
     if (!form.name.trim()) e.name = "Full name is required";
+    if (!form.parentName.trim()) e.parentName = "Parent's Name is required";
     if (!form.dob) e.dob = "Date of birth is required";
     if (!form.mobile.trim()) {
       e.mobile = "Mobile number is required";
     } else if (form.mobile.replace(/\D/g, '').length !== 10) {
       e.mobile = "Enter a valid 10-digit mobile number";
     }
+    
+    if (!form.emergencyContact.trim()) {
+      e.emergencyContact = "Emergency contact is required";
+    } else if (form.emergencyContact.replace(/\D/g, '').length !== 10) {
+      e.emergencyContact = "Enter a valid 10-digit emergency contact number";
+    }
+
+    if (!form.clubName.trim()) e.clubName = "Club details are required";
     
     const activeSelected = form.selectedEvents.filter(id => eligibleEvents.some(eve => eve.id === id));
     if (activeSelected.length === 0) e.selectedEvents = "Please select at least one eligible event";
@@ -347,15 +356,16 @@ function RegistrationForm() {
           {/* Parent */}
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-1.5" htmlFor="ec-parent">
-              Parent&apos;s Name
+              Parent&apos;s Name <span className="text-brand-500">*</span>
             </label>
             <input
               id="ec-parent"
               type="text"
               value={form.parentName}
               onChange={(e) => setForm((f) => ({ ...f, parentName: e.target.value }))}
-              className="w-full border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition"
+              className={`w-full border px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition ${errors.parentName ? "border-red-400 bg-red-50" : "border-gray-200 bg-white"}`}
             />
+            {errors.parentName && <p className="mt-1 text-xs text-red-500">{errors.parentName}</p>}
           </div>
           {/* DOB */}
           <div>
@@ -421,7 +431,7 @@ function RegistrationForm() {
           {/* Emergency */}
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-1.5" htmlFor="ec-emergency">
-              Emergency Contact No.
+              Emergency Contact No. <span className="text-brand-500">*</span>
             </label>
             <div className="flex relative items-stretch">
               <span className="inline-flex items-center px-4 border border-r-0 border-gray-200 bg-gray-50 text-gray-500 text-sm font-medium">
@@ -433,9 +443,10 @@ function RegistrationForm() {
                 value={form.emergencyContact}
                 onChange={(e) => setForm((f) => ({ ...f, emergencyContact: e.target.value.replace(/\D/g, '').slice(0, 10) }))}
                 placeholder="10-digit number"
-                className="flex-1 w-full border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition"
+                className={`flex-1 w-full border px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition ${errors.emergencyContact ? "border-red-400 bg-red-50" : "border-gray-200 bg-white"}`}
               />
             </div>
+            {errors.emergencyContact && <p className="mt-1 text-xs text-red-500">{errors.emergencyContact}</p>}
           </div>
           {/* Relationship */}
           <div>
@@ -463,12 +474,11 @@ function RegistrationForm() {
         <div className="grid gap-5">
           <div className="sm:col-span-2">
             <label className="block text-sm font-semibold text-gray-700 mb-1.5" htmlFor="ec-club">
-              Unit / Establishment / Club
+              Unit / Establishment / Club <span className="text-brand-500">*</span>
             </label>
             <input
               id="ec-club"
               type="text"
-              name="clubName"
               value={form.clubName}
               onChange={(e) => setForm((f) => ({ ...f, clubName: e.target.value }))}
               placeholder="e.g. HPRC / Army Riding School"

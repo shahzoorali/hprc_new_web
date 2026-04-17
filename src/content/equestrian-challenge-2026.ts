@@ -122,11 +122,12 @@ export const equestrianChallenge2026 = {
 
 
   prizeMoney: {
-    note: "Cash prizes for Open category participants only in 80 cm, 90 cm & 105 cm Show Jumping. Age-category class winners receive Medals & Certificates.",
+    note: "Cash prizes for Open category participants only in 80 cm, 90 cm, 105 cm Show Jumping & Two-Phase. Age-category class winners (Children I, Children II, Junior) receive Medals & Certificates.",
     table: [
       { height: "80 cm (Open)", gold: 10000, silver: 7500, bronze: 5000, fourth: 2500 },
       { height: "90 cm (Open)", gold: 10000, silver: 7500, bronze: 5000, fourth: 2500 },
       { height: "105 cm (Open)", gold: 10000, silver: 7500, bronze: 5000, fourth: 2500 },
+      { height: "Two-Phase (105-110 cm) (Open)", gold: 10000, silver: 7500, bronze: 5000, fourth: 2500 },
     ],
   },
 
