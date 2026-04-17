@@ -140,22 +140,28 @@ export const equestrianChallenge2026 = {
   ],
 
   stabling: {
-    heading: "Stabling & Logistics",
+    heading: "Stabling / Camp Details",
     description:
-      "Stabling for outstation horses is available at HPRC subject to advance request and availability. A nominal stabling charge may apply. Please indicate your stabling requirements at the time of submitting entries so that arrangements can be confirmed in advance. Refreshments will be available at the Club for participants and officials.",
+      "The Camp will open on 13th May and close on 18th May 2026. All stable requests must be submitted via the HPRC Equestrian Challenge – Stabling Form before 10th May 2026 along with the relevant fees.",
+    details: [
+      "Stable Fees: Rs. 600 per day (Temporary) / Rs. 1000 per day (Permanent)",
+      "Bookings confirmed only after full payment for intended days",
+      "Self-Containment: All teams must bring their own rations, grass, straw, fodder, and equipment",
+      "Staff: Teams must make their own arrangements for staff stay and food"
+    ],
   },
 
   declaration:
     "I declare that the details furnished above are correct to the best of my knowledge. I undertake no responsibility for any loss, damage or injury that may occur for me / my son, daughter, during the course of the event/s directly or indirectly from accident or any other causes. The Hyderabad Polo & Riding Club will not be held responsible for any first aid or other medical treatment provided.",
 
   importantNotes: [
+    "Closing Date: Entries close at 18:00 hrs on Thursday, May 14, 2026. Entries thereafter are considered Post-Entries.",
+    "Post-Entries: Accepted via Post Entry Form until 18:00 hrs on Friday, May 15, 2026. Fees apply.",
+    "No Spot Entries will be accepted under any circumstances.",
+    "Age Proof Document is mandatory for all age-category participants.",
     "Appropriate Riding Dress Code must be followed for all events.",
-    "Age Proof Document (Aadhaar, Passport, or Birth Certificate) is mandatory for age-category participants.",
-    "Medals & Certificates will be awarded to Category Winners (Children I, Children II, Junior).",
-    "The Club reserves the right to alter the order or timing of any event without prior notice.",
-    "Both morning sessions begin sharp at 7:00 AM — please plan accordingly.",
-    "Evening sessions (5:00 PM – 8:00 PM) will be conducted under floodlights.",
-    "Prize Distribution Ceremony will follow the Top Score event on 17th May, at ~7:30 PM when the Chief Guest arrives.",
+    "Medals & Certificates will be awarded to Category Winners.",
+    "Prize Distribution Ceremony: Sunday, 17th May at ~7:30 PM."
   ],
 };
 

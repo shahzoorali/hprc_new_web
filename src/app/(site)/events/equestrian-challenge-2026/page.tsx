@@ -1001,7 +1001,15 @@ export default function EquestrianChallenge2026Page() {
             </div>
             <div>
               <h3 className="text-lg font-bold text-blue-900 mb-2">{stabling.heading}</h3>
-              <p className="text-sm text-blue-800 leading-relaxed">{stabling.description}</p>
+              <p className="text-sm text-blue-800 leading-relaxed mb-4">{stabling.description}</p>
+              <ul className="grid sm:grid-cols-2 gap-x-8 gap-y-2">
+                {stabling.details?.map((detail, idx) => (
+                  <li key={idx} className="flex items-center gap-2 text-xs text-blue-700 font-medium">
+                    <div className="h-1.5 w-1.5 rounded-full bg-blue-400" />
+                    {detail}
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
@@ -1018,6 +1026,19 @@ export default function EquestrianChallenge2026Page() {
               <p className="mt-3 text-sm text-gray-500 max-w-lg mx-auto">
                 Fill in the form below. On submission, your email client will open with all details pre-filled — simply send it to complete your registration.
               </p>
+              
+              {/* Entry Deadlines Alert */}
+              <div className="mt-8 grid sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
+                <div className="bg-brand-50 border-l-4 border-brand-500 p-4 text-left">
+                  <p className="text-xs font-bold text-brand-700 uppercase tracking-wider mb-1">Standard Entry Closes</p>
+                  <p className="text-sm font-bold text-brand-900">Thursday, 14 May · 6:00 PM</p>
+                </div>
+                <div className="bg-amber-50 border-l-4 border-amber-500 p-4 text-left">
+                  <p className="text-xs font-bold text-amber-700 uppercase tracking-wider mb-1">Post Entry Closes</p>
+                  <p className="text-sm font-bold text-amber-900">Friday, 15 May · 6:00 PM</p>
+                </div>
+              </div>
+
               <div className="mt-4 inline-flex items-center gap-2 bg-amber-50 border border-amber-200 px-4 py-2 text-xs text-amber-800 font-medium">
                 <svg className="h-4 w-4 text-amber-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
