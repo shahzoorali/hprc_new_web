@@ -6,62 +6,129 @@ import React from "react";
 import { arsalaanKhan as player } from "@/content/players/arsalaan-khan";
 
 function CarouselSection({ gallery, onImageClick }: { gallery: any[], onImageClick: (url: string) => void }) {
-  // Triple the items to ensure seamless infinite scrolling
+  const scrollRef = React.useRef<HTMLDivElement>(null);
+  const isDraggingRef = React.useRef(false);
+  const startXRef = React.useRef(0);
+  const scrollLeftRef = React.useRef(0);
+  const [isHovered, setIsHovered] = React.useState(false);
+
+  // Triple items for seamless loop
   const scrollItems = [...gallery, ...gallery, ...gallery];
 
+  // Continuous drift logic
+  React.useEffect(() => {
+    const slider = scrollRef.current;
+    if (!slider) return;
+
+    let animationFrameId: number;
+    const scroll = () => {
+      if (!isHovered && !isDraggingRef.current) {
+        slider.scrollLeft += 0.8; // Slower, smoother drift
+        if (slider.scrollLeft >= slider.scrollWidth / 1.5) {
+          slider.scrollLeft = slider.scrollWidth / 3;
+        }
+      }
+      animationFrameId = requestAnimationFrame(scroll);
+    };
+
+    animationFrameId = requestAnimationFrame(scroll);
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [isHovered]);
+
+  // Initial scroll
+  React.useEffect(() => {
+    const slider = scrollRef.current;
+    if (slider) {
+      slider.scrollLeft = slider.scrollWidth / 3;
+    }
+  }, []);
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    isDraggingRef.current = true;
+    startXRef.current = e.pageX - (scrollRef.current?.offsetLeft || 0);
+    scrollLeftRef.current = scrollRef.current?.scrollLeft || 0;
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDraggingRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - (scrollRef.current?.offsetLeft || 0);
+    const walk = (x - startXRef.current); // 1:1 movement for smoothness
+    if (scrollRef.current) scrollRef.current.scrollLeft = scrollLeftRef.current - walk;
+  };
+
+  const handleMouseUp = () => {
+    isDraggingRef.current = false;
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    isDraggingRef.current = true;
+    startXRef.current = e.touches[0].pageX - (scrollRef.current?.offsetLeft || 0);
+    scrollLeftRef.current = scrollRef.current?.scrollLeft || 0;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDraggingRef.current) return;
+    const x = e.touches[0].pageX - (scrollRef.current?.offsetLeft || 0);
+    const walk = (x - startXRef.current);
+    if (scrollRef.current) scrollRef.current.scrollLeft = scrollLeftRef.current - walk;
+  };
+
+  const handleTouchEnd = () => {
+    isDraggingRef.current = false;
+  };
+
   return (
-    <section 
-      className="py-20 sm:py-32 overflow-hidden bg-[#0c0c0c]"
-    >
+    <section className="py-20 sm:py-32 overflow-hidden bg-[#0c0c0c]">
       <div className="container mb-12 sm:mb-16">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.3em] text-brand-500 mb-4">Capturing the Moment</p>
             <h2 className="text-4xl sm:text-6xl font-extrabold font-display uppercase tracking-tighter">Gallery</h2>
           </div>
-          <p className="text-white/40 max-w-sm text-sm italic hidden sm:block">
-            Infinite moments from the field, captured in motion.
+          <p className="text-white/40 max-w-sm text-sm italic hidden sm:block font-light">
+            Interact to explore. Moments captured in motion.
           </p>
         </div>
       </div>
 
-      <div className="relative">
-        <div className="flex overflow-hidden">
-          <div 
-            className="flex gap-6 animate-marquee hover:[animation-play-state:paused]"
-            style={{ width: 'max-content' }}
-          >
-            {scrollItems.map((item, index) => (
-              <div
-                key={index}
-                className="relative flex-none w-[280px] sm:w-[350px] lg:w-[450px] aspect-[4/5] group overflow-hidden cursor-zoom-in"
-                onClick={() => onImageClick(item.url)}
-              >
-                <Image
-                  src={item.url}
-                  alt={item.caption}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-black via-black/20 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-500">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-400 mb-2">HPRC Exclusive</p>
-                  <p className="text-lg font-bold font-display uppercase tracking-tight leading-tight">{item.caption}</p>
-                </div>
+      <div 
+        className="relative overflow-hidden cursor-grab active:cursor-grabbing select-none"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => { setIsHovered(false); isDraggingRef.current = false; }}
+      >
+        <div 
+          ref={scrollRef}
+          className="flex gap-6 overflow-x-hidden whitespace-nowrap"
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
+          {scrollItems.map((item, index) => (
+            <div
+              key={index}
+              className="relative flex-none w-[280px] sm:w-[350px] lg:w-[450px] aspect-[4/5] group overflow-hidden"
+              onClick={() => !isDraggingRef.current && onImageClick(item.url)}
+            >
+              <Image
+                src={item.url}
+                alt={item.caption}
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-110 pointer-events-none"
+                draggable={false}
+              />
+              <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors duration-500 pointer-events-none" />
+              <div className="absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-black via-black/20 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-500 pointer-events-none">
+                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-400 mb-2">HPRC Exclusive</p>
+                <p className="text-lg font-bold font-display uppercase tracking-tight leading-tight">{item.caption}</p>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
-
-      <style jsx global>{`
-        @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(calc(-33.33% - 1rem)); }
-        }
-        .animate-marquee {
-          animation: marquee 35s linear infinite;
-        }
-      `}</style>
     </section>
   );
 }
