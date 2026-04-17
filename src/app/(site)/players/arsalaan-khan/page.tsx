@@ -5,6 +5,67 @@ import Link from "next/link";
 import React from "react";
 import { arsalaanKhan as player } from "@/content/players/arsalaan-khan";
 
+function CarouselSection({ gallery, onImageClick }: { gallery: any[], onImageClick: (url: string) => void }) {
+  // Triple the items to ensure seamless infinite scrolling
+  const scrollItems = [...gallery, ...gallery, ...gallery];
+
+  return (
+    <section 
+      className="py-20 sm:py-32 overflow-hidden bg-[#0c0c0c]"
+    >
+      <div className="container mb-12 sm:mb-16">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-brand-500 mb-4">Capturing the Moment</p>
+            <h2 className="text-4xl sm:text-6xl font-extrabold font-display uppercase tracking-tighter">Gallery</h2>
+          </div>
+          <p className="text-white/40 max-w-sm text-sm italic hidden sm:block">
+            Infinite moments from the field, captured in motion.
+          </p>
+        </div>
+      </div>
+
+      <div className="relative">
+        <div className="flex overflow-hidden">
+          <div 
+            className="flex gap-6 animate-marquee hover:[animation-play-state:paused]"
+            style={{ width: 'max-content' }}
+          >
+            {scrollItems.map((item, index) => (
+              <div
+                key={index}
+                className="relative flex-none w-[280px] sm:w-[350px] lg:w-[450px] aspect-[4/5] group overflow-hidden cursor-zoom-in"
+                onClick={() => onImageClick(item.url)}
+              >
+                <Image
+                  src={item.url}
+                  alt={item.caption}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-black via-black/20 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-400 mb-2">HPRC Exclusive</p>
+                  <p className="text-lg font-bold font-display uppercase tracking-tight leading-tight">{item.caption}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <style jsx global>{`
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(calc(-33.33% - 1rem)); }
+        }
+        .animate-marquee {
+          animation: marquee 35s linear infinite;
+        }
+      `}</style>
+    </section>
+  );
+}
+
 export default function PlayerProfilePage() {
   const [selectedImage, setSelectedImage] = React.useState<string | null>(null);
 
@@ -153,51 +214,8 @@ export default function PlayerProfilePage() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════════ GALLERY SECTION */}
-      <section className="py-32">
-        <div className="container">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
-            <div>
-              <p className="text-xs font-bold uppercase tracking-[0.3em] text-brand-500 mb-4">Capturing the Moment</p>
-              <h2 className="text-4xl sm:text-6xl font-extrabold font-display uppercase tracking-tighter">Gallery</h2>
-            </div>
-            <p className="text-white/40 max-w-sm text-sm italic">
-              A glimpse into the life of Arsalan Khan, inside the arena and beyond.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-            <div 
-              className="md:col-span-8 aspect-video relative group overflow-hidden cursor-zoom-in"
-              onClick={() => setSelectedImage("/images/players/arsalaan-khan/arsalaan-team.jpg")}
-            >
-              <Image src="/images/players/arsalaan-khan/arsalaan-team.jpg" alt="Gallery Large" fill className="object-cover group-hover:scale-110 transition-transform duration-[2000ms]" />
-              <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors duration-500" />
-            </div>
-            <div 
-              className="md:col-span-4 aspect-square md:aspect-auto relative group overflow-hidden cursor-zoom-in"
-              onClick={() => setSelectedImage("/images/players/arsalaan-khan/arsalaan-profile.jpg")}
-            >
-              <Image src="/images/players/arsalaan-khan/arsalaan-profile.jpg" alt="Gallery Portrait" fill className="object-cover group-hover:scale-110 transition-transform duration-[2000ms]" />
-              <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors duration-500" />
-            </div>
-            <div 
-              className="md:col-span-4 aspect-square relative group overflow-hidden cursor-zoom-in"
-              onClick={() => setSelectedImage("/images/players/arsalaan-khan/arsalaan-arena-1.jpg")}
-            >
-               <Image src="/images/players/arsalaan-khan/arsalaan-arena-1.jpg" alt="Gallery 3" fill className="object-cover group-hover:scale-110 transition-transform duration-[2000ms]" />
-               <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors duration-500" />
-            </div>
-            <div 
-              className="md:col-span-8 aspect-[16/7] relative group overflow-hidden cursor-zoom-in"
-              onClick={() => setSelectedImage("/images/players/arsalaan-khan/arsalaan-arena-2.jpg")}
-            >
-               <Image src="/images/players/arsalaan-khan/arsalaan-arena-2.jpg" alt="Gallery 4" fill className="object-cover group-hover:scale-110 transition-transform duration-[2000ms]" />
-               <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors duration-500" />
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* ═══════════════════════════════════════════════════════════ GALLERY CAROUSEL */}
+      <CarouselSection gallery={player.gallery} onImageClick={setSelectedImage} />
 
       {/* ═══════════════════════════════════════════════════════════ IN PRESS SECTION */}
       <section className="bg-[#080808] py-32 border-y border-white/5">
