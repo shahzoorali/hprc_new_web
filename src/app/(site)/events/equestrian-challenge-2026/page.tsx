@@ -169,7 +169,11 @@ function RegistrationForm() {
     const e: Partial<Record<keyof FormData | "ageProof" | "eventHorsesGlobal", string>> = {};
     if (!form.name.trim()) e.name = "Full name is required";
     if (!form.dob) e.dob = "Date of birth is required";
-    if (!form.mobile.trim()) e.mobile = "Mobile number is required";
+    if (!form.mobile.trim()) {
+      e.mobile = "Mobile number is required";
+    } else if (form.mobile.replace(/\D/g, '').length !== 10) {
+      e.mobile = "Enter a valid 10-digit mobile number";
+    }
     
     const activeSelected = form.selectedEvents.filter(id => eligibleEvents.some(eve => eve.id === id));
     if (activeSelected.length === 0) e.selectedEvents = "Please select at least one eligible event";
@@ -386,14 +390,19 @@ function RegistrationForm() {
             <label className="block text-sm font-semibold text-gray-700 mb-1.5" htmlFor="ec-mobile">
               Mobile No. <span className="text-brand-500">*</span>
             </label>
-            <input
-              id="ec-mobile"
-              type="tel"
-              value={form.mobile}
-              onChange={(e) => setForm((f) => ({ ...f, mobile: e.target.value }))}
-              placeholder="+91"
-              className={`w-full border px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition ${errors.mobile ? "border-red-400 bg-red-50" : "border-gray-200 bg-white"}`}
-            />
+            <div className="flex relative items-stretch">
+              <span className="inline-flex items-center px-4 border border-r-0 border-gray-200 bg-gray-50 text-gray-500 text-sm font-medium">
+                +91
+              </span>
+              <input
+                id="ec-mobile"
+                type="tel"
+                value={form.mobile}
+                onChange={(e) => setForm((f) => ({ ...f, mobile: e.target.value.replace(/\D/g, '').slice(0, 10) }))}
+                placeholder="10-digit number"
+                className={`flex-1 w-full border px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition ${errors.mobile ? "border-red-400 bg-red-50" : "border-gray-200 bg-white"}`}
+              />
+            </div>
             {errors.mobile && <p className="mt-1 text-xs text-red-500">{errors.mobile}</p>}
           </div>
           {/* Email */}
@@ -414,13 +423,19 @@ function RegistrationForm() {
             <label className="block text-sm font-semibold text-gray-700 mb-1.5" htmlFor="ec-emergency">
               Emergency Contact No.
             </label>
-            <input
-              id="ec-emergency"
-              type="tel"
-              value={form.emergencyContact}
-              onChange={(e) => setForm((f) => ({ ...f, emergencyContact: e.target.value }))}
-              className="w-full border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition"
-            />
+            <div className="flex relative items-stretch">
+              <span className="inline-flex items-center px-4 border border-r-0 border-gray-200 bg-gray-50 text-gray-500 text-sm font-medium">
+                +91
+              </span>
+              <input
+                id="ec-emergency"
+                type="tel"
+                value={form.emergencyContact}
+                onChange={(e) => setForm((f) => ({ ...f, emergencyContact: e.target.value.replace(/\D/g, '').slice(0, 10) }))}
+                placeholder="10-digit number"
+                className="flex-1 w-full border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition"
+              />
+            </div>
           </div>
           {/* Relationship */}
           <div>
