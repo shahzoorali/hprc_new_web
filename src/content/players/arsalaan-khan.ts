@@ -29,7 +29,15 @@ export const arsalaanKhan = {
     { id: "1", title: "Match Highlights 2025", thumbnail: "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=800&q=80" },
   ],
   press: [
-    { title: "Arsalaan Khan: Leading the New Wave of Indian Polo", source: "Deccan Chronicle", date: "Jan 2026" },
-    { title: "From Tradition to Professionalism: The Arsalaan Khan Story", source: "Polo Times", date: "Nov 2025" },
+    { title: "2 Hyderabad players at Polo Challenge Cup 2024 in the US", source: "Excel India Online", date: "Sep 2024" },
+    { title: "Arsalan Khan is Most Valuable Player (MVP) for his tactical all-round brilliance", source: "You & I", date: "Oct 2024" },
+    { title: "HPRC World Arena Polo Championship 2025 from Feb 24 in Hyderabad", source: "UNI India", date: "Feb 2025" },
+    { title: "India storm into final with big win over Germany", source: "The Hans India", date: "Feb 2026" },
+    { title: "Arsalan powers India to victory", source: "Deccan Chronicle", date: "Feb 2025" },
+    { title: "USA pips India at International Arena Challenge Polo", source: "Excel India Online", date: "Oct 2024" },
+    { title: "Two from Hyderabad in US-bound Indian Arena Polo team", source: "Munsif Daily", date: "Sep 2024" },
+    { title: "HPRC Wins Arena Polo Club of the Season at The Indian Polo Awards", source: "Deccan Chronicle", date: "Mar 2026" },
+    { title: "Playing the Sport of Kings – Arsalaan Khan talks with You & I", source: "You & I", date: "Nov 2018" },
+    { title: "HPRC Cup Final Highlights", source: "Deccan Chronicle", date: "Mar 2025" },
   ]
 };
