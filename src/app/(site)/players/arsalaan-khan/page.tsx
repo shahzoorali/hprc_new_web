@@ -241,7 +241,7 @@ export default function PlayerProfilePage() {
                   {player.bio.split("\n\n")[1]}
                 </p>
                 <div className="flex gap-4">
-                  <Link href="/contact" className="bg-white !text-brand-500 px-6 sm:px-8 py-3 font-bold uppercase text-[10px] sm:text-xs tracking-widest hover:bg-brand-500 hover:!text-white transition-colors">Collaborate</Link>
+                  <Link href="https://www.instagram.com/khan_arsalaan/" target="_blank" rel="noopener noreferrer" className="bg-white !text-brand-500 px-6 sm:px-8 py-3 font-bold uppercase text-[10px] sm:text-xs tracking-widest hover:bg-brand-500 hover:!text-white transition-colors">Collaborate</Link>
                 </div>
              </div>
           </div>
