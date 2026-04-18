@@ -45,7 +45,7 @@ if ($order_id) {
 
     // 2. Transmit success data automatically to Google Sheets via Webhook
     if($order_status === "Success" || $order_status === "Successful") {
-        $result = $conn->query("SELECT name, parentName, dob, address, mobile, email, emergencyContact, emergencyRelation, clubName, selectedEvents, eventHorses, ageProofPath FROM ec2026 WHERE id='".$conn->real_escape_string($order_id)."'");
+        $result = $conn->query("SELECT name, parentName, dob, address, mobile, email, emergencyContact, emergencyRelation, clubName, selectedEvents, eventHorses, stablingType, stablingCount, stablingFrom, stablingTo, ageProofPath FROM ec2026 WHERE id='".$conn->real_escape_string($order_id)."'");
         if ($result && $row = $result->fetch_assoc()) {
             
             $webhook_url = "https://script.google.com/macros/s/AKfycbzw65SAMdxZpVqp5TcIKvcLIZVdDDcybqkMAUnjM7-wSqvjmo0Pw2Lgz7nC_2ttDN33/exec";
@@ -63,6 +63,10 @@ if ($order_id) {
                 "clubName" => $row['clubName'],
                 "events" => $row['selectedEvents'],
                 "eventHorses" => $row['eventHorses'],
+                "stablingType" => $row['stablingType'],
+                "stablingCount" => $row['stablingCount'],
+                "stablingFrom" => $row['stablingFrom'],
+                "stablingTo" => $row['stablingTo'],
                 "ageProofLink" => $ageProofLink,
                 "amount" => $mer_amount,
                 "tracking_id" => $tracking_id

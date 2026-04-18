@@ -89,6 +89,10 @@ type FormData = {
   clubName: string;
   selectedEvents: number[];
   eventHorses: Record<number, string>;
+  stablingType: "NONE" | "TEMPORARY" | "PERMANENT";
+  stablingCount: number;
+  stablingFrom: string;
+  stablingTo: string;
   declaration: boolean;
 };
 
@@ -104,6 +108,10 @@ const INITIAL_FORM: FormData = {
   clubName: "",
   selectedEvents: [],
   eventHorses: {},
+  stablingType: "NONE",
+  stablingCount: 0,
+  stablingFrom: "2026-05-13",
+  stablingTo: "2026-05-18",
   declaration: false,
 };
 
@@ -158,15 +166,30 @@ function RegistrationForm() {
   }, []);
 
   const totalFee = useMemo(
-    () =>
-      form.selectedEvents.reduce((sum, id) => {
+    () => {
+      const eventFees = form.selectedEvents.reduce((sum, id) => {
         const ev = eligibleEvents.find((e) => e.id === id);
         if (!ev) return sum;
         const baseFee = ev.fee;
         const postEntrySurcharge = entryStatus === "POST_ENTRY" ? 500 : 0;
         return sum + baseFee + postEntrySurcharge;
-      }, 0),
-    [form.selectedEvents, eligibleEvents, entryStatus]
+      }, 0);
+
+      let stablingFees = 0;
+      if (form.stablingType !== "NONE" && form.stablingCount > 0 && form.stablingFrom && form.stablingTo) {
+        const start = new Date(form.stablingFrom);
+        const end = new Date(form.stablingTo);
+        const diffTime = end.getTime() - start.getTime();
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+        if (diffDays > 0) {
+          const rate = form.stablingType === "TEMPORARY" ? 600 : 1000;
+          stablingFees = rate * form.stablingCount * diffDays;
+        }
+      }
+
+      return eventFees + stablingFees;
+    },
+    [form.selectedEvents, eligibleEvents, entryStatus, form.stablingType, form.stablingCount, form.stablingFrom, form.stablingTo]
   );
 
   const toggleEvent = useCallback((id: number) => {
@@ -179,7 +202,7 @@ function RegistrationForm() {
   }, []);
 
   const validate = () => {
-    const e: Partial<Record<keyof FormData | "ageProof" | "eventHorsesGlobal", string>> = {};
+    const e: Partial<Record<keyof FormData | "ageProof" | "eventHorsesGlobal" | "stablingDates", string>> = {};
     if (!form.name.trim()) e.name = "Full name is required";
     if (!form.parentName.trim()) e.parentName = "Parent's Name is required";
     if (!form.dob) e.dob = "Date of birth is required";
@@ -216,6 +239,13 @@ function RegistrationForm() {
       if (!fileInput || !fileInput.files || fileInput.files.length === 0) {
         e.ageProof = "Age proof document is required for age-category events";
       }
+    }
+
+    if (form.stablingType !== "NONE") {
+        if (form.stablingCount <= 0) e.stablingCount = "Please enter number of stables";
+        const start = new Date(form.stablingFrom);
+        const end = new Date(form.stablingTo);
+        if (end < start) e.stablingDates = "Check-out date cannot be before check-in date";
     }
     
     if (!form.declaration) e.declaration = "You must accept the declaration";
@@ -311,6 +341,10 @@ function RegistrationForm() {
       <input type="hidden" name="clubName" value={form.clubName} />
       <input type="hidden" name="selectedEvents" value={JSON.stringify(form.selectedEvents)} />
       <input type="hidden" name="eventHorses" value={JSON.stringify(form.eventHorses)} />
+      <input type="hidden" name="stablingType" value={form.stablingType} />
+      <input type="hidden" name="stablingCount" value={form.stablingCount} />
+      <input type="hidden" name="stablingFrom" value={form.stablingFrom} />
+      <input type="hidden" name="stablingTo" value={form.stablingTo} />
       <input type="hidden" name="amount" value={totalFee} />
 
       {/* ── Draft Restore Notice ─────────────────────── */}
@@ -588,21 +622,115 @@ function RegistrationForm() {
 
         {/* Fee Summary */}
         {form.selectedEvents.length > 0 && (
-          <div className="flex items-center justify-between bg-brand-900 text-white px-6 py-4 rounded-xl">
-            <span className="text-sm font-medium text-white/80">
+          <div className="flex items-center justify-between bg-brand-900/5 text-brand-900 border border-brand-900/10 px-6 py-4 rounded-xl">
+            <span className="text-sm font-medium">
               {form.selectedEvents.length} event{form.selectedEvents.length > 1 ? "s" : ""} selected
             </span>
-            <span className="text-xl font-extrabold font-display">
-              Total: ₹{totalFee.toLocaleString("en-IN")}
+            <span className="text-lg font-bold">
+              Events Subtotal: ₹{form.selectedEvents.reduce((sum, id) => {
+                const ev = eligibleEvents.find((e) => e.id === id);
+                if (!ev) return sum;
+                const baseFee = ev.fee;
+                const postEntrySurcharge = entryStatus === "POST_ENTRY" ? 500 : 0;
+                return sum + baseFee + postEntrySurcharge;
+              }, 0).toLocaleString("en-IN")}
             </span>
           </div>
         )}
       </div>
 
+      {/* ── Stabling Booking ────────────────────────────── */}
+      <div className="space-y-6">
+        <h3 className="text-xl font-bold text-brand-900 font-display flex items-center gap-3">
+          <span className="flex h-8 w-8 items-center justify-center bg-brand-500 text-white text-sm font-bold">4</span>
+          Stabling (Optional)
+        </h3>
+        <div className="bg-blue-50/50 border border-blue-100 p-5 sm:p-6 rounded-2xl space-y-5">
+          <p className="text-xs text-blue-700 font-medium">Type of stables are subject to availability. Camp window: 13th May – 18th May 2026.</p>
+          
+          <div className="grid gap-5 sm:grid-cols-2">
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-1.5">Stable Type</label>
+              <div className="flex bg-white p-1 border border-gray-200">
+                {(["NONE", "TEMPORARY", "PERMANENT"] as const).map((type) => (
+                  <button
+                    key={type}
+                    type="button"
+                    onClick={() => setForm(f => ({ ...f, stablingType: type, stablingCount: type === "NONE" ? 0 : Math.max(1, f.stablingCount) }))}
+                    className={`flex-1 py-2 text-[10px] sm:text-xs font-bold transition-all ${form.stablingType === type ? 'bg-brand-500 text-white shadow-lg' : 'text-gray-500 hover:bg-gray-50'}`}
+                  >
+                    {type}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {form.stablingType !== "NONE" && (
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-1.5">No. of Stables</label>
+                <input
+                  type="number"
+                  min="1"
+                  max="10"
+                  value={form.stablingCount}
+                  onChange={(e) => setForm(f => ({ ...f, stablingCount: parseInt(e.target.value) || 0 }))}
+                  className={`w-full border px-4 py-2.5 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition ${errors.stablingCount ? "border-red-400 bg-red-50" : "border-gray-200 bg-white"}`}
+                />
+              </div>
+            )}
+
+            {form.stablingType !== "NONE" && (
+              <>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-1.5">From Date</label>
+                  <input
+                    type="date"
+                    min="2026-05-13"
+                    max="2026-05-18"
+                    value={form.stablingFrom}
+                    onChange={(e) => setForm(f => ({ ...f, stablingFrom: e.target.value }))}
+                    className="w-full border border-gray-200 bg-white px-4 py-2.5 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-1.5">To Date</label>
+                  <input
+                    type="date"
+                    min={form.stablingFrom || "2026-05-13"}
+                    max="2026-05-18"
+                    value={form.stablingTo}
+                    onChange={(e) => setForm(f => ({ ...f, stablingTo: e.target.value }))}
+                    className={`w-full border px-4 py-2.5 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition ${errors.stablingDates ? "border-red-400 bg-red-50" : "border-gray-200 bg-white"}`}
+                  />
+                  {errors.stablingDates && <p className="mt-1 text-[10px] text-red-500 font-bold">{errors.stablingDates}</p>}
+                </div>
+              </>
+            )}
+          </div>
+
+          {form.stablingType !== "NONE" && (
+            <div className="pt-2 border-t border-blue-100 flex items-center justify-between">
+              <span className="text-xs font-bold text-blue-700 uppercase tracking-wider">
+                Stabling Subtotal
+              </span>
+              <span className="text-base font-extrabold text-blue-900">
+                ₹{(totalFee - form.selectedEvents.reduce((sum, id) => {
+                  const ev = eligibleEvents.find((e) => e.id === id);
+                  if (!ev) return sum;
+                  const baseFee = ev.fee;
+                  const postEntrySurcharge = entryStatus === "POST_ENTRY" ? 500 : 0;
+                  return sum + baseFee + postEntrySurcharge;
+                }, 0)).toLocaleString("en-IN")}
+              </span>
+            </div>
+          )}
+        </div>
+      </div>
+
       {showAgeProof && (
         <div className="space-y-6">
           <h3 className="text-xl font-bold text-brand-900 font-display flex items-center gap-3">
-            <span className="flex h-8 w-8 items-center justify-center bg-brand-500 text-white text-sm font-bold">4</span>
+            <span className="flex h-8 w-8 items-center justify-center bg-brand-500 text-white text-sm font-bold">5</span>
             Age Proof Upload
           </h3>
           <div className="bg-amber-50 border border-amber-200 p-5 rounded-xl">
@@ -618,6 +746,20 @@ function RegistrationForm() {
               className="block w-full text-sm text-amber-900 file:mr-4 file:py-2.5 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-white file:text-brand-700 hover:file:bg-brand-50 transition shadow-sm cursor-pointer"
             />
             {errors.ageProof && <p className="mt-2 text-xs text-red-500 font-bold">{errors.ageProof}</p>}
+          </div>
+        </div>
+      )}
+
+      {/* ── Final Total Display ────────────────────────── */}
+      {(form.selectedEvents.length > 0 || form.stablingType !== "NONE") && (
+        <div className="bg-brand-900 text-white p-6 rounded-2xl shadow-xl shadow-brand-500/20 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div>
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/60 mb-1">Grand Total Amount</p>
+            <p className="text-3xl font-extrabold font-display">₹{totalFee.toLocaleString("en-IN")}</p>
+          </div>
+          <div className="text-center sm:text-right">
+            <p className="text-xs text-brand-200 font-medium">Inclusive of all taxes and surcharges</p>
+            {entryStatus === "POST_ENTRY" && <p className="text-[10px] text-amber-300 font-bold uppercase mt-1">Post-Entry Surcharge Applied</p>}
           </div>
         </div>
       )}

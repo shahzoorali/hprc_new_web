@@ -12,6 +12,10 @@ $emergencyRelation = isset($_POST['emergencyRelation']) ? $_POST['emergencyRelat
 $clubName = isset($_POST['clubName']) ? $_POST['clubName'] : '';
 $selectedEvents = isset($_POST['selectedEvents']) ? $_POST['selectedEvents'] : ''; 
 $eventHorses = isset($_POST['eventHorses']) ? $_POST['eventHorses'] : ''; 
+$stablingType = isset($_POST['stablingType']) ? $_POST['stablingType'] : 'NONE';
+$stablingCount = isset($_POST['stablingCount']) ? $_POST['stablingCount'] : 0;
+$stablingFrom = isset($_POST['stablingFrom']) ? $_POST['stablingFrom'] : '';
+$stablingTo = isset($_POST['stablingTo']) ? $_POST['stablingTo'] : '';
 $amount = isset($_POST['amount']) ? $_POST['amount'] : 0;
 $currency = "INR";
 
@@ -32,7 +36,7 @@ if (isset($_FILES['ageProof']) && $_FILES['ageProof']['error'] == 0) {
     }
 }
 
-$sql = "INSERT INTO ec2026 (name, parentName, dob, address, mobile, email, emergencyContact, emergencyRelation, clubName, selectedEvents, eventHorses, ageProofPath, amount, currency) 
+$sql = "INSERT INTO ec2026 (name, parentName, dob, address, mobile, email, emergencyContact, emergencyRelation, clubName, selectedEvents, eventHorses, stablingType, stablingCount, stablingFrom, stablingTo, ageProofPath, amount, currency) 
         VALUES ('".$conn->real_escape_string($name)."', 
                 '".$conn->real_escape_string($parentName)."', 
                 '".$conn->real_escape_string($dob)."', 
@@ -44,6 +48,10 @@ $sql = "INSERT INTO ec2026 (name, parentName, dob, address, mobile, email, emerg
                 '".$conn->real_escape_string($clubName)."', 
                 '".$conn->real_escape_string($selectedEvents)."', 
                 '".$conn->real_escape_string($eventHorses)."', 
+                '".$conn->real_escape_string($stablingType)."', 
+                '".(int)$stablingCount."', 
+                '".$conn->real_escape_string($stablingFrom)."', 
+                '".$conn->real_escape_string($stablingTo)."', 
                 '".$conn->real_escape_string($ageProofPath)."', 
                 '".$conn->real_escape_string($amount)."', 
                 '$currency')";
