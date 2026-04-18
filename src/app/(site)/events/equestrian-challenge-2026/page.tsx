@@ -120,7 +120,7 @@ function RegistrationForm() {
   const formRef = React.useRef<HTMLFormElement | null>(null);
   const [form, setForm] = useState<FormData>(INITIAL_FORM);
   const [submitted, setSubmitted] = useState(false);
-  const [errors, setErrors] = useState<Partial<Record<keyof FormData | "ageProof" | "eventHorsesGlobal", string>>>({});
+  const [errors, setErrors] = useState<Partial<Record<keyof FormData | "ageProof" | "eventHorsesGlobal" | "stablingDates", string>>>({});
   const [draftExists, setDraftExists] = useState(false);
 
   React.useEffect(() => {
