@@ -135,9 +135,7 @@ export const equestrianChallenge2026 = {
     "Age Proof Document (Aadhaar, Passport, or Birth Certificate) is mandatory for riders participating in age-category events — must be uploaded with the entry form.",
     "Entry Forms along with full entry fees must be submitted online.",
     "Entries received without supporting documents or fees will not be accepted.",
-    "Note: We will not accept any Spot Entries.",
-    "Entries once submitted and fees paid are non-refundable.",
-    "Rights of admission are reserved."
+    "Entries once submitted and fees paid are non-refundable."
   ],
 
   stabling: {
@@ -159,11 +157,10 @@ export const equestrianChallenge2026 = {
     "Closing Date: Entries close at 18:00 hrs on Thursday, May 14, 2026. Entries thereafter are considered Post-Entries.",
     "Post-Entries: Accepted via Post Entry Form until 18:00 hrs on Friday, May 15, 2026. Fees apply.",
     "No Spot Entries will be accepted under any circumstances.",
-    "Age Proof Document is mandatory for all age-category participants.",
+    "Number of entries: A horse can participate only once in each category of an event / discipline. On Day 1, a horse can have no more than three entries. On Day 2, a horse is allowed only two entries per session (morning / evening) and is limited to three entries for the day.",
     "Appropriate Riding Dress Code must be followed for all events.",
     "Medals & Certificates will be awarded to Category Winners.",
     "Prize Distribution Ceremony: Sunday, 17th May at ~7:30 PM.",
-    "Number of entries: A horse can participate only once in each category of an event / discipline. On Day 1, a horse can have no more than three entries. On Day 2, a horse is allowed only two entries per session (morning / evening) and is limited to three entries for the day.",
     "The rights of admission are reserved."
   ],
 };
