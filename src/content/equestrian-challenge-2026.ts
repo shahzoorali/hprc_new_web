@@ -132,6 +132,9 @@ export const equestrianChallenge2026 = {
   },
 
   requirements: [
+    "Closing Date: Entries close at 18:00 hrs on Thursday, May 14, 2026. Entries thereafter are considered Post-Entries.",
+    "Post-Entries: Accepted via Post Entry Form until 18:00 hrs on Friday, May 15, 2026. Fees apply.",
+    "No Spot Entries will be accepted under any circumstances.",
     "Age Proof Document (Aadhaar, Passport, or Birth Certificate) is mandatory for riders participating in age-category events — must be uploaded with the entry form.",
     "Entry Forms along with full entry fees must be submitted online.",
     "Entries received without supporting documents or fees will not be accepted.",
@@ -154,9 +157,6 @@ export const equestrianChallenge2026 = {
     "I declare that the details furnished above are correct to the best of my knowledge. I undertake no responsibility for any loss, damage or injury that may occur for me / my son, daughter, during the course of the event/s directly or indirectly from accident or any other causes. The Hyderabad Polo & Riding Club will not be held responsible for any first aid or other medical treatment provided.",
 
   importantNotes: [
-    "Closing Date: Entries close at 18:00 hrs on Thursday, May 14, 2026. Entries thereafter are considered Post-Entries.",
-    "Post-Entries: Accepted via Post Entry Form until 18:00 hrs on Friday, May 15, 2026. Fees apply.",
-    "No Spot Entries will be accepted under any circumstances.",
     "Number of entries: A horse can participate only once in each category of an event / discipline. On Day 1, a horse can have no more than three entries. On Day 2, a horse is allowed only two entries per session (morning / evening) and is limited to three entries for the day.",
     "Appropriate Riding Dress Code must be followed for all events.",
     "Medals & Certificates will be awarded to Category Winners.",
