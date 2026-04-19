@@ -89,7 +89,7 @@ type FormData = {
   clubName: string;
   selectedEvents: number[];
   eventHorses: Record<number, string>;
-  stablingType: "NONE" | "TEMPORARY" | "PERMANENT";
+  stablingType: "NONE" | "TEMPORARY";
   stablingCount: number;
   stablingFrom: string;
   stablingTo: string;
@@ -182,7 +182,7 @@ function RegistrationForm() {
         const diffTime = end.getTime() - start.getTime();
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
         if (diffDays > 0) {
-          const rate = form.stablingType === "TEMPORARY" ? 600 : 1000;
+          const rate = 600;
           stablingFees = rate * form.stablingCount * diffDays;
         }
       }
@@ -652,7 +652,7 @@ function RegistrationForm() {
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-1.5">Stable Type</label>
               <div className="flex bg-white p-1 border border-gray-200">
-                {(["NONE", "TEMPORARY", "PERMANENT"] as const).map((type) => (
+                {(["NONE", "TEMPORARY"] as const).map((type) => (
                   <button
                     key={type}
                     type="button"
@@ -866,11 +866,7 @@ export default function EquestrianChallenge2026Page() {
             </div>
 
             {/* Governing body badge */}
-            <div className="absolute top-4 sm:top-6 left-1/2 -translate-x-1/2 z-20 bg-white/95 backdrop-blur-sm border border-white/60 px-4 sm:px-5 py-2 sm:py-2.5 shadow-xl w-[90%] sm:w-auto">
-              <p className="text-[9px] sm:text-xs font-semibold uppercase tracking-[0.15em] sm:tracking-[0.2em] text-brand-700 text-center leading-tight">
-                Organised under the aegis of EFI &amp; TSEA
-              </p>
-            </div>
+
 
             <div className="relative z-10 px-6 sm:px-12 md:px-20 pb-12 sm:pb-16 pt-20 sm:pt-24 text-center">
               {/* Badge */}
@@ -977,7 +973,7 @@ export default function EquestrianChallenge2026Page() {
                 The competition is open to riders from all EFI-affiliated clubs and units across the region, featuring Hacks, Dressage, Show Jumping, and Top Score events. Cash prizes are awarded to Open category Show Jumping finishers.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
-                {["Open Competition", "EFI Governed", "2-Day Event", "Floodlit Evening Sessions"].map((tag) => (
+                {["Open Competition", "2-Day Event", "Floodlit Evening Sessions"].map((tag) => (
                   <span key={tag} className="inline-flex items-center bg-white border border-brand-200 text-brand-700 text-xs font-semibold px-3 py-1.5 shadow-sm">
                     {tag}
                   </span>

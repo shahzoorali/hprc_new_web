@@ -24,7 +24,7 @@ export const equestrianChallenge2026 = {
     },
     grounds: {
       ground1: "Ground 1 — Hacks, Dressage, 40 cm and 60 cm Show Jumping",
-      mainArena: "Main Arena — 80 cm, 90 cm, 105 cm Show Jumping, Two-Phase & Top Score",
+      mainArena: "Main Arena — 80 cm, 90 cm, 105 cm Show Jumping, Two-Phase (105-110 cm) & Top Score",
     },
   },
 
@@ -136,16 +136,17 @@ export const equestrianChallenge2026 = {
     "Entry Forms along with full entry fees must be submitted online.",
     "Entries received without supporting documents or fees will not be accepted.",
     "Note: We will not accept any Spot Entries.",
-    "Entries once submitted and fees paid are non-refundable."
+    "Entries once submitted and fees paid are non-refundable.",
+    "Rights of admission are reserved."
   ],
 
   stabling: {
     heading: "Stabling / Camp Details",
     description:
-      "The Camp will open on 13th May and close on 18th May 2026. All stable requests must be submitted via the HPRC Equestrian Challenge – Stabling Form before 10th May 2026 along with the relevant fees.",
+      "The Camp will open on 13th May and close on 18th May 2026. All stable requests must be submitted via the HPRC Equestrian Challenge – Stabling Form before 10th May 2026 along with the relevant fees. Note that permanent stables are not available; only temporary stables are provided.",
     details: [
-      "Stable Fees: Rs. 600 per day (Temporary) / Rs. 1000 per day (Permanent)",
-      "Bookings confirmed only after full payment for intended days",
+      "Stable fee: Stable fee will be Rs 600 per stable per day for temporary stables, depending on availability.",
+      "Stable bookings will be confirmed only after receiving the full charges for the intended number of days.",
       "Self-Containment: All teams must bring their own rations, grass, straw, fodder, and equipment",
       "Staff: Teams must make their own arrangements for staff stay and food"
     ],
@@ -161,7 +162,8 @@ export const equestrianChallenge2026 = {
     "Age Proof Document is mandatory for all age-category participants.",
     "Appropriate Riding Dress Code must be followed for all events.",
     "Medals & Certificates will be awarded to Category Winners.",
-    "Prize Distribution Ceremony: Sunday, 17th May at ~7:30 PM."
+    "Prize Distribution Ceremony: Sunday, 17th May at ~7:30 PM.",
+    "The rights of admission are reserved."
   ],
 };
 
