@@ -22,7 +22,17 @@ export function SiteFooter() {
           </div>
           <p className="mt-4 text-sm text-gray-600">{siteConfig.description}</p>
           <div className="mt-4 space-y-1 text-sm text-gray-600">
-            <p>{siteConfig.contact.address}</p>
+            <p>
+              <a 
+                href="https://maps.app.goo.gl/nEiXR5Do7J7AXDYb7" 
+                target="_blank" 
+                rel="noreferrer" 
+                className="hover:text-brand-900 transition-colors"
+                title="View on Google Maps"
+              >
+                {siteConfig.contact.address}
+              </a>
+            </p>
             <p>{siteConfig.contact.phone}</p>
             <p>
               <a href={`mailto:${siteConfig.contact.email}`} className="hover:text-brand-900">

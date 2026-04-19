@@ -997,7 +997,20 @@ export default function EquestrianChallenge2026Page() {
                   <span className="text-2xl leading-none flex-shrink-0 mt-0.5">{item.icon}</span>
                   <div>
                     <p className="text-xs font-bold text-brand-500 uppercase tracking-wider">{item.label}</p>
-                    <p className="text-sm font-semibold text-gray-800 mt-0.5">{item.value}</p>
+                    <p className="text-sm font-semibold text-gray-800 mt-0.5">
+                      {item.label === "Venue" ? (
+                        <a 
+                          href="https://maps.app.goo.gl/nEiXR5Do7J7AXDYb7" 
+                          target="_blank" 
+                          rel="noreferrer" 
+                          className="hover:text-brand-600 transition-colors underline decoration-brand-200 underline-offset-4 hover:decoration-brand-500"
+                        >
+                          {item.value}
+                        </a>
+                      ) : (
+                        item.value
+                      )}
+                    </p>
                   </div>
                 </div>
               ))}
