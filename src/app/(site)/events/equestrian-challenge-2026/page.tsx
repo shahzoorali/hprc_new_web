@@ -81,7 +81,6 @@ type FormData = {
   name: string;
   parentName: string;
   dob: string;
-  address: string;
   mobile: string;
   email: string;
   emergencyContact: string;
@@ -100,7 +99,6 @@ const INITIAL_FORM: FormData = {
   name: "",
   parentName: "",
   dob: "",
-  address: "",
   mobile: "",
   email: "",
   emergencyContact: "",
@@ -333,7 +331,6 @@ function RegistrationForm() {
       <input type="hidden" name="name" value={form.name} />
       <input type="hidden" name="parentName" value={form.parentName} />
       <input type="hidden" name="dob" value={form.dob} />
-      <input type="hidden" name="address" value={form.address} />
       <input type="hidden" name="mobile" value={form.mobile} />
       <input type="hidden" name="email" value={form.email} />
       <input type="hidden" name="emergencyContact" value={form.emergencyContact} />
@@ -429,19 +426,7 @@ function RegistrationForm() {
             />
             {errors.dob && <p className="mt-1 text-xs text-red-500">{errors.dob}</p>}
           </div>
-          {/* Address */}
-          <div className="sm:col-span-2">
-            <label className="block text-sm font-semibold text-gray-700 mb-1.5" htmlFor="ec-address">
-              Address
-            </label>
-            <textarea
-              id="ec-address"
-              rows={2}
-              value={form.address}
-              onChange={(e) => setForm((f) => ({ ...f, address: e.target.value }))}
-              className="w-full border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition resize-none"
-            />
-          </div>
+
           {/* Mobile */}
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-1.5" htmlFor="ec-mobile">
