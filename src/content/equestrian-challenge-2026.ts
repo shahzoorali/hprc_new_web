@@ -43,7 +43,7 @@ export const equestrianChallenge2026 = {
         {
           time: "Morning · 7:00 AM",
           venue: "Ground 1",
-          events: "Hacks — 10 years & Under, 11 to 15 years",
+          events: "Hacks — 12 years & Under, 13 to 16 years",
         },
         {
           time: "Followed By",
@@ -92,8 +92,8 @@ export const equestrianChallenge2026 = {
 
   events: [
     // HACKS
-    { id: 1, discipline: "HACKS", category: "10 years & Under", date: "16 May", fee: 1500, minAge: 0, maxAge: 10 },
-    { id: 2, discipline: "HACKS", category: "11 to 15 years", date: "16 May", fee: 1500, minAge: 11, maxAge: 15 },
+    { id: 1, discipline: "HACKS", category: "12 years & Under", date: "16 May", fee: 1500, minAge: 0, maxAge: 12 },
+    { id: 2, discipline: "HACKS", category: "13 to 16 years", date: "16 May", fee: 1500, minAge: 13, maxAge: 16 },
     // DRESSAGE
     { id: 3, discipline: "DRESSAGE", category: "Children II (10 - 12 years)", date: "16 May", fee: 2000, minAge: 10, maxAge: 12 },
     { id: 4, discipline: "DRESSAGE", category: "Children I (12 - 14 years)", date: "16 May", fee: 2000, minAge: 12, maxAge: 14 },

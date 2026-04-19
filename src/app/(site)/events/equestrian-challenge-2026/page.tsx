@@ -441,7 +441,7 @@ function RegistrationForm() {
               type="date"
               value={form.dob}
               onChange={(e) => setForm((f) => ({ ...f, dob: e.target.value }))}
-              max="2016-05-17"
+              max="2022-05-16"
               className={`w-full border px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition ${errors.dob ? "border-red-400 bg-red-50" : "border-gray-200 bg-white"}`}
             />
             {errors.dob && <p className="mt-1 text-xs text-red-500">{errors.dob}</p>}
