@@ -37,7 +37,118 @@ export default function HomePage() {
         imageAlt={heroSlide.imageAlt}
       />
 
-      {/* Featured Event - World Arena Polo Championship 2026 - Sophisticated Design */}
+      {/* HPRC Equestrian Challenge 2026 - Fabulous Hero Section */}
+      <section className="relative overflow-hidden bg-white">
+        <div className="container relative z-10 py-12 lg:py-20">
+          <div className="relative group overflow-hidden rounded-[2.5rem] bg-neutral-900 shadow-2xl">
+            {/* Background Image with sophisticated overlay */}
+            <div className="absolute inset-0">
+              <Image
+                src="https://images.unsplash.com/photo-1598974357801-cbca100e65d3?q=80&w=2000"
+                alt="Equestrian Challenge 2026"
+                fill
+                className="object-cover transition-transform duration-1000 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-neutral-900 via-neutral-900/80 to-transparent"></div>
+            </div>
+
+            {/* Content Container */}
+            <div className="relative z-10 grid lg:grid-cols-2 gap-12 items-center p-8 sm:p-12 lg:p-20">
+              <div className="space-y-8">
+                {/* Badge */}
+                <div className="inline-flex items-center gap-3 bg-brand-500/20 backdrop-blur-md border border-brand-500/30 px-5 py-2.5 rounded-full">
+                  <span className="relative flex h-3 w-3">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-500 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-3 w-3 bg-brand-500"></span>
+                  </span>
+                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-500 font-display">
+                    Registrations Open Now
+                  </span>
+                </div>
+
+                {/* Typography */}
+                <div className="space-y-4">
+                  <p className="text-lg sm:text-xl font-medium text-brand-400 font-display italic tracking-wide">
+                    The Grandest Stage in Telangana
+                  </p>
+                  <h2 className="text-[clamp(2.5rem,6vw,4.5rem)] font-extrabold leading-[1.05] text-white font-display tracking-tight">
+                    HPRC <br />
+                    <span className="bg-gradient-to-r from-brand-400 via-brand-200 to-brand-400 bg-clip-text text-transparent">
+                      Equestrian Challenge
+                    </span>
+                    <br /> 2026
+                  </h2>
+                </div>
+
+                {/* Key Details Grid */}
+                <div className="grid grid-cols-2 gap-6 pt-4">
+                  <div className="flex items-center gap-4">
+                    <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                      <span className="text-2xl">📅</span>
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-white/50">Dates</p>
+                      <p className="text-sm font-bold text-white">May 16 & 17, 2026</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                      <span className="text-2xl">📍</span>
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-white/50">Venue</p>
+                      <p className="text-sm font-bold text-white">HPRC, Aziznagar</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Description */}
+                <p className="text-base sm:text-lg text-white/70 leading-relaxed font-light max-w-xl font-body">
+                  Experience elite equestrian competition across Show Jumping, Dressage, and Hacks. Join the finest riders in the country for a weekend of grace, power, and prestige.
+                </p>
+
+                {/* CTA Buttons */}
+                <div className="flex flex-wrap items-center gap-5 pt-4">
+                  <Link
+                    href="/events/equestrian-challenge-2026"
+                    className="group inline-flex items-center justify-center gap-3 bg-white px-10 py-5 text-base font-bold text-brand-900 shadow-2xl transition-all duration-300 hover:bg-brand-50 hover:-translate-y-1 font-display rounded-2xl"
+                  >
+                    <span>Register Now</span>
+                    <svg className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </Link>
+                  <Link
+                    href="/events/equestrian-challenge-2026#details"
+                    className="inline-flex items-center justify-center border border-white/20 bg-white/5 backdrop-blur-md px-10 py-5 text-base font-bold text-white transition-all duration-300 hover:bg-white/10 font-display rounded-2xl"
+                  >
+                    View Details
+                  </Link>
+                </div>
+              </div>
+
+              {/* Graphical Elements / Featured Image */}
+              <div className="hidden lg:block relative">
+                <div className="absolute -inset-4 bg-brand-500/10 blur-3xl rounded-full animate-pulse"></div>
+                <div className="relative aspect-square rounded-[3rem] overflow-hidden border border-white/10 shadow-3xl">
+                   <Image 
+                    src="https://images.unsplash.com/photo-1553531580-6520e75d0458?q=80&w=1000" 
+                    alt="Equestrian Detail"
+                    fill
+                    className="object-cover"
+                   />
+                   <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-transparent to-transparent opacity-60"></div>
+                   <div className="absolute bottom-10 left-10 right-10 p-6 bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl">
+                     <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-400 mb-1">Featured Highlight</p>
+                     <p className="text-lg font-bold text-white leading-tight">Two-Phase (105-110 cm) Show Jumping</p>
+                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Featured Award - Indian Polo Awards - Sophisticated Design */}
       <section className="relative overflow-hidden bg-gradient-to-br from-neutral-900 via-brand-900 to-neutral-900 py-16 sm:py-24 lg:py-32">
         {/* Subtle Background Image of the Award Ceremony */}
