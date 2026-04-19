@@ -157,7 +157,7 @@ export const equestrianChallenge2026 = {
     "I declare that the details furnished above are correct to the best of my knowledge. I undertake no responsibility for any loss, damage or injury that may occur for me / my son, daughter, during the course of the event/s directly or indirectly from accident or any other causes. The Hyderabad Polo & Riding Club will not be held responsible for any first aid or other medical treatment provided.",
 
   importantNotes: [
-    "Number of entries: A horse can participate only once in each category of an event / discipline. On Day 1, a horse can have no more than three entries. On Day 2, a horse is allowed only two entries per session (morning / evening) and is limited to three entries for the day.",
+    "Number of Entries\n\nA horse may participate only once in each category within a given event or discipline.\nDay 1: A maximum of three entries per horse.\nDay 2: A maximum of two entries per session (morning and evening), with an overall limit of three entries per horse for the day.",
     "Appropriate Riding Dress Code must be followed for all events.",
     "Medals & Certificates will be awarded to Category Winners.",
     "Prize Distribution Ceremony: Sunday, 17th May at ~7:30 PM.",
