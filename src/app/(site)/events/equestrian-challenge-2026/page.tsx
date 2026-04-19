@@ -129,24 +129,6 @@ function RegistrationForm() {
     } catch {}
   }, []);
 
-  // Sync selected events with eligible events when rider age changes
-  React.useEffect(() => {
-    const validSelected = form.selectedEvents.filter(id => 
-      eligibleEvents.some(ev => ev.id === id)
-    );
-    
-    if (validSelected.length !== form.selectedEvents.length) {
-      setForm(prev => ({
-        ...prev,
-        selectedEvents: validSelected,
-        eventHorses: Object.fromEntries(
-          Object.entries(prev.eventHorses).filter(([id]) => 
-            validSelected.includes(parseInt(id))
-          )
-        )
-      }));
-    }
-  }, [eligibleEvents, form.selectedEvents.length]);
 
   const restoreDraft = () => {
     try {
@@ -171,6 +153,25 @@ function RegistrationForm() {
     if (riderAge === null) return [];
     return events.filter(e => riderAge >= (e.minAge ?? 0) && riderAge <= (e.maxAge ?? 99));
   }, [events, riderAge]);
+
+  // Sync selected events with eligible events when rider age changes
+  React.useEffect(() => {
+    const validSelected = form.selectedEvents.filter(id => 
+      eligibleEvents.some(ev => ev.id === id)
+    );
+    
+    if (validSelected.length !== form.selectedEvents.length) {
+      setForm(prev => ({
+        ...prev,
+        selectedEvents: validSelected,
+        eventHorses: Object.fromEntries(
+          Object.entries(prev.eventHorses).filter(([id]) => 
+            validSelected.includes(parseInt(id))
+          )
+        )
+      }));
+    }
+  }, [eligibleEvents, form.selectedEvents.length]);
 
   const entryStatus = useMemo(() => {
     const now = new Date();
