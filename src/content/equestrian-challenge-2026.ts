@@ -161,6 +161,7 @@ export const equestrianChallenge2026 = {
     "Appropriate Riding Dress Code must be followed for all events.",
     "Medals & Certificates will be awarded to Category Winners.",
     "Prize Distribution Ceremony: Sunday, 17th May at ~7:30 PM.",
+    "Coggins and Glanders tests mandatory.",
     "The rights of admission are reserved."
   ],
 };
