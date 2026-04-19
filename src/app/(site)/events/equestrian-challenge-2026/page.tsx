@@ -129,6 +129,25 @@ function RegistrationForm() {
     } catch {}
   }, []);
 
+  // Sync selected events with eligible events when rider age changes
+  React.useEffect(() => {
+    const validSelected = form.selectedEvents.filter(id => 
+      eligibleEvents.some(ev => ev.id === id)
+    );
+    
+    if (validSelected.length !== form.selectedEvents.length) {
+      setForm(prev => ({
+        ...prev,
+        selectedEvents: validSelected,
+        eventHorses: Object.fromEntries(
+          Object.entries(prev.eventHorses).filter(([id]) => 
+            validSelected.includes(parseInt(id))
+          )
+        )
+      }));
+    }
+  }, [eligibleEvents, form.selectedEvents.length]);
+
   const restoreDraft = () => {
     try {
       const existing = JSON.parse(localStorage.getItem("ec2026-registrations") ?? "[]");
@@ -605,7 +624,6 @@ function RegistrationForm() {
           </>
         )}
 
-        {/* Fee Summary */}
         {form.selectedEvents.length > 0 && (
           <div className="flex items-center justify-between bg-brand-900/5 text-brand-900 border border-brand-900/10 px-6 py-4 rounded-xl">
             <span className="text-sm font-medium">
