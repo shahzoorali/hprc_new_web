@@ -163,6 +163,7 @@ export const equestrianChallenge2026 = {
     "Appropriate Riding Dress Code must be followed for all events.",
     "Medals & Certificates will be awarded to Category Winners.",
     "Prize Distribution Ceremony: Sunday, 17th May at ~7:30 PM.",
+    "Number of entries: A horse can participate only once in each category of an event / discipline. On Day 1, a horse can have no more than three entries. On Day 2, a horse is allowed only two entries per session (morning / evening) and is limited to three entries for the day.",
     "The rights of admission are reserved."
   ],
 };
