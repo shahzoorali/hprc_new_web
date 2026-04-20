@@ -1016,6 +1016,45 @@ export default function EquestrianChallenge2026Page() {
               ))}
             </div>
           </div>
+          
+          {/* Enhanced Download Prospectus Section */}
+          <div className="mt-16 relative">
+            <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-px bg-gradient-to-r from-transparent via-brand-200 to-transparent" />
+            <div className="relative flex flex-col items-center">
+              <div className="bg-white px-6 pb-4">
+                <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-500">Official Document</span>
+              </div>
+              <a
+                href="/docs/events/equestrian-challenge-2026/prospectus.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative inline-flex flex-col sm:flex-row items-center gap-4 bg-brand-900 px-10 py-6 text-white shadow-[0_20px_50px_rgba(227,30,36,0.3)] transition-all duration-500 hover:shadow-[0_30px_60px_rgba(227,30,36,0.5)] hover:-translate-y-1"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-brand-600 to-brand-700 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                <div className="relative flex items-center gap-4">
+                  <div className="flex h-12 w-12 items-center justify-center bg-white/10 group-hover:bg-white/20 transition-colors">
+                    <svg className="h-6 w-6 text-brand-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  </div>
+                  <div className="text-left">
+                    <p className="text-sm font-black uppercase tracking-wider text-white">Download Event Prospectus</p>
+                    <p className="text-[10px] font-medium text-brand-200 mt-0.5">Rules, Regulations & Full Schedule (PDF)</p>
+                  </div>
+                </div>
+                
+                <div className="relative hidden sm:block h-8 w-px bg-white/20 mx-2" />
+                
+                <div className="relative flex items-center gap-2">
+                  <span className="text-xs font-bold text-white/90">Get Details</span>
+                  <svg className="h-4 w-4 text-brand-400 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </div>
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
