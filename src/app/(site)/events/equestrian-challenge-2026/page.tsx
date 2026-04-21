@@ -113,6 +113,14 @@ const INITIAL_FORM: FormData = {
   declaration: false,
 };
 
+const PAIR_GROUPS: Record<number, number> = {
+  6: 8, 8: 6,   // 40cm
+  9: 11, 11: 9, // 60cm
+  12: 13, 13: 12, // 80cm
+  14: 15, 15: 14, // 90cm
+  16: 17, 17: 16  // 105cm
+};
+
 function RegistrationForm() {
   const { events, declaration, event } = equestrianChallenge2026;
   const formRef = React.useRef<HTMLFormElement | null>(null);
@@ -222,6 +230,8 @@ function RegistrationForm() {
   const toggleEvent = useCallback((id: number) => {
     setForm((f) => {
       const isSelected = f.selectedEvents.includes(id);
+      const ev = events.find(e => e.id === id);
+      
       if (isSelected) {
         const { [id]: removed, ...restHorses } = f.eventHorses;
         return {
@@ -230,14 +240,44 @@ function RegistrationForm() {
           eventHorses: restHorses
         };
       } else {
+        // Init horse name: if partner exists, only mirror the FIRST horse by default.
+        // We do NOT copy the extra jump automatically to avoid accidental billing.
+        let initialHorse = [""];
+        const partnerId = PAIR_GROUPS[id];
+        if (partnerId && f.selectedEvents.includes(partnerId)) {
+          initialHorse = [(f.eventHorses[partnerId]?.[0] || "")];
+        }
+
         return {
           ...f,
           selectedEvents: [...f.selectedEvents, id],
-          eventHorses: { ...f.eventHorses, [id]: [""] } // Initialize with one jump
+          eventHorses: { ...f.eventHorses, [id]: initialHorse }
         };
       }
     });
-  }, []);
+  }, [events]);
+
+  const syncHorses = (id: number, index: number, value: string) => {
+    setForm(f => {
+      const newHorses = { ...f.eventHorses };
+      // 1. Update current
+      const current = [...(newHorses[id] || [""])];
+      current[index] = value;
+      newHorses[id] = current;
+
+      // 2. Sync to partner if exists AND partner has that jump slot
+      const partnerId = PAIR_GROUPS[id];
+      if (partnerId && f.selectedEvents.includes(partnerId)) {
+        const partner = [...(newHorses[partnerId] || [""])];
+        if (index < partner.length) {
+          partner[index] = value;
+          newHorses[partnerId] = partner;
+        }
+      }
+
+      return { ...f, eventHorses: newHorses };
+    });
+  };
 
   const validate = () => {
     const e: Partial<Record<keyof FormData | "ageProof" | "eventHorsesGlobal" | "stablingDates", string>> = {};
@@ -610,12 +650,21 @@ function RegistrationForm() {
                     <div className="grid gap-3 sm:grid-cols-2">
                       {discEvents.map((ev) => {
                         const checked = form.selectedEvents.includes(ev.id);
+                        
+                        // Dressage Restriction Logic
+                        const isDressage = disc === "DRESSAGE";
+                        const otherDressageSelected = isDressage && form.selectedEvents.some(id => {
+                          const otherEv = eligibleEvents.find(e => e.id === id);
+                          return otherEv && otherEv.discipline === "DRESSAGE" && id !== ev.id;
+                        });
+
                         return (
-                          <div key={ev.id} className={`flex flex-col border transition-all ${checked ? "border-brand-400 bg-white shadow-sm" : "border-transparent bg-white/50 hover:bg-white/80"}`}>
-                            <label className="flex items-start gap-3 p-3 cursor-pointer">
+                          <div key={ev.id} className={`flex flex-col border transition-all ${checked ? "border-brand-400 bg-white shadow-sm" : "border-transparent bg-white/50 hover:bg-white/80"} ${otherDressageSelected ? "opacity-50 cursor-not-allowed" : ""}`}>
+                            <label className={`flex items-start gap-3 p-3 ${otherDressageSelected ? "cursor-not-allowed" : "cursor-pointer"}`}>
                               <input
                                 type="checkbox"
                                 checked={checked}
+                                disabled={otherDressageSelected}
                                 onChange={() => toggleEvent(ev.id)}
                                 className="mt-0.5 h-4 w-4 accent-brand-500 flex-shrink-0"
                               />
@@ -629,11 +678,20 @@ function RegistrationForm() {
                             </label>
                             {checked && (
                               <div className="px-3 pb-3 pt-1 border-t border-gray-100 bg-gray-50/50 mt-1 space-y-3">
-                                {(form.eventHorses[ev.id] || [""]).map((horse, idx) => (
+                                {(form.eventHorses[ev.id] || [""]).map((horse, idx) => {
+                                  const partnerId = PAIR_GROUPS[ev.id];
+                                  const partnerSelected = partnerId && form.selectedEvents.includes(partnerId);
+                                  const partnerEv = partnerSelected ? eligibleEvents.find(e => e.id === partnerId) : null;
+                                  
+                                  // Determine Primary vs Secondary based on selection order
+                                  const isSecondary = partnerSelected && (form.selectedEvents.indexOf(ev.id) > form.selectedEvents.indexOf(partnerId));
+                                  const masterHorses = partnerSelected ? (form.eventHorses[partnerId] || []) : [];
+                                  
+                                  return (
                                   <div key={idx} className="space-y-1">
                                     <div className="flex items-center justify-between">
                                       <label className="text-[10px] font-bold text-gray-500 uppercase">
-                                        Jump {idx + 1} Horse Name
+                                        Jump {idx + 1} Horse Name {isSecondary && partnerEv && `(Mirror: ${partnerEv.category})`}
                                       </label>
                                       {idx === 1 && (
                                         <button 
@@ -653,35 +711,54 @@ function RegistrationForm() {
                                         </button>
                                       )}
                                     </div>
-                                    <input 
-                                      type="text" 
-                                      placeholder={`Horse Name for Jump ${idx + 1} *`}
-                                      value={horse}
-                                      onChange={(e) => {
-                                        const newHorses = [...(form.eventHorses[ev.id] || [""])];
-                                        newHorses[idx] = e.target.value;
-                                        setForm(f => ({ ...f, eventHorses: { ...f.eventHorses, [ev.id]: newHorses } }));
-                                      }}
-                                      className={`w-full text-xs px-3 py-2 border rounded outline-none transition ${errors.eventHorsesGlobal && !horse.trim() ? 'border-red-300 focus:border-red-400 bg-red-50' : 'border-gray-200 focus:border-brand-400'}`}
-                                    />
+
+                                    {isSecondary ? (
+                                      // SECONDARY EVENT: STRICT MIRROR (READ ONLY)
+                                      <input 
+                                        type="text" 
+                                        readOnly
+                                        value={masterHorses[idx] || ""}
+                                        placeholder={`Define in ${partnerEv?.category}...`}
+                                        className="w-full text-xs px-3 py-2 border rounded border-gray-100 bg-gray-100 text-gray-600 outline-none italic font-medium"
+                                      />
+                                    ) : (
+                                      // PRIMARY EVENT: STANDARD TEXT INPUT
+                                      <input 
+                                        type="text" 
+                                        placeholder={`Horse Name for Jump ${idx + 1} *`}
+                                        value={horse}
+                                        onChange={(e) => syncHorses(ev.id, idx, e.target.value)}
+                                        className={`w-full text-xs px-3 py-2 border rounded outline-none transition ${errors.eventHorsesGlobal && !horse.trim() ? 'border-red-300 focus:border-red-400 bg-red-50' : 'border-gray-200 focus:border-brand-400'}`}
+                                      />
+                                    )}
                                   </div>
-                                ))}
+                                )})}
                                 
                                 {ev.discipline !== "HACKS" && (form.eventHorses[ev.id]?.length || 0) < 2 && (
                                   <button
                                     type="button"
                                     onClick={() => {
-                                      setForm(f => ({
-                                        ...f,
-                                        eventHorses: {
-                                          ...f.eventHorses,
-                                          [ev.id]: [...(f.eventHorses[ev.id] || [""]), ""]
+                                      setForm(f => {
+                                        const newHorses = { ...f.eventHorses };
+                                        const partnerId = PAIR_GROUPS[ev.id];
+                                        const partnerHorses = partnerId ? (f.eventHorses[partnerId] || []) : [];
+                                        
+                                        // 1. Add slot to self, pre-filled from partner if exists
+                                        newHorses[ev.id] = [...(newHorses[ev.id] || [""]), (partnerHorses[1] || "")];
+                                        
+                                        // 2. If we are secondary and adding a jump, ensure primary has the slot to define horse
+                                        const isSecondary = partnerId && f.selectedEvents.includes(partnerId) && (f.selectedEvents.indexOf(ev.id) > f.selectedEvents.indexOf(partnerId));
+                                        
+                                        if (isSecondary && (newHorses[partnerId]?.length || 0) < 2) {
+                                          newHorses[partnerId] = [...(newHorses[partnerId] || [""]), ""];
                                         }
-                                      }));
+
+                                        return { ...f, eventHorses: newHorses };
+                                      });
                                     }}
                                     className="w-full py-2 border-2 border-dashed border-brand-200 text-brand-600 text-[10px] font-bold uppercase hover:bg-brand-50 transition"
                                   >
-                                    + Add Extra Jump (Max 2)
+                                    + Add Extra Jump (Max 2) — ₹{(ev.fee + (entryStatus === "POST_ENTRY" ? 500 : 0)).toLocaleString("en-IN")}
                                   </button>
                                 )}
                               </div>
