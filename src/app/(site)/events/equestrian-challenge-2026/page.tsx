@@ -191,26 +191,18 @@ function RegistrationForm() {
     return "STANDARD";
   }, []);
 
-  const totalFee = useMemo(
+  const { eventFees, stablingFees, totalFee } = useMemo(
     () => {
-      const eventFees = form.selectedEvents.reduce((sum, id) => {
+      const eFees = form.selectedEvents.reduce((sum, id) => {
         const ev = eligibleEvents.find((e) => e.id === id);
         if (!ev) return sum;
-        
-        const jumpCount = (form.eventHorses[id] || []).filter(h => h.trim() !== "").length || 1;
-        // Even if horse name isn't entered yet, the selection implies at least 1 jump
-        // But for calculation, we use actual jumps + extra jumps defined in the UI
-        // Actually, let's just count the length of the horses array for that event
-        const horses = form.eventHorses[id] || [""]; 
-        const count = horses.length;
-        
+        const count = (form.eventHorses[id] || [""]).length;
         const baseFee = ev.fee;
         const postEntrySurcharge = entryStatus === "POST_ENTRY" ? 500 : 0;
-        
         return sum + (baseFee + postEntrySurcharge) * count;
       }, 0);
 
-      let stablingFees = 0;
+      let sFees = 0;
       if (form.stablingType !== "NONE" && form.stablingCount > 0 && form.stablingFrom && form.stablingTo) {
         const start = new Date(form.stablingFrom);
         const end = new Date(form.stablingTo);
@@ -218,14 +210,26 @@ function RegistrationForm() {
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
         if (diffDays > 0) {
           const rate = 600;
-          stablingFees = rate * form.stablingCount * diffDays;
+          sFees = rate * form.stablingCount * diffDays;
         }
       }
 
-      return eventFees + stablingFees;
+      return { eventFees: eFees, stablingFees: sFees, totalFee: eFees + sFees };
     },
     [form.selectedEvents, eligibleEvents, entryStatus, form.stablingType, form.stablingCount, form.stablingFrom, form.stablingTo, form.eventHorses]
   );
+
+  const hasConcurrentPair = useMemo(() => {
+    return form.selectedEvents.some(id => {
+      const partnerId = PAIR_GROUPS[id];
+      return partnerId && form.selectedEvents.includes(partnerId);
+    });
+  }, [form.selectedEvents]);
+
+  const uniqueHorseCount = useMemo(() => {
+    const allHorses = Object.values(form.eventHorses).flat().filter(h => h && h.trim() !== "");
+    return new Set(allHorses).size;
+  }, [form.eventHorses]);
 
   const toggleEvent = useCallback((id: number) => {
     setForm((f) => {
@@ -774,20 +778,35 @@ function RegistrationForm() {
           </>
         )}
 
+        {hasConcurrentPair && (
+          <div className="bg-blue-50 border border-blue-200 p-4 rounded-xl text-xs text-blue-800 leading-relaxed flex gap-3">
+             <svg className="h-5 w-5 text-blue-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <p>
+              <strong>Note (Prospectus Page 2):</strong> The age and Open categories will be run concurrently. Riders wishing to participate in both categories will jump a single round with the score considered in both categories.
+            </p>
+          </div>
+        )}
+
         {form.selectedEvents.length > 0 && (
           <div className="flex items-center justify-between bg-brand-900/5 text-brand-900 border border-brand-900/10 px-6 py-4 rounded-xl">
-            <span className="text-sm font-medium">
-              {form.selectedEvents.reduce((acc, id) => acc + (form.eventHorses[id]?.length || 1), 0)} Total Registeration{form.selectedEvents.length > 1 || (form.selectedEvents.some(id => form.eventHorses[id]?.length > 1)) ? "s" : ""}
-            </span>
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
+              <span className="text-sm font-bold flex items-center gap-2">
+                <svg className="h-4 w-4 text-brand-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+                {form.selectedEvents.length} Event{form.selectedEvents.length > 1 ? "s" : ""} Selection
+              </span>
+              <span className="text-sm font-bold flex items-center gap-2">
+                <svg className="h-4 w-4 text-brand-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                {form.selectedEvents.reduce((acc, id) => acc + (form.eventHorses[id]?.length || 1), 0)} Jump{form.selectedEvents.reduce((acc, id) => acc + (form.eventHorses[id]?.length || 1), 0) > 1 ? "s" : ""} Total
+              </span>
+            </div>
             <span className="text-lg font-bold">
-              Events Subtotal: ₹{form.selectedEvents.reduce((sum, id) => {
-                const ev = eligibleEvents.find((e) => e.id === id);
-                if (!ev) return sum;
-                const count = (form.eventHorses[id] || [""]).length;
-                const baseFee = ev.fee;
-                const postEntrySurcharge = entryStatus === "POST_ENTRY" ? 500 : 0;
-                return sum + (baseFee + postEntrySurcharge) * count;
-              }, 0).toLocaleString("en-IN")}
+              Events Subtotal: ₹{eventFees.toLocaleString("en-IN")}
             </span>
           </div>
         )}
@@ -862,19 +881,25 @@ function RegistrationForm() {
             )}
           </div>
 
+            {form.stablingType === "TEMPORARY" && uniqueHorseCount > form.stablingCount && (
+              <div className="bg-amber-50 border border-amber-200 p-4 rounded-xl text-xs text-amber-800 flex items-start gap-3">
+                <svg className="h-5 w-5 text-amber-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+                <div>
+                  <p className="font-bold">Stabling Check</p>
+                  <p className="mt-1">You have registered <strong>{uniqueHorseCount}</strong> individual horse{uniqueHorseCount > 1 ? "s" : ""} but only booked <strong>{form.stablingCount}</strong> stable{form.stablingCount > 1 ? "s" : ""}. Please ensure you have booked enough stabling for all your horses.</p>
+                </div>
+              </div>
+            )}
+
           {form.stablingType !== "NONE" && (
             <div className="pt-2 border-t border-blue-100 flex items-center justify-between">
               <span className="text-xs font-bold text-blue-700 uppercase tracking-wider">
                 Stabling Subtotal
               </span>
               <span className="text-base font-extrabold text-blue-900">
-                ₹{(totalFee - form.selectedEvents.reduce((sum, id) => {
-                  const ev = eligibleEvents.find((e) => e.id === id);
-                  if (!ev) return sum;
-                  const baseFee = ev.fee;
-                  const postEntrySurcharge = entryStatus === "POST_ENTRY" ? 500 : 0;
-                  return sum + baseFee + postEntrySurcharge;
-                }, 0)).toLocaleString("en-IN")}
+                ₹{stablingFees.toLocaleString("en-IN")}
               </span>
             </div>
           )}
