@@ -87,7 +87,7 @@ type FormData = {
   emergencyRelation: string;
   clubName: string;
   selectedEvents: number[];
-  eventHorses: Record<number, string>;
+  eventHorses: Record<number, string[]>; // Changed to string[] to support up to 2 jumps
   stablingType: "NONE" | "TEMPORARY";
   stablingCount: number;
   stablingFrom: string;
@@ -188,9 +188,18 @@ function RegistrationForm() {
       const eventFees = form.selectedEvents.reduce((sum, id) => {
         const ev = eligibleEvents.find((e) => e.id === id);
         if (!ev) return sum;
+        
+        const jumpCount = (form.eventHorses[id] || []).filter(h => h.trim() !== "").length || 1;
+        // Even if horse name isn't entered yet, the selection implies at least 1 jump
+        // But for calculation, we use actual jumps + extra jumps defined in the UI
+        // Actually, let's just count the length of the horses array for that event
+        const horses = form.eventHorses[id] || [""]; 
+        const count = horses.length;
+        
         const baseFee = ev.fee;
         const postEntrySurcharge = entryStatus === "POST_ENTRY" ? 500 : 0;
-        return sum + baseFee + postEntrySurcharge;
+        
+        return sum + (baseFee + postEntrySurcharge) * count;
       }, 0);
 
       let stablingFees = 0;
@@ -207,16 +216,27 @@ function RegistrationForm() {
 
       return eventFees + stablingFees;
     },
-    [form.selectedEvents, eligibleEvents, entryStatus, form.stablingType, form.stablingCount, form.stablingFrom, form.stablingTo]
+    [form.selectedEvents, eligibleEvents, entryStatus, form.stablingType, form.stablingCount, form.stablingFrom, form.stablingTo, form.eventHorses]
   );
 
   const toggleEvent = useCallback((id: number) => {
-    setForm((f) => ({
-      ...f,
-      selectedEvents: f.selectedEvents.includes(id)
-        ? f.selectedEvents.filter((x) => x !== id)
-        : [...f.selectedEvents, id],
-    }));
+    setForm((f) => {
+      const isSelected = f.selectedEvents.includes(id);
+      if (isSelected) {
+        const { [id]: removed, ...restHorses } = f.eventHorses;
+        return {
+          ...f,
+          selectedEvents: f.selectedEvents.filter((x) => x !== id),
+          eventHorses: restHorses
+        };
+      } else {
+        return {
+          ...f,
+          selectedEvents: [...f.selectedEvents, id],
+          eventHorses: { ...f.eventHorses, [id]: [""] } // Initialize with one jump
+        };
+      }
+    });
   }, []);
 
   const validate = () => {
@@ -241,10 +261,14 @@ function RegistrationForm() {
     const activeSelected = form.selectedEvents.filter(id => eligibleEvents.some(eve => eve.id === id));
     if (activeSelected.length === 0) e.selectedEvents = "Please select at least one eligible event";
     
-    const missingHorse = form.selectedEvents.some(id => !form.eventHorses[id] || !form.eventHorses[id].trim());
+    const missingHorse = form.selectedEvents.some(id => {
+      const horses = form.eventHorses[id] || [];
+      return horses.length === 0 || horses.some(h => !h || !h.trim());
+    });
+    
     if (missingHorse) {
-      e.eventHorsesGlobal = "Horse Name is required for all selected events";
-      e.selectedEvents = "Please provide the horse name for all selected events";
+      e.eventHorsesGlobal = "Horse Name is required for all selected events and jumps";
+      e.selectedEvents = "Please provide the horse name for all selected entries";
     }
 
     const hasAgeBasedEvent = form.selectedEvents.some(id => {
@@ -604,14 +628,62 @@ function RegistrationForm() {
                               </span>
                             </label>
                             {checked && (
-                              <div className="px-3 pb-3 pt-1 border-t border-gray-100 bg-gray-50/50 mt-1">
-                                <input 
-                                  type="text" 
-                                  placeholder="Horse Name *" 
-                                  value={form.eventHorses[ev.id] || ""}
-                                  onChange={(e) => setForm(f => ({ ...f, eventHorses: { ...f.eventHorses, [ev.id]: e.target.value } }))}
-                                  className={`w-full text-xs px-3 py-2 border rounded outline-none transition ${errors.eventHorsesGlobal && !form.eventHorses[ev.id]?.trim() ? 'border-red-300 focus:border-red-400 bg-red-50' : 'border-gray-200 focus:border-brand-400'}`}
-                                />
+                              <div className="px-3 pb-3 pt-1 border-t border-gray-100 bg-gray-50/50 mt-1 space-y-3">
+                                {(form.eventHorses[ev.id] || [""]).map((horse, idx) => (
+                                  <div key={idx} className="space-y-1">
+                                    <div className="flex items-center justify-between">
+                                      <label className="text-[10px] font-bold text-gray-500 uppercase">
+                                        Jump {idx + 1} Horse Name
+                                      </label>
+                                      {idx === 1 && (
+                                        <button 
+                                          type="button"
+                                          onClick={() => {
+                                            setForm(f => ({
+                                              ...f,
+                                              eventHorses: {
+                                                ...f.eventHorses,
+                                                [ev.id]: (f.eventHorses[ev.id] || []).filter((_, i) => i !== 1)
+                                              }
+                                            }));
+                                          }}
+                                          className="text-[10px] font-bold text-red-500 hover:text-red-600"
+                                        >
+                                          Remove Extra Jump
+                                        </button>
+                                      )}
+                                    </div>
+                                    <input 
+                                      type="text" 
+                                      placeholder={`Horse Name for Jump ${idx + 1} *`}
+                                      value={horse}
+                                      onChange={(e) => {
+                                        const newHorses = [...(form.eventHorses[ev.id] || [""])];
+                                        newHorses[idx] = e.target.value;
+                                        setForm(f => ({ ...f, eventHorses: { ...f.eventHorses, [ev.id]: newHorses } }));
+                                      }}
+                                      className={`w-full text-xs px-3 py-2 border rounded outline-none transition ${errors.eventHorsesGlobal && !horse.trim() ? 'border-red-300 focus:border-red-400 bg-red-50' : 'border-gray-200 focus:border-brand-400'}`}
+                                    />
+                                  </div>
+                                ))}
+                                
+                                {ev.discipline !== "HACKS" && (form.eventHorses[ev.id]?.length || 0) < 2 && (
+                                  <button
+                                    type="button"
+                                    onClick={() => {
+                                      setForm(f => ({
+                                        ...f,
+                                        eventHorses: {
+                                          ...f.eventHorses,
+                                          [ev.id]: [...(f.eventHorses[ev.id] || [""]), ""]
+                                        }
+                                      }));
+                                    }}
+                                    className="w-full py-2 border-2 border-dashed border-brand-200 text-brand-600 text-[10px] font-bold uppercase hover:bg-brand-50 transition"
+                                  >
+                                    + Add Extra Jump (Max 2)
+                                  </button>
+                                )}
                               </div>
                             )}
                           </div>
@@ -628,15 +700,16 @@ function RegistrationForm() {
         {form.selectedEvents.length > 0 && (
           <div className="flex items-center justify-between bg-brand-900/5 text-brand-900 border border-brand-900/10 px-6 py-4 rounded-xl">
             <span className="text-sm font-medium">
-              {form.selectedEvents.length} event{form.selectedEvents.length > 1 ? "s" : ""} selected
+              {form.selectedEvents.reduce((acc, id) => acc + (form.eventHorses[id]?.length || 1), 0)} Total Registeration{form.selectedEvents.length > 1 || (form.selectedEvents.some(id => form.eventHorses[id]?.length > 1)) ? "s" : ""}
             </span>
             <span className="text-lg font-bold">
               Events Subtotal: ₹{form.selectedEvents.reduce((sum, id) => {
                 const ev = eligibleEvents.find((e) => e.id === id);
                 if (!ev) return sum;
+                const count = (form.eventHorses[id] || [""]).length;
                 const baseFee = ev.fee;
                 const postEntrySurcharge = entryStatus === "POST_ENTRY" ? 500 : 0;
-                return sum + baseFee + postEntrySurcharge;
+                return sum + (baseFee + postEntrySurcharge) * count;
               }, 0).toLocaleString("en-IN")}
             </span>
           </div>

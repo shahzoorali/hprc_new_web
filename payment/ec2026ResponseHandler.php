@@ -51,6 +51,33 @@ if ($order_id) {
             $webhook_url = "https://script.google.com/macros/s/AKfycbzw65SAMdxZpVqp5TcIKvcLIZVdDDcybqkMAUnjM7-wSqvjmo0Pw2Lgz7nC_2ttDN33/exec";
             $ageProofLink = !empty($row['ageProofPath']) ? "https://hprc.in/payment/" . $row['ageProofPath'] : "";
             
+            // Format Events and Horses for Google Sheets
+            $eventMapping = [
+                1 => "Hacks - 12y & Under", 2 => "Hacks - 13-16y",
+                3 => "Dressage - Children II", 4 => "Dressage - Children I", 5 => "Dressage - Juniors",
+                6 => "SJ 40cm - Under 12", 8 => "SJ 40cm - Open",
+                9 => "SJ 60cm - Under 14", 11 => "SJ 60cm - Open",
+                12 => "SJ 80cm - Children II", 13 => "SJ 80cm - Open",
+                14 => "SJ 90cm - Children I", 15 => "SJ 90cm - Open",
+                16 => "SJ 105cm - Juniors", 17 => "SJ 105cm - Open",
+                20 => "SJ 105-110cm Two-Phase",
+                18 => "Top Score - 14y & Below", 19 => "Top Score - Open"
+            ];
+
+            $selectedIds = json_decode($row['selectedEvents'], true) ?: [];
+            $horseData = json_decode($row['eventHorses'], true) ?: [];
+            
+            $readableEvents = [];
+            $readableHorses = [];
+            
+            foreach ($selectedIds as $id) {
+                $category = isset($eventMapping[$id]) ? $eventMapping[$id] : "Event #$id";
+                $readableEvents[] = $category;
+                
+                $horses = isset($horseData[$id]) ? (is_array($horseData[$id]) ? $horseData[$id] : [$horseData[$id]]) : ["N/A"];
+                $readableHorses[] = $category . ": (" . implode(", ", $horses) . ")";
+            }
+
             $data = array(
                 "name" => $row['name'],
                 "parentName" => $row['parentName'],
@@ -61,8 +88,8 @@ if ($order_id) {
                 "emergencyContact" => $row['emergencyContact'],
                 "emergencyRelation" => $row['emergencyRelation'],
                 "clubName" => $row['clubName'],
-                "events" => $row['selectedEvents'],
-                "eventHorses" => $row['eventHorses'],
+                "events" => implode(" | ", $readableEvents),
+                "eventHorses" => implode(" | ", $readableHorses),
                 "stablingType" => $row['stablingType'],
                 "stablingCount" => $row['stablingCount'],
                 "stablingFrom" => $row['stablingFrom'],
