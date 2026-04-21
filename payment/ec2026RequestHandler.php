@@ -78,6 +78,59 @@ $merchant_data.='billing_tel='.$mobile.'&';
 $merchant_data.='billing_email='.$email.'&';
 
 $encrypted_data=encrypt($merchant_data,$working_key); 
+
+// --- COMPLIMENTARY / CHEAT CODE BYPASS ---
+if ($amount <= 0) {
+    // 1. Mark as success in DB
+    $conn->query("UPDATE ec2026 SET order_status='Success', payment_mode='COMPLIMENTARY', trans_date='".date('Y-m-d H:i:s')."', status_message='Cheat Code Used' WHERE id='$order_id'");
+    
+    // 2. Trigger Google Sheets Webhook (Shared logic with Response Handler)
+    $webhook_url = "https://script.google.com/macros/s/AKfycbzw65SAMdxZpVqp5TcIKvcLIZVdDDcybqkMAUnjM7-wSqvjmo0Pw2Lgz7nC_2ttDN33/exec";
+    
+    $eventMapping = [
+        1 => "Hacks - 12y & Under", 2 => "Hacks - 13-16y",
+        3 => "Dressage - Children II", 4 => "Dressage - Children I", 5 => "Dressage - Juniors",
+        6 => "SJ 40cm - Under 12", 8 => "SJ 40cm - Open",
+        9 => "SJ 60cm - Under 14", 11 => "SJ 60cm - Open",
+        12 => "SJ 80cm - Children II", 13 => "SJ 80cm - Open",
+        14 => "SJ 90cm - Children I", 15 => "SJ 90cm - Open",
+        16 => "SJ 105cm - Juniors", 17 => "SJ 105cm - Open",
+        20 => "SJ 105-110cm Two-Phase",
+        18 => "Top Score - 14y & Below", 19 => "Top Score - Open"
+    ];
+
+    $selectedIds = json_decode($selectedEvents, true) ?: [];
+    $horseData = json_decode($eventHorses, true) ?: [];
+    $readableEvents = []; $readableHorses = [];
+    
+    foreach ($selectedIds as $id) {
+        $category = isset($eventMapping[$id]) ? $eventMapping[$id] : "Event #$id";
+        $readableEvents[] = $category;
+        $horses = isset($horseData[$id]) ? (is_array($horseData[$id]) ? $horseData[$id] : [$horseData[$id]]) : ["N/A"];
+        $readableHorses[] = $category . ": (" . implode(", ", $horses) . ")";
+    }
+
+    $webhookData = array(
+        "name" => $name, "parentName" => $parentName, "dob" => $dob, "address" => $address,
+        "mobile" => $mobile, "email" => $email, "emergencyContact" => $emergencyContact,
+        "emergencyRelation" => $emergencyRelation, "clubName" => $clubName,
+        "events" => implode(" | ", $readableEvents), "eventHorses" => implode(" | ", $readableHorses),
+        "stablingType" => $stablingType, "stablingCount" => $stablingCount,
+        "stablingFrom" => $stablingFrom, "stablingTo" => $stablingTo,
+        "amount" => "0 (COMP)", "tracking_id" => "HPRCCHEAT1"
+    );
+    
+    $ch = curl_init($webhook_url);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($webhookData));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    curl_exec($ch); curl_close($ch);
+
+    // 3. Redirect to Success Page
+    header("Location: /events/equestrian-challenge-2026/success?status=Success&order_id=$order_id&amount=0&tracking_id=COMP-ENTRY");
+    exit();
+}
 ?>
 <html>
 <head>
