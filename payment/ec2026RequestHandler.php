@@ -1,5 +1,7 @@
 <?php include('crypto.php');
 require("dbconnect.php");
+require("mailer.php");
+require("email_templates.php");
 
 $name = isset($_POST['name']) ? $_POST['name'] : '';
 $parentName = isset($_POST['parentName']) ? $_POST['parentName'] : '';
@@ -126,6 +128,26 @@ if ($amount <= 0) {
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
     curl_exec($ch); curl_close($ch);
+
+    // 4. Send Success Email via SES
+    if (!empty($email)) {
+        $details = ["events" => implode(" | ", $readableEvents)];
+        $htmlBody = get_success_email_body($name, $order_id, "0 (COMP)", "COMP-ENTRY", $details);
+        send_hprc_email($email, $name, "Registration Confirmed - HPRC Equestrian Challenge 2026", $htmlBody);
+        
+        // 4b. Send Detailed Admin Notification
+        $adminData = [
+            "name" => $name, "parentName" => $parentName, "dob" => $dob, "address" => $address,
+            "mobile" => $mobile, "email" => $email, "emergencyContact" => $emergencyContact,
+            "emergencyRelation" => $emergencyRelation, "clubName" => $clubName,
+            "events" => implode(" | ", $readableEvents), "eventHorses" => implode(" | ", $readableHorses),
+            "stablingType" => $stablingType, "stablingCount" => $stablingCount,
+            "stablingFrom" => $stablingFrom, "stablingTo" => $stablingTo,
+            "amount" => "0 (COMP)", "ageProofPath" => $ageProofPath
+        ];
+        $adminHtml = get_admin_notification_body($adminData, $order_id, "COMP-ENTRY");
+        send_admin_notification("COMPLIMENTARY REGISTRATION: $name (#$order_id)", $adminHtml);
+    }
 
     // 3. Redirect to Success Page
     header("Location: /events/equestrian-challenge-2026/success?status=Success&order_id=$order_id&amount=0&tracking_id=COMP-ENTRY");
