@@ -1,6 +1,6 @@
 <?php
 /**
- * HPRC SES Mailer Utility (with Debug Logging)
+ * HPRC SES Mailer Utility
  */
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -24,11 +24,6 @@ function send_hprc_email($toEmail, $toName, $subject, $htmlBody, $plainBody = ""
     try {
         // Server settings
         $mail->isSMTP();
-        $mail->SMTPDebug = 2; 
-        $mail->Debugoutput = function($str, $level) {
-            file_put_contents(__DIR__ . '/smtp_debug.log', "[" . date('Y-m-d H:i:s') . "] " . $str . "\n", FILE_APPEND);
-        };
-
         $mail->Host       = $env['SES_SMTP_HOST'];
         $mail->SMTPAuth   = true;
         $mail->Username   = $env['SES_SMTP_USER'];
@@ -50,7 +45,6 @@ function send_hprc_email($toEmail, $toName, $subject, $htmlBody, $plainBody = ""
         $mail->send();
         return ["success" => true];
     } catch (Exception $e) {
-        file_put_contents(__DIR__ . '/smtp_debug.log', "[" . date('Y-m-d H:i:s') . "] FATAL ERROR: " . $mail->ErrorInfo . "\n", FILE_APPEND);
         return ["success" => false, "error" => $mail->ErrorInfo];
     }
 }
@@ -66,11 +60,6 @@ function send_admin_notification($subject, $htmlBody) {
     $mail = new PHPMailer(true);
     try {
         $mail->isSMTP();
-        $mail->SMTPDebug = 2; 
-        $mail->Debugoutput = function($str, $level) {
-            file_put_contents(__DIR__ . '/smtp_debug.log', "[" . date('Y-m-d H:i:s') . "] ADMIN_SEND: " . $str . "\n", FILE_APPEND);
-        };
-
         $mail->Host       = $env['SES_SMTP_HOST'];
         $mail->SMTPAuth   = true;
         $mail->Username   = $env['SES_SMTP_USER'];
@@ -96,6 +85,6 @@ function send_admin_notification($subject, $htmlBody) {
 
         $mail->send();
     } catch (Exception $e) {
-        file_put_contents(__DIR__ . '/smtp_debug.log', "[" . date('Y-m-d H:i:s') . "] ADMIN_FATAL: " . $mail->ErrorInfo . "\n", FILE_APPEND);
+        // Fail silently for admin notifications
     }
 }
