@@ -3,21 +3,10 @@ include('crypto.php');
 require("dbconnect.php");
 require("mailer.php");
 require("email_templates.php");
-
-// DEBUG LOGGING
-function hlog($msg) {
-    file_put_contents(__DIR__ . '/handler_debug.log', "[" . date('Y-m-d H:i:s') . "] " . $msg . "\n", FILE_APPEND);
-}
-
-hlog("Handler Started");
+error_reporting(0);
 
 $workingKey='D21542B21357F51DA6027649B1E12DFE';		
 $encResponse=$_POST["encResp"];			
-
-if (!$encResponse) {
-    hlog("ERROR: No encResp received");
-}
-
 $rcvdString=decrypt($encResponse,$workingKey);		
 $order_status="";
 $decryptValues=explode('&', $rcvdString);
@@ -44,8 +33,6 @@ for($i = 0; $i < $dataSize; $i++) {
     else if($lable =='order_status') $order_status = $information[1];
 }
 
-hlog("Data Decrypted: Order ID $order_id, Status $order_status");
-
 if ($order_id) {
     // 1. Update the local MySQL EC2026 Database
     $updatesql = "UPDATE ec2026 SET tracking_id='".$conn->real_escape_string($tracking_id)."',
@@ -56,26 +43,18 @@ if ($order_id) {
                     trans_date='".$conn->real_escape_string($trans_date)."'
                     WHERE id='".$conn->real_escape_string($order_id)."'";
 
-    if ($conn->query($updatesql)) {
-        hlog("DB Update Successful for ID $order_id");
-    } else {
-        hlog("DB Update FAILED: " . $conn->error);
-    }
+    $conn->query($updatesql);
 
     // 2. Send Email Alerts via SES
     $userResult = $conn->query("SELECT name, email, selectedEvents FROM ec2026 WHERE id='".$conn->real_escape_string($order_id)."'");
     $userData = ($userResult && $userResult->num_rows > 0) ? $userResult->fetch_assoc() : null;
 
     if ($userData && !empty($userData['email'])) {
-        hlog("User Data found for email: " . $userData['email']);
-        
         if ($order_status === "Success" || $order_status === "Successful") {
-            hlog("Processing SUCCESS flow");
             // 2a. Fetch all details for Webhook & Detailed Email
             $result = $conn->query("SELECT name, parentName, dob, address, mobile, email, emergencyContact, emergencyRelation, clubName, selectedEvents, eventHorses, stablingType, stablingCount, stablingFrom, stablingTo, ageProofPath FROM ec2026 WHERE id='".$conn->real_escape_string($order_id)."'");
             
             if ($result && $row = $result->fetch_assoc()) {
-                hlog("Detailed record fetched");
                 $webhook_url = "https://script.google.com/macros/s/AKfycbzw65SAMdxZpVqp5TcIKvcLIZVdDDcybqkMAUnjM7-wSqvjmo0Pw2Lgz7nC_2ttDN33/exec";
                 $ageProofLink = !empty($row['ageProofPath']) ? "https://hprc.in/payment/" . $row['ageProofPath'] : "";
                 
@@ -102,24 +81,22 @@ if ($order_id) {
                     $readableHorses[] = $category . ": (" . implode(", ", $horses) . ")";
                 }
 
-                hlog("Attempting Rider Email Send...");
                 // 2b. Send Success Email via SES (BEFORE Webhook to avoid timeouts)
                 $details = ["events" => implode(" | ", $readableEvents)];
                 $htmlBody = get_success_email_body($userData['name'], $order_id, $mer_amount, $tracking_id, $details);
-                $res = send_hprc_email($userData['email'], $userData['name'], "Registration Confirmed - HPRC Equestrian Challenge 2026", $htmlBody);
-                hlog("Rider Email Result: " . ($res['success'] ? 'OK' : 'FAIL: '.$res['error']));
+                send_hprc_email($userData['email'], $userData['name'], "Registration Confirmed - HPRC Equestrian Challenge 2026", $htmlBody);
 
-                hlog("Attempting Admin Email Send...");
                 // 2c. Send Detailed Admin Notification
                 $adminData = $row; 
                 $adminData['events'] = implode(" | ", $readableEvents);
                 $adminData['eventHorses'] = implode(" | ", $readableHorses);
                 $adminData['amount'] = $mer_amount;
                 $adminHtml = get_admin_notification_body($adminData, $order_id, $tracking_id);
-                send_admin_notification("NEW REGISTRATION: {$userData['name']} (#{$order_id})", $adminHtml);
-                hlog("Admin Notification Sent");
+                
+                // Attach Age Proof if exists
+                $attachment = !empty($row['ageProofPath']) ? __DIR__ . '/' . $row['ageProofPath'] : null;
+                send_admin_notification("NEW REGISTRATION: {$userData['name']} (#{$order_id})", $adminHtml, $attachment);
 
-                hlog("Triggering Webhook...");
                 // 2d. Transmit success data to Google Sheets (Webhook last as it can be slow)
                 $webhookData = array(
                     "name" => $row['name'], "parentName" => $row['parentName'], "dob" => $row['dob'],
@@ -138,30 +115,18 @@ if ($order_id) {
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
                 curl_exec($ch); curl_close($ch);
-                hlog("Webhook complete");
-            } else {
-                hlog("ERROR: Detailed record not found for ID $order_id");
             }
         } else {
-            hlog("Processing FAILURE/ABORT flow. Status: $order_status");
             // 2c. Send Failure Email via SES
             $htmlBody = get_failed_email_body($userData['name'], $order_id, $status_message);
-            $res = send_hprc_email($userData['email'], $userData['name'], "Payment Notification - HPRC Equestrian Challenge 2026", $htmlBody);
-            hlog("Rider Failure Email Result: " . ($res['success'] ? 'OK' : 'FAIL: '.$res['error']));
+            send_hprc_email($userData['email'], $userData['name'], "Payment Notification - HPRC Equestrian Challenge 2026", $htmlBody);
 
             // 2d. Send Admin Failure Alert
             $adminHtml = get_admin_failed_notification_body($userData['name'], $order_id, $status_message, $userData['email']);
             send_admin_notification("PAYMENT FAILED: {$userData['name']} (#{$order_id})", $adminHtml);
-            hlog("Admin Failure Notification Sent");
         }
-    } else {
-        hlog("ERROR: User Data or Email missing for ID $order_id");
     }
-} else {
-    hlog("ERROR: Order ID is missing");
 }
-
-hlog("Handler finished. Redirecting...");
 
 // 3. Redirect back to React/Next.js UI success screen
 $redirect_url = '/events/equestrian-challenge-2026/success?status=' . urlencode($order_status) . 

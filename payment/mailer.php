@@ -49,7 +49,7 @@ function send_hprc_email($toEmail, $toName, $subject, $htmlBody, $plainBody = ""
     }
 }
 
-function send_admin_notification($subject, $htmlBody) {
+function send_admin_notification($subject, $htmlBody, $attachmentPath = null) {
     // Load .env
     $envPath = __DIR__ . '/../.env';
     if (!file_exists($envPath)) return;
@@ -76,6 +76,11 @@ function send_admin_notification($subject, $htmlBody) {
             if (!empty($email)) {
                 $mail->addAddress($email);
             }
+        }
+
+        // Attach file if path provided
+        if ($attachmentPath && file_exists($attachmentPath)) {
+            $mail->addAttachment($attachmentPath);
         }
 
         $mail->isHTML(true);
