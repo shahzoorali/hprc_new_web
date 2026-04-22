@@ -98,7 +98,7 @@ function get_failed_email_body($name, $orderId, $statusMessage) {
 function get_admin_notification_body($data, $orderId, $trackingId) {
     $events = !empty($data['events']) ? $data['events'] : "N/A";
     $horses = !empty($data['eventHorses']) ? $data['eventHorses'] : "N/A";
-    $ageProof = !empty($data['ageProofPath']) ? "https://hprc.in/payment/" . $data['ageProofPath'] : "None uploaded";
+    $ageProof = !empty($data['ageProofPath']) ? "https://hprc.in/payment/view_proof.php?file=" . urlencode(basename($data['ageProofPath'])) : "None uploaded";
     $logoUrl = "https://hprc.in/hprc_logo.png";
 
     return "
