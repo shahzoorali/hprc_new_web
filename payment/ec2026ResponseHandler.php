@@ -56,7 +56,7 @@ if ($order_id) {
             
             if ($result && $row = $result->fetch_assoc()) {
                 $webhook_url = "https://script.google.com/macros/s/AKfycbzw65SAMdxZpVqp5TcIKvcLIZVdDDcybqkMAUnjM7-wSqvjmo0Pw2Lgz7nC_2ttDN33/exec";
-                $ageProofLink = !empty($row['ageProofPath']) ? "https://hprc.in/payment/" . $row['ageProofPath'] : "";
+                $ageProofLink = !empty($row['ageProofPath']) ? "https://hprc.in/payment/view_proof.php?file=" . urlencode(basename($row['ageProofPath'])) : "";
                 
                 $eventMapping = [
                     1 => "Hacks - 12y & Under", 2 => "Hacks - 13-16y",

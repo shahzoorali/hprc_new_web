@@ -112,6 +112,8 @@ if ($amount <= 0) {
         $readableHorses[] = $category . ": (" . implode(", ", $horses) . ")";
     }
 
+    $ageProofLink = !empty($ageProofPath) ? "https://hprc.in/payment/view_proof.php?file=" . urlencode(basename($ageProofPath)) : "";
+
     $webhookData = array(
         "name" => $name, "parentName" => $parentName, "dob" => $dob, "address" => $address,
         "mobile" => $mobile, "email" => $email, "emergencyContact" => $emergencyContact,
@@ -119,7 +121,8 @@ if ($amount <= 0) {
         "events" => implode(" | ", $readableEvents), "eventHorses" => implode(" | ", $readableHorses),
         "stablingType" => $stablingType, "stablingCount" => $stablingCount,
         "stablingFrom" => $stablingFrom, "stablingTo" => $stablingTo,
-        "amount" => "0 (COMP)", "tracking_id" => "HPRCCHEAT1"
+        "amount" => "0 (COMP)", "tracking_id" => "HPRCCHEAT1",
+        "ageProofLink" => $ageProofLink
     );
     
     // 4. Send Success Email via SES (BEFORE Webhook)
