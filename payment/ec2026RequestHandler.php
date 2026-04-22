@@ -122,14 +122,7 @@ if ($amount <= 0) {
         "amount" => "0 (COMP)", "tracking_id" => "HPRCCHEAT1"
     );
     
-    $ch = curl_init($webhook_url);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($webhookData));
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-    curl_exec($ch); curl_close($ch);
-
-    // 4. Send Success Email via SES
+    // 4. Send Success Email via SES (BEFORE Webhook)
     if (!empty($email)) {
         $details = ["events" => implode(" | ", $readableEvents)];
         $htmlBody = get_success_email_body($name, $order_id, "0 (COMP)", "COMP-ENTRY", $details);
@@ -148,6 +141,14 @@ if ($amount <= 0) {
         $adminHtml = get_admin_notification_body($adminData, $order_id, "COMP-ENTRY");
         send_admin_notification("COMPLIMENTARY REGISTRATION: $name (#$order_id)", $adminHtml);
     }
+
+    // 2. Trigger Google Sheets Webhook (Webhook last as it can be slow)
+    $ch = curl_init($webhook_url);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($webhookData));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    curl_exec($ch); curl_close($ch);
 
     // 3. Redirect to Success Page
     header("Location: /events/equestrian-challenge-2026/success?status=Success&order_id=$order_id&amount=0&tracking_id=COMP-ENTRY");

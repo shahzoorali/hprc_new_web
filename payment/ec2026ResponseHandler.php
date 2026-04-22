@@ -51,8 +51,9 @@ if ($order_id) {
 
     if ($userData && !empty($userData['email'])) {
         if ($order_status === "Success" || $order_status === "Successful") {
-            // 2a. Transmit success data to Google Sheets
+            // 2a. Fetch all details for Webhook & Detailed Email
             $result = $conn->query("SELECT name, parentName, dob, address, mobile, email, emergencyContact, emergencyRelation, clubName, selectedEvents, eventHorses, stablingType, stablingCount, stablingFrom, stablingTo, ageProofPath FROM ec2026 WHERE id='".$conn->real_escape_string($order_id)."'");
+            
             if ($result && $row = $result->fetch_assoc()) {
                 $webhook_url = "https://script.google.com/macros/s/AKfycbzw65SAMdxZpVqp5TcIKvcLIZVdDDcybqkMAUnjM7-wSqvjmo0Pw2Lgz7nC_2ttDN33/exec";
                 $ageProofLink = !empty($row['ageProofPath']) ? "https://hprc.in/payment/" . $row['ageProofPath'] : "";
@@ -80,6 +81,20 @@ if ($order_id) {
                     $readableHorses[] = $category . ": (" . implode(", ", $horses) . ")";
                 }
 
+                // 2b. Send Success Email via SES (BEFORE Webhook to avoid timeouts)
+                $details = ["events" => implode(" | ", $readableEvents)];
+                $htmlBody = get_success_email_body($userData['name'], $order_id, $mer_amount, $tracking_id, $details);
+                send_hprc_email($userData['email'], $userData['name'], "Registration Confirmed - HPRC Equestrian Challenge 2026", $htmlBody);
+
+                // 2c. Send Detailed Admin Notification
+                $adminData = $row; 
+                $adminData['events'] = implode(" | ", $readableEvents);
+                $adminData['eventHorses'] = implode(" | ", $readableHorses);
+                $adminData['amount'] = $mer_amount;
+                $adminHtml = get_admin_notification_body($adminData, $order_id, $tracking_id);
+                send_admin_notification("NEW REGISTRATION: {$userData['name']} (#{$order_id})", $adminHtml);
+
+                // 2d. Transmit success data to Google Sheets (Webhook last as it can be slow)
                 $webhookData = array(
                     "name" => $row['name'], "parentName" => $row['parentName'], "dob" => $row['dob'],
                     "address" => $row['address'], "mobile" => $row['mobile'], "email" => $row['email'],
@@ -97,19 +112,6 @@ if ($order_id) {
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
                 curl_exec($ch); curl_close($ch);
-
-                // 2b. Send Success Email via SES
-                $details = ["events" => implode(" | ", $readableEvents)];
-                $htmlBody = get_success_email_body($userData['name'], $order_id, $mer_amount, $tracking_id, $details);
-                send_hprc_email($userData['email'], $userData['name'], "Registration Confirmed - HPRC Equestrian Challenge 2026", $htmlBody);
-
-                // 2c. Send Detailed Admin Notification
-                $adminData = $row; 
-                $adminData['events'] = implode(" | ", $readableEvents);
-                $adminData['eventHorses'] = implode(" | ", $readableHorses);
-                $adminData['amount'] = $mer_amount;
-                $adminHtml = get_admin_notification_body($adminData, $order_id, $tracking_id);
-                send_admin_notification("NEW REGISTRATION: {$userData['name']} (#{$order_id})", $adminHtml);
             }
         } else {
             // 2c. Send Failure Email via SES
