@@ -24,18 +24,27 @@ $currency = "INR";
 // Handle Age Proof Upload
 $ageProofPath = '';
 if (isset($_FILES['ageProof']) && $_FILES['ageProof']['error'] == 0) {
-    $uploadDir = 'uploads/ec2026/age_proofs/';
+    $uploadDir = __DIR__ . '/uploads/ec2026/age_proofs/';
     if (!is_dir($uploadDir)) {
-        mkdir($uploadDir, 0755, true);
+        if (!mkdir($uploadDir, 0755, true)) {
+            error_log("EC2026: Failed to create upload directory: " . $uploadDir);
+        }
     }
+    
     $safeName = preg_replace('/[^a-zA-Z0-9]/', '_', $name);
     $fileExtension = pathinfo($_FILES['ageProof']['name'], PATHINFO_EXTENSION);
     $fileName = $safeName . '_age_proof_' . time() . '.' . $fileExtension;
     $targetPath = $uploadDir . $fileName;
     
     if (move_uploaded_file($_FILES['ageProof']['tmp_name'], $targetPath)) {
-        $ageProofPath = $targetPath;
+        // Store relative path for database consistency
+        $ageProofPath = 'uploads/ec2026/age_proofs/' . $fileName;
+    } else {
+        error_log("EC2026: Failed to move uploaded file. Error Code: " . $_FILES['ageProof']['error'] . " | Target: " . $targetPath);
     }
+} else if (isset($_FILES['ageProof']) && $_FILES['ageProof']['error'] != 4) {
+    // Error 4 means no file was uploaded, which is fine. Other errors should be logged.
+    error_log("EC2026: File upload error detected. Code: " . $_FILES['ageProof']['error']);
 }
 
 $sql = "INSERT INTO ec2026 (name, parentName, dob, address, mobile, email, emergencyContact, emergencyRelation, clubName, selectedEvents, eventHorses, stablingType, stablingCount, stablingFrom, stablingTo, ageProofPath, amount, currency) 
@@ -125,28 +134,28 @@ if ($amount <= 0) {
         "ageProofLink" => $ageProofLink
     );
     
-    // 4. Send Success Email via SES (BEFORE Webhook)
+    // 4. Send Rider Confirmation Email (Only if email exists)
     if (!empty($email)) {
         $details = ["events" => implode(" | ", $readableEvents)];
         $htmlBody = get_success_email_body($name, $order_id, "0 (COMP)", "COMP-ENTRY", $details);
         send_hprc_email($email, $name, "Registration Confirmed - HPRC Equestrian Challenge 2026", $htmlBody);
-        
-        // 4b. Send Detailed Admin Notification
-        $adminData = [
-            "name" => $name, "parentName" => $parentName, "dob" => $dob, "address" => $address,
-            "mobile" => $mobile, "email" => $email, "emergencyContact" => $emergencyContact,
-            "emergencyRelation" => $emergencyRelation, "clubName" => $clubName,
-            "events" => implode(" | ", $readableEvents), "eventHorses" => implode(" | ", $readableHorses),
-            "stablingType" => $stablingType, "stablingCount" => $stablingCount,
-            "stablingFrom" => $stablingFrom, "stablingTo" => $stablingTo,
-            "amount" => "0 (COMP)", "ageProofPath" => $ageProofPath
-        ];
-        $adminHtml = get_admin_notification_body($adminData, $order_id, "COMP-ENTRY");
-        
-        // Attach Age Proof if exists
-        $attachment = !empty($ageProofPath) ? __DIR__ . '/' . $ageProofPath : null;
-        send_admin_notification("COMPLIMENTARY REGISTRATION: $name (#$order_id)", $adminHtml, $attachment);
     }
+
+    // 4b. Send Detailed Admin Notification (ALWAYS)
+    $adminData = [
+        "name" => $name, "parentName" => $parentName, "dob" => $dob, "address" => $address,
+        "mobile" => $mobile, "email" => $email, "emergencyContact" => $emergencyContact,
+        "emergencyRelation" => $emergencyRelation, "clubName" => $clubName,
+        "events" => implode(" | ", $readableEvents), "eventHorses" => implode(" | ", $readableHorses),
+        "stablingType" => $stablingType, "stablingCount" => $stablingCount,
+        "stablingFrom" => $stablingFrom, "stablingTo" => $stablingTo,
+        "amount" => "0 (COMP)", "ageProofPath" => $ageProofPath
+    ];
+    $adminHtml = get_admin_notification_body($adminData, $order_id, "COMP-ENTRY");
+    
+    // Attach Age Proof if exists
+    $attachment = !empty($ageProofPath) ? __DIR__ . '/' . $ageProofPath : null;
+    send_admin_notification("COMPLIMENTARY REGISTRATION: $name (#$order_id)", $adminHtml, $attachment);
 
     // 2. Trigger Google Sheets Webhook (Webhook last as it can be slow)
     $ch = curl_init($webhook_url);

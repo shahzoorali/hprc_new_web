@@ -49,7 +49,8 @@ if ($order_id) {
     $userResult = $conn->query("SELECT name, email, selectedEvents FROM ec2026 WHERE id='".$conn->real_escape_string($order_id)."'");
     $userData = ($userResult && $userResult->num_rows > 0) ? $userResult->fetch_assoc() : null;
 
-    if ($userData && !empty($userData['email'])) {
+    // 2. Process Notifications & External Sync
+    if ($userData) {
         if ($order_status === "Success" || $order_status === "Successful") {
             // 2a. Fetch all details for Webhook & Detailed Email
             $result = $conn->query("SELECT name, parentName, dob, address, mobile, email, emergencyContact, emergencyRelation, clubName, selectedEvents, eventHorses, stablingType, stablingCount, stablingFrom, stablingTo, ageProofPath FROM ec2026 WHERE id='".$conn->real_escape_string($order_id)."'");
@@ -81,15 +82,20 @@ if ($order_id) {
                     $readableHorses[] = $category . ": (" . implode(", ", $horses) . ")";
                 }
 
-                // 2b. Send Success Email via SES (BEFORE Webhook to avoid timeouts)
-                $details = ["events" => implode(" | ", $readableEvents)];
-                $htmlBody = get_success_email_body($userData['name'], $order_id, $mer_amount, $tracking_id, $details);
-                send_hprc_email($userData['email'], $userData['name'], "Registration Confirmed - HPRC Equestrian Challenge 2026", $htmlBody);
+                $eventList = implode(" | ", $readableEvents);
+                $horseList = implode(" | ", $readableHorses);
 
-                // 2c. Send Detailed Admin Notification
+                // 2b. Send Rider Confirmation Email (Only if email exists)
+                if (!empty($userData['email'])) {
+                    $details = ["events" => $eventList];
+                    $htmlBody = get_success_email_body($userData['name'], $order_id, $mer_amount, $tracking_id, $details);
+                    send_hprc_email($userData['email'], $userData['name'], "Registration Confirmed - HPRC Equestrian Challenge 2026", $htmlBody);
+                }
+
+                // 2c. Send Detailed Admin Notification (ALWAYS)
                 $adminData = $row; 
-                $adminData['events'] = implode(" | ", $readableEvents);
-                $adminData['eventHorses'] = implode(" | ", $readableHorses);
+                $adminData['events'] = $eventList;
+                $adminData['eventHorses'] = $horseList;
                 $adminData['amount'] = $mer_amount;
                 $adminHtml = get_admin_notification_body($adminData, $order_id, $tracking_id);
                 
@@ -97,13 +103,13 @@ if ($order_id) {
                 $attachment = !empty($row['ageProofPath']) ? __DIR__ . '/' . $row['ageProofPath'] : null;
                 send_admin_notification("NEW REGISTRATION: {$userData['name']} (#{$order_id})", $adminHtml, $attachment);
 
-                // 2d. Transmit success data to Google Sheets (Webhook last as it can be slow)
+                // 2d. Transmit success data to Google Sheets (ALWAYS)
                 $webhookData = array(
                     "name" => $row['name'], "parentName" => $row['parentName'], "dob" => $row['dob'],
                     "address" => $row['address'], "mobile" => $row['mobile'], "email" => $row['email'],
                     "emergencyContact" => $row['emergencyContact'], "emergencyRelation" => $row['emergencyRelation'],
-                    "clubName" => $row['clubName'], "events" => implode(" | ", $readableEvents),
-                    "eventHorses" => implode(" | ", $readableHorses), "stablingType" => $row['stablingType'],
+                    "clubName" => $row['clubName'], "events" => $eventList,
+                    "eventHorses" => $horseList, "stablingType" => $row['stablingType'],
                     "stablingCount" => $row['stablingCount'], "stablingFrom" => $row['stablingFrom'],
                     "stablingTo" => $row['stablingTo'], "ageProofLink" => $ageProofLink,
                     "amount" => $mer_amount, "tracking_id" => $tracking_id
@@ -117,15 +123,18 @@ if ($order_id) {
                 curl_exec($ch); curl_close($ch);
             }
         } else {
-            // 2c. Send Failure Email via SES
-            $htmlBody = get_failed_email_body($userData['name'], $order_id, $status_message);
-            send_hprc_email($userData['email'], $userData['name'], "Payment Notification - HPRC Equestrian Challenge 2026", $htmlBody);
+            // 2e. Send Failure Email via SES (Only if email exists)
+            if (!empty($userData['email'])) {
+                $htmlBody = get_failed_email_body($userData['name'], $order_id, $status_message);
+                send_hprc_email($userData['email'], $userData['name'], "Payment Notification - HPRC Equestrian Challenge 2026", $htmlBody);
+            }
 
-            // 2d. Send Admin Failure Alert
-            $adminHtml = get_admin_failed_notification_body($userData['name'], $order_id, $status_message, $userData['email']);
+            // 2f. Send Admin Failure Alert (ALWAYS)
+            $adminHtml = get_admin_failed_notification_body($userData['name'], $order_id, $status_message, $userData['email'] ?: "No Email Provided");
             send_admin_notification("PAYMENT FAILED: {$userData['name']} (#{$order_id})", $adminHtml);
         }
     }
+
 }
 
 // 3. Redirect back to React/Next.js UI success screen
