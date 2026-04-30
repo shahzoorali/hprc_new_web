@@ -106,8 +106,9 @@ if ($amount <= 0) {
         12 => "SJ 80cm - Children II", 13 => "SJ 80cm - Open",
         14 => "SJ 90cm - Children I", 15 => "SJ 90cm - Open",
         16 => "SJ 105cm - Juniors", 17 => "SJ 105cm - Open",
-        20 => "SJ 105-110cm Two-Phase",
-        18 => "Top Score - 14y & Below", 19 => "Top Score - Open"
+        20 => "Table C 105-110cm",
+        18 => "Top Score - 14y & Below", 19 => "Top Score - Open",
+        21 => "Practice Round 50cm", 22 => "Practice Round 90cm"
     ];
 
     $selectedIds = json_decode($selectedEvents, true) ?: [];
@@ -138,7 +139,8 @@ if ($amount <= 0) {
     if (!empty($email)) {
         $details = ["events" => implode(" | ", $readableEvents)];
         $htmlBody = get_success_email_body($name, $order_id, "0 (COMP)", "COMP-ENTRY", $details);
-        send_hprc_email($email, $name, "Registration Confirmed - HPRC Equestrian Challenge 2026", $htmlBody);
+        $etiquettePath = __DIR__ . '/../public/events/ec2026/HPRC_Equestrian_Challenge_2026_Etiquette_Conduct_Guidelines.pdf';
+        send_hprc_email($email, $name, "Registration Confirmed - HPRC Equestrian Challenge 2026", $htmlBody, "", $etiquettePath);
     }
 
     // 4b. Send Detailed Admin Notification (ALWAYS)

@@ -5,14 +5,14 @@ export const equestrianChallenge2026 = {
   meta: {
     title: "HPRC Equestrian Challenge 2026 | Hyderabad Polo & Riding Club",
     description:
-      "Register for the inaugural HPRC Equestrian Challenge 2026 — 16th & 17th May 2026 at Hyderabad Polo & Riding Club, Gandipet. Hacks, Dressage, Show Jumping & Top Score events.",
+      "Register for the inaugural HPRC Equestrian Challenge 2026 — 15th to 17th May 2026 at Hyderabad Polo & Riding Club, Gandipet. Hacks, Dressage, Show Jumping & Top Score events.",
   },
 
   event: {
     name: "HPRC Equestrian Challenge 2026",
     tagline: "The Inaugural HPRC Equestrian Challenge",
-    dates: "16th & 17th May 2026",
-    dateRange: { start: "2026-05-16T07:00:00+05:30", end: "2026-05-17T20:00:00+05:30" },
+    dates: "15th to 17th May 2026",
+    dateRange: { start: "2026-05-15T17:00:00+05:30", end: "2026-05-17T20:00:00+05:30" },
     venue: "Hyderabad Polo & Riding Club, Gandipet, Moinabad, Ranga Reddy",
     venueAddress: "Aziznagar Survey No. 177, Gandipet, Moinabad, Ranga Reddy District, Telangana – 500074",
     govBody: "Organised by HPRC",
@@ -30,14 +30,25 @@ export const equestrianChallenge2026 = {
 
   stats: [
     { value: "4", label: "Disciplines" },
-    { value: "19", label: "Classes" },
-    { value: "2", label: "Days" },
+    { value: "21", label: "Classes" },
+    { value: "3", label: "Days" },
     { value: "₹10K", label: "Top Prize" },
   ],
 
   schedule: [
     {
       day: "Day 1",
+      date: "Friday, 15 May 2026",
+      sessions: [
+        {
+          time: "Evening · 5:00 PM",
+          venue: "Ground 1 / Main Arena",
+          events: "Practice (Clear) Round — 50 cm (Ground 1), 90 cm (Main Arena)",
+        },
+      ],
+    },
+    {
+      day: "Day 2",
       date: "Saturday, 16 May 2026",
       sessions: [
         {
@@ -63,7 +74,7 @@ export const equestrianChallenge2026 = {
       ],
     },
     {
-      day: "Day 2",
+      day: "Day 3",
       date: "Sunday, 17 May 2026",
       sessions: [
         {
@@ -74,7 +85,7 @@ export const equestrianChallenge2026 = {
         {
           time: "Evening · 5:00 PM",
           venue: "Main Arena",
-          events: "Show Jumping — Two-Phase (105 - 110 cm)",
+          events: "Table C (105 - 110 cm)",
         },
         {
           time: "Followed By",
@@ -113,28 +124,32 @@ export const equestrianChallenge2026 = {
     // SHOW JUMPING 105 cm
     { id: 16, discipline: "SHOW JUMPING", category: "Juniors (14 - 18 years) (105 cm)", date: "17 May", fee: 2000, minAge: 14, maxAge: 18 },
     { id: 17, discipline: "SHOW JUMPING", category: "Open (105 cm)", date: "17 May", fee: 2000, minAge: 0, maxAge: 99 },
-    // SHOW JUMPING Two-Phase
-    { id: 20, discipline: "SHOW JUMPING", category: "Two-Phase (105 - 110 cm) (Open)", date: "17 May", fee: 2000, minAge: 0, maxAge: 99 },
+    // SHOW JUMPING Table C
+    { id: 20, discipline: "SHOW JUMPING", category: "Table C (105 - 110 cm) (Open)", date: "17 May", fee: 2000, minAge: 0, maxAge: 99 },
     // TOP SCORE
     { id: 18, discipline: "TOP SCORE", category: "14 years & Below", date: "17 May", fee: 2000, minAge: 0, maxAge: 14 },
     { id: 19, discipline: "TOP SCORE", category: "14+ years (Open)", date: "17 May", fee: 2000, minAge: 14, maxAge: 99 },
+    // PRACTICE ROUND
+    { id: 21, discipline: "PRACTICE ROUND", category: "50 cm (Ground 1)", date: "15 May", fee: 1000, minAge: 0, maxAge: 99 },
+    { id: 22, discipline: "PRACTICE ROUND", category: "90 cm (Main Arena)", date: "15 May", fee: 1000, minAge: 0, maxAge: 99 },
   ],
 
 
   prizeMoney: {
-    note: "Cash prizes for Open category participants only in 80 cm, 90 cm, 105 cm Show Jumping & Two-Phase. Age-category class winners (Children I, Children II, Junior) receive Medals & Certificates.",
+    note: "Cash prizes for Open category participants only in 80 cm, 90 cm, 105 cm Show Jumping, Table C & Top Score. Age-category class winners (Children I, Children II, Junior) receive Medals & Certificates.",
     table: [
       { height: "80 cm (Open)", gold: 10000, silver: 7500, bronze: 5000, fourth: 2500 },
       { height: "90 cm (Open)", gold: 10000, silver: 7500, bronze: 5000, fourth: 2500 },
       { height: "105 cm (Open)", gold: 10000, silver: 7500, bronze: 5000, fourth: 2500 },
-      { height: "Two-Phase (105-110 cm) (Open)", gold: 10000, silver: 7500, bronze: 5000, fourth: 2500 },
+      { height: "Table C (105-110 cm) (Open)", gold: 10000, silver: 7500, bronze: 5000, fourth: 2500 },
+      { height: "Top Score (Open)", gold: 10000, silver: 7500, bronze: 5000, fourth: 2500 },
     ],
   },
 
   requirements: [
     "Closing Date: Entries close at 18:00 hrs on Thursday, May 14, 2026. Entries thereafter are considered Post-Entries.",
     "Post-Entries: Accepted via Post Entry Form until 18:00 hrs on Friday, May 15, 2026. Fees apply.",
-    "No Spot Entries will be accepted under any circumstances.",
+    "We will not accept any Spot Entries for the competitive events.",
     "Age Proof Document (Aadhaar, Passport, or Birth Certificate) is mandatory for riders participating in age-category events — must be uploaded with the entry form.",
     "Entry Forms along with full entry fees must be submitted online.",
     "Entries received without supporting documents or fees will not be accepted.",
@@ -144,9 +159,10 @@ export const equestrianChallenge2026 = {
   stabling: {
     heading: "Stabling / Camp Details",
     description:
-      "The Camp will open on 13th May and close on 18th May 2026. All stable requests must be submitted via the HPRC Equestrian Challenge – Stabling Form before 10th May 2026 along with the relevant fees. Note that permanent stables are not available; only temporary stables are provided.",
+      "The Camp will open on 13th May and close on 18th May 2026. All stable requests must be submitted via the HPRC Equestrian Challenge – Stabling Form before 10th May 2026 along with the relevant fees.",
+    permanentAvailable: 15,
     details: [
-      "Stable fee: Stable fee will be ₹600 per stable per day for temporary stables, depending on availability.",
+      "Stable fee: ₹2,000 per stable per day for permanent stables and ₹1,000 per stable per day for temporary stables, depending on availability.",
       "Stable bookings will be confirmed only after receiving the full charges for the intended number of days.",
       "Self-Containment: All teams must bring their own rations, grass, straw, fodder, and equipment",
       "Staff: Teams must make their own arrangements for staff stay and food"
@@ -157,7 +173,7 @@ export const equestrianChallenge2026 = {
     "I declare that the details furnished above are correct to the best of my knowledge. I undertake no responsibility for any loss, damage or injury that may occur for me / my son, daughter, during the course of the event/s directly or indirectly from accident or any other causes. The Hyderabad Polo & Riding Club will not be held responsible for any first aid or other medical treatment provided.",
 
   importantNotes: [
-    "Number of Entries\n\nA horse may participate only once in each category within a given event or discipline.\nDay 1: A maximum of three entries per horse.\nDay 2: A maximum of two entries per session (morning and evening), with an overall limit of three entries per horse for the day.",
+    "Number of Entries\n\nA horse may participate only once in each category within a given event or discipline.\nDays 1 and 2: A horse can have no more than three entries.\nDay 3: A horse is allowed only two entries per session (morning / evening) and is limited to three entries for the day.",
     "Appropriate Riding Dress Code must be followed for all events.",
     "Medals & Certificates will be awarded to Category Winners.",
     "Prize Distribution Ceremony: Sunday, 17th May at ~7:30 PM.",

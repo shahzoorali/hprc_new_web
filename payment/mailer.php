@@ -10,7 +10,7 @@ require __DIR__ . '/PHPMailer/src/Exception.php';
 require __DIR__ . '/PHPMailer/src/PHPMailer.php';
 require __DIR__ . '/PHPMailer/src/SMTP.php';
 
-function send_hprc_email($toEmail, $toName, $subject, $htmlBody, $plainBody = "") {
+function send_hprc_email($toEmail, $toName, $subject, $htmlBody, $plainBody = "", $attachmentPath = null) {
     // Load .env
     $envPath = __DIR__ . '/../.env';
     if (!file_exists($envPath)) {
@@ -35,7 +35,11 @@ function send_hprc_email($toEmail, $toName, $subject, $htmlBody, $plainBody = ""
         $mail->setFrom($env['SES_SENDER_EMAIL'], 'HPRC Events');
         $mail->addAddress($toEmail, $toName);
         $mail->addReplyTo($env['SES_SENDER_EMAIL'], 'HPRC Events');
-        
+        // Add attachment if provided
+        if ($attachmentPath && file_exists($attachmentPath)) {
+            $mail->addAttachment($attachmentPath);
+        }
+
         // Content
         $mail->isHTML(true);
         $mail->Subject = $subject;

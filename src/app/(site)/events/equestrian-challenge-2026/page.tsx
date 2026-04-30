@@ -67,12 +67,15 @@ function DisciplineIcon({ discipline }: { discipline: string }) {
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
       </svg>
     );
-  // SHOW JUMPING default
-  return (
-    <svg className={cls} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714 2.143L13 3z" />
-    </svg>
-  );
+// SHOW JUMPING default
+  if (discipline === "SHOW JUMPING" || discipline === "PRACTICE ROUND") {
+    return (
+      <svg className={cls} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714 2.143L13 3z" />
+      </svg>
+    );
+  }
+  return null;
 }
 
 // ─── Registration Form ────────────────────────────────────────────────────────
@@ -88,7 +91,7 @@ type FormData = {
   clubName: string;
   selectedEvents: number[];
   eventHorses: Record<number, string[]>; // Changed to string[] to support up to 2 jumps
-  stablingType: "NONE" | "TEMPORARY";
+  stablingType: "NONE" | "TEMPORARY" | "PERMANENT";
   stablingCount: number;
   stablingFrom: string;
   stablingTo: string;
@@ -125,7 +128,7 @@ const INITIAL_FORM: FormData = {
 
 
 function RegistrationForm() {
-  const { events, declaration, event } = equestrianChallenge2026;
+  const { events, declaration, event, stabling } = equestrianChallenge2026;
   const formRef = React.useRef<HTMLFormElement | null>(null);
   const [form, setForm] = useState<FormData>(INITIAL_FORM);
   const [submitted, setSubmitted] = useState(false);
@@ -212,7 +215,7 @@ function RegistrationForm() {
         const diffTime = end.getTime() - start.getTime();
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
         if (diffDays > 0) {
-          const rate = 600;
+          const rate = form.stablingType === "PERMANENT" ? 2000 : 1000;
           sFees = rate * form.stablingCount * diffDays;
         }
       }
@@ -301,6 +304,12 @@ function RegistrationForm() {
     } else if (form.mobile.replace(/\D/g, '').length !== 10) {
       e.mobile = "Enter a valid 10-digit mobile number";
     }
+
+    if (!form.email.trim()) {
+      e.email = "Email ID is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+      e.email = "Enter a valid email address";
+    }
     
     if (!form.emergencyContact.trim()) {
       e.emergencyContact = "Emergency contact is required";
@@ -321,6 +330,51 @@ function RegistrationForm() {
     if (missingHorse) {
       e.eventHorsesGlobal = "Horse Name is required for all selected events and jumps";
       e.selectedEvents = "Please provide the horse name for all selected entries";
+    }
+
+    // Number of entries validation based on Days
+    const horseCounts: Record<string, Record<string, number>> = {
+      "15 May": {}, "16 May": {}, "17 May": {}
+    };
+    const horseCountsSession: Record<string, Record<string, number>> = {
+      "Morning": {}, "Evening": {}
+    };
+
+    activeSelected.forEach(id => {
+      const ev = eligibleEvents.find(eve => eve.id === id);
+      if (!ev) return;
+      const horses = form.eventHorses[id] || [];
+      horses.forEach(horse => {
+        if (!horse || !horse.trim()) return;
+        if (!horseCounts[ev.date]) horseCounts[ev.date] = {};
+        horseCounts[ev.date][horse] = (horseCounts[ev.date][horse] || 0) + 1;
+
+        if (ev.date === "17 May") {
+          let session = "Evening";
+          // Table C (105-110cm) is Evening. 90cm and 105cm SJ are Morning. Top Score is Evening.
+          if (ev.category.includes("90 cm") || (ev.category.includes("105 cm") && ev.discipline !== "Table C" && !ev.category.includes("Table C"))) {
+             session = "Morning";
+          }
+          if (!horseCountsSession[session]) horseCountsSession[session] = {};
+          horseCountsSession[session][horse] = (horseCountsSession[session][horse] || 0) + 1;
+        }
+      });
+    });
+
+    for (const [date, counts] of Object.entries(horseCounts)) {
+       for (const [horse, count] of Object.entries(counts)) {
+         if (count > 3) {
+            e.eventHorsesGlobal = `Horse "${horse}" exceeds the maximum of 3 entries on ${date}.`;
+         }
+       }
+    }
+    
+    for (const [session, counts] of Object.entries(horseCountsSession)) {
+       for (const [horse, count] of Object.entries(counts)) {
+         if (count > 2) {
+            e.eventHorsesGlobal = `Horse "${horse}" exceeds the maximum of 2 entries in the Day 3 ${session} session.`;
+         }
+       }
     }
 
     const hasAgeBasedEvent = form.selectedEvents.some(id => {
@@ -405,8 +459,9 @@ function RegistrationForm() {
     );
   }
 
-  const disciplineGroups = ["HACKS", "DRESSAGE", "SHOW JUMPING", "TOP SCORE"];
+  const disciplineGroups = ["PRACTICE ROUND", "HACKS", "DRESSAGE", "SHOW JUMPING", "TOP SCORE"];
   const disciplineColors: Record<string, string> = {
+    "PRACTICE ROUND": "bg-emerald-50 border-emerald-200",
     HACKS: "bg-amber-50 border-amber-200",
     DRESSAGE: "bg-blue-50 border-blue-200",
     "SHOW JUMPING": "bg-brand-50 border-brand-200",
@@ -547,15 +602,16 @@ function RegistrationForm() {
           {/* Email */}
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-1.5" htmlFor="ec-email">
-              Email ID
+              Email ID <span className="text-brand-500">*</span>
             </label>
             <input
               id="ec-email"
               type="email"
               value={form.email}
               onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
-              className="w-full border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition"
+              className={`w-full border px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition ${errors.email ? "border-red-400 bg-red-50" : "border-gray-200 bg-white"}`}
             />
+            {errors.email && <p className="mt-1 text-xs text-red-500">{errors.email}</p>}
           </div>
           {/* Emergency */}
           <div>
@@ -834,7 +890,7 @@ function RegistrationForm() {
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-1.5">Stable Type</label>
               <div className="flex bg-white p-1 border border-gray-200">
-                {(["NONE", "TEMPORARY"] as const).map((type) => (
+                {(["NONE", "TEMPORARY", "PERMANENT"] as const).map((type) => (
                   <button
                     key={type}
                     type="button"
@@ -845,6 +901,11 @@ function RegistrationForm() {
                   </button>
                 ))}
               </div>
+              {form.stablingType === "PERMANENT" && (
+                <p className="mt-2 text-xs font-bold text-brand-600">
+                  {stabling.permanentAvailable} Permanent Stables Available (Limited)
+                </p>
+              )}
             </div>
 
             {form.stablingType !== "NONE" && (
