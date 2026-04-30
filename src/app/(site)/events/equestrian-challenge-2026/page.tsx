@@ -1070,7 +1070,7 @@ function RegistrationForm() {
               <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
-              {totalFee === 0 ? "Submit Complimentary Entry" : "Proceed to Payment"}
+              {form.specialNotes.includes("HPRCCHEAT1") ? "Submit Complimentary Entry" : "Proceed to Payment"}
             </button>
             <p className="mt-3 text-xs text-gray-500">
               {entryStatus === "POST_ENTRY" 
