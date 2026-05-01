@@ -88,7 +88,7 @@ export default function HomePage() {
                     </div>
                     <div>
                       <p className="text-[10px] font-bold uppercase tracking-widest text-white/50">Dates</p>
-                      <p className="text-sm font-bold text-white">May 16 & 17, 2026</p>
+                      <p className="text-sm font-bold text-white">May 15 - 17, 2026</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-4">
@@ -140,7 +140,7 @@ export default function HomePage() {
                    <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-transparent to-transparent opacity-60"></div>
                    <div className="absolute bottom-10 left-10 right-10 p-6 bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl">
                      <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-400 mb-1">Featured Highlight</p>
-                     <p className="text-lg font-bold text-white leading-tight">Two-Phase (105-110 cm) Show Jumping</p>
+                     <p className="text-lg font-bold text-white leading-tight">Table C (105-110 cm) Show Jumping</p>
                    </div>
                 </div>
               </div>
