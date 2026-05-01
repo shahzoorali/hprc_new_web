@@ -390,7 +390,12 @@ function RegistrationForm() {
     }
 
     if (form.stablingType !== "NONE") {
-        if (form.stablingCount <= 0) e.stablingCount = "Please enter number of stables";
+        if (form.stablingCount <= 0) {
+            e.stablingCount = "Please enter number of stables";
+        } else if (form.stablingType === "PERMANENT" && form.stablingCount > stabling.permanentAvailable) {
+            e.stablingCount = `Only ${stabling.permanentAvailable} permanent stables are currently available`;
+        }
+        
         const start = new Date(form.stablingFrom);
         const end = new Date(form.stablingTo);
         if (end < start) e.stablingDates = "Check-out date cannot be before check-in date";
