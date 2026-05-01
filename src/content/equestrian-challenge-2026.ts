@@ -16,7 +16,7 @@ export const equestrianChallenge2026 = {
     venue: "Hyderabad Polo & Riding Club, Gandipet, Moinabad, Ranga Reddy",
     venueAddress: "Aziznagar Survey No. 177, Gandipet, Moinabad, Ranga Reddy District, Telangana – 500074",
     govBody: "Organised by HPRC",
-    contact: ["+91 9949000085", "+91 9177000056", "+91 7799259000"],
+    contact: ["+91 9949000085", "+91 7799259000"],
     email: "ridingschool@bbin.in",
     sessions: {
       morning: "7:00 AM to 9:00 AM",
@@ -147,8 +147,8 @@ export const equestrianChallenge2026 = {
   },
 
   requirements: [
-    "Closing Date: Entries close at 18:00 hrs on Thursday, May 14, 2026. Entries thereafter are considered Post-Entries.",
-    "Post-Entries: Accepted via Post Entry Form until 18:00 hrs on Friday, May 15, 2026. Fees apply.",
+    "Closing Date: Entries close at 18:00 hrs on Thursday, May 14, 2026. Any entries received after this time will be considered as Post-Entries.",
+    "Post-Entries: Accepted until 18:00 hrs on Friday, May 15, 2026. Additional fees apply for all post-entries.",
     "We will not accept any Spot Entries for the competitive events.",
     "Age Proof Document (Aadhaar, Passport, or Birth Certificate) is mandatory for riders participating in age-category events — must be uploaded with the entry form.",
     "Entry Forms along with full entry fees must be submitted online.",

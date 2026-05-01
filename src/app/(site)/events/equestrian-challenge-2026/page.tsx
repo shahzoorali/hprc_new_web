@@ -1242,13 +1242,13 @@ export default function EquestrianChallenge2026Page() {
                 The Inaugural Equestrian Challenge
               </h2>
               <p className="mt-5 text-base sm:text-lg text-gray-700 leading-relaxed font-light">
-                We are delighted to announce that the Hyderabad Polo &amp; Riding Club will be hosting its <strong>inaugural HPRC Equestrian Challenge 2026</strong> on 16th and 17th May 2026 at the Club grounds, Gandipet. This is an exciting opportunity for all riders to compete, showcase their skills, and represent their clubs in a formal equestrian competition.
+                We are delighted to announce that the Hyderabad Polo &amp; Riding Club will be hosting its <strong>inaugural HPRC Equestrian Challenge 2026</strong> on {event.dates} at the Club grounds, Gandipet. This is an exciting opportunity for all riders to compete, showcase their skills, and represent their clubs in a formal equestrian competition.
               </p>
               <p className="mt-4 text-base text-gray-600 leading-relaxed font-light">
                 The competition is open to riders from all EFI-affiliated clubs and units across the region, featuring Hacks, Dressage, Show Jumping, and Top Score events. Cash prizes are awarded to Open category Show Jumping finishers.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
-                {["Open Competition", "2-Day Event", "Floodlit Evening Sessions"].map((tag) => (
+                {["Open Competition", "3-Day Event", "Floodlit Evening Sessions"].map((tag) => (
                   <span key={tag} className="inline-flex items-center bg-white border border-brand-200 text-brand-700 text-xs font-semibold px-3 py-1.5 shadow-sm">
                     {tag}
                   </span>
@@ -1257,7 +1257,7 @@ export default function EquestrianChallenge2026Page() {
             </div>
             <div className="space-y-4">
               {[
-                { icon: "📅", label: "Dates", value: "16th & 17th May 2026" },
+                { icon: "📅", label: "Dates", value: event.dates },
                 { icon: "📍", label: "Venue", value: event.venueAddress },
                 { icon: "🌅", label: "Morning", value: event.sessions.morning },
                 { icon: "🌙", label: "Evening", value: event.sessions.evening },
@@ -1296,7 +1296,7 @@ export default function EquestrianChallenge2026Page() {
                 <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-500">Official Document</span>
               </div>
               <a
-                href="/docs/events/equestrian-challenge-2026/prospectus.pdf"
+                href="/events/ec2026/HPRC_Equestrian_Challenge_2026_Prospectus.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group relative inline-flex flex-col sm:flex-row items-center gap-4 bg-brand-900 px-10 py-6 text-white shadow-[0_20px_50px_rgba(227,30,36,0.3)] transition-all duration-500 hover:shadow-[0_30px_60px_rgba(227,30,36,0.5)] hover:-translate-y-1"

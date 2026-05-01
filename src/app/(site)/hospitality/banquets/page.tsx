@@ -268,7 +268,7 @@ export default function BanquetsPage() {
                 </svg>
               </Link>
               <a
-                href="tel:+919177000056"
+                href="tel:+919949000085"
                 className="inline-flex items-center gap-2 border-2 border-white/30 hover:border-white/60 text-white hover:bg-white/10 px-8 py-4 rounded-full font-semibold transition-all duration-300"
               >
                 <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

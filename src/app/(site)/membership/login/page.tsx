@@ -18,8 +18,7 @@ export default function MemberLoginPage() {
         <p>
           The online member portal is currently being refreshed. For immediate assistance with
           bookings or statements, please reach out to the membership desk at{" "}
-          <a href="mailto:info@hprc.co.in">info@hprc.co.in</a> or call{" "}
-          <a href="tel:+919177000056">+91 9177 00 00 56</a>.
+          <a href="mailto:info@hprc.co.in">info@hprc.co.in</a>. If you are unable to login, please contact the club office for support.
         </p>
       </section>
     </div>

@@ -40,13 +40,10 @@ function get_success_email_body($name, $orderId, $amount, $trackingId, $details 
                 {$eventsHtml}
             </div>
 
-            <p style='font-size: 16px;'>We look forward to seeing you at the event on <strong>16th & 17th May 2026</strong>.</p>
+            <p style='font-size: 16px;'>We look forward to seeing you at the event on <strong>15th to 17th May 2026</strong>.</p>
             
             <div style='margin-top: 40px; padding-top: 25px; border-top: 1px solid #f0f0f0; color: #777; font-size: 14px; text-align: center;'>
-                <p style='margin-bottom: 5px;'>If you have any questions, please contact us:</p>
-                <p style='margin-top: 0;'>
-                    +91 9177000056
-                </p>
+                <p style='margin-bottom: 5px;'>If you have any questions, please contact the club office for support.</p>
                 <p style='margin-top: 25px; font-weight: bold; color: #1a1a1a;'>Team HPRC</p>
             </div>
         </div>
@@ -82,7 +79,7 @@ function get_failed_email_body($name, $orderId, $statusMessage) {
             <div style='margin-top: 40px; padding-top: 25px; border-top: 1px solid #f0f0f0; color: #777; font-size: 14px; text-align: center;'>
                 <p style='margin-bottom: 5px;'>For assistance, please contact us:</p>
                 <p style='margin-top: 0;'>
-                    +91 9177000056
+                    +91 9949000085
                 </p>
                 <p style='margin-top: 25px; font-weight: bold; color: #1a1a1a;'>Team HPRC</p>
             </div>
