@@ -409,6 +409,7 @@ function RegistrationForm() {
   const showAgeProof = useMemo(() => {
     return form.selectedEvents.some(id => {
       const ev = eligibleEvents.find(eve => eve.id === id);
+      // Logic: If maxAge is less than 99, it's an age-restricted class
       return ev && ev.maxAge !== undefined && ev.maxAge < 99;
     });
   }, [form.selectedEvents, eligibleEvents]);
@@ -1003,7 +1004,7 @@ function RegistrationForm() {
       </div>
 
       {showAgeProof && (
-        <div className="space-y-6">
+        <div className="space-y-6" id="age-proof-section">
           <h3 className="text-xl font-bold text-brand-900 font-display flex items-center gap-3">
             <span className="flex h-8 w-8 items-center justify-center bg-brand-500 text-white text-sm font-bold">6</span>
             Age Proof Upload
@@ -1023,6 +1024,15 @@ function RegistrationForm() {
             {errors.ageProof && <p className="mt-2 text-xs text-red-500 font-bold">{errors.ageProof}</p>}
           </div>
         </div>
+      )}
+
+      {!showAgeProof && form.selectedEvents.length > 0 && (
+         <div className="bg-gray-50 border border-gray-200 p-4 rounded-xl text-[10px] text-gray-500 flex items-center gap-2">
+            <svg className="h-3 w-3 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Age proof is not required for your selected Open categories.
+         </div>
       )}
 
       {/* ── Final Total Display ────────────────────────── */}
@@ -1541,7 +1551,7 @@ export default function EquestrianChallenge2026Page() {
                 <svg className="h-4 w-4 text-amber-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                Age Proof documents must be submitted along with the entry.
+                Age Proof is mandatory only for age-restricted classes (Not required for Open classes).
               </div>
             </div>
             <RegistrationForm />
