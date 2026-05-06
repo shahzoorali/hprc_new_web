@@ -111,7 +111,9 @@ if ($order_id) {
                     $horses = isset($horseData[$id]) ? (is_array($horseData[$id]) ? $horseData[$id] : [$horseData[$id]]) : ["N/A"];
 
                     $webhookData = array(
-                        "name" => $row['name'], "parentName" => $row['parentName'], "dob" => $row['dob'],
+                        "name" => $row['name'], 
+                        "dob" => $row['dob'], 
+                        "parentName" => $row['parentName'],
                         "address" => $row['address'], "mobile" => $row['mobile'], "email" => $row['email'],
                         "emergencyContact" => $row['emergencyContact'], "emergencyRelation" => $row['emergencyRelation'],
                         "clubName" => $row['clubName'], 

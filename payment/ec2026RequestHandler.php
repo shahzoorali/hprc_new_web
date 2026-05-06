@@ -123,7 +123,10 @@ if ($amount <= 0) {
         $horses = isset($horseData[$id]) ? (is_array($horseData[$id]) ? $horseData[$id] : [$horseData[$id]]) : ["N/A"];
         
         $webhookPayloads[] = array(
-            "name" => $name, "parentName" => $parentName, "dob" => $dob, "address" => $address,
+            "name" => $name, 
+            "dob" => $dob,
+            "parentName" => $parentName, 
+            "address" => $address,
             "mobile" => $mobile, "email" => $email, "emergencyContact" => $emergencyContact,
             "emergencyRelation" => $emergencyRelation, "clubName" => $clubName,
             "events" => $category, 
