@@ -113,8 +113,30 @@ if ($amount <= 0) {
 
     $selectedIds = json_decode($selectedEvents, true) ?: [];
     $horseData = json_decode($eventHorses, true) ?: [];
-    $readableEvents = []; $readableHorses = [];
     
+    $ageProofLink = !empty($ageProofPath) ? "https://hprc.in/payment/view_proof.php?file=" . urlencode(basename($ageProofPath)) : "";
+
+    // Prepare an array of webhook payloads (one per event)
+    $webhookPayloads = [];
+    foreach ($selectedIds as $id) {
+        $category = isset($eventMapping[$id]) ? $eventMapping[$id] : "Event #$id";
+        $horses = isset($horseData[$id]) ? (is_array($horseData[$id]) ? $horseData[$id] : [$horseData[$id]]) : ["N/A"];
+        
+        $webhookPayloads[] = array(
+            "name" => $name, "parentName" => $parentName, "dob" => $dob, "address" => $address,
+            "mobile" => $mobile, "email" => $email, "emergencyContact" => $emergencyContact,
+            "emergencyRelation" => $emergencyRelation, "clubName" => $clubName,
+            "events" => $category, 
+            "eventHorses" => implode(", ", $horses),
+            "stablingType" => $stablingType, "stablingCount" => $stablingCount,
+            "stablingFrom" => $stablingFrom, "stablingTo" => $stablingTo,
+            "amount" => "0 (COMP)", "tracking_id" => "HPRCCHEAT1-" . $id,
+            "ageProofLink" => $ageProofLink
+        );
+    }
+
+    // For backward compatibility or other logic, keeping these for emails
+    $readableEvents = []; $readableHorses = [];
     foreach ($selectedIds as $id) {
         $category = isset($eventMapping[$id]) ? $eventMapping[$id] : "Event #$id";
         $readableEvents[] = $category;
@@ -122,18 +144,6 @@ if ($amount <= 0) {
         $readableHorses[] = $category . ": (" . implode(", ", $horses) . ")";
     }
 
-    $ageProofLink = !empty($ageProofPath) ? "https://hprc.in/payment/view_proof.php?file=" . urlencode(basename($ageProofPath)) : "";
-
-    $webhookData = array(
-        "name" => $name, "parentName" => $parentName, "dob" => $dob, "address" => $address,
-        "mobile" => $mobile, "email" => $email, "emergencyContact" => $emergencyContact,
-        "emergencyRelation" => $emergencyRelation, "clubName" => $clubName,
-        "events" => implode(" | ", $readableEvents), "eventHorses" => implode(" | ", $readableHorses),
-        "stablingType" => $stablingType, "stablingCount" => $stablingCount,
-        "stablingFrom" => $stablingFrom, "stablingTo" => $stablingTo,
-        "amount" => "0 (COMP)", "tracking_id" => "HPRCCHEAT1",
-        "ageProofLink" => $ageProofLink
-    );
     
     // 4. Send Rider Confirmation Email (Only if email exists)
     if (!empty($email)) {
@@ -159,13 +169,17 @@ if ($amount <= 0) {
     $attachment = !empty($ageProofPath) ? __DIR__ . '/' . $ageProofPath : null;
     send_admin_notification("COMPLIMENTARY REGISTRATION: $name (#$order_id)", $adminHtml, $attachment);
 
-    // 2. Trigger Google Sheets Webhook (Webhook last as it can be slow)
-    $ch = curl_init($webhook_url);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($webhookData));
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-    curl_exec($ch); curl_close($ch);
+    // 2. Trigger Google Sheets Webhook for each event entry
+    foreach ($webhookPayloads as $payload) {
+        $ch = curl_init($webhook_url);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_exec($ch); 
+        curl_close($ch);
+    }
+
 
     // 3. Redirect to Success Page
     header("Location: /events/equestrian-challenge-2026/success?status=Success&order_id=$order_id&amount=0&tracking_id=COMP-ENTRY");

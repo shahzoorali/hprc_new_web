@@ -105,24 +105,33 @@ if ($order_id) {
                 $attachment = !empty($row['ageProofPath']) ? __DIR__ . '/' . $row['ageProofPath'] : null;
                 send_admin_notification("NEW REGISTRATION: {$userData['name']} (#{$order_id})", $adminHtml, $attachment);
 
-                // 2d. Transmit success data to Google Sheets (ALWAYS)
-                $webhookData = array(
-                    "name" => $row['name'], "parentName" => $row['parentName'], "dob" => $row['dob'],
-                    "address" => $row['address'], "mobile" => $row['mobile'], "email" => $row['email'],
-                    "emergencyContact" => $row['emergencyContact'], "emergencyRelation" => $row['emergencyRelation'],
-                    "clubName" => $row['clubName'], "events" => $eventList,
-                    "eventHorses" => $horseList, "stablingType" => $row['stablingType'],
-                    "stablingCount" => $row['stablingCount'], "stablingFrom" => $row['stablingFrom'],
-                    "stablingTo" => $row['stablingTo'], "ageProofLink" => $ageProofLink,
-                    "amount" => $mer_amount, "tracking_id" => $tracking_id
-                );
-                
-                $ch = curl_init($webhook_url);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($webhookData));
-                curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-                curl_exec($ch); curl_close($ch);
+                // 2d. Transmit success data to Google Sheets (One row per event)
+                foreach ($selectedIds as $id) {
+                    $category = isset($eventMapping[$id]) ? $eventMapping[$id] : "Event #$id";
+                    $horses = isset($horseData[$id]) ? (is_array($horseData[$id]) ? $horseData[$id] : [$horseData[$id]]) : ["N/A"];
+
+                    $webhookData = array(
+                        "name" => $row['name'], "parentName" => $row['parentName'], "dob" => $row['dob'],
+                        "address" => $row['address'], "mobile" => $row['mobile'], "email" => $row['email'],
+                        "emergencyContact" => $row['emergencyContact'], "emergencyRelation" => $row['emergencyRelation'],
+                        "clubName" => $row['clubName'], 
+                        "events" => $category,
+                        "eventHorses" => implode(", ", $horses), 
+                        "stablingType" => $row['stablingType'],
+                        "stablingCount" => $row['stablingCount'], "stablingFrom" => $row['stablingFrom'],
+                        "stablingTo" => $row['stablingTo'], "ageProofLink" => $ageProofLink,
+                        "amount" => $mer_amount, "tracking_id" => $tracking_id . " (#$id)"
+                    );
+                    
+                    $ch = curl_init($webhook_url);
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($webhookData));
+                    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+                    curl_exec($ch); 
+                    curl_close($ch);
+                }
+
             }
         } else {
             // 2e. Send Failure Email via SES (Only if email exists)
