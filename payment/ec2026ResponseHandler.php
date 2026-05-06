@@ -106,9 +106,43 @@ if ($order_id) {
                 send_admin_notification("NEW REGISTRATION: {$userData['name']} (#{$order_id})", $adminHtml, $attachment);
 
                 // 2d. Transmit success data to Google Sheets (One row per event)
+                // Calculate itemized fees to bundle stabling into the first row
+                $baseFees = [
+                    1 => 1500, 2 => 1500, // Hacks
+                    3 => 2000, 4 => 2000, 5 => 2000, // Dressage
+                    6 => 2000, 8 => 2000, 9 => 2000, 11 => 2000, 12 => 2000, // SJ
+                    13 => 2000, 14 => 2000, 15 => 2000, 16 => 2000, 17 => 2000, 20 => 2000, // SJ
+                    18 => 2000, 19 => 2000, // Top Score
+                    21 => 1000, 22 => 1000 // Practice
+                ];
+
+                $deadline = strtotime('2026-05-14 18:00:00');
+                $currentTime = !empty($trans_date) ? strtotime($trans_date) : time();
+                $surcharge = ($currentTime > $deadline) ? 500 : 0;
+
+                $eventTotal = 0;
+                $calculatedFees = [];
+                foreach ($selectedIds as $id) {
+                    $base = isset($baseFees[$id]) ? $baseFees[$id] : 2000;
+                    $count = isset($horseData[$id]) ? (is_array($horseData[$id]) ? count($horseData[$id]) : 1) : 1;
+                    $fee = ($base + $surcharge) * $count;
+                    $calculatedFees[$id] = $fee;
+                    $eventTotal += $fee;
+                }
+
+                $stablingBalance = (float)$mer_amount - $eventTotal;
+                $isFirstRow = true;
+
                 foreach ($selectedIds as $id) {
                     $category = isset($eventMapping[$id]) ? $eventMapping[$id] : "Event #$id";
                     $horses = isset($horseData[$id]) ? (is_array($horseData[$id]) ? $horseData[$id] : [$horseData[$id]]) : ["N/A"];
+
+                    // Bundle stabling into the first event row
+                    $displayAmount = $calculatedFees[$id];
+                    if ($isFirstRow) {
+                        $displayAmount += $stablingBalance;
+                        $isFirstRow = false;
+                    }
 
                     $webhookData = array(
                         "name" => $row['name'], 
@@ -122,7 +156,7 @@ if ($order_id) {
                         "stablingType" => $row['stablingType'],
                         "stablingCount" => $row['stablingCount'], "stablingFrom" => $row['stablingFrom'],
                         "stablingTo" => $row['stablingTo'], "ageProofLink" => $ageProofLink,
-                        "amount" => $mer_amount, "tracking_id" => $tracking_id . " (#$id)"
+                        "amount" => $displayAmount, "tracking_id" => $tracking_id . " (#$id)"
                     );
                     
                     $ch = curl_init($webhook_url);
