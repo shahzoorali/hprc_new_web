@@ -117,7 +117,9 @@ if ($order_id) {
                 ];
 
                 $deadline = strtotime('2026-05-14 18:00:00');
-                $currentTime = !empty($trans_date) ? strtotime($trans_date) : time();
+                // CCAvenue often sends dd/mm/yyyy. strtotime treats slashes as m/d/y. 
+                // Replacing slashes with hyphens forces d-m-y parsing.
+                $currentTime = !empty($trans_date) ? strtotime(str_replace('/', '-', $trans_date)) : time();
                 $surcharge = ($currentTime > $deadline) ? 500 : 0;
 
                 $eventTotal = 0;
