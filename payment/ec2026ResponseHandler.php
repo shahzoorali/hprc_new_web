@@ -34,6 +34,11 @@ for($i = 0; $i < $dataSize; $i++) {
 }
 
 if ($order_id) {
+    // 0. Check if order has already been processed with this exact status (to prevent duplicate webhooks/emails on refresh)
+    $checkResult = $conn->query("SELECT order_status FROM ec2026 WHERE id='".$conn->real_escape_string($order_id)."'");
+    $currentData = ($checkResult && $checkResult->num_rows > 0) ? $checkResult->fetch_assoc() : null;
+    $isDuplicateHit = ($currentData && $currentData['order_status'] === $order_status);
+
     // 1. Update the local MySQL EC2026 Database
     $updatesql = "UPDATE ec2026 SET tracking_id='".$conn->real_escape_string($tracking_id)."',
                     bank_ref_no='".$conn->real_escape_string($bank_ref_no)."',
@@ -50,7 +55,7 @@ if ($order_id) {
     $userData = ($userResult && $userResult->num_rows > 0) ? $userResult->fetch_assoc() : null;
 
     // 2. Process Notifications & External Sync
-    if ($userData) {
+    if ($userData && !$isDuplicateHit) {
         if ($order_status === "Success" || $order_status === "Successful") {
             // 2a. Fetch all details for Webhook & Detailed Email
             $result = $conn->query("SELECT name, parentName, dob, address, mobile, email, emergencyContact, emergencyRelation, clubName, selectedEvents, eventHorses, stablingType, stablingCount, stablingFrom, stablingTo, ageProofPath FROM ec2026 WHERE id='".$conn->real_escape_string($order_id)."'");
