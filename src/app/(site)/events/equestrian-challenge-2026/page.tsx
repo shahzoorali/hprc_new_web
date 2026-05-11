@@ -896,7 +896,7 @@ function RegistrationForm() {
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-1.5">Stable Type</label>
               <div className="flex bg-white p-1 border border-gray-200">
-                {(["NONE", "TEMPORARY", "PERMANENT"] as const).map((type) => (
+                {(["NONE", "PERMANENT"] as const).map((type) => (
                   <button
                     key={type}
                     type="button"

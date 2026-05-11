@@ -162,7 +162,7 @@ export const equestrianChallenge2026 = {
       "The Camp will open on 13th May and close on 18th May 2026. All stable requests must be submitted via the HPRC Equestrian Challenge – Stabling Form before 10th May 2026 along with the relevant fees.",
     permanentAvailable: 20,
     details: [
-      "Stable fee: ₹2,000 per stable per day for permanent stables and ₹1,000 per stable per day for temporary stables, depending on availability.",
+      "Stable fee: ₹2,000 per stable per day (Permanent Stables only).",
       "Stable bookings will be confirmed only after receiving the full charges for the intended number of days.",
       "Self-Containment: All teams must bring their own rations, grass, straw, fodder, and equipment",
       "Staff: Teams must make their own arrangements for staff stay and food"
