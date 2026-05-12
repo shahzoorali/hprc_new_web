@@ -1,8 +1,15 @@
 <?php
+// Performance hardening: prevent timeout during slow ops (DB + email + Sheets webhook).
+set_time_limit(120);
+ignore_user_abort(true);
+ini_set('max_execution_time', 120);
+ini_set('default_socket_timeout', 30);
+
 include('crypto.php');
 require("dbconnect.php");
 require("mailer.php");
 require("email_templates.php");
+require_once("InventoryManager.php");
 error_reporting(0);
 
 $workingKey='D21542B21357F51DA6027649B1E12DFE';		
@@ -61,6 +68,40 @@ if ($order_id) {
             $result = $conn->query("SELECT name, parentName, dob, address, mobile, email, emergencyContact, emergencyRelation, clubName, selectedEvents, eventHorses, stablingType, stablingCount, stablingFrom, stablingTo, ageProofPath FROM ec2026 WHERE id='".$conn->real_escape_string($order_id)."'");
             
             if ($result && $row = $result->fetch_assoc()) {
+                // Deduct stabling inventory immediately (critical, before background work).
+                if ($row['stablingType'] === 'PERMANENT'
+                    && (int)$row['stablingCount'] > 0
+                    && !empty($row['stablingFrom'])
+                    && !empty($row['stablingTo'])) {
+                    $im = new InventoryManager();
+                    $im->deductInventory(
+                        $order_id,
+                        $row['name'],
+                        (int)$row['stablingCount'],
+                        $row['stablingFrom'],
+                        $row['stablingTo']
+                    );
+                }
+
+                // Send redirect to the user NOW so the browser isn't blocked
+                // waiting on emails + Google Sheets webhooks. Background work
+                // continues server-side via fastcgi_finish_request().
+                $redirect_url_early = '/events/equestrian-challenge-2026/success?status=' . urlencode($order_status) .
+                                      '&order_id=' . urlencode($order_id) .
+                                      '&amount=' . urlencode($mer_amount) .
+                                      '&tracking_id=' . urlencode($tracking_id) .
+                                      '&status_message=' . urlencode($status_message);
+                header("Location: " . $redirect_url_early);
+                header("Content-Length: 0");
+                header("Connection: close");
+                if (function_exists('ob_get_level') && ob_get_level() > 0) {
+                    @ob_end_flush();
+                }
+                @flush();
+                if (function_exists('fastcgi_finish_request')) {
+                    fastcgi_finish_request();
+                }
+
                 $webhook_url = "https://script.google.com/macros/s/AKfycbzw65SAMdxZpVqp5TcIKvcLIZVdDDcybqkMAUnjM7-wSqvjmo0Pw2Lgz7nC_2ttDN33/exec";
                 $ageProofLink = !empty($row['ageProofPath']) ? "https://hprc.in/payment/view_proof.php?file=" . urlencode(basename($row['ageProofPath'])) : "";
                 
@@ -177,6 +218,9 @@ if ($order_id) {
                         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
                         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+                        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
+                        curl_setopt($ch, CURLOPT_TIMEOUT, 8);
+                        curl_setopt($ch, CURLOPT_NOSIGNAL, 1);
                         curl_exec($ch);
                         curl_close($ch);
                     }

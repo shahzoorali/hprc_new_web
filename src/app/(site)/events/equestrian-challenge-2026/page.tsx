@@ -127,6 +127,15 @@ const INITIAL_FORM: FormData = {
 };
 
 
+type StablingAvailability = {
+  permanentCapacity: number;
+  dailyAvailability: Record<string, number>;
+  minAvailable: number;
+  lastUpdated: string;
+};
+
+const STABLING_API_URL = "https://hprc.in/payment/api/stabling-available.php";
+
 function RegistrationForm() {
   const { events, declaration, event, stabling } = equestrianChallenge2026;
   const formRef = React.useRef<HTMLFormElement | null>(null);
@@ -135,13 +144,77 @@ function RegistrationForm() {
   const [errors, setErrors] = useState<Partial<Record<keyof FormData | "ageProof" | "eventHorsesGlobal" | "stablingDates", string>>>({});
   const [draftExists, setDraftExists] = useState(false);
 
+  // Stabling inventory state — fetched live from server, falls back to hardcoded value on error.
+  const [inventory, setInventory] = useState<StablingAvailability | null>(null);
+  const [inventoryLoading, setInventoryLoading] = useState(false);
+  const [inventoryError, setInventoryError] = useState<string | null>(null);
+  const abortRef = React.useRef<AbortController | null>(null);
+  const debounceRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const fetchAvailability = useCallback((from: string, to: string) => {
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(async () => {
+      // Cancel any in-flight request before starting a new one.
+      abortRef.current?.abort();
+      const controller = new AbortController();
+      abortRef.current = controller;
+      setInventoryLoading(true);
+      setInventoryError(null);
+      try {
+        const res = await fetch(
+          `${STABLING_API_URL}?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`,
+          { signal: controller.signal, cache: "no-store" }
+        );
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data: StablingAvailability = await res.json();
+        setInventory(data);
+      } catch (err: unknown) {
+        if (err instanceof DOMException && err.name === "AbortError") return;
+        setInventoryError("Couldn't verify live availability — using cached limit.");
+      } finally {
+        if (abortRef.current === controller) setInventoryLoading(false);
+      }
+    }, 400);
+  }, []);
+
+  // Server-side rejection banner (RequestHandler bounces back with ?stabling_error=…)
+  const [serverStablingError, setServerStablingError] = useState<string | null>(null);
+
   React.useEffect(() => {
     // Check if there is a saved registration in localStorage
     try {
       const existing = JSON.parse(localStorage.getItem("ec2026-registrations") ?? "[]");
       if (existing && existing.length > 0) setDraftExists(true);
     } catch {}
-  }, []);
+    // Pick up a server-side stabling rejection from the URL.
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const err = params.get("stabling_error");
+      if (err) {
+        setServerStablingError(err);
+        // Clean the URL so reload doesn't keep showing the banner.
+        params.delete("stabling_error");
+        const cleanUrl = window.location.pathname + (params.toString() ? `?${params}` : "") + window.location.hash;
+        window.history.replaceState({}, "", cleanUrl);
+      }
+    }
+    // Kick off initial availability fetch for the default date window.
+    fetchAvailability(INITIAL_FORM.stablingFrom, INITIAL_FORM.stablingTo);
+    return () => {
+      abortRef.current?.abort();
+      if (debounceRef.current) clearTimeout(debounceRef.current);
+    };
+  }, [fetchAvailability]);
+
+  // Re-fetch availability whenever stabling dates change.
+  React.useEffect(() => {
+    if (form.stablingFrom && form.stablingTo) {
+      fetchAvailability(form.stablingFrom, form.stablingTo);
+    }
+  }, [form.stablingFrom, form.stablingTo, fetchAvailability]);
+
+  // Effective availability: live value if loaded, else fallback to hardcoded.
+  const liveMinAvailable = inventory?.minAvailable ?? stabling.permanentAvailable;
 
 
   const restoreDraft = () => {
@@ -392,13 +465,18 @@ function RegistrationForm() {
     if (form.stablingType !== "NONE") {
         if (form.stablingCount <= 0) {
             e.stablingCount = "Please enter number of stables";
-        } else if (form.stablingType === "PERMANENT" && form.stablingCount > stabling.permanentAvailable) {
-            e.stablingCount = `Only ${stabling.permanentAvailable} permanent stables are currently available`;
+        } else if (form.stablingType === "PERMANENT" && form.stablingCount > liveMinAvailable) {
+            e.stablingCount = `Only ${liveMinAvailable} permanent stable${liveMinAvailable === 1 ? "" : "s"} available for your selected dates`;
         }
-        
+
         const start = new Date(form.stablingFrom);
         const end = new Date(form.stablingTo);
         if (end < start) e.stablingDates = "Check-out date cannot be before check-in date";
+
+        // Block submission while we're still checking availability — avoids stale-data overbookings.
+        if (inventoryLoading) {
+            e.stablingCount = "Verifying live stable availability — please wait a moment";
+        }
     }
     
     if (!form.declaration) e.declaration = "You must accept the declaration";
@@ -889,6 +967,18 @@ function RegistrationForm() {
           <span className="flex h-8 w-8 items-center justify-center bg-brand-500 text-white text-sm font-bold">4</span>
           Stabling (Optional)
         </h3>
+        {serverStablingError && (
+          <div className="bg-red-50 border border-red-200 p-4 rounded-xl flex items-start gap-3">
+            <svg className="h-5 w-5 text-red-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            <div>
+              <p className="text-sm font-bold text-red-900">Stabling booking rejected</p>
+              <p className="text-xs text-red-700 mt-1">{serverStablingError}</p>
+              <p className="text-xs text-red-600 mt-1">Please adjust the number of stables or your dates and try again.</p>
+            </div>
+          </div>
+        )}
         <div className="bg-blue-50/50 border border-blue-100 p-5 sm:p-6 rounded-2xl space-y-5">
           <p className="text-xs text-blue-700 font-medium">Type of stables are subject to availability. Camp window: 13th May – 18th May 2026.</p>
           
@@ -908,8 +998,22 @@ function RegistrationForm() {
                 ))}
               </div>
               {form.stablingType === "PERMANENT" && (
-                <p className="mt-2 text-xs font-bold text-brand-600">
-                  {stabling.permanentAvailable} Permanent Stables Available (Limited)
+                <p className="mt-2 text-xs font-bold text-brand-600 flex items-center gap-2">
+                  {inventoryLoading ? (
+                    <>
+                      <svg className="h-3.5 w-3.5 animate-spin text-brand-500" viewBox="0 0 24 24" fill="none">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
+                      </svg>
+                      Checking live availability…
+                    </>
+                  ) : inventoryError ? (
+                    <span className="text-amber-600">⚠️ {inventoryError} (Limit: {stabling.permanentAvailable})</span>
+                  ) : (
+                    <>
+                      {liveMinAvailable} Permanent Stable{liveMinAvailable === 1 ? "" : "s"} Available for your dates (Limited)
+                    </>
+                  )}
                 </p>
               )}
             </div>
@@ -1080,12 +1184,25 @@ function RegistrationForm() {
             <button
               type="submit"
               id="ec-submit"
-              className="inline-flex items-center gap-3 bg-gradient-to-r from-brand-500 to-brand-600 text-white px-10 py-4 text-base font-bold shadow-xl shadow-brand-500/30 hover:from-brand-600 hover:to-brand-700 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-2xl hover:shadow-brand-500/40"
+              disabled={form.stablingType === "PERMANENT" && inventoryLoading}
+              title={form.stablingType === "PERMANENT" && inventoryLoading ? "Confirming stable availability…" : ""}
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-brand-500 to-brand-600 text-white px-10 py-4 text-base font-bold shadow-xl shadow-brand-500/30 hover:from-brand-600 hover:to-brand-700 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-2xl hover:shadow-brand-500/40 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0"
             >
-              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-              {form.specialNotes.includes("HPRCCHEAT1") ? "Submit Complimentary Entry" : "Proceed to Payment"}
+              {form.stablingType === "PERMANENT" && inventoryLoading ? (
+                <svg className="h-5 w-5 animate-spin" viewBox="0 0 24 24" fill="none">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
+                </svg>
+              ) : (
+                <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              )}
+              {form.stablingType === "PERMANENT" && inventoryLoading
+                ? "Verifying availability…"
+                : form.specialNotes.includes("HPRCCHEAT1")
+                  ? "Submit Complimentary Entry"
+                  : "Proceed to Payment"}
             </button>
             <p className="mt-3 text-xs text-gray-500">
               {entryStatus === "POST_ENTRY" 

@@ -1,7 +1,15 @@
-<?php include('crypto.php');
+<?php
+// Performance hardening: prevent timeout during slow ops (DB + email + webhook).
+set_time_limit(120);
+ignore_user_abort(true);
+ini_set('max_execution_time', 120);
+ini_set('default_socket_timeout', 30);
+
+include('crypto.php');
 require("dbconnect.php");
 require("mailer.php");
 require("email_templates.php");
+require_once("InventoryManager.php");
 
 $name = isset($_POST['name']) ? $_POST['name'] : '';
 $parentName = isset($_POST['parentName']) ? $_POST['parentName'] : '';
@@ -47,7 +55,21 @@ if (isset($_FILES['ageProof']) && $_FILES['ageProof']['error'] == 0) {
     error_log("EC2026: File upload error detected. Code: " . $_FILES['ageProof']['error']);
 }
 
-$sql = "INSERT INTO ec2026 (name, parentName, dob, address, mobile, email, emergencyContact, emergencyRelation, clubName, selectedEvents, eventHorses, stablingType, stablingCount, stablingFrom, stablingTo, ageProofPath, amount, currency) 
+// Pre-flight inventory check for PERMANENT stables before creating the order.
+// Prevents orders we can't honour. Form already checks, this is the authoritative server-side gate.
+if ($stablingType === 'PERMANENT' && (int)$stablingCount > 0 && !empty($stablingFrom) && !empty($stablingTo)) {
+    $im = new InventoryManager();
+    $check = $im->canBook((int)$stablingCount, $stablingFrom, $stablingTo);
+    if (!$check['ok']) {
+        $reason = isset($check['reason']) ? $check['reason'] : 'Stables unavailable for selected dates';
+        error_log("EC2026: Stabling rejected for $name — $reason");
+        $back = '/events/equestrian-challenge-2026?stabling_error=' . urlencode($reason);
+        header("Location: $back");
+        exit();
+    }
+}
+
+$sql = "INSERT INTO ec2026 (name, parentName, dob, address, mobile, email, emergencyContact, emergencyRelation, clubName, selectedEvents, eventHorses, stablingType, stablingCount, stablingFrom, stablingTo, ageProofPath, amount, currency)
         VALUES ('".$conn->real_escape_string($name)."', 
                 '".$conn->real_escape_string($parentName)."', 
                 '".$conn->real_escape_string($dob)."', 
@@ -94,6 +116,12 @@ $encrypted_data=encrypt($merchant_data,$working_key);
 if ($amount <= 0) {
     // 1. Mark as success in DB
     $conn->query("UPDATE ec2026 SET order_status='Success', payment_mode='COMPLIMENTARY', trans_date='".date('Y-m-d H:i:s')."', status_message='Cheat Code Used' WHERE id='$order_id'");
+
+    // 1b. Deduct stabling inventory for complimentary booking
+    if ($stablingType === 'PERMANENT' && (int)$stablingCount > 0 && !empty($stablingFrom) && !empty($stablingTo)) {
+        $imComp = new InventoryManager();
+        $imComp->deductInventory($order_id, $name, (int)$stablingCount, $stablingFrom, $stablingTo);
+    }
     
     // 2. Trigger Google Sheets Webhook (Shared logic with Response Handler)
     $webhook_url = "https://script.google.com/macros/s/AKfycbzw65SAMdxZpVqp5TcIKvcLIZVdDDcybqkMAUnjM7-wSqvjmo0Pw2Lgz7nC_2ttDN33/exec";
@@ -184,7 +212,10 @@ if ($amount <= 0) {
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-        curl_exec($ch); 
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 8);
+        curl_setopt($ch, CURLOPT_NOSIGNAL, 1);
+        curl_exec($ch);
         curl_close($ch);
     }
 
