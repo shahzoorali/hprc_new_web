@@ -113,7 +113,7 @@ export const equestrianChallenge2026 = {
     { id: 6, discipline: "SHOW JUMPING", category: "Under 12 years (40 cm)", date: "16 May", fee: 2000, minAge: 0, maxAge: 11 },
     { id: 8, discipline: "SHOW JUMPING", category: "Open (40 cm)", date: "16 May", fee: 2000, minAge: 0, maxAge: 99 },
     // SHOW JUMPING 60 cm
-    { id: 9, discipline: "SHOW JUMPING", category: "Under 14 years (60 cm)", date: "16 May", fee: 2000, minAge: 0, maxAge: 13 },
+    { id: 9, discipline: "SHOW JUMPING", category: "Under 14 years (60 cm)", date: "16 May", fee: 2000, minAge: 0, maxAge: 14 },
     { id: 11, discipline: "SHOW JUMPING", category: "Open (60 cm)", date: "16 May", fee: 2000, minAge: 0, maxAge: 99 },
     // SHOW JUMPING 80 cm
     { id: 12, discipline: "SHOW JUMPING", category: "Children II (10 - 12 years) (80 cm)", date: "16 May", fee: 2000, minAge: 10, maxAge: 12 },
@@ -128,7 +128,7 @@ export const equestrianChallenge2026 = {
     { id: 20, discipline: "SHOW JUMPING", category: "Table C (105 - 110 cm) (Open)", date: "17 May", fee: 2000, minAge: 0, maxAge: 99 },
     // TOP SCORE
     { id: 18, discipline: "TOP SCORE", category: "14 years & Below", date: "17 May", fee: 2000, minAge: 0, maxAge: 14 },
-    { id: 19, discipline: "TOP SCORE", category: "14+ years (Open)", date: "17 May", fee: 2000, minAge: 14, maxAge: 99 },
+    { id: 19, discipline: "TOP SCORE", category: "14+ years (Open)", date: "17 May", fee: 2000, minAge: 0, maxAge: 99 },
     // PRACTICE ROUND
     { id: 21, discipline: "PRACTICE ROUND", category: "50 cm (Ground 1)", date: "15 May", fee: 1000, minAge: 0, maxAge: 99 },
     { id: 22, discipline: "PRACTICE ROUND", category: "90 cm (Main Arena)", date: "15 May", fee: 1000, minAge: 0, maxAge: 99 },
