@@ -5,24 +5,39 @@
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use Aws\SecretsManager\SecretsManagerClient;
+use Aws\Exception\AwsException;
 
 require __DIR__ . '/PHPMailer/src/Exception.php';
 require __DIR__ . '/PHPMailer/src/PHPMailer.php';
 require __DIR__ . '/PHPMailer/src/SMTP.php';
+require __DIR__ . '/vendor/autoload.php';
+
+function hprc_get_ses_config() {
+    static $cache = null;
+    if ($cache !== null) {
+        return $cache;
+    }
+    $client = new SecretsManagerClient([
+        'region'  => 'ap-south-1',
+        'version' => 'latest',
+    ]);
+    $result = $client->getSecretValue(['SecretId' => 'hprc']);
+    $cache = json_decode($result['SecretString'], true);
+    return $cache;
+}
 
 function send_hprc_email($toEmail, $toName, $subject, $htmlBody, $plainBody = "", $attachmentPath = null) {
-    // Load .env
-    $envPath = __DIR__ . '/../.env';
-    if (!file_exists($envPath)) {
-        return ["success" => false, "error" => ".env file not found"];
+    try {
+        $env = hprc_get_ses_config();
+    } catch (AwsException $e) {
+        error_log("hprc mailer: Secrets Manager fetch failed: " . $e->getAwsErrorMessage());
+        return ["success" => false, "error" => "config unavailable"];
     }
-    
-    $env = parse_ini_file($envPath);
-    
+
     $mail = new PHPMailer(true);
 
     try {
-        // Server settings
         $mail->isSMTP();
         $mail->Host       = $env['SES_SMTP_HOST'];
         $mail->SMTPAuth   = true;
@@ -31,16 +46,13 @@ function send_hprc_email($toEmail, $toName, $subject, $htmlBody, $plainBody = ""
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port       = $env['SES_SMTP_PORT'];
 
-        // Recipients
         $mail->setFrom($env['SES_SENDER_EMAIL'], 'HPRC Events');
         $mail->addAddress($toEmail, $toName);
         $mail->addReplyTo($env['SES_SENDER_EMAIL'], 'HPRC Events');
-        // Add attachment if provided
         if ($attachmentPath && file_exists($attachmentPath)) {
             $mail->addAttachment($attachmentPath);
         }
 
-        // Content
         $mail->isHTML(true);
         $mail->Subject = $subject;
         $mail->Body    = $htmlBody;
@@ -54,11 +66,13 @@ function send_hprc_email($toEmail, $toName, $subject, $htmlBody, $plainBody = ""
 }
 
 function send_admin_notification($subject, $htmlBody, $attachmentPath = null) {
-    // Load .env
-    $envPath = __DIR__ . '/../.env';
-    if (!file_exists($envPath)) return;
-    $env = parse_ini_file($envPath);
-    
+    try {
+        $env = hprc_get_ses_config();
+    } catch (AwsException $e) {
+        error_log("hprc admin mailer: Secrets Manager fetch failed: " . $e->getAwsErrorMessage());
+        return;
+    }
+
     if (empty($env['SES_ADMIN_EMAIL'])) return;
 
     $mail = new PHPMailer(true);
@@ -72,8 +86,7 @@ function send_admin_notification($subject, $htmlBody, $attachmentPath = null) {
         $mail->Port       = $env['SES_SMTP_PORT'];
 
         $mail->setFrom($env['SES_SENDER_EMAIL'], 'HPRC Admin Bot');
-        
-        // Add multiple admin emails if present (comma separated)
+
         $admins = explode(',', $env['SES_ADMIN_EMAIL']);
         foreach ($admins as $admin) {
             $email = trim($admin);
@@ -82,7 +95,6 @@ function send_admin_notification($subject, $htmlBody, $attachmentPath = null) {
             }
         }
 
-        // Attach file if path provided
         if ($attachmentPath && file_exists($attachmentPath)) {
             $mail->addAttachment($attachmentPath);
         }
