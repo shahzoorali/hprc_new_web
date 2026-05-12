@@ -116,26 +116,31 @@ if ($amount <= 0) {
     
     $ageProofLink = !empty($ageProofPath) ? "https://hprc.in/payment/view_proof.php?file=" . urlencode(basename($ageProofPath)) : "";
 
-    // Prepare an array of webhook payloads (one per event)
+    // Prepare an array of webhook payloads (one per jump)
     $webhookPayloads = [];
     foreach ($selectedIds as $id) {
         $category = isset($eventMapping[$id]) ? $eventMapping[$id] : "Event #$id";
         $horses = isset($horseData[$id]) ? (is_array($horseData[$id]) ? $horseData[$id] : [$horseData[$id]]) : ["N/A"];
-        
-        $webhookPayloads[] = array(
-            "name" => $name, 
-            "dob" => $dob,
-            "parentName" => $parentName, 
-            "address" => $address,
-            "mobile" => $mobile, "email" => $email, "emergencyContact" => $emergencyContact,
-            "emergencyRelation" => $emergencyRelation, "clubName" => $clubName,
-            "events" => $category, 
-            "eventHorses" => implode(", ", $horses),
-            "stablingType" => $stablingType, "stablingCount" => $stablingCount,
-            "stablingFrom" => $stablingFrom, "stablingTo" => $stablingTo,
-            "amount" => "0 (COMP)", "tracking_id" => "HPRCCHEAT1-" . $id,
-            "ageProofLink" => $ageProofLink
-        );
+
+        foreach ($horses as $jumpIdx => $horse) {
+            $jumpNumber = $jumpIdx + 1;
+            $jumpLabel = (count($horses) > 1) ? " - Jump $jumpNumber" : "";
+
+            $webhookPayloads[] = array(
+                "name" => $name,
+                "dob" => $dob,
+                "parentName" => $parentName,
+                "address" => $address,
+                "mobile" => $mobile, "email" => $email, "emergencyContact" => $emergencyContact,
+                "emergencyRelation" => $emergencyRelation, "clubName" => $clubName,
+                "events" => $category . $jumpLabel,
+                "eventHorses" => $horse,
+                "stablingType" => $stablingType, "stablingCount" => $stablingCount,
+                "stablingFrom" => $stablingFrom, "stablingTo" => $stablingTo,
+                "amount" => "0 (COMP)", "tracking_id" => "HPRCCHEAT1-" . $id . "-J" . $jumpNumber,
+                "ageProofLink" => $ageProofLink
+            );
+        }
     }
 
     // For backward compatibility or other logic, keeping these for emails
