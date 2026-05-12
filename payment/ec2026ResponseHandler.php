@@ -143,36 +143,43 @@ if ($order_id) {
                 foreach ($selectedIds as $id) {
                     $category = isset($eventMapping[$id]) ? $eventMapping[$id] : "Event #$id";
                     $horses = isset($horseData[$id]) ? (is_array($horseData[$id]) ? $horseData[$id] : [$horseData[$id]]) : ["N/A"];
+                    $base = isset($baseFees[$id]) ? $baseFees[$id] : 2000;
+                    $perJumpFee = $base + $surcharge;
 
-                    // Bundle stabling into the first event row
-                    $displayAmount = $calculatedFees[$id];
-                    if ($isFirstRow) {
-                        $displayAmount += $stablingBalance;
-                        $isFirstRow = false;
+                    foreach ($horses as $jumpIdx => $horse) {
+                        // Bundle stabling into the very first jump row
+                        $displayAmount = $perJumpFee;
+                        if ($isFirstRow) {
+                            $displayAmount += $stablingBalance;
+                            $isFirstRow = false;
+                        }
+
+                        $jumpNumber = $jumpIdx + 1;
+                        $jumpLabel = (count($horses) > 1) ? " - Jump $jumpNumber" : "";
+
+                        $webhookData = array(
+                            "name" => $row['name'],
+                            "dob" => $row['dob'],
+                            "parentName" => $row['parentName'],
+                            "address" => $row['address'], "mobile" => $row['mobile'], "email" => $row['email'],
+                            "emergencyContact" => $row['emergencyContact'], "emergencyRelation" => $row['emergencyRelation'],
+                            "clubName" => $row['clubName'],
+                            "events" => $category . $jumpLabel,
+                            "eventHorses" => $horse,
+                            "stablingType" => $row['stablingType'],
+                            "stablingCount" => $row['stablingCount'], "stablingFrom" => $row['stablingFrom'],
+                            "stablingTo" => $row['stablingTo'], "ageProofLink" => $ageProofLink,
+                            "amount" => $displayAmount, "tracking_id" => $tracking_id . " (#$id-J$jumpNumber)"
+                        );
+
+                        $ch = curl_init($webhook_url);
+                        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($webhookData));
+                        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+                        curl_exec($ch);
+                        curl_close($ch);
                     }
-
-                    $webhookData = array(
-                        "name" => $row['name'], 
-                        "dob" => $row['dob'], 
-                        "parentName" => $row['parentName'],
-                        "address" => $row['address'], "mobile" => $row['mobile'], "email" => $row['email'],
-                        "emergencyContact" => $row['emergencyContact'], "emergencyRelation" => $row['emergencyRelation'],
-                        "clubName" => $row['clubName'], 
-                        "events" => $category,
-                        "eventHorses" => implode(", ", $horses), 
-                        "stablingType" => $row['stablingType'],
-                        "stablingCount" => $row['stablingCount'], "stablingFrom" => $row['stablingFrom'],
-                        "stablingTo" => $row['stablingTo'], "ageProofLink" => $ageProofLink,
-                        "amount" => $displayAmount, "tracking_id" => $tracking_id . " (#$id)"
-                    );
-                    
-                    $ch = curl_init($webhook_url);
-                    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($webhookData));
-                    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-                    curl_exec($ch); 
-                    curl_close($ch);
                 }
 
             }
