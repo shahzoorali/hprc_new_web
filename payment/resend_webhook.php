@@ -94,13 +94,16 @@ foreach ($selectedIds as $id) {
             "amount" => $displayAmount, "tracking_id" => $row['tracking_id'] . " (RESENT-#$id-J$jumpNumber)"
         );
 
-        $ch = curl_init($webhook_url);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($webhookData));
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-        $response = curl_exec($ch);
-        curl_close($ch);
+        $options = stream_context_create(array(
+            'http' => array(
+                'method'  => 'POST',
+                'header'  => 'Content-Type: application/json',
+                'content' => json_encode($webhookData),
+                'ignore_errors' => true,
+                'timeout' => 10
+            )
+        ));
+        $response = @file_get_contents($webhook_url, false, $options);
 
         $count++;
         echo "✓ Row $count: {$category}{$jumpLabel} | {$horse} | ₹{$displayAmount}<br>";
