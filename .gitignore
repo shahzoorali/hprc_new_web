@@ -36,6 +36,7 @@ yarn-error.log*
 # php payment dependencies and runtime uploads
 /payment/vendor/
 /payment/uploads/
+/payment/data/
 
 # vercel
 .vercel
