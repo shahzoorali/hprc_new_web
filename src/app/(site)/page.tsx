@@ -132,7 +132,7 @@ export default function HomePage() {
                 <div className="absolute -inset-4 bg-brand-500/10 blur-3xl rounded-full animate-pulse"></div>
                 <div className="relative aspect-square rounded-[3rem] overflow-hidden border border-white/10 shadow-3xl">
                    <Image 
-                    src="https://images.unsplash.com/photo-1553531580-6520e75d0458?q=80&w=1000" 
+                    src="/photo-1553531580-6520e75d0458.png" 
                     alt="Equestrian Detail"
                     fill
                     className="object-cover"

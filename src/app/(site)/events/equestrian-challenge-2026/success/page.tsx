@@ -114,7 +114,7 @@ function SuccessContent() {
               ? "Thank you! Your entry for the HPRC Equestrian Challenge 2026 has been received and verified."
               : "Let's review the status of your recent entry payment."
           }
-          backgroundImage="https://images.unsplash.com/photo-1553531580-6520e75d0458?w=1920&q=80"
+          backgroundImage="/photo-1553531580-6520e75d0458.png"
         />
       </div>
 
