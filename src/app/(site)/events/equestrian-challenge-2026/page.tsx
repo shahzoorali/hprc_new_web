@@ -675,6 +675,7 @@ function RegistrationForm() {
               <input
                 id="ec-mobile"
                 type="tel"
+                required
                 value={form.mobile}
                 onChange={(e) => setForm((f) => ({ ...f, mobile: e.target.value.replace(/\D/g, '').slice(0, 10) }))}
                 placeholder="10-digit number"
