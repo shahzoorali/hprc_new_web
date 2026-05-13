@@ -5,7 +5,7 @@
 // Set STABLING_ADMIN_KEY in server env. As a fallback, the constant below is used.
 // Change FALLBACK_KEY immediately and ideally remove it after the env var is set on the server.
 
-define('FALLBACK_KEY', 'shahzoor);
+define('FALLBACK_KEY', 'shahzoor');
 
 $envKey = getenv('STABLING_ADMIN_KEY');
 $expectedKey = $envKey ?: FALLBACK_KEY;
