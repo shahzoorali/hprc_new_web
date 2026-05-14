@@ -9,7 +9,7 @@ const blogPosts = [
     title: "Health Benefits of Horse Riding That You Did Not Know",
     excerpt:
       "Discover the surprising physical and mental health benefits of horse riding. From improved core strength to stress relief, equestrian activities offer a unique full-body workout that benefits riders of all ages.",
-    image: "https://hprc.in/images/gallery/Blog-001.jpg",
+    image: "/hero-horse.png",
     category: "Health & Wellness",
     readTime: "5 min read",
     date: "December 15, 2024",
@@ -65,7 +65,7 @@ const blogPosts = [
     title: "Exercises for Correct Horse Riding",
     excerpt:
       "Master the art of horse riding with these essential exercises designed to improve your posture, balance, and riding technique. Perfect for beginners and intermediate riders looking to enhance their skills.",
-    image: "https://hprc.in/images/gallery/Blog-002.jpg",
+    image: "/hero-horse.png",
     category: "Training Tips",
     readTime: "7 min read",
     date: "November 28, 2024",
@@ -137,7 +137,7 @@ const blogPosts = [
     title: "5 Tips on Being Mentally Prepared For Any Equestrian Competition",
     excerpt:
       "Competition day can be nerve-wracking. Learn proven mental preparation techniques used by professional equestrians to stay calm, focused, and perform at your best when it matters most.",
-    image: "https://hprc.in/images/gallery/Blog-003.jpg",
+    image: "/hero-horse.png",
     category: "Competition",
     readTime: "6 min read",
     date: "October 10, 2024",
