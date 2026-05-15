@@ -101,7 +101,7 @@ export default function NewslettersPage() {
             title="Newsletters"
             description="Monthly recaps, highlights, and member updates from HPRC spanning 2014-2016."
             actions={[{ label: "Subscribe", href: "/contact", variant: "primary" }]}
-            backgroundImage="https://images.unsplash.com/photo-15504236404362540-800?q=80"
+            backgroundImage="/hero-horse.png"
           />
         </div>
 
