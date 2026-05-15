@@ -804,7 +804,10 @@ function RegistrationForm() {
                     <div className="grid gap-3 sm:grid-cols-2">
                       {discEvents.map((ev) => {
                         const checked = form.selectedEvents.includes(ev.id);
-                        
+
+                        // Practice Round — on-spot booking only, not available online
+                        const isPracticeRound = disc === "PRACTICE ROUND";
+
                         // Dressage Restriction Logic
                         const isDressage = disc === "DRESSAGE";
                         const otherDressageSelected = isDressage && form.selectedEvents.some(id => {
@@ -812,23 +815,32 @@ function RegistrationForm() {
                           return otherEv && otherEv.discipline === "DRESSAGE" && id !== ev.id;
                         });
 
+                        const isDisabled = isPracticeRound || otherDressageSelected;
+
                         return (
-                          <div key={ev.id} className={`flex flex-col border transition-all ${checked ? "border-brand-400 bg-white shadow-sm" : "border-transparent bg-white/50 hover:bg-white/80"} ${otherDressageSelected ? "opacity-50 cursor-not-allowed" : ""}`}>
-                            <label className={`flex items-start gap-3 p-3 ${otherDressageSelected ? "cursor-not-allowed" : "cursor-pointer"}`}>
+                          <div key={ev.id} className={`flex flex-col border transition-all ${isPracticeRound ? "opacity-60 cursor-not-allowed bg-gray-100 border-gray-200" : checked ? "border-brand-400 bg-white shadow-sm" : "border-transparent bg-white/50 hover:bg-white/80"} ${otherDressageSelected ? "opacity-50 cursor-not-allowed" : ""}`}>
+                            <label className={`flex items-start gap-3 p-3 ${isDisabled ? "cursor-not-allowed" : "cursor-pointer"}`}>
                               <input
                                 type="checkbox"
                                 checked={checked}
-                                disabled={otherDressageSelected}
+                                disabled={isDisabled}
                                 onChange={() => toggleEvent(ev.id)}
                                 className="mt-0.5 h-4 w-4 accent-brand-500 flex-shrink-0"
                               />
                               <div className="flex-1 min-w-0">
                                 <p className="text-sm font-medium text-gray-900 leading-tight">{ev.category}</p>
                                 <p className="text-xs text-gray-500 mt-0.5">{ev.date}</p>
+                                {isPracticeRound && (
+                                  <span className="inline-block mt-1 text-[10px] font-bold uppercase tracking-wide bg-amber-100 text-amber-700 px-2 py-0.5 rounded">
+                                    📍 On-Spot Only — Book at HPRC
+                                  </span>
+                                )}
                               </div>
-                              <span className="text-sm font-bold text-brand-600 flex-shrink-0">
-                                ₹{ev.fee.toLocaleString("en-IN")}
-                              </span>
+                              {!isPracticeRound && (
+                                <span className="text-sm font-bold text-brand-600 flex-shrink-0">
+                                  ₹{ev.fee.toLocaleString("en-IN")}
+                                </span>
+                              )}
                             </label>
                             {checked && (
                               <div className="px-3 pb-3 pt-1 border-t border-gray-100 bg-gray-50/50 mt-1 space-y-3">

@@ -55,6 +55,15 @@ if (isset($_FILES['ageProof']) && $_FILES['ageProof']['error'] == 0) {
     error_log("EC2026: File upload error detected. Code: " . $_FILES['ageProof']['error']);
 }
 
+// Block Practice Round events — on-spot only, not available for online booking.
+$practiceRoundIds = [21, 22];
+$submittedIds = json_decode($selectedEvents, true) ?: [];
+if (array_intersect($submittedIds, $practiceRoundIds)) {
+    error_log("EC2026: Practice round booking attempt blocked for $name");
+    header("Location: /events/equestrian-challenge-2026?error=practice_onspot");
+    exit();
+}
+
 // Pre-flight inventory check for PERMANENT stables before creating the order.
 // Prevents orders we can't honour. Form already checks, this is the authoritative server-side gate.
 if ($stablingType === 'PERMANENT' && (int)$stablingCount > 0 && !empty($stablingFrom) && !empty($stablingTo)) {
