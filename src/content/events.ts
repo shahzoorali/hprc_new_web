@@ -242,16 +242,15 @@ export const eventsContent = {
       imageUrl: "/documents/news/sauryaram-varma-equestrian.webp",
     },
   ] satisfies NewsArticle[],
-  upcoming: [
+  upcoming: [] as UpcomingEvent[],
+  pastHighlights: [
     {
       title: "HPRC Equestrian Challenge 2026",
-      date: "15th - 17th May 2026",
       description:
-        "The inaugural HPRC Equestrian Challenge — an open equestrian competition featuring Hacks, Dressage, Show Jumping (40 cm to 105 cm), and Top Score events. Organised under the aegis of EFI & TSEA at HPRC, Gandipet. Cash prizes for Open Show Jumping. Register now.",
-      link: "/events/equestrian-challenge-2026",
+        "The inaugural HPRC Equestrian Challenge concluded with 126+ riders from 30+ clubs competing across Show Jumping, Dressage, Hacks, and Top Score. View official results from the evening (16 May) and morning (17 May) sessions.",
+      link: "/events/news/ec2026-results-17-may-morning-session",
+      image: "/images/ec2026/aamir-shahnawaz-1.jpg",
     },
-  ] as UpcomingEvent[],
-  pastHighlights: [
     {
       title: "HPRC World Arena Polo Championship 2026",
       description:
