@@ -28,8 +28,10 @@ export default function PastEventsPage() {
         />
         <div className="grid gap-6 sm:gap-8 grid-cols-1 md:grid-cols-2">
           {eventsContent.pastHighlights.map((highlight, index) => {
-            // Get event image based on link
-            const getEventImage = (link: string) => {
+            // Get event image based on highlight data or link
+            const getEventImage = (h: typeof highlight, i: number) => {
+              if (h.image) return h.image;
+              const link = h.link;
               if (link.includes("1st-rel-10th-hyd-horse-show")) {
                 return "/documents/gallery/events/1st-rel-gallery/gallery-001.jpg";
               }
@@ -45,16 +47,15 @@ export default function PastEventsPage() {
               if (link.includes("hprc-sport-complex")) {
                 return "/documents/gallery/events/hprc-sport-complex/01.jpg";
               }
-              // Fallback images
               const fallbackImages = [
                 "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=800&q=80",
                 "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=800&q=80",
                 "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80",
               ];
-              return fallbackImages[index % fallbackImages.length];
+              return fallbackImages[i % fallbackImages.length];
             };
 
-            const eventImage = getEventImage(highlight.link);
+            const eventImage = getEventImage(highlight, index);
 
             return (
               <Link
