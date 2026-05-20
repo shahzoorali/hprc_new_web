@@ -21,8 +21,12 @@ export default function EventsPage() {
       <section className="container space-y-10">
         <SectionHeading
           eyebrow="Upcoming"
-          title="Featured events"
-          description="Mark your calendar and experience the thrill of equestrian sport and club celebrations."
+          title={eventsContent.upcoming.length > 0 ? "Featured events" : "Upcoming events"}
+          description={
+            eventsContent.upcoming.length > 0
+              ? "Mark your calendar and experience the thrill of equestrian sport and club celebrations."
+              : "Stay tuned for upcoming tournaments, showcases, and club celebrations at HPRC."
+          }
           align="left"
         />
         {eventsContent.upcoming && eventsContent.upcoming.length > 0 ? (
