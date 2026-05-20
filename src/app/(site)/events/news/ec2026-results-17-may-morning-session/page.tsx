@@ -5,7 +5,7 @@ import { SectionHeading } from "@/components/ui/section-heading";
 export const metadata = {
   title: "EC2026 Results — 17 May Morning Session | HPRC Equestrian Challenge 2026",
   description:
-    "Official results of the HPRC Equestrian Challenge 2026 morning session held on 17 May 2026. Winners across Jumping 90cm CH-I and 105cm Junior categories.",
+    "Official results of the HPRC Equestrian Challenge 2026 morning session held on 17 May 2026. Winners across Jumping 90cm CH-I, 105cm Junior, and Table C 105-110cm categories.",
 };
 
 const results = [
@@ -19,9 +19,9 @@ const results = [
   {
     category: "Jumping CH-I — 90 CM Open",
     rows: [
-      { pos: "🥇 1st Place", rider: "Ayaan Varma Nadimaplli", horse: "Darcy", club: "HPRC" },
-      { pos: "🥈 2nd Place", rider: "Jagadeesh", horse: "Peterbolt", club: "Archi Horse Riding Academy" },
-      { pos: "🥉 3rd Place", rider: "Dhanvi Cheruvu", horse: "Bhima", club: "Flying Sea Stallion" },
+      { pos: "🥇 1st Place", rider: "Jagadeesh", horse: "Peterbolt", club: "Archi Horse Riding Academy" },
+      { pos: "🥈 2nd Place", rider: "Dhanvi Cheruvu", horse: "Bhima", club: "Flying Sea Stallion" },
+      { pos: "🥉 3rd Place", rider: "Ayaan Varma Nadimaplli", horse: "Darcy", club: "HPRC" },
     ],
   },
   {
@@ -37,6 +37,14 @@ const results = [
       { pos: "🥇 1st Place", rider: "Aamir Shahnawaz", horse: "Darcy", club: "HPRC" },
       { pos: "🥈 2nd Place", rider: "Mohammed Amaan Ali", horse: "Flying Champ", club: "Rancho De Caballos" },
       { pos: "🥉 3rd Place", rider: "Shiva Sai", horse: "Tyson", club: "Ruta" },
+    ],
+  },
+  {
+    category: "Jumping Open — Table C 105-110 CM",
+    rows: [
+      { pos: "🥇 1st Place", rider: "Amogha Varsha Datla", horse: "—", club: "HPRC" },
+      { pos: "🥈 2nd Place", rider: "Aamir Shahnawaz", horse: "Darcy", club: "HPRC" },
+      { pos: "🥉 3rd Place", rider: "Mohammed Amaan Ali", horse: "Flying Champ", club: "Rancho de Caballos" },
     ],
   },
 ];
@@ -91,7 +99,7 @@ export default function EC2026Results17MayMorningPage() {
               <p>
                 The event continued to witness exceptional participation from talented riders representing prominent
                 equestrian academies and clubs from across the region. The morning session featured exciting
-                competitions in the <strong>CH-I 90 CM</strong> and <strong>Junior 105 CM</strong> jumping categories,
+                competitions in the <strong>CH-I 90 CM</strong>, <strong>Junior 105 CM</strong>, and <strong>Table C 105-110 CM</strong> jumping categories,
                 where riders demonstrated remarkable control, precision, and confidence over technically challenging
                 courses.
               </p>
