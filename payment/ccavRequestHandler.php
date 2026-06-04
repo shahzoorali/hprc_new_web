@@ -34,13 +34,13 @@ require("dbconnect.php");?>
 	error_reporting(1);
 	
 	$merchant_data='order_id='.$order_id.'&'; 
-	$merchant_data.='merchant_id=195053&';
+	$merchant_data.='merchant_id=4447589&';
 	$merchant_data.='currency=INR&';
 	$merchant_data.='redirect_url=https://hprc.in/payment/success.php&';
 	$merchant_data.='cancel_url=https://hprc.in/payment/success.php&';
 	$merchant_data.='language=EN&';
-	$working_key='D21542B21357F51DA6027649B1E12DFE';//Shared by CCAVENUES
-	$access_code='AVWW81FJ19BV33WWVB';//Shared by CCAVENUES
+	$working_key='00A39923BC821061266C29348FF5A3F0';//HDFC CCAvenue
+	$access_code='AVPP92NE85CC15PPCC';//HDFC CCAvenue
 	
 	foreach ($_POST as $key => $value){
 		$merchant_data.=$key.'='.$value.'&';

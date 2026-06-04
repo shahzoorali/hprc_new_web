@@ -4,7 +4,7 @@ require("dbconnect.php");
 
 error_reporting(0);
 
-$workingKey='D21542B21357F51DA6027649B1E12DFE';		//Working Key
+$workingKey='00A39923BC821061266C29348FF5A3F0'; //HDFC CCAvenue
 $encResponse=$_POST["encResp"];			//Response from CCAvenue
 $rcvdString=decrypt($encResponse,$workingKey);		
 $order_status="";

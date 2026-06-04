@@ -3,7 +3,7 @@
  
 	error_reporting(0);
 	
-	$workingKey='D21542B21357F51DA6027649B1E12DFE';		//Working Key should be provided here.
+	$workingKey='00A39923BC821061266C29348FF5A3F0'; //HDFC CCAvenue		//Working Key should be provided here.
 	$encResponse=$_POST["encResp"];			//This is the response sent by the CCAvenue Server
 	$rcvdString=decrypt($encResponse,$workingKey);		//Crypto Decryption used as per the specified working key.
 	$order_status="";
