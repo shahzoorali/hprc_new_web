@@ -1167,9 +1167,15 @@ export default function NationalQualifier2026Page() {
 
 
             <div className="relative z-10 px-6 sm:px-12 md:px-20 pb-12 sm:pb-16 pt-20 sm:pt-24 text-center">
-              {/* Badge */}
+              {/* Badge with EFI Logo */}
               <div className="inline-flex items-center gap-3 bg-gradient-to-r from-brand-500 to-brand-600 px-5 py-2.5 mb-6 shadow-xl shadow-brand-500/40">
-                <div className="h-1.5 w-1.5 bg-white" />
+                <Image
+                  src="/events/nq2026/efi_logo.png"
+                  alt="Equestrian Federation of India"
+                  width={24}
+                  height={24}
+                  className="h-6 w-6"
+                />
                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-white">
                   Under EFI · In association with TSEA
                 </span>
@@ -1265,7 +1271,7 @@ export default function NationalQualifier2026Page() {
                 The Road to JNEC 2026
               </h2>
               <p className="mt-5 text-base sm:text-lg text-gray-700 leading-relaxed font-light">
-                The <strong>National Qualifier (NQ) 2026</strong> runs on {event.dates} at the Hyderabad Polo &amp; Riding Club, Gandipet — organised by HPRC in association with TSEA, under the aegis of the Equestrian Federation of India (EFI). Its objective is to enable qualification to the JNEC.
+                The <strong>National Qualifier (NQ) 2026</strong> runs on {event.dates} at the Hyderabad Polo &amp; Riding Club, Gandipet — organised by HPRC in association with TSEA, under the aegis of the <strong>Equestrian Federation of India (EFI)</strong>. Its objective is to enable qualification to the JNEC.
               </p>
               <p className="mt-4 text-base text-gray-600 leading-relaxed font-light">
                 The qualifier is conducted in Dressage and Show Jumping across the Children II, Children I, Junior and Young Rider categories, as per the EFI National Qualifier Guidelines for JNEC 2026. A valid EFI Rider ID and Horse EFI Registration are mandatory for all entries.
@@ -1311,6 +1317,47 @@ export default function NationalQualifier2026Page() {
             </div>
           </div>
           
+          {/* Official Endorsement */}
+          <div className="mt-16 relative">
+            <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-px bg-gradient-to-r from-transparent via-brand-200 to-transparent" />
+            <div className="relative flex flex-col items-center">
+              <div className="bg-white px-6 pb-4">
+                <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-500">Official Endorsement</span>
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 items-center justify-center max-w-lg mx-auto">
+                {/* HPRC */}
+                <div className="flex flex-col items-center gap-3">
+                  <div className="h-16 w-16 bg-white border border-brand-200 rounded-lg flex items-center justify-center p-2">
+                    <span className="text-2xl font-bold text-brand-700">HPRC</span>
+                  </div>
+                  <p className="text-xs font-semibold text-gray-700 text-center">Hyderabad Polo &amp; Riding Club</p>
+                </div>
+                {/* TSEA */}
+                <div className="flex flex-col items-center gap-3">
+                  <div className="h-16 w-16 bg-white border border-brand-200 rounded-lg flex items-center justify-center p-2">
+                    <span className="text-center">
+                      <p className="text-[10px] font-bold text-brand-700">TSEA</p>
+                    </span>
+                  </div>
+                  <p className="text-xs font-semibold text-gray-700 text-center">Telangana State Equestrian Association</p>
+                </div>
+                {/* EFI */}
+                <div className="flex flex-col items-center gap-3 col-span-2 sm:col-span-1">
+                  <div className="h-16 w-16 bg-white border border-brand-200 rounded-lg flex items-center justify-center p-2">
+                    <Image
+                      src="/events/nq2026/efi_logo.png"
+                      alt="Equestrian Federation of India"
+                      width={56}
+                      height={56}
+                      className="h-14 w-14 object-contain"
+                    />
+                  </div>
+                  <p className="text-xs font-semibold text-gray-700 text-center">Equestrian Federation of India</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* Enhanced Download Prospectus Section */}
           <div className="mt-16 relative">
             <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-px bg-gradient-to-r from-transparent via-brand-200 to-transparent" />
@@ -1444,6 +1491,25 @@ export default function NationalQualifier2026Page() {
             <h2 className="text-3xl sm:text-4xl font-extrabold text-brand-900 font-display">Qualification, Not Prizes</h2>
             <p className="mt-4 text-sm text-gray-600 leading-relaxed">
               No medals or prize money are awarded at the National Qualifier. This is a qualifying event — riders who qualify for the next stage (JNEC) will be notified directly by the Equestrian Federation of India.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ═════════════════════════════════════════════════════ EFI SANCTIONING */}
+      <section className="container mt-16">
+        <div className="bg-gradient-to-r from-brand-50 to-blue-50 border border-brand-200 rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center gap-6">
+          <Image
+            src="/events/nq2026/efi_logo.png"
+            alt="Equestrian Federation of India"
+            width={80}
+            height={80}
+            className="h-20 w-20 object-contain flex-shrink-0"
+          />
+          <div>
+            <h3 className="text-lg font-bold text-brand-900 font-display">Sanctioned by the Equestrian Federation of India</h3>
+            <p className="mt-2 text-sm text-gray-700 leading-relaxed">
+              This National Qualifier is conducted under the technical guidelines, rules and regulations of the Equestrian Federation of India (EFI) as part of the official qualifying pathway to the JNEC. All participants must adhere to EFI standards and requirements.
             </p>
           </div>
         </div>
