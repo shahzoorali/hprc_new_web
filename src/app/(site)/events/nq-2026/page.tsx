@@ -1147,8 +1147,8 @@ export default function NationalQualifier2026Page() {
             {/* Background */}
             <div className="absolute inset-0">
               <Image
-                src="https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=1920&q=85"
-                alt="National Qualifier (NQ) 2026"
+                src="/images/ec2026/aamir-shahnawaz-2.jpg"
+                alt="National Qualifier (NQ) 2026 — EFI Dressage & Show Jumping Qualifier"
                 fill
                 className="object-cover object-center"
                 priority

@@ -1332,8 +1332,8 @@ export default function EquestrianChallenge2026Page() {
             {/* Background */}
             <div className="absolute inset-0">
               <Image
-                src="https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=1920&q=85"
-                alt="HPRC Equestrian Challenge 2026"
+                src="/images/ec2026/action-2.jpg"
+                alt="HPRC Equestrian Challenge 2026 — Show Jumping Competition"
                 fill
                 className="object-cover object-center"
                 priority
