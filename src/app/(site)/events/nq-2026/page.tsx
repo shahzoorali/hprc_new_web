@@ -1167,7 +1167,7 @@ export default function NationalQualifier2026Page() {
 
 
             <div className="relative z-10 px-6 sm:px-12 md:px-20 pb-12 sm:pb-16 pt-20 sm:pt-24 text-center">
-              {/* Badge with EFI Logo */}
+              {/* Badge with EFI + TSEA Logos */}
               <div className="inline-flex items-center gap-3 bg-gradient-to-r from-brand-500 to-brand-600 px-5 py-2.5 mb-6 shadow-xl shadow-brand-500/40">
                 <Image
                   src="/events/nq2026/efi_logo.png"
@@ -1179,7 +1179,14 @@ export default function NationalQualifier2026Page() {
                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-white">
                   Under EFI · In association with TSEA
                 </span>
-                <div className="h-1.5 w-1.5 bg-white" />
+                <div className="h-1.5 w-1.5 bg-white/60" />
+                <Image
+                  src="/events/nq2026/tsea-logo.jpeg"
+                  alt="Telangana State Equestrian Association"
+                  width={24}
+                  height={24}
+                  className="h-6 w-6 object-contain"
+                />
               </div>
 
               <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white font-display tracking-tight leading-tight">
@@ -1328,16 +1335,26 @@ export default function NationalQualifier2026Page() {
                 {/* HPRC */}
                 <div className="flex flex-col items-center gap-3">
                   <div className="h-16 w-16 bg-white border border-brand-200 rounded-lg flex items-center justify-center p-2">
-                    <span className="text-2xl font-bold text-brand-700">HPRC</span>
+                    <Image
+                      src="/hprc_logo.png"
+                      alt="Hyderabad Polo & Riding Club"
+                      width={56}
+                      height={56}
+                      className="h-14 w-14 object-contain"
+                    />
                   </div>
                   <p className="text-xs font-semibold text-gray-700 text-center">Hyderabad Polo &amp; Riding Club</p>
                 </div>
                 {/* TSEA */}
                 <div className="flex flex-col items-center gap-3">
                   <div className="h-16 w-16 bg-white border border-brand-200 rounded-lg flex items-center justify-center p-2">
-                    <span className="text-center">
-                      <p className="text-[10px] font-bold text-brand-700">TSEA</p>
-                    </span>
+                    <Image
+                      src="/events/nq2026/tsea-logo.jpeg"
+                      alt="Telangana State Equestrian Association"
+                      width={56}
+                      height={56}
+                      className="h-14 w-14 object-contain"
+                    />
                   </div>
                   <p className="text-xs font-semibold text-gray-700 text-center">Telangana State Equestrian Association</p>
                 </div>
@@ -1496,20 +1513,30 @@ export default function NationalQualifier2026Page() {
         </div>
       </section>
 
-      {/* ═════════════════════════════════════════════════════ EFI SANCTIONING */}
+      {/* ═════════════════════════════════════════════════════ EFI / TSEA SANCTIONING */}
       <section className="container mt-16">
         <div className="bg-gradient-to-r from-brand-50 to-blue-50 border border-brand-200 rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center gap-6">
-          <Image
-            src="/events/nq2026/efi_logo.png"
-            alt="Equestrian Federation of India"
-            width={80}
-            height={80}
-            className="h-20 w-20 object-contain flex-shrink-0"
-          />
+          <div className="flex items-center gap-4 flex-shrink-0">
+            <Image
+              src="/events/nq2026/efi_logo.png"
+              alt="Equestrian Federation of India"
+              width={80}
+              height={80}
+              className="h-20 w-20 object-contain"
+            />
+            <div className="h-14 w-px bg-brand-200" />
+            <Image
+              src="/events/nq2026/tsea-logo.jpeg"
+              alt="Telangana State Equestrian Association"
+              width={80}
+              height={80}
+              className="h-20 w-20 object-contain"
+            />
+          </div>
           <div>
-            <h3 className="text-lg font-bold text-brand-900 font-display">Sanctioned by the Equestrian Federation of India</h3>
+            <h3 className="text-lg font-bold text-brand-900 font-display">Sanctioned by EFI · Organised in association with TSEA</h3>
             <p className="mt-2 text-sm text-gray-700 leading-relaxed">
-              This National Qualifier is conducted under the technical guidelines, rules and regulations of the Equestrian Federation of India (EFI) as part of the official qualifying pathway to the JNEC. All participants must adhere to EFI standards and requirements.
+              This National Qualifier is conducted under the technical guidelines, rules and regulations of the Equestrian Federation of India (EFI) as part of the official qualifying pathway to the JNEC, and is organised in association with the Telangana State Equestrian Association (TSEA). All participants must adhere to EFI standards and requirements.
             </p>
           </div>
         </div>
@@ -1581,9 +1608,82 @@ export default function NationalQualifier2026Page() {
 
       {/* ═══════════════════════════════════════════════ REGISTER FORM */}
       <section className="container mt-16" id="register">
-        <div className="relative overflow-hidden border-2 border-blue-100 bg-blue-50/40 p-6 sm:p-10 md:p-14 shadow-2xl">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-blue-400/6 blur-[150px] pointer-events-none" />
-          <div className="relative">
+        <div className="relative overflow-hidden border-2 border-sky-200 shadow-2xl" style={{ background: "linear-gradient(135deg, #f0f7ff 0%, #e8f4fd 40%, #f5f0ff 70%, #eef5ff 100%)" }}>
+
+          {/* ── Watermark layer ── */}
+          <div className="absolute inset-0 pointer-events-none overflow-hidden select-none" aria-hidden="true">
+
+            {/* Large EFI logo watermark — top right */}
+            <div className="absolute -top-8 -right-8 opacity-[0.045]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/events/nq2026/efi_logo.png" alt="" className="w-72 h-72 object-contain" />
+            </div>
+
+            {/* TSEA logo watermark — bottom left */}
+            <div className="absolute -bottom-10 -left-10 opacity-[0.04]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/events/nq2026/tsea-logo.jpeg" alt="" className="w-64 h-64 object-contain" />
+            </div>
+
+            {/* Horse silhouette SVG — centre-right watermark */}
+            <svg className="absolute top-1/4 right-[5%] w-72 h-72 opacity-[0.04] text-sky-700" viewBox="0 0 200 200" fill="currentColor">
+              <path d="M170,40 C165,38 158,39 152,42 C148,35 140,30 130,30 C122,30 115,34 110,40 C105,35 98,32 90,33 C82,34 76,38 72,45 C65,42 56,43 50,48 C44,53 42,61 44,70 C38,74 34,80 33,88 C32,96 35,104 41,109 C38,115 37,122 40,128 C43,134 49,138 56,138 L60,138 L58,155 C58,157 59,159 61,160 C63,161 65,160 66,158 L72,145 C76,147 80,148 84,148 L86,165 C86,167 88,169 90,169 C92,169 94,167 94,165 L94,148 C100,147 106,144 110,140 C114,144 120,147 126,148 L126,165 C126,167 128,169 130,169 C132,169 134,167 134,165 L134,148 L138,148 C144,148 149,146 153,142 L159,158 C160,160 162,161 164,160 C166,159 167,157 167,155 L163,138 C168,135 172,130 173,124 C174,118 172,112 168,107 C173,102 176,95 175,88 C174,81 170,75 164,71 C168,65 169,57 166,51 C168,47 170,43 170,40 Z" />
+            </svg>
+
+            {/* Polo mallet + ball SVG — top-left faint watermark */}
+            <svg className="absolute top-10 left-10 w-48 h-48 opacity-[0.04] text-indigo-700" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="3">
+              <line x1="20" y1="10" x2="75" y2="85" strokeLinecap="round"/>
+              <rect x="68" y="78" width="18" height="12" rx="3" transform="rotate(-50 68 78)"/>
+              <circle cx="15" cy="85" r="8"/>
+            </svg>
+
+            {/* Rosette / medal SVG — centre-left */}
+            <svg className="absolute top-1/2 -translate-y-1/2 left-[-20px] w-56 h-56 opacity-[0.035] text-sky-600" viewBox="0 0 100 100" fill="currentColor">
+              <circle cx="50" cy="45" r="22"/>
+              <polygon points="50,23 53,16 50,10 47,16" transform="rotate(0 50 45)"/>
+              <polygon points="50,23 53,16 50,10 47,16" transform="rotate(30 50 45)"/>
+              <polygon points="50,23 53,16 50,10 47,16" transform="rotate(60 50 45)"/>
+              <polygon points="50,23 53,16 50,10 47,16" transform="rotate(90 50 45)"/>
+              <polygon points="50,23 53,16 50,10 47,16" transform="rotate(120 50 45)"/>
+              <polygon points="50,23 53,16 50,10 47,16" transform="rotate(150 50 45)"/>
+              <polygon points="50,23 53,16 50,10 47,16" transform="rotate(180 50 45)"/>
+              <polygon points="50,23 53,16 50,10 47,16" transform="rotate(210 50 45)"/>
+              <polygon points="50,23 53,16 50,10 47,16" transform="rotate(240 50 45)"/>
+              <polygon points="50,23 53,16 50,10 47,16" transform="rotate(270 50 45)"/>
+              <polygon points="50,23 53,16 50,10 47,16" transform="rotate(300 50 45)"/>
+              <polygon points="50,23 53,16 50,10 47,16" transform="rotate(330 50 45)"/>
+              <rect x="44" y="65" width="5" height="22" rx="2"/>
+              <rect x="51" y="65" width="5" height="22" rx="2"/>
+              <rect x="40" y="85" width="20" height="5" rx="2"/>
+            </svg>
+
+            {/* "NATIONAL QUALIFIER" diagonal text watermark */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span
+                className="text-sky-800 font-black font-display tracking-[0.4em] uppercase whitespace-nowrap select-none"
+                style={{ fontSize: "clamp(28px, 5vw, 56px)", opacity: 0.025, transform: "rotate(-15deg)" }}
+              >
+                NATIONAL QUALIFIER 2026
+              </span>
+            </div>
+
+            {/* EFI text watermark — bottom centre */}
+            <div className="absolute bottom-8 inset-x-0 flex justify-center">
+              <span
+                className="text-indigo-800 font-black font-display tracking-[0.6em] uppercase select-none"
+                style={{ fontSize: "clamp(12px, 2.5vw, 22px)", opacity: 0.04 }}
+              >
+                EQUESTRIAN FEDERATION OF INDIA
+              </span>
+            </div>
+
+            {/* Subtle radial colour blobs */}
+            <div className="absolute top-0 left-1/4 w-96 h-96 bg-sky-300/20 blur-[120px]" />
+            <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-300/15 blur-[140px]" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-violet-200/10 blur-[100px]" />
+          </div>
+
+          <div className="relative p-6 sm:p-10 md:p-14">
             <div className="text-center mb-10">
               <p className="text-xs font-bold uppercase tracking-[0.3em] text-brand-500 mb-3">Online Entry</p>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-brand-900 font-display">Register for the National Qualifier</h2>
