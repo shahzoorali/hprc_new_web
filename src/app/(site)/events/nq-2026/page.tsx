@@ -1581,8 +1581,8 @@ export default function NationalQualifier2026Page() {
 
       {/* ═══════════════════════════════════════════════ REGISTER FORM */}
       <section className="container mt-16" id="register">
-        <div className="relative overflow-hidden border-2 border-brand-100 bg-white p-6 sm:p-10 md:p-14 shadow-2xl">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-brand-500/4 blur-[150px] pointer-events-none" />
+        <div className="relative overflow-hidden border-2 border-blue-100 bg-blue-50/40 p-6 sm:p-10 md:p-14 shadow-2xl">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-blue-400/6 blur-[150px] pointer-events-none" />
           <div className="relative">
             <div className="text-center mb-10">
               <p className="text-xs font-bold uppercase tracking-[0.3em] text-brand-500 mb-3">Online Entry</p>
