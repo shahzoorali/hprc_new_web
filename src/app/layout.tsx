@@ -70,6 +70,9 @@ export const metadata: Metadata = {
       },
     ],
   },
+  verification: {
+    google: "fKPeTpFmYjXGifr5MlL4B0OIjwJCxuqXxj1XEcYEE24",
+  },
   other: {
     "theme-color": "#e31e24",
   },
