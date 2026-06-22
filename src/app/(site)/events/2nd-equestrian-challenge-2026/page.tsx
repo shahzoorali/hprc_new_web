@@ -96,6 +96,7 @@ type FormData = {
   stablingFrom: string;
   stablingTo: string;
   specialNotes: string;
+  ageProofType: "PASSPORT" | "BIRTH_CERT_AADHAAR" | "";
   declaration: boolean;
 };
 
@@ -130,6 +131,7 @@ const INITIAL_FORM: FormData = {
   stablingFrom: "",
   stablingTo: "",
   specialNotes: "",
+  ageProofType: "",
   declaration: false,
 };
 
@@ -475,9 +477,15 @@ function RegistrationForm() {
     });
     
     if (hasAgeBasedEvent) {
-      const fileInput = document.getElementById('ec-age-proof') as HTMLInputElement;
-      if (!fileInput || !fileInput.files || fileInput.files.length === 0) {
-        e.ageProof = "Age proof document is required for age-category events";
+      if (!form.ageProofType) {
+        e.ageProof = "Please select the document type you are uploading";
+      } else {
+        const fileInput = document.getElementById('ec-age-proof') as HTMLInputElement;
+        if (!fileInput || !fileInput.files || fileInput.files.length === 0) {
+          e.ageProof = form.ageProofType === "PASSPORT"
+            ? "Please upload a copy of the Indian Passport"
+            : "Please upload Birth Certificate + Aadhaar (combined as one file or separately)";
+        }
       }
     }
 
@@ -592,6 +600,7 @@ function RegistrationForm() {
       <input type="hidden" name="stablingFrom" value={form.stablingFrom} />
       <input type="hidden" name="stablingTo" value={form.stablingTo} />
       <input type="hidden" name="specialNotes" value={form.specialNotes} />
+      <input type="hidden" name="ageProofType" value={form.ageProofType} />
       <input type="hidden" name="amount" value={totalFee} />
 
       {/* ── Draft Restore Notice ─────────────────────── */}
@@ -1194,19 +1203,85 @@ function RegistrationForm() {
             <span className="flex h-8 w-8 items-center justify-center bg-brand-500 text-white text-sm font-bold">6</span>
             Age Proof Upload
           </h3>
-          <div className="bg-amber-50 border border-amber-200 p-5 rounded-xl">
-            <label className="block text-sm font-semibold text-amber-900 mb-1.5" htmlFor="ec-age-proof">
-              Govt ID (Aadhaar, Passport, or Birth Certificate) <span className="text-brand-500">*</span>
-            </label>
-            <p className="text-xs text-amber-800/80 mb-3 block">Required because you have selected one or more age-category events.</p>
-            <input
-              id="ec-age-proof"
-              name="ageProof"
-              type="file"
-              accept=".pdf,image/*"
-              className="block w-full text-sm text-amber-900 file:mr-4 file:py-2.5 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-white file:text-brand-700 hover:file:bg-brand-50 transition shadow-sm cursor-pointer"
-            />
-            {errors.ageProof && <p className="mt-2 text-xs text-red-500 font-bold">{errors.ageProof}</p>}
+
+          <div className="bg-amber-50 border border-amber-200 p-5 rounded-xl space-y-4">
+            <div>
+              <p className="text-sm font-bold text-amber-900 mb-1">
+                Select document type <span className="text-brand-500">*</span>
+              </p>
+              <p className="text-xs text-amber-800/80 mb-3">
+                Required because you have selected one or more age-category events.
+              </p>
+
+              <div className="grid sm:grid-cols-2 gap-3">
+                {([
+                  {
+                    value: "PASSPORT" as const,
+                    title: "Indian Passport",
+                    sub: "Upload a scan / photo of the bio-data page of a valid Indian passport.",
+                  },
+                  {
+                    value: "BIRTH_CERT_AADHAAR" as const,
+                    title: "Birth Certificate + Aadhaar",
+                    sub: "Upload both documents combined into one PDF or image.",
+                  },
+                ]).map((opt) => (
+                  <label
+                    key={opt.value}
+                    className={`flex items-start gap-3 p-4 border-2 rounded-xl cursor-pointer transition-all ${
+                      form.ageProofType === opt.value
+                        ? "border-brand-500 bg-white shadow-md"
+                        : "border-amber-200 bg-white/60 hover:bg-white/90"
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      name="ageProofTypeRadio"
+                      value={opt.value}
+                      checked={form.ageProofType === opt.value}
+                      onChange={() => setForm(f => ({ ...f, ageProofType: opt.value }))}
+                      className="mt-0.5 h-4 w-4 accent-brand-500 flex-shrink-0"
+                    />
+                    <div>
+                      <p className="text-sm font-bold text-gray-900">{opt.title}</p>
+                      <p className="text-xs text-gray-500 mt-0.5">{opt.sub}</p>
+                    </div>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            {form.ageProofType && (
+              <div className="pt-2 border-t border-amber-200">
+                <label className="block text-sm font-semibold text-amber-900 mb-2" htmlFor="ec-age-proof">
+                  {form.ageProofType === "PASSPORT"
+                    ? "Upload Indian Passport (bio-data page)"
+                    : "Upload Birth Certificate + Aadhaar (combined PDF or image)"}
+                  <span className="text-brand-500"> *</span>
+                </label>
+                {form.ageProofType === "BIRTH_CERT_AADHAAR" && (
+                  <p className="text-xs text-amber-700 mb-2">
+                    Tip: merge both documents into a single PDF before uploading.
+                  </p>
+                )}
+                <input
+                  id="ec-age-proof"
+                  name="ageProof"
+                  type="file"
+                  accept=".pdf,image/*"
+                  className="block w-full text-sm text-amber-900 file:mr-4 file:py-2.5 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-white file:text-brand-700 hover:file:bg-brand-50 transition shadow-sm cursor-pointer"
+                />
+              </div>
+            )}
+
+            {errors.ageProof && (
+              <p className="text-xs text-red-500 font-bold flex items-center gap-1.5">
+                <svg className="h-3.5 w-3.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+                {errors.ageProof}
+              </p>
+            )}
           </div>
         </div>
       )}
