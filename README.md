@@ -121,21 +121,39 @@ in Next.js; data is served by thin PHP JSON endpoints under
 documents. The Next.js server calls PHP server-to-server with a shared token, so
 the browser never sees the secret and the DB/uploads stay behind PHP.
 
-**Required environment variables** (all server-only — never `NEXT_PUBLIC_`):
+**URL:** `https://hprc.in/admin`
 
-| Variable | Where | Purpose |
+### Environment variables
+
+All server-only — never use a `NEXT_PUBLIC_` prefix. Set in `.env.production.local`
+on the EC2 server (never commit this file).
+
+| Variable | Purpose | Production value |
 | --- | --- | --- |
-| `ADMIN_PASSWORD` | Next.js (Vercel) | Password for the `/admin` login form |
-| `ADMIN_SESSION_SECRET` | Next.js (Vercel) | Signs the `admin_session` JWT (use a long random string) |
-| `ADMIN_API_TOKEN` | Next.js **and** PHP host | Shared `X-Admin-Token`; the two values must match |
-| `PAYMENT_API_BASE` | Next.js | PHP app base URL — `https://hprc.in/payment` (prod) / `http://localhost:8000/payment` (dev) |
+| `ADMIN_PASSWORD` | Password for the `/admin` login form | `3v***************` |
+| `ADMIN_SESSION_SECRET` | Signs the `admin_session` JWT (64-char hex) | `c0e8***...***143b5` |
+| `ADMIN_API_TOKEN` | Shared token between Next.js and PHP — must match on both sides | `6a95***...***417d` |
+| `PAYMENT_API_BASE` | PHP app base URL | `https://hprc.in/payment` |
 
-On the PHP host, set `ADMIN_API_TOKEN` via server env / `.htaccess` `SetEnv` /
-hosting panel.
+### EC2 server config (already done — do not redo)
 
-**Local development:** run both servers with `npm run dev:all` (Next on :3000,
-PHP on :8000), with the four vars set in `.env.local`. The PHP server must be
-started with `ADMIN_API_TOKEN` in its environment.
+- **`.env.production.local`** — written to `/home/ubuntu/shahzoor/hprc.in/` (mode 600)
+- **nginx** — `fastcgi_param HTTP_X_ADMIN_TOKEN` added to PHP location block in
+  `/etc/nginx/sites-enabled/hprc.ravist.in`
+- **PHP-FPM** — `env[ADMIN_API_TOKEN]` added to `/etc/php/8.4/fpm/pool.d/www.conf`
+  so `getenv('ADMIN_API_TOKEN')` works in PHP scripts
+
+If you ever rotate the token, update **all three** of the above and reload nginx + php8.4-fpm.
+
+### Local development
+
+Run both servers with `npm run dev:all` (Next on :3000, PHP on :8000), with the
+four vars set in `.env.local` (see `.env.example`). For the PHP server to see the
+token, start it as:
+
+```powershell
+$env:ADMIN_API_TOKEN = "test"; npm run dev:php
+```
 
 ## 🚢 Deployment
 
