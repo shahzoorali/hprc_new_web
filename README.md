@@ -112,6 +112,31 @@ Create a `.env.local` file (see `.env.example`) for:
 - `NEXT_PUBLIC_SITE_NAME` - Site name
 - Other environment-specific settings
 
+## 🔐 Admin Dashboard (`/admin`)
+
+A protected, read-only dashboard to review registrations for the open events
+(National Qualifier 2026 and the 2nd Equestrian Challenge — August). The UI is
+in Next.js; data is served by thin PHP JSON endpoints under
+`payment/api/admin/` that read the existing MySQL tables and uploaded
+documents. The Next.js server calls PHP server-to-server with a shared token, so
+the browser never sees the secret and the DB/uploads stay behind PHP.
+
+**Required environment variables** (all server-only — never `NEXT_PUBLIC_`):
+
+| Variable | Where | Purpose |
+| --- | --- | --- |
+| `ADMIN_PASSWORD` | Next.js (Vercel) | Password for the `/admin` login form |
+| `ADMIN_SESSION_SECRET` | Next.js (Vercel) | Signs the `admin_session` JWT (use a long random string) |
+| `ADMIN_API_TOKEN` | Next.js **and** PHP host | Shared `X-Admin-Token`; the two values must match |
+| `PAYMENT_API_BASE` | Next.js | PHP app base URL — `https://hprc.in/payment` (prod) / `http://localhost:8000/payment` (dev) |
+
+On the PHP host, set `ADMIN_API_TOKEN` via server env / `.htaccess` `SetEnv` /
+hosting panel.
+
+**Local development:** run both servers with `npm run dev:all` (Next on :3000,
+PHP on :8000), with the four vars set in `.env.local`. The PHP server must be
+started with `ADMIN_API_TOKEN` in its environment.
+
 ## 🚢 Deployment
 
 ### Vercel (Recommended)

@@ -29,7 +29,7 @@ export const equestrianChallengeAug2026 = {
     },
     grounds: {
       ground1: "Ground 1 — Hacks & Dressage",
-      mainArena: "Main Arena — Show Jumping (40–110 cm) & Practice Round",
+      mainArena: "Main Arena — Practice Round & Show Jumping (40–110 cm)",
     },
   },
 

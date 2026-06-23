@@ -14,6 +14,8 @@ export default function robots(): MetadataRoute.Robots {
           "/pay-now/success",
           "/events/*/success",  // payment success/confirmation pages
           "/api/",
+          "/admin",   // private admin dashboard — never index
+          "/admin/",
         ],
       },
 
@@ -23,32 +25,32 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "GPTBot",
         allow: "/",
-        disallow: ["/membership/login", "/membership/pay-now", "/pay-now"],
+        disallow: ["/membership/login", "/membership/pay-now", "/pay-now", "/admin"],
       },
       {
         userAgent: "ChatGPT-User",
         allow: "/",
-        disallow: ["/membership/login", "/membership/pay-now", "/pay-now"],
+        disallow: ["/membership/login", "/membership/pay-now", "/pay-now", "/admin"],
       },
       {
         userAgent: "ClaudeBot",
         allow: "/",
-        disallow: ["/membership/login", "/membership/pay-now", "/pay-now"],
+        disallow: ["/membership/login", "/membership/pay-now", "/pay-now", "/admin"],
       },
       {
         userAgent: "Claude-Web",
         allow: "/",
-        disallow: ["/membership/login", "/membership/pay-now", "/pay-now"],
+        disallow: ["/membership/login", "/membership/pay-now", "/pay-now", "/admin"],
       },
       {
         userAgent: "PerplexityBot",
         allow: "/",
-        disallow: ["/membership/login", "/membership/pay-now", "/pay-now"],
+        disallow: ["/membership/login", "/membership/pay-now", "/pay-now", "/admin"],
       },
       {
         userAgent: "Googlebot",
         allow: "/",
-        disallow: ["/membership/login", "/membership/pay-now", "/pay-now"],
+        disallow: ["/membership/login", "/membership/pay-now", "/pay-now", "/admin"],
       },
       {
         userAgent: "Googlebot-Image",
@@ -57,7 +59,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "Bingbot",
         allow: "/",
-        disallow: ["/membership/login", "/membership/pay-now", "/pay-now"],
+        disallow: ["/membership/login", "/membership/pay-now", "/pay-now", "/admin"],
       },
       {
         userAgent: "facebookexternalhit",
@@ -80,7 +82,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "meta-externalagent",
         allow: "/",
-        disallow: ["/membership/login", "/membership/pay-now", "/pay-now"],
+        disallow: ["/membership/login", "/membership/pay-now", "/pay-now", "/admin"],
       },
       // Apple
       {
@@ -91,7 +93,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "Amazonbot",
         allow: "/",
-        disallow: ["/membership/login", "/membership/pay-now", "/pay-now"],
+        disallow: ["/membership/login", "/membership/pay-now", "/pay-now", "/admin"],
       },
     ],
     sitemap: "https://www.hprc.in/sitemap.xml",

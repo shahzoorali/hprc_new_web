@@ -99,6 +99,7 @@ type FormData = {
   stablingTo: string;
   specialNotes: string;
   isIndian: boolean;
+  ageProofType: "PASSPORT" | "BIRTH_CERT_AADHAAR" | "";
   declaration: boolean;
 };
 
@@ -106,7 +107,7 @@ type FormData = {
 const PAIR_GROUPS: Record<number, number> = {};
 
 // Fixed stabling package date windows (per prospectus). PER_DAY = 12–14 Aug
-// (₹5,000), FULL_CAMP = 12–17 Aug (₹10,000, covers NQ + the Equestrian Challenge).
+// (₹5,000), FULL_CAMP = 12–17 Aug (₹10,000, covers National Qualifier (NQ) + the HPRC Equestrian Challenge).
 const STABLING_PACKAGES = {
   PER_DAY: { total: 5000, from: "2026-08-12", to: "2026-08-14" },
   FULL_CAMP: { total: 10000, from: "2026-08-12", to: "2026-08-17" },
@@ -131,6 +132,7 @@ const INITIAL_FORM: FormData = {
   stablingTo: "",
   specialNotes: "",
   isIndian: false,
+  ageProofType: "",
   declaration: false,
 };
 
@@ -421,9 +423,15 @@ function RegistrationForm() {
 
     // Age & nationality proof is mandatory for every NQ entry.
     if (activeSelected.length > 0) {
-      const fileInput = document.getElementById('ec-age-proof') as HTMLInputElement;
-      if (!fileInput || !fileInput.files || fileInput.files.length === 0) {
-        e.ageProof = "Age & nationality proof (Indian passport, or birth certificate + Aadhaar) is required";
+      if (!form.ageProofType) {
+        e.ageProof = "Please select the document type you are uploading";
+      } else {
+        const fileInput = document.getElementById('ec-age-proof') as HTMLInputElement;
+        if (!fileInput || !fileInput.files || fileInput.files.length === 0) {
+          e.ageProof = form.ageProofType === "PASSPORT"
+            ? "Please upload a copy of the Indian Passport"
+            : "Please upload Birth Certificate + Aadhaar (combined as one file or separately)";
+        }
       }
     }
 
@@ -531,6 +539,7 @@ function RegistrationForm() {
       <input type="hidden" name="eventHorses" value={JSON.stringify(form.eventHorses)} />
       <input type="hidden" name="eventHorseEfi" value={JSON.stringify(form.eventHorseEfi)} />
       <input type="hidden" name="isIndian" value={form.isIndian ? "yes" : "no"} />
+      <input type="hidden" name="ageProofType" value={form.ageProofType} />
       <input type="hidden" name="stablingType" value={form.stablingType} />
       <input type="hidden" name="stablingCount" value={form.stablingCount} />
       <input type="hidden" name="stablingFrom" value={form.stablingFrom} />
@@ -952,7 +961,7 @@ function RegistrationForm() {
                 </svg>
                 {form.stablingType === "PER_DAY"
                   ? "Per-Day Stabling · 12th – 14th August 2026 · ₹2,500 per stable per day (₹5,000 total)"
-                  : "Full Camp · 12th – 17th August 2026 · ₹2,000 per stable per day (₹10,000 total) — covers NQ + the Equestrian Challenge"}
+                  : "Full Camp · 12th – 17th August 2026 · ₹2,000 per stable per day (₹10,000 total) — covers National Qualifier (NQ) + the HPRC Equestrian Challenge"}
               </div>
             )}
           </div>
@@ -1009,19 +1018,87 @@ function RegistrationForm() {
             <span className="flex h-8 w-8 items-center justify-center bg-brand-500 text-white text-sm font-bold">6</span>
             Age &amp; Nationality Proof
           </h3>
-          <div className="bg-amber-50 border border-amber-200 p-5 rounded-xl">
-            <label className="block text-sm font-semibold text-amber-900 mb-1.5" htmlFor="ec-age-proof">
-              Age &amp; Nationality Proof — Indian Passport, or Birth Certificate + Aadhaar <span className="text-brand-500">*</span>
-            </label>
-            <p className="text-xs text-amber-800/80 mb-3 block">Mandatory for every NQ entry, as proof of age and Indian nationality. Foreign nationals / OCI cardholders are not eligible.</p>
-            <input
-              id="ec-age-proof"
-              name="ageProof"
-              type="file"
-              accept=".pdf,image/*"
-              className="block w-full text-sm text-amber-900 file:mr-4 file:py-2.5 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-white file:text-brand-700 hover:file:bg-brand-50 transition shadow-sm cursor-pointer"
-            />
-            {errors.ageProof && <p className="mt-2 text-xs text-red-500 font-bold">{errors.ageProof}</p>}
+
+          <div className="bg-amber-50 border border-amber-200 p-5 rounded-xl space-y-4">
+            <div>
+              <p className="text-sm font-bold text-amber-900 mb-1">
+                Select document type <span className="text-brand-500">*</span>
+              </p>
+              <p className="text-xs text-amber-800/80 mb-3">
+                Mandatory for all NQ entries — proves age and Indian nationality. Foreign nationals and OCI cardholders are <strong>not eligible</strong>.
+              </p>
+
+              {/* Radio options */}
+              <div className="grid sm:grid-cols-2 gap-3">
+                {([
+                  {
+                    value: "PASSPORT" as const,
+                    title: "Indian Passport",
+                    sub: "Upload a scan / photo of your valid Indian passport (bio-data page).",
+                  },
+                  {
+                    value: "BIRTH_CERT_AADHAAR" as const,
+                    title: "Birth Certificate + Aadhaar",
+                    sub: "Upload both documents combined into one PDF or image.",
+                  },
+                ]).map((opt) => (
+                  <label
+                    key={opt.value}
+                    className={`flex items-start gap-3 p-4 border-2 rounded-xl cursor-pointer transition-all ${
+                      form.ageProofType === opt.value
+                        ? "border-brand-500 bg-white shadow-md"
+                        : "border-amber-200 bg-white/60 hover:bg-white/90"
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      name="ageProofTypeRadio"
+                      value={opt.value}
+                      checked={form.ageProofType === opt.value}
+                      onChange={() => setForm(f => ({ ...f, ageProofType: opt.value }))}
+                      className="mt-0.5 h-4 w-4 accent-brand-500 flex-shrink-0"
+                    />
+                    <div>
+                      <p className="text-sm font-bold text-gray-900">{opt.title}</p>
+                      <p className="text-xs text-gray-500 mt-0.5">{opt.sub}</p>
+                    </div>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            {/* File upload — shown once type is chosen */}
+            {form.ageProofType && (
+              <div className="pt-2 border-t border-amber-200">
+                <label className="block text-sm font-semibold text-amber-900 mb-2" htmlFor="ec-age-proof">
+                  {form.ageProofType === "PASSPORT"
+                    ? "Upload Indian Passport (bio-data page)"
+                    : "Upload Birth Certificate + Aadhaar (combined PDF or image)"}
+                  <span className="text-brand-500"> *</span>
+                </label>
+                {form.ageProofType === "BIRTH_CERT_AADHAAR" && (
+                  <p className="text-xs text-amber-700 mb-2">
+                    Tip: merge both documents into a single PDF before uploading, or upload them separately by renaming and combining.
+                  </p>
+                )}
+                <input
+                  id="ec-age-proof"
+                  name="ageProof"
+                  type="file"
+                  accept=".pdf,image/*"
+                  className="block w-full text-sm text-amber-900 file:mr-4 file:py-2.5 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-white file:text-brand-700 hover:file:bg-brand-50 transition shadow-sm cursor-pointer"
+                />
+              </div>
+            )}
+
+            {errors.ageProof && (
+              <p className="text-xs text-red-500 font-bold flex items-center gap-1.5">
+                <svg className="h-3.5 w-3.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+                {errors.ageProof}
+              </p>
+            )}
           </div>
         </div>
       )}
@@ -1298,7 +1375,7 @@ export default function NationalQualifier2026Page() {
                 { icon: "🌅", label: "Morning", value: event.sessions.morning },
                 { icon: "🌙", label: "Evening", value: event.sessions.evening },
                 { icon: "🏟️", label: "Ground 1", value: "Dressage" },
-                { icon: "🏆", label: "Main Arena", value: "Show Jumping & Practice Round" },
+                { icon: "🏆", label: "Main Arena", value: "Practice Round & Show Jumping" },
               ].map((item) => (
                 <div key={item.label} className="flex items-start gap-4 bg-white border border-brand-100 p-4 shadow-sm">
                   <span className="text-2xl leading-none flex-shrink-0 mt-0.5">{item.icon}</span>
@@ -1470,7 +1547,10 @@ export default function NationalQualifier2026Page() {
           <p className="mt-3 text-base text-gray-600 max-w-xl mx-auto">Dressage &amp; Show Jumping across four age categories — entries are online only, no post or spot entries</p>
         </div>
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-          {Object.entries(byDiscipline).map(([disc, discEvents]) => {
+          {Object.entries(byDiscipline).sort(([a], [b]) => {
+            const order = ["PRACTICE ROUND", "DRESSAGE", "SHOW JUMPING"];
+            return order.indexOf(a) - order.indexOf(b);
+          }).map(([disc, discEvents]) => {
             const theme = disciplineThemes[disc] ?? { color: "text-gray-700", bg: "bg-gray-50", border: "border-gray-200" };
             return (
               <div key={disc} className={`border-2 ${theme.border} ${theme.bg} overflow-hidden`}>
@@ -1497,6 +1577,9 @@ export default function NationalQualifier2026Page() {
               </div>
             );
           })}
+        </div>
+        <div className="mt-6 text-center text-xs text-gray-600">
+          <p><span className="font-semibold">Legend:</span> H = Height, S = Spread</p>
         </div>
       </section>
 

@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Playfair_Display, Inter, Cormorant_Garamond } from "next/font/google";
-
 import Script from "next/script";
-import { SiteFooter } from "@/components/layout/site-footer";
-import { SiteHeader } from "@/components/layout/site-header";
+
 import { siteConfig } from "@/config/site";
 
 import "./globals.css";
@@ -102,11 +100,7 @@ export default function RootLayout({
                   bg-background antialiased text-foreground`}
         suppressHydrationWarning
       >
-        <div className="flex min-h-screen flex-col">
-          <SiteHeader />
-          <main className="flex-1">{children}</main>
-          <SiteFooter />
-        </div>
+        {children}
       </body>
     </html>
   );

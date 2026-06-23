@@ -1545,7 +1545,7 @@ export default function EquestrianChallenge2026Page() {
                 { icon: "🌅", label: "Morning", value: event.sessions.morning },
                 { icon: "🌙", label: "Evening", value: event.sessions.evening },
                 { icon: "🏟️", label: "Ground 1", value: "Hacks & Dressage" },
-                { icon: "🏆", label: "Main Arena", value: "Show Jumping & Practice Round" },
+                { icon: "🏆", label: "Main Arena", value: "Practice Round & Show Jumping" },
               ].map((item) => (
                 <div key={item.label} className="flex items-start gap-4 bg-white border border-brand-100 p-4 shadow-sm">
                   <span className="text-2xl leading-none flex-shrink-0 mt-0.5">{item.icon}</span>
@@ -1666,7 +1666,10 @@ export default function EquestrianChallenge2026Page() {
           <p className="mt-3 text-base text-gray-600 max-w-xl mx-auto">15 classes across 3 disciplines — open to riders from HPRC and affiliated clubs and units</p>
         </div>
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-          {Object.entries(byDiscipline).map(([disc, discEvents]) => {
+          {Object.entries(byDiscipline).sort(([a], [b]) => {
+            const order = ["PRACTICE ROUND", "HACKS", "DRESSAGE", "SHOW JUMPING"];
+            return order.indexOf(a) - order.indexOf(b);
+          }).map(([disc, discEvents]) => {
             const theme = disciplineThemes[disc] ?? { color: "text-gray-700", bg: "bg-gray-50", border: "border-gray-200" };
             return (
               <div key={disc} className={`border-2 ${theme.border} ${theme.bg} overflow-hidden`}>

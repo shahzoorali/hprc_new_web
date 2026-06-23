@@ -124,7 +124,8 @@ if ($order_id) {
                 if (!empty($userData['email'])) {
                     $details = ["events" => $eventList];
                     $htmlBody = get_success_email_body($userData['name'], $order_id, $mer_amount, $tracking_id, $details);
-                    send_hprc_email($userData['email'], $userData['name'], "Registration Confirmed - National Qualifier (NQ) 2026", $htmlBody, "", "");
+                    $etiquettePath = __DIR__ . '/../public/events/nq2026/HPRC_National_Qualifier_2026_Etiquette_Conduct_Guidelines.pdf';
+                    send_hprc_email($userData['email'], $userData['name'], "Registration Confirmed - National Qualifier (NQ) 2026", $htmlBody, "", $etiquettePath);
                 }
 
                 $adminData = $row;

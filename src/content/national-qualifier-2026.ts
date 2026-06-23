@@ -34,7 +34,7 @@ export const nationalQualifier2026 = {
     },
     grounds: {
       ground1: "Ground 1 — Dressage",
-      mainArena: "Main Arena — Show Jumping & Practice Round",
+      mainArena: "Main Arena — Practice Round & Show Jumping",
     },
   },
 
@@ -42,7 +42,7 @@ export const nationalQualifier2026 = {
     { value: "2", label: "Disciplines" },
     { value: "8", label: "Classes" },
     { value: "3", label: "Days" },
-    { value: "JNEC", label: "Qualifier For" },
+    { value: "JNEC", label: "Qualifier for JNEC" },
   ],
 
   schedule: [
@@ -152,7 +152,7 @@ export const nationalQualifier2026 = {
     },
     details: [
       "Per-Day Stabling (12–14 Aug): ₹2,500 per stable per day — ₹5,000 per stable total.",
-      "Full Camp (12–17 Aug): ₹2,000 per stable per day — ₹10,000 per stable total (covers NQ + the Equestrian Challenge).",
+      "Full Camp (12–17 Aug): ₹2,000 per stable per day — ₹10,000 per stable total (covers National Qualifier (NQ) + the HPRC Equestrian Challenge).",
       "Bookings are confirmed only after full charges are received for the intended number of days.",
       "Self-Containment: bring your own rations, grass, straw, fodder, and camping equipment.",
       "Teams must make their own arrangements for staff stay and food.",
