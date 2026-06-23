@@ -14,24 +14,28 @@ function secretKey(): Uint8Array {
   return new TextEncoder().encode(secret);
 }
 
-// Mint a signed session token (subject "admin", 12h expiry).
-export async function createSessionToken(): Promise<string> {
+// Mint a signed session token storing the username, 12h expiry.
+export async function createSessionToken(username: string): Promise<string> {
   return new SignJWT({ role: "admin" })
     .setProtectedHeader({ alg: "HS256" })
-    .setSubject("admin")
+    .setSubject(username)
     .setIssuedAt()
     .setExpirationTime(`${SESSION_HOURS}h`)
     .sign(secretKey());
 }
 
-// Verify a session token. Returns true only for a valid, unexpired admin token.
-export async function verifySessionToken(token: string | undefined): Promise<boolean> {
-  if (!token) return false;
+// Verify a session token. Returns the username for a valid unexpired token,
+// null otherwise.
+export async function verifySessionToken(
+  token: string | undefined,
+): Promise<string | null> {
+  if (!token) return null;
   try {
     const { payload } = await jwtVerify(token, secretKey());
-    return payload.sub === "admin";
+    // Accept any non-empty subject — username stored there.
+    return typeof payload.sub === "string" && payload.sub ? payload.sub : null;
   } catch {
-    return false;
+    return null;
   }
 }
 

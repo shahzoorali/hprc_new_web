@@ -1,16 +1,18 @@
+import { cookies } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
 
 import { LogoutButton } from "@/components/admin/logout-button";
+import { ADMIN_COOKIE, verifySessionToken } from "@/lib/admin-session";
 
-// Minimal admin shell: top bar with the HPRC logo, section links, and a logout
-// button. No public site header/footer. Wraps every authenticated dashboard
-// page (the login page lives outside this group, so it stays chrome-free).
-export default function DashboardLayout({
+export default async function DashboardLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const token = (await cookies()).get(ADMIN_COOKIE)?.value;
+  const username = await verifySessionToken(token);
+
   return (
     <div className="flex min-h-screen flex-col bg-neutral-50">
       <header className="border-b border-neutral-200 bg-white">
@@ -38,7 +40,14 @@ export default function DashboardLayout({
               </Link>
             </nav>
           </div>
-          <LogoutButton />
+          <div className="flex items-center gap-3">
+            {username ? (
+              <span className="text-sm text-neutral-500">
+                Signed in as <strong className="text-neutral-700">{username}</strong>
+              </span>
+            ) : null}
+            <LogoutButton />
+          </div>
         </div>
       </header>
       <main className="flex-1">

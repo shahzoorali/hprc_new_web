@@ -8,7 +8,7 @@ import { ADMIN_COOKIE, verifySessionToken } from "@/lib/admin-session";
 
 export async function GET(req: NextRequest) {
   const token = (await cookies()).get(ADMIN_COOKIE)?.value;
-  if (!(await verifySessionToken(token))) {
+  if (!(await verifySessionToken(token))) { // returns username or null
     return new NextResponse("Unauthorized", { status: 401 });
   }
 

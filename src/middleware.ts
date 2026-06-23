@@ -18,7 +18,7 @@ export async function middleware(req: NextRequest) {
 
   const token = req.cookies.get(ADMIN_COOKIE)?.value;
   if (await verifySessionToken(token)) {
-    return NextResponse.next();
+    return NextResponse.next(); // verifySessionToken returns username (truthy) or null
   }
 
   const loginUrl = req.nextUrl.clone();
