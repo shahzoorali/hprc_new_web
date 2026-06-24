@@ -97,7 +97,7 @@ if ($order_id) {
                     fastcgi_finish_request();
                 }
 
-                $webhook_url = "https://script.google.com/macros/s/AKfycbzw65SAMdxZpVqp5TcIKvcLIZVdDDcybqkMAUnjM7-wSqvjmo0Pw2Lgz7nC_2ttDN33/exec";
+                $webhook_url = "https://script.google.com/macros/s/AKfycbx7Mdp6_XTnil1Kny4A7c1O9BJDbXBqoVMDcf-G2sKVQpbkTKTKlTowpPi3N9z_zVjX/exec";
                 $ageProofLink = !empty($row['ageProofPath']) ? "https://hprc.in/payment/view_proof.php?file=" . urlencode(basename($row['ageProofPath'])) : "";
                 $ageProofLink2 = !empty($row['ageProofPath2']) ? "https://hprc.in/payment/view_proof.php?file=" . urlencode(basename($row['ageProofPath2'])) : "";
 

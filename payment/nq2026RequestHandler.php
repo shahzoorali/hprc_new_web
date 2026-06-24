@@ -137,7 +137,7 @@ $eventMapping = [
     9 => "Practice Round 0.80-0.90m"
 ];
 
-$webhook_url = "https://script.google.com/macros/s/AKfycbzw65SAMdxZpVqp5TcIKvcLIZVdDDcybqkMAUnjM7-wSqvjmo0Pw2Lgz7nC_2ttDN33/exec";
+$webhook_url = "https://script.google.com/macros/s/AKfycbx7Mdp6_XTnil1Kny4A7c1O9BJDbXBqoVMDcf-G2sKVQpbkTKTKlTowpPi3N9z_zVjX/exec";
 
 // --- COMPLIMENTARY / CHEAT CODE BYPASS ---
 if ($amount <= 0) {
