@@ -1559,7 +1559,7 @@ export default function NationalQualifier2026Page() {
           <h2 className="text-3xl sm:text-4xl font-extrabold text-brand-900 font-display">Disciplines &amp; Entry Fees</h2>
           <p className="mt-3 text-base text-gray-600 max-w-xl mx-auto">Dressage &amp; Show Jumping across four age categories — entries are online only, no post or spot entries</p>
         </div>
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {Object.entries(byDiscipline).sort(([a], [b]) => {
             const order = ["PRACTICE ROUND", "DRESSAGE", "SHOW JUMPING"];
             return order.indexOf(a) - order.indexOf(b);
