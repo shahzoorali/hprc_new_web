@@ -1090,8 +1090,8 @@ function RegistrationForm() {
               <div className="grid sm:grid-cols-3 gap-2">
                 {([
                   { type: "NONE", title: "No Stabling", sub: "—" },
-                  { type: "PER_DAY", title: "Per-Day · 14–17 Aug", sub: "₹7,500 / stable" },
-                  { type: "FULL_CAMP", title: "Full Camp · 12–17 Aug", sub: "₹10,000 / stable" },
+                  { type: "PER_DAY", title: "Per-Day · 14–17 Aug", sub: "₹2,500/stable/day · ₹7,500 total" },
+                  { type: "FULL_CAMP", title: "Full Camp · 12–17 Aug", sub: "₹2,000/stable/day · ₹10,000 total" },
                 ] as const).map((opt) => (
                   <button
                     key={opt.type}
