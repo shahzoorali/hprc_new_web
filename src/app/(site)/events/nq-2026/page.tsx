@@ -297,6 +297,13 @@ function RegistrationForm() {
         return { eventFees: 0, stablingFees: 0, totalFee: 0 };
       }
 
+      const isPromoCode = form.specialNotes.trim() === "HPRCTEST2";
+      if (isPromoCode) {
+        const totalEntries = form.selectedEvents.reduce((sum, id) => sum + (form.eventHorses[id] || [""]).length, 0);
+        const promoFee = totalEntries * 2;
+        return { eventFees: promoFee, stablingFees: 0, totalFee: promoFee };
+      }
+
       return { eventFees: eFees, stablingFees: sFees, totalFee: eFees + sFees };
     },
     [form.selectedEvents, eligibleEvents, entryStatus, form.stablingType, form.stablingCount, form.stablingFrom, form.stablingTo, form.eventHorses, form.specialNotes]
@@ -1111,7 +1118,11 @@ function RegistrationForm() {
             <p className="text-3xl font-extrabold font-display">₹{totalFee.toLocaleString("en-IN")}</p>
           </div>
           <div className="text-center sm:text-right">
-            <p className="text-xs text-brand-200 font-medium">Inclusive of all applicable taxes</p>
+            {form.specialNotes.trim() === "HPRCTEST2" ? (
+              <p className="text-xs text-yellow-300 font-semibold">Promo applied — ₹2 per entry (testing only)</p>
+            ) : (
+              <p className="text-xs text-brand-200 font-medium">Inclusive of all applicable taxes</p>
+            )}
           </div>
         </div>
       )}
@@ -1176,9 +1187,11 @@ function RegistrationForm() {
               )}
               {form.stablingType !== "NONE" && inventoryLoading
                 ? "Verifying availability…"
-                : form.specialNotes.includes("HPRCCHEAT1")
+                : form.specialNotes.trim() === "HPRCCHEAT1"
                   ? "Submit Complimentary Entry"
-                  : "Proceed to Payment"}
+                  : form.specialNotes.trim() === "HPRCTEST2"
+                    ? "Proceed to Payment (Promo)"
+                    : "Proceed to Payment"}
             </button>
             <p className="mt-3 text-xs text-gray-500">
               Entries close at 12:00 noon on 12 August 2026. No post-entries or spot entries — please ensure all details are correct before submitting.
