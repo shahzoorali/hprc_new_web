@@ -39,29 +39,37 @@ $stablingTo = isset($_POST['stablingTo']) ? $_POST['stablingTo'] : '';
 $amount = isset($_POST['amount']) ? $_POST['amount'] : 0;
 $currency = "INR";
 
-// Handle Age & Nationality Proof Upload
-$ageProofPath = '';
-if (isset($_FILES['ageProof']) && $_FILES['ageProof']['error'] == 0) {
-    $uploadDir = __DIR__ . '/uploads/nq2026/age_proofs/';
-    if (!is_dir($uploadDir)) {
-        if (!mkdir($uploadDir, 0755, true)) {
-            error_log("NQ2026: Failed to create upload directory: " . $uploadDir);
+// Handle Age & Nationality Proof Uploads (up to 2 files: ageProof required, ageProof2 optional)
+$uploadDir = __DIR__ . '/uploads/nq2026/age_proofs/';
+
+/**
+ * Moves one uploaded proof file into the nq2026 uploads dir.
+ * Returns the stored relative path, or '' if no/failed upload.
+ */
+$handleProofUpload = function ($fileKey, $suffix) use ($name, $uploadDir) {
+    if (!isset($_FILES[$fileKey]) || $_FILES[$fileKey]['error'] != 0) {
+        if (isset($_FILES[$fileKey]) && $_FILES[$fileKey]['error'] != 4) {
+            error_log("NQ2026: File upload error on $fileKey. Code: " . $_FILES[$fileKey]['error']);
         }
+        return '';
     }
-
+    if (!is_dir($uploadDir) && !mkdir($uploadDir, 0755, true)) {
+        error_log("NQ2026: Failed to create upload directory: " . $uploadDir);
+        return '';
+    }
     $safeName = preg_replace('/[^a-zA-Z0-9]/', '_', $name);
-    $fileExtension = pathinfo($_FILES['ageProof']['name'], PATHINFO_EXTENSION);
-    $fileName = $safeName . '_age_proof_' . time() . '.' . $fileExtension;
+    $fileExtension = pathinfo($_FILES[$fileKey]['name'], PATHINFO_EXTENSION);
+    $fileName = $safeName . '_age_proof' . $suffix . '_' . time() . '.' . $fileExtension;
     $targetPath = $uploadDir . $fileName;
-
-    if (move_uploaded_file($_FILES['ageProof']['tmp_name'], $targetPath)) {
-        $ageProofPath = 'uploads/nq2026/age_proofs/' . $fileName;
-    } else {
-        error_log("NQ2026: Failed to move uploaded file. Error Code: " . $_FILES['ageProof']['error'] . " | Target: " . $targetPath);
+    if (move_uploaded_file($_FILES[$fileKey]['tmp_name'], $targetPath)) {
+        return 'uploads/nq2026/age_proofs/' . $fileName;
     }
-} else if (isset($_FILES['ageProof']) && $_FILES['ageProof']['error'] != 4) {
-    error_log("NQ2026: File upload error detected. Code: " . $_FILES['ageProof']['error']);
-}
+    error_log("NQ2026: Failed to move uploaded file $fileKey to " . $targetPath);
+    return '';
+};
+
+$ageProofPath  = $handleProofUpload('ageProof', '');
+$ageProofPath2 = $handleProofUpload('ageProof2', '_2');
 
 // Pre-flight inventory check against the SHARED camp ledger.
 if ($stablingType !== 'NONE' && (int)$stablingCount > 0 && !empty($stablingFrom) && !empty($stablingTo)) {
@@ -76,7 +84,7 @@ if ($stablingType !== 'NONE' && (int)$stablingCount > 0 && !empty($stablingFrom)
     }
 }
 
-$sql = "INSERT INTO nq2026 (name, parentName, dob, address, mobile, email, emergencyContact, emergencyRelation, clubName, efiRiderId, isIndian, selectedEvents, eventHorses, eventHorseEfi, stablingType, stablingCount, stablingFrom, stablingTo, ageProofPath, amount, currency)
+$sql = "INSERT INTO nq2026 (name, parentName, dob, address, mobile, email, emergencyContact, emergencyRelation, clubName, efiRiderId, isIndian, selectedEvents, eventHorses, eventHorseEfi, stablingType, stablingCount, stablingFrom, stablingTo, ageProofPath, ageProofPath2, amount, currency)
         VALUES ('".$conn->real_escape_string($name)."',
                 '".$conn->real_escape_string($parentName)."',
                 '".$conn->real_escape_string($dob)."',
@@ -96,6 +104,7 @@ $sql = "INSERT INTO nq2026 (name, parentName, dob, address, mobile, email, emerg
                 '".$conn->real_escape_string($stablingFrom)."',
                 '".$conn->real_escape_string($stablingTo)."',
                 '".$conn->real_escape_string($ageProofPath)."',
+                '".$conn->real_escape_string($ageProofPath2)."',
                 '".$conn->real_escape_string($amount)."',
                 '$currency')";
 
@@ -144,6 +153,7 @@ if ($amount <= 0) {
     $efiData = json_decode($eventHorseEfi, true) ?: [];
 
     $ageProofLink = !empty($ageProofPath) ? "https://hprc.in/payment/view_proof.php?file=" . urlencode(basename($ageProofPath)) : "";
+    $ageProofLink2 = !empty($ageProofPath2) ? "https://hprc.in/payment/view_proof.php?file=" . urlencode(basename($ageProofPath2)) : "";
 
     $webhookPayloads = [];
     foreach ($selectedIds as $id) {
@@ -164,7 +174,8 @@ if ($amount <= 0) {
                 "stablingType" => $stablingType, "stablingCount" => $stablingCount,
                 "stablingFrom" => $stablingFrom, "stablingTo" => $stablingTo,
                 "amount" => "0 (COMP)", "tracking_id" => "HPRCNQCHEAT-" . $id,
-                "ageProofLink" => $ageProofLink
+                "ageProofLink" => $ageProofLink,
+                "ageProofLink2" => $ageProofLink2
             );
         }
     }

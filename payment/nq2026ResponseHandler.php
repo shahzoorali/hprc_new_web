@@ -63,7 +63,7 @@ if ($order_id) {
 
     if ($userData && !$isDuplicateHit) {
         if ($order_status === "Success" || $order_status === "Successful") {
-            $result = $conn->query("SELECT name, parentName, dob, address, mobile, email, emergencyContact, emergencyRelation, clubName, efiRiderId, selectedEvents, eventHorses, eventHorseEfi, stablingType, stablingCount, stablingFrom, stablingTo, ageProofPath FROM nq2026 WHERE id='".$conn->real_escape_string($order_id)."'");
+            $result = $conn->query("SELECT name, parentName, dob, address, mobile, email, emergencyContact, emergencyRelation, clubName, efiRiderId, selectedEvents, eventHorses, eventHorseEfi, stablingType, stablingCount, stablingFrom, stablingTo, ageProofPath, ageProofPath2 FROM nq2026 WHERE id='".$conn->real_escape_string($order_id)."'");
 
             if ($result && $row = $result->fetch_assoc()) {
                 if ($row['stablingType'] !== 'NONE'
@@ -99,6 +99,7 @@ if ($order_id) {
 
                 $webhook_url = "https://script.google.com/macros/s/AKfycbzw65SAMdxZpVqp5TcIKvcLIZVdDDcybqkMAUnjM7-wSqvjmo0Pw2Lgz7nC_2ttDN33/exec";
                 $ageProofLink = !empty($row['ageProofPath']) ? "https://hprc.in/payment/view_proof.php?file=" . urlencode(basename($row['ageProofPath'])) : "";
+                $ageProofLink2 = !empty($row['ageProofPath2']) ? "https://hprc.in/payment/view_proof.php?file=" . urlencode(basename($row['ageProofPath2'])) : "";
 
                 $eventMapping = [
                     1 => "Dressage - Children II", 2 => "Dressage - Children I", 3 => "Dressage - Junior", 4 => "Dressage - Young Rider",
@@ -182,6 +183,7 @@ if ($order_id) {
                             "stablingType" => $row['stablingType'],
                             "stablingCount" => $row['stablingCount'], "stablingFrom" => $row['stablingFrom'],
                             "stablingTo" => $row['stablingTo'], "ageProofLink" => $ageProofLink,
+                            "ageProofLink2" => $ageProofLink2,
                             "amount" => $displayAmount, "tracking_id" => $tracking_id . " (#$id)"
                         );
 
