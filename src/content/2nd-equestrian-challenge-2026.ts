@@ -18,7 +18,7 @@ export const equestrianChallengeAug2026 = {
     dates: "14th to 16th August 2026",
     dateRange: { start: "2026-08-14T17:00:00+05:30", end: "2026-08-16T20:00:00+05:30" },
     venue: "Hyderabad Polo & Riding Club, Gandipet, Moinabad, Ranga Reddy",
-    venueAddress: "Aziznagar Survey No. 177, Gandipet, Moinabad, Ranga Reddy District, Telangana – 500074",
+    venueAddress: "Moinabad Road, Aziznagar, Hyderabad, Telangana 500075",
     govBody: "Organised by HPRC",
     contact: ["+91 9949000085", "+91 7799259000"],
     email: "ridingschool@bbin.in",

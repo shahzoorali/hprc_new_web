@@ -18,7 +18,7 @@ export const nationalQualifier2026 = {
     dates: "12th to 14th August 2026",
     dateRange: { start: "2026-08-12T17:00:00+05:30", end: "2026-08-14T18:00:00+05:30" },
     venue: "Hyderabad Polo & Riding Club, Gandipet, Moinabad, Ranga Reddy",
-    venueAddress: "Aziznagar Survey No. 177, Gandipet, Moinabad, Ranga Reddy District, Telangana – 500074",
+    venueAddress: "Moinabad Road, Aziznagar, Hyderabad, Telangana 500075",
     govBody: "Organised by HPRC, in association with TSEA, under the aegis of EFI",
     contact: ["+91 9949000085", "+91 7799259000"],
     email: "info@hprc.co.in",

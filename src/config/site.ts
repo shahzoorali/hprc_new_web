@@ -8,7 +8,7 @@ export const siteConfig = {
     email: "info@hprc.co.in",
     membershipEmail: "reaz@hprc.co.in",
     address:
-      "Near Mrugavani Resort and Spa, Aziz Nagar Village, Gandipet, Ranga Reddy District, Hyderabad, Telangana, India - 500075",
+      "Moinabad Road, Aziznagar, Hyderabad, Telangana 500075",
   },
   social: {
     facebook: "https://www.facebook.com/hydprc",
