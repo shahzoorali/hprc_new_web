@@ -906,8 +906,8 @@ function RegistrationForm() {
               <div className="grid sm:grid-cols-3 gap-2">
                 {([
                   { type: "NONE", title: "No Stabling", sub: "—" },
-                  { type: "PER_DAY", title: "Per-Day · 12–14 Aug", sub: "₹5,000 / stable" },
-                  { type: "FULL_CAMP", title: "Full Camp · 12–17 Aug", sub: "₹10,000 / stable" },
+                  { type: "PER_DAY", title: "Per-Day · 12–14 Aug", sub: "₹2,500/stable/day · ₹5,000 total" },
+                  { type: "FULL_CAMP", title: "Full Camp · 12–17 Aug", sub: "₹2,000/stable/day · ₹10,000 total" },
                 ] as const).map((opt) => (
                   <button
                     key={opt.type}
@@ -1581,7 +1581,7 @@ export default function NationalQualifier2026Page() {
                         <p className="text-sm font-medium text-gray-900 leading-tight">{ev.category}</p>
                         <p className="text-xs text-gray-500 mt-0.5">{ev.date}</p>
                       </div>
-                      <span className="text-sm font-extrabold text-brand-600 flex-shrink-0 ml-3">
+                      <span className="text-sm font-extrabold text-brand-600 flex-shrink-0 ml-3 text-center min-w-[5rem]">
                         ₹{ev.fee.toLocaleString("en-IN")}
                       </span>
                     </div>
