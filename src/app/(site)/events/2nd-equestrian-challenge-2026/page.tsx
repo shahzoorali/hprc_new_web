@@ -1537,10 +1537,10 @@ export default function EquestrianChallenge2026Page() {
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.3em] text-brand-500 mb-3">About the Event</p>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-brand-900 font-display leading-tight">
-                The 2nd Equestrian Challenge — August Season
+                The HPRC Equestrian Challenge — August Season
               </h2>
               <p className="mt-5 text-base sm:text-lg text-gray-700 leading-relaxed font-light">
-                The Hyderabad Polo &amp; Riding Club returns with the <strong>2nd HPRC Equestrian Challenge 2026 (August Season)</strong> on {event.dates} at the Club grounds, Gandipet. It is an open opportunity for all eligible riders to compete, showcase their skills, and represent their clubs and units.
+                The Hyderabad Polo &amp; Riding Club presents the <strong>HPRC Equestrian Challenge 2026 (August Season)</strong> on {event.dates} at the Club grounds, Gandipet. It is an open opportunity for all eligible riders to compete, showcase their skills, and represent their clubs and units.
               </p>
               <p className="mt-4 text-base text-gray-600 leading-relaxed font-light">
                 The competition is open to riders from HPRC and affiliated clubs and units, featuring Hacks, Dressage and Show Jumping across all age categories — including a beginner-friendly 40 cm class. Cash prizes are awarded to Open category Show Jumping finishers.

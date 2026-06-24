@@ -129,7 +129,7 @@ if ($order_id) {
                     $details = ["events" => $eventList];
                     $htmlBody = get_success_email_body($userData['name'], $order_id, $mer_amount, $tracking_id, $details);
                     $etiquettePath = __DIR__ . '/../public/events/ecaug2026/HPRC_Equestrian_Challenge_2026_Etiquette_Conduct_Guidelines.pdf';
-                    send_hprc_email($userData['email'], $userData['name'], "Registration Confirmed - 2nd HPRC Equestrian Challenge 2026 (August)", $htmlBody, "", $etiquettePath);
+                    send_hprc_email($userData['email'], $userData['name'], "Registration Confirmed - HPRC Equestrian Challenge 2026 (August)", $htmlBody, "", $etiquettePath);
                 }
 
                 $adminData = $row;
@@ -216,7 +216,7 @@ if ($order_id) {
         } else {
             if (!empty($userData['email'])) {
                 $htmlBody = get_failed_email_body($userData['name'], $order_id, $status_message);
-                send_hprc_email($userData['email'], $userData['name'], "Payment Notification - 2nd HPRC Equestrian Challenge 2026 (August)", $htmlBody);
+                send_hprc_email($userData['email'], $userData['name'], "Payment Notification - HPRC Equestrian Challenge 2026 (August)", $htmlBody);
             }
 
             $adminHtml = get_admin_failed_notification_body($userData['name'], $order_id, $status_message, $userData['email'] ?: "No Email Provided");

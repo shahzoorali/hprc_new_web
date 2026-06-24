@@ -184,7 +184,7 @@ if ($amount <= 0) {
         $details = ["events" => implode(" | ", $readableEvents)];
         $htmlBody = get_success_email_body($name, $order_id, "0 (COMP)", "COMP-ENTRY", $details);
         $etiquettePath = __DIR__ . '/../public/events/ecaug2026/HPRC_Equestrian_Challenge_2026_Etiquette_Conduct_Guidelines.pdf';
-        send_hprc_email($email, $name, "Registration Confirmed - 2nd HPRC Equestrian Challenge 2026 (August)", $htmlBody, "", $etiquettePath);
+        send_hprc_email($email, $name, "Registration Confirmed - HPRC Equestrian Challenge 2026 (August)", $htmlBody, "", $etiquettePath);
     }
 
     $adminData = [

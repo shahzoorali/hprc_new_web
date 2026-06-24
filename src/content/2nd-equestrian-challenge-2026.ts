@@ -1,5 +1,5 @@
-// 2nd HPRC Equestrian Challenge 2026 — August Season — Content Data
-// Source: "HPRC Equestrian Challenge Aug 2026 Prospectus v1-2.pdf" (14–16 August 2026)
+// HPRC Equestrian Challenge 2026 — August Season — Content Data
+// Source: "HPRC Equestrian Challenge Aug 2026 Prospectus v1.pdf" (14–16 August 2026)
 //
 // NOTE: This is the August edition. The inaugural (May) edition lives in
 // equestrian-challenge-2026.ts. This file is fully self-contained so the two
@@ -7,19 +7,19 @@
 
 export const equestrianChallengeAug2026 = {
   meta: {
-    title: "2nd HPRC Equestrian Challenge 2026 — August Season | Hyderabad Polo & Riding Club",
+    title: "HPRC Equestrian Challenge 2026 — August Season | Hyderabad Polo & Riding Club",
     description:
-      "Register for the 2nd HPRC Equestrian Challenge 2026 (August Season) — 14th to 16th August 2026 at Hyderabad Polo & Riding Club, Gandipet. Hacks, Dressage & Show Jumping across all age categories, with a beginner-friendly 40 cm class.",
+      "Register for the HPRC Equestrian Challenge 2026 (August Season) — 14th to 16th August 2026 at Hyderabad Polo & Riding Club, Gandipet. Hacks, Dressage & Show Jumping across all age categories, with a beginner-friendly 40 cm class.",
   },
 
   event: {
-    name: "2nd HPRC Equestrian Challenge 2026",
-    tagline: "The 2nd HPRC Equestrian Challenge — August Season",
+    name: "HPRC Equestrian Challenge 2026",
+    tagline: "The HPRC Equestrian Challenge — August Season",
     dates: "14th to 16th August 2026",
     dateRange: { start: "2026-08-14T17:00:00+05:30", end: "2026-08-16T20:00:00+05:30" },
     venue: "Hyderabad Polo & Riding Club, Gandipet, Moinabad, Ranga Reddy",
-    venueAddress: "Moinabad Road, Aziznagar, Hyderabad, Telangana 500075",
-    govBody: "Organised by HPRC",
+    venueAddress: "Aziznagar Sy. No. 177, Gandipet, Moinabad, Ranga Reddy, Telangana 500074",
+    govBody: "Organised by Hyderabad Polo & Riding Club (HPRC)",
     contact: ["+91 9949000085", "+91 7799259000"],
     email: "ridingschool@bbin.in",
     showSecretary: { name: "Vinitha Venkateswarulu", phone: "+91 9100033323" },

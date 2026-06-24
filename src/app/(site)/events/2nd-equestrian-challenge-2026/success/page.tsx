@@ -107,11 +107,11 @@ function SuccessContent() {
     <div className="space-y-16 pb-24">
       <div className="container pt-16">
         <PageHero
-          eyebrow="2nd Equestrian Challenge — August 2026"
+          eyebrow="HPRC Equestrian Challenge — August 2026"
           title={isSuccess ? "Entry Confirmed!" : "Payment Status"}
           description={
             isSuccess
-              ? "Thank you! Your entry for the 2nd HPRC Equestrian Challenge 2026 (August Season) has been received and verified."
+              ? "Thank you! Your entry for the HPRC Equestrian Challenge 2026 (August Season) has been received and verified."
               : "Let's review the status of your recent entry payment."
           }
           backgroundImage="/photo-1553531580-6520e75d0458.png"
