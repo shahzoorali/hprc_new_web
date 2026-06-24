@@ -49,5 +49,6 @@ $row['isSuccess']    = admin_is_success($row['order_status']);
 $row['entries']      = $entries;
 $row['entriesCount'] = count($entries);
 $row['documentPath'] = !empty($row['ageProofPath']) ? $row['ageProofPath'] : null;
+$row['documentPath2'] = !empty($row['ageProofPath2']) ? $row['ageProofPath2'] : null;
 
 echo json_encode($row);

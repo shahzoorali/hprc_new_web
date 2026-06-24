@@ -39,6 +39,7 @@ export interface RegistrationDetail extends Record<string, unknown> {
   entries: EventEntry[];
   entriesCount: number;
   documentPath: string | null;
+  documentPath2: string | null;
 }
 
 export interface EventStats {

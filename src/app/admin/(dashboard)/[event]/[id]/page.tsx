@@ -58,11 +58,13 @@ export default async function RegistrationDetailPage({
   }
 
   const isNq = eventKey === "nq";
-  const docPath = rec.documentPath;
-  const docUrl = docPath
-    ? `/admin/api/document?event=${eventKey}&file=${encodeURIComponent(docPath)}`
-    : null;
-  const isPdf = typeof docPath === "string" && docPath.toLowerCase().endsWith(".pdf");
+  const documents = [rec.documentPath, rec.documentPath2]
+    .filter((p): p is string => typeof p === "string" && p.length > 0)
+    .map((path, i) => ({
+      label: `Document ${i + 1}`,
+      url: `/admin/api/document?event=${eventKey}&file=${encodeURIComponent(path)}`,
+      isPdf: path.toLowerCase().endsWith(".pdf"),
+    }));
 
   return (
     <div className="space-y-5">
@@ -157,26 +159,33 @@ export default async function RegistrationDetailPage({
       </div>
 
       <Card title="Age / nationality document">
-        {docUrl ? (
-          <div className="space-y-3">
-            {isPdf ? (
-              <iframe src={docUrl} className="h-[600px] w-full border border-neutral-200" />
-            ) : (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={docUrl}
-                alt="Uploaded document"
-                className="max-h-[600px] border border-neutral-200"
-              />
-            )}
-            <a
-              href={docUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-block bg-brand-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-brand-700"
-            >
-              Open / download
-            </a>
+        {documents.length > 0 ? (
+          <div className="space-y-6">
+            {documents.map((doc) => (
+              <div key={doc.url} className="space-y-3">
+                <p className="text-[11px] font-semibold uppercase tracking-wider text-neutral-400">
+                  {doc.label}
+                </p>
+                {doc.isPdf ? (
+                  <iframe src={doc.url} className="h-[600px] w-full border border-neutral-200" />
+                ) : (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={doc.url}
+                    alt={doc.label}
+                    className="max-h-[600px] border border-neutral-200"
+                  />
+                )}
+                <a
+                  href={doc.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-block bg-brand-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-brand-700"
+                >
+                  Open / download
+                </a>
+              </div>
+            ))}
           </div>
         ) : (
           <p className="text-sm text-neutral-400">No document uploaded.</p>
