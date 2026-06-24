@@ -15,18 +15,25 @@ if (empty($file)) {
 // Sanitize the filename to prevent directory traversal
 $filename = basename($file);
 
-// 1. Check in the payment/uploads folder (the default location)
-$filePath = __DIR__ . "/uploads/ec2026/age_proofs/" . $filename;
+// Search all known age_proof upload directories
+$searchPaths = [
+    __DIR__ . "/uploads/ec2026/age_proofs/" . $filename,
+    __DIR__ . "/uploads/ecaug2026/age_proofs/" . $filename,
+    __DIR__ . "/uploads/nq2026/age_proofs/" . $filename,
+    __DIR__ . "/../" . $file,
+];
 
-// 2. If not found, check if it exists relative to the root (for older entries or different structures)
-if (!file_exists($filePath)) {
-    $filePath = __DIR__ . "/../" . $file; 
+$filePath = null;
+foreach ($searchPaths as $candidate) {
+    if (file_exists($candidate)) {
+        $filePath = $candidate;
+        break;
+    }
 }
 
-// 3. Final check: Does it exist at all?
-if (!file_exists($filePath)) {
+if (!$filePath) {
     header("HTTP/1.0 404 Not Found");
-    error_log("EC2026 Proof Viewer: File not found at resolved path: " . $filePath);
+    error_log("Proof Viewer: File not found: " . $filename);
     die("File not found.");
 }
 
