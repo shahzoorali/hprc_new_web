@@ -129,7 +129,7 @@ $eventMapping = [
     16 => "Practice Round 80-90cm"
 ];
 
-$webhook_url = "https://script.google.com/macros/s/AKfycbzw65SAMdxZpVqp5TcIKvcLIZVdDDcybqkMAUnjM7-wSqvjmo0Pw2Lgz7nC_2ttDN33/exec";
+$webhook_url = "https://script.google.com/macros/s/AKfycby6F50wqXr3CfW9G7AGrK0F4CMi9tshDpoUDLtDmhw1zUzTq4qH6bNcqS7N8ey2-jYp/exec";
 
 // --- COMPLIMENTARY / CHEAT CODE BYPASS ---
 if ($amount <= 0) {
