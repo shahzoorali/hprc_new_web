@@ -149,6 +149,9 @@ export default async function RegistrationDetailPage({
                           {isNq && e.efi[i] ? (
                             <span className="text-neutral-400"> · EFI {e.efi[i]}</span>
                           ) : null}
+                          {rec.horseBreeds && rec.horseBreeds[h] ? (
+                            <span className="text-neutral-400"> · {rec.horseBreeds[h]}</span>
+                          ) : null}
                         </li>
                       ))}
                     </ul>

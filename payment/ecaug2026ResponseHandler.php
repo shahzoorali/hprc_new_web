@@ -63,7 +63,7 @@ if ($order_id) {
 
     if ($userData && !$isDuplicateHit) {
         if ($order_status === "Success" || $order_status === "Successful") {
-            $result = $conn->query("SELECT name, parentName, dob, address, mobile, email, emergencyContact, emergencyRelation, clubName, selectedEvents, eventHorses, stablingType, stablingCount, stablingFrom, stablingTo, ageProofPath FROM ecaug2026 WHERE id='".$conn->real_escape_string($order_id)."'");
+            $result = $conn->query("SELECT name, parentName, dob, address, mobile, email, emergencyContact, emergencyRelation, clubName, selectedEvents, eventHorses, horseBreeds, stablingType, stablingCount, stablingFrom, stablingTo, ageProofPath FROM ecaug2026 WHERE id='".$conn->real_escape_string($order_id)."'");
 
             if ($result && $row = $result->fetch_assoc()) {
                 if ($row['stablingType'] !== 'NONE'
@@ -113,6 +113,7 @@ if ($order_id) {
 
                 $selectedIds = json_decode($row['selectedEvents'], true) ?: [];
                 $horseData = json_decode($row['eventHorses'], true) ?: [];
+                $breedMap = json_decode($row['horseBreeds'], true) ?: [];
                 $readableEvents = []; $readableHorses = [];
 
                 foreach ($selectedIds as $id) {
@@ -193,6 +194,7 @@ if ($order_id) {
                             "clubName" => $row['clubName'],
                             "events" => $category . $jumpLabel,
                             "eventHorses" => $horse,
+                            "breed" => isset($breedMap[$horse]) ? $breedMap[$horse] : "",
                             "stablingType" => $row['stablingType'],
                             "stablingCount" => $row['stablingCount'], "stablingFrom" => $row['stablingFrom'],
                             "stablingTo" => $row['stablingTo'], "ageProofLink" => $ageProofLink,

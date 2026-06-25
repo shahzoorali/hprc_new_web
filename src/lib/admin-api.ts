@@ -41,6 +41,7 @@ export interface RegistrationDetail extends Record<string, unknown> {
   documentPath: string | null;
   documentPath2: string | null;
   headshotPath: string | null;
+  horseBreeds: Record<string, string> | null;
 }
 
 export interface EventStats {

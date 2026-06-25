@@ -51,5 +51,8 @@ $row['entriesCount'] = count($entries);
 $row['documentPath'] = !empty($row['ageProofPath']) ? $row['ageProofPath'] : null;
 $row['documentPath2'] = !empty($row['ageProofPath2']) ? $row['ageProofPath2'] : null;
 $row['headshotPath'] = !empty($row['headshotPath']) ? $row['headshotPath'] : null;
+$row['horseBreeds'] = (isset($row['horseBreeds']) && $row['horseBreeds'] !== '')
+    ? (json_decode($row['horseBreeds'], true) ?: null)
+    : null;
 
 echo json_encode($row);

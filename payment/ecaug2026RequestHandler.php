@@ -31,6 +31,7 @@ $emergencyRelation = isset($_POST['emergencyRelation']) ? $_POST['emergencyRelat
 $clubName = isset($_POST['clubName']) ? $_POST['clubName'] : '';
 $selectedEvents = isset($_POST['selectedEvents']) ? $_POST['selectedEvents'] : '';
 $eventHorses = isset($_POST['eventHorses']) ? $_POST['eventHorses'] : '';
+$horseBreeds = isset($_POST['horseBreeds']) ? $_POST['horseBreeds'] : '';
 $stablingType = isset($_POST['stablingType']) ? $_POST['stablingType'] : 'NONE';
 $stablingCount = isset($_POST['stablingCount']) ? $_POST['stablingCount'] : 0;
 $stablingFrom = isset($_POST['stablingFrom']) ? $_POST['stablingFrom'] : '';
@@ -99,7 +100,7 @@ if ($stablingType !== 'NONE' && (int)$stablingCount > 0 && !empty($stablingFrom)
     }
 }
 
-$sql = "INSERT INTO ecaug2026 (name, parentName, dob, address, mobile, email, emergencyContact, emergencyRelation, clubName, selectedEvents, eventHorses, stablingType, stablingCount, stablingFrom, stablingTo, ageProofPath, headshotPath, amount, currency)
+$sql = "INSERT INTO ecaug2026 (name, parentName, dob, address, mobile, email, emergencyContact, emergencyRelation, clubName, selectedEvents, eventHorses, horseBreeds, stablingType, stablingCount, stablingFrom, stablingTo, ageProofPath, headshotPath, amount, currency)
         VALUES ('".$conn->real_escape_string($name)."',
                 '".$conn->real_escape_string($parentName)."',
                 '".$conn->real_escape_string($dob)."',
@@ -111,6 +112,7 @@ $sql = "INSERT INTO ecaug2026 (name, parentName, dob, address, mobile, email, em
                 '".$conn->real_escape_string($clubName)."',
                 '".$conn->real_escape_string($selectedEvents)."',
                 '".$conn->real_escape_string($eventHorses)."',
+                '".$conn->real_escape_string($horseBreeds)."',
                 '".$conn->real_escape_string($stablingType)."',
                 '".(int)$stablingCount."',
                 '".$conn->real_escape_string($stablingFrom)."',
@@ -167,6 +169,7 @@ if ($amount <= 0) {
 
     $selectedIds = json_decode($selectedEvents, true) ?: [];
     $horseData = json_decode($eventHorses, true) ?: [];
+    $breedMap = json_decode($horseBreeds, true) ?: [];
 
     $ageProofLink = !empty($ageProofPath) ? "https://hprc.in/payment/view_proof.php?file=" . urlencode(basename($ageProofPath)) : "";
 
@@ -189,6 +192,7 @@ if ($amount <= 0) {
                 "emergencyRelation" => $emergencyRelation, "clubName" => $clubName,
                 "events" => $category . $jumpLabel,
                 "eventHorses" => $horse,
+                "breed" => isset($breedMap[$horse]) ? $breedMap[$horse] : "",
                 "stablingType" => $stablingType, "stablingCount" => $stablingCount,
                 "stablingFrom" => $stablingFrom, "stablingTo" => $stablingTo,
                 "amount" => "0 (COMP)", "tracking_id" => "HPRCAUGCHEAT-" . $id . "-J" . $jumpNumber,
