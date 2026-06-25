@@ -37,15 +37,15 @@ export default function HomePage() {
         imageAlt={heroSlide.imageAlt}
       />
 
-      {/* HPRC Equestrian Challenge 2026 - Fabulous Hero Section */}
+      {/* 2nd HPRC Equestrian Challenge 2026 (August) - Registrations Open Hero */}
       <section className="relative overflow-hidden bg-white">
         <div className="container relative z-10 py-12 lg:py-20">
           <div className="relative group overflow-hidden rounded-[2.5rem] bg-neutral-900 shadow-2xl">
             {/* Background Image with sophisticated overlay */}
             <div className="absolute inset-0">
               <Image
-                src="/images/ec2026/aamir-shahnawaz-1.jpg"
-                alt="Aamir Shahnawaz competing at HPRC Equestrian Challenge 2026"
+                src="/images/ec2026/action-1.jpg"
+                alt="Show Jumping action at the HPRC Equestrian Challenge 2026"
                 fill
                 className="object-cover object-center transition-transform duration-1000 group-hover:scale-105"
               />
@@ -58,20 +58,21 @@ export default function HomePage() {
                 {/* Badge */}
                 <div className="inline-flex items-center gap-3 bg-green-500/20 backdrop-blur-md border border-green-500/30 px-5 py-2.5 rounded-full">
                   <span className="relative flex h-3 w-3">
+                    <span className="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 animate-ping"></span>
                     <span className="relative inline-flex rounded-full h-3 w-3 bg-green-400"></span>
                   </span>
                   <span className="text-xs font-bold uppercase tracking-[0.2em] text-green-400 font-display">
-                    Results Available
+                    Registrations Open
                   </span>
                 </div>
 
                 {/* Typography */}
                 <div className="space-y-4">
                   <p className="text-lg sm:text-xl font-medium text-brand-400 font-display italic tracking-wide">
-                    15 – 17 May 2026 · HPRC, Aziznagar
+                    14 – 16 August 2026 · HPRC, Gandipet
                   </p>
                   <h2 className="text-[clamp(2.5rem,6vw,4.5rem)] font-extrabold leading-[1.05] text-white font-display tracking-tight">
-                    HPRC <br />
+                    2nd HPRC <br />
                     <span className="bg-gradient-to-r from-brand-400 via-brand-200 to-brand-400 bg-clip-text text-transparent">
                       Equestrian Challenge
                     </span>
@@ -82,40 +83,43 @@ export default function HomePage() {
                 {/* Key Stats Grid */}
                 <div className="grid grid-cols-3 gap-4 pt-4">
                   <div className="flex flex-col gap-1 bg-white/5 border border-white/10 rounded-2xl p-4">
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-white/50">Riders</p>
-                    <p className="text-2xl font-extrabold text-white">126+</p>
-                  </div>
-                  <div className="flex flex-col gap-1 bg-white/5 border border-white/10 rounded-2xl p-4">
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-white/50">Clubs</p>
-                    <p className="text-2xl font-extrabold text-white">30+</p>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-white/50">Disciplines</p>
+                    <p className="text-2xl font-extrabold text-white">3</p>
                   </div>
                   <div className="flex flex-col gap-1 bg-white/5 border border-white/10 rounded-2xl p-4">
                     <p className="text-[10px] font-bold uppercase tracking-widest text-white/50">Classes</p>
-                    <p className="text-2xl font-extrabold text-white">19</p>
+                    <p className="text-2xl font-extrabold text-white">15</p>
+                  </div>
+                  <div className="flex flex-col gap-1 bg-white/5 border border-white/10 rounded-2xl p-4">
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-white/50">Top Prize</p>
+                    <p className="text-2xl font-extrabold text-white">₹25K</p>
                   </div>
                 </div>
 
                 {/* Description */}
                 <p className="text-base sm:text-lg text-white/70 leading-relaxed font-light max-w-xl font-body">
-                  The HPRC Equestrian Challenge 2026 concluded with outstanding performances across Show Jumping, Dressage, and Hacks. View the official results from all sessions.
+                  Hacks, Dressage &amp; Show Jumping across all age categories — under floodlights at HPRC, Gandipet. Beginner-friendly 40 cm class to advanced 105–110 cm two-phase. Entries close 13 August 2026.
                 </p>
 
                 {/* CTA Buttons */}
                 <div className="flex flex-wrap items-center gap-5 pt-4">
                   <Link
-                    href="/events/news/ec2026-results-17-may-morning-session"
+                    href="/events/2nd-equestrian-challenge-2026"
                     className="group inline-flex items-center justify-center gap-3 bg-white px-10 py-5 text-base font-bold text-brand-900 shadow-2xl transition-all duration-300 hover:bg-brand-50 hover:-translate-y-1 font-display rounded-2xl"
                   >
-                    <span>17 May Results</span>
+                    <span>Register Now</span>
                     <svg className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
                   </Link>
                   <Link
-                    href="/events/news/ec2026-results-16-may-evening-session"
-                    className="inline-flex items-center justify-center border border-white/20 bg-white/5 backdrop-blur-md px-10 py-5 text-base font-bold text-white transition-all duration-300 hover:bg-white/10 font-display rounded-2xl"
+                    href="/events/2nd-equestrian-challenge-2026"
+                    className="group inline-flex items-center justify-center gap-3 bg-brand-500 px-10 py-5 text-base font-bold text-white shadow-2xl transition-all duration-300 hover:bg-brand-600 hover:-translate-y-1 font-display rounded-2xl"
                   >
-                    16 May Results
+                    <span>View Schedule</span>
+                    <svg className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
                   </Link>
                 </div>
               </div>
@@ -125,16 +129,16 @@ export default function HomePage() {
                 <div className="absolute -inset-4 bg-brand-500/10 blur-3xl rounded-full animate-pulse"></div>
                 <div className="relative aspect-square rounded-[3rem] overflow-hidden border border-white/10 shadow-3xl">
                    <Image
-                    src="/images/ec2026/faizan-khan-1.jpg"
-                    alt="Faizan Khan on Goldenstar — 1st Place, 40cm Open at HPRC Equestrian Challenge 2026"
+                    src="/images/ec2026/action-2.jpg"
+                    alt="Show Jumping at the HPRC Equestrian Challenge 2026"
                     fill
                     className="object-cover"
                    />
                    <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-transparent to-transparent opacity-60"></div>
                    <div className="absolute bottom-10 left-10 right-10 p-6 bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl">
-                     <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-400 mb-1">🥇 40cm Open Winner</p>
-                     <p className="text-lg font-bold text-white leading-tight">Faizan Khan on Goldenstar</p>
-                     <p className="text-xs text-white/60 mt-1">Stallion Horse Riding Academy</p>
+                     <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-400 mb-1">⚡ Under Floodlights</p>
+                     <p className="text-lg font-bold text-white leading-tight">Show Jumping · 40–110 cm</p>
+                     <p className="text-xs text-white/60 mt-1">Main Arena · Gandipet, Hyderabad</p>
                    </div>
                 </div>
               </div>
