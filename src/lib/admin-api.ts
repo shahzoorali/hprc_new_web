@@ -40,6 +40,7 @@ export interface RegistrationDetail extends Record<string, unknown> {
   entriesCount: number;
   documentPath: string | null;
   documentPath2: string | null;
+  headshotPath: string | null;
 }
 
 export interface EventStats {

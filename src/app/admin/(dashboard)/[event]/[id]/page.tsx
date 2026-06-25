@@ -58,6 +58,9 @@ export default async function RegistrationDetailPage({
   }
 
   const isNq = eventKey === "nq";
+  const headshotUrl = rec.headshotPath
+    ? `/admin/api/document?event=${eventKey}&dir=headshots&file=${encodeURIComponent(rec.headshotPath)}`
+    : null;
   const documents = [rec.documentPath, rec.documentPath2]
     .filter((p): p is string => typeof p === "string" && p.length > 0)
     .map((path, i) => ({
@@ -75,11 +78,21 @@ export default async function RegistrationDetailPage({
       </div>
 
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <div>
-          <h1 className="font-display text-2xl font-bold text-neutral-900">{str(rec.name)}</h1>
-          <p className="mt-1 text-sm text-neutral-500">
-            Registration #{rec.id} · {str(rec.created_at)}
-          </p>
+        <div className="flex items-center gap-4">
+          {headshotUrl ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={headshotUrl}
+              alt={`${str(rec.name)} headshot`}
+              className="h-16 w-16 flex-shrink-0 rounded-full border border-neutral-200 object-cover"
+            />
+          ) : null}
+          <div>
+            <h1 className="font-display text-2xl font-bold text-neutral-900">{str(rec.name)}</h1>
+            <p className="mt-1 text-sm text-neutral-500">
+              Registration #{rec.id} · {str(rec.created_at)}
+            </p>
+          </div>
         </div>
         <StatusPill status={rec.order_status as string | null} isSuccess={rec.isSuccess} />
       </div>

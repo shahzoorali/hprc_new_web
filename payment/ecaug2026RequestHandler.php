@@ -62,6 +62,30 @@ if (isset($_FILES['ageProof']) && $_FILES['ageProof']['error'] == 0) {
     error_log("ECAUG2026: File upload error detected. Code: " . $_FILES['ageProof']['error']);
 }
 
+// Handle Rider Headshot Upload
+$headshotPath = '';
+if (isset($_FILES['headshot']) && $_FILES['headshot']['error'] == 0) {
+    $headshotDir = __DIR__ . '/uploads/ecaug2026/headshots/';
+    if (!is_dir($headshotDir)) {
+        if (!mkdir($headshotDir, 0755, true)) {
+            error_log("ECAUG2026: Failed to create headshot directory: " . $headshotDir);
+        }
+    }
+
+    $safeName = preg_replace('/[^a-zA-Z0-9]/', '_', $name);
+    $fileExtension = pathinfo($_FILES['headshot']['name'], PATHINFO_EXTENSION);
+    $fileName = $safeName . '_headshot_' . time() . '.' . $fileExtension;
+    $targetPath = $headshotDir . $fileName;
+
+    if (move_uploaded_file($_FILES['headshot']['tmp_name'], $targetPath)) {
+        $headshotPath = 'uploads/ecaug2026/headshots/' . $fileName;
+    } else {
+        error_log("ECAUG2026: Failed to move headshot. Error Code: " . $_FILES['headshot']['error'] . " | Target: " . $targetPath);
+    }
+} else if (isset($_FILES['headshot']) && $_FILES['headshot']['error'] != 4) {
+    error_log("ECAUG2026: Headshot upload error detected. Code: " . $_FILES['headshot']['error']);
+}
+
 // Pre-flight inventory check for stable bookings before creating the order.
 if ($stablingType !== 'NONE' && (int)$stablingCount > 0 && !empty($stablingFrom) && !empty($stablingTo)) {
     $im = new InventoryManagerCamp();
@@ -75,7 +99,7 @@ if ($stablingType !== 'NONE' && (int)$stablingCount > 0 && !empty($stablingFrom)
     }
 }
 
-$sql = "INSERT INTO ecaug2026 (name, parentName, dob, address, mobile, email, emergencyContact, emergencyRelation, clubName, selectedEvents, eventHorses, stablingType, stablingCount, stablingFrom, stablingTo, ageProofPath, amount, currency)
+$sql = "INSERT INTO ecaug2026 (name, parentName, dob, address, mobile, email, emergencyContact, emergencyRelation, clubName, selectedEvents, eventHorses, stablingType, stablingCount, stablingFrom, stablingTo, ageProofPath, headshotPath, amount, currency)
         VALUES ('".$conn->real_escape_string($name)."',
                 '".$conn->real_escape_string($parentName)."',
                 '".$conn->real_escape_string($dob)."',
@@ -92,6 +116,7 @@ $sql = "INSERT INTO ecaug2026 (name, parentName, dob, address, mobile, email, em
                 '".$conn->real_escape_string($stablingFrom)."',
                 '".$conn->real_escape_string($stablingTo)."',
                 '".$conn->real_escape_string($ageProofPath)."',
+                '".$conn->real_escape_string($headshotPath)."',
                 '".$conn->real_escape_string($amount)."',
                 '$currency')";
 

@@ -148,8 +148,9 @@ function RegistrationForm() {
   const formRef = React.useRef<HTMLFormElement | null>(null);
   const [form, setForm] = useState<FormData>(INITIAL_FORM);
   const [submitted, setSubmitted] = useState(false);
-  const [errors, setErrors] = useState<Partial<Record<keyof FormData | "ageProof" | "eventHorsesGlobal" | "stablingDates", string>>>({});
+  const [errors, setErrors] = useState<Partial<Record<keyof FormData | "ageProof" | "headshot" | "eventHorsesGlobal" | "stablingDates", string>>>({});
   const [draftExists, setDraftExists] = useState(false);
+  const [headshotPreview, setHeadshotPreview] = useState<string | null>(null);
 
   // National Qualifier recall — if the rider confirmed an NQ entry on this device,
   // offer to import their details, and auto-cover stabling if they booked Full Camp.
@@ -401,8 +402,14 @@ function RegistrationForm() {
   };
 
   const validate = () => {
-    const e: Partial<Record<keyof FormData | "ageProof" | "eventHorsesGlobal" | "stablingDates", string>> = {};
+    const e: Partial<Record<keyof FormData | "ageProof" | "headshot" | "eventHorsesGlobal" | "stablingDates", string>> = {};
     if (!form.name.trim()) e.name = "Full name is required";
+    {
+      const headshotInput = document.getElementById('ec-headshot') as HTMLInputElement;
+      if (!headshotInput || !headshotInput.files || headshotInput.files.length === 0) {
+        e.headshot = "Please upload a headshot photo of the rider";
+      }
+    }
     if (!form.parentName.trim()) e.parentName = "Parent's Name is required";
     if (!form.dob) e.dob = "Date of birth is required";
     if (!form.mobile.trim()) {
@@ -682,20 +689,61 @@ function RegistrationForm() {
           Rider Details
         </h3>
         <div className="grid gap-5 sm:grid-cols-2">
-          {/* Name */}
-          <div className="sm:col-span-2">
-            <label className="block text-sm font-semibold text-gray-700 mb-1.5" htmlFor="ec-name">
-              Full Name <span className="text-brand-500">*</span>
-            </label>
-            <input
-              id="ec-name"
-              type="text"
-              value={form.name}
-              onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
-              placeholder="Full Name"
-              className={`w-full border px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition ${errors.name ? "border-red-400 bg-red-50" : "border-gray-200 bg-white"}`}
-            />
-            {errors.name && <p className="mt-1 text-xs text-red-500">{errors.name}</p>}
+          {/* Name + Headshot */}
+          <div className="sm:col-span-2 flex flex-col sm:flex-row items-start gap-5">
+            {/* Headshot uploader with illustration / live preview */}
+            <div className="flex-shrink-0">
+              <label className="block text-sm font-semibold text-gray-700 mb-1.5" htmlFor="ec-headshot">
+                Rider Headshot <span className="text-brand-500">*</span>
+              </label>
+              <div className="flex items-start gap-3">
+                <div className={`relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-xl border-2 ${errors.headshot ? "border-red-400" : "border-gray-200"} bg-gray-50`}>
+                  {headshotPreview ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={headshotPreview} alt="Rider headshot preview" className="h-full w-full object-cover" />
+                  ) : (
+                    <svg viewBox="0 0 24 24" className="h-full w-full p-3 text-gray-300" aria-hidden="true">
+                      <circle cx="12" cy="8" r="4" fill="currentColor" />
+                      <path d="M4 20.5c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5" fill="currentColor" />
+                    </svg>
+                  )}
+                </div>
+                <div className="max-w-[200px]">
+                  <input
+                    id="ec-headshot"
+                    name="headshot"
+                    type="file"
+                    accept="image/*"
+                    onChange={(ev) => {
+                      const file = ev.target.files?.[0] ?? null;
+                      setHeadshotPreview(file ? URL.createObjectURL(file) : null);
+                      if (file) setErrors((prev) => ({ ...prev, headshot: undefined }));
+                    }}
+                    className="block w-full text-xs text-gray-700 file:mr-3 file:py-2 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-brand-50 file:text-brand-700 hover:file:bg-brand-100 transition cursor-pointer"
+                  />
+                  <p className="mt-1.5 text-[11px] leading-snug text-gray-500">
+                    Clear, front-facing photo of the rider&apos;s face — like a passport photo. Shown as the example on the left.
+                  </p>
+                </div>
+              </div>
+              {errors.headshot && <p className="mt-1 text-xs text-red-500">{errors.headshot}</p>}
+            </div>
+
+            {/* Name */}
+            <div className="w-full flex-1">
+              <label className="block text-sm font-semibold text-gray-700 mb-1.5" htmlFor="ec-name">
+                Full Name <span className="text-brand-500">*</span>
+              </label>
+              <input
+                id="ec-name"
+                type="text"
+                value={form.name}
+                onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
+                placeholder="Full Name"
+                className={`w-full border px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition ${errors.name ? "border-red-400 bg-red-50" : "border-gray-200 bg-white"}`}
+              />
+              {errors.name && <p className="mt-1 text-xs text-red-500">{errors.name}</p>}
+            </div>
           </div>
           {/* Parent */}
           <div>

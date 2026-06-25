@@ -14,6 +14,7 @@ export async function GET(req: NextRequest) {
 
   const event = req.nextUrl.searchParams.get("event");
   const file = req.nextUrl.searchParams.get("file");
+  const dir = req.nextUrl.searchParams.get("dir") === "headshots" ? "headshots" : null;
   if ((event !== "nq" && event !== "ec") || !file) {
     return new NextResponse("Bad request", { status: 400 });
   }
@@ -24,7 +25,7 @@ export async function GET(req: NextRequest) {
     return new NextResponse("Server not configured", { status: 500 });
   }
 
-  const url = `${base.replace(/\/$/, "")}/api/admin/document.php?event=${event}&file=${encodeURIComponent(file)}`;
+  const url = `${base.replace(/\/$/, "")}/api/admin/document.php?event=${event}&file=${encodeURIComponent(file)}${dir ? `&dir=${dir}` : ""}`;
   const upstream = await fetch(url, {
     headers: { "X-Admin-Token": apiToken },
     cache: "no-store",

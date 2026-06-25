@@ -22,8 +22,11 @@ if (!$cfg || $file === '') {
 // Strip any directory components — only the bare filename is trusted.
 $filename = basename($file);
 
-// payment/api/admin -> payment/uploads/{dir}/age_proofs/{filename}
-$filePath = __DIR__ . '/../../uploads/' . $cfg['uploadDir'] . '/age_proofs/' . $filename;
+// Optional subdir, whitelisted to known upload categories. Defaults to age_proofs.
+$subDir = isset($_GET['dir']) && $_GET['dir'] === 'headshots' ? 'headshots' : 'age_proofs';
+
+// payment/api/admin -> payment/uploads/{dir}/{subDir}/{filename}
+$filePath = __DIR__ . '/../../uploads/' . $cfg['uploadDir'] . '/' . $subDir . '/' . $filename;
 
 if (!file_exists($filePath)) {
     http_response_code(404);
