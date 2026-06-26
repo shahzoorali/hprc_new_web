@@ -242,7 +242,15 @@ export const eventsContent = {
       imageUrl: "/documents/news/sauryaram-varma-equestrian.webp",
     },
   ] satisfies NewsArticle[],
-  upcoming: [] as UpcomingEvent[],
+  upcoming: [
+    {
+      title: "HPRC Equestrian Challenge 2026 — August Season",
+      date: "14–16 August 2026",
+      description:
+        "Hacks, Dressage & Show Jumping across all age categories at Hyderabad Polo & Riding Club, Gandipet. Morning and floodlit evening sessions over three days, with prize money up to ₹25,000 in Open Show Jumping. Entries close 13 August 2026 at 6 PM.",
+      link: "/events/2nd-equestrian-challenge-2026",
+    },
+  ] as UpcomingEvent[],
   pastHighlights: [
     {
       title: "HPRC Equestrian Challenge 2026",

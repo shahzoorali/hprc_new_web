@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { PageHero } from "@/components/ui/page-hero";
 import { eventsContent } from "@/content/events";
 
@@ -23,6 +24,14 @@ export default function UpcomingEventsPage() {
             </p>
             <h2 className="mt-3 text-xl font-semibold text-brand-900">{event.title}</h2>
             <p className="mt-3 text-sm text-gray-700">{event.description}</p>
+            {event.link && (
+              <Link
+                href={event.link}
+                className="mt-4 inline-block text-sm font-semibold text-brand-600 hover:text-brand-800 underline underline-offset-2"
+              >
+                View Event &amp; Register →
+              </Link>
+            )}
           </article>
         ))}
       </section>
