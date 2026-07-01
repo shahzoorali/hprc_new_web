@@ -39,6 +39,14 @@ $stablingTo = isset($_POST['stablingTo']) ? $_POST['stablingTo'] : '';
 $amount = isset($_POST['amount']) ? $_POST['amount'] : 0;
 $currency = "INR";
 
+// Reject junk/automated requests (scanners, empty POSTs) before they can hit the
+// amount<=0 complimentary bypass below. A real form submission always has these.
+if ($name === '' || $mobile === '' || $email === '' || $selectedEvents === '') {
+    error_log("ECAUG2026: Rejected incomplete submission (missing required fields).");
+    http_response_code(400);
+    exit('Missing required fields.');
+}
+
 // Handle Age Proof Upload
 $ageProofPath = '';
 if (isset($_FILES['ageProof']) && $_FILES['ageProof']['error'] == 0) {
