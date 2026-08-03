@@ -1804,6 +1804,37 @@ export default function EquestrianChallenge2026Page() {
         </div>
       </section>
 
+      {/* ═══════════════════════════════════════════════ AGE CATEGORIES */}
+      <section className="container mt-16 space-y-6">
+        <div className="text-center">
+          <p className="text-xs font-bold uppercase tracking-[0.3em] text-brand-500 mb-3">Eligibility</p>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-brand-900 font-display">Age Categories</h2>
+          <p className="mt-3 text-base text-gray-600 max-w-2xl mx-auto">
+            A rider competes as the age they are turning in the calendar year, regardless of birth month.
+          </p>
+        </div>
+        <div className="max-w-2xl mx-auto overflow-x-auto border border-brand-100 shadow-sm">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="bg-brand-900 text-white text-xs uppercase tracking-wider">
+                <th className="px-4 py-3 text-left font-bold">Age in 2026</th>
+                <th className="px-4 py-3 text-left font-bold">Year Born</th>
+                <th className="px-4 py-3 text-left font-bold">Eligible for Category</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-brand-100">
+              {equestrianChallenge2026.ageCategories.map((row) => (
+                <tr key={row.category} className="bg-white even:bg-brand-50/40">
+                  <td className="px-4 py-3 text-gray-800">{row.years}</td>
+                  <td className="px-4 py-3 text-gray-600">{row.born}</td>
+                  <td className="px-4 py-3 font-semibold text-brand-700">{row.category}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
       {/* ═══════════════════════════════════════════════ PRIZE MONEY */}
       <section className="relative overflow-hidden bg-gradient-to-br from-brand-50/60 via-white to-brand-50/40 py-16 mt-16">
         <div className="container">

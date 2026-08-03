@@ -33,11 +33,19 @@ export const equestrianChallengeAug2026 = {
     },
   },
 
+  // Age-as-on-calendar-year categories — per prospectus §6f.
+  ageCategories: [
+    { years: "10 - 12 years", born: "2014 - 2016", category: "Children II & Open" },
+    { years: "12 - 14 years", born: "2012 - 2014", category: "Children I & Open" },
+    { years: "14 - 18 years", born: "2008 - 2012", category: "Junior & Open" },
+    { years: "18+ years", born: "2008 & earlier", category: "Open" },
+  ],
+
   stats: [
     { value: "3", label: "Disciplines" },
     { value: "15", label: "Classes" },
     { value: "3", label: "Days" },
-    { value: "₹25K", label: "Top Prize" },
+    { value: "₹20K", label: "Top Prize" },
   ],
 
   schedule: [
@@ -59,6 +67,11 @@ export const equestrianChallengeAug2026 = {
         {
           time: "Morning · 7:00 AM",
           venue: "Ground 1",
+          events: "Flag Hoisting",
+        },
+        {
+          time: "Morning · 7:30 AM",
+          venue: "Ground 1",
           events: "Hacks — 12 years & Under, 13 to 16 years",
         },
         {
@@ -67,9 +80,14 @@ export const equestrianChallengeAug2026 = {
           events: "Dressage — Children II, Children I, Juniors",
         },
         {
-          time: "Evening · 5:00 PM",
+          time: "Evening · 4:00 PM",
           venue: "Main Arena",
-          events: "Show Jumping — 80 cm, 90 cm",
+          events: "Show Jumping — 40 cm, 105–110 cm (Two-phase)",
+        },
+        {
+          time: "~7:00 PM",
+          venue: "Main Arena",
+          events: "Prize Ceremony — On arrival of the Chief Guest",
         },
       ],
     },
@@ -83,9 +101,9 @@ export const equestrianChallengeAug2026 = {
           events: "Show Jumping — 60 cm",
         },
         {
-          time: "Evening · 5:00 PM",
+          time: "Evening · 4:00 PM",
           venue: "Main Arena",
-          events: "Show Jumping — 40 cm, 105–110 cm (Two-phase)",
+          events: "Show Jumping — 80 cm, 90 cm",
         },
         {
           time: "~7:00 PM",
@@ -106,20 +124,20 @@ export const equestrianChallengeAug2026 = {
     { id: 4, discipline: "DRESSAGE", category: "Children I (12 - 14 years)", date: "15 Aug", fee: 2000, postFee: 2500, minAge: 12, maxAge: 14 },
     { id: 5, discipline: "DRESSAGE", category: "Juniors (14 - 18 years)", date: "15 Aug", fee: 2000, postFee: 2500, minAge: 14, maxAge: 18 },
     // SHOW JUMPING 40 cm
-    { id: 6, discipline: "SHOW JUMPING", category: "Under 12 years (40 cm)", date: "16 Aug", fee: 2000, postFee: 2500, minAge: 0, maxAge: 11 },
-    { id: 7, discipline: "SHOW JUMPING", category: "Open (40 cm)", date: "16 Aug", fee: 2000, postFee: 2500, minAge: 0, maxAge: 99 },
+    { id: 6, discipline: "SHOW JUMPING", category: "Under 12 years (40 cm)", date: "15 Aug", fee: 2000, postFee: 2500, minAge: 0, maxAge: 11 },
+    { id: 7, discipline: "SHOW JUMPING", category: "Open (40 cm)", date: "15 Aug", fee: 2000, postFee: 2500, minAge: 0, maxAge: 99 },
     // SHOW JUMPING 60 cm
     { id: 8, discipline: "SHOW JUMPING", category: "Under 14 years (60 cm)", date: "16 Aug", fee: 2000, postFee: 2500, minAge: 0, maxAge: 14 },
     { id: 9, discipline: "SHOW JUMPING", category: "Open (60 cm)", date: "16 Aug", fee: 2000, postFee: 2500, minAge: 0, maxAge: 99 },
     // SHOW JUMPING 80 cm (clear rounds stay in arena for an immediate jump-off)
-    { id: 10, discipline: "SHOW JUMPING", category: "Children II (10 - 12 years) (80 cm)", date: "15 Aug", fee: 2000, postFee: 2500, minAge: 10, maxAge: 12 },
-    { id: 11, discipline: "SHOW JUMPING", category: "Open (80 cm)", date: "15 Aug", fee: 2000, postFee: 2500, minAge: 0, maxAge: 99 },
+    { id: 10, discipline: "SHOW JUMPING", category: "Children II (10 - 12 years) (80 cm)", date: "16 Aug", fee: 2000, postFee: 2500, minAge: 10, maxAge: 12 },
+    { id: 11, discipline: "SHOW JUMPING", category: "Open (80 cm)", date: "16 Aug", fee: 2000, postFee: 2500, minAge: 0, maxAge: 99 },
     // SHOW JUMPING 90 cm (clear rounds stay in arena for an immediate jump-off)
-    { id: 12, discipline: "SHOW JUMPING", category: "Children I (12 - 14 years) (90 cm)", date: "15 Aug", fee: 2000, postFee: 2500, minAge: 12, maxAge: 14 },
-    { id: 13, discipline: "SHOW JUMPING", category: "Open (90 cm)", date: "15 Aug", fee: 2000, postFee: 2500, minAge: 0, maxAge: 99 },
+    { id: 12, discipline: "SHOW JUMPING", category: "Children I (12 - 14 years) (90 cm)", date: "16 Aug", fee: 2000, postFee: 2500, minAge: 12, maxAge: 14 },
+    { id: 13, discipline: "SHOW JUMPING", category: "Open (90 cm)", date: "16 Aug", fee: 2000, postFee: 2500, minAge: 0, maxAge: 99 },
     // SHOW JUMPING 105–110 cm (Two-phase)
-    { id: 14, discipline: "SHOW JUMPING", category: "Juniors (14 - 18 years) (105 - 110 cm)", date: "16 Aug", fee: 2000, postFee: 2500, minAge: 14, maxAge: 18 },
-    { id: 15, discipline: "SHOW JUMPING", category: "Open (105 - 110 cm) (Two-phase)", date: "16 Aug", fee: 2000, postFee: 2500, minAge: 0, maxAge: 99 },
+    { id: 14, discipline: "SHOW JUMPING", category: "Juniors (14 - 18 years) (105 - 110 cm)", date: "15 Aug", fee: 2000, postFee: 2500, minAge: 14, maxAge: 18 },
+    { id: 15, discipline: "SHOW JUMPING", category: "Open (105 - 110 cm) (Two-phase)", date: "15 Aug", fee: 2000, postFee: 2500, minAge: 0, maxAge: 99 },
     // PRACTICE ROUND
     { id: 16, discipline: "PRACTICE ROUND", category: "80 - 90 cm (Main Arena)", date: "14 Aug", fee: 1000, postFee: 1000, minAge: 0, maxAge: 99 },
   ],
@@ -129,9 +147,9 @@ export const equestrianChallengeAug2026 = {
   prizeMoney: {
     note: "Prize money is awarded to Open category participants only in the 80 cm, 90 cm and 105–110 cm Show Jumping classes, provided there are a minimum of six riders in that category. The 40 cm and 60 cm classes and all age-category classes (Children I, Children II, Junior) receive medals and certificates only.",
     table: [
-      { height: "105 - 110 cm (Open)", gold: 25000, silver: 15000, bronze: 10000, fourth: 5000 },
-      { height: "90 cm (Open)", gold: 10000, silver: 7500, bronze: 5000, fourth: 2500 },
-      { height: "80 cm (Open)", gold: 7500, silver: 5000, bronze: 3000, fourth: 1500 },
+      { height: "105 - 110 cm (Open)", gold: 20000, silver: 10000, bronze: 7500, fourth: 5000 },
+      { height: "90 cm (Open)", gold: 15000, silver: 7500, bronze: 5000, fourth: 2500 },
+      { height: "80 cm (Open)", gold: 15000, silver: 7500, bronze: 5000, fourth: 2500 },
     ],
   },
 
@@ -159,7 +177,7 @@ export const equestrianChallengeAug2026 = {
         total: 7500,
         from: "2026-08-14",
         to: "2026-08-17",
-        note: "₹2,500 per stable per day (14th–17th August).",
+        note: "₹2,500 per stable per day.",
       },
       FULL_CAMP: {
         label: "Full Camp",
@@ -172,7 +190,7 @@ export const equestrianChallengeAug2026 = {
       },
     },
     details: [
-      "Per-Day Stabling (14–17 Aug): ₹2,500 per stable per day — ₹7,500 per stable total.",
+      "Per-Day Stabling: ₹2,500 per stable per day.",
       "Full Camp (12–17 Aug): ₹2,000 per stable per day — ₹10,000 per stable total (National Qualifier + Equestrian Challenge).",
       "Bookings are confirmed only after full charges are received for the intended number of days.",
       "Self-Containment: bring your own rations, grass, straw, fodder, and camping equipment.",
