@@ -249,18 +249,32 @@ function RegistrationForm() {
     return events.filter(e => riderAge >= (e.minAge ?? 0) && riderAge <= (e.maxAge ?? 99));
   }, [events, riderAge]);
 
-  // Sync selected events with eligible events when rider age changes
+  // Junior (14-18) and Young Rider (16-21) overlap for riders aged 16-18. Once a
+  // rider selects any event carrying an ageGroup, they're locked to that group
+  // across both disciplines — prospectus §2 forbids mixing Junior/Young Rider.
+  const lockedAgeGroup = useMemo(() => {
+    for (const id of form.selectedEvents) {
+      const ev = events.find(e => e.id === id);
+      if (ev && "ageGroup" in ev && ev.ageGroup) return ev.ageGroup as string;
+    }
+    return null;
+  }, [form.selectedEvents, events]);
+
+  // Sync selected events with eligible events (and the age-group lock) when rider age changes
   React.useEffect(() => {
-    const validSelected = form.selectedEvents.filter(id => 
-      eligibleEvents.some(ev => ev.id === id)
-    );
-    
+    const validSelected = form.selectedEvents.filter(id => {
+      const ev = events.find(e => e.id === id);
+      if (!eligibleEvents.some(e => e.id === id)) return false;
+      if (lockedAgeGroup && ev && "ageGroup" in ev && ev.ageGroup && ev.ageGroup !== lockedAgeGroup) return false;
+      return true;
+    });
+
     if (validSelected.length !== form.selectedEvents.length) {
       setForm(prev => ({
         ...prev,
         selectedEvents: validSelected,
         eventHorses: Object.fromEntries(
-          Object.entries(prev.eventHorses).filter(([id]) => 
+          Object.entries(prev.eventHorses).filter(([id]) =>
             validSelected.includes(parseInt(id))
           )
         )
@@ -326,6 +340,11 @@ function RegistrationForm() {
           eventHorseEfi: restEfi,
         };
       } else {
+        // Age-group lock: block adding an event from a different Junior/Young
+        // Rider group than the one already in use on this entry.
+        const ev = events.find((e) => e.id === id) as { ageGroup?: string } | undefined;
+        if (lockedAgeGroup && ev?.ageGroup && ev.ageGroup !== lockedAgeGroup) return f;
+
         return {
           ...f,
           selectedEvents: [...f.selectedEvents, id],
@@ -334,7 +353,7 @@ function RegistrationForm() {
         };
       }
     });
-  }, [events]);
+  }, [events, lockedAgeGroup]);
 
   const syncHorses = (id: number, index: number, value: string) => {
     setForm(f => {
@@ -342,6 +361,28 @@ function RegistrationForm() {
       current[index] = value;
       return { ...f, eventHorses: { ...f.eventHorses, [id]: current } };
     });
+  };
+
+  // Prospectus §5d — riders may enter up to two horses per NQ event.
+  const addSecondHorse = (id: number) => {
+    setForm(f => {
+      const horses = [...(f.eventHorses[id] || [""])];
+      const efis = [...(f.eventHorseEfi[id] || [""])];
+      if (horses.length >= 2) return f;
+      return {
+        ...f,
+        eventHorses: { ...f.eventHorses, [id]: [...horses, ""] },
+        eventHorseEfi: { ...f.eventHorseEfi, [id]: [...efis, ""] },
+      };
+    });
+  };
+
+  const removeSecondHorse = (id: number) => {
+    setForm(f => ({
+      ...f,
+      eventHorses: { ...f.eventHorses, [id]: (f.eventHorses[id] || [""]).slice(0, 1) },
+      eventHorseEfi: { ...f.eventHorseEfi, [id]: (f.eventHorseEfi[id] || [""]).slice(0, 1) },
+    }));
   };
 
   const syncHorseEfi = (id: number, index: number, value: string) => {
@@ -622,7 +663,7 @@ function RegistrationForm() {
               type="date"
               value={form.dob}
               onChange={(e) => setForm((f) => ({ ...f, dob: e.target.value }))}
-              max="2022-08-16"
+              max="2016-12-31"
               className={`w-full border px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition ${errors.dob ? "border-red-400 bg-red-50" : "border-gray-200 bg-white"}`}
             />
             {errors.dob && <p className="mt-1 text-xs text-red-500">{errors.dob}</p>}
@@ -783,46 +824,102 @@ function RegistrationForm() {
                     <div className="grid gap-3 sm:grid-cols-2">
                       {discEvents.map((ev) => {
                         const checked = form.selectedEvents.includes(ev.id);
+                        const evAgeGroup = (ev as { ageGroup?: string }).ageGroup;
+                        const lockedOut = !checked && !!lockedAgeGroup && !!evAgeGroup && evAgeGroup !== lockedAgeGroup;
+                        const horses = form.eventHorses[ev.id] || [""];
+                        const hasSecondHorse = horses.length > 1;
 
                         return (
-                          <div key={ev.id} className={`flex flex-col border transition-all ${checked ? "border-brand-400 bg-white shadow-sm" : "border-transparent bg-white/50 hover:bg-white/80"}`}>
-                            <label className="flex items-start gap-3 p-3 cursor-pointer">
+                          <div key={ev.id} className={`flex flex-col border transition-all ${checked ? "border-brand-400 bg-white shadow-sm" : lockedOut ? "border-transparent bg-gray-100 opacity-50" : "border-transparent bg-white/50 hover:bg-white/80"}`}>
+                            <label className={`flex items-start gap-3 p-3 ${lockedOut ? "cursor-not-allowed" : "cursor-pointer"}`}>
                               <input
                                 type="checkbox"
                                 checked={checked}
+                                disabled={lockedOut}
                                 onChange={() => toggleEvent(ev.id)}
                                 className="mt-0.5 h-4 w-4 accent-brand-500 flex-shrink-0"
                               />
                               <div className="flex-1 min-w-0">
                                 <p className="text-sm font-medium text-gray-900 leading-tight">{ev.category}</p>
                                 <p className="text-xs text-gray-500 mt-0.5">{ev.date}</p>
+                                {lockedOut && (
+                                  <p className="text-[10px] text-amber-600 font-semibold mt-0.5">
+                                    Locked out — entry already set to {lockedAgeGroup === "JUNIOR" ? "Junior" : "Young Rider"}
+                                  </p>
+                                )}
                               </div>
                               <span className="text-sm font-bold text-brand-600 flex-shrink-0">
                                 ₹{ev.fee.toLocaleString("en-IN")}
                               </span>
                             </label>
                             {checked && (
-                              <div className="px-3 pb-3 pt-1 border-t border-gray-100 bg-gray-50/50 mt-1 space-y-2">
-                                <div className="space-y-1">
-                                  <label className="text-[10px] font-bold text-gray-500 uppercase">Horse Name</label>
-                                  <input
-                                    type="text"
-                                    placeholder="Horse Name *"
-                                    value={form.eventHorses[ev.id]?.[0] || ""}
-                                    onChange={(e) => syncHorses(ev.id, 0, e.target.value)}
-                                    className={`w-full text-xs px-3 py-2 border rounded outline-none transition ${errors.eventHorsesGlobal && !(form.eventHorses[ev.id]?.[0] || "").trim() ? 'border-red-300 focus:border-red-400 bg-red-50' : 'border-gray-200 focus:border-brand-400'}`}
-                                  />
+                              <div className="px-3 pb-3 pt-1 border-t border-gray-100 bg-gray-50/50 mt-1 space-y-3">
+                                <div className="space-y-2">
+                                  <p className="text-[10px] font-bold text-gray-500 uppercase">Horse 1</p>
+                                  <div className="space-y-1">
+                                    <label className="text-[10px] font-bold text-gray-500 uppercase">Horse Name</label>
+                                    <input
+                                      type="text"
+                                      placeholder="Horse Name *"
+                                      value={horses[0] || ""}
+                                      onChange={(e) => syncHorses(ev.id, 0, e.target.value)}
+                                      className={`w-full text-xs px-3 py-2 border rounded outline-none transition ${errors.eventHorsesGlobal && !(horses[0] || "").trim() ? 'border-red-300 focus:border-red-400 bg-red-50' : 'border-gray-200 focus:border-brand-400'}`}
+                                    />
+                                  </div>
+                                  <div className="space-y-1">
+                                    <label className="text-[10px] font-bold text-gray-500 uppercase">Horse EFI Registration No.</label>
+                                    <input
+                                      type="text"
+                                      placeholder="EFI Passport / Reg No. *"
+                                      value={form.eventHorseEfi[ev.id]?.[0] || ""}
+                                      onChange={(e) => syncHorseEfi(ev.id, 0, e.target.value)}
+                                      className={`w-full text-xs px-3 py-2 border rounded outline-none transition ${errors.eventHorsesGlobal && !(form.eventHorseEfi[ev.id]?.[0] || "").trim() ? 'border-red-300 focus:border-red-400 bg-red-50' : 'border-gray-200 focus:border-brand-400'}`}
+                                    />
+                                  </div>
                                 </div>
-                                <div className="space-y-1">
-                                  <label className="text-[10px] font-bold text-gray-500 uppercase">Horse EFI Registration No.</label>
-                                  <input
-                                    type="text"
-                                    placeholder="EFI Passport / Reg No. *"
-                                    value={form.eventHorseEfi[ev.id]?.[0] || ""}
-                                    onChange={(e) => syncHorseEfi(ev.id, 0, e.target.value)}
-                                    className={`w-full text-xs px-3 py-2 border rounded outline-none transition ${errors.eventHorsesGlobal && !(form.eventHorseEfi[ev.id]?.[0] || "").trim() ? 'border-red-300 focus:border-red-400 bg-red-50' : 'border-gray-200 focus:border-brand-400'}`}
-                                  />
-                                </div>
+
+                                {hasSecondHorse ? (
+                                  <div className="space-y-2 pt-2 border-t border-gray-200">
+                                    <div className="flex items-center justify-between">
+                                      <p className="text-[10px] font-bold text-gray-500 uppercase">Horse 2</p>
+                                      <button
+                                        type="button"
+                                        onClick={() => removeSecondHorse(ev.id)}
+                                        className="text-[10px] font-bold text-red-500 hover:text-red-600"
+                                      >
+                                        Remove
+                                      </button>
+                                    </div>
+                                    <div className="space-y-1">
+                                      <label className="text-[10px] font-bold text-gray-500 uppercase">Horse Name</label>
+                                      <input
+                                        type="text"
+                                        placeholder="Horse Name *"
+                                        value={horses[1] || ""}
+                                        onChange={(e) => syncHorses(ev.id, 1, e.target.value)}
+                                        className={`w-full text-xs px-3 py-2 border rounded outline-none transition ${errors.eventHorsesGlobal && !(horses[1] || "").trim() ? 'border-red-300 focus:border-red-400 bg-red-50' : 'border-gray-200 focus:border-brand-400'}`}
+                                      />
+                                    </div>
+                                    <div className="space-y-1">
+                                      <label className="text-[10px] font-bold text-gray-500 uppercase">Horse EFI Registration No.</label>
+                                      <input
+                                        type="text"
+                                        placeholder="EFI Passport / Reg No. *"
+                                        value={form.eventHorseEfi[ev.id]?.[1] || ""}
+                                        onChange={(e) => syncHorseEfi(ev.id, 1, e.target.value)}
+                                        className={`w-full text-xs px-3 py-2 border rounded outline-none transition ${errors.eventHorsesGlobal && !(form.eventHorseEfi[ev.id]?.[1] || "").trim() ? 'border-red-300 focus:border-red-400 bg-red-50' : 'border-gray-200 focus:border-brand-400'}`}
+                                      />
+                                    </div>
+                                  </div>
+                                ) : (
+                                  <button
+                                    type="button"
+                                    onClick={() => addSecondHorse(ev.id)}
+                                    className="text-[10px] font-bold text-brand-600 hover:text-brand-700 flex items-center gap-1"
+                                  >
+                                    + Add a second horse for this event
+                                  </button>
+                                )}
                               </div>
                             )}
                           </div>
@@ -842,7 +939,10 @@ function RegistrationForm() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             <p>
-              <strong>Horse limit:</strong> a horse may enter each category only once, and a maximum of three events per day (2 Dressage &amp; 1 Show Jumping, or 2 Show Jumping &amp; 1 Dressage). A mandatory Vet Check for all NQ horses is on 13 Aug at 7:30 AM.
+              <strong>Horse limit:</strong> a horse may enter each category only once, and a maximum of three events per day (2 Dressage &amp; 1 Show Jumping, or 2 Show Jumping &amp; 1 Dressage). Riders may enter up to two horses per event. A mandatory Vet Check for all NQ horses is on 13 Aug at 7:30 AM.
+              {lockedAgeGroup && (
+                <> Your entry is locked to the <strong>{lockedAgeGroup === "JUNIOR" ? "Junior" : "Young Rider"}</strong> category for riders aged 16–18 — Junior and Young Rider classes cannot be mixed on one entry.</>
+              )}
             </p>
           </div>
         )}
@@ -1556,6 +1656,40 @@ export default function NationalQualifier2026Page() {
         </div>
         <div className="mt-6 text-center text-xs text-gray-600">
           <p><span className="font-semibold">Legend:</span> H = Height, S = Spread</p>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════ AGE CATEGORIES */}
+      <section className="container mt-16 space-y-6">
+        <div className="text-center">
+          <p className="text-xs font-bold uppercase tracking-[0.3em] text-brand-500 mb-3">Eligibility</p>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-brand-900 font-display">Age Categories</h2>
+          <p className="mt-3 text-base text-gray-600 max-w-2xl mx-auto">
+            Age is calculated as on 1 January of the competition year (FEI age-calculation rule) — the age a rider attains during the calendar year, regardless of actual birth date.
+          </p>
+        </div>
+        <div className="max-w-2xl mx-auto overflow-x-auto border border-brand-100 shadow-sm">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="bg-brand-900 text-white text-xs uppercase tracking-wider">
+                <th className="px-4 py-3 text-left font-bold">Age in 2026</th>
+                <th className="px-4 py-3 text-left font-bold">Year Born</th>
+                <th className="px-4 py-3 text-left font-bold">Category</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-brand-100">
+              {equestrianChallenge2026.ageCategories.map((row) => (
+                <tr key={row.category} className="bg-white even:bg-brand-50/40">
+                  <td className="px-4 py-3 text-gray-800">{row.years}</td>
+                  <td className="px-4 py-3 text-gray-600">{row.born}</td>
+                  <td className="px-4 py-3 font-semibold text-brand-700">{row.category}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="max-w-2xl mx-auto bg-amber-50 border border-amber-200 p-4 rounded-xl text-xs text-amber-800 leading-relaxed">
+          <strong>Note:</strong> riders can only compete in one eligible category — e.g. a 12-year-old may compete in Children I or Children II, not both. Riders aged 16–18 are eligible for both Junior and Young Rider; they must choose one category and stay in it across every event they enter (no mixing Junior and Young Rider on the same entry).
         </div>
       </section>
 
