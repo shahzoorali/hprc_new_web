@@ -161,7 +161,7 @@ export const nationalQualifier2026 = {
       },
     },
     details: [
-      "Per-Day Stabling (12–14 Aug): ₹2,500 per stable per day — ₹5,000 per stable total.",
+      "Per-Day Stabling: ₹2,500 per stable per day",
       "Full Camp (12–17 Aug): ₹2,000 per stable per day — ₹10,000 per stable total (covers National Qualifier (NQ) + the HPRC Equestrian Challenge).",
       "Bookings are confirmed only after full charges are received for the intended number of days.",
       "Self-Containment: bring your own rations, grass, straw, fodder, and camping equipment.",
