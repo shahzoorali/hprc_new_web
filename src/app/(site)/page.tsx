@@ -37,7 +37,7 @@ export default function HomePage() {
         imageAlt={heroSlide.imageAlt}
       />
 
-      {/* 2nd HPRC Equestrian Challenge 2026 (August) - Registrations Open Hero */}
+      {/* National Qualifier (NQ) 2026 - Registrations Open Hero */}
       <section className="relative overflow-hidden bg-white">
         <div className="container relative z-10 py-12 lg:py-20">
           <div className="relative group overflow-hidden rounded-[2.5rem] bg-neutral-900 shadow-2xl">
@@ -45,7 +45,7 @@ export default function HomePage() {
             <div className="absolute inset-0">
               <Image
                 src="/images/ec2026/action-1.jpg"
-                alt="Show Jumping action at the HPRC Equestrian Challenge 2026"
+                alt="Show Jumping action at the National Qualifier 2026"
                 fill
                 className="object-cover object-center transition-transform duration-1000 group-hover:scale-105"
               />
@@ -69,14 +69,14 @@ export default function HomePage() {
                 {/* Typography */}
                 <div className="space-y-4">
                   <p className="text-lg sm:text-xl font-medium text-brand-400 font-display italic tracking-wide">
-                    14 – 16 August 2026 · HPRC, Gandipet
+                    12 – 14 August 2026 · HPRC, Gandipet
                   </p>
                   <h2 className="text-[clamp(2.5rem,6vw,4.5rem)] font-extrabold leading-[1.05] text-white font-display tracking-tight">
-                    2nd HPRC <br />
+                    National <br />
                     <span className="bg-gradient-to-r from-brand-400 via-brand-200 to-brand-400 bg-clip-text text-transparent">
-                      Equestrian Challenge
+                      Qualifier
                     </span>
-                    <br /> 2026
+                    <br /> (NQ) 2026
                   </h2>
                 </div>
 
@@ -84,27 +84,27 @@ export default function HomePage() {
                 <div className="grid grid-cols-3 gap-4 pt-4">
                   <div className="flex flex-col gap-1 bg-white/5 border border-white/10 rounded-2xl p-4">
                     <p className="text-[10px] font-bold uppercase tracking-widest text-white/50">Disciplines</p>
-                    <p className="text-2xl font-extrabold text-white">3</p>
+                    <p className="text-2xl font-extrabold text-white">2</p>
                   </div>
                   <div className="flex flex-col gap-1 bg-white/5 border border-white/10 rounded-2xl p-4">
                     <p className="text-[10px] font-bold uppercase tracking-widest text-white/50">Classes</p>
-                    <p className="text-2xl font-extrabold text-white">15</p>
+                    <p className="text-2xl font-extrabold text-white">8</p>
                   </div>
                   <div className="flex flex-col gap-1 bg-white/5 border border-white/10 rounded-2xl p-4">
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-white/50">Top Prize</p>
-                    <p className="text-2xl font-extrabold text-white">₹25K</p>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-white/50">Qualifier for</p>
+                    <p className="text-2xl font-extrabold text-white">JNEC</p>
                   </div>
                 </div>
 
                 {/* Description */}
                 <p className="text-base sm:text-lg text-white/70 leading-relaxed font-light max-w-xl font-body">
-                  Hacks, Dressage &amp; Show Jumping across all age categories — under floodlights at HPRC, Gandipet. Beginner-friendly 40 cm class to advanced 105–110 cm two-phase. Entries close 13 August 2026.
+                  Dressage &amp; Show Jumping qualifier for JNEC 2026, under the aegis of the Equestrian Federation of India (EFI), in association with TSEA. Entries close 12 August 2026 at noon.
                 </p>
 
                 {/* CTA Buttons */}
                 <div className="flex flex-wrap items-center gap-5 pt-4">
                   <Link
-                    href="/events/2nd-equestrian-challenge-2026"
+                    href="/events/nq-2026"
                     className="group inline-flex items-center justify-center gap-3 bg-white px-10 py-5 text-base font-bold text-brand-900 shadow-2xl transition-all duration-300 hover:bg-brand-50 hover:-translate-y-1 font-display rounded-2xl"
                   >
                     <span>Register Now</span>
@@ -113,7 +113,7 @@ export default function HomePage() {
                     </svg>
                   </Link>
                   <Link
-                    href="/events/2nd-equestrian-challenge-2026"
+                    href="/events/nq-2026"
                     className="group inline-flex items-center justify-center gap-3 bg-brand-500 px-10 py-5 text-base font-bold text-white shadow-2xl transition-all duration-300 hover:bg-brand-600 hover:-translate-y-1 font-display rounded-2xl"
                   >
                     <span>View Schedule</span>
@@ -130,14 +130,14 @@ export default function HomePage() {
                 <div className="relative aspect-square rounded-[3rem] overflow-hidden border border-white/10 shadow-3xl">
                    <Image
                     src="/images/ec2026/action-2.jpg"
-                    alt="Show Jumping at the HPRC Equestrian Challenge 2026"
+                    alt="Show Jumping at the National Qualifier 2026"
                     fill
                     className="object-cover"
                    />
                    <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-transparent to-transparent opacity-60"></div>
                    <div className="absolute bottom-10 left-10 right-10 p-6 bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl">
-                     <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-400 mb-1">⚡ Under Floodlights</p>
-                     <p className="text-lg font-bold text-white leading-tight">Show Jumping · 40–110 cm</p>
+                     <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-400 mb-1">⚡ EFI Qualifier</p>
+                     <p className="text-lg font-bold text-white leading-tight">Dressage &amp; Show Jumping</p>
                      <p className="text-xs text-white/60 mt-1">Main Arena · Gandipet, Hyderabad</p>
                    </div>
                 </div>
