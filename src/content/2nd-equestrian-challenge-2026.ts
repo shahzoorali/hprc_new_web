@@ -204,6 +204,7 @@ export const equestrianChallengeAug2026 = {
   importantNotes: [
     "Number of Entries\n\nA horse may participate only once in each category within a given event or discipline.\nDay 1 & Day 3: maximum two (2) entries per horse per day.\nDay 2: up to three (3) entries per horse — 2 Dressage & 1 Show Jumping, or 2 Show Jumping & 1 Dressage — plus one (1) additional Hacks entry is permitted on the horse.",
     "Hacks classes are open ONLY to riders who are not participating in any other event or discipline.",
+    "Teams must collect their assigned HPRC Horse ID tags upon arrival. This tag must be visibly displayed on the horse throughout the event and returned prior to the issuance of the Clearance Certificate. Unreturned or lost tags will incur a replacement fee.",
     "If more than 30 entries are received in any class, that class will be conducted in the Two-phase format.",
     "Appropriate EFI dress code must be followed for all events. Non-compliance may result in disqualification.",
     "Negative Coggins (Equine Infectious Anaemia) and Glanders test certificates (CFT or Mallein) — valid for a minimum of 15 days prior to arrival — are mandatory for all horses. Entry will be strictly denied without them.",
