@@ -725,13 +725,13 @@ function RegistrationForm() {
             {/* Headshot uploader with illustration / live preview */}
             <div className="flex-shrink-0">
               <label className="block text-sm font-semibold text-gray-700 mb-1.5" htmlFor="ec-headshot">
-                Rider Headshot <span className="text-brand-500">*</span>
+                Rider Photo <span className="text-brand-500">*</span>
               </label>
               <div className="flex items-start gap-3">
                 <div className={`relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-xl border-2 ${errors.headshot ? "border-red-400" : "border-gray-200"} bg-gray-50`}>
                   {headshotPreview ? (
                     // eslint-disable-next-line @next/next/no-img-element
-                    <img src={headshotPreview} alt="Rider headshot preview" className="h-full w-full object-cover" />
+                    <img src={headshotPreview} alt="Rider photo preview" className="h-full w-full object-cover" />
                   ) : (
                     <svg viewBox="0 0 24 24" className="h-full w-full p-3 text-gray-300" aria-hidden="true">
                       <circle cx="12" cy="8" r="4" fill="currentColor" />
@@ -753,7 +753,7 @@ function RegistrationForm() {
                     className="block w-full text-xs text-gray-700 file:mr-3 file:py-2 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-brand-50 file:text-brand-700 hover:file:bg-brand-100 transition cursor-pointer"
                   />
                   <p className="mt-1.5 text-[11px] leading-snug text-gray-500">
-                    Clear, front-facing photo of the rider&apos;s face — like a passport photo. Shown as the example on the left.
+                    An action photo of the rider competing — e.g. show jumping, on the horse. Not a passport-style headshot. See examples below.
                   </p>
                 </div>
               </div>
@@ -774,6 +774,26 @@ function RegistrationForm() {
                 className={`w-full border px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition ${errors.name ? "border-red-400 bg-red-50" : "border-gray-200 bg-white"}`}
               />
               {errors.name && <p className="mt-1 text-xs text-red-500">{errors.name}</p>}
+            </div>
+          </div>
+
+          {/* Show Example Photos */}
+          <div className="sm:col-span-2">
+            <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-2">Show Example Photos</p>
+            <div className="grid grid-cols-3 gap-3 max-w-md">
+              {[
+                { src: "/images/ec2026/rider-photo-examples/example1.webp", label: "Example 1" },
+                { src: "/images/ec2026/rider-photo-examples/example2.jpg", label: "Example 2" },
+                { src: "/images/ec2026/rider-photo-examples/example3.jpg", label: "Example 3" },
+              ].map((ex) => (
+                <div key={ex.label} className="space-y-1">
+                  <div className="relative h-20 w-full overflow-hidden rounded-lg border border-gray-200 bg-gray-50">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={ex.src} alt={`${ex.label} — show jumping action photo`} className="h-full w-full object-cover" />
+                  </div>
+                  <p className="text-center text-[10px] text-gray-500">{ex.label}</p>
+                </div>
+              ))}
             </div>
           </div>
           {/* Parent */}
