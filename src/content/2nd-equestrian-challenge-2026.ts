@@ -174,10 +174,10 @@ export const equestrianChallengeAug2026 = {
         label: "Per-Day Stabling",
         window: "14th – 17th August",
         ratePerDay: 2500,
-        total: 7500,
+        total: null,
         from: "2026-08-14",
         to: "2026-08-17",
-        note: "₹2,500 per stable per day.",
+        note: "₹2,500 per stable per day — billed for the actual number of days booked within the camp window.",
       },
       FULL_CAMP: {
         label: "Full Camp",
@@ -190,7 +190,7 @@ export const equestrianChallengeAug2026 = {
       },
     },
     details: [
-      "Per-Day Stabling: ₹2,500 per stable per day.",
+      "Per-Day Stabling: ₹2,500 per stable per day — billed for the actual number of days booked within 14th–17th August.",
       "Full Camp (12–17 Aug): ₹2,000 per stable per day — ₹10,000 per stable total (National Qualifier + Equestrian Challenge).",
       "Bookings are confirmed only after full charges are received for the intended number of days.",
       "Self-Containment: bring your own rations, grass, straw, fodder, and camping equipment.",
