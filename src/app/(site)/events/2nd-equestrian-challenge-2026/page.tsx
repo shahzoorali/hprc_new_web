@@ -91,7 +91,6 @@ type FormData = {
   clubName: string;
   selectedEvents: number[];
   eventHorses: Record<number, string[]>; // Changed to string[] to support up to 2 jumps
-  horseBreeds: Record<string, { breed: string; other: string }>; // keyed by horse name
   stablingType: "NONE" | "PER_DAY" | "FULL_CAMP";
   stablingCount: number;
   stablingFrom: string;
@@ -126,7 +125,6 @@ const INITIAL_FORM: FormData = {
   clubName: "",
   selectedEvents: [],
   eventHorses: {},
-  horseBreeds: {},
   stablingType: "NONE",
   stablingCount: 0,
   stablingFrom: "",
@@ -150,7 +148,7 @@ function RegistrationForm() {
   const formRef = React.useRef<HTMLFormElement | null>(null);
   const [form, setForm] = useState<FormData>(INITIAL_FORM);
   const [submitted, setSubmitted] = useState(false);
-  const [errors, setErrors] = useState<Partial<Record<keyof FormData | "ageProof" | "headshot" | "eventHorsesGlobal" | "horseBreedsGlobal" | "stablingDates", string>>>({});
+  const [errors, setErrors] = useState<Partial<Record<keyof FormData | "ageProof" | "headshot" | "eventHorsesGlobal" | "stablingDates", string>>>({});
   const [draftExists, setDraftExists] = useState(false);
   const [headshotPreview, setHeadshotPreview] = useState<string | null>(null);
 
@@ -353,17 +351,6 @@ function RegistrationForm() {
 
   const uniqueHorseCount = uniqueHorses.length;
 
-  // Resolve each horse's breed to a single label for submission (Others -> typed text).
-  const resolvedBreeds = useMemo(() => {
-    const out: Record<string, string> = {};
-    uniqueHorses.forEach((name) => {
-      const b = form.horseBreeds[name];
-      if (!b || !b.breed) return;
-      out[name] = b.breed === "Others" ? b.other.trim() : b.breed;
-    });
-    return out;
-  }, [uniqueHorses, form.horseBreeds]);
-
   const toggleEvent = useCallback((id: number) => {
     setForm((f) => {
       const isSelected = f.selectedEvents.includes(id);
@@ -417,7 +404,7 @@ function RegistrationForm() {
   };
 
   const validate = () => {
-    const e: Partial<Record<keyof FormData | "ageProof" | "headshot" | "eventHorsesGlobal" | "horseBreedsGlobal" | "stablingDates", string>> = {};
+    const e: Partial<Record<keyof FormData | "ageProof" | "headshot" | "eventHorsesGlobal" | "stablingDates", string>> = {};
     if (!form.name.trim()) e.name = "Full name is required";
     {
       const headshotInput = document.getElementById('ec-headshot') as HTMLInputElement;
@@ -458,21 +445,6 @@ function RegistrationForm() {
     if (missingHorse) {
       e.eventHorsesGlobal = "Horse Name is required for all selected events and jumps";
       e.selectedEvents = "Please provide the horse name for all selected entries";
-    }
-
-    // Every named horse must have a breed; "Others" requires the typed breed.
-    if (!missingHorse) {
-      for (const name of uniqueHorses) {
-        const b = form.horseBreeds[name];
-        if (!b || !b.breed) {
-          e.horseBreedsGlobal = "Please select a breed for every horse";
-          break;
-        }
-        if (b.breed === "Others" && !b.other.trim()) {
-          e.horseBreedsGlobal = `Please specify the breed for "${name}" (marked Others)`;
-          break;
-        }
-      }
     }
 
     // Hacks exclusivity (prospectus §2): Hacks riders may not enter any other discipline.
@@ -631,7 +603,6 @@ function RegistrationForm() {
       <input type="hidden" name="clubName" value={form.clubName} />
       <input type="hidden" name="selectedEvents" value={JSON.stringify(form.selectedEvents)} />
       <input type="hidden" name="eventHorses" value={JSON.stringify(form.eventHorses)} />
-      <input type="hidden" name="horseBreeds" value={JSON.stringify(resolvedBreeds)} />
       <input type="hidden" name="stablingType" value={form.stablingType} />
       <input type="hidden" name="stablingCount" value={form.stablingCount} />
       <input type="hidden" name="stablingFrom" value={form.stablingFrom} />
@@ -1140,77 +1111,6 @@ function RegistrationForm() {
           </div>
         )}
       </div>
-
-      {/* ── Horse Details (breed per unique horse) ──────── */}
-      {uniqueHorses.length > 0 && (
-        <div className="space-y-4" id="horse-details-section">
-          <h3 className="text-xl font-bold text-brand-900 font-display flex items-center gap-3">
-            <span className="flex h-8 w-8 items-center justify-center bg-brand-500 text-white text-sm font-bold">★</span>
-            Horse Details
-          </h3>
-          <p className="text-xs text-gray-500 -mt-1">
-            Select the breed for each horse you entered above.
-          </p>
-
-          <div className="space-y-3">
-            {uniqueHorses.map((name) => {
-              const current = form.horseBreeds[name] || { breed: "", other: "" };
-              return (
-                <div key={name} className="border border-gray-200 rounded-xl p-4 bg-white">
-                  <p className="text-sm font-bold text-gray-900 mb-3">
-                    {name} <span className="text-gray-400 font-normal">— Breed <span className="text-brand-500">*</span></span>
-                  </p>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                    {["Warmblood", "Thoroughbred", "Indian", "Others"].map((opt) => (
-                      <label
-                        key={opt}
-                        className={`flex items-center justify-center gap-2 px-3 py-2 border-2 rounded-lg cursor-pointer text-xs font-semibold transition-all ${
-                          current.breed === opt
-                            ? "border-brand-500 bg-brand-50 text-brand-700"
-                            : "border-gray-200 bg-white text-gray-600 hover:bg-gray-50"
-                        }`}
-                      >
-                        <input
-                          type="radio"
-                          name={`breed-${name}`}
-                          value={opt}
-                          checked={current.breed === opt}
-                          onChange={() =>
-                            setForm((f) => ({
-                              ...f,
-                              horseBreeds: { ...f.horseBreeds, [name]: { ...current, breed: opt } },
-                            }))
-                          }
-                          className="h-3.5 w-3.5 accent-brand-500"
-                        />
-                        {opt}
-                      </label>
-                    ))}
-                  </div>
-                  {current.breed === "Others" && (
-                    <input
-                      type="text"
-                      value={current.other}
-                      onChange={(ev) =>
-                        setForm((f) => ({
-                          ...f,
-                          horseBreeds: { ...f.horseBreeds, [name]: { ...current, other: ev.target.value } },
-                        }))
-                      }
-                      placeholder="Please specify the breed *"
-                      className="mt-3 w-full text-xs px-3 py-2 border border-gray-200 rounded outline-none focus:border-brand-400 transition"
-                    />
-                  )}
-                </div>
-              );
-            })}
-          </div>
-
-          {errors.horseBreedsGlobal && (
-            <p className="text-xs text-red-500 font-bold">{errors.horseBreedsGlobal}</p>
-          )}
-        </div>
-      )}
 
       {/* ── Stabling Booking ────────────────────────────── */}
       <div className="space-y-6">
