@@ -105,6 +105,15 @@ type FormData = {
 // NQ has no Open/age concurrency — every class is age-bracketed, so no pairing.
 const PAIR_GROUPS: Record<number, number> = {};
 
+// Display labels for the age-group lock (prospectus §2: riders may compete in
+// only ONE eligible category and must stay in it across every event).
+const AGE_GROUP_LABELS: Record<string, string> = {
+  CHILD_II: "Children II",
+  CHILD_I: "Children I",
+  JUNIOR: "Junior",
+  YOUNG_RIDER: "Young Rider",
+};
+
 // Stabling fee tiers (per prospectus). EARLY_ARRIVAL is billed per day for
 // stays before the NQ camp opens (12 Aug) — the rider picks an arrival date.
 // NQ_DATES and FULL_CAMP are flat fees for their fixed windows.
@@ -257,9 +266,10 @@ function RegistrationForm() {
     return events.filter(e => riderAge >= (e.minAge ?? 0) && riderAge <= (e.maxAge ?? 99));
   }, [events, riderAge]);
 
-  // Junior (14-18) and Young Rider (16-21) overlap for riders aged 16-18. Once a
-  // rider selects any event carrying an ageGroup, they're locked to that group
-  // across both disciplines — prospectus §2 forbids mixing Junior/Young Rider.
+  // Adjacent age brackets overlap at their boundaries (e.g. age 12 is eligible
+  // for both Children I and Children II). Once a rider selects any event
+  // carrying an ageGroup, they're locked to that one category across every
+  // event — prospectus §2 forbids mixing eligible categories.
   const lockedAgeGroup = useMemo(() => {
     for (const id of form.selectedEvents) {
       const ev = events.find(e => e.id === id);
@@ -863,7 +873,7 @@ function RegistrationForm() {
                                 <p className="text-xs text-gray-500 mt-0.5">{ev.date}</p>
                                 {lockedOut && (
                                   <p className="text-[10px] text-amber-600 font-semibold mt-0.5">
-                                    Locked out — entry already set to {lockedAgeGroup === "JUNIOR" ? "Junior" : "Young Rider"}
+                                    Locked out — entry already set to {AGE_GROUP_LABELS[lockedAgeGroup ?? ""] ?? lockedAgeGroup}
                                   </p>
                                 )}
                               </div>
@@ -960,7 +970,7 @@ function RegistrationForm() {
             <p>
               <strong>Horse limit:</strong> a horse may enter each category only once, and a maximum of three events per day (2 Dressage &amp; 1 Show Jumping, or 2 Show Jumping &amp; 1 Dressage). Riders may enter up to two horses per event. A mandatory Vet Check for all NQ horses is on 13 Aug at 7:30 AM.
               {lockedAgeGroup && (
-                <> Your entry is locked to the <strong>{lockedAgeGroup === "JUNIOR" ? "Junior" : "Young Rider"}</strong> category for riders aged 16–18 — Junior and Young Rider classes cannot be mixed on one entry.</>
+                <> Your entry is locked to the <strong>{AGE_GROUP_LABELS[lockedAgeGroup ?? ""] ?? lockedAgeGroup}</strong> category — riders may compete in only one eligible age category and cannot mix categories across events.</>
               )}
             </p>
           </div>

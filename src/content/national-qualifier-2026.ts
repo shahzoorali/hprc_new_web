@@ -110,13 +110,13 @@ export const nationalQualifier2026 = {
   // NO post-entry / spot entries — kept for structural parity with the shared form.
   events: [
     // DRESSAGE (Snaffle only — tests per EFI NQ Guidelines for JNEC 2026)
-    { id: 1, discipline: "DRESSAGE", category: "Children II (10 - 12 years)", date: "14 Aug", fee: 3000, postFee: 3000, minAge: 10, maxAge: 12 },
-    { id: 2, discipline: "DRESSAGE", category: "Children I (12 - 14 years)", date: "14 Aug", fee: 3000, postFee: 3000, minAge: 12, maxAge: 14 },
+    { id: 1, discipline: "DRESSAGE", category: "Children II (10 - 12 years)", date: "14 Aug", fee: 3000, postFee: 3000, minAge: 10, maxAge: 12, ageGroup: "CHILD_II" },
+    { id: 2, discipline: "DRESSAGE", category: "Children I (12 - 14 years)", date: "14 Aug", fee: 3000, postFee: 3000, minAge: 12, maxAge: 14, ageGroup: "CHILD_I" },
     { id: 3, discipline: "DRESSAGE", category: "Junior (14 - 18 years)", date: "13 Aug", fee: 3000, postFee: 3000, minAge: 14, maxAge: 18, ageGroup: "JUNIOR" },
     { id: 4, discipline: "DRESSAGE", category: "Young Rider (16 - 21 years)", date: "13 Aug", fee: 3000, postFee: 3000, minAge: 16, maxAge: 21, ageGroup: "YOUNG_RIDER" },
     // SHOW JUMPING (H/S per EFI NQ Guidelines for JNEC 2026)
-    { id: 5, discipline: "SHOW JUMPING", category: "Children II (H 0.80 m / S 0.90 m)", date: "13 Aug", fee: 3000, postFee: 3000, minAge: 10, maxAge: 12 },
-    { id: 6, discipline: "SHOW JUMPING", category: "Children I (H 0.90 m / S 1.05 m)", date: "13 Aug", fee: 3000, postFee: 3000, minAge: 12, maxAge: 14 },
+    { id: 5, discipline: "SHOW JUMPING", category: "Children II (H 0.80 m / S 0.90 m)", date: "13 Aug", fee: 3000, postFee: 3000, minAge: 10, maxAge: 12, ageGroup: "CHILD_II" },
+    { id: 6, discipline: "SHOW JUMPING", category: "Children I (H 0.90 m / S 1.05 m)", date: "13 Aug", fee: 3000, postFee: 3000, minAge: 12, maxAge: 14, ageGroup: "CHILD_I" },
     { id: 7, discipline: "SHOW JUMPING", category: "Junior (H 1.05 m / S 1.15 m)", date: "14 Aug", fee: 3000, postFee: 3000, minAge: 14, maxAge: 18, ageGroup: "JUNIOR" },
     { id: 8, discipline: "SHOW JUMPING", category: "Young Rider (H 1.15 m / S 1.30 m)", date: "13 Aug", fee: 3000, postFee: 3000, minAge: 16, maxAge: 21, ageGroup: "YOUNG_RIDER" },
     // PRACTICE ROUND
@@ -183,12 +183,16 @@ export const nationalQualifier2026 = {
     "I declare that the details furnished above are correct to the best of my knowledge, and that the rider is an Indian national (not a foreign national or OCI cardholder). I undertake no responsibility for any loss, damage or injury that may occur for me / my son, daughter, during the course of the event/s directly or indirectly from accident or any other causes. The Hyderabad Polo & Riding Club, TSEA and EFI will not be held responsible for any first aid or other medical treatment provided.",
 
   importantNotes: [
-    "Mandatory Veterinary Check: all NQ horses must present for the Vet Check on Thursday, 13 August at 7:30 AM (ground opposite the indoor riding arena).",
+    "Mandatory Veterinary Check: all NQ horses must present for the Vet Check on Thursday, 13 August at 7:30 AM (ground opposite the indoor riding arena). Following completion of the Vet Check, only the registered participant may ride or mount the horse for the remainder of the event.",
     "Horse Eligibility: horses of any grade EXCEPT Grade 1 & above in Show Jumping and Grand Prix in Dressage are eligible.",
     "Number of Entries\n\nA horse may participate only once in each category of any discipline.\nIn a day, a horse can be used in a maximum of three (3) events — 2 Dressage & 1 Show Jumping, or 2 Show Jumping & 1 Dressage.",
     "Riders may enter up to two horses in each NQ event (Dressage or Show Jumping).",
-    "Age Category Overlap: riders aged 16–18 are eligible for both Junior and Young Rider. They must choose ONE category and stay in it for every event they enter — mixing categories across disciplines (e.g. Junior for jumping, Young Rider for dressage) is not permitted.",
+    "Age Category Overlap: riders can choose to compete in only one of the categories for which they are eligible based on their age — e.g. a 12-year-old may compete in Children I or Children II, but not both, and a 16–18-year-old may compete in Junior or Young Rider, but not both. Once chosen, riders must stay in that ONE category for every event they enter — mixing categories across disciplines is not permitted.",
     "Dressage Bitting: Snaffle only, for all categories.",
+    "Show Jumping Course Walk: the course will be closed for walk by riders and their coaches 20 minutes before the start of each category.",
+    "Reporting for Each Class: the first two riders in the event / category must report to the Arena Steward at least five (5) minutes before the scheduled start of that event. Any horse not reported in time can be eliminated unless the rider shows good cause for the delay.",
+    "Whips/Spurs/Bits: as per EFI and relevant FEI rules.",
+    "Apparel: all riders must comply with EFI and FEI Dress Code Regulations for that discipline during the event. Non-compliance will result in disqualification.",
     "No medals or prizes are awarded in the National Qualifier. Riders qualifying for further stages will be notified directly by EFI.",
     "Negative Coggins (Equine Infectious Anaemia) and Glanders certificates (CFT or Mallein) — valid for a minimum of 15 days prior to arrival — are mandatory. Entry is strictly denied without them.",
     "Appeals / objections: a deposit of ₹2,000 must be lodged with the Show Secretary; it is refunded if upheld.",
