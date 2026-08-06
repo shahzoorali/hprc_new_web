@@ -133,36 +133,46 @@ export const nationalQualifier2026 = {
     "Entry fees are non-refundable if the horse does not participate in the class.",
   ],
 
-  // Shared camp stabling. Per-Day covers the NQ days (12–14 Aug); Full Camp (12–17
-  // Aug) covers BOTH the NQ and the Equestrian Challenge in a single booking.
+  // Shared camp stabling. Full Camp (12–17 Aug) covers BOTH the NQ and the
+  // Equestrian Challenge (14–16 Aug) in a single booking.
   stabling: {
-    heading: "Stabling / Camp Details",
+    heading: "Permanent Stable Fee per horse",
     description:
       "The Camp opens at noon (12:00 pm) on 12th August and closes at noon (12:00 pm) on 14th August 2026. All stable requests must be submitted via the Entry Form before 10th August 2026 along with the relevant fees. Stables are limited and allocated first-come, first-served.",
     permanentAvailable: 30,
     packages: {
-      PER_DAY: {
-        label: "Per-Day Stabling",
-        window: "12th – 14th August",
+      EARLY_ARRIVAL: {
+        label: "Earlier than 12th August",
+        window: "Before 12th August",
         ratePerDay: 2500,
-        total: 5000,
+        total: null,
+        from: "",
+        to: "2026-08-12",
+        note: "₹2,500 per stable per day.",
+      },
+      NQ_DATES: {
+        label: "NQ Dates",
+        window: "12th, 13th & 14th August",
+        ratePerDay: null,
+        total: 4000,
         from: "2026-08-12",
         to: "2026-08-14",
-        note: "₹2,500 per stable per day (12th–14th August).",
+        note: "₹4,000 per stable for the duration.",
       },
       FULL_CAMP: {
         label: "Full Camp",
         window: "12th – 17th August",
-        ratePerDay: 2000,
+        ratePerDay: null,
         total: 10000,
         from: "2026-08-12",
         to: "2026-08-17",
-        note: "₹2,000 per stable per day (12th–17th August) — covers the National Qualifier + the HPRC Equestrian Challenge (14th–16th August) together.",
+        note: "₹10,000 per stable for the duration — covers the National Qualifier 2026 & the HPRC Equestrian Challenge (14th–16th August) together.",
       },
     },
     details: [
-      "Per-Day Stabling: ₹2,500 per stable per day",
-      "Full Camp (12–17 Aug): ₹2,000 per stable per day — ₹10,000 per stable total (covers National Qualifier (NQ) + the HPRC Equestrian Challenge).",
+      "Earlier than 12th August: ₹2,500 per stable per day.",
+      "NQ Dates (12th, 13th & 14th August): ₹4,000 per stable for the duration.",
+      "Full Camp (12th–17th August): ₹10,000 per stable for the duration — covers the National Qualifier 2026 & the HPRC Equestrian Challenge (14th–16th August) together.",
       "Bookings are confirmed only after full charges are received for the intended number of days.",
       "Self-Containment: bring your own rations, grass, straw, fodder, and camping equipment.",
       "Teams must make their own arrangements for staff stay and food.",

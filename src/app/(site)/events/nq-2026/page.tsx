@@ -93,7 +93,7 @@ type FormData = {
   selectedEvents: number[];
   eventHorses: Record<number, string[]>;       // one horse name per NQ class
   eventHorseEfi: Record<number, string[]>;      // matching Horse EFI Reg No.
-  stablingType: "NONE" | "PER_DAY" | "FULL_CAMP";
+  stablingType: "NONE" | "EARLY_ARRIVAL" | "NQ_DATES" | "FULL_CAMP";
   stablingCount: number;
   stablingFrom: string;
   stablingTo: string;
@@ -105,12 +105,20 @@ type FormData = {
 // NQ has no Open/age concurrency — every class is age-bracketed, so no pairing.
 const PAIR_GROUPS: Record<number, number> = {};
 
-// Fixed stabling package date windows (per prospectus). PER_DAY = 12–14 Aug
-// (₹5,000), FULL_CAMP = 12–17 Aug (₹10,000, covers National Qualifier (NQ) + the HPRC Equestrian Challenge).
+// Stabling fee tiers (per prospectus). EARLY_ARRIVAL is billed per day for
+// stays before the NQ camp opens (12 Aug) — the rider picks an arrival date.
+// NQ_DATES and FULL_CAMP are flat fees for their fixed windows.
 const STABLING_PACKAGES = {
-  PER_DAY: { total: 5000, from: "2026-08-12", to: "2026-08-14" },
-  FULL_CAMP: { total: 10000, from: "2026-08-12", to: "2026-08-17" },
+  EARLY_ARRIVAL: { mode: "PER_DAY" as const, ratePerDay: 2500, from: "", to: "2026-08-12" },
+  NQ_DATES: { mode: "FLAT" as const, total: 4000, from: "2026-08-12", to: "2026-08-14" },
+  FULL_CAMP: { mode: "FLAT" as const, total: 10000, from: "2026-08-12", to: "2026-08-17" },
 } as const;
+
+function daysBetween(from: string, to: string): number {
+  if (!from || !to) return 0;
+  const ms = new Date(to).getTime() - new Date(from).getTime();
+  return Math.max(0, Math.round(ms / (1000 * 60 * 60 * 24)));
+}
 
 const INITIAL_FORM: FormData = {
   name: "",
@@ -149,8 +157,7 @@ function RegistrationForm() {
   const formRef = React.useRef<HTMLFormElement | null>(null);
   const [form, setForm] = useState<FormData>(INITIAL_FORM);
   const [submitted, setSubmitted] = useState(false);
-  const [errors, setErrors] = useState<Partial<Record<keyof FormData | "ageProof" | "headshot" | "eventHorsesGlobal" | "stablingDates", string>>>({});
-  const [headshotPreview, setHeadshotPreview] = useState<string | null>(null);
+  const [errors, setErrors] = useState<Partial<Record<keyof FormData | "ageProof" | "eventHorsesGlobal" | "stablingDates", string>>>({});
   const [draftExists, setDraftExists] = useState(false);
 
   // Stabling inventory state — fetched live from server, falls back to hardcoded value on error.
@@ -302,7 +309,14 @@ function RegistrationForm() {
       let sFees = 0;
       if (form.stablingType !== "NONE" && form.stablingCount > 0) {
         const pkg = STABLING_PACKAGES[form.stablingType];
-        if (pkg) sFees = pkg.total * form.stablingCount;
+        if (pkg) {
+          if (pkg.mode === "PER_DAY") {
+            const days = daysBetween(form.stablingFrom, form.stablingTo);
+            sFees = pkg.ratePerDay * days * form.stablingCount;
+          } else {
+            sFees = pkg.total * form.stablingCount;
+          }
+        }
       }
 
       const isCheatCode = form.specialNotes.trim() === "HPRCCHEAT1";
@@ -395,13 +409,7 @@ function RegistrationForm() {
   };
 
   const validate = () => {
-    const e: Partial<Record<keyof FormData | "ageProof" | "headshot" | "eventHorsesGlobal" | "stablingDates", string>> = {};
-    {
-      const headshotInput = document.getElementById('ec-headshot') as HTMLInputElement;
-      if (!headshotInput || !headshotInput.files || headshotInput.files.length === 0) {
-        e.headshot = "Please upload a photo of the rider";
-      }
-    }
+    const e: Partial<Record<keyof FormData | "ageProof" | "eventHorsesGlobal" | "stablingDates", string>> = {};
     if (!form.name.trim()) e.name = "Full name is required";
     if (!form.parentName.trim()) e.parentName = "Parent's Name is required";
     if (!form.dob) e.dob = "Date of birth is required";
@@ -492,6 +500,10 @@ function RegistrationForm() {
         // Block submission while we're still checking availability — avoids stale-data overbookings.
         if (inventoryLoading) {
             e.stablingCount = "Verifying live stable availability — please wait a moment";
+        }
+
+        if (form.stablingType === "EARLY_ARRIVAL" && !form.stablingFrom) {
+            e.stablingDates = "Please select an arrival date";
         }
     }
     
@@ -645,64 +657,6 @@ function RegistrationForm() {
               className={`w-full border px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition ${errors.name ? "border-red-400 bg-red-50" : "border-gray-200 bg-white"}`}
             />
             {errors.name && <p className="mt-1 text-xs text-red-500">{errors.name}</p>}
-          </div>
-
-          {/* Rider Photo */}
-          <div className="sm:col-span-2">
-            <label className="block text-sm font-semibold text-gray-700 mb-1.5" htmlFor="ec-headshot">
-              Rider Photo <span className="text-brand-500">*</span>
-            </label>
-            <div className="flex items-start gap-3">
-              <div className={`relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-xl border-2 ${errors.headshot ? "border-red-400" : "border-gray-200"} bg-gray-50`}>
-                {headshotPreview ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={headshotPreview} alt="Rider photo preview" className="h-full w-full object-cover" />
-                ) : (
-                  <svg viewBox="0 0 24 24" className="h-full w-full p-3 text-gray-300" aria-hidden="true">
-                    <circle cx="12" cy="8" r="4" fill="currentColor" />
-                    <path d="M4 20.5c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5" fill="currentColor" />
-                  </svg>
-                )}
-              </div>
-              <div className="max-w-[240px]">
-                <input
-                  id="ec-headshot"
-                  name="headshot"
-                  type="file"
-                  accept="image/*"
-                  onChange={(ev) => {
-                    const file = ev.target.files?.[0] ?? null;
-                    setHeadshotPreview(file ? URL.createObjectURL(file) : null);
-                    if (file) setErrors((prev) => ({ ...prev, headshot: undefined }));
-                  }}
-                  className="block w-full text-xs text-gray-700 file:mr-3 file:py-2 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-brand-50 file:text-brand-700 hover:file:bg-brand-100 transition cursor-pointer"
-                />
-                <p className="mt-1.5 text-[11px] leading-snug text-gray-500">
-                  An action photo of the rider competing — e.g. show jumping or dressage, on the horse. Not a passport-style headshot. See examples below.
-                </p>
-              </div>
-            </div>
-            {errors.headshot && <p className="mt-1 text-xs text-red-500">{errors.headshot}</p>}
-
-            {/* Show Example Photos */}
-            <div className="mt-4">
-              <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-2">Show Example Photos</p>
-              <div className="grid grid-cols-3 gap-3 max-w-md">
-                {[
-                  { src: "/images/ec2026/rider-photo-examples/example1.webp", label: "Example 1" },
-                  { src: "/images/ec2026/rider-photo-examples/example2.jpg", label: "Example 2" },
-                  { src: "/images/ec2026/rider-photo-examples/example3.jpg", label: "Example 3" },
-                ].map((ex) => (
-                  <div key={ex.label} className="space-y-1">
-                    <div className="relative h-20 w-full overflow-hidden rounded-lg border border-gray-200 bg-gray-50">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={ex.src} alt={`${ex.label} — show jumping action photo`} className="h-full w-full object-cover" />
-                    </div>
-                    <p className="text-center text-[10px] text-gray-500">{ex.label}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
           {/* Parent */}
           <div>
@@ -1059,11 +1013,12 @@ function RegistrationForm() {
           <div className="grid gap-5 sm:grid-cols-2">
             <div className="sm:col-span-2">
               <label className="block text-sm font-semibold text-gray-700 mb-1.5">Stabling Package</label>
-              <div className="grid sm:grid-cols-3 gap-2">
+              <div className="grid sm:grid-cols-4 gap-2">
                 {([
                   { type: "NONE", title: "No Stabling", sub: "—" },
-                  { type: "PER_DAY", title: "Per-Day · 12–14 Aug", sub: "₹2,500/stable/day · ₹5,000 total" },
-                  { type: "FULL_CAMP", title: "Full Camp · 12–17 Aug", sub: "₹2,000/stable/day · ₹10,000 total" },
+                  { type: "EARLY_ARRIVAL", title: "Earlier than 12 Aug", sub: "₹2,500 per day" },
+                  { type: "NQ_DATES", title: "NQ Dates · 12–14 Aug", sub: "₹4,000 for duration" },
+                  { type: "FULL_CAMP", title: "Full Camp · 12–17 Aug", sub: "₹10,000 for duration" },
                 ] as const).map((opt) => (
                   <button
                     key={opt.type}
@@ -1072,7 +1027,7 @@ function RegistrationForm() {
                       ...f,
                       stablingType: opt.type,
                       stablingCount: opt.type === "NONE" ? 0 : Math.max(1, f.stablingCount),
-                      stablingFrom: opt.type === "NONE" ? "" : STABLING_PACKAGES[opt.type].from,
+                      stablingFrom: opt.type === "NONE" ? "" : (opt.type === "EARLY_ARRIVAL" ? "" : STABLING_PACKAGES[opt.type].from),
                       stablingTo: opt.type === "NONE" ? "" : STABLING_PACKAGES[opt.type].to,
                     }))}
                     className={`flex flex-col items-center justify-center py-3 px-2 text-center border transition-all ${form.stablingType === opt.type ? 'bg-brand-500 text-white border-brand-500 shadow-lg' : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'}`}
@@ -1117,14 +1072,31 @@ function RegistrationForm() {
               </div>
             )}
 
+            {form.stablingType === "EARLY_ARRIVAL" && (
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-1.5" htmlFor="ec-stabling-arrival">Arrival Date</label>
+                <input
+                  id="ec-stabling-arrival"
+                  type="date"
+                  max="2026-08-11"
+                  value={form.stablingFrom}
+                  onChange={(e) => setForm(f => ({ ...f, stablingFrom: e.target.value }))}
+                  className={`w-full border px-4 py-2.5 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition ${errors.stablingDates ? "border-red-400 bg-red-50" : "border-gray-200 bg-white"}`}
+                />
+                {errors.stablingDates && <p className="mt-1 text-xs text-red-500">{errors.stablingDates}</p>}
+              </div>
+            )}
+
             {form.stablingType !== "NONE" && (
               <div className="sm:col-span-2 flex items-center gap-2 text-xs text-blue-700 font-medium bg-white border border-blue-100 px-4 py-2.5">
                 <svg className="h-4 w-4 text-blue-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
-                {form.stablingType === "PER_DAY"
-                  ? "Per-Day Stabling · 12th – 14th August 2026 · ₹2,500 per stable per day (₹5,000 total)"
-                  : "Full Camp · 12th – 17th August 2026 · ₹2,000 per stable per day (₹10,000 total) — covers National Qualifier (NQ) + the HPRC Equestrian Challenge"}
+                {form.stablingType === "EARLY_ARRIVAL"
+                  ? "Earlier than 12th August · ₹2,500 per stable per day"
+                  : form.stablingType === "NQ_DATES"
+                  ? "NQ Dates · 12th – 14th August 2026 · ₹4,000 per stable for the duration"
+                  : "Full Camp · 12th – 17th August 2026 · ₹10,000 per stable for the duration — covers National Qualifier (NQ) + the HPRC Equestrian Challenge (14th–16th August) together"}
               </div>
             )}
           </div>
