@@ -99,6 +99,7 @@ type FormData = {
   stablingTo: string;
   specialNotes: string;
   isIndian: boolean;
+  proofType: "PASSPORT" | "BIRTH_AADHAAR";
   declaration: boolean;
 };
 
@@ -148,6 +149,7 @@ const INITIAL_FORM: FormData = {
   stablingTo: "",
   specialNotes: "",
   isIndian: false,
+  proofType: "PASSPORT",
   declaration: false,
 };
 
@@ -492,11 +494,22 @@ function RegistrationForm() {
       }
     }
 
-    // Age & nationality proof is mandatory for every NQ entry.
+    // Age & nationality proof is mandatory for every NQ entry: either an Indian
+    // Passport on its own, or BOTH a Birth Certificate and an Aadhaar card.
     if (activeSelected.length > 0) {
-      const fileInput = document.getElementById('ec-age-proof') as HTMLInputElement;
-      if (!fileInput || !fileInput.files || fileInput.files.length === 0) {
-        e.ageProof = "Please upload at least one age & nationality proof document";
+      const doc1 = document.getElementById('ec-age-proof') as HTMLInputElement;
+      const doc2 = document.getElementById('ec-age-proof-2') as HTMLInputElement;
+      const hasDoc1 = !!doc1?.files?.length;
+      const hasDoc2 = !!doc2?.files?.length;
+
+      if (form.proofType === "PASSPORT") {
+        if (!hasDoc1) {
+          e.ageProof = "Please upload your Indian Passport";
+        }
+      } else {
+        if (!hasDoc1 || !hasDoc2) {
+          e.ageProof = "Please upload BOTH the Birth Certificate and the Aadhaar card";
+        }
       }
     }
 
@@ -1169,44 +1182,70 @@ function RegistrationForm() {
               <p className="text-sm font-bold text-amber-900 mb-1">
                 Upload age &amp; nationality proof <span className="text-brand-500">*</span>
               </p>
-              <p className="text-xs text-amber-800/80 mb-1">
-                Mandatory for all NQ entries — proves age and Indian nationality. Foreign nationals and OCI cardholders are <strong>not eligible</strong>.
-              </p>
               <p className="text-xs text-amber-800/80 mb-3">
-                Upload any government document that shows your date of birth and Indian nationality —
-                for example an <strong>Indian Passport</strong>, <strong>Aadhaar card</strong>, or <strong>Birth Certificate</strong>.
-                You can upload <strong>one file, or two separate files</strong> if your proof is split across documents
-                (e.g. Birth Certificate as one file and Aadhaar as another). No need to merge them — just pick each file below.
+                Mandatory for all NQ entries — proves age and Indian nationality. Foreign nationals and OCI cardholders are <strong>not eligible</strong>.
+                Provide your <strong>Indian Passport</strong> on its own, or — if you don&apos;t have one — <strong>both</strong> your <strong>Birth Certificate</strong> and <strong>Aadhaar card</strong> together.
               </p>
             </div>
 
-            {/* Document 1 — required */}
-            <div className="pt-2 border-t border-amber-200">
-              <label className="block text-sm font-semibold text-amber-900 mb-2" htmlFor="ec-age-proof">
-                Document 1 <span className="text-brand-500">*</span>
-              </label>
-              <input
-                id="ec-age-proof"
-                name="ageProof"
-                type="file"
-                accept=".pdf,image/*"
-                className="block w-full text-sm text-amber-900 file:mr-4 file:py-2.5 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-white file:text-brand-700 hover:file:bg-brand-50 transition shadow-sm cursor-pointer"
-              />
+            {/* Proof type toggle */}
+            <div className="grid grid-cols-2 gap-2">
+              {([
+                { type: "PASSPORT", title: "I have a Passport" },
+                { type: "BIRTH_AADHAAR", title: "No Passport (Birth Cert. + Aadhaar)" },
+              ] as const).map((opt) => (
+                <button
+                  key={opt.type}
+                  type="button"
+                  onClick={() => setForm(f => ({ ...f, proofType: opt.type }))}
+                  className={`py-2.5 px-3 text-center text-xs sm:text-sm font-bold border transition-all ${form.proofType === opt.type ? 'bg-brand-500 text-white border-brand-500 shadow-lg' : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'}`}
+                >
+                  {opt.title}
+                </button>
+              ))}
             </div>
 
-            {/* Document 2 — optional */}
-            <div>
-              <label className="block text-sm font-semibold text-amber-900 mb-2" htmlFor="ec-age-proof-2">
-                Document 2 <span className="text-amber-700/70 font-normal">(optional — only if you have a second file)</span>
-              </label>
-              <input
-                id="ec-age-proof-2"
-                name="ageProof2"
-                type="file"
-                accept=".pdf,image/*"
-                className="block w-full text-sm text-amber-900 file:mr-4 file:py-2.5 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-white file:text-brand-700 hover:file:bg-brand-50 transition shadow-sm cursor-pointer"
-              />
-            </div>
+            {form.proofType === "PASSPORT" ? (
+              <div className="pt-2 border-t border-amber-200">
+                <label className="block text-sm font-semibold text-amber-900 mb-2" htmlFor="ec-age-proof">
+                  Indian Passport <span className="text-brand-500">*</span>
+                </label>
+                <input
+                  id="ec-age-proof"
+                  name="ageProof"
+                  type="file"
+                  accept=".pdf,image/*"
+                  className="block w-full text-sm text-amber-900 file:mr-4 file:py-2.5 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-white file:text-brand-700 hover:file:bg-brand-50 transition shadow-sm cursor-pointer"
+                />
+              </div>
+            ) : (
+              <>
+                <div className="pt-2 border-t border-amber-200">
+                  <label className="block text-sm font-semibold text-amber-900 mb-2" htmlFor="ec-age-proof">
+                    Birth Certificate <span className="text-brand-500">*</span>
+                  </label>
+                  <input
+                    id="ec-age-proof"
+                    name="ageProof"
+                    type="file"
+                    accept=".pdf,image/*"
+                    className="block w-full text-sm text-amber-900 file:mr-4 file:py-2.5 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-white file:text-brand-700 hover:file:bg-brand-50 transition shadow-sm cursor-pointer"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-amber-900 mb-2" htmlFor="ec-age-proof-2">
+                    Aadhaar Card <span className="text-brand-500">*</span>
+                  </label>
+                  <input
+                    id="ec-age-proof-2"
+                    name="ageProof2"
+                    type="file"
+                    accept=".pdf,image/*"
+                    className="block w-full text-sm text-amber-900 file:mr-4 file:py-2.5 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-white file:text-brand-700 hover:file:bg-brand-50 transition shadow-sm cursor-pointer"
+                  />
+                </div>
+              </>
+            )}
 
             {errors.ageProof && (
               <p className="text-xs text-red-500 font-bold flex items-center gap-1.5">
