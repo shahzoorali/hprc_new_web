@@ -107,18 +107,14 @@ const PAIR_GROUPS: Record<number, number> = {
   14: 15, 15: 14, // 105–110 cm (Juniors ↔ Open)
 };
 
-// Stabling fee tiers (per prospectus). PER_DAY is billed per night for
-// however many nights the rider needs within the camp window (14–17 Aug) —
-// there is no fixed total. FULL_CAMP is a flat fee for its fixed window.
-function daysBetween(from: string, to: string): number {
-  if (!from || !to) return 0;
-  const ms = new Date(to).getTime() - new Date(from).getTime();
-  return Math.max(0, Math.round(ms / (1000 * 60 * 60 * 24)));
-}
-
+// Fixed stabling package date windows (per prospectus). PER_DAY = 14–17 Aug,
+// FULL_CAMP = 12–17 Aug. Totals are per stable. PER_DAY is intentionally a
+// flat ₹7,500 (not billed per selected day) — it must stay pricier than
+// Full Camp minus NQ Dates (₹10,000 - ₹4,000 = ₹6,000) so it can't be used
+// as a cheaper backdoor around Full Camp / NQ Dates pricing.
 const STABLING_PACKAGES = {
-  PER_DAY: { mode: "PER_DAY" as const, ratePerDay: 2500, from: "2026-08-14", to: "2026-08-17" },
-  FULL_CAMP: { mode: "FLAT" as const, total: 10000, from: "2026-08-12", to: "2026-08-17" },
+  PER_DAY: { total: 7500, from: "2026-08-14", to: "2026-08-17" },
+  FULL_CAMP: { total: 10000, from: "2026-08-12", to: "2026-08-17" },
 } as const;
 
 const INITIAL_FORM: FormData = {
@@ -324,14 +320,7 @@ function RegistrationForm() {
       let sFees = 0;
       if (form.stablingType !== "NONE" && form.stablingCount > 0) {
         const pkg = STABLING_PACKAGES[form.stablingType];
-        if (pkg) {
-          if (pkg.mode === "PER_DAY") {
-            const days = daysBetween(form.stablingFrom, form.stablingTo);
-            sFees = pkg.ratePerDay * days * form.stablingCount;
-          } else {
-            sFees = pkg.total * form.stablingCount;
-          }
-        }
+        if (pkg) sFees = pkg.total * form.stablingCount;
       }
 
       const isCheatCode = form.specialNotes.trim() === "HPRCCHEAT1";
@@ -521,14 +510,6 @@ function RegistrationForm() {
         // Block submission while we're still checking availability — avoids stale-data overbookings.
         if (inventoryLoading) {
             e.stablingCount = "Verifying live stable availability — please wait a moment";
-        }
-
-        if (form.stablingType === "PER_DAY") {
-            if (!form.stablingFrom || !form.stablingTo) {
-                e.stablingDates = "Please select your stabling dates";
-            } else if (form.stablingTo <= form.stablingFrom) {
-                e.stablingDates = "The 'To' date must be after the 'From' date";
-            }
         }
     }
 
@@ -1173,7 +1154,7 @@ function RegistrationForm() {
               <div className="grid sm:grid-cols-3 gap-2">
                 {([
                   { type: "NONE", title: "No Stabling", sub: "—" },
-                  { type: "PER_DAY", title: "Per-Day · 14–17 Aug", sub: "₹2,500 per stable per day" },
+                  { type: "PER_DAY", title: "Per-Day · 14–17 Aug", sub: "₹2,500/stable/day · ₹7,500 total" },
                   { type: "FULL_CAMP", title: "Full Camp · 12–17 Aug", sub: "₹2,000/stable/day · ₹10,000 total" },
                 ] as const).map((opt) => (
                   <button
@@ -1183,8 +1164,8 @@ function RegistrationForm() {
                       ...f,
                       stablingType: opt.type,
                       stablingCount: opt.type === "NONE" ? 0 : Math.max(1, f.stablingCount),
-                      stablingFrom: opt.type === "NONE" ? "" : (opt.type === "PER_DAY" ? "" : STABLING_PACKAGES[opt.type].from),
-                      stablingTo: opt.type === "NONE" ? "" : (opt.type === "PER_DAY" ? "" : STABLING_PACKAGES[opt.type].to),
+                      stablingFrom: opt.type === "NONE" ? "" : STABLING_PACKAGES[opt.type].from,
+                      stablingTo: opt.type === "NONE" ? "" : STABLING_PACKAGES[opt.type].to,
                     }))}
                     className={`flex flex-col items-center justify-center py-3 px-2 text-center border transition-all ${form.stablingType === opt.type ? 'bg-brand-500 text-white border-brand-500 shadow-lg' : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'}`}
                   >
@@ -1228,43 +1209,13 @@ function RegistrationForm() {
               </div>
             )}
 
-            {form.stablingType === "PER_DAY" && (
-              <>
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1.5" htmlFor="ec-stabling-from">From</label>
-                  <input
-                    id="ec-stabling-from"
-                    type="date"
-                    min="2026-08-14"
-                    max="2026-08-17"
-                    value={form.stablingFrom}
-                    onChange={(e) => setForm(f => ({ ...f, stablingFrom: e.target.value }))}
-                    className={`w-full border px-4 py-2.5 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition ${errors.stablingDates ? "border-red-400 bg-red-50" : "border-gray-200 bg-white"}`}
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1.5" htmlFor="ec-stabling-to">To</label>
-                  <input
-                    id="ec-stabling-to"
-                    type="date"
-                    min="2026-08-14"
-                    max="2026-08-17"
-                    value={form.stablingTo}
-                    onChange={(e) => setForm(f => ({ ...f, stablingTo: e.target.value }))}
-                    className={`w-full border px-4 py-2.5 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition ${errors.stablingDates ? "border-red-400 bg-red-50" : "border-gray-200 bg-white"}`}
-                  />
-                </div>
-                {errors.stablingDates && <p className="sm:col-span-2 text-xs text-red-500">{errors.stablingDates}</p>}
-              </>
-            )}
-
             {form.stablingType !== "NONE" && (
               <div className="sm:col-span-2 flex items-center gap-2 text-xs text-blue-700 font-medium bg-white border border-blue-100 px-4 py-2.5">
                 <svg className="h-4 w-4 text-blue-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
                 {form.stablingType === "PER_DAY"
-                  ? "Per-Day Stabling · within 14th – 17th August 2026 · ₹2,500 per stable per day"
+                  ? "Per-Day Stabling · 14th – 17th August 2026 · ₹2,500 per stable per day (₹7,500 total)"
                   : "Full Camp · 12th – 17th August 2026 · ₹2,000 per stable per day (₹10,000 total)"}
               </div>
             )}
