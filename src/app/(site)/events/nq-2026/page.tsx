@@ -628,6 +628,22 @@ function RegistrationForm() {
       <input type="hidden" name="specialNotes" value={form.specialNotes} />
       <input type="hidden" name="amount" value={totalFee} />
 
+      <div className="relative">
+        {entryStatus === "CLOSED" && (
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center overflow-hidden"
+          >
+            <span className="-rotate-[20deg] whitespace-nowrap text-4xl sm:text-6xl font-black uppercase tracking-widest text-red-600/25 border-8 border-red-600/25 px-6 py-3 sm:px-10 sm:py-5">
+              Registration Closed
+            </span>
+          </div>
+        )}
+        <fieldset
+          disabled={entryStatus === "CLOSED"}
+          className={`space-y-10 border-0 p-0 m-0 min-w-0 ${entryStatus === "CLOSED" ? "opacity-40 select-none" : ""}`}
+        >
+
       {/* ── Draft Restore Notice ─────────────────────── */}
       {draftExists && (
         <div className="bg-blue-50 border border-blue-200 p-4 rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
@@ -1306,6 +1322,9 @@ function RegistrationForm() {
           </span>
         </label>
         {errors.declaration && <p className="text-xs text-red-500">{errors.declaration}</p>}
+      </div>
+
+        </fieldset>
       </div>
 
       {/* ── Submit ─────────────────────────────────────── */}

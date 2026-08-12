@@ -47,6 +47,18 @@ if ($name === '' || $mobile === '' || $email === '' || $selectedEvents === '') {
     exit('Missing required fields.');
 }
 
+// Entries close at 12:00 noon IST on 12 August 2026 — no post-entries or spot
+// entries. The form's submit button already disappears client-side at this
+// point, but that's only a UI convenience; enforce it here too so a stale
+// tab or a direct POST can't slip an entry through after the deadline.
+date_default_timezone_set('Asia/Kolkata');
+$closingDeadline = strtotime('2026-08-12 12:00:00');
+if (time() > $closingDeadline) {
+    error_log("NQ2026: Rejected submission after closing deadline — $name <$email>.");
+    http_response_code(403);
+    exit('Registration Closed. Entries closed at 12:00 Noon on Wednesday, 12 August 2026. No post-entries or spot entries are accepted.');
+}
+
 // Handle Age & Nationality Proof Uploads (up to 2 files: ageProof required, ageProof2 optional)
 $uploadDir = __DIR__ . '/uploads/nq2026/age_proofs/';
 
