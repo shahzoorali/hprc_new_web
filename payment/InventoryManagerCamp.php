@@ -106,11 +106,20 @@ class InventoryManagerCamp {
             $daily[$date] = $entry['available'];
             if ($entry['available'] < $minAvailable) $minAvailable = $entry['available'];
         }
+
+        $totalStablesBooked = 0;
+        foreach ($data['bookings'] as $b) {
+            $totalStablesBooked += (int)$b['stablesCount'];
+        }
+
         return [
             'permanentCapacity' => $capacity,
             'dailyAvailability' => $daily,
             'minAvailable' => $minAvailable,
-            'lastUpdated' => $data['lastUpdated']
+            'lastUpdated' => $data['lastUpdated'],
+            'lastRebuiltFromDB' => isset($data['lastRebuiltFromDB']) ? $data['lastRebuiltFromDB'] : null,
+            'bookingsCount' => count($data['bookings']),
+            'totalStablesBooked' => $totalStablesBooked,
         ];
     }
 

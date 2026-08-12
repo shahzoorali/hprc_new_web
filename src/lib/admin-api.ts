@@ -123,6 +123,9 @@ export interface StablingSnapshot {
   dailyAvailability: Record<string, number>;
   minAvailable: number;
   lastUpdated: string | null;
+  lastRebuiltFromDB: string | null;
+  bookingsCount: number;
+  totalStablesBooked: number;
 }
 
 // Shared August camp stabling availability (NQ + EC). Public PHP endpoint, no
