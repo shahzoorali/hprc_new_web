@@ -140,7 +140,7 @@ send_admin_notification("NEW REGISTRATION (AUG, MANUALLY RECONCILED): {$row['nam
 echo "Admin notification sent.\n";
 
 // Google Sheet webhook — same itemization as the real handler.
-$webhook_url = "https://script.google.com/macros/s/AKfycby6F50wqXr3CfW9G7AGrK0F4CMi9tshDpoUDLtDmhw1zUzTq4qH6bNcqS7N8ey2-jYp/exec";
+$webhook_url = "https://script.google.com/macros/s/AKfycbynK3pTkRLw4Oqp04kAlX0dh0C7_ed6G8P8f3LNrdbpHMTpmI-Q64XyuBDNKMsnuJeN/exec";
 $baseFees = [
     1 => 1500, 2 => 1500,
     3 => 2000, 4 => 2000, 5 => 2000,
