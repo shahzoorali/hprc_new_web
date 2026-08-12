@@ -269,7 +269,7 @@ class InventoryManagerCamp {
                 "SELECT id, name, stablingCount, stablingFrom, stablingTo
                  FROM `$table`
                  WHERE order_status IN ('Success', 'Successful')
-                   AND stablingType IN ('PER_DAY', 'FULL_CAMP')
+                   AND stablingType <> 'NONE'
                    AND stablingCount > 0"
             );
 
