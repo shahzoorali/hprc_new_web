@@ -1874,7 +1874,7 @@ export default function EquestrianChallenge2026Page() {
               <div className="mt-8 grid sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
                 <div className="bg-brand-50 border-l-4 border-brand-500 p-4 text-left">
                   <p className="text-xs font-bold text-brand-700 uppercase tracking-wider mb-1">Standard Entry Closes</p>
-                  <p className="text-sm font-bold text-brand-900">Thursday, 13 Aug · 6:00 PM</p>
+                  <p className="text-sm font-bold text-brand-900">Friday, 14 Aug · 12:00 AM</p>
                 </div>
                 <div className="bg-amber-50 border-l-4 border-amber-500 p-4 text-left">
                   <p className="text-xs font-bold text-amber-700 uppercase tracking-wider mb-1">Post Entry Closes</p>
