@@ -154,7 +154,7 @@ export const equestrianChallengeAug2026 = {
   },
 
   requirements: [
-    "Closing Date: Entries close at 18:00 hrs (6 PM) on Thursday, 13 August 2026. Entries after this time are treated as Post-Entries.",
+    "Closing Date: Entries close at 00:00 hrs (midnight) on Friday, 14 August 2026. Entries after this time are treated as Post-Entries.",
     "Post-Entries: Accepted only until 12:00 hrs (noon) on Friday, 14 August 2026, at the higher Post-Entry fee.",
     "Age-specific Categories: A copy of the rider's birth certificate is mandatory and must be uploaded with the entry form. Entries without it will not be accepted.",
     "Age Rule: A rider competes as the age they are turning in the calendar year (2026), regardless of birth month.",

@@ -299,7 +299,7 @@ function RegistrationForm() {
 
   const entryStatus = useMemo(() => {
     const now = new Date();
-    const standardDeadline = new Date("2026-08-13T18:00:00+05:30");
+    const standardDeadline = new Date("2026-08-14T00:00:00+05:30");
     const finalDeadline = new Date("2026-08-14T12:00:00+05:30");
     
     if (now > finalDeadline) return "CLOSED";
