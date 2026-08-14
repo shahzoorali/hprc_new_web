@@ -244,13 +244,6 @@ export const eventsContent = {
   ] satisfies NewsArticle[],
   upcoming: [
     {
-      title: "National Qualifier (NQ) 2026",
-      date: "12–14 August 2026",
-      description:
-        "Dressage & Show Jumping qualifier for JNEC 2026 at Hyderabad Polo & Riding Club, Gandipet, under the aegis of the Equestrian Federation of India (EFI), in association with TSEA. Entries close 12 August 2026 at noon.",
-      link: "/events/nq-2026",
-    },
-    {
       title: "HPRC Equestrian Challenge 2026 — August Season",
       date: "14–16 August 2026",
       description:
