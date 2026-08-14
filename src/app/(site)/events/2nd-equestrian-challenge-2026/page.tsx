@@ -297,15 +297,9 @@ function RegistrationForm() {
     }
   }, [eligibleEvents, form.selectedEvents.length]);
 
-  const entryStatus = useMemo(() => {
-    const now = new Date();
-    const standardDeadline = new Date("2026-08-14T16:00:00+05:30");
-    const finalDeadline = new Date("2026-08-14T16:00:00+05:30");
-    
-    if (now > finalDeadline) return "CLOSED";
-    if (now > standardDeadline) return "POST_ENTRY";
-    return "STANDARD";
-  }, []);
+  // Registrations for this event are closed (club decision, overrides the deadline).
+  type EntryStatus = "STANDARD" | "POST_ENTRY" | "CLOSED";
+  const entryStatus: EntryStatus = ("CLOSED" as EntryStatus);
 
   const { eventFees, stablingFees, totalFee } = useMemo(
     () => {
@@ -586,15 +580,24 @@ function RegistrationForm() {
   };
 
   return (
-    <form 
-      ref={formRef} 
-      onSubmit={handleSubmit} 
+    <div className="relative">
+      {/* Registrations Closed Watermark */}
+      <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center overflow-hidden">
+        <span className="select-none text-4xl sm:text-6xl md:text-7xl font-extrabold uppercase tracking-widest text-red-600/20 -rotate-12 whitespace-nowrap">
+          Registrations Closed
+        </span>
+      </div>
+
+      <form
+      ref={formRef}
+      onSubmit={handleSubmit}
       action="https://hprc.in/payment/ecaug2026RequestHandler.php"
-      method="POST" 
+      method="POST"
       encType="multipart/form-data"
-      className="space-y-10" 
+      className="space-y-10 relative"
       noValidate>
-      
+      <fieldset disabled className="space-y-10">
+
       {/* Hidden Fields for PHP Processing */}
       <input type="hidden" name="name" value={form.name} />
       <input type="hidden" name="parentName" value={form.parentName} />
@@ -1394,7 +1397,9 @@ function RegistrationForm() {
           </>
         )}
       </div>
-    </form>
+      </fieldset>
+      </form>
+    </div>
   );
 }
 
