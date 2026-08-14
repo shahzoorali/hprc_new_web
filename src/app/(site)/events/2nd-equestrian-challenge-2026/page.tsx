@@ -299,8 +299,8 @@ function RegistrationForm() {
 
   const entryStatus = useMemo(() => {
     const now = new Date();
-    const standardDeadline = new Date("2026-08-14T00:00:00+05:30");
-    const finalDeadline = new Date("2026-08-14T12:00:00+05:30");
+    const standardDeadline = new Date("2026-08-14T16:00:00+05:30");
+    const finalDeadline = new Date("2026-08-14T16:00:00+05:30");
     
     if (now > finalDeadline) return "CLOSED";
     if (now > standardDeadline) return "POST_ENTRY";
@@ -1359,7 +1359,7 @@ function RegistrationForm() {
         {entryStatus === "CLOSED" ? (
           <div className="bg-red-50 border border-red-200 p-6 max-w-lg mx-auto">
             <p className="text-red-700 font-bold mb-1">Registration Closed</p>
-            <p className="text-xs text-red-600">The final post-entry deadline (14 Aug, 12:00 Noon) has passed. We are no longer accepting entries.</p>
+            <p className="text-xs text-red-600">The entry deadline (14 Aug, 4:00 PM) has passed. We are no longer accepting entries.</p>
           </div>
         ) : (
           <>
@@ -1389,9 +1389,7 @@ function RegistrationForm() {
                     : "Proceed to Payment"}
             </button>
             <p className="mt-3 text-xs text-gray-500">
-              {entryStatus === "POST_ENTRY" 
-                ? "Post-entry window is open. Standard fees have been increased by ₹500 per event." 
-                : "Standard entry is open. Ensure all details are correct before submitting."}
+              Standard entry is open. Ensure all details are correct before submitting.
             </p>
           </>
         )}
@@ -1870,15 +1868,11 @@ export default function EquestrianChallenge2026Page() {
                 Fill in the form below. On submission, your email client will open with all details pre-filled — simply send it to complete your registration.
               </p>
               
-              {/* Entry Deadlines Alert */}
-              <div className="mt-8 grid sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
+              {/* Entry Deadline Alert */}
+              <div className="mt-8 max-w-sm mx-auto">
                 <div className="bg-brand-50 border-l-4 border-brand-500 p-4 text-left">
-                  <p className="text-xs font-bold text-brand-700 uppercase tracking-wider mb-1">Standard Entry Closes</p>
-                  <p className="text-sm font-bold text-brand-900">Friday, 14 Aug · 12:00 AM</p>
-                </div>
-                <div className="bg-amber-50 border-l-4 border-amber-500 p-4 text-left">
-                  <p className="text-xs font-bold text-amber-700 uppercase tracking-wider mb-1">Post Entry Closes</p>
-                  <p className="text-sm font-bold text-amber-900">Friday, 14 Aug · 12:00 Noon</p>
+                  <p className="text-xs font-bold text-brand-700 uppercase tracking-wider mb-1">Registration Closes</p>
+                  <p className="text-sm font-bold text-brand-900">Friday, 14 Aug · 4:00 PM</p>
                 </div>
               </div>
 
