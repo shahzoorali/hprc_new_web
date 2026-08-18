@@ -14,6 +14,17 @@ export default function UpcomingEventsPage() {
         />
       </div>
       <section className="container space-y-6">
+        {eventsContent.upcoming.length === 0 && (
+          <div className="border border-brand-100 bg-white/95 p-8 text-center shadow-[var(--shadow-elevated)]">
+            <p className="text-gray-700">
+              No upcoming events are scheduled right now. Check back soon, or view our{" "}
+              <Link href="/events/past" className="font-semibold text-brand-600 underline underline-offset-2 hover:text-brand-800">
+                past events
+              </Link>
+              .
+            </p>
+          </div>
+        )}
         {eventsContent.upcoming.map((event) => (
           <article
             key={event.title}

@@ -31,6 +31,26 @@ export const eventsContent = {
   },
   news: [
     {
+      title: "Results — 2nd HPRC Equestrian Challenge 2026",
+      date: "18 August, 2026",
+      source: "HPRC",
+      excerpt:
+        "Official placings from the 2nd HPRC Equestrian Challenge 2026, held 14–16 August at Gandipet. Fourteen classes across Hacks, Dressage and Show Jumping, with podium riders, horses and clubs.",
+      url: "/events/news/ec-aug-2026-results",
+      category: "Results",
+      imageUrl: "/images/results/ec-aug-2026/myra-alapati.jpg",
+    },
+    {
+      title: "Results — National Qualifier (NQ) 2026",
+      date: "18 August, 2026",
+      source: "HPRC",
+      excerpt:
+        "Official results of the National Qualifier 2026, held 12–14 August at Gandipet. Dressage scores and Show Jumping penalties across Children, Junior and Young Rider categories.",
+      url: "/events/news/nq-2026-results",
+      category: "Results",
+      imageUrl: "/images/hprc-tipa-award2025.jpeg",
+    },
+    {
       title: "HPRC Wins Arena Polo Club of the Season at The Indian Polo Awards",
       date: "March 24, 2026",
       source: "LA POLO",
@@ -242,22 +262,28 @@ export const eventsContent = {
       imageUrl: "/documents/news/sauryaram-varma-equestrian.webp",
     },
   ] satisfies NewsArticle[],
-  upcoming: [
-    {
-      title: "HPRC Equestrian Challenge 2026 — August Season",
-      date: "14–16 August 2026",
-      description:
-        "Hacks, Dressage & Show Jumping across all age categories at Hyderabad Polo & Riding Club, Gandipet. Morning and floodlit evening sessions over three days, with prize money up to ₹20,000 in Open Show Jumping. Entries close 13 August 2026 at 6 PM.",
-      link: "/events/2nd-equestrian-challenge-2026",
-    },
-  ] as UpcomingEvent[],
+  upcoming: [] as UpcomingEvent[],
   pastHighlights: [
+    {
+      title: "National Qualifier (NQ) 2026",
+      description:
+        "The National Qualifier 2026 concluded 12–14 August with riders competing across Dressage and Show Jumping in the Children, Junior and Young Rider categories. View the official results.",
+      link: "/events/news/nq-2026-results",
+      image: "/images/ec2026/aamir-shahnawaz-1.jpg",
+    },
+    {
+      title: "2nd HPRC Equestrian Challenge 2026",
+      description:
+        "The 2nd HPRC Equestrian Challenge concluded 14–16 August with fourteen classes across Hacks, Dressage and Show Jumping, and prize money up to ₹20,000 in Open Show Jumping. View the official results.",
+      link: "/events/news/ec-aug-2026-results",
+      image: "/images/ec2026/action-1.jpg",
+    },
     {
       title: "HPRC Equestrian Challenge 2026",
       description:
         "The inaugural HPRC Equestrian Challenge concluded with 126+ riders from 30+ clubs competing across Show Jumping, Dressage, Hacks, and Top Score. View official results from the evening (16 May) and morning (17 May) sessions.",
       link: "/events/news/ec2026-results-17-may-morning-session",
-      image: "/images/ec2026/aamir-shahnawaz-1.jpg",
+      image: "/images/ec2026/aamir-shahnawaz-2.jpg",
     },
     {
       title: "HPRC World Arena Polo Championship 2026",

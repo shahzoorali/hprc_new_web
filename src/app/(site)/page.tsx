@@ -37,109 +37,95 @@ export default function HomePage() {
         imageAlt={heroSlide.imageAlt}
       />
 
-      {/* HPRC Equestrian Challenge 2026 - August Season Hero */}
+      {/* August 2026 Results — NQ & EC */}
       <section className="relative overflow-hidden bg-white">
         <div className="container relative z-10 py-12 lg:py-20">
-          <div className="relative group overflow-hidden rounded-[2.5rem] bg-neutral-900 shadow-2xl">
-            {/* Background Image with sophisticated overlay */}
-            <div className="absolute inset-0">
-              <Image
-                src="/images/ec2026/action-1.jpg"
-                alt="Show Jumping action at the HPRC Equestrian Challenge 2026"
-                fill
-                className="object-cover object-center transition-transform duration-1000 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-neutral-900 via-neutral-900/80 to-transparent"></div>
-            </div>
-
-            {/* Content Container */}
-            <div className="relative z-10 grid lg:grid-cols-2 gap-12 items-center p-8 sm:p-12 lg:p-20">
-              <div className="space-y-8">
-                {/* Badge */}
-                <div className="inline-flex items-center gap-3 bg-red-500/20 backdrop-blur-md border border-red-500/30 px-5 py-2.5 rounded-full">
-                  <span className="relative flex h-3 w-3">
-                    <span className="relative inline-flex rounded-full h-3 w-3 bg-red-400"></span>
-                  </span>
-                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-red-400 font-display">
-                    Registrations Closed
-                  </span>
-                </div>
-
-                {/* Typography */}
-                <div className="space-y-4">
-                  <p className="text-lg sm:text-xl font-medium text-brand-400 font-display italic tracking-wide">
-                    14 – 16 August 2026 · HPRC, Gandipet
-                  </p>
-                  <h2 className="text-[clamp(2.5rem,6vw,4.5rem)] font-extrabold leading-[1.05] text-white font-display tracking-tight">
-                    Equestrian <br />
-                    <span className="bg-gradient-to-r from-brand-400 via-brand-200 to-brand-400 bg-clip-text text-transparent">
-                      Challenge
-                    </span>
-                    <br /> 2026
-                  </h2>
-                </div>
-
-                {/* Key Stats Grid */}
-                <div className="grid grid-cols-3 gap-4 pt-4">
-                  <div className="flex flex-col gap-1 bg-white/5 border border-white/10 rounded-2xl p-4">
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-white/50">Disciplines</p>
-                    <p className="text-2xl font-extrabold text-white">3</p>
-                  </div>
-                  <div className="flex flex-col gap-1 bg-white/5 border border-white/10 rounded-2xl p-4">
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-white/50">Classes</p>
-                    <p className="text-2xl font-extrabold text-white">15</p>
-                  </div>
-                  <div className="flex flex-col gap-1 bg-white/5 border border-white/10 rounded-2xl p-4">
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-white/50">Top Prize</p>
-                    <p className="text-2xl font-extrabold text-white">₹20K</p>
-                  </div>
-                </div>
-
-                {/* Description */}
-                <p className="text-base sm:text-lg text-white/70 leading-relaxed font-light max-w-xl font-body">
-                  Hacks, Dressage &amp; Show Jumping across all age categories at Hyderabad Polo &amp; Riding Club, Gandipet. Morning and floodlit evening sessions over three days, with prize money up to ₹20,000 in Open Show Jumping. Registrations are now closed.
-                </p>
-
-                {/* CTA Buttons */}
-                <div className="flex flex-wrap items-center gap-5 pt-4">
-                  <Link
-                    href="/events/2nd-equestrian-challenge-2026"
-                    className="group inline-flex items-center justify-center gap-3 bg-white px-10 py-5 text-base font-bold text-brand-900 shadow-2xl transition-all duration-300 hover:bg-brand-50 hover:-translate-y-1 font-display rounded-2xl"
-                  >
-                    <span>Event Details</span>
-                    <svg className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </Link>
-                  <Link
-                    href="/events/2nd-equestrian-challenge-2026"
-                    className="group inline-flex items-center justify-center gap-3 bg-brand-500 px-10 py-5 text-base font-bold text-white shadow-2xl transition-all duration-300 hover:bg-brand-600 hover:-translate-y-1 font-display rounded-2xl"
-                  >
-                    <span>View Schedule</span>
-                    <svg className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </Link>
-                </div>
+          <div className="grid gap-8 lg:grid-cols-2">
+            {/* National Qualifier 2026 */}
+            <div className="relative group overflow-hidden rounded-[2.5rem] bg-neutral-900 shadow-2xl">
+              <div className="absolute inset-0">
+                <Image
+                  src="/images/ec2026/aamir-shahnawaz-1.jpg"
+                  alt="Dressage at the National Qualifier 2026"
+                  fill
+                  className="object-cover object-center transition-transform duration-1000 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/70 to-neutral-900/20"></div>
               </div>
 
-              {/* Graphical Elements / Featured Image */}
-              <div className="hidden lg:block relative">
-                <div className="absolute -inset-4 bg-brand-500/10 blur-3xl rounded-full animate-pulse"></div>
-                <div className="relative aspect-square rounded-[3rem] overflow-hidden border border-white/10 shadow-3xl">
-                   <Image
-                    src="/images/ec2026/action-2.jpg"
-                    alt="Show Jumping at the HPRC Equestrian Challenge 2026"
-                    fill
-                    className="object-cover"
-                   />
-                   <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-transparent to-transparent opacity-60"></div>
-                   <div className="absolute bottom-10 left-10 right-10 p-6 bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl">
-                     <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-400 mb-1">2nd Edition · August Season</p>
-                     <p className="text-lg font-bold text-white leading-tight">Hacks, Dressage &amp; Show Jumping</p>
-                     <p className="text-xs text-white/60 mt-1">Main Arena · Gandipet, Hyderabad</p>
-                   </div>
+              <div className="relative z-10 space-y-6 p-8 sm:p-12">
+                <div className="inline-flex items-center gap-3 rounded-full border border-emerald-400/30 bg-emerald-500/20 px-5 py-2.5 backdrop-blur-md">
+                  <span className="h-2.5 w-2.5 rounded-full bg-emerald-400"></span>
+                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-300 font-display">
+                    Results Announced
+                  </span>
                 </div>
+
+                <div className="space-y-3">
+                  <p className="text-lg font-medium text-brand-400 font-display italic tracking-wide">
+                    12 – 14 August 2026 · HPRC, Gandipet
+                  </p>
+                  <h2 className="text-[clamp(2rem,4.5vw,3.25rem)] font-extrabold leading-[1.05] text-white font-display tracking-tight">
+                    National <br /> Qualifier <span className="text-brand-300">2026</span>
+                  </h2>
+                  <p className="max-w-md text-base text-white/70 leading-relaxed font-light font-body">
+                    Dressage and Show Jumping placings across Children, Junior and Young Rider categories.
+                  </p>
+                </div>
+
+                <Link
+                  href="/events/news/nq-2026-results"
+                  className="group/btn inline-flex items-center justify-center gap-3 rounded-2xl bg-brand-500 px-8 py-4 text-base font-bold text-white shadow-2xl transition-all duration-300 hover:bg-brand-600 hover:-translate-y-1 font-display"
+                >
+                  <span>View Results</span>
+                  <svg className="h-5 w-5 transition-transform duration-300 group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </Link>
+              </div>
+            </div>
+
+            {/* HPRC Equestrian Challenge 2026 */}
+            <div className="relative group overflow-hidden rounded-[2.5rem] bg-neutral-900 shadow-2xl">
+              <div className="absolute inset-0">
+                <Image
+                  src="/images/ec2026/action-1.jpg"
+                  alt="Show Jumping action at the HPRC Equestrian Challenge 2026"
+                  fill
+                  className="object-cover object-center transition-transform duration-1000 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/70 to-neutral-900/20"></div>
+              </div>
+
+              <div className="relative z-10 space-y-6 p-8 sm:p-12">
+                <div className="inline-flex items-center gap-3 rounded-full border border-emerald-400/30 bg-emerald-500/20 px-5 py-2.5 backdrop-blur-md">
+                  <span className="h-2.5 w-2.5 rounded-full bg-emerald-400"></span>
+                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-300 font-display">
+                    Results Announced
+                  </span>
+                </div>
+
+                <div className="space-y-3">
+                  <p className="text-lg font-medium text-brand-400 font-display italic tracking-wide">
+                    14 – 16 August 2026 · HPRC, Gandipet
+                  </p>
+                  <h2 className="text-[clamp(2rem,4.5vw,3.25rem)] font-extrabold leading-[1.05] text-white font-display tracking-tight">
+                    Equestrian <br /> <span className="text-brand-300">Challenge</span> 2026
+                  </h2>
+                  <p className="max-w-md text-base text-white/70 leading-relaxed font-light font-body">
+                    Hacks, Dressage &amp; Show Jumping placings across fourteen classes at the 2nd edition.
+                  </p>
+                </div>
+
+                <Link
+                  href="/events/news/ec-aug-2026-results"
+                  className="group/btn inline-flex items-center justify-center gap-3 rounded-2xl bg-brand-500 px-8 py-4 text-base font-bold text-white shadow-2xl transition-all duration-300 hover:bg-brand-600 hover:-translate-y-1 font-display"
+                >
+                  <span>View Results</span>
+                  <svg className="h-5 w-5 transition-transform duration-300 group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </Link>
               </div>
             </div>
           </div>
