@@ -62,8 +62,9 @@ export default function NQ2026ResultsPage() {
           />
           <div className="mx-auto mt-6 max-w-3xl space-y-3 text-center text-gray-700">
             <p>
-              Dressage classes are ranked by average score across the judges — a higher percentage is better.
-              Show Jumping classes are ranked by total penalties, where a lower figure is better.
+              Results are listed as scored, not ranked. Dressage classes show the average judges&apos; score — a
+              higher percentage reflects a stronger round. Show Jumping classes show total penalties, where a lower
+              figure reflects a cleaner round.
             </p>
           </div>
         </div>
@@ -71,7 +72,7 @@ export default function NQ2026ResultsPage() {
 
       {/* Results */}
       <section className="container">
-        <ResultsBoard classes={nqResults} showPhotos={false} />
+        <ResultsBoard classes={nqResults} showPhotos={false} showRanking={false} />
       </section>
 
       {/* Closing */}

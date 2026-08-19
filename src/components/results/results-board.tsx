@@ -102,12 +102,28 @@ function PodiumCard({
   );
 }
 
+/** Plain, unranked row — no position, no medal. Used where results carry a score/penalty figure but no judged placing. */
+function ScoreRow({ cls, entry, striped }: { cls: ResultClass; entry: ResultEntry; striped: boolean }) {
+  return (
+    <tr className={`border-b border-gray-100 ${striped ? "bg-gray-50/60" : "bg-white"}`}>
+      <td className="px-5 py-3 font-semibold text-gray-900">{entry.rider}</td>
+      <td className="px-5 py-3 italic text-gray-700">{entry.horse}</td>
+      <td className="px-5 py-3 text-gray-600">{entry.club ?? "—"}</td>
+      <td className="px-5 py-3 text-gray-600">{entry.ageGroup ?? "—"}</td>
+      {cls.metric && <td className="px-5 py-3 font-medium text-gray-800">{metricValue(cls, entry)}</td>}
+    </tr>
+  );
+}
+
 export function ResultsBoard({
   classes,
   showPhotos = true,
+  showRanking = true,
 }: {
   classes: ResultClass[];
   showPhotos?: boolean;
+  /** false = plain score/penalty list, no position, medals, or podium — for classes with no judged placing. */
+  showRanking?: boolean;
 }) {
   const disciplines = useMemo(() => Array.from(new Set(classes.map((c) => c.discipline))), [classes]);
   const [active, setActive] = useState<string>("All");
@@ -135,8 +151,8 @@ export function ResultsBoard({
       </div>
 
       {visible.map((cls) => {
-        const podium = cls.entries.slice(0, 3);
-        const rest = cls.entries.slice(3);
+        const podium = showRanking ? cls.entries.slice(0, 3) : [];
+        const rest = showRanking ? cls.entries.slice(3) : cls.entries;
         const hasPrize = cls.entries.some((e) => e.prize);
 
         return (
@@ -148,54 +164,72 @@ export function ResultsBoard({
             <header className="flex flex-wrap items-baseline justify-between gap-2 bg-brand-900 px-6 py-4">
               <h2 className="text-lg font-bold tracking-wide text-white">{cls.title}</h2>
               <span className="text-sm text-brand-200">
-                {cls.entries.length} {cls.entries.length === 1 ? "placing" : "placings"}
+                {cls.entries.length} {cls.entries.length === 1 ? "result" : "results"}
               </span>
             </header>
 
             <div className="space-y-6 bg-white p-6">
-              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                {podium.map((entry, i) => (
-                  <PodiumCard
-                    key={`${entry.rider}-${entry.horse}-${i}`}
-                    cls={cls}
-                    entry={entry}
-                    index={i}
-                    showPhotos={showPhotos}
-                  />
-                ))}
-              </div>
+              {podium.length > 0 && (
+                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                  {podium.map((entry, i) => (
+                    <PodiumCard
+                      key={`${entry.rider}-${entry.horse}-${i}`}
+                      cls={cls}
+                      entry={entry}
+                      index={i}
+                      showPhotos={showPhotos}
+                    />
+                  ))}
+                </div>
+              )}
 
               {rest.length > 0 && (
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>
                       <tr className="border-b border-brand-100 bg-brand-50">
-                        <th className="w-32 px-5 py-3 text-left font-semibold text-brand-800">Position</th>
+                        {showRanking && (
+                          <th className="w-32 px-5 py-3 text-left font-semibold text-brand-800">Position</th>
+                        )}
                         <th className="px-5 py-3 text-left font-semibold text-brand-800">Rider</th>
                         <th className="px-5 py-3 text-left font-semibold text-brand-800">Horse</th>
                         <th className="px-5 py-3 text-left font-semibold text-brand-800">Club</th>
+                        {!showRanking && (
+                          <th className="px-5 py-3 text-left font-semibold text-brand-800">Age Group</th>
+                        )}
                         {cls.metric && (
                           <th className="px-5 py-3 text-left font-semibold text-brand-800">{metricLabel(cls)}</th>
                         )}
-                        {hasPrize && <th className="px-5 py-3 text-left font-semibold text-brand-800">Prize</th>}
+                        {showRanking && hasPrize && (
+                          <th className="px-5 py-3 text-left font-semibold text-brand-800">Prize</th>
+                        )}
                       </tr>
                     </thead>
                     <tbody>
-                      {rest.map((entry, i) => (
-                        <tr
-                          key={`${entry.rider}-${entry.horse}-${i}`}
-                          className={`border-b border-gray-100 ${i % 2 === 0 ? "bg-white" : "bg-gray-50/60"}`}
-                        >
-                          <td className="px-5 py-3 font-medium text-gray-800">{positionLabel(entry, i + 3)}</td>
-                          <td className="px-5 py-3 font-semibold text-gray-900">{entry.rider}</td>
-                          <td className="px-5 py-3 italic text-gray-700">{entry.horse}</td>
-                          <td className="px-5 py-3 text-gray-600">{entry.club ?? "—"}</td>
-                          {cls.metric && (
-                            <td className="px-5 py-3 font-medium text-gray-800">{metricValue(cls, entry)}</td>
-                          )}
-                          {hasPrize && <td className="px-5 py-3 text-gray-700">{entry.prize ?? "—"}</td>}
-                        </tr>
-                      ))}
+                      {rest.map((entry, i) =>
+                        showRanking ? (
+                          <tr
+                            key={`${entry.rider}-${entry.horse}-${i}`}
+                            className={`border-b border-gray-100 ${i % 2 === 0 ? "bg-white" : "bg-gray-50/60"}`}
+                          >
+                            <td className="px-5 py-3 font-medium text-gray-800">{positionLabel(entry, i + 3)}</td>
+                            <td className="px-5 py-3 font-semibold text-gray-900">{entry.rider}</td>
+                            <td className="px-5 py-3 italic text-gray-700">{entry.horse}</td>
+                            <td className="px-5 py-3 text-gray-600">{entry.club ?? "—"}</td>
+                            {cls.metric && (
+                              <td className="px-5 py-3 font-medium text-gray-800">{metricValue(cls, entry)}</td>
+                            )}
+                            {hasPrize && <td className="px-5 py-3 text-gray-700">{entry.prize ?? "—"}</td>}
+                          </tr>
+                        ) : (
+                          <ScoreRow
+                            key={`${entry.rider}-${entry.horse}-${i}`}
+                            cls={cls}
+                            entry={entry}
+                            striped={i % 2 === 1}
+                          />
+                        ),
+                      )}
                     </tbody>
                   </table>
                 </div>
