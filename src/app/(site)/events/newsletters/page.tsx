@@ -1,7 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import dynamic from "next/dynamic";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 import { PageHero } from "@/components/ui/page-hero";
@@ -17,10 +19,27 @@ const PDFFlipbookViewer = dynamic(
         <div className="text-white">Loading PDF viewer...</div>
       </div>
     ),
-  }
+  },
 );
 
+type Newsletter = {
+  title: string;
+  date: string;
+  featuredImage: string;
+  description: string;
+  /** "pdf" editions open in the flipbook viewer, "html" editions open on their own reader page. */
+  format: "pdf" | "html";
+  /** Set for PDF editions. */
+  pdfUrl?: string;
+  /** Set for HTML editions. */
+  href?: string;
+  filename?: string;
+  /** object-position for the featured image; cover scans read better anchored to the top. */
+  imagePosition?: string;
+};
+
 export default function NewslettersPage() {
+  const router = useRouter();
   const [selectedNewsletter, setSelectedNewsletter] = useState<{
     title: string;
     pdfUrl: string;
@@ -28,8 +47,19 @@ export default function NewslettersPage() {
 
   // Newsletter data from source page https://hprc.in/newsletters.html
   // Featured images mapped to each newsletter
-  const newsletters = [
+  const newsletters: Newsletter[] = [
     {
+      title: "HOOFBEATS Vol-02 — National Qualifier & 2nd HPRC Equestrian Challenge",
+      date: "August 2026",
+      format: "html",
+      href: "/events/newsletters/hoofbeats-vol-02-august-2026",
+      featuredImage: "/documents/newsletters/images/hoofbeats-vol-02.png",
+      imagePosition: "object-top",
+      description:
+        "Five days, two events, one arena — the National Qualifier 2026 with TSEA under the aegis of the EFI, followed by the 2nd HPRC Equestrian Challenge across 15 classes at Aziznagar, Gandipet.",
+    },
+    {
+      format: "pdf",
       filename: "NATIONAL-EQUESTRIAN-CHAMPIONSHIP-2016.pdf",
       title: "NATIONAL EQUESTRIAN CHAMPIONSHIP 2016",
       date: "2016",
@@ -39,6 +69,7 @@ export default function NewslettersPage() {
         "Comprehensive coverage of the National Equestrian Championship 2016, featuring competition results, highlights, and achievements.",
     },
     {
+      format: "pdf",
       filename: "4th-HYDERABAD-HORSE-SHOW-OCTOBER-2015-EDITION.pdf",
       title: "4th HYDERABAD HORSE SHOW OCTOBER 2015 EDITION",
       date: "October 2015",
@@ -48,6 +79,7 @@ export default function NewslettersPage() {
         "The 4th edition of the Hyderabad Horse Show held in October 2015, showcasing equestrian excellence and competition highlights.",
     },
     {
+      format: "pdf",
       filename: "HPRC-NEWSLETTER-18th-MAY-2015-EDITION.pdf",
       title: "HPRC NEWSLETTER 18th MAY 2015 EDITION",
       date: "May 2015",
@@ -57,6 +89,7 @@ export default function NewslettersPage() {
         "Monthly newsletter from May 2015 featuring club events, member achievements, and upcoming tournaments.",
     },
     {
+      format: "pdf",
       filename: "HPRC-NEWSLETTER-20th-MARCH-2015-EDITION.pdf",
       title: "HPRC NEWSLETTER 20th MARCH 2015 EDITION",
       date: "March 2015",
@@ -66,6 +99,7 @@ export default function NewslettersPage() {
         "March 2015 newsletter covering club activities, equestrian events, and member updates.",
     },
     {
+      format: "pdf",
       filename: "EQUESTRIAN-ESSENTIALITY-JANUARY-2015-EDITION.pdf",
       title: "EQUESTRIAN ESSENTIALITY JANUARY 2015 EDITION",
       date: "January 2015",
@@ -75,6 +109,7 @@ export default function NewslettersPage() {
         "January 2015 edition focusing on essential equestrian updates, training programs, and competition announcements.",
     },
     {
+      format: "pdf",
       filename: "THE-FIRST-HYDERABAD-HORSE-SHOW-DECEMBER-2014-EDITION.pdf",
       title: "THE FIRST HYDERABAD HORSE SHOW DECEMBER 2014 EDITION",
       date: "December 2014",
@@ -85,11 +120,17 @@ export default function NewslettersPage() {
     },
   ];
 
-  const handleOpenFlipbook = (newsletter: (typeof newsletters)[0]) => {
-    setSelectedNewsletter({
-      title: newsletter.title,
-      pdfUrl: newsletter.pdfUrl,
-    });
+  const handleOpenNewsletter = (newsletter: Newsletter) => {
+    if (newsletter.format === "html") {
+      if (newsletter.href) router.push(newsletter.href);
+      return;
+    }
+    if (newsletter.pdfUrl) {
+      setSelectedNewsletter({
+        title: newsletter.title,
+        pdfUrl: newsletter.pdfUrl,
+      });
+    }
   };
 
   return (
@@ -99,7 +140,7 @@ export default function NewslettersPage() {
           <PageHero
             eyebrow="Media"
             title="Newsletters"
-            description="Monthly recaps, highlights, and member updates from HPRC spanning 2014-2016."
+            description="Hoofbeats and the HPRC newsletter archive — event recaps, results, and member updates from 2014 to today."
             actions={[{ label: "Subscribe", href: "/contact", variant: "primary" }]}
             backgroundImage="/hero-horse.png"
           />
@@ -109,7 +150,7 @@ export default function NewslettersPage() {
           <SectionHeading
             eyebrow="Newsletter Archive"
             title="HPRC Newsletters"
-            description="Browse through past newsletter editions, view in flipbook format, and stay informed about equestrian events and club activities."
+            description="Read the latest Hoofbeats edition online, or browse past newsletters in flipbook format."
             align="left"
           />
 
@@ -119,7 +160,7 @@ export default function NewslettersPage() {
               <div
                 key={index}
                 className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white hover:shadow-xl transition-all duration-300 cursor-pointer"
-                onClick={() => handleOpenFlipbook(newsletter)}
+                onClick={() => handleOpenNewsletter(newsletter)}
               >
                 {/* Featured Image */}
                 <div className="relative h-48 overflow-hidden">
@@ -127,10 +168,18 @@ export default function NewslettersPage() {
                     src={newsletter.featuredImage}
                     alt={newsletter.title}
                     fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    className={`object-cover transition-transform duration-500 group-hover:scale-110 ${
+                      newsletter.imagePosition ?? ""
+                    }`}
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+
+                  {index === 0 && (
+                    <span className="absolute left-4 top-4 rounded-full bg-brand-500 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white shadow-sm">
+                      Latest issue
+                    </span>
+                  )}
 
                   {/* Overlay Icon */}
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -163,29 +212,57 @@ export default function NewslettersPage() {
                   )}
 
                   {/* View Button */}
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleOpenFlipbook(newsletter);
-                    }}
-                    className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-semibold rounded-lg bg-brand-500 text-white hover:bg-brand-600 cursor-pointer transition-colors w-full justify-center"
-                  >
-                    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                      />
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                      />
-                    </svg>
-                    <span>View in Flipbook</span>
-                  </button>
+                  {newsletter.format === "html" && newsletter.href ? (
+                    <Link
+                      href={newsletter.href}
+                      onClick={(e) => e.stopPropagation()}
+                      className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-semibold rounded-lg bg-brand-500 text-white hover:bg-brand-600 cursor-pointer transition-colors w-full justify-center"
+                    >
+                      <svg
+                        className="h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                        />
+                      </svg>
+                      <span>Read the edition</span>
+                    </Link>
+                  ) : (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleOpenNewsletter(newsletter);
+                      }}
+                      className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-semibold rounded-lg bg-brand-500 text-white hover:bg-brand-600 cursor-pointer transition-colors w-full justify-center"
+                    >
+                      <svg
+                        className="h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                        />
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                        />
+                      </svg>
+                      <span>View in Flipbook</span>
+                    </button>
+                  )}
                 </div>
               </div>
             ))}
@@ -210,13 +287,13 @@ export default function NewslettersPage() {
                 />
               </svg>
               <span className="text-sm font-semibold text-gray-700">
-                All newsletters are archived from 2014-2016 with featured images and flipbook
-                viewing.
+                Current editions are published as readable web pages; the 2014-2016 archive is
+                available as flipbooks.
               </span>
             </div>
             <p className="text-sm text-gray-600">
-              Click on any newsletter card to open it in an interactive flipbook viewer. Navigate
-              through pages, zoom, and download directly from the viewer.
+              Click the latest Hoofbeats to read it page by page in your browser. Older editions
+              open in an interactive flipbook viewer where you can navigate, zoom, and download.
             </p>
           </div>
         </section>
