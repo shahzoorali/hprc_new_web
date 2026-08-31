@@ -3,7 +3,8 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-// Posts to the logout route then sends the user back to the login page.
+// Ends the Payload session and returns to the CMS login. Payload's REST API is
+// mounted at /cms-api (not the default /api) — see payload.config.ts.
 export function LogoutButton() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -11,7 +12,10 @@ export function LogoutButton() {
   async function handleLogout() {
     setLoading(true);
     try {
-      await fetch("/api/admin/logout", { method: "POST" });
+      await fetch("/cms-api/users/logout", {
+        method: "POST",
+        credentials: "include",
+      });
       router.push("/admin/login");
       router.refresh();
     } finally {

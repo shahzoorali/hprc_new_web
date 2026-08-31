@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { eventsContent } from "@/content/events";
+import { getNewsArticles } from "@/lib/news";
 
-export default function NewsPage() {
-  const featuredArticle = eventsContent.news[0];
-  const otherArticles = eventsContent.news.slice(1);
+export default async function NewsPage() {
+  const news = await getNewsArticles();
+  const featuredArticle = news[0];
+  const otherArticles = news.slice(1);
 
   return (
     <div className="bg-slate-50 min-h-screen">
@@ -190,7 +191,7 @@ export default function NewsPage() {
               <p className="text-slate-600">Latest updates from HPRC</p>
             </div>
             <div className="hidden sm:flex items-center gap-2">
-              <span className="text-sm text-slate-500">{eventsContent.news.length} articles</span>
+              <span className="text-sm text-slate-500">{news.length} articles</span>
             </div>
           </div>
 

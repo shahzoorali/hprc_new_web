@@ -46,3 +46,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 admin-users.json
+
+# claude code local tooling
+.claude/

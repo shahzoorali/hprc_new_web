@@ -4,8 +4,10 @@ import Link from "next/link";
 import { PageHero } from "@/components/ui/page-hero";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { eventsContent } from "@/content/events";
+import { getNewsArticles } from "@/lib/news";
 
-export default function EventsPage() {
+export default async function EventsPage() {
+  const newsArticles = await getNewsArticles(3);
   return (
     <div className="space-y-12 sm:space-y-16 pb-12 sm:pb-16">
       <div className="container pt-12">
@@ -243,7 +245,7 @@ export default function EventsPage() {
       </section>
 
       {/* Latest News Section */}
-      {eventsContent.news && eventsContent.news.length > 0 && (
+      {newsArticles.length > 0 && (
         <section className="container space-y-6 sm:space-y-8">
           <SectionHeading
             eyebrow="The Press"
@@ -251,7 +253,7 @@ export default function EventsPage() {
             description="Recent coverage and press releases about HPRC tournaments, achievements, and events."
           />
           <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-            {eventsContent.news.slice(0, 3).map((article, index) => {
+            {newsArticles.map((article, index) => {
               // Use image from source article, fallback to stock image if not available
               const imageUrl =
                 article.imageUrl ||

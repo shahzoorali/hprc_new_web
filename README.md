@@ -54,20 +54,22 @@ A modern, responsive Next.js website for the Hyderabad Polo & Riding Club (HPRC)
 ```
 hprc_new_web/
 ├── src/
-│   ├── app/              # Next.js App Router pages
-│   │   ├── (site)/       # Main site pages
-│   │   │   ├── about/    # About section pages
-│   │   │   ├── events/   # Events & Media pages
-│   │   │   ├── membership/ # Membership pages
-│   │   │   └── ...
-│   │   ├── layout.tsx    # Root layout
+│   ├── app/              # Next.js App Router — THREE root layouts, no app/layout.tsx
+│   │   ├── (site)/       # Public site + its root layout (html/body/fonts)
+│   │   ├── (payload)/    # Payload CMS admin + /cms-api
+│   │   ├── (manage)/     # Registrations dashboard (/admin/registrations)
+│   │   ├── api/admin/    # CSV export + document proxies to PHP
 │   │   └── globals.css   # Global styles
+│   ├── collections/      # Payload collections (News, BlogPosts, Media, Users)
+│   ├── blocks/           # Payload block definitions
+│   ├── hooks/            # Payload hooks (cache revalidation)
 │   ├── components/       # Reusable React components
+│   │   ├── blocks/       # Renderers for CMS blocks
 │   │   ├── layout/       # Layout components (Header, Footer)
-│   │   ├── navigation/   # Navigation components
 │   │   └── ui/           # UI components (Hero, Cards, etc.)
-│   ├── content/          # Content/data layer
-│   └── config/           # Configuration files
+│   ├── content/          # Legacy content layer — shrinking as phases land
+│   ├── payload.config.ts # CMS config
+│   └── config/           # Site configuration
 ├── public/               # Static assets
 ├── docs/                 # Documentation
 └── ...
@@ -95,9 +97,11 @@ Edit `src/config/site.ts` to update:
 
 ### Content Management
 
-Content is managed in TypeScript files under `src/content/`:
+News and blog posts are managed in the CMS at `/admin` — do not edit them in
+code. The files below are what is *left* in `src/content/`, and each shrinks as
+its migration phase lands:
 - `about.ts` - About section content
-- `events.ts` - Events and media content
+- `events.ts` - Events and media content (its `news[]` array is now unused — the CMS owns news)
 - `home.ts` - Homepage content
 - `hospitality.ts` - Hospitality venues and services
 - `membership.ts` - Membership information
@@ -112,48 +116,124 @@ Create a `.env.local` file (see `.env.example`) for:
 - `NEXT_PUBLIC_SITE_NAME` - Site name
 - Other environment-specific settings
 
-## 🔐 Admin Dashboard (`/admin`)
+## 🗂️ CMS — Payload 3 (`/admin`)
+
+> **Status:** phases 0–1 complete on branch `feat/payload-cms`; **not yet deployed**.
+> Production still runs the pre-CMS site. News, blog posts and the registrations
+> dashboard are CMS-backed locally.
+
+The site is migrating to [Payload CMS 3](https://payloadcms.com), installed *into*
+this Next.js app rather than run as a separate service — same repo, same `pm2`
+process, same domain. Server components read MongoDB in-process via Payload's
+Local API, so there is no HTTP hop between a page and its content.
+
+**Content database:** MongoDB Atlas (`hprc_cms`), ap-south-1 — same region as the
+EC2 box, ~6 ms away. Deliberately separate from the MySQL that the PHP payment
+app uses; the two never share a database.
+
+### Four things that are easy to break
+
+1. **The package is ESM** (`"type": "module"` in `package.json`). Payload's CLI
+   fails with `ERR_REQUIRE_ASYNC_MODULE` without it. Any new plain-CommonJS file
+   must be named `.cjs` (see `scripts/generate-favicon.cjs`).
+
+2. **There are TWO root layouts, and there must be no `src/app/layout.tsx`.**
+   `(site)/layout.tsx` renders the public site; `(payload)/layout.tsx` renders the
+   CMS. Re-adding a root layout puts Payload's `<html>` inside the site's `<html>`,
+   which blanks the admin with a hydration error.
+
+3. **Payload's REST API is at `/cms-api`, not the default `/api`** — the default
+   catch-all would swallow this app's own `/api/admin/*` route handlers.
+
+4. **Versions are pinned deliberately.** `@payloadcms/next@3.88.0` requires
+   `next >= 16.2.6`, and this app is on exactly 16.2.6. Upgrade Next, React and
+   Payload together, never one alone.
+
+### Working with the CMS
+
+```bash
+npm run dev                  # CMS at /admin, site at /
+npm run generate:types       # regenerate src/payload-types.ts after schema edits
+npm run generate:importmap   # re-run after adding custom admin components
+```
+
+Collections live in `src/collections/`, config in `src/payload.config.ts`.
+Uploads land in `public/uploads`. Pre-existing assets under `public/documents`
+and `public/images` keep their paths and are **not** managed by the media library.
+
+### Backups — required, not optional
+
+Atlas **shared tiers (M0/M2/M5) get no automated snapshots**. Before the CMS, all
+content was versioned in git and recoverable forever; afterwards,
+`scripts/backup-mongo.sh` is the safety net. It is installed on the EC2 box
+(`mongodump` via `mongodb-database-tools`) and should run nightly from cron:
+
+```
+30 2 * * * /home/ubuntu/shahzoor/hprc.in/scripts/backup-mongo.sh >> /var/log/hprc-mongo-backup.log 2>&1
+```
+
+Set `BACKUP_S3_URI` so copies leave the box — a backup stored beside the app is
+not a backup. Restore-test it before relying on it.
+
+## 🔐 Registrations dashboard (`/admin/registrations`)
 
 A protected, read-only dashboard to review registrations for the open events
-(National Qualifier 2026 and the 2nd Equestrian Challenge — August). The UI is
-in Next.js; data is served by thin PHP JSON endpoints under
-`payment/api/admin/` that read the existing MySQL tables and uploaded
-documents. The Next.js server calls PHP server-to-server with a shared token, so
-the browser never sees the secret and the DB/uploads stay behind PHP.
+(National Qualifier 2026 and the 2nd Equestrian Challenge — August). Data is
+served by thin PHP JSON endpoints under `payment/api/admin/` that read the
+existing MySQL tables and uploaded documents. The Next.js server calls PHP
+server-to-server with a shared token, so the browser never sees the secret and
+the DB/uploads stay behind PHP. **That data path is unchanged by the CMS.**
 
-**URL:** `https://hprc.in/admin`
+What did change:
 
-### Environment variables
+- It moved from `/admin` to `/admin/registrations`, because Payload now owns
+  `/admin`. It lives in its own route group, `src/app/(manage)/`, with its own
+  root layout — that is why it still uses the site's Tailwind styling rather
+  than Payload's admin CSS. Next resolves its static segments ahead of Payload's
+  `[[...segments]]` catch-all, so the two coexist. A link into it appears in the
+  Payload sidebar (`admin.components.afterNavLinks`).
+- Login is now Payload's. Sign in once at `/admin` and the dashboard is
+  authenticated too — `src/lib/cms-auth.ts` reads the Payload session.
+- The CSV export and document proxies moved to `/api/admin/export` and
+  `/api/admin/document` (out of `/admin`, which is Payload's) and return 401
+  without a Payload session.
 
-All server-only — never use a `NEXT_PUBLIC_` prefix. Set in `.env.production.local`
-on the EC2 server (never commit this file).
+**Retired with it:** `ADMIN_PASSWORD`, `ADMIN_SESSION_SECRET`, `admin-users.json`,
+`scripts/add-admin-user.mjs`, `src/lib/admin-{auth,session}.ts`,
+`src/middleware.ts` and the `/api/admin/{login,logout}` routes. `ADMIN_API_TOKEN`
+and `PAYMENT_API_BASE` are still required — they are the PHP hop.
 
-| Variable | Purpose | Production value |
+## 📰 Migrated content (phase 1)
+
+| Collection | Source it replaced | Count |
 | --- | --- | --- |
-| `ADMIN_PASSWORD` | Password for the `/admin` login form | `3v***************` |
-| `ADMIN_SESSION_SECRET` | Signs the `admin_session` JWT (64-char hex) | `c0e8***...***143b5` |
-| `ADMIN_API_TOKEN` | Shared token between Next.js and PHP — must match on both sides | `6a95***...***417d` |
-| `PAYMENT_API_BASE` | PHP app base URL | `https://hprc.in/payment` |
+| `news` | `content/events.ts` → `news[]`, plus the news index/homepage/events strips | 23 |
+| `blog-posts` | the `blogPosts` array duplicated in `events/blogs/page.tsx` and `events/blogs/[slug]/page.tsx` | 3 |
 
-### EC2 server config (already done — do not redo)
+Two notes on fidelity:
 
-- **`.env.production.local`** — written to `/home/ubuntu/shahzoor/hprc.in/` (mode 600)
-- **nginx** — `fastcgi_param HTTP_X_ADMIN_TOKEN` added to PHP location block in
-  `/etc/nginx/sites-enabled/hprc.ravist.in`
-- **PHP-FPM** — `env[ADMIN_API_TOKEN]` added to `/etc/php/8.4/fpm/pool.d/www.conf`
-  so `getenv('ADMIN_API_TOKEN')` works in PHP scripts
+- **Dates.** The hand-written date strings were inconsistent (`2024`,
+  `18 August, 2026`, `October 6, 2024`) and printed verbatim. Every original
+  string is preserved in `dateLabel`; `publishedDate` carries a parsed date used
+  only for ordering. Nothing on the page changed.
+- **Order.** The old `news[]` array was hand-curated, not date-sorted (it had
+  30 Jan before 31 Jan). Sorting by date alone would have changed the lead story,
+  so a `featured` checkbox pins it. Same for the blog index.
 
-If you ever rotate the token, update **all three** of the above and reload nginx + php8.4-fpm.
+The 19 hand-built pages under `events/news/*` are **still served from code** —
+they are static routes and Next resolves them ahead of the new
+`events/news/[slug]` CMS route. That route serves brand-new articles written in
+the CMS today, and each old page can be deleted individually as its body is
+migrated, with no big-bang cutover. Three of them
+(`nq-2026-results`, `ec-aug-2026-results`, `ec2026-results-*`) are really results
+pages driven by `content/results-*.ts` and belong to phase 3, not news.
 
-### Local development
+### Publishing invalidates the cache
 
-Run both servers with `npm run dev:all` (Next on :3000, PHP on :8000), with the
-four vars set in `.env.local` (see `.env.example`). For the PHP server to see the
-token, start it as:
-
-```powershell
-$env:ADMIN_API_TOKEN = "test"; npm run dev:php
-```
+`src/hooks/revalidate.ts` calls `revalidatePath` after a save. Note that
+`revalidatePath` throws outside a Next request context (seed scripts, cron,
+`payload run`), so every call is wrapped — a failed revalidation must never
+abort an editor's save.
 
 ## 🚢 Deployment
 

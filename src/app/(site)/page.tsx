@@ -10,6 +10,7 @@ import React from "react";
 import { CountryBadge } from "@/components/ui/country-badge";
 import { HeroVideo } from "@/components/ui/hero-video";
 import { eventsContent } from "@/content/events";
+import { getNewsArticles } from "@/lib/news";
 import { homeContent } from "@/content/home";
 import { worldArenaPoloChampionship2026 } from "@/content/world-arena-polo-championship-2026";
 
@@ -24,7 +25,8 @@ const countryFlagComponents: Record<
   LUX: LU,
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+  const newsArticles = await getNewsArticles(3);
   const heroSlide = homeContent.heroSlides[0];
   const featuredEvent = worldArenaPoloChampionship2026;
 
@@ -441,7 +443,7 @@ export default function HomePage() {
       </section>
 
       {/* News Section - Refined Design */}
-      {eventsContent.news && eventsContent.news.length > 0 && (
+      {newsArticles.length > 0 && (
         <section
           className="bg-gradient-elegant py-16 sm:py-20 lg:py-28 lg:py-32"
           aria-labelledby="news-heading"
@@ -460,7 +462,7 @@ export default function HomePage() {
               </p>
             </div>
             <div className="mt-8 sm:mt-12 lg:mt-16 grid gap-4 sm:gap-6 lg:gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-              {eventsContent.news.slice(0, 3).map((article, index) => {
+              {newsArticles.map((article, index) => {
                 const imageUrl =
                   article.imageUrl ||
                   "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=600&q=80";

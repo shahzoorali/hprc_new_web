@@ -2,231 +2,30 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { RenderBlocks } from "@/components/blocks/render-blocks";
+import { getBlogPostBySlug, getBlogSlugs, getBlogSummaries, toBlogSummary } from "@/lib/blogs";
+
 // Blog posts data - same as in the main blogs page
-const blogPosts = [
-  {
-    id: "health-benefits-horse-riding",
-    title: "Health Benefits of Horse Riding That You Did Not Know",
-    excerpt:
-      "Discover the surprising physical and mental health benefits of horse riding. From improved core strength to stress relief, equestrian activities offer a unique full-body workout that benefits riders of all ages.",
-    image: "/hero-horse.png",
-    category: "Health & Wellness",
-    readTime: "5 min read",
-    date: "December 15, 2024",
-    author: "HPRC Team",
-    content: `
-      <p>Horse riding is not just a recreational activity or a sport; it's a comprehensive workout that offers numerous health benefits. Whether you're a beginner or an experienced rider, spending time in the saddle can significantly improve your physical and mental well-being.</p>
-
-      <h2>Physical Health Benefits</h2>
-      
-      <h3>1. Core Strength and Stability</h3>
-      <p>Maintaining balance while riding requires constant engagement of your core muscles. The natural movement of the horse challenges your abdominal and back muscles, leading to improved core strength and stability over time.</p>
-      
-      <h3>2. Improved Posture</h3>
-      <p>Proper riding technique demands good posture. Riders must sit tall with shoulders back and spine aligned. This constant attention to posture during riding sessions translates to better posture in daily life.</p>
-      
-      <h3>3. Cardiovascular Exercise</h3>
-      <p>While it may not seem like traditional cardio, horse riding elevates your heart rate, especially during trotting and cantering. A 45-minute ride can burn between 200-400 calories depending on the intensity.</p>
-      
-      <h3>4. Muscle Toning</h3>
-      <p>Riding engages multiple muscle groups including:</p>
-      <ul>
-        <li>Inner thighs and hip flexors</li>
-        <li>Calf muscles</li>
-        <li>Arm and shoulder muscles</li>
-        <li>Back muscles</li>
-      </ul>
-      
-      <h3>5. Improved Coordination and Balance</h3>
-      <p>Coordinating your body movements with the horse's motion develops exceptional balance and coordination skills that benefit other areas of life.</p>
-
-      <h2>Mental Health Benefits</h2>
-      
-      <h3>1. Stress Relief</h3>
-      <p>The rhythmic motion of riding and the connection with the horse has a calming effect. Many riders report feeling more relaxed and less stressed after a riding session.</p>
-      
-      <h3>2. Increased Confidence</h3>
-      <p>Learning to control and communicate with a large animal builds confidence. Each milestone achieved in riding contributes to improved self-esteem.</p>
-      
-      <h3>3. Mindfulness and Focus</h3>
-      <p>Riding requires complete attention to the present moment. This natural mindfulness practice helps clear the mind and improve concentration.</p>
-      
-      <h3>4. Social Connection</h3>
-      <p>Riding communities provide opportunities for social interaction and building friendships with like-minded individuals.</p>
-
-      <h2>Getting Started</h2>
-      <p>If you're interested in experiencing these benefits, consider starting with beginner riding lessons at HPRC. Our experienced instructors will guide you through the basics while ensuring your safety and comfort.</p>
-      
-      <p>Remember, consistency is key. Regular riding sessions will help you maximize these health benefits while developing a rewarding relationship with horses.</p>
-    `,
-  },
-  {
-    id: "exercises-correct-horse-riding",
-    title: "Exercises for Correct Horse Riding",
-    excerpt:
-      "Master the art of horse riding with these essential exercises designed to improve your posture, balance, and riding technique. Perfect for beginners and intermediate riders looking to enhance their skills.",
-    image: "/hero-horse.png",
-    category: "Training Tips",
-    readTime: "7 min read",
-    date: "November 28, 2024",
-    author: "HPRC Training Team",
-    content: `
-      <p>Proper technique is the foundation of good horse riding. Whether you're just starting out or looking to refine your skills, these exercises will help you develop the strength, flexibility, and body awareness needed for correct riding form.</p>
-
-      <h2>Off-Horse Exercises</h2>
-      
-      <h3>1. Core Strengthening</h3>
-      <p>A strong core is essential for maintaining balance and stability in the saddle.</p>
-      <ul>
-        <li><strong>Planks:</strong> Hold for 30-60 seconds, focusing on keeping your body in a straight line</li>
-        <li><strong>Dead Bugs:</strong> Lie on your back and alternate extending opposite arm and leg</li>
-        <li><strong>Bird Dogs:</strong> On hands and knees, extend opposite arm and leg while maintaining balance</li>
-      </ul>
-      
-      <h3>2. Hip Flexibility</h3>
-      <p>Flexible hips allow for better leg position and communication with your horse.</p>
-      <ul>
-        <li><strong>Hip Circles:</strong> Stand on one leg and rotate the other hip in circles</li>
-        <li><strong>Butterfly Stretch:</strong> Sit with soles of feet together, gently pressing knees toward the ground</li>
-        <li><strong>Pigeon Pose:</strong> A yoga pose that deeply stretches the hip flexors</li>
-      </ul>
-      
-      <h3>3. Leg Strength</h3>
-      <p>Strong legs help maintain proper position and give clear aids to your horse.</p>
-      <ul>
-        <li><strong>Squats:</strong> Focus on keeping weight in your heels</li>
-        <li><strong>Lunges:</strong> Step forward and lower your back knee toward the ground</li>
-        <li><strong>Calf Raises:</strong> Rise up on your toes, then lower slowly</li>
-      </ul>
-
-      <h2>Mounted Exercises</h2>
-      
-      <h3>1. Two-Point Position</h3>
-      <p>Practice rising out of the saddle while maintaining balance. This strengthens your legs and improves your seat.</p>
-      
-      <h3>2. No-Stirrup Work</h3>
-      <p>Riding without stirrups develops a deeper seat and better balance. Start at the walk and progress to trot as you become more confident.</p>
-      
-      <h3>3. Arm Circles</h3>
-      <p>While walking, extend your arms and make slow circles. This improves upper body independence and balance.</p>
-      
-      <h3>4. Eyes Closed Exercise</h3>
-      <p>At a halt or walk, close your eyes briefly to focus on feeling the horse's movement. This develops body awareness and balance.</p>
-
-      <h2>Breathing Exercises</h2>
-      <p>Proper breathing helps you stay relaxed and connected with your horse:</p>
-      <ul>
-        <li>Practice deep belly breathing before mounting</li>
-        <li>Exhale during transitions to stay soft and relaxed</li>
-        <li>Maintain steady breathing during all gaits</li>
-      </ul>
-
-      <h2>Practice Tips</h2>
-      <ul>
-        <li>Warm up before every ride with stretching</li>
-        <li>Practice off-horse exercises 3-4 times per week</li>
-        <li>Focus on one skill at a time during riding sessions</li>
-        <li>Ask your instructor for feedback on your position</li>
-      </ul>
-
-      <p>Consistent practice of these exercises will lead to noticeable improvements in your riding. Remember, good riding is a journey, not a destination!</p>
-    `,
-  },
-  {
-    id: "5-tips-mentally-prepared-equestrian-competition",
-    title: "5 Tips on Being Mentally Prepared For Any Equestrian Competition",
-    excerpt:
-      "Competition day can be nerve-wracking. Learn proven mental preparation techniques used by professional equestrians to stay calm, focused, and perform at your best when it matters most.",
-    image: "/hero-horse.png",
-    category: "Competition",
-    readTime: "6 min read",
-    date: "October 10, 2024",
-    author: "HPRC Competition Team",
-    content: `
-      <p>Competition day can bring a mix of excitement and anxiety. Whether you're competing in show jumping, dressage, polo, or any other equestrian discipline, mental preparation is just as important as physical training. Here are five proven strategies to help you perform at your best.</p>
-
-      <h2>1. Visualize Success</h2>
-      <p>Visualization is a powerful tool used by elite athletes across all sports. Before the competition:</p>
-      <ul>
-        <li>Find a quiet space and close your eyes</li>
-        <li>Imagine yourself riding the course or test perfectly</li>
-        <li>Include all sensory details - the feel of the reins, the rhythm of your horse, the sounds around you</li>
-        <li>Visualize handling unexpected situations calmly</li>
-        <li>End with seeing yourself completing your ride successfully</li>
-      </ul>
-      <p>Practice this visualization daily in the weeks leading up to competition.</p>
-
-      <h2>2. Develop a Pre-Competition Routine</h2>
-      <p>A consistent routine helps signal to your mind and body that it's time to perform. Your routine might include:</p>
-      <ul>
-        <li>A specific warm-up sequence</li>
-        <li>Listening to particular music</li>
-        <li>Positive self-talk or affirmations</li>
-        <li>Breathing exercises</li>
-        <li>A final equipment check</li>
-      </ul>
-      <p>The key is consistency - do the same routine before every competition so it becomes automatic.</p>
-
-      <h2>3. Control What You Can Control</h2>
-      <p>Competition brings many variables beyond your control - weather, other competitors, judging. Focus your energy on what you CAN control:</p>
-      <ul>
-        <li>Your preparation and training</li>
-        <li>Your horse's care and warm-up</li>
-        <li>Your attitude and mindset</li>
-        <li>Your breathing and relaxation</li>
-        <li>Your reaction to challenges</li>
-      </ul>
-      <p>Let go of everything else. Worrying about uncontrollable factors only drains your mental energy.</p>
-
-      <h2>4. Use Positive Self-Talk</h2>
-      <p>The way you talk to yourself matters. Replace negative thoughts with positive ones:</p>
-      <ul>
-        <li>Instead of "Don't mess up" → "I am prepared and capable"</li>
-        <li>Instead of "Everyone is watching" → "I'm focused on my ride"</li>
-        <li>Instead of "What if I fail?" → "I trust my training"</li>
-        <li>Instead of "I'm so nervous" → "I'm excited and ready"</li>
-      </ul>
-      <p>Create personal affirmations that resonate with you and repeat them regularly.</p>
-
-      <h2>5. Embrace Nervous Energy</h2>
-      <p>Nervousness before competition is normal and can actually enhance performance when channeled correctly:</p>
-      <ul>
-        <li>Recognize that butterflies mean you care about your performance</li>
-        <li>Use deep breathing to manage intense anxiety (4 counts in, 4 counts hold, 4 counts out)</li>
-        <li>Channel nervous energy into focus and alertness</li>
-        <li>Remember that your horse can sense your emotions - staying calm helps them stay calm too</li>
-      </ul>
-
-      <h2>Bonus Tips</h2>
-      <ul>
-        <li><strong>Get adequate sleep</strong> in the days before competition</li>
-        <li><strong>Eat properly</strong> - don't skip meals or try new foods on competition day</li>
-        <li><strong>Arrive early</strong> to avoid rushing and added stress</li>
-        <li><strong>Have a support system</strong> - bring someone who helps you stay calm</li>
-        <li><strong>Learn from every competition</strong> - win or lose, there's always something to improve</li>
-      </ul>
-
-      <p>Remember, mental preparation is a skill that improves with practice. Start implementing these strategies in your training sessions so they become second nature by competition day. Good luck!</p>
-    `,
-  },
-];
+// Blog content now comes from the CMS — see src/lib/blogs.ts
 
 export async function generateStaticParams() {
-  return blogPosts.map((post) => ({
-    slug: post.id,
-  }));
+  const slugs = await getBlogSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export default async function BlogArticlePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const post = blogPosts.find((p) => p.id === slug);
+  const doc = await getBlogPostBySlug(slug);
 
-  if (!post) {
+  if (!doc) {
     notFound();
   }
 
+  // Header fields in the same shape the markup below already expects.
+  const post = toBlogSummary(doc);
+
   // Find related posts (other posts in different categories)
-  const relatedPosts = blogPosts.filter((p) => p.id !== post.id).slice(0, 2);
+  const relatedPosts = (await getBlogSummaries()).filter((p) => p.id !== post.id).slice(0, 2);
 
   return (
     <div className="min-h-screen bg-[#faf9f7]">
@@ -295,8 +94,9 @@ export default async function BlogArticlePage({ params }: { params: Promise<{ sl
                 prose-li:text-gray-600
                 prose-strong:text-gray-900
                 prose-ul:my-4 prose-li:my-1"
-              dangerouslySetInnerHTML={{ __html: post.content }}
-            />
+            >
+              <RenderBlocks blocks={doc.body} />
+            </div>
 
             {/* Share Section */}
             <div className="mt-12 pt-8 border-t border-gray-200">

@@ -16,6 +16,9 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
     // Ignore script files (Node.js scripts, not part of the app)
     "scripts/**",
+    // Payload generates these — never hand-edited, so don't lint them.
+    "src/app/(payload)/admin/importMap.js",
+    "src/payload-types.ts",
   ]),
 ]);
 

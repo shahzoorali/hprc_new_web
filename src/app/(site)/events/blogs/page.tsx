@@ -1,52 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
 
-// Blog posts from HPRC - https://hprc.in/blogs.html
-const blogPosts = [
-  {
-    id: "health-benefits-horse-riding",
-    title: "Health Benefits of Horse Riding That You Did Not Know",
-    excerpt:
-      "Discover the surprising physical and mental health benefits of horse riding. From improved core strength to stress relief, equestrian activities offer a unique full-body workout that benefits riders of all ages.",
-    image: "/hero-horse.png",
-    category: "Health & Wellness",
-    readTime: "5 min read",
-    date: "December 15, 2024",
-    featured: true,
-  },
-  {
-    id: "exercises-correct-horse-riding",
-    title: "Exercises for Correct Horse Riding",
-    excerpt:
-      "Master the art of horse riding with these essential exercises designed to improve your posture, balance, and riding technique. Perfect for beginners and intermediate riders looking to enhance their skills.",
-    image: "/hero-horse.png",
-    category: "Training Tips",
-    readTime: "7 min read",
-    date: "November 28, 2024",
-    featured: false,
-  },
-  {
-    id: "5-tips-mentally-prepared-equestrian-competition",
-    title: "5 Tips on Being Mentally Prepared For Any Equestrian Competition",
-    excerpt:
-      "Competition day can be nerve-wracking. Learn proven mental preparation techniques used by professional equestrians to stay calm, focused, and perform at your best when it matters most.",
-    image: "/hero-horse.png",
-    category: "Competition",
-    readTime: "6 min read",
-    date: "October 10, 2024",
-    featured: false,
-  },
-];
+import { getBlogSummaries } from "@/lib/blogs";
+
+// Blog posts now come from the CMS — see src/lib/blogs.ts
 
 // Categories for filtering
 const categories = [
-  { id: "all", name: "All Posts", count: blogPosts.length },
+  { id: "all", name: "All Posts", count: 0 },
   { id: "health", name: "Health & Wellness", count: 1 },
   { id: "training", name: "Training Tips", count: 1 },
   { id: "competition", name: "Competition", count: 1 },
 ];
 
-export default function BlogsPage() {
+export default async function BlogsPage() {
+  const blogPosts = await getBlogSummaries();
   const featuredPost = blogPosts.find((post) => post.featured);
   const regularPosts = blogPosts.filter((post) => !post.featured);
 
