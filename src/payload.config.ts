@@ -5,10 +5,15 @@ import { buildConfig } from "payload";
 import sharp from "sharp";
 import { fileURLToPath } from "url";
 
+import { Albums } from "./collections/Albums";
 import { BlogPosts } from "./collections/BlogPosts";
+import { GalleryCategories } from "./collections/GalleryCategories";
 import { Media } from "./collections/Media";
 import { News } from "./collections/News";
+import { Newsletters } from "./collections/Newsletters";
 import { Users } from "./collections/Users";
+import { VideoCategories } from "./collections/VideoCategories";
+import { Videos } from "./collections/Videos";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -36,7 +41,17 @@ export default buildConfig({
       titleSuffix: " — HPRC",
     },
   },
-  collections: [News, BlogPosts, Media, Users],
+  collections: [
+    News,
+    BlogPosts,
+    Albums,
+    GalleryCategories,
+    Videos,
+    VideoCategories,
+    Newsletters,
+    Media,
+    Users,
+  ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {

@@ -69,3 +69,36 @@ export const revalidateBlogPostAfterDelete: CollectionAfterDeleteHook = ({ doc, 
   if (doc?.slug) safeRevalidate(`/events/blogs/${doc.slug}`);
   return doc;
 };
+
+// --- Galleries (phase 2) -----------------------------------------------------
+// Albums, videos and newsletters each render on a single page, and album or
+// category changes can reorder that whole page, so the page is revalidated as a
+// unit rather than per document.
+
+function makeRevalidator(paths: string[]) {
+  const change: CollectionAfterChangeHook = ({ doc, req }) => {
+    if (req.context?.skipRevalidate) return doc;
+    for (const p of paths) safeRevalidate(p);
+    return doc;
+  };
+  const remove: CollectionAfterDeleteHook = ({ doc, req }) => {
+    if (req.context?.skipRevalidate) return doc;
+    for (const p of paths) safeRevalidate(p);
+    return doc;
+  };
+  return [change, remove] as const;
+}
+
+export const [revalidateGallery, revalidateGalleryAfterDelete] = makeRevalidator([
+  "/events/photo-gallery",
+  "/events",
+]);
+
+export const [revalidateVideos, revalidateVideosAfterDelete] = makeRevalidator([
+  "/events/video-gallery",
+  "/events",
+]);
+
+export const [revalidateNewsletters, revalidateNewslettersAfterDelete] = makeRevalidator([
+  "/events/newsletters",
+]);

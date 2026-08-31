@@ -118,9 +118,9 @@ Create a `.env.local` file (see `.env.example`) for:
 
 ## 🗂️ CMS — Payload 3 (`/admin`)
 
-> **Status:** phases 0–1 complete on branch `feat/payload-cms`; **not yet deployed**.
-> Production still runs the pre-CMS site. News, blog posts and the registrations
-> dashboard are CMS-backed locally.
+> **Status:** phases 0–2 complete on branch `feat/payload-cms`; **not yet deployed**.
+> Production still runs the pre-CMS site. News, blog posts, galleries, videos,
+> newsletters and the registrations dashboard are CMS-backed locally.
 
 The site is migrating to [Payload CMS 3](https://payloadcms.com), installed *into*
 this Next.js app rather than run as a separate service — same repo, same `pm2`
@@ -203,14 +203,34 @@ What did change:
 `src/middleware.ts` and the `/api/admin/{login,logout}` routes. `ADMIN_API_TOKEN`
 and `PAYMENT_API_BASE` are still required — they are the PHP hop.
 
-## 📰 Migrated content (phase 1)
+## 📰 Migrated content
+
+**Phase 1**
 
 | Collection | Source it replaced | Count |
 | --- | --- | --- |
 | `news` | `content/events.ts` → `news[]`, plus the news index/homepage/events strips | 23 |
 | `blog-posts` | the `blogPosts` array duplicated in `events/blogs/page.tsx` and `events/blogs/[slug]/page.tsx` | 3 |
 
-Two notes on fidelity:
+**Phase 2** — the three gallery pages, 1,643 lines of hardcoded arrays
+
+| Collection | Source it replaced | Count |
+| --- | --- | --- |
+| `gallery-categories` + `albums` | `events/photo-gallery/page.tsx` (856 lines) | 2 + 22 (256 photos) |
+| `video-categories` + `videos` | `events/video-gallery/page.tsx` (552 lines) | 4 + 15 |
+| `newsletters` | `events/newsletters/page.tsx` (235 lines) | 6 |
+
+All three pages are interactive (lightbox, category tabs, PDF flipbook), so each
+was split into a server `page.tsx` that fetches and a `*-client.tsx` that keeps
+the state. The JSX is otherwise untouched.
+
+One quirk preserved deliberately: **four videos are cross-listed** in the source
+data — the same YouTube id appears under a different title in a second category
+(`-N4h3tTNhKo` is both "…Championship 2025" in Polo and "…Championship Venue" in
+Club & Facilities). Deduplicating on the video id would have emptied out the
+Club & Facilities tab, so a video's identity is its id *and* its title.
+
+### Fidelity notes
 
 - **Dates.** The hand-written date strings were inconsistent (`2024`,
   `18 August, 2026`, `October 6, 2024`) and printed verbatim. Every original
@@ -219,6 +239,10 @@ Two notes on fidelity:
 - **Order.** The old `news[]` array was hand-curated, not date-sorted (it had
   30 Jan before 31 Jan). Sorting by date alone would have changed the lead story,
   so a `featured` checkbox pins it. Same for the blog index.
+
+**Images.** Every image field accepts either an upload or a legacy `/public`
+path (`src/fields/image.ts`). The ~323 MB of existing assets keep their paths and
+are not re-uploaded; renderers prefer an upload and fall back to the path.
 
 The 19 hand-built pages under `events/news/*` are **still served from code** —
 they are static routes and Next resolves them ahead of the new

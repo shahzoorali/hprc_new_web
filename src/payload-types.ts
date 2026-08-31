@@ -69,6 +69,11 @@ export interface Config {
   collections: {
     news: News;
     'blog-posts': BlogPost;
+    albums: Album;
+    'gallery-categories': GalleryCategory;
+    videos: Video;
+    'video-categories': VideoCategory;
+    newsletters: Newsletter;
     media: Media;
     users: User;
     'payload-kv': PayloadKv;
@@ -80,6 +85,11 @@ export interface Config {
   collectionsSelect: {
     news: NewsSelect<false> | NewsSelect<true>;
     'blog-posts': BlogPostsSelect<false> | BlogPostsSelect<true>;
+    albums: AlbumsSelect<false> | AlbumsSelect<true>;
+    'gallery-categories': GalleryCategoriesSelect<false> | GalleryCategoriesSelect<true>;
+    videos: VideosSelect<false> | VideosSelect<true>;
+    'video-categories': VideoCategoriesSelect<false> | VideoCategoriesSelect<true>;
+    newsletters: NewslettersSelect<false> | NewslettersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
@@ -355,6 +365,177 @@ export interface BlogPost {
   _status?: ('draft' | 'published') | null;
 }
 /**
+ * Photo albums shown on the gallery page.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "albums".
+ */
+export interface Album {
+  id: string;
+  title: string;
+  /**
+   * Album id used in the page's URL hash.
+   */
+  slug: string;
+  category: string | GalleryCategory;
+  /**
+   * e.g. "2016". Used for the year filter.
+   */
+  year?: string | null;
+  /**
+   * Printed verbatim, e.g. "11 Oct 2015".
+   */
+  date?: string | null;
+  cover?: {
+    /**
+     * Preferred. Alt text and sizes come from the media library.
+     */
+    image?: (string | null) | Media;
+    /**
+     * Path to a file already in /public. Only used when no upload is set.
+     */
+    imagePath?: string | null;
+  };
+  /**
+   * Drag to reorder. The first photo is used if no cover is set.
+   */
+  images?:
+    | {
+        /**
+         * Preferred. Alt text and sizes come from the media library.
+         */
+        image?: (string | null) | Media;
+        /**
+         * Path to a file already in /public. Only used when no upload is set.
+         */
+        imagePath?: string | null;
+        /**
+         * Alt text for the legacy path above. Ignored when an upload is used.
+         */
+        imageAlt?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Lower numbers appear first.
+   */
+  displayOrder?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery-categories".
+ */
+export interface GalleryCategory {
+  id: string;
+  name: string;
+  /**
+   * Used as the tab id on the gallery page.
+   */
+  slug: string;
+  description?: string | null;
+  /**
+   * Lower numbers appear first.
+   */
+  displayOrder?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Videos from the HPRC YouTube channel.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "videos".
+ */
+export interface Video {
+  id: string;
+  title: string;
+  description?: string | null;
+  /**
+   * Just the ID — the part after v= in the URL. For https://youtu.be/OqYb2gZm0lk it is OqYb2gZm0lk.
+   */
+  youtubeId: string;
+  /**
+   * e.g. "1:07:00"
+   */
+  duration?: string | null;
+  /**
+   * Printed verbatim, e.g. "2.4K"
+   */
+  views?: string | null;
+  /**
+   * Leave empty for a featured video that sits above the categories.
+   */
+  category?: (string | null) | VideoCategory;
+  /**
+   * Show large, above the category sections.
+   */
+  featured?: boolean | null;
+  /**
+   * Lower numbers appear first.
+   */
+  displayOrder?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "video-categories".
+ */
+export interface VideoCategory {
+  id: string;
+  name: string;
+  slug: string;
+  /**
+   * A single emoji shown beside the category name, e.g. 🏇
+   */
+  icon?: string | null;
+  /**
+   * Lower numbers appear first.
+   */
+  displayOrder?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsletters".
+ */
+export interface Newsletter {
+  id: string;
+  title: string;
+  /**
+   * Printed verbatim, e.g. "October 2015" or "2016".
+   */
+  date: string;
+  description?: string | null;
+  /**
+   * Upload the newsletter PDF. Preferred for anything new.
+   */
+  pdf?: (string | null) | Media;
+  /**
+   * Legacy path under /public/documents/newsletters/. Only used when no PDF is uploaded above.
+   */
+  pdfPath?: string | null;
+  cover?: {
+    /**
+     * Preferred. Alt text and sizes come from the media library.
+     */
+    image?: (string | null) | Media;
+    /**
+     * Path to a file already in /public. Only used when no upload is set.
+     */
+    imagePath?: string | null;
+  };
+  /**
+   * Lower numbers appear first.
+   */
+  displayOrder?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
@@ -415,6 +596,26 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'blog-posts';
         value: string | BlogPost;
+      } | null)
+    | ({
+        relationTo: 'albums';
+        value: string | Album;
+      } | null)
+    | ({
+        relationTo: 'gallery-categories';
+        value: string | GalleryCategory;
+      } | null)
+    | ({
+        relationTo: 'videos';
+        value: string | Video;
+      } | null)
+    | ({
+        relationTo: 'video-categories';
+        value: string | VideoCategory;
+      } | null)
+    | ({
+        relationTo: 'newsletters';
+        value: string | Newsletter;
       } | null)
     | ({
         relationTo: 'media';
@@ -569,6 +770,94 @@ export interface BlogPostsSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "albums_select".
+ */
+export interface AlbumsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  category?: T;
+  year?: T;
+  date?: T;
+  cover?:
+    | T
+    | {
+        image?: T;
+        imagePath?: T;
+      };
+  images?:
+    | T
+    | {
+        image?: T;
+        imagePath?: T;
+        imageAlt?: T;
+        id?: T;
+      };
+  displayOrder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery-categories_select".
+ */
+export interface GalleryCategoriesSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  description?: T;
+  displayOrder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "videos_select".
+ */
+export interface VideosSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  youtubeId?: T;
+  duration?: T;
+  views?: T;
+  category?: T;
+  featured?: T;
+  displayOrder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "video-categories_select".
+ */
+export interface VideoCategoriesSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  icon?: T;
+  displayOrder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsletters_select".
+ */
+export interface NewslettersSelect<T extends boolean = true> {
+  title?: T;
+  date?: T;
+  description?: T;
+  pdf?: T;
+  pdfPath?: T;
+  cover?:
+    | T
+    | {
+        image?: T;
+        imagePath?: T;
+      };
+  displayOrder?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
