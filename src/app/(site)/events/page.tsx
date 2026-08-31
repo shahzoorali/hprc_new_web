@@ -4,10 +4,13 @@ import Link from "next/link";
 import { PageHero } from "@/components/ui/page-hero";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { eventsContent } from "@/content/events";
+import { getPastEvents, getUpcomingEvents } from "@/lib/events";
 import { getNewsArticles } from "@/lib/news";
 
 export default async function EventsPage() {
   const newsArticles = await getNewsArticles(3);
+  const upcoming = await getUpcomingEvents();
+  const pastHighlights = await getPastEvents();
   return (
     <div className="space-y-12 sm:space-y-16 pb-12 sm:pb-16">
       <div className="container pt-12">
@@ -23,19 +26,19 @@ export default async function EventsPage() {
       <section className="container space-y-10">
         <SectionHeading
           eyebrow="Upcoming"
-          title={eventsContent.upcoming.length > 0 ? "Featured events" : "Upcoming events"}
+          title={upcoming.length > 0 ? "Featured events" : "Upcoming events"}
           description={
-            eventsContent.upcoming.length > 0
+            upcoming.length > 0
               ? "Mark your calendar and experience the thrill of equestrian sport and club celebrations."
               : "Stay tuned for upcoming tournaments, showcases, and club celebrations at HPRC."
           }
           align="left"
         />
-        {eventsContent.upcoming && eventsContent.upcoming.length > 0 ? (
+        {upcoming && upcoming.length > 0 ? (
           <div className="grid gap-6 sm:gap-8 grid-cols-1 md:grid-cols-2">
-            {eventsContent.upcoming.map((event, index) => {
+            {upcoming.map((event, index) => {
               // Use equestrian-specific image for the EC2026 event
-              const getUpcomingImage = (ev: typeof eventsContent.upcoming[number], i: number) => {
+              const getUpcomingImage = (ev: (typeof upcoming)[number], i: number) => {
                 if (ev.link?.includes("equestrian-challenge-2026")) {
                   return "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=800&q=80";
                 }
@@ -110,12 +113,23 @@ export default async function EventsPage() {
           </div>
         ) : (
           <div className="flex flex-col items-center justify-center rounded-[2.5rem] border border-gray-100 bg-white/50 py-16 px-6 text-center shadow-inner">
-            <svg className="h-12 w-12 text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            <svg
+              className="h-12 w-12 text-gray-300 mb-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1.5}
+                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+              />
             </svg>
             <h3 className="text-xl font-bold text-gray-900">No upcoming events</h3>
             <p className="mt-2 text-sm text-gray-500 max-w-md">
-              There are currently no featured upcoming events. Please check back later or subscribe to our newsletter to stay updated.
+              There are currently no featured upcoming events. Please check back later or subscribe
+              to our newsletter to stay updated.
             </p>
           </div>
         )}
@@ -146,7 +160,7 @@ export default async function EventsPage() {
             </Link>
           </div>
           <div className="grid gap-6 sm:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-            {eventsContent.pastHighlights.slice(0, 6).map((highlight, index) => {
+            {pastHighlights.slice(0, 6).map((highlight, index) => {
               // Get event image based on link
               const getEventImage = (highlight: any, index: number) => {
                 if (highlight.image) {

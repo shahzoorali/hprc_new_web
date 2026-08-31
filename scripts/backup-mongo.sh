@@ -25,10 +25,19 @@ PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 BACKUP_DIR="${BACKUP_DIR:-/home/ubuntu/backups/hprc-cms}"
 RETENTION_DAYS="${RETENTION_DAYS:-14}"
 
-# Load DATABASE_URI from the server env file without exporting the whole file.
+# Pull just the two settings we need out of the server env file, rather than
+# sourcing it — that file also holds the payment app's secrets.
 ENV_FILE="${ENV_FILE:-$PROJECT_DIR/.env.production.local}"
-if [ -z "${DATABASE_URI:-}" ] && [ -f "$ENV_FILE" ]; then
-  DATABASE_URI="$(grep -E '^DATABASE_URI=' "$ENV_FILE" | head -1 | cut -d= -f2-)"
+read_env() {
+  [ -f "$ENV_FILE" ] || return 0
+  grep -E "^$1=" "$ENV_FILE" | head -1 | cut -d= -f2-
+}
+
+if [ -z "${DATABASE_URI:-}" ]; then
+  DATABASE_URI="$(read_env DATABASE_URI)"
+fi
+if [ -z "${BACKUP_S3_URI:-}" ]; then
+  BACKUP_S3_URI="$(read_env BACKUP_S3_URI)"
 fi
 
 if [ -z "${DATABASE_URI:-}" ]; then
@@ -61,11 +70,18 @@ if [ "$ACTUAL_BYTES" -lt "$MIN_BYTES" ]; then
   exit 1
 fi
 
+# The offsite copy is deliberately non-fatal. A missing IAM permission or a
+# transient S3 error must not abort the run before the local dump is pruned and
+# accounted for — a failed upload is a warning, a lost local backup is not.
 if [ -n "${BACKUP_S3_URI:-}" ]; then
   if command -v aws >/dev/null 2>&1; then
     echo "[$(date -Is)] Uploading to $BACKUP_S3_URI/"
-    aws s3 cp "$ARCHIVE" "$BACKUP_S3_URI/" --only-show-errors
-    echo "[$(date -Is)] Upload complete"
+    if aws s3 cp "$ARCHIVE" "$BACKUP_S3_URI/" --only-show-errors; then
+      echo "[$(date -Is)] Upload complete"
+    else
+      echo "[$(date -Is)] WARNING: S3 upload failed — local copy kept at $ARCHIVE" >&2
+      echo "[$(date -Is)] WARNING: this backup is NOT offsite until that is fixed" >&2
+    fi
   else
     echo "[$(date -Is)] WARNING: BACKUP_S3_URI set but aws CLI not installed — local copy only" >&2
   fi

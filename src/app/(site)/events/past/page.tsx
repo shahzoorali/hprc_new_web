@@ -3,9 +3,10 @@ import Link from "next/link";
 
 import { PageHero } from "@/components/ui/page-hero";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { eventsContent } from "@/content/events";
+import { getPastEvents } from "@/lib/events";
 
-export default function PastEventsPage() {
+export default async function PastEventsPage() {
+  const pastHighlights = await getPastEvents();
   return (
     <div className="space-y-12 pb-16">
       <div className="container pt-12">
@@ -27,7 +28,7 @@ export default function PastEventsPage() {
           align="left"
         />
         <div className="grid gap-6 sm:gap-8 grid-cols-1 md:grid-cols-2">
-          {eventsContent.pastHighlights.map((highlight, index) => {
+          {pastHighlights.map((highlight, index) => {
             // Get event image based on highlight data or link
             const getEventImage = (h: typeof highlight, i: number) => {
               if (h.image) return h.image;

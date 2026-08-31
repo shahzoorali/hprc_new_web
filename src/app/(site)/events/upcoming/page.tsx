@@ -1,8 +1,10 @@
 import Link from "next/link";
-import { PageHero } from "@/components/ui/page-hero";
-import { eventsContent } from "@/content/events";
 
-export default function UpcomingEventsPage() {
+import { PageHero } from "@/components/ui/page-hero";
+import { getUpcomingEvents } from "@/lib/events";
+
+export default async function UpcomingEventsPage() {
+  const upcoming = await getUpcomingEvents();
   return (
     <div className="space-y-12 pb-16">
       <div className="container pt-12">
@@ -14,18 +16,21 @@ export default function UpcomingEventsPage() {
         />
       </div>
       <section className="container space-y-6">
-        {eventsContent.upcoming.length === 0 && (
+        {upcoming.length === 0 && (
           <div className="border border-brand-100 bg-white/95 p-8 text-center shadow-[var(--shadow-elevated)]">
             <p className="text-gray-700">
               No upcoming events are scheduled right now. Check back soon, or view our{" "}
-              <Link href="/events/past" className="font-semibold text-brand-600 underline underline-offset-2 hover:text-brand-800">
+              <Link
+                href="/events/past"
+                className="font-semibold text-brand-600 underline underline-offset-2 hover:text-brand-800"
+              >
                 past events
               </Link>
               .
             </p>
           </div>
         )}
-        {eventsContent.upcoming.map((event) => (
+        {upcoming.map((event) => (
           <article
             key={event.title}
             className=" border border-brand-100 bg-white/95 p-6 shadow-[var(--shadow-elevated)]"

@@ -1,0 +1,9 @@
+# Shell scripts must keep LF endings — they run on the Linux EC2 box, and a CRLF
+# shebang fails with: /usr/bin/env: 'bash\r': No such file or directory
+*.sh text eol=lf
+
+# Keep everything else consistent in the repo regardless of checkout platform.
+*.ts text
+*.tsx text
+*.json text
+*.md text

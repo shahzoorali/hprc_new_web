@@ -7,11 +7,15 @@ import { fileURLToPath } from "url";
 
 import { Albums } from "./collections/Albums";
 import { BlogPosts } from "./collections/BlogPosts";
+import { Events } from "./collections/Events";
 import { GalleryCategories } from "./collections/GalleryCategories";
 import { Media } from "./collections/Media";
 import { News } from "./collections/News";
 import { Newsletters } from "./collections/Newsletters";
+import { ResultClasses } from "./collections/ResultClasses";
+import { ResultSets } from "./collections/ResultSets";
 import { Users } from "./collections/Users";
+import { importResultsEndpoint } from "./endpoints/import-results";
 import { VideoCategories } from "./collections/VideoCategories";
 import { Videos } from "./collections/Videos";
 
@@ -34,7 +38,16 @@ export default buildConfig({
     components: {
       // The registrations dashboard lives outside Payload (its own route group,
       // reading the PHP payment API), so surface it in the CMS sidebar.
-      afterNavLinks: ["/components/payload/RegistrationsNavLink#RegistrationsNavLink"],
+      afterNavLinks: [
+        "/components/payload/RegistrationsNavLink#RegistrationsNavLink",
+        "/components/payload/ImportResultsNavLink#ImportResultsNavLink",
+      ],
+      views: {
+        importResults: {
+          Component: "/components/payload/ImportResultsView#ImportResultsView",
+          path: "/import-results",
+        },
+      },
     },
     meta: {
       title: "HPRC Admin",
@@ -44,14 +57,18 @@ export default buildConfig({
   collections: [
     News,
     BlogPosts,
+    Events,
     Albums,
     GalleryCategories,
     Videos,
     VideoCategories,
     Newsletters,
+    ResultSets,
+    ResultClasses,
     Media,
     Users,
   ],
+  endpoints: [importResultsEndpoint],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {

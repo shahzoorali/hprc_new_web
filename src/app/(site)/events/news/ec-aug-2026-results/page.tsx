@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { SectionHeading } from "@/components/ui/section-heading";
+
 import { ResultsBoard } from "@/components/results/results-board";
-import { ecAugResults } from "@/content/results-ec";
+import { SectionHeading } from "@/components/ui/section-heading";
+import { getResultSet } from "@/lib/results";
 
 export const metadata = {
   title: "Results — 2nd HPRC Equestrian Challenge 2026 | Hyderabad Polo & Riding Club",
@@ -9,20 +10,23 @@ export const metadata = {
     "Official results of the 2nd HPRC Equestrian Challenge 2026, held 14–16 August 2026 at the Hyderabad Polo & Riding Club. Placings across Hacks, Dressage and Show Jumping.",
 };
 
-const riders = new Set(ecAugResults.flatMap((c) => c.entries.map((e) => e.rider)));
-const clubs = new Set(
-  ecAugResults.flatMap((c) => c.entries.map((e) => e.club).filter(Boolean) as string[]),
-);
-const placings = ecAugResults.reduce((n, c) => n + c.entries.length, 0);
+export default async function ECAug2026ResultsPage() {
+  const resultSet = await getResultSet("ec-aug-2026");
+  const classes = resultSet?.classes ?? [];
 
-const stats = [
-  { value: String(ecAugResults.length), label: "Classes" },
-  { value: String(placings), label: "Placings" },
-  { value: String(riders.size), label: "Riders placed" },
-  { value: String(clubs.size), label: "Clubs" },
-];
+  const riders = new Set(classes.flatMap((c) => c.entries.map((e) => e.rider)));
+  const clubs = new Set(
+    classes.flatMap((c) => c.entries.map((e) => e.club).filter(Boolean) as string[]),
+  );
+  const placings = classes.reduce((n, c) => n + c.entries.length, 0);
 
-export default function ECAug2026ResultsPage() {
+  const stats = [
+    { value: String(classes.length), label: "Classes" },
+    { value: String(placings), label: "Placings" },
+    { value: String(riders.size), label: "Riders placed" },
+    { value: String(clubs.size), label: "Clubs" },
+  ];
+
   return (
     <div className="space-y-16 pb-16">
       {/* Hero */}
@@ -42,7 +46,10 @@ export default function ECAug2026ResultsPage() {
 
           <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4">
             {stats.map((s) => (
-              <div key={s.label} className="rounded-2xl bg-white/10 px-4 py-5 text-center backdrop-blur">
+              <div
+                key={s.label}
+                className="rounded-2xl bg-white/10 px-4 py-5 text-center backdrop-blur"
+              >
                 <p className="text-3xl font-extrabold text-white">{s.value}</p>
                 <p className="mt-1 text-sm text-brand-200">{s.label}</p>
               </div>
@@ -61,24 +68,25 @@ export default function ECAug2026ResultsPage() {
             align="center"
           />
           <p className="mx-auto mt-6 max-w-3xl text-center text-gray-700">
-            Riders from {clubs.size} clubs and academies competed across Hacks, Dressage and Show Jumping,
-            from 40 cm through to the two-phase 105–110 cm Open. HPRC congratulates every rider who took part.
+            Riders from {clubs.size} clubs and academies competed across Hacks, Dressage and Show
+            Jumping, from 40 cm through to the two-phase 105–110 cm Open. HPRC congratulates every
+            rider who took part.
           </p>
         </div>
       </section>
 
       {/* Results */}
       <section className="container">
-        <ResultsBoard classes={ecAugResults} />
+        <ResultsBoard classes={classes} />
       </section>
 
       {/* Closing */}
       <section className="container">
         <div className="space-y-4 rounded-[2rem] bg-brand-900 p-8 text-center md:p-12">
           <p className="mx-auto max-w-3xl text-lg leading-relaxed text-white/90">
-            HPRC congratulates all winners and participants for their performances, dedication and sportsmanship.
-            The club remains committed to promoting equestrian excellence and nurturing emerging riding talent in
-            Hyderabad and across India.
+            HPRC congratulates all winners and participants for their performances, dedication and
+            sportsmanship. The club remains committed to promoting equestrian excellence and
+            nurturing emerging riding talent in Hyderabad and across India.
           </p>
           <div className="space-y-1 pt-4">
             <p className="font-semibold text-brand-200">Hyderabad Polo &amp; Riding Club</p>

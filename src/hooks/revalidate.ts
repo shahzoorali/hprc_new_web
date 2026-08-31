@@ -102,3 +102,25 @@ export const [revalidateVideos, revalidateVideosAfterDelete] = makeRevalidator([
 export const [revalidateNewsletters, revalidateNewslettersAfterDelete] = makeRevalidator([
   "/events/newsletters",
 ]);
+
+export const [revalidateResults, revalidateResultsAfterDelete] = makeRevalidator([
+  "/events/news/nq-2026-results",
+  "/events/news/ec-aug-2026-results",
+  "/events/news",
+]);
+
+export const revalidateEvent: CollectionAfterChangeHook = ({ doc, previousDoc, req }) => {
+  if (req.context?.skipRevalidate) return doc;
+  const paths = new Set<string>(["/", "/events", "/events/upcoming", "/events/past"]);
+  if (typeof doc?.slug === "string") paths.add(`/events/${doc.slug}`);
+  if (typeof previousDoc?.slug === "string") paths.add(`/events/${previousDoc.slug}`);
+  for (const p of paths) safeRevalidate(p);
+  return doc;
+};
+
+export const revalidateEventAfterDelete: CollectionAfterDeleteHook = ({ doc, req }) => {
+  if (req.context?.skipRevalidate) return doc;
+  for (const p of ["/", "/events", "/events/upcoming", "/events/past"]) safeRevalidate(p);
+  if (doc?.slug) safeRevalidate(`/events/${doc.slug}`);
+  return doc;
+};

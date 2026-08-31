@@ -69,11 +69,14 @@ export interface Config {
   collections: {
     news: News;
     'blog-posts': BlogPost;
+    events: Event;
     albums: Album;
     'gallery-categories': GalleryCategory;
     videos: Video;
     'video-categories': VideoCategory;
     newsletters: Newsletter;
+    'result-sets': ResultSet;
+    'result-classes': ResultClass;
     media: Media;
     users: User;
     'payload-kv': PayloadKv;
@@ -85,11 +88,14 @@ export interface Config {
   collectionsSelect: {
     news: NewsSelect<false> | NewsSelect<true>;
     'blog-posts': BlogPostsSelect<false> | BlogPostsSelect<true>;
+    events: EventsSelect<false> | EventsSelect<true>;
     albums: AlbumsSelect<false> | AlbumsSelect<true>;
     'gallery-categories': GalleryCategoriesSelect<false> | GalleryCategoriesSelect<true>;
     videos: VideosSelect<false> | VideosSelect<true>;
     'video-categories': VideoCategoriesSelect<false> | VideoCategoriesSelect<true>;
     newsletters: NewslettersSelect<false> | NewslettersSelect<true>;
+    'result-sets': ResultSetsSelect<false> | ResultSetsSelect<true>;
+    'result-classes': ResultClassesSelect<false> | ResultClassesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
@@ -187,7 +193,7 @@ export interface News {
   /**
    * Build the article from blocks. Empty for link-only entries.
    */
-  body?: (RichTextBlock | ImageGalleryBlock | QuoteBlock | EmbedBlock)[] | null;
+  body?: (RichTextBlock | ImageGalleryBlock | QuoteBlock | EmbedBlock | MediaTextBlock)[] | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -327,6 +333,46 @@ export interface EmbedBlock {
   blockType: 'embed';
 }
 /**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MediaTextBlock".
+ */
+export interface MediaTextBlock {
+  heading?: string | null;
+  body: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  media?: {
+    /**
+     * Preferred. Alt text and sizes come from the media library.
+     */
+    image?: (string | null) | Media;
+    /**
+     * Path to a file already in /public. Only used when no upload is set.
+     */
+    imagePath?: string | null;
+    /**
+     * Alt text for the legacy path above. Ignored when an upload is used.
+     */
+    imageAlt?: string | null;
+  };
+  imagePosition?: ('right' | 'left') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'mediaText';
+}
+/**
  * Longer editorial pieces — riding advice, club stories.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -359,10 +405,314 @@ export interface BlogPost {
    * Legacy path under /public. Only used when no upload is set above.
    */
   heroImagePath?: string | null;
-  body: (RichTextBlock | ImageGalleryBlock | QuoteBlock | EmbedBlock)[];
+  body: (RichTextBlock | ImageGalleryBlock | QuoteBlock | EmbedBlock | MediaTextBlock)[];
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
+}
+/**
+ * Tournaments and competitions. Status drives the upcoming and past listings.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events".
+ */
+export interface Event {
+  id: string;
+  title: string;
+  /**
+   * The event appears at /events/<slug>.
+   */
+  slug: string;
+  /**
+   * Upcoming events appear on /events/upcoming and the homepage; completed ones move to /events/past automatically.
+   */
+  status: 'upcoming' | 'registration-open' | 'in-progress' | 'completed';
+  /**
+   * Highlight on the homepage and events page.
+   */
+  featured?: boolean | null;
+  /**
+   * Used for ordering.
+   */
+  startDate: string;
+  /**
+   * Printed verbatim on cards and listings, e.g. 14–16 August 2026. Leave blank to format the date.
+   */
+  dateLabel?: string | null;
+  /**
+   * e.g. Gandipet, Moinabad
+   */
+  venue?: string | null;
+  /**
+   * The summary shown on event cards and listings.
+   */
+  excerpt: string;
+  cardImage?: {
+    /**
+     * Preferred. Alt text and sizes come from the media library.
+     */
+    image?: (string | null) | Media;
+    /**
+     * Path to a file already in /public. Only used when no upload is set.
+     */
+    imagePath?: string | null;
+  };
+  /**
+   * Optional. Send listing cards somewhere other than /events/<slug> — e.g. straight to a results page. Existing events use this because their pages live at varied URLs.
+   */
+  linkOverride?: string | null;
+  /**
+   * Link to the entry form, e.g. /events/nq-2026. The form itself stays in code — the CMS only links to it.
+   */
+  registrationUrl?: string | null;
+  /**
+   * Build the event page from blocks. Leave empty for an event that only needs a listing entry.
+   */
+  body?:
+    | (
+        | PageHeroBlock
+        | HeroVideoBlock
+        | RichTextBlock
+        | MediaTextBlock
+        | StatsBlock
+        | CountdownBlock
+        | EventScheduleBlock
+        | PricingTableBlock
+        | RulesBlock
+        | TimelineBlock
+        | ResultsBoardBlock
+        | ImageGalleryBlock
+        | QuoteBlock
+        | EmbedBlock
+        | CtaBlock
+      )[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PageHeroBlock".
+ */
+export interface PageHeroBlock {
+  eyebrow?: string | null;
+  title: string;
+  description: string;
+  background?: {
+    /**
+     * Preferred. Alt text and sizes come from the media library.
+     */
+    image?: (string | null) | Media;
+    /**
+     * Path to a file already in /public. Only used when no upload is set.
+     */
+    imagePath?: string | null;
+  };
+  actions?:
+    | {
+        label: string;
+        href: string;
+        variant?: ('primary' | 'outline') | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'pageHero';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroVideoBlock".
+ */
+export interface HeroVideoBlock {
+  /**
+   * YouTube URL. The component extracts the id itself.
+   */
+  videoUrl: string;
+  fallback?: {
+    /**
+     * Preferred. Alt text and sizes come from the media library.
+     */
+    image?: (string | null) | Media;
+    /**
+     * Path to a file already in /public. Only used when no upload is set.
+     */
+    imagePath?: string | null;
+  };
+  imageAlt?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'heroVideo';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StatsBlock".
+ */
+export interface StatsBlock {
+  stats: {
+    value: string;
+    label: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'stats';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CountdownBlock".
+ */
+export interface CountdownBlock {
+  heading?: string | null;
+  /**
+   * Counts down to this moment, then shows zeros.
+   */
+  targetDate: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'countdown';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "EventScheduleBlock".
+ */
+export interface EventScheduleBlock {
+  schedule: {
+    /**
+     * Day 1, Day 2 … this also selects the header image.
+     */
+    day: string;
+    date: string;
+    dateFull: string;
+    activities?:
+      | {
+          time?: string | null;
+          activity: string;
+          /**
+           * Sets the icon and colour.
+           */
+          type: 'arrival' | 'practice' | 'match' | 'ceremony' | 'hospitality' | 'media' | 'final';
+          id?: string | null;
+        }[]
+      | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'eventSchedule';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PricingTableBlock".
+ */
+export interface PricingTableBlock {
+  heading: string;
+  /**
+   * The GST and Total columns only appear if at least one row fills them in.
+   */
+  rows: {
+    label: string;
+    price: string;
+    gst?: string | null;
+    total?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'pricingTable';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RulesBlock".
+ */
+export interface RulesBlock {
+  eyebrow?: string | null;
+  title: string;
+  description?: string | null;
+  categories: {
+    category: string;
+    items?:
+      | {
+          text: string;
+          id?: string | null;
+        }[]
+      | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'rules';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TimelineBlock".
+ */
+export interface TimelineBlock {
+  items: {
+    year: string;
+    summary: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'timeline';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ResultsBoardBlock".
+ */
+export interface ResultsBoardBlock {
+  /**
+   * Which competition to show. Its classes come along automatically.
+   */
+  resultSet: string | ResultSet;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'resultsBoard';
+}
+/**
+ * A competition's results. Add classes from the Result classes collection.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "result-sets".
+ */
+export interface ResultSet {
+  id: string;
+  title: string;
+  /**
+   * e.g. "nq-2026". Used to look the set up from a page.
+   */
+  slug: string;
+  /**
+   * Printed verbatim, e.g. "12–14 August 2026 · Gandipet".
+   */
+  eventDate?: string | null;
+  /**
+   * Show rider photos in the results table. Off for sets where most riders entered offline and have no photo.
+   */
+  showPhotos?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CtaBlock".
+ */
+export interface CtaBlock {
+  heading: string;
+  description?: string | null;
+  actions?:
+    | {
+        label: string;
+        href: string;
+        variant?: ('primary' | 'outline') | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'cta';
 }
 /**
  * Photo albums shown on the gallery page.
@@ -536,6 +886,75 @@ export interface Newsletter {
   createdAt: string;
 }
 /**
+ * Placings for a single class. Use Import results to load one from a spreadsheet.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "result-classes".
+ */
+export interface ResultClass {
+  id: string;
+  resultSet: string | ResultSet;
+  title: string;
+  /**
+   * Anchor id for linking straight to this class.
+   */
+  slug: string;
+  /**
+   * e.g. "Dressage", "Show Jumping", "Hacks"
+   */
+  discipline: string;
+  /**
+   * e.g. "Junior", "Children I", "Open"
+   */
+  category: string;
+  /**
+   * Controls which column the table shows and how it is ranked.
+   */
+  metric: 'score' | 'penalties' | 'none';
+  /**
+   * Drag to reorder. Order here is the order shown.
+   */
+  entries?:
+    | {
+        /**
+         * Placing as printed — "1st", "Joint 3rd". Blank for score-ranked classes.
+         */
+        pos?: string | null;
+        rider: string;
+        horse: string;
+        club?: string | null;
+        /**
+         * Age band only — never a date of birth.
+         */
+        ageGroup?: string | null;
+        prize?: string | null;
+        /**
+         * Dressage average as a decimal — 0.6612 prints as 66.12%.
+         */
+        score?: string | null;
+        /**
+         * Show jumping total penalties.
+         */
+        penalties?: string | null;
+        /**
+         * Optional rider photo.
+         */
+        photo?: (string | null) | Media;
+        /**
+         * Legacy path under /public/images/results/. Used when no upload is set.
+         */
+        photoPath?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Lower numbers appear first.
+   */
+  displayOrder?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
@@ -598,6 +1017,10 @@ export interface PayloadLockedDocument {
         value: string | BlogPost;
       } | null)
     | ({
+        relationTo: 'events';
+        value: string | Event;
+      } | null)
+    | ({
         relationTo: 'albums';
         value: string | Album;
       } | null)
@@ -616,6 +1039,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'newsletters';
         value: string | Newsletter;
+      } | null)
+    | ({
+        relationTo: 'result-sets';
+        value: string | ResultSet;
+      } | null)
+    | ({
+        relationTo: 'result-classes';
+        value: string | ResultClass;
       } | null)
     | ({
         relationTo: 'media';
@@ -691,6 +1122,7 @@ export interface NewsSelect<T extends boolean = true> {
         imageGallery?: T | ImageGalleryBlockSelect<T>;
         quote?: T | QuoteBlockSelect<T>;
         embed?: T | EmbedBlockSelect<T>;
+        mediaText?: T | MediaTextBlockSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -746,6 +1178,24 @@ export interface EmbedBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MediaTextBlock_select".
+ */
+export interface MediaTextBlockSelect<T extends boolean = true> {
+  heading?: T;
+  body?: T;
+  media?:
+    | T
+    | {
+        image?: T;
+        imagePath?: T;
+        imageAlt?: T;
+      };
+  imagePosition?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "blog-posts_select".
  */
 export interface BlogPostsSelect<T extends boolean = true> {
@@ -766,10 +1216,228 @@ export interface BlogPostsSelect<T extends boolean = true> {
         imageGallery?: T | ImageGalleryBlockSelect<T>;
         quote?: T | QuoteBlockSelect<T>;
         embed?: T | EmbedBlockSelect<T>;
+        mediaText?: T | MediaTextBlockSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events_select".
+ */
+export interface EventsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  status?: T;
+  featured?: T;
+  startDate?: T;
+  dateLabel?: T;
+  venue?: T;
+  excerpt?: T;
+  cardImage?:
+    | T
+    | {
+        image?: T;
+        imagePath?: T;
+      };
+  linkOverride?: T;
+  registrationUrl?: T;
+  body?:
+    | T
+    | {
+        pageHero?: T | PageHeroBlockSelect<T>;
+        heroVideo?: T | HeroVideoBlockSelect<T>;
+        richText?: T | RichTextBlockSelect<T>;
+        mediaText?: T | MediaTextBlockSelect<T>;
+        stats?: T | StatsBlockSelect<T>;
+        countdown?: T | CountdownBlockSelect<T>;
+        eventSchedule?: T | EventScheduleBlockSelect<T>;
+        pricingTable?: T | PricingTableBlockSelect<T>;
+        rules?: T | RulesBlockSelect<T>;
+        timeline?: T | TimelineBlockSelect<T>;
+        resultsBoard?: T | ResultsBoardBlockSelect<T>;
+        imageGallery?: T | ImageGalleryBlockSelect<T>;
+        quote?: T | QuoteBlockSelect<T>;
+        embed?: T | EmbedBlockSelect<T>;
+        cta?: T | CtaBlockSelect<T>;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PageHeroBlock_select".
+ */
+export interface PageHeroBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  title?: T;
+  description?: T;
+  background?:
+    | T
+    | {
+        image?: T;
+        imagePath?: T;
+      };
+  actions?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        variant?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroVideoBlock_select".
+ */
+export interface HeroVideoBlockSelect<T extends boolean = true> {
+  videoUrl?: T;
+  fallback?:
+    | T
+    | {
+        image?: T;
+        imagePath?: T;
+      };
+  imageAlt?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StatsBlock_select".
+ */
+export interface StatsBlockSelect<T extends boolean = true> {
+  stats?:
+    | T
+    | {
+        value?: T;
+        label?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CountdownBlock_select".
+ */
+export interface CountdownBlockSelect<T extends boolean = true> {
+  heading?: T;
+  targetDate?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "EventScheduleBlock_select".
+ */
+export interface EventScheduleBlockSelect<T extends boolean = true> {
+  schedule?:
+    | T
+    | {
+        day?: T;
+        date?: T;
+        dateFull?: T;
+        activities?:
+          | T
+          | {
+              time?: T;
+              activity?: T;
+              type?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PricingTableBlock_select".
+ */
+export interface PricingTableBlockSelect<T extends boolean = true> {
+  heading?: T;
+  rows?:
+    | T
+    | {
+        label?: T;
+        price?: T;
+        gst?: T;
+        total?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RulesBlock_select".
+ */
+export interface RulesBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  title?: T;
+  description?: T;
+  categories?:
+    | T
+    | {
+        category?: T;
+        items?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TimelineBlock_select".
+ */
+export interface TimelineBlockSelect<T extends boolean = true> {
+  items?:
+    | T
+    | {
+        year?: T;
+        summary?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ResultsBoardBlock_select".
+ */
+export interface ResultsBoardBlockSelect<T extends boolean = true> {
+  resultSet?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CtaBlock_select".
+ */
+export interface CtaBlockSelect<T extends boolean = true> {
+  heading?: T;
+  description?: T;
+  actions?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        variant?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -854,6 +1522,48 @@ export interface NewslettersSelect<T extends boolean = true> {
     | {
         image?: T;
         imagePath?: T;
+      };
+  displayOrder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "result-sets_select".
+ */
+export interface ResultSetsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  eventDate?: T;
+  showPhotos?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "result-classes_select".
+ */
+export interface ResultClassesSelect<T extends boolean = true> {
+  resultSet?: T;
+  title?: T;
+  slug?: T;
+  discipline?: T;
+  category?: T;
+  metric?: T;
+  entries?:
+    | T
+    | {
+        pos?: T;
+        rider?: T;
+        horse?: T;
+        club?: T;
+        ageGroup?: T;
+        prize?: T;
+        score?: T;
+        penalties?: T;
+        photo?: T;
+        photoPath?: T;
+        id?: T;
       };
   displayOrder?: T;
   updatedAt?: T;

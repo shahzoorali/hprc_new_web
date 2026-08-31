@@ -118,7 +118,7 @@ Create a `.env.local` file (see `.env.example`) for:
 
 ## 🗂️ CMS — Payload 3 (`/admin`)
 
-> **Status:** phases 0–2 complete on branch `feat/payload-cms`; **not yet deployed**.
+> **Status:** phases 0–3 complete on branch `feat/payload-cms`; **not yet deployed**.
 > Production still runs the pre-CMS site. News, blog posts, galleries, videos,
 > newsletters and the registrations dashboard are CMS-backed locally.
 
@@ -212,6 +212,30 @@ and `PAYMENT_API_BASE` are still required — they are the PHP hop.
 | `news` | `content/events.ts` → `news[]`, plus the news index/homepage/events strips | 23 |
 | `blog-posts` | the `blogPosts` array duplicated in `events/blogs/page.tsx` and `events/blogs/[slug]/page.tsx` | 3 |
 
+**Phase 3** — results, event listings and the block library
+
+| Collection | Source it replaced | Count |
+| --- | --- | --- |
+| `result-sets` + `result-classes` | `content/results-nq.ts`, `content/results-ec.ts` | 2 + 21 (89 entries) |
+| `events` | the `upcoming` and `pastHighlights` arrays in `content/events.ts` | 11 |
+
+`status` on an event now drives the listings: an event moves from
+`/events/upcoming` to `/events/past` by changing one field, rather than a
+developer editing two arrays. `linkOverride` preserves the existing cards that
+point at results pages rather than `/events/<slug>`.
+
+**Importing results.** `/admin/import-results` takes the scoring spreadsheet for
+one class, shows exactly how each column was read, and only writes after you
+look at the preview. Import **replaces** a class's entries, which is also how a
+correction is applied after prize-giving. Column aliases are accepted (place →
+pos, faults → penalties, percentage → score), and a dressage score written as
+`66.12` or `66.12%` is stored as `0.6612` so the site still prints 66.12%. Run
+`npx tsx scripts/test-csv-import.ts` to exercise the parser.
+
+**The block library** (`src/blocks/`) is 15 blocks; all but four wrap components
+that already exist in `src/components/ui/`, so a CMS-built page renders the same
+markup a coded one does. `contentBlocks` is the smaller set offered on articles.
+
 **Phase 2** — the three gallery pages, 1,643 lines of hardcoded arrays
 
 | Collection | Source it replaced | Count |
@@ -243,6 +267,11 @@ Club & Facilities tab, so a video's identity is its id *and* its title.
 **Images.** Every image field accepts either an upload or a legacy `/public`
 path (`src/fields/image.ts`). The ~323 MB of existing assets keep their paths and
 are not re-uploaded; renderers prefer an upload and fall back to the path.
+
+The eleven hand-built event pages under `events/*` are likewise still served
+from code, for the same reason — only their listing metadata moved. Rebuilding
+one from blocks is per-page work: delete the coded page and the CMS
+`events/[slug]` route takes over.
 
 The 19 hand-built pages under `events/news/*` are **still served from code** —
 they are static routes and Next resolves them ahead of the new
