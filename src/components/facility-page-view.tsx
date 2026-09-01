@@ -1,5 +1,11 @@
 "use client";
 
+// Shared view for every sports-centre facility page.
+//
+// Lifted verbatim from the old sports-centre/tennis/page.tsx, then pointed at
+// CMS data. All eight facility pages had an identical component sequence and
+// differed only in copy and images, so this one component plus the [facilityId]
+// route replaces 1,625 lines across eight near-duplicate files.
 import Image from "next/image";
 import { useState } from "react";
 
@@ -8,19 +14,10 @@ import { PageHero } from "@/components/ui/page-hero";
 import { PricingTable } from "@/components/ui/pricing-table";
 import { RulesSection } from "@/components/ui/rules-section";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { saunaContent } from "@/content/sauna";
+import type { FacilityPageData } from "@/lib/facilities";
 
-export default function SaunaPage() {
-  const galleryImages = [
-    {
-      src: "/documents/gallery/sauna/Sauna.jpg",
-      alt: "HPRC Sauna Facility",
-    },
-    {
-      src: "/documents/gallery/sauna/Sauna_2.jpg",
-      alt: "HPRC Sauna Room",
-    },
-  ];
+export function FacilityPageView({ facility }: { facility: FacilityPageData }) {
+  const galleryImages = facility.galleryImages;
 
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
@@ -30,24 +27,24 @@ export default function SaunaPage() {
       {/* Hero Section */}
       <div className="container pt-12">
         <PageHero
-          eyebrow={saunaContent.hero.eyebrow}
-          title={saunaContent.hero.title}
-          description={saunaContent.hero.description}
+          eyebrow={facility.hero.eyebrow}
+          title={facility.hero.title}
+          description={facility.hero.description}
           actions={[
             { label: "Book a Session", href: "/contact", variant: "primary" },
             { label: "View All Facilities", href: "/sports-centre", variant: "outline" },
           ]}
-          backgroundImage="/documents/gallery/sauna/Bg-Home-020.jpg"
+          backgroundImage={facility.hero.backgroundImage}
         />
       </div>
 
       {/* Overview */}
       <section className="container space-y-6">
         <p className="text-sm text-gray-700 md:text-base leading-relaxed">
-          Fill out the form to enroll and enjoy the benefits of our sauna facility.
+          {facility.overviewText}
         </p>
         <a
-          href="#"
+          href={facility.formUrl ?? "#"}
           className="inline-flex items-center gap-2 text-sm font-semibold text-brand-600 hover:text-brand-700 transition-colors"
         >
           <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -66,12 +63,12 @@ export default function SaunaPage() {
       <section className="container space-y-8 sm:space-y-12">
         <SectionHeading
           eyebrow="Operating Hours"
-          title="Sauna Timings"
+          title={facility.timingsTitle ?? `${facility.name} Timings`}
           description="Plan your visit according to our schedule. Morning and evening sessions available."
           align="left"
         />
         <div className="grid gap-6 sm:gap-8 md:grid-cols-2">
-          {saunaContent.timings.map((timing) => (
+          {facility.timings.map((timing) => (
             <div
               key={timing.label}
               className="p-6 rounded-2xl border-2 border-brand-200 bg-gradient-to-br from-brand-50/30 to-white hover:border-brand-300 hover:shadow-lg transition-all duration-300"
@@ -87,13 +84,13 @@ export default function SaunaPage() {
       <section className="container space-y-8">
         <SectionHeading
           eyebrow="Membership"
-          title={saunaContent.pricing.heading}
-          description="Choose from per-day options for members and guests."
+          title={facility.pricingHeading}
+          description={facility.pricingDescription ?? ""}
           align="left"
         />
-        <PricingTable heading={saunaContent.pricing.heading} rows={saunaContent.pricing.rows} />
+        <PricingTable heading={facility.pricingHeading} rows={facility.pricingRows} />
         <ul className="space-y-3 text-sm text-gray-600">
-          {saunaContent.pricing.notes.map((note) => (
+          {facility.pricingNotes.map((note) => (
             <li key={note} className="flex gap-3">
               <span className="mt-1 h-2 w-2 rounded-full bg-brand-500" aria-hidden="true" />
               <span>{note}</span>
@@ -104,21 +101,24 @@ export default function SaunaPage() {
 
       {/* Rules Section */}
       <RulesSection
-        categories={saunaContent.rules}
-        eyebrow="Safety First"
-        title="Sauna Rules & Etiquette"
-        description="Please follow these important safety guidelines to ensure a safe and enjoyable experience."
+        categories={facility.rules}
+        eyebrow={facility.rulesEyebrow ?? "Etiquette"}
+        title={facility.rulesTitle ?? `${facility.name} Rules & Etiquette`}
+        description={
+          facility.rulesDescription ??
+          "Please follow these guidelines to ensure a safe and enjoyable experience for everyone."
+        }
       />
 
       {/* Gallery Section */}
       <section className="container space-y-8">
         <SectionHeading
           eyebrow="Gallery"
-          title={saunaContent.gallery.heading}
-          description={saunaContent.gallery.description}
+          title={facility.galleryHeading ?? `${facility.name} Gallery`}
+          description={facility.galleryDescription ?? ""}
           align="left"
         />
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {galleryImages.map((image, index) => (
             <div
               key={index}
@@ -133,7 +133,7 @@ export default function SaunaPage() {
                 alt={image.alt}
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-110"
-                sizes="(max-width: 640px) 100vw, 50vw"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               {/* Click indicator */}
@@ -168,9 +168,10 @@ export default function SaunaPage() {
       {/* CTA Section */}
       <section className="container">
         <div className="rounded-3xl bg-gradient-to-r from-brand-600 to-brand-700 p-8 sm:p-12 text-center text-white shadow-xl">
-          <h2 className="text-2xl sm:text-3xl font-bold mb-4">Ready to Relax?</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold mb-4">Ready to Play?</h2>
           <p className="text-sm sm:text-base text-white/90 mb-6 max-w-2xl mx-auto">
-            Contact us to book a session or learn more about our sauna facilities.
+            Contact us to book a court, enroll in coaching programs, or learn more about our tennis
+            facilities.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a

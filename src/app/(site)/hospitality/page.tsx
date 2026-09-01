@@ -3,9 +3,10 @@ import Link from "next/link";
 
 import { PageHero } from "@/components/ui/page-hero";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { hospitalityContent } from "@/content/hospitality";
+import { getHospitality } from "@/lib/pages";
 
-export default function HospitalityPage() {
+export default async function HospitalityPage() {
+  const hospitalityContent = await getHospitality();
   return (
     <div className="space-y-16 sm:space-y-20 pb-16 sm:pb-20">
       <div className="container pt-12 sm:pt-16">

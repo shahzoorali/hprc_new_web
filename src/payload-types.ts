@@ -70,6 +70,9 @@ export interface Config {
     news: News;
     'blog-posts': BlogPost;
     events: Event;
+    facilities: Facility;
+    programmes: Programme;
+    people: Person;
     albums: Album;
     'gallery-categories': GalleryCategory;
     videos: Video;
@@ -89,6 +92,9 @@ export interface Config {
     news: NewsSelect<false> | NewsSelect<true>;
     'blog-posts': BlogPostsSelect<false> | BlogPostsSelect<true>;
     events: EventsSelect<false> | EventsSelect<true>;
+    facilities: FacilitiesSelect<false> | FacilitiesSelect<true>;
+    programmes: ProgrammesSelect<false> | ProgrammesSelect<true>;
+    people: PeopleSelect<false> | PeopleSelect<true>;
     albums: AlbumsSelect<false> | AlbumsSelect<true>;
     'gallery-categories': GalleryCategoriesSelect<false> | GalleryCategoriesSelect<true>;
     videos: VideosSelect<false> | VideosSelect<true>;
@@ -107,8 +113,16 @@ export interface Config {
     defaultIDType: string;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    about: About;
+    hospitality: Hospitality;
+    membership: Membership;
+  };
+  globalsSelect: {
+    about: AboutSelect<false> | AboutSelect<true>;
+    hospitality: HospitalitySelect<false> | HospitalitySelect<true>;
+    membership: MembershipSelect<false> | MembershipSelect<true>;
+  };
   locale: null;
   widgets: {
     collections: CollectionsWidget;
@@ -715,6 +729,227 @@ export interface CtaBlock {
   blockType: 'cta';
 }
 /**
+ * Sports centre facilities and their pages.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "facilities".
+ */
+export interface Facility {
+  id: string;
+  name: string;
+  /**
+   * The page appears at /sports-centre/<slug>.
+   */
+  slug: string;
+  /**
+   * Order on the sports centre index.
+   */
+  displayOrder?: number | null;
+  cardDescription: string;
+  /**
+   * One-line hours shown on the card.
+   */
+  timingsSummary?: string | null;
+  highlights?:
+    | {
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  cardImage?: {
+    /**
+     * Preferred. Alt text and sizes come from the media library.
+     */
+    image?: (string | null) | Media;
+    /**
+     * Path to a file already in /public. Only used when no upload is set.
+     */
+    imagePath?: string | null;
+  };
+  hero: {
+    eyebrow?: string | null;
+    title: string;
+    description: string;
+    /**
+     * Preferred. Alt text and sizes come from the media library.
+     */
+    background?: (string | null) | Media;
+    /**
+     * Path to a file already in /public. Only used when no upload is set.
+     */
+    backgroundPath?: string | null;
+  };
+  /**
+   * The short line above the enrolment form link.
+   */
+  overviewText?: string | null;
+  /**
+   * Enrolment form download. Leave blank to hide the link.
+   */
+  formUrl?: string | null;
+  /**
+   * Section heading, e.g. "Tennis Court Timings".
+   */
+  timingsTitle?: string | null;
+  timings?:
+    | {
+        /**
+         * Morning, Evening…
+         */
+        label: string;
+        time: string;
+        id?: string | null;
+      }[]
+    | null;
+  pricingHeading?: string | null;
+  pricingDescription?: string | null;
+  pricingRows?:
+    | {
+        label: string;
+        price: string;
+        gst?: string | null;
+        total?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  pricingNotes?:
+    | {
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  rulesEyebrow?: string | null;
+  rulesTitle?: string | null;
+  rulesDescription?: string | null;
+  rules?:
+    | {
+        category: string;
+        items?:
+          | {
+              text: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  galleryHeading?: string | null;
+  galleryDescription?: string | null;
+  /**
+   * Drag to reorder.
+   */
+  galleryImages?:
+    | {
+        /**
+         * Preferred. Alt text and sizes come from the media library.
+         */
+        image?: (string | null) | Media;
+        /**
+         * Path to a file already in /public. Only used when no upload is set.
+         */
+        imagePath?: string | null;
+        /**
+         * Alt text for the legacy path above. Ignored when an upload is used.
+         */
+        imageAlt?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "programmes".
+ */
+export interface Programme {
+  id: string;
+  title: string;
+  /**
+   * The page appears at /programmes/<slug>.
+   */
+  slug: string;
+  excerpt: string;
+  /**
+   * Printed verbatim, e.g. "Tue - Sun - 6:00 AM to 10:00 AM".
+   */
+  schedule?: string | null;
+  cardImage?: {
+    /**
+     * Preferred. Alt text and sizes come from the media library.
+     */
+    image?: (string | null) | Media;
+    /**
+     * Path to a file already in /public. Only used when no upload is set.
+     */
+    imagePath?: string | null;
+  };
+  highlights?:
+    | {
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Optional. Some programmes list several fee tables.
+   */
+  pricingTables?:
+    | {
+        heading: string;
+        rows?:
+          | {
+              label: string;
+              price: string;
+              gst?: string | null;
+              total?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Order on the programmes index.
+   */
+  displayOrder?: number | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * Committee members shown on the leadership page.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "people".
+ */
+export interface Person {
+  id: string;
+  name: string;
+  role: string;
+  group: 'leadership' | 'equestrian' | 'polo' | 'sportsArena';
+  /**
+   * Shown for managing committee members only.
+   */
+  bio?: string | null;
+  photo?: {
+    /**
+     * Preferred. Alt text and sizes come from the media library.
+     */
+    image?: (string | null) | Media;
+    /**
+     * Path to a file already in /public. Only used when no upload is set.
+     */
+    imagePath?: string | null;
+  };
+  /**
+   * Lower numbers appear first within a group.
+   */
+  displayOrder?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * Photo albums shown on the gallery page.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1019,6 +1254,18 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'events';
         value: string | Event;
+      } | null)
+    | ({
+        relationTo: 'facilities';
+        value: string | Facility;
+      } | null)
+    | ({
+        relationTo: 'programmes';
+        value: string | Programme;
+      } | null)
+    | ({
+        relationTo: 'people';
+        value: string | Person;
       } | null)
     | ({
         relationTo: 'albums';
@@ -1441,6 +1688,153 @@ export interface CtaBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "facilities_select".
+ */
+export interface FacilitiesSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  displayOrder?: T;
+  cardDescription?: T;
+  timingsSummary?: T;
+  highlights?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  cardImage?:
+    | T
+    | {
+        image?: T;
+        imagePath?: T;
+      };
+  hero?:
+    | T
+    | {
+        eyebrow?: T;
+        title?: T;
+        description?: T;
+        background?: T;
+        backgroundPath?: T;
+      };
+  overviewText?: T;
+  formUrl?: T;
+  timingsTitle?: T;
+  timings?:
+    | T
+    | {
+        label?: T;
+        time?: T;
+        id?: T;
+      };
+  pricingHeading?: T;
+  pricingDescription?: T;
+  pricingRows?:
+    | T
+    | {
+        label?: T;
+        price?: T;
+        gst?: T;
+        total?: T;
+        id?: T;
+      };
+  pricingNotes?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  rulesEyebrow?: T;
+  rulesTitle?: T;
+  rulesDescription?: T;
+  rules?:
+    | T
+    | {
+        category?: T;
+        items?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  galleryHeading?: T;
+  galleryDescription?: T;
+  galleryImages?:
+    | T
+    | {
+        image?: T;
+        imagePath?: T;
+        imageAlt?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "programmes_select".
+ */
+export interface ProgrammesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  excerpt?: T;
+  schedule?: T;
+  cardImage?:
+    | T
+    | {
+        image?: T;
+        imagePath?: T;
+      };
+  highlights?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  pricingTables?:
+    | T
+    | {
+        heading?: T;
+        rows?:
+          | T
+          | {
+              label?: T;
+              price?: T;
+              gst?: T;
+              total?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  displayOrder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "people_select".
+ */
+export interface PeopleSelect<T extends boolean = true> {
+  name?: T;
+  role?: T;
+  group?: T;
+  bio?: T;
+  photo?:
+    | T
+    | {
+        image?: T;
+        imagePath?: T;
+      };
+  displayOrder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "albums_select".
  */
 export interface AlbumsSelect<T extends boolean = true> {
@@ -1685,6 +2079,337 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about".
+ */
+export interface About {
+  id: string;
+  hero: {
+    eyebrow?: string | null;
+    title: string;
+    description: string;
+  };
+  overview?:
+    | {
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  mission?: string | null;
+  vision?: string | null;
+  values?:
+    | {
+        title: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * The plain list of what the club has on site.
+   */
+  facilities?:
+    | {
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Drag to reorder. Shown as the heritage timeline.
+   */
+  heritage?:
+    | {
+        year: string;
+        summary: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "hospitality".
+ */
+export interface Hospitality {
+  id: string;
+  hero: {
+    eyebrow?: string | null;
+    title: string;
+    description: string;
+  };
+  /**
+   * Drag to reorder.
+   */
+  venues?:
+    | {
+        name: string;
+        description: string;
+        /**
+         * The longer copy shown on the venue's own page.
+         */
+        fullDescription?: string | null;
+        highlights?:
+          | {
+              text: string;
+              id?: string | null;
+            }[]
+          | null;
+        menuLinks?:
+          | {
+              label: string;
+              href: string;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Banquet packages. Only the banquets venue uses these today.
+         */
+        menuPackages?:
+          | {
+              name: string;
+              price: string;
+              gst?: string | null;
+              features?:
+                | {
+                    text: string;
+                    id?: string | null;
+                  }[]
+                | null;
+              id?: string | null;
+            }[]
+          | null;
+        photo?: {
+          /**
+           * Preferred. Alt text and sizes come from the media library.
+           */
+          image?: (string | null) | Media;
+          /**
+           * Path to a file already in /public. Only used when no upload is set.
+           */
+          imagePath?: string | null;
+        };
+        brand?: {
+          /**
+           * Preferred. Alt text and sizes come from the media library.
+           */
+          image?: (string | null) | Media;
+          /**
+           * Path to a file already in /public. Only used when no upload is set.
+           */
+          imagePath?: string | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  experiences?:
+    | {
+        title: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "membership".
+ */
+export interface Membership {
+  id: string;
+  hero: {
+    eyebrow?: string | null;
+    title: string;
+    description: string;
+  };
+  steps?:
+    | {
+        title: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
+  benefits?:
+    | {
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  services?:
+    | {
+        label: string;
+        href: string;
+        id?: string | null;
+      }[]
+    | null;
+  faqs?:
+    | {
+        question: string;
+        answer: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about_select".
+ */
+export interface AboutSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        eyebrow?: T;
+        title?: T;
+        description?: T;
+      };
+  overview?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  mission?: T;
+  vision?: T;
+  values?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  facilities?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  heritage?:
+    | T
+    | {
+        year?: T;
+        summary?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "hospitality_select".
+ */
+export interface HospitalitySelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        eyebrow?: T;
+        title?: T;
+        description?: T;
+      };
+  venues?:
+    | T
+    | {
+        name?: T;
+        description?: T;
+        fullDescription?: T;
+        highlights?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        menuLinks?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              id?: T;
+            };
+        menuPackages?:
+          | T
+          | {
+              name?: T;
+              price?: T;
+              gst?: T;
+              features?:
+                | T
+                | {
+                    text?: T;
+                    id?: T;
+                  };
+              id?: T;
+            };
+        photo?:
+          | T
+          | {
+              image?: T;
+              imagePath?: T;
+            };
+        brand?:
+          | T
+          | {
+              image?: T;
+              imagePath?: T;
+            };
+        id?: T;
+      };
+  experiences?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "membership_select".
+ */
+export interface MembershipSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        eyebrow?: T;
+        title?: T;
+        description?: T;
+      };
+  steps?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  benefits?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  services?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  faqs?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { aboutContent } from "@/content/about";
+import { getAbout } from "@/lib/pages";
 
-export default function HeritagePage() {
+export default async function HeritagePage() {
+  const aboutContent = await getAbout();
   // Group heritage items by era for visual storytelling
   const eras = [
     { name: "The Golden Age", range: "1877-1896", items: aboutContent.heritage.slice(0, 3) },

@@ -5,8 +5,10 @@ import { PageHero } from "@/components/ui/page-hero";
 import { PricingTable } from "@/components/ui/pricing-table";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { sportsContent } from "@/content/sports";
+import { getFacilitySummaries } from "@/lib/facilities";
 
-export default function SportsCentrePage() {
+export default async function SportsCentrePage() {
+  const facilities = await getFacilitySummaries();
   return (
     <div className="space-y-10 sm:space-y-16 pb-10 sm:pb-16">
       <div className="container pt-12">
@@ -30,7 +32,7 @@ export default function SportsCentrePage() {
           description="Book courts, schedule lessons, or participate in leagues guided by certified coaches and partner academies."
         />
         <div className="grid gap-6 sm:gap-10 grid-cols-1 md:grid-cols-2">
-          {sportsContent.facilities.map((facility) => {
+          {facilities.map((facility) => {
             // All major facilities have dedicated pages, others use the dynamic route
             const facilityHref =
               facility.id === "swimming"

@@ -1,5 +1,9 @@
 import { revalidatePath } from "next/cache";
-import type { CollectionAfterChangeHook, CollectionAfterDeleteHook } from "payload";
+import type {
+  CollectionAfterChangeHook,
+  CollectionAfterDeleteHook,
+  GlobalAfterChangeHook,
+} from "payload";
 
 // Publishing in the CMS has to invalidate the rendered pages, otherwise editors
 // save a change and the site keeps serving the cached version. Before the CMS a
@@ -124,3 +128,50 @@ export const revalidateEventAfterDelete: CollectionAfterDeleteHook = ({ doc, req
   if (doc?.slug) safeRevalidate(`/events/${doc.slug}`);
   return doc;
 };
+
+export const revalidateFacility: CollectionAfterChangeHook = ({ doc, previousDoc, req }) => {
+  if (req.context?.skipRevalidate) return doc;
+  const paths = new Set<string>(["/sports-centre"]);
+  if (typeof doc?.slug === "string") paths.add(`/sports-centre/${doc.slug}`);
+  if (typeof previousDoc?.slug === "string") paths.add(`/sports-centre/${previousDoc.slug}`);
+  for (const p of paths) safeRevalidate(p);
+  return doc;
+};
+
+export const revalidateFacilityAfterDelete: CollectionAfterDeleteHook = ({ doc, req }) => {
+  if (req.context?.skipRevalidate) return doc;
+  safeRevalidate("/sports-centre");
+  if (doc?.slug) safeRevalidate(`/sports-centre/${doc.slug}`);
+  return doc;
+};
+
+export const revalidateProgramme: CollectionAfterChangeHook = ({ doc, previousDoc, req }) => {
+  if (req.context?.skipRevalidate) return doc;
+  const paths = new Set<string>(["/programmes"]);
+  if (typeof doc?.slug === "string") paths.add(`/programmes/${doc.slug}`);
+  if (typeof previousDoc?.slug === "string") paths.add(`/programmes/${previousDoc.slug}`);
+  for (const p of paths) safeRevalidate(p);
+  return doc;
+};
+
+export const revalidateProgrammeAfterDelete: CollectionAfterDeleteHook = ({ doc, req }) => {
+  if (req.context?.skipRevalidate) return doc;
+  safeRevalidate("/programmes");
+  if (doc?.slug) safeRevalidate(`/programmes/${doc.slug}`);
+  return doc;
+};
+
+// Globals revalidate a fixed set of paths — there is only ever one document, so
+// there is no slug to derive them from.
+export function revalidateGlobal(paths: string[]): GlobalAfterChangeHook {
+  return ({ doc, req }) => {
+    if (req.context?.skipRevalidate) return doc;
+    for (const p of paths) safeRevalidate(p);
+    return doc;
+  };
+}
+
+export const [revalidatePeople, revalidatePeopleAfterDelete] = makeRevalidator([
+  "/about/leadership",
+  "/about",
+]);

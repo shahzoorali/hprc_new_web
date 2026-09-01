@@ -118,7 +118,7 @@ Create a `.env.local` file (see `.env.example`) for:
 
 ## 🗂️ CMS — Payload 3 (`/admin`)
 
-> **Status:** phases 0–3 complete on branch `feat/payload-cms`; **not yet deployed**.
+> **Status:** phases 0–4 complete on branch `feat/payload-cms`; **not yet deployed**.
 > Production still runs the pre-CMS site. News, blog posts, galleries, videos,
 > newsletters and the registrations dashboard are CMS-backed locally.
 
@@ -211,6 +211,35 @@ and `PAYMENT_API_BASE` are still required — they are the PHP hop.
 | --- | --- | --- |
 | `news` | `content/events.ts` → `news[]`, plus the news index/homepage/events strips | 23 |
 | `blog-posts` | the `blogPosts` array duplicated in `events/blogs/page.tsx` and `events/blogs/[slug]/page.tsx` | 3 |
+
+**Phase 4** — sports centre, programmes and the remaining marketing pages
+
+| Collection / global | Source it replaced | Count |
+| --- | --- | --- |
+| `facilities` | `content/sports.ts` **and eight near-duplicate pages** | 8 |
+| `programmes` | `content/programmes.ts` | 6 |
+| `people` | `leadership` + `subCommittees` in `content/about.ts` | 15 |
+| `about` (global) | the rest of `content/about.ts` | — |
+| `hospitality` (global) | `content/hospitality.ts` | 3 venues |
+| `membership` (global) | `content/membership.ts` | — |
+
+The facility work is a consolidation, not just a migration. The eight pages
+under `sports-centre/` had an **identical component sequence** — hero, overview,
+timings, pricing, rules, gallery, CTA — and differed only in copy and images.
+They are now one `[facilityId]` route plus `components/facility-page-view.tsx`
+(lifted verbatim from the old tennis page), so adding a ninth facility is a CMS
+record rather than a new file. Route count went down 92 → 84 while prerendered
+pages went **up** 85 → 91.
+
+Some data only existed inside those page files — gallery arrays, hero
+backgrounds and section headings. It was extracted to
+`src/content/_migration/facility-pages.json`, which is now the only record of it
+outside the CMS; keep it.
+
+**Watch out:** a `"use client"` page must not import from `src/lib/*` that pulls
+in `@payload-config` — that drags `revalidatePath` into the browser bundle and
+the build fails for every page in the graph. Fetch in a server `page.tsx` and
+pass data down, as `hospitality/chukkers` and the galleries do.
 
 **Phase 3** — results, event listings and the block library
 

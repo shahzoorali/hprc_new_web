@@ -1,8 +1,9 @@
 import { PageHero } from "@/components/ui/page-hero";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { aboutContent } from "@/content/about";
+import { getAbout } from "@/lib/pages";
 
-export default function MissionVisionPage() {
+export default async function MissionVisionPage() {
+  const aboutContent = await getAbout();
   return (
     <div className="space-y-16 pb-16">
       <div className="container pt-12">

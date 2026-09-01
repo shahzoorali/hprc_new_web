@@ -2,15 +2,22 @@ import { notFound } from "next/navigation";
 
 import { PageHero } from "@/components/ui/page-hero";
 import { PricingTable } from "@/components/ui/pricing-table";
-import { programmesContent } from "@/content/programmes";
+import { getProgramme, getProgrammeSlugs } from "@/lib/facilities";
 
 type ProgrammePageProps = {
   params: Promise<{ programmeId: string }>;
 };
 
+export const dynamicParams = true;
+
+export async function generateStaticParams() {
+  const slugs = await getProgrammeSlugs();
+  return slugs.map((programmeId) => ({ programmeId }));
+}
+
 export default async function ProgrammeDetailPage({ params }: ProgrammePageProps) {
   const { programmeId } = await params;
-  const programme = programmesContent.programmes.find((item) => item.id === programmeId);
+  const programme = await getProgramme(programmeId);
 
   if (!programme) {
     notFound();

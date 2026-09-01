@@ -2,9 +2,10 @@ import Link from "next/link";
 
 import { PageHero } from "@/components/ui/page-hero";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { membershipContent } from "@/content/membership";
+import { getMembership } from "@/lib/pages";
 
-export default function MembershipPage() {
+export default async function MembershipPage() {
+  const membershipContent = await getMembership();
   return (
     <div className="space-y-24 pb-24">
       {/* Sophisticated Hero Section */}

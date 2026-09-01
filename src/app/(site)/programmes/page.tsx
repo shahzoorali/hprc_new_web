@@ -5,8 +5,10 @@ import { PageHero } from "@/components/ui/page-hero";
 import { PricingTable } from "@/components/ui/pricing-table";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { programmesContent } from "@/content/programmes";
+import { getProgrammes } from "@/lib/facilities";
 
-export default function ProgrammesPage() {
+export default async function ProgrammesPage() {
+  const programmes = await getProgrammes();
   return (
     <div className="space-y-16 sm:space-y-20 pb-16 sm:pb-20">
       {/* Enhanced Hero Section */}
@@ -98,7 +100,7 @@ export default function ProgrammesPage() {
 
         {/* Responsive Grid Layout - Stacked on mobile, alternating on desktop */}
         <div className="space-y-12 sm:space-y-16">
-          {programmesContent.programmes.map((programme, index) => {
+          {programmes.map((programme, index) => {
             const isEven = index % 2 === 0;
 
             return (

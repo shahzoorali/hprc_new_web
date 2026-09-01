@@ -1,12 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { aboutContent } from "@/content/about";
+import { getAbout, getCommittee } from "@/lib/pages";
 
-export default function LeadershipPage() {
+export default async function LeadershipPage() {
+  const aboutContent = await getAbout();
+  const committee = await getCommittee();
   // Separate president/VP from other members for featured display
-  const featuredLeaders = aboutContent.leadership.slice(0, 2);
-  const executiveMembers = aboutContent.leadership.slice(2);
+  const featuredLeaders = committee.leadership.slice(0, 2);
+  const executiveMembers = committee.leadership.slice(2);
 
   return (
     <div className="bg-gradient-to-b from-slate-50 to-white">
@@ -321,7 +323,7 @@ export default function LeadershipPage() {
                 </p>
               </div>
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                {aboutContent.subCommittees.equestrian.map((member, index) => {
+                {committee.subCommittees.equestrian.map((member, index) => {
                   // Get image path for member
                   const getImagePath = (name: string) => {
                     if (name === "Chaitanya R. Kumar") return "/images/chaitania.jpg";
@@ -406,7 +408,7 @@ export default function LeadershipPage() {
                 </p>
               </div>
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                {aboutContent.subCommittees.polo.map((member, index) => {
+                {committee.subCommittees.polo.map((member, index) => {
                   // Get image path for member
                   const getImagePath = (name: string) => {
                     if (name === "Chaitanya R. Kumar") return "/images/chaitania.jpg";
@@ -492,7 +494,7 @@ export default function LeadershipPage() {
                 </p>
               </div>
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                {aboutContent.subCommittees.sportsArena.map((member, index) => {
+                {committee.subCommittees.sportsArena.map((member, index) => {
                   // Get image path for member
                   const getImagePath = (name: string) => {
                     if (name === "Chaitanya R. Kumar") return "/images/chaitania.jpg";

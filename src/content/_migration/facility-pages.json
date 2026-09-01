@@ -1,0 +1,182 @@
+{
+ "tennis": {
+  "gallery": [
+   {
+    "src": "/documents/gallery/tennis/001.jpeg",
+    "alt": "HPRC Tennis Court"
+   },
+   {
+    "src": "/documents/gallery/tennis/002.jpg",
+    "alt": "HPRC Tennis Facilities"
+   },
+   {
+    "src": "/documents/gallery/tennis/003.jpg",
+    "alt": "HPRC Tennis Court Area"
+   },
+   {
+    "src": "/documents/gallery/tennis/004.jpg",
+    "alt": "HPRC Tennis Court View"
+   }
+  ],
+  "background": "/documents/gallery/tennis/TennisCourt01.jpg",
+  "timingsTitle": "Tennis Court Timings",
+  "pricingDescription": "Choose from flexible membership options. Per-day, monthly, and yearly plans available for adults and kids. Coaching programs available for all age groups.",
+  "overviewText": "Fill out the form below to enroll and avail our tennis court benefits."
+ },
+ "badminton": {
+  "gallery": [
+   {
+    "src": "/documents/gallery/badminton/bad1.jpeg",
+    "alt": "HPRC Badminton Court"
+   },
+   {
+    "src": "/documents/gallery/badminton/bad2.jpg",
+    "alt": "HPRC Badminton Facilities"
+   }
+  ],
+  "background": "/documents/gallery/badminton/bad.jpg",
+  "timingsTitle": "Badminton Court Timings",
+  "pricingDescription": "Choose from flexible membership options. Per-day, monthly, and yearly plans available for adults and kids. Coaching programs available for all age groups.",
+  "overviewText": "Fill out the form below to enroll and avail our badminton court benefits."
+ },
+ "squash": {
+  "gallery": [
+   {
+    "src": "/documents/gallery/squash/squ1.jpeg",
+    "alt": "HPRC Squash Court"
+   },
+   {
+    "src": "/documents/gallery/squash/squ2.jpeg",
+    "alt": "HPRC Squash Facilities"
+   },
+   {
+    "src": "/documents/gallery/squash/squ3.jpeg",
+    "alt": "HPRC Squash Court Area"
+   },
+   {
+    "src": "/documents/gallery/squash/squ4.jpeg",
+    "alt": "HPRC Squash Court View"
+   }
+  ],
+  "background": "/documents/gallery/squash/Bg-Home-015.jpg",
+  "timingsTitle": "Squash Court Timings",
+  "pricingDescription": "Choose from flexible membership options. Per-day, monthly, and yearly plans available for adults and kids. Coaching programs available for all age groups.",
+  "overviewText": "Fill out the form below to enroll and avail our squash court benefits."
+ },
+ "basketball": {
+  "gallery": [
+   {
+    "src": "/documents/gallery/basketball/ball1.jpeg",
+    "alt": "HPRC Basketball Court"
+   },
+   {
+    "src": "/documents/gallery/basketball/ball2.jpeg",
+    "alt": "HPRC Basketball Facilities"
+   },
+   {
+    "src": "/documents/gallery/basketball/ball3.jpeg",
+    "alt": "HPRC Basketball Court Area"
+   },
+   {
+    "src": "/documents/gallery/basketball/ball4.jpeg",
+    "alt": "HPRC Basketball Court View"
+   },
+   {
+    "src": "/documents/gallery/basketball/ball5.jpeg",
+    "alt": "HPRC Basketball Court"
+   }
+  ],
+  "background": "/documents/gallery/basketball/Bg-Home-017.jpg",
+  "timingsTitle": "Basketball Court Timings",
+  "pricingDescription": "Choose from flexible membership options. Per-day and monthly plans available for adults and kids. Special rates for day time and under lights bookings.",
+  "overviewText": "Fill out the form below to enroll and avail our basketball court benefits."
+ },
+ "swimming": {
+  "gallery": [
+   {
+    "src": "/documents/gallery/swimming/pool1.jpg",
+    "alt": "HPRC Swimming Pool"
+   },
+   {
+    "src": "/documents/gallery/swimming/pool2.jpg",
+    "alt": "HPRC Swimming Pool Facilities"
+   },
+   {
+    "src": "/documents/gallery/swimming/pool3.jpg",
+    "alt": "HPRC Swimming Pool Area"
+   },
+   {
+    "src": "/documents/gallery/swimming/pool4.jpg",
+    "alt": "HPRC Swimming Pool View"
+   }
+  ],
+  "background": "/documents/gallery/swimming/pool1m.jpg",
+  "timingsTitle": "Swimming Pool Timings",
+  "pricingDescription": "Choose from flexible membership options. Per-day, monthly, and yearly plans available for adults and kids. Coaching programs available for all age groups.",
+  "overviewText": "Fill out the form below to enroll and avail our swimming program benefits."
+ },
+ "futsal": {
+  "gallery": [
+   {
+    "src": "/documents/gallery/futsal/f01.jpeg",
+    "alt": "HPRC Futsal Court"
+   },
+   {
+    "src": "/documents/gallery/futsal/f02.jpeg",
+    "alt": "HPRC Futsal Facilities"
+   },
+   {
+    "src": "/documents/gallery/futsal/f03.jpeg",
+    "alt": "HPRC Futsal Court Area"
+   },
+   {
+    "src": "/documents/gallery/futsal/f04.jpg",
+    "alt": "HPRC Futsal Court View"
+   }
+  ],
+  "background": "/documents/gallery/futsal/Bg-Home-018.jpg",
+  "timingsTitle": "Futsal Court Timings",
+  "pricingDescription": "Book by the hour. Special rates for day time and under lights bookings.",
+  "overviewText": "Fill out the form to enroll and enjoy the benefits of our futsal ground."
+ },
+ "gym": {
+  "gallery": [
+   {
+    "src": "/documents/gallery/gym/g01.jpeg",
+    "alt": "HPRC Gym Facilities"
+   },
+   {
+    "src": "/documents/gallery/gym/g02.jpeg",
+    "alt": "HPRC Gym Equipment"
+   },
+   {
+    "src": "/documents/gallery/gym/g03.jpeg",
+    "alt": "HPRC Gym Area"
+   },
+   {
+    "src": "/documents/gallery/gym/g04.jpeg",
+    "alt": "HPRC Gym View"
+   }
+  ],
+  "background": "/documents/gallery/gym/Bg-Home-019.jpg",
+  "timingsTitle": "Gym Timings",
+  "pricingDescription": "Choose from flexible membership options. Per-day, monthly, and yearly plans available for adults and kids. Coaching programs available for all age groups.",
+  "overviewText": "Fill out the form below to enroll and avail our gym studio benefits."
+ },
+ "sauna": {
+  "gallery": [
+   {
+    "src": "/documents/gallery/sauna/Sauna.jpg",
+    "alt": "HPRC Sauna Facility"
+   },
+   {
+    "src": "/documents/gallery/sauna/Sauna_2.jpg",
+    "alt": "HPRC Sauna Room"
+   }
+  ],
+  "background": "/documents/gallery/sauna/Bg-Home-020.jpg",
+  "timingsTitle": "Sauna Timings",
+  "pricingDescription": "Choose from per-day options for members and guests.",
+  "overviewText": "Fill out the form to enroll and enjoy the benefits of our sauna facility."
+ }
+}

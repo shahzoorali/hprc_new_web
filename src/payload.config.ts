@@ -8,14 +8,20 @@ import { fileURLToPath } from "url";
 import { Albums } from "./collections/Albums";
 import { BlogPosts } from "./collections/BlogPosts";
 import { Events } from "./collections/Events";
+import { Facilities } from "./collections/Facilities";
 import { GalleryCategories } from "./collections/GalleryCategories";
 import { Media } from "./collections/Media";
 import { News } from "./collections/News";
 import { Newsletters } from "./collections/Newsletters";
+import { People } from "./collections/People";
+import { Programmes } from "./collections/Programmes";
 import { ResultClasses } from "./collections/ResultClasses";
 import { ResultSets } from "./collections/ResultSets";
 import { Users } from "./collections/Users";
 import { importResultsEndpoint } from "./endpoints/import-results";
+import { AboutGlobal } from "./globals/AboutGlobal";
+import { HospitalityGlobal } from "./globals/HospitalityGlobal";
+import { MembershipGlobal } from "./globals/MembershipGlobal";
 import { VideoCategories } from "./collections/VideoCategories";
 import { Videos } from "./collections/Videos";
 
@@ -58,6 +64,9 @@ export default buildConfig({
     News,
     BlogPosts,
     Events,
+    Facilities,
+    Programmes,
+    People,
     Albums,
     GalleryCategories,
     Videos,
@@ -68,6 +77,7 @@ export default buildConfig({
     Media,
     Users,
   ],
+  globals: [AboutGlobal, HospitalityGlobal, MembershipGlobal],
   endpoints: [importResultsEndpoint],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",

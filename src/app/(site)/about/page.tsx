@@ -1,9 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { aboutContent } from "@/content/about";
+import { getAbout, getCommittee } from "@/lib/pages";
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const aboutContent = await getAbout();
+  const committee = await getCommittee();
   return (
     <div className="bg-[#0a0a0a]">
       {/* Hero - Cinematic Split Screen */}
@@ -430,7 +432,7 @@ export default function AboutPage() {
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {aboutContent.leadership.slice(0, 3).map((leader, index) => {
+            {committee.leadership.slice(0, 3).map((leader, index) => {
               // Get image path for leader
               const getImagePath = (name: string) => {
                 if (name === "Chaitanya R. Kumar") return "/images/chaitania.jpg";

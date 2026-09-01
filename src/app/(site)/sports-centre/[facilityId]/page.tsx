@@ -1,46 +1,45 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { PageHero } from "@/components/ui/page-hero";
-import { sportsContent } from "@/content/sports";
+import { FacilityPageView } from "@/components/facility-page-view";
+import { getFacility, getFacilitySlugs } from "@/lib/facilities";
 
-type FacilityPageProps = {
-  params: { facilityId: string };
-};
+// Every sports-centre facility page. Replaces the eight hand-written pages that
+// used to sit alongside this route — they had an identical structure and are now
+// one component reading CMS data, so adding a facility is a CMS record.
 
-export default function FacilityPage({ params }: FacilityPageProps) {
-  const facility = sportsContent.facilities.find((item) => item.id === params.facilityId);
+export const dynamicParams = true;
+
+export async function generateStaticParams() {
+  const slugs = await getFacilitySlugs();
+  return slugs.map((facilityId) => ({ facilityId }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ facilityId: string }>;
+}): Promise<Metadata> {
+  const { facilityId } = await params;
+  const facility = await getFacility(facilityId);
+  if (!facility) return {};
+  return {
+    title: facility.hero.title,
+    description: facility.hero.description,
+  };
+}
+
+export default async function FacilityPage({
+  params,
+}: {
+  params: Promise<{ facilityId: string }>;
+}) {
+  const { facilityId } = await params;
+  const facility = await getFacility(facilityId);
 
   if (!facility) {
     notFound();
   }
 
-  return (
-    <div className="space-y-16 pb-16">
-      <div className="container pt-12">
-        <PageHero
-          eyebrow="Sports Centre"
-          title={facility.name}
-          description={facility.description}
-          actions={[
-            { label: "Book a Session", href: "/contact", variant: "primary" },
-            { label: "View All Facilities", href: "/sports-centre", variant: "outline" },
-          ]}
-        />
-      </div>
-
-      <section className="container space-y-4 text-sm text-gray-700">
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-600">
-          {facility.timings}
-        </p>
-        <ul className="space-y-3">
-          {facility.highlights.map((highlight) => (
-            <li key={highlight} className="flex gap-3">
-              <span className="mt-1 h-2 w-2 rounded-full bg-brand-500" aria-hidden="true" />
-              <span>{highlight}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
-    </div>
-  );
+  return <FacilityPageView facility={facility} />;
 }
