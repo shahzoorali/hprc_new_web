@@ -55,28 +55,11 @@ export function ImportResultsView() {
   useEffect(() => {
     (async () => {
       try {
-        const res = await fetch("/cms-api/result-classes?limit=300&depth=1&sort=displayOrder", {
+        const res = await fetch("/cms-api/result-class-index", {
           credentials: "include",
         });
         const data = await res.json();
-        setClasses(
-          (data.docs ?? []).map(
-            (d: {
-              id: string;
-              title: string;
-              entries?: unknown[];
-              resultSet?: { title?: string } | string;
-            }) => ({
-              id: d.id,
-              title: d.title,
-              setTitle:
-                typeof d.resultSet === "object" && d.resultSet !== null
-                  ? (d.resultSet.title ?? "")
-                  : "",
-              entryCount: d.entries?.length ?? 0,
-            }),
-          ),
-        );
+        setClasses(data.classes ?? []);
       } catch {
         setError("Could not load result classes.");
       }

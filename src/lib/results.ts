@@ -48,6 +48,18 @@ export interface ResultSetData {
   classes: ResultClass[];
 }
 
+async function loadClasses(setId: string | number) {
+  const payload = await getPayload({ config });
+  const classes = await payload.find({
+    collection: "result-classes",
+    where: { resultSet: { equals: setId } },
+    sort: "displayOrder",
+    limit: 500,
+    depth: 1,
+  });
+  return classes.docs.map(toResultClass);
+}
+
 // Look up a result set and its classes by set slug (e.g. "nq-2026").
 export async function getResultSet(slug: string): Promise<ResultSetData | null> {
   const payload = await getPayload({ config });
@@ -61,18 +73,25 @@ export async function getResultSet(slug: string): Promise<ResultSetData | null> 
   const set = sets.docs[0];
   if (!set) return null;
 
-  const classes = await payload.find({
-    collection: "result-classes",
-    where: { resultSet: { equals: set.id } },
-    sort: "displayOrder",
-    limit: 500,
-    depth: 1,
-  });
+  return {
+    title: set.title,
+    eventDate: set.eventDate ?? undefined,
+    showPhotos: Boolean(set.showPhotos),
+    classes: await loadClasses(set.id),
+  };
+}
+
+// Same, but from the relationship id a resultsBoard block stores. Avoids the
+// round trip of resolving the id to a slug only to look the slug up again.
+export async function getResultSetById(id: string): Promise<ResultSetData | null> {
+  const payload = await getPayload({ config });
+  const set = await payload.findByID({ collection: "result-sets", id, depth: 0 }).catch(() => null);
+  if (!set) return null;
 
   return {
     title: set.title,
     eventDate: set.eventDate ?? undefined,
     showPhotos: Boolean(set.showPhotos),
-    classes: classes.docs.map(toResultClass),
+    classes: await loadClasses(set.id),
   };
 }

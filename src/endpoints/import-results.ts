@@ -50,6 +50,13 @@ const COLUMN_ALIASES: Record<string, keyof ParsedEntry> = {
   award: "prize",
 };
 
+// Guard rails. The importer is behind a login, but an editor pasting a huge
+// file — or a compromised session — would otherwise have the whole thing parsed
+// into memory on a 3.7 GB box that runs the site, the payment app and PHP-FPM.
+// A class is a few dozen riders; these ceilings are far above any real sheet.
+export const MAX_CSV_BYTES = 1_000_000; // 1 MB
+export const MAX_ROWS = 2_000;
+
 // Minimal RFC4180-ish parser: handles quoted fields, escaped quotes and commas
 // inside quotes. Enough for a spreadsheet export, and avoids a dependency.
 export function parseCsv(text: string): string[][] {
@@ -120,8 +127,31 @@ function normaliseScore(raw: string): { value: string; warning?: string } {
 }
 
 export function parseResultsCsv(text: string): ParseResult {
+  const bytes = Buffer.byteLength(text, "utf8");
+  if (bytes > MAX_CSV_BYTES) {
+    return {
+      entries: [],
+      mapped: [],
+      ignored: [],
+      warnings: [
+        `That file is ${(bytes / 1_000_000).toFixed(1)} MB. Import one class at a time — the limit is ${MAX_CSV_BYTES / 1_000_000} MB.`,
+      ],
+    };
+  }
+
   const rows = parseCsv(text);
   const warnings: string[] = [];
+
+  if (rows.length > MAX_ROWS + 1) {
+    return {
+      entries: [],
+      mapped: [],
+      ignored: [],
+      warnings: [
+        `That sheet has ${rows.length - 1} rows. A single class takes at most ${MAX_ROWS}; check you are not importing the whole competition at once.`,
+      ],
+    };
+  }
 
   if (rows.length < 2) {
     return {
@@ -193,6 +223,12 @@ export const importResultsEndpoint: Endpoint = {
     const { classId, csv, dryRun } = body;
     if (!csv || typeof csv !== "string") {
       return Response.json({ error: "No CSV provided" }, { status: 400 });
+    }
+    if (Buffer.byteLength(csv, "utf8") > MAX_CSV_BYTES) {
+      return Response.json(
+        { error: `CSV too large — the limit is ${MAX_CSV_BYTES / 1_000_000} MB.` },
+        { status: 413 },
+      );
     }
 
     const parsed = parseResultsCsv(csv);

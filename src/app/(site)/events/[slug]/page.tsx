@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { RenderPageBlocks } from "@/components/blocks/render-page-blocks";
+import { RenderBlocks } from "@/components/blocks/render-blocks";
 import { getEventBySlug, getRenderableEventSlugs } from "@/lib/events";
 
 // CMS-built event pages.
@@ -46,7 +46,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
   return (
     <div className="pb-16">
       <div className="container pt-8">
-        <RenderPageBlocks blocks={event.body} />
+        <RenderBlocks blocks={event.body} />
       </div>
     </div>
   );

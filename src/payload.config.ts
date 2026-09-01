@@ -19,6 +19,7 @@ import { ResultClasses } from "./collections/ResultClasses";
 import { ResultSets } from "./collections/ResultSets";
 import { Users } from "./collections/Users";
 import { importResultsEndpoint } from "./endpoints/import-results";
+import { resultClassIndexEndpoint } from "./endpoints/result-class-index";
 import { AboutGlobal } from "./globals/AboutGlobal";
 import { HospitalityGlobal } from "./globals/HospitalityGlobal";
 import { MembershipGlobal } from "./globals/MembershipGlobal";
@@ -77,8 +78,14 @@ export default buildConfig({
     Media,
     Users,
   ],
+  // Cap uploads. Without this, one large file can fill the box's disk or push
+  // sharp past available memory while generating the Media image sizes.
+  // Newsletters are the largest legitimate upload and sit well under this.
+  upload: {
+    limits: { fileSize: 25 * 1024 * 1024 },
+  },
   globals: [AboutGlobal, HospitalityGlobal, MembershipGlobal],
-  endpoints: [importResultsEndpoint],
+  endpoints: [importResultsEndpoint, resultClassIndexEndpoint],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {
