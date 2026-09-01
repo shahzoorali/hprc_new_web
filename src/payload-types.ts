@@ -114,14 +114,20 @@ export interface Config {
   };
   fallbackLocale: null;
   globals: {
+    homepage: Homepage;
     about: About;
     hospitality: Hospitality;
     membership: Membership;
+    navigation: Navigation;
+    'site-settings': SiteSetting;
   };
   globalsSelect: {
+    homepage: HomepageSelect<false> | HomepageSelect<true>;
     about: AboutSelect<false> | AboutSelect<true>;
     hospitality: HospitalitySelect<false> | HospitalitySelect<true>;
     membership: MembershipSelect<false> | MembershipSelect<true>;
+    navigation: NavigationSelect<false> | NavigationSelect<true>;
+    'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
   };
   locale: null;
   widgets: {
@@ -2096,6 +2102,97 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   createdAt?: T;
 }
 /**
+ * The hero, pillars and highlights. News and results update themselves.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "homepage".
+ */
+export interface Homepage {
+  id: string;
+  /**
+   * The first slide is what the homepage shows. A slide with a video URL plays the video with the image as its fallback.
+   */
+  heroSlides?:
+    | {
+        /**
+         * YouTube URL. Leave blank for a still image.
+         */
+        video?: string | null;
+        /**
+         * Preferred. Alt text and sizes come from the media library.
+         */
+        image?: (string | null) | Media;
+        /**
+         * Path to a file already in /public. Only used when no upload is set.
+         */
+        imagePath?: string | null;
+        imageAlt?: string | null;
+        title: string;
+        /**
+         * Shown in the accent colour.
+         */
+        titleHighlight?: string | null;
+        description: string;
+        actions?:
+          | {
+              label: string;
+              href: string;
+              variant?: ('primary' | 'outline') | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  pillars?:
+    | {
+        title: string;
+        description: string;
+        href?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  highlights?:
+    | {
+        title: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
+  events?:
+    | {
+        title: string;
+        description: string;
+        href?: string | null;
+        /**
+         * Icon key used by the card, e.g. "book".
+         */
+        iconName?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  spotlight?: {
+    title?: string | null;
+    description?: string | null;
+    cta?: {
+      label?: string | null;
+      href?: string | null;
+    };
+  };
+  testimonials?:
+    | {
+        quote: string;
+        /**
+         * Attribution as printed, e.g. "Member since 2012".
+         */
+        author: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "about".
  */
@@ -2270,6 +2367,197 @@ export interface Membership {
   createdAt?: string | null;
 }
 /**
+ * The main menu. Drag items and links to reorder them.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "navigation".
+ */
+export interface Navigation {
+  id: string;
+  /**
+   * Top-level items, left to right.
+   */
+  primary?:
+    | {
+        label: string;
+        href: string;
+        /**
+         * Short caption under the label in the dropdown.
+         */
+        description?: string | null;
+        /**
+         * Leave empty for a plain link with no dropdown.
+         */
+        sections?:
+          | {
+              title?: string | null;
+              description?: string | null;
+              /**
+               * Preferred. Alt text and sizes come from the media library.
+               */
+              image?: (string | null) | Media;
+              /**
+               * Path to a file already in /public. Only used when no upload is set.
+               */
+              imagePath?: string | null;
+              items?:
+                | {
+                    label: string;
+                    href: string;
+                    id?: string | null;
+                  }[]
+                | null;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Optional highlighted panel on the right of the dropdown.
+         */
+        featured?: {
+          title?: string | null;
+          description?: string | null;
+          href?: string | null;
+          label?: string | null;
+          /**
+           * Preferred. Alt text and sizes come from the media library.
+           */
+          image?: (string | null) | Media;
+          /**
+           * Path to a file already in /public. Only used when no upload is set.
+           */
+          imagePath?: string | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Small links alongside the main menu, e.g. Pay Now.
+   */
+  utility?:
+    | {
+        label: string;
+        href: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * Phone, address, social links and the header buttons.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings".
+ */
+export interface SiteSetting {
+  id: string;
+  name: string;
+  /**
+   * The abbreviation, e.g. "HPRC".
+   */
+  shortName?: string | null;
+  /**
+   * Used as the default meta description and in the footer. Keep it under about 160 characters.
+   */
+  description: string;
+  phone: string;
+  email: string;
+  /**
+   * Shown on membership pages when different from the main address.
+   */
+  membershipEmail?: string | null;
+  address: string;
+  facebook?: string | null;
+  instagram?: string | null;
+  youtube?: string | null;
+  twitter?: string | null;
+  /**
+   * The call-to-action buttons in the site header.
+   */
+  primaryActions?:
+    | {
+        label: string;
+        href: string;
+        variant?: ('primary' | 'outline') | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "homepage_select".
+ */
+export interface HomepageSelect<T extends boolean = true> {
+  heroSlides?:
+    | T
+    | {
+        video?: T;
+        image?: T;
+        imagePath?: T;
+        imageAlt?: T;
+        title?: T;
+        titleHighlight?: T;
+        description?: T;
+        actions?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              variant?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  pillars?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        href?: T;
+        id?: T;
+      };
+  highlights?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  events?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        href?: T;
+        iconName?: T;
+        id?: T;
+      };
+  spotlight?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        cta?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+            };
+      };
+  testimonials?:
+    | T
+    | {
+        quote?: T;
+        author?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "about_select".
  */
@@ -2420,6 +2708,84 @@ export interface MembershipSelect<T extends boolean = true> {
     | {
         question?: T;
         answer?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "navigation_select".
+ */
+export interface NavigationSelect<T extends boolean = true> {
+  primary?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        description?: T;
+        sections?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              image?: T;
+              imagePath?: T;
+              items?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                    id?: T;
+                  };
+              id?: T;
+            };
+        featured?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              href?: T;
+              label?: T;
+              image?: T;
+              imagePath?: T;
+            };
+        id?: T;
+      };
+  utility?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings_select".
+ */
+export interface SiteSettingsSelect<T extends boolean = true> {
+  name?: T;
+  shortName?: T;
+  description?: T;
+  phone?: T;
+  email?: T;
+  membershipEmail?: T;
+  address?: T;
+  facebook?: T;
+  instagram?: T;
+  youtube?: T;
+  twitter?: T;
+  primaryActions?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        variant?: T;
         id?: T;
       };
   updatedAt?: T;

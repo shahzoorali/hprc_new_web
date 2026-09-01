@@ -1,5 +1,5 @@
-import { siteConfig } from "@/config/site";
-
+// Contact-page copy. Address, phone and email are NOT here — they come from
+// the Site settings global so there is one place to change them.
 export const contactContent = {
   hero: {
     eyebrow: "Contact",
@@ -7,10 +7,6 @@ export const contactContent = {
     description:
       "Our membership and events teams are here to help you schedule tours, riding assessments, sports bookings, and celebrations across the club.",
   },
-  address: siteConfig.contact.address,
-  phone: siteConfig.contact.phone,
-  email: siteConfig.contact.email,
-  membershipEmail: siteConfig.contact.membershipEmail,
   hours: [
     { label: "Riding Arenas", value: "6:00 – 10:00 AM & 4:00 – 9:00 PM" },
     { label: "Sports Centre", value: "6:00 – 10:00 AM & 4:00 – 9:00 PM" },

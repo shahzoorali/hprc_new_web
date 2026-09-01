@@ -4,7 +4,7 @@ import Script from "next/script";
 
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
-import { siteConfig } from "@/config/site";
+import { getSiteConfig } from "@/lib/site";
 
 import "../globals.css";
 
@@ -48,45 +48,48 @@ const cormorantGaramond = Cormorant_Garamond({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: {
-    default: `${siteConfig.name} | Equestrian, Polo & Sports Club in Hyderabad`,
-    template: `%s | ${siteConfig.name}`,
-  },
-  description: siteConfig.description,
-  applicationName: siteConfig.name,
-  metadataBase: new URL("https://www.hprc.in"),
-  icons: {
-    icon: [
-      { url: "/icon.png", sizes: "512x512", type: "image/png" },
-      { url: "/favicon.png", sizes: "48x48", type: "image/png" },
-    ],
-    shortcut: "/favicon.png",
-    apple: "/apple-icon.png",
-  },
-  openGraph: {
-    title: siteConfig.name,
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = await getSiteConfig();
+  return {
+    title: {
+      default: `${siteConfig.name} | Equestrian, Polo & Sports Club in Hyderabad`,
+      template: `%s | ${siteConfig.name}`,
+    },
     description: siteConfig.description,
-    type: "website",
-    url: "https://www.hprc.in",
-    locale: "en_IN",
-    siteName: siteConfig.name,
-    images: [
-      {
-        url: "/hprc_logo.png",
-        width: 527,
-        height: 457,
-        alt: "HPRC Logo",
-      },
-    ],
-  },
-  verification: {
-    google: "fKPeTpFmYjXGifr5MlL4B0OIjwJCxuqXxj1XEcYEE24",
-  },
-  other: {
-    "theme-color": "#e31e24",
-  },
-};
+    applicationName: siteConfig.name,
+    metadataBase: new URL("https://www.hprc.in"),
+    icons: {
+      icon: [
+        { url: "/icon.png", sizes: "512x512", type: "image/png" },
+        { url: "/favicon.png", sizes: "48x48", type: "image/png" },
+      ],
+      shortcut: "/favicon.png",
+      apple: "/apple-icon.png",
+    },
+    openGraph: {
+      title: siteConfig.name,
+      description: siteConfig.description,
+      type: "website",
+      url: "https://www.hprc.in",
+      locale: "en_IN",
+      siteName: siteConfig.name,
+      images: [
+        {
+          url: "/hprc_logo.png",
+          width: 527,
+          height: 457,
+          alt: "HPRC Logo",
+        },
+      ],
+    },
+    verification: {
+      google: "fKPeTpFmYjXGifr5MlL4B0OIjwJCxuqXxj1XEcYEE24",
+    },
+    other: {
+      "theme-color": "#e31e24",
+    },
+  };
+}
 
 export default function SiteLayout({
   children,

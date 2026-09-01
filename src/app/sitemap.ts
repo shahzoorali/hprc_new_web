@@ -1,5 +1,9 @@
 import { MetadataRoute } from "next";
 
+import { getBlogSlugs } from "@/lib/blogs";
+import { getFacilitySlugs, getProgrammeSlugs } from "@/lib/facilities";
+import { getNewsArticles } from "@/lib/news";
+
 const BASE = "https://www.hprc.in";
 const NOW = new Date();
 
@@ -16,35 +20,21 @@ const url = (
   priority,
 });
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  // ── Blog posts (dynamic) ───────────────────────────────────────────────────
-  const blogSlugs = [
-    "health-benefits-horse-riding",
-    "exercises-correct-horse-riding",
-    "5-tips-mentally-prepared-equestrian-competition",
-  ];
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  // Blogs, programmes and facilities now live in the CMS, so their slugs come
+  // from there rather than a hand-kept list that silently goes stale whenever
+  // someone publishes or renames one.
+  const [blogSlugs, programmeIds, facilityIds, news] = await Promise.all([
+    getBlogSlugs(),
+    getProgrammeSlugs(),
+    getFacilitySlugs(),
+    getNewsArticles(200),
+  ]);
 
-  // ── Riding & Polo programme IDs (dynamic) ─────────────────────────────────
-  const programmeIds = [
-    "start-riding",
-    "intermediate",
-    "polo",
-    "equestrian",
-    "stick-and-ball",
-    "chukkers",
-  ];
-
-  // ── Sports-centre facility IDs (dynamic) ──────────────────────────────────
-  const facilityIds = [
-    "tennis",
-    "badminton",
-    "squash",
-    "swimming",
-    "basketball",
-    "futsal",
-    "gym",
-    "sauna",
-  ];
+  // Only articles hosted on this site — press mentions link out.
+  const newsPaths = news
+    .map((a) => a.url)
+    .filter((u) => u.startsWith("/events/news/"));
 
   return [
     // ── Core ──────────────────────────────────────────────────────────────────
@@ -73,6 +63,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url("/programmes",              0.9,  "monthly"),
     url("/programmes/beginners",    0.8,  "monthly"),
     ...programmeIds.map((id) => url(`/programmes/${id}`, 0.7, "monthly")),
+
+    // ── News (from the CMS) ───────────────────────────────────────────────────
+    ...newsPaths.map((path) => url(path, 0.6, "monthly")),
 
     // ── Sports Centre ─────────────────────────────────────────────────────────
     url("/sports-centre",           0.9,  "monthly"),

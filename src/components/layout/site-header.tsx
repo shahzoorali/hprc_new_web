@@ -2,10 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { MainNav } from "@/components/navigation/main-nav";
-import { siteConfig } from "@/config/site";
-import { utilityNavigation } from "@/content/navigation";
+import { getNavigation, getSiteConfig } from "@/lib/site";
 
-export function SiteHeader() {
+export async function SiteHeader() {
+  const siteConfig = await getSiteConfig();
+  const { primary: primaryNavigation, utility: utilityNavigation } = await getNavigation();
   return (
     <header className="relative z-50 w-full transition-all duration-500">
       {/* Elegant Top Bar with Gradient */}
@@ -119,7 +120,7 @@ export function SiteHeader() {
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-8 px-6 py-4 sm:px-8 lg:py-5">
           {/* Centered Navigation */}
           <div className="flex-1">
-            <MainNav />
+            <MainNav primaryNavigation={primaryNavigation} />
           </div>
 
           {/* Elegant Action Buttons - Desktop */}

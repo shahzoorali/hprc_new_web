@@ -51,7 +51,8 @@ export const Newsletters: CollectionConfig = {
       type: "text",
       admin: {
         condition: (data) => data?.format === "html",
-        description: "Path to the reader page, e.g. /events/newsletters/hoofbeats-vol-02-august-2026",
+        description:
+          "Path to the reader page, e.g. /events/newsletters/hoofbeats-vol-02-august-2026",
       },
     },
     {
@@ -59,7 +60,7 @@ export const Newsletters: CollectionConfig = {
       type: "text",
       admin: {
         description:
-          "Optional CSS object-position for the cover, e.g. \"top\". Scans often read better anchored to the top.",
+          'Optional CSS object-position for the cover, e.g. "top". Scans often read better anchored to the top.',
       },
     },
     {

@@ -118,7 +118,7 @@ Create a `.env.local` file (see `.env.example`) for:
 
 ## 🗂️ CMS — Payload 3 (`/admin`)
 
-> **Status:** phases 0–4 complete on branch `feat/payload-cms`; **not yet deployed**.
+> **Status:** phases 0–5 complete on branch `feat/payload-cms`; **not yet deployed**.
 > Production still runs the pre-CMS site. News, blog posts, galleries, videos,
 > newsletters and the registrations dashboard are CMS-backed locally.
 
@@ -211,6 +211,44 @@ and `PAYMENT_API_BASE` are still required — they are the PHP hop.
 | --- | --- | --- |
 | `news` | `content/events.ts` → `news[]`, plus the news index/homepage/events strips | 23 |
 | `blog-posts` | the `blogPosts` array duplicated in `events/blogs/page.tsx` and `events/blogs/[slug]/page.tsx` | 3 |
+
+**Phase 5** — navigation, site settings, homepage and cleanup
+
+| Global | Source it replaced |
+| --- | --- |
+| `site-settings` | `src/config/site.ts` — phone, address, social links, header buttons |
+| `navigation` | `src/content/navigation.ts` — the whole mega menu |
+| `homepage` | `src/content/home.ts` — hero slides, pillars, highlights, testimonials |
+
+The header and footer are server components and fetch directly; `main-nav` is a
+client component (the mega menu holds state), so the menu is passed to it as a
+prop. The root layout's `metadata` became `generateMetadata()` so the club name
+and description come from the CMS.
+
+`sitemap.ts` no longer carries hand-kept slug lists for blogs, programmes and
+facilities — it reads them from the CMS, and now includes news articles too
+(64 → 98 URLs).
+
+### Deleting migrated content
+
+Once a module is in the CMS, **delete it along with the seed script that read
+it**. Leaving a stale copy is worse than removing it: someone edits
+`tennis.ts` to fix a typo and cannot work out why the site never changes. Note
+that `scripts/` is excluded from `tsconfig.json`, so a seed script left pointing
+at a deleted module will not fail the build — `seed-galleries.ts` sat broken from
+phase 2 until the phase 5 audit found it.
+
+Still in `src/content/`, deliberately:
+
+- the eleven event modules and `events.ts` — the hand-built event pages use them
+- `navigation.ts` and `results-types.ts` — types only, the data is in the CMS
+- `sports.ts`, `programmes.ts` — only the page hero/overview copy is left
+- `contact.ts` — page copy; address, phone and email now come from Site settings
+- `about.ts`, `home.ts`, `membership.ts` — used only by three dead
+  `*-redesign.tsx` drafts that are not routes and are imported nowhere. Delete
+  those drafts and these three modules can go too.
+- `_migration/facility-pages.json` — an archive of data that existed only inside
+  the eight deleted facility pages. Nothing reads it; keep it as a record.
 
 **Phase 4** — sports centre, programmes and the remaining marketing pages
 

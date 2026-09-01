@@ -3,8 +3,10 @@ import Link from "next/link";
 import { PageHero } from "@/components/ui/page-hero";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { contactContent } from "@/content/contact";
+import { getSiteConfig } from "@/lib/site";
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const siteConfig = await getSiteConfig();
   return (
     <div className="space-y-16 sm:space-y-24 pb-12 sm:pb-24">
       {/* Sophisticated Hero Section */}
@@ -54,7 +56,7 @@ export default function ContactPage() {
                     rel="noreferrer"
                     className="font-medium text-gray-700 hover:text-brand-600 transition-colors"
                   >
-                    {contactContent.address}
+                    {siteConfig.contact.address}
                   </Link>
                 </div>
               </div>
@@ -74,10 +76,10 @@ export default function ContactPage() {
                 <div className="flex-1">
                   <p className="font-semibold text-brand-900 mb-1">Phone</p>
                   <a
-                    href={`tel:${contactContent.phone.replace(/\s/g, "")}`}
+                    href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`}
                     className="font-medium text-gray-700 hover:text-brand-600 transition-colors"
                   >
-                    {contactContent.phone}
+                    {siteConfig.contact.phone}
                   </a>
                 </div>
               </div>
@@ -97,10 +99,10 @@ export default function ContactPage() {
                 <div className="flex-1">
                   <p className="font-semibold text-brand-900 mb-1">Email</p>
                   <a
-                    href={`mailto:${contactContent.email}`}
+                    href={`mailto:${siteConfig.contact.email}`}
                     className="font-medium text-gray-700 hover:text-brand-600 transition-colors"
                   >
-                    {contactContent.email}
+                    {siteConfig.contact.email}
                   </a>
                 </div>
               </div>
@@ -120,10 +122,10 @@ export default function ContactPage() {
                 <div className="flex-1">
                   <p className="font-semibold text-brand-900 mb-1">Membership</p>
                   <a
-                    href={`mailto:${contactContent.membershipEmail}`}
+                    href={`mailto:${siteConfig.contact.membershipEmail}`}
                     className="font-medium text-gray-700 hover:text-brand-600 transition-colors"
                   >
-                    {contactContent.membershipEmail}
+                    {siteConfig.contact.membershipEmail}
                   </a>
                 </div>
               </div>

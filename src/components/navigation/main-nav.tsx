@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useState, useRef, useEffect, useCallback } from "react";
 
-import { primaryNavigation, type NavChild, type NavItem } from "@/content/navigation";
+import type { NavChild, NavItem } from "@/content/navigation";
 
 import { MegaMenu } from "./mega-menu";
 
@@ -49,7 +49,7 @@ function Submenu({ items }: { items: NavChild[] }) {
   );
 }
 
-function DesktopNav() {
+function DesktopNav({ primaryNavigation }: { primaryNavigation: NavItem[] }) {
   const pathname = usePathname();
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -388,7 +388,7 @@ function MenuIcon({ name, className }: { name: string; className?: string }) {
   return <span className="text-lg font-bold">{getInitials(name)}</span>;
 }
 
-function MobileNav() {
+function MobileNav({ primaryNavigation }: { primaryNavigation: NavItem[] }) {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<NavItem | null>(null);
@@ -848,11 +848,11 @@ function MobileNav() {
   );
 }
 
-export function MainNav() {
+export function MainNav({ primaryNavigation }: { primaryNavigation: NavItem[] }) {
   return (
     <div className="flex w-full items-center justify-end gap-4">
-      <DesktopNav />
-      <MobileNav />
+      <DesktopNav primaryNavigation={primaryNavigation} />
+      <MobileNav primaryNavigation={primaryNavigation} />
     </div>
   );
 }

@@ -1,12 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { siteConfig } from "@/config/site";
-import { primaryNavigation, utilityNavigation } from "@/content/navigation";
+import { getNavigation, getSiteConfig } from "@/lib/site";
 
-const quickLinks = primaryNavigation.filter((item) => item.label !== "Home").slice(0, 5);
 
-export function SiteFooter() {
+
+
+export async function SiteFooter() {
+  const siteConfig = await getSiteConfig();
+  const { primary: primaryNavigation, utility: utilityNavigation } = await getNavigation();
+  const quickLinks = primaryNavigation.filter((item) => item.label !== "Home").slice(0, 5);
   const programmesNav = primaryNavigation.find((item) => item.label === "Programmes");
   const programmeLinks =
     programmesNav?.sections?.[0]?.items ?? programmesNav?.children ?? [];

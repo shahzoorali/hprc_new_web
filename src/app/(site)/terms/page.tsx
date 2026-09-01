@@ -2,9 +2,10 @@ import Link from "next/link";
 
 import { PageHero } from "@/components/ui/page-hero";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { siteConfig } from "@/config/site";
+import { getSiteConfig } from "@/lib/site";
 
-export default function TermsPage() {
+export default async function TermsPage() {
+  const siteConfig = await getSiteConfig();
   return (
     <div className="space-y-16 pb-16">
       <div className="container pt-12">

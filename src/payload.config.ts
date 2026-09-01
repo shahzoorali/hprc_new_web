@@ -21,8 +21,11 @@ import { Users } from "./collections/Users";
 import { importResultsEndpoint } from "./endpoints/import-results";
 import { resultClassIndexEndpoint } from "./endpoints/result-class-index";
 import { AboutGlobal } from "./globals/AboutGlobal";
+import { HomepageGlobal } from "./globals/HomepageGlobal";
 import { HospitalityGlobal } from "./globals/HospitalityGlobal";
 import { MembershipGlobal } from "./globals/MembershipGlobal";
+import { NavigationGlobal } from "./globals/NavigationGlobal";
+import { SiteSettings } from "./globals/SiteSettings";
 import { VideoCategories } from "./collections/VideoCategories";
 import { Videos } from "./collections/Videos";
 
@@ -84,7 +87,14 @@ export default buildConfig({
   upload: {
     limits: { fileSize: 25 * 1024 * 1024 },
   },
-  globals: [AboutGlobal, HospitalityGlobal, MembershipGlobal],
+  globals: [
+    HomepageGlobal,
+    AboutGlobal,
+    HospitalityGlobal,
+    MembershipGlobal,
+    NavigationGlobal,
+    SiteSettings,
+  ],
   endpoints: [importResultsEndpoint, resultClassIndexEndpoint],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",

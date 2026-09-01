@@ -11,7 +11,7 @@ import { CountryBadge } from "@/components/ui/country-badge";
 import { HeroVideo } from "@/components/ui/hero-video";
 import { eventsContent } from "@/content/events";
 import { getNewsArticles } from "@/lib/news";
-import { homeContent } from "@/content/home";
+import { getHomeContent } from "@/lib/site";
 import { worldArenaPoloChampionship2026 } from "@/content/world-arena-polo-championship-2026";
 
 const countryFlagComponents: Record<
@@ -26,6 +26,7 @@ const countryFlagComponents: Record<
 };
 
 export default async function HomePage() {
+  const homeContent = await getHomeContent();
   const newsArticles = await getNewsArticles(3);
   const heroSlide = homeContent.heroSlides[0];
   const featuredEvent = worldArenaPoloChampionship2026;
@@ -393,7 +394,7 @@ export default async function HomePage() {
               return (
                 <Link
                   key={pillar.title}
-                  href={pillar.href}
+                  href={pillar.href ?? "#"}
                   className="group relative overflow-hidden rounded-[2.5rem] bg-white shadow-xl border border-gray-100 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:border-brand-200 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:ring-offset-4"
                 >
                   {/* Elegant Image */}
