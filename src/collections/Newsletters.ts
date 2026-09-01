@@ -33,15 +33,49 @@ export const Newsletters: CollectionConfig = {
     },
     { name: "description", type: "textarea" },
     {
+      name: "format",
+      type: "radio",
+      required: true,
+      defaultValue: "pdf",
+      options: [
+        { label: "PDF — opens in the flipbook viewer", value: "pdf" },
+        { label: "Web edition — opens its own reader page", value: "html" },
+      ],
+      admin: {
+        description:
+          "Older editions are scanned PDFs. Hoofbeats is a web edition with its own page.",
+      },
+    },
+    {
+      name: "href",
+      type: "text",
+      admin: {
+        condition: (data) => data?.format === "html",
+        description: "Path to the reader page, e.g. /events/newsletters/hoofbeats-vol-02-august-2026",
+      },
+    },
+    {
+      name: "imagePosition",
+      type: "text",
+      admin: {
+        description:
+          "Optional CSS object-position for the cover, e.g. \"top\". Scans often read better anchored to the top.",
+      },
+    },
+    {
       name: "pdf",
       type: "upload",
       relationTo: "media",
-      admin: { description: "Upload the newsletter PDF. Preferred for anything new." },
+      admin: {
+        condition: (data) => data?.format !== "html",
+        description: "Upload the newsletter PDF. Preferred for anything new.",
+      },
     },
     {
       name: "pdfPath",
       type: "text",
       admin: {
+        condition: (data) => data?.format !== "html",
         description:
           "Legacy path under /public/documents/newsletters/. Only used when no PDF is uploaded above.",
       },

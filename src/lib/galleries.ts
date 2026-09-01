@@ -139,12 +139,16 @@ export async function getVideoGallery(): Promise<{
 // ---------- Newsletters ----------
 
 export interface LegacyNewsletter {
-  filename: string;
+  filename?: string;
   title: string;
   date: string;
-  pdfUrl: string;
+  /** "pdf" opens in the flipbook viewer; "html" routes to its own reader page. */
+  format: "pdf" | "html";
+  pdfUrl?: string;
+  href?: string;
   featuredImage: string;
   description: string;
+  imagePosition?: string;
 }
 
 export async function getNewsletters(): Promise<LegacyNewsletter[]> {
@@ -157,14 +161,18 @@ export async function getNewsletters(): Promise<LegacyNewsletter[]> {
   });
 
   return res.docs.map((doc: Newsletter) => {
-    const pdfUrl = fileUrl(doc.pdf, doc.pdfPath);
+    const format = doc.format === "html" ? "html" : "pdf";
+    const pdfUrl = format === "pdf" ? fileUrl(doc.pdf, doc.pdfPath) : "";
     return {
-      filename: pdfUrl.split("/").pop() ?? "",
+      filename: pdfUrl ? (pdfUrl.split("/").pop() ?? "") : undefined,
       title: doc.title,
       date: doc.date,
-      pdfUrl,
+      format,
+      pdfUrl: pdfUrl || undefined,
+      href: doc.href ?? undefined,
       featuredImage: fileUrl(doc.cover?.image, doc.cover?.imagePath),
       description: doc.description ?? "",
+      imagePosition: doc.imagePosition ?? undefined,
     };
   });
 }

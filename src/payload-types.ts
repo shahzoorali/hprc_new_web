@@ -1096,6 +1096,18 @@ export interface Newsletter {
   date: string;
   description?: string | null;
   /**
+   * Older editions are scanned PDFs. Hoofbeats is a web edition with its own page.
+   */
+  format: 'pdf' | 'html';
+  /**
+   * Path to the reader page, e.g. /events/newsletters/hoofbeats-vol-02-august-2026
+   */
+  href?: string | null;
+  /**
+   * Optional CSS object-position for the cover, e.g. "top". Scans often read better anchored to the top.
+   */
+  imagePosition?: string | null;
+  /**
    * Upload the newsletter PDF. Preferred for anything new.
    */
   pdf?: (string | null) | Media;
@@ -1909,6 +1921,9 @@ export interface NewslettersSelect<T extends boolean = true> {
   title?: T;
   date?: T;
   description?: T;
+  format?: T;
+  href?: T;
+  imagePosition?: T;
   pdf?: T;
   pdfPath?: T;
   cover?:

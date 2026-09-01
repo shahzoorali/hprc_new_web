@@ -2,9 +2,8 @@ import { getNewsletters } from "@/lib/galleries";
 
 import { NewslettersClient } from "./newsletters-client";
 
-// Server wrapper — the PDF flipbook viewer is client-only (it is dynamically
-// imported with ssr:false because of its canvas dependency), so the page shell
-// fetches and the client component renders.
+// Server wrapper — fetches the archive and hands it to the client component,
+// which owns the flipbook state.
 export default async function NewslettersPage() {
   const newsletters = await getNewsletters();
   return <NewslettersClient newsletters={newsletters} />;
