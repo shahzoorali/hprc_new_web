@@ -2,6 +2,7 @@ import config from "@payload-config";
 import { getPayload } from "payload";
 import "server-only";
 
+import { eventsContent } from "@/content/events";
 import type { EventHighlight, UpcomingEvent } from "@/content/events";
 import type { Event, Media } from "@/payload-types";
 
@@ -44,12 +45,22 @@ export async function getUpcomingEvents(): Promise<UpcomingEvent[]> {
     limit: 100,
     depth: 1,
   });
-  return res.docs.map((doc) => ({
+  const cmsDocs: UpcomingEvent[] = res.docs.map((doc) => ({
     title: doc.title,
     date: label(doc),
     description: doc.excerpt,
     link: href(doc),
   }));
+
+  // Combine with static upcoming events, filtering out duplicates by link or title
+  const staticDocs = eventsContent.upcoming || [];
+  const combined = [...cmsDocs];
+  for (const item of staticDocs) {
+    if (!combined.some((c) => (c.link && c.link === item.link) || c.title === item.title)) {
+      combined.push(item);
+    }
+  }
+  return combined;
 }
 
 export async function getPastEvents(): Promise<EventHighlight[]> {

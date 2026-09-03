@@ -262,7 +262,15 @@ export const eventsContent = {
       imageUrl: "/documents/news/sauryaram-varma-equestrian.webp",
     },
   ] satisfies NewsArticle[],
-  upcoming: [] as UpcomingEvent[],
+  upcoming: [
+    {
+      title: "National Qualifier (NQ) — October 2026",
+      date: "14 – 16 October 2026",
+      description:
+        "Dressage and Show Jumping qualifier for the Junior National Equestrian Championship (JNEC) under the aegis of EFI in association with TSEA. Entries close 13 October 2026.",
+      link: "/events/oct-nq-2026",
+    },
+  ] as UpcomingEvent[],
   pastHighlights: [
     {
       title: "National Qualifier (NQ) 2026",
