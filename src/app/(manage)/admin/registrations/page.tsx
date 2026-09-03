@@ -65,8 +65,8 @@ export default async function AdminOverviewPage() {
   const ecStables = stats.ec?.stablesBooked ?? 0;
   // NQ August and EC share one camp ledger; October NQ has its own isolated ledger.
   const expectedAugustCampStables = nqStables + ecStables;
-  const augMismatch = stablingAug !== null && stablingAug.totalStablesBooked !== expectedAugustCampStables;
-  const octMismatch = stablingOct !== null && stablingOct.totalStablesBooked !== octNqStables;
+  const augMismatch = stablingAug !== null && typeof stablingAug.totalStablesBooked === "number" && stablingAug.totalStablesBooked !== expectedAugustCampStables;
+  const octMismatch = stablingOct !== null && typeof stablingOct.totalStablesBooked === "number" && stablingOct.totalStablesBooked !== octNqStables;
 
   return (
     <div className="space-y-6">
@@ -89,7 +89,7 @@ export default async function AdminOverviewPage() {
       {octMismatch ? (
         <section className="border border-brand-200 bg-brand-50 p-4 text-sm text-brand-800">
           <strong>October camp ledger out of sync.</strong> Registrations show {octNqStables}{" "}
-          stable box(es) requested, but the October camp ledger has {stablingOct.totalStablesBooked}. Availability below may be inaccurate — rebuild the ledger from the database.
+          stable box(es) requested, but the October camp ledger has {stablingOct.totalStablesBooked ?? 0}. Availability below may be inaccurate — rebuild the ledger from the database.
         </section>
       ) : null}
 
