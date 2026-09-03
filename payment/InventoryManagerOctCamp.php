@@ -96,11 +96,21 @@ class InventoryManagerOctCamp {
             }
         }
 
+        $totalStablesBooked = 0;
+        if (isset($data['bookings']) && is_array($data['bookings'])) {
+            foreach ($data['bookings'] as $b) {
+                $totalStablesBooked += (int)($b['stablesCount'] ?? $b['count'] ?? 0);
+            }
+        }
+
         return [
             'permanentCapacity' => $data['permanentCapacity'],
             'dailyAvailability' => $dailyAvailability,
             'minAvailable' => max(0, $minAvailable),
-            'lastUpdated' => isset($data['lastUpdated']) ? $data['lastUpdated'] : gmdate('c')
+            'lastUpdated' => isset($data['lastUpdated']) ? $data['lastUpdated'] : gmdate('c'),
+            'lastRebuiltFromDB' => isset($data['lastRebuiltFromDB']) ? $data['lastRebuiltFromDB'] : null,
+            'bookingsCount' => isset($data['bookings']) && is_array($data['bookings']) ? count($data['bookings']) : 0,
+            'totalStablesBooked' => $totalStablesBooked,
         ];
     }
 

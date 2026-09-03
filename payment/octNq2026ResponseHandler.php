@@ -80,21 +80,7 @@ if ($order_id) {
                     );
                 }
 
-                $redirect_url_early = '/events/oct-nq-2026/success?status=' . urlencode($order_status) .
-                                      '&order_id=' . urlencode($order_id) .
-                                      '&amount=' . urlencode($mer_amount) .
-                                      '&tracking_id=' . urlencode($tracking_id) .
-                                      '&status_message=' . urlencode($status_message);
-                header("Location: " . $redirect_url_early);
-                header("Content-Length: 0");
-                header("Connection: close");
-                if (function_exists('ob_get_level') && ob_get_level() > 0) {
-                    @ob_end_flush();
-                }
-                @flush();
-                if (function_exists('fastcgi_finish_request')) {
-                    fastcgi_finish_request();
-                }
+
 
                 $webhook_url = "https://script.google.com/macros/s/AKfycbx7Mdp6_XTnil1Kny4A7c1O9BJDbXBqoVMDcf-G2sKVQpbkTKTKlTowpPi3N9z_zVjX/exec";
                 $ageProofLink = !empty($row['ageProofPath']) ? "https://hprc.in/payment/view_proof.php?file=" . urlencode(basename($row['ageProofPath'])) : "";
@@ -161,33 +147,81 @@ if ($order_id) {
                 $adminBody = get_admin_notification_body($emailData, $order_id, $tracking_id);
                 send_hprc_email('info@hprc.co.in', 'HPRC Admin', $adminSubject, $adminBody);
 
-                $fullData = [];
-                for($i = 0; $i < $dataSize; $i++) {
-                    $information=explode('=',$decryptValues[$i]);
-                    $fullData[$information[0]] = isset($information[1]) ? $information[1] : '';
-                }
-                $fullData['merchant_param1'] = $row['clubName'];
-                $fullData['merchant_param2'] = $row['dob'];
-                $fullData['merchant_param3'] = implode(", ", $readableEvents);
-                $fullData['merchant_param4'] = implode(" | ", $readableHorses);
-                $fullData['merchant_param5'] = "Stables: {$row['stablingType']} ({$row['stablingCount']}) from {$row['stablingFrom']} to {$row['stablingTo']}";
-                $fullData['delivery_name']   = $row['parentName'];
-                $fullData['billing_notes']   = "Emergency: {$row['emergencyContact']} ({$row['emergencyRelation']})";
-                $fullData['age_proof_link']  = $ageProofLink;
-                $fullData['age_proof_link2'] = $ageProofLink2;
-                $fullData['efi_rider_id']    = $row['efiRiderId'];
-                $fullData['is_indian']       = $row['isIndian'];
-                $fullData['event_horse_efi'] = $row['eventHorseEfi'];
-                $fullData['edition']         = 'HPRC NQ October 2026';
+                $webhook_url = "https://script.google.com/macros/s/AKfycbx7Mdp6_XTnil1Kny4A7c1O9BJDbXBqoVMDcf-G2sKVQpbkTKTKlTowpPi3N9z_zVjX/exec";
+                $baseFees = [
+                    1 => 3000, 2 => 3000, 3 => 3000, 4 => 3000,
+                    5 => 3000, 6 => 3000, 7 => 3000, 8 => 3000,
+                    9 => 1000
+                ];
 
-                $ch = curl_init($webhook_url);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fullData));
-                curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-                curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-                $webhook_response = curl_exec($ch);
-                curl_close($ch);
+                $eventTotal = 0;
+                foreach ($selectedIds as $id) {
+                    $base = isset($baseFees[$id]) ? $baseFees[$id] : 3000;
+                    $count = isset($horseData[$id]) ? (is_array($horseData[$id]) ? count($horseData[$id]) : 1) : 1;
+                    $eventTotal += $base * $count;
+                }
+
+                $stablingBalance = (float)$mer_amount - $eventTotal;
+                $isFirstRow = true;
+
+                foreach ($selectedIds as $id) {
+                    $category = isset($eventMapping[$id]) ? $eventMapping[$id] : "Event #$id";
+                    $horses = isset($horseData[$id]) ? (is_array($horseData[$id]) ? $horseData[$id] : [$horseData[$id]]) : ["N/A"];
+                    $regs = isset($efiData[$id]) ? (is_array($efiData[$id]) ? $efiData[$id] : [$efiData[$id]]) : [];
+                    $base = isset($baseFees[$id]) ? $baseFees[$id] : 3000;
+
+                    foreach ($horses as $jumpIdx => $horse) {
+                        $displayAmount = $base;
+                        if ($isFirstRow) {
+                            $displayAmount += $stablingBalance;
+                            $isFirstRow = false;
+                        }
+
+                        $isMultiple = count($horses) > 1;
+                        $jumpLabel = $isMultiple ? " - Horse " . ($jumpIdx + 1) : "";
+
+                        $webhookData = array(
+                            "edition" => "HPRC NQ October 2026",
+                            "name" => $row['name'],
+                            "dob" => $row['dob'],
+                            "parentName" => $row['parentName'],
+                            "address" => $row['address'],
+                            "mobile" => $row['mobile'],
+                            "email" => $row['email'],
+                            "emergencyContact" => $row['emergencyContact'],
+                            "emergencyRelation" => $row['emergencyRelation'],
+                            "clubName" => $row['clubName'],
+                            "efiRiderId" => $row['efiRiderId'],
+                            "events" => $category . $jumpLabel,
+                            "eventHorses" => $horse,
+                            "horseEfiReg" => isset($regs[$jumpIdx]) ? $regs[$jumpIdx] : "",
+                            "stablingType" => $row['stablingType'],
+                            "stablingCount" => $row['stablingCount'],
+                            "stablingFrom" => $row['stablingFrom'],
+                            "stablingTo" => $row['stablingTo'],
+                            "ageProofLink" => $ageProofLink,
+                            "ageProofLink2" => $ageProofLink2,
+                            "amount" => $displayAmount,
+                            "tracking_id" => $tracking_id . " (#$id)"
+                        );
+
+                        $ch = curl_init($webhook_url);
+                        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($webhookData));
+                        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+                        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+                        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+                        curl_exec($ch);
+                        curl_close($ch);
+                    }
+                }
+                header("Location: /events/oct-nq-2026/success?status=" . urlencode($order_status) .
+                                      "&order_id=" . urlencode($order_id) .
+                                      "&amount=" . urlencode($mer_amount) .
+                                      "&tracking_id=" . urlencode($tracking_id) .
+                                      "&status_message=" . urlencode($status_message));
+                exit;
             }
         } else {
             $redirect_url_failed = '/events/oct-nq-2026/success?status=' . urlencode($order_status) .

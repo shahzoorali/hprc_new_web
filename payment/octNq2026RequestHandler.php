@@ -158,22 +158,6 @@ if ($amount <= 0) {
 
     $conn->query("UPDATE nq_oct_2026 SET order_status='Success', payment_mode='COMPLIMENTARY', trans_date='".date('Y-m-d H:i:s')."', status_message='Cheat Code Used' WHERE id='$order_id'");
 
-    $redirect_url_early = '/events/oct-nq-2026/success?status=Success' .
-                          '&order_id=' . urlencode($order_id) .
-                          '&amount=0' .
-                          '&tracking_id=COMPLIMENTARY' .
-                          '&status_message=' . urlencode('Cheat Code Used');
-    header("Location: " . $redirect_url_early);
-    header("Content-Length: 0");
-    header("Connection: close");
-    if (function_exists('ob_get_level') && ob_get_level() > 0) {
-        @ob_end_flush();
-    }
-    @flush();
-    if (function_exists('fastcgi_finish_request')) {
-        fastcgi_finish_request();
-    }
-
     $webhook_url = "https://script.google.com/macros/s/AKfycbx7Mdp6_XTnil1Kny4A7c1O9BJDbXBqoVMDcf-G2sKVQpbkTKTKlTowpPi3N9z_zVjX/exec";
     $ageProofLink = !empty($ageProofPath) ? "https://hprc.in/payment/view_proof.php?file=" . urlencode(basename($ageProofPath)) : "";
     $ageProofLink2 = !empty($ageProofPath2) ? "https://hprc.in/payment/view_proof.php?file=" . urlencode(basename($ageProofPath2)) : "";
@@ -187,84 +171,67 @@ if ($amount <= 0) {
     $selectedIds = json_decode($selectedEvents, true) ?: [];
     $horseData = json_decode($eventHorses, true) ?: [];
     $efiData = json_decode($eventHorseEfi, true) ?: [];
-    $readableEvents = []; $readableHorses = [];
+
+    $webhookPayloads = [];
+    $readableEvents = []; 
+    $readableHorses = [];
 
     foreach ($selectedIds as $id) {
         $category = isset($eventMapping[$id]) ? $eventMapping[$id] : "Event #$id";
         $readableEvents[] = $category;
         $horses = isset($horseData[$id]) ? (is_array($horseData[$id]) ? $horseData[$id] : [$horseData[$id]]) : ["N/A"];
-        $efis = isset($efiData[$id]) ? (is_array($efiData[$id]) ? $efiData[$id] : [$efiData[$id]]) : [];
+        $regs = isset($efiData[$id]) ? (is_array($efiData[$id]) ? $efiData[$id] : [$efiData[$id]]) : [];
 
         $formattedHorses = [];
         $isMultiple = count($horses) > 1;
         foreach ($horses as $idx => $hName) {
             $label = $isMultiple ? ("Horse " . ($idx + 1) . ": " . $hName) : $hName;
-            if (!empty($efis[$idx])) {
-                $label .= " (EFI: " . $efis[$idx] . ")";
+            $efiStr = isset($regs[$idx]) ? $regs[$idx] : "";
+            if (!empty($efiStr)) {
+                $label .= " (EFI: " . $efiStr . ")";
             }
             $formattedHorses[] = $label;
+
+            $jumpLabel = $isMultiple ? " - Horse " . ($idx + 1) : "";
+            $webhookPayloads[] = array(
+                "edition" => "HPRC NQ October 2026",
+                "name" => $name,
+                "dob" => $dob,
+                "parentName" => $parentName,
+                "address" => $address,
+                "mobile" => $mobile,
+                "email" => $email,
+                "emergencyContact" => $emergencyContact,
+                "emergencyRelation" => $emergencyRelation,
+                "clubName" => $clubName,
+                "efiRiderId" => $efiRiderId,
+                "events" => $category . $jumpLabel,
+                "eventHorses" => $hName,
+                "horseEfiReg" => $efiStr,
+                "stablingType" => $stablingType,
+                "stablingCount" => $stablingCount,
+                "stablingFrom" => $stablingFrom,
+                "stablingTo" => $stablingTo,
+                "amount" => "0 (COMP)",
+                "tracking_id" => "COMPLIMENTARY (#$id)",
+                "ageProofLink" => $ageProofLink,
+                "ageProofLink2" => $ageProofLink2
+            );
         }
         $readableHorses[] = $category . ": [" . implode(" | ", $formattedHorses) . "]";
     }
 
-    $fullData = [
-        'order_id' => $order_id,
-        'tracking_id' => 'COMPLIMENTARY',
-        'bank_ref_no' => 'N/A',
-        'order_status' => 'Success',
-        'failure_message' => 'Cheat Code Used',
-        'payment_mode' => 'COMPLIMENTARY',
-        'card_name' => 'N/A',
-        'status_code' => 'N/A',
-        'status_message' => 'Cheat Code Used',
-        'currency' => 'INR',
-        'amount' => 0,
-        'billing_name' => $name,
-        'billing_address' => $address,
-        'billing_city' => '',
-        'billing_state' => '',
-        'billing_zip' => '',
-        'billing_country' => 'India',
-        'billing_tel' => $mobile,
-        'billing_email' => $email,
-        'delivery_name' => $parentName,
-        'delivery_address' => '',
-        'delivery_city' => '',
-        'delivery_state' => '',
-        'delivery_zip' => '',
-        'delivery_country' => '',
-        'delivery_tel' => $emergencyContact,
-        'merchant_param1' => $clubName,
-        'merchant_param2' => $dob,
-        'merchant_param3' => implode(", ", $readableEvents),
-        'merchant_param4' => implode(" | ", $readableHorses),
-        'merchant_param5' => "Stables: $stablingType ($stablingCount) from $stablingFrom to $stablingTo",
-        'vault' => 'N',
-        'offer_type' => 'null',
-        'offer_code' => 'null',
-        'discount_value' => '0.0',
-        'mer_amount' => 0,
-        'eci_value' => 'null',
-        'retry' => 'N',
-        'response_code' => '0',
-        'billing_notes' => "Emergency: $emergencyContact ($emergencyRelation)",
-        'trans_date' => date('d/m/Y H:i:s'),
-        'age_proof_link' => $ageProofLink,
-        'age_proof_link2' => $ageProofLink2,
-        'efi_rider_id' => $efiRiderId,
-        'is_indian' => $isIndian,
-        'event_horse_efi' => $eventHorseEfi,
-        'edition' => 'HPRC NQ October 2026'
-    ];
-
-    $ch = curl_init($webhook_url);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fullData));
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-    $webhook_response = curl_exec($ch);
-    curl_close($ch);
+    foreach ($webhookPayloads as $payload) {
+        $ch = curl_init($webhook_url);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+        curl_exec($ch);
+        curl_close($ch);
+    }
 
     $emailData = [
         'name' => $name,
@@ -298,6 +265,12 @@ if ($amount <= 0) {
     $adminBody = get_admin_notification_body($emailData, $order_id, 'COMPLIMENTARY');
     send_hprc_email('info@hprc.co.in', 'HPRC Admin', $adminSubject, $adminBody);
 
+    $redirect_url = '/events/oct-nq-2026/success?status=Success' .
+                    '&order_id=' . urlencode($order_id) .
+                    '&amount=0' .
+                    '&tracking_id=COMPLIMENTARY' .
+                    '&status_message=' . urlencode('Cheat Code Used');
+    header("Location: " . $redirect_url);
     exit;
 }
 ?>
