@@ -153,15 +153,9 @@ if ($order_id) {
 
                 $userSubject = "Entry Confirmation - National Qualifier (NQ) October 2026 - Order #$order_id";
                 $userBody = get_success_email_body($row['name'], $order_id, $mer_amount, $tracking_id, $emailData);
-                $attachments = [];
                 $etiquettePath = __DIR__ . '/../public/events/oct-nq2026/HPRC_National_Qualifier_2026_Etiquette_Conduct_Guidelines.pdf';
-                if (file_exists($etiquettePath)) {
-                    $attachments[] = [
-                        'path' => $etiquettePath,
-                        'name' => 'HPRC_National_Qualifier_2026_Etiquette_Conduct_Guidelines.pdf'
-                    ];
-                }
-                send_hprc_email($row['email'], $row['name'], $userSubject, $userBody, $attachments);
+                $attachment = file_exists($etiquettePath) ? $etiquettePath : null;
+                send_hprc_email($row['email'], $row['name'], $userSubject, $userBody, "", $attachment);
 
                 $adminSubject = "New Paid Entry: National Qualifier October 2026 - {$row['name']} (Order #$order_id)";
                 $adminBody = get_admin_notification_body($emailData, $order_id, $tracking_id);
