@@ -141,3 +141,13 @@ export async function getStablingSnapshot(): Promise<StablingSnapshot | null> {
     return null;
   }
 }
+
+export async function getOctStablingSnapshot(): Promise<StablingSnapshot | null> {
+  try {
+    const res = await fetch(`${apiBase()}/api/stabling-available-oct-camp.php`, { cache: "no-store" });
+    if (!res.ok) return null;
+    return (await res.json()) as StablingSnapshot;
+  } catch {
+    return null;
+  }
+}

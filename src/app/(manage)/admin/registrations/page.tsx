@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { StatCard } from "@/components/admin/stat-card";
-import { EventStats, getStablingSnapshot, getStats } from "@/lib/admin-api";
+import { EventStats, getOctStablingSnapshot, getStablingSnapshot, getStats, StablingSnapshot } from "@/lib/admin-api";
 
 export const dynamic = "force-dynamic";
 
@@ -44,7 +44,11 @@ function relativeTime(iso: string | null): string {
 }
 
 export default async function AdminOverviewPage() {
-  const [stats, stabling] = await Promise.all([getStats("all"), getStablingSnapshot()]);
+  const [stats, stablingAug, stablingOct] = await Promise.all([
+    getStats("all"),
+    getStablingSnapshot(),
+    getOctStablingSnapshot(),
+  ]);
 
   const empty: EventStats = {
     total: 0,
@@ -57,10 +61,12 @@ export default async function AdminOverviewPage() {
   };
 
   const nqStables = stats.nq?.stablesBooked ?? 0;
+  const octNqStables = stats.oct_nq?.stablesBooked ?? 0;
   const ecStables = stats.ec?.stablesBooked ?? 0;
   // NQ August and EC share one camp ledger; October NQ has its own isolated ledger.
   const expectedAugustCampStables = nqStables + ecStables;
-  const ledgerMismatch = stabling !== null && stabling.totalStablesBooked !== expectedAugustCampStables;
+  const augMismatch = stablingAug !== null && stablingAug.totalStablesBooked !== expectedAugustCampStables;
+  const octMismatch = stablingOct !== null && stablingOct.totalStablesBooked !== octNqStables;
 
   return (
     <div className="space-y-6">
@@ -71,17 +77,19 @@ export default async function AdminOverviewPage() {
         </p>
       </div>
 
-      {stabling === null ? (
-        <section className="border border-brand-200 bg-brand-50 p-4 text-sm text-brand-800">
-          <strong>Stabling ledger unreachable.</strong> The overview couldn&apos;t load the shared
-          camp inventory — availability figures below may be missing or wrong until this recovers.
-        </section>
-      ) : ledgerMismatch ? (
+      {augMismatch ? (
         <section className="border border-brand-200 bg-brand-50 p-4 text-sm text-brand-800">
           <strong>August camp ledger out of sync.</strong> Registrations show {expectedAugustCampStables}{" "}
           stable box(es) requested ({nqStables} NQ Aug + {ecStables} EC), but the shared August camp ledger has{" "}
-          {stabling.totalStablesBooked}. Availability below may be inaccurate — rebuild the ledger
+          {stablingAug.totalStablesBooked}. Availability below may be inaccurate — rebuild the ledger
           from the database.
+        </section>
+      ) : null}
+
+      {octMismatch ? (
+        <section className="border border-brand-200 bg-brand-50 p-4 text-sm text-brand-800">
+          <strong>October camp ledger out of sync.</strong> Registrations show {octNqStables}{" "}
+          stable box(es) requested, but the October camp ledger has {stablingOct.totalStablesBooked}. Availability below may be inaccurate — rebuild the ledger from the database.
         </section>
       ) : null}
 
@@ -101,28 +109,67 @@ export default async function AdminOverviewPage() {
         stats={stats.ec ?? empty}
       />
 
-      {stabling ? (
+      {/* October Camp Stabling */}
+      {stablingOct ? (
         <section className="border border-neutral-200 bg-white p-5">
           <div className="mb-1 flex items-baseline justify-between">
             <h2 className="font-display text-lg font-bold text-neutral-900">
-              Stabling availability (shared camp)
+              Stabling availability — October Camp 2026
             </h2>
             <span className="text-xs text-neutral-500">
-              Capacity {stabling.permanentCapacity}/day · min available{" "}
-              <strong className="text-neutral-800">{stabling.minAvailable}</strong>
+              Capacity {stablingOct.permanentCapacity}/day · min available{" "}
+              <strong className="text-neutral-800">{stablingOct.minAvailable}</strong>
             </span>
           </div>
           <p className="mb-3 text-xs text-neutral-400">
-            Boxes occupied per day for August NQ &amp; EC (shared {stabling.permanentCapacity}-box
-            August camp) · October NQ uses a separate isolated camp ledger · ledger updated{" "}
-            {relativeTime(stabling.lastUpdated)}
-            {stabling.lastRebuiltFromDB
-              ? ` · last rebuilt from DB ${relativeTime(stabling.lastRebuiltFromDB)}`
+            Isolated camp ledger for October NQ 2026 · ledger updated{" "}
+            {relativeTime(stablingOct.lastUpdated)}
+            {stablingOct.lastRebuiltFromDB
+              ? ` · last rebuilt from DB ${relativeTime(stablingOct.lastRebuiltFromDB)}`
               : ""}
           </p>
           <div className="flex flex-wrap gap-2">
-            {Object.entries(stabling.dailyAvailability).map(([date, avail]) => {
-              const pct = stabling.permanentCapacity > 0 ? avail / stabling.permanentCapacity : 0;
+            {Object.entries(stablingOct.dailyAvailability).map(([date, avail]) => {
+              const pct = stablingOct.permanentCapacity > 0 ? avail / stablingOct.permanentCapacity : 0;
+              const tone =
+                avail === 0
+                  ? "border-brand-200 bg-brand-50 text-brand-800"
+                  : pct <= 0.2
+                    ? "border-gold-200 bg-gold-100 text-gold-500"
+                    : "border-neutral-200 bg-neutral-50 text-neutral-700";
+              return (
+                <div key={date} className={`border px-3 py-2 text-center ${tone}`}>
+                  <div className="text-[11px] font-medium">{date.slice(5)}</div>
+                  <div className="font-display text-base font-bold">{avail}</div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      ) : null}
+
+      {/* August Shared Camp Stabling */}
+      {stablingAug ? (
+        <section className="border border-neutral-200 bg-white p-5">
+          <div className="mb-1 flex items-baseline justify-between">
+            <h2 className="font-display text-lg font-bold text-neutral-900">
+              Stabling availability — August Camp 2026 (Shared)
+            </h2>
+            <span className="text-xs text-neutral-500">
+              Capacity {stablingAug.permanentCapacity}/day · min available{" "}
+              <strong className="text-neutral-800">{stablingAug.minAvailable}</strong>
+            </span>
+          </div>
+          <p className="mb-3 text-xs text-neutral-400">
+            Boxes occupied per day for August NQ &amp; EC (shared {stablingAug.permanentCapacity}-box camp) · ledger updated{" "}
+            {relativeTime(stablingAug.lastUpdated)}
+            {stablingAug.lastRebuiltFromDB
+              ? ` · last rebuilt from DB ${relativeTime(stablingAug.lastRebuiltFromDB)}`
+              : ""}
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {Object.entries(stablingAug.dailyAvailability).map(([date, avail]) => {
+              const pct = stablingAug.permanentCapacity > 0 ? avail / stablingAug.permanentCapacity : 0;
               const tone =
                 avail === 0
                   ? "border-brand-200 bg-brand-50 text-brand-800"
