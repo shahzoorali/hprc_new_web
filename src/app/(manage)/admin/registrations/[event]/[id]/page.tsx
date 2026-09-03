@@ -58,7 +58,7 @@ export default async function RegistrationDetailPage({
     notFound();
   }
 
-  const isNq = eventKey === "nq";
+  const isNq = eventKey === "nq" || eventKey === "oct_nq";
   const headshotUrl = rec.headshotPath
     ? `/api/admin/document?event=${eventKey}&dir=headshots&file=${encodeURIComponent(rec.headshotPath)}`
     : null;

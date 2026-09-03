@@ -58,15 +58,16 @@ export default async function AdminOverviewPage() {
 
   const nqStables = stats.nq?.stablesBooked ?? 0;
   const ecStables = stats.ec?.stablesBooked ?? 0;
-  const expectedStablesBooked = nqStables + ecStables;
-  const ledgerMismatch = stabling !== null && stabling.totalStablesBooked !== expectedStablesBooked;
+  // NQ August and EC share one camp ledger; October NQ has its own isolated ledger.
+  const expectedAugustCampStables = nqStables + ecStables;
+  const ledgerMismatch = stabling !== null && stabling.totalStablesBooked !== expectedAugustCampStables;
 
   return (
     <div className="space-y-6">
       <div>
         <h1 className="font-display text-2xl font-bold text-neutral-900">Overview</h1>
         <p className="mt-1 text-sm text-neutral-500">
-          Registrations and payments across the two open events.
+          Registrations and payments across all active events.
         </p>
       </div>
 
@@ -77,8 +78,8 @@ export default async function AdminOverviewPage() {
         </section>
       ) : ledgerMismatch ? (
         <section className="border border-brand-200 bg-brand-50 p-4 text-sm text-brand-800">
-          <strong>Stabling ledger out of sync.</strong> Registrations show {expectedStablesBooked}{" "}
-          stable box(es) requested ({nqStables} NQ + {ecStables} EC), but the shared camp ledger has{" "}
+          <strong>August camp ledger out of sync.</strong> Registrations show {expectedAugustCampStables}{" "}
+          stable box(es) requested ({nqStables} NQ Aug + {ecStables} EC), but the shared August camp ledger has{" "}
           {stabling.totalStablesBooked}. Availability below may be inaccurate — rebuild the ledger
           from the database.
         </section>
@@ -112,8 +113,9 @@ export default async function AdminOverviewPage() {
             </span>
           </div>
           <p className="mb-3 text-xs text-neutral-400">
-            Boxes occupied per day across both events (one shared {stabling.permanentCapacity}-box
-            camp) · ledger updated {relativeTime(stabling.lastUpdated)}
+            Boxes occupied per day for August NQ &amp; EC (shared {stabling.permanentCapacity}-box
+            August camp) · October NQ uses a separate isolated camp ledger · ledger updated{" "}
+            {relativeTime(stabling.lastUpdated)}
             {stabling.lastRebuiltFromDB
               ? ` · last rebuilt from DB ${relativeTime(stabling.lastRebuiltFromDB)}`
               : ""}
