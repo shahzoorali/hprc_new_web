@@ -193,7 +193,18 @@ if ($amount <= 0) {
         $category = isset($eventMapping[$id]) ? $eventMapping[$id] : "Event #$id";
         $readableEvents[] = $category;
         $horses = isset($horseData[$id]) ? (is_array($horseData[$id]) ? $horseData[$id] : [$horseData[$id]]) : ["N/A"];
-        $readableHorses[] = $category . ": (" . implode(", ", $horses) . ")";
+        $efis = isset($efiData[$id]) ? (is_array($efiData[$id]) ? $efiData[$id] : [$efiData[$id]]) : [];
+
+        $formattedHorses = [];
+        $isMultiple = count($horses) > 1;
+        foreach ($horses as $idx => $hName) {
+            $label = $isMultiple ? ("Horse " . ($idx + 1) . ": " . $hName) : $hName;
+            if (!empty($efis[$idx])) {
+                $label .= " (EFI: " . $efis[$idx] . ")";
+            }
+            $formattedHorses[] = $label;
+        }
+        $readableHorses[] = $category . ": [" . implode(" | ", $formattedHorses) . "]";
     }
 
     $fullData = [
