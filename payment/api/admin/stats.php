@@ -50,14 +50,18 @@ function admin_event_stats($conn, $cfg) {
 }
 
 $nqCfg = admin_event_config('nq');
+$octNqCfg = admin_event_config('oct_nq');
 $ecCfg = admin_event_config('ec');
 
 if ($event === 'nq') {
     echo json_encode(['nq' => admin_event_stats($conn, $nqCfg)]);
+} elseif ($event === 'oct_nq') {
+    echo json_encode(['oct_nq' => admin_event_stats($conn, $octNqCfg)]);
 } elseif ($event === 'ec') {
     echo json_encode(['ec' => admin_event_stats($conn, $ecCfg)]);
 } elseif ($event === 'all' || $event === '') {
     echo json_encode([
+        'oct_nq' => admin_event_stats($conn, $octNqCfg),
         'nq' => admin_event_stats($conn, $nqCfg),
         'ec' => admin_event_stats($conn, $ecCfg),
     ]);

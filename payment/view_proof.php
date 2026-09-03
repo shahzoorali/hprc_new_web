@@ -20,6 +20,7 @@ $searchPaths = [
     __DIR__ . "/uploads/ec2026/age_proofs/" . $filename,
     __DIR__ . "/uploads/ecaug2026/age_proofs/" . $filename,
     __DIR__ . "/uploads/nq2026/age_proofs/" . $filename,
+    __DIR__ . "/uploads/oct_nq2026/age_proofs/" . $filename,
     __DIR__ . "/../" . $file,
 ];
 

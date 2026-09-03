@@ -28,6 +28,9 @@ function admin_event_config($event) {
     if ($event === 'nq') {
         return ['table' => 'nq2026', 'map' => $NQ_EVENT_MAP, 'uploadDir' => 'nq2026'];
     }
+    if ($event === 'oct_nq') {
+        return ['table' => 'nq_oct_2026', 'map' => $NQ_EVENT_MAP, 'uploadDir' => 'oct_nq2026'];
+    }
     if ($event === 'ec') {
         return ['table' => 'ecaug2026', 'map' => $EC_EVENT_MAP, 'uploadDir' => 'ecaug2026'];
     }

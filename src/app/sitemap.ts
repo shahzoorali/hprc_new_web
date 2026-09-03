@@ -89,6 +89,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     url("/events/newsletters",      0.6,  "monthly"),
 
     // ── Active events (high priority — people are registering) ────────────────
+    url("/events/oct-nq-2026",      1.0,  "daily",   new Date("2026-09-03")),
     url("/events/nq-2026",          1.0,  "daily",   new Date("2026-06-23")),
     url("/events/2nd-equestrian-challenge-2026", 1.0, "daily", new Date("2026-06-23")),
 

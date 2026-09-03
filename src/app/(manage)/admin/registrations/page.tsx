@@ -85,7 +85,12 @@ export default async function AdminOverviewPage() {
       ) : null}
 
       <EventSummary
-        title="National Qualifier 2026"
+        title="National Qualifier — October 2026"
+        href="/admin/registrations/oct_nq"
+        stats={stats.oct_nq ?? empty}
+      />
+      <EventSummary
+        title="National Qualifier 2026 (August)"
         href="/admin/registrations/nq"
         stats={stats.nq ?? empty}
       />

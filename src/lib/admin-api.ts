@@ -5,7 +5,7 @@
 // only from server components / route handlers — never from a "use client" file.
 import "server-only";
 
-export type EventKey = "nq" | "ec";
+export type EventKey = "nq" | "oct_nq" | "ec";
 
 export interface EventEntry {
   id: number;
@@ -55,6 +55,7 @@ export interface EventStats {
 }
 
 export interface StatsResponse {
+  oct_nq?: EventStats;
   nq?: EventStats;
   ec?: EventStats;
 }

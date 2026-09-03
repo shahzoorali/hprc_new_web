@@ -40,6 +40,52 @@ export default async function HomePage() {
         imageAlt={heroSlide.imageAlt}
       />
 
+      {/* Featured Active Event — National Qualifier October 2026 */}
+      <section className="relative overflow-hidden bg-gradient-to-r from-brand-950 via-brand-900 to-neutral-950 text-white">
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute -top-24 -right-24 h-96 w-96 rounded-full bg-brand-500/20 blur-3xl" />
+          <div className="absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-brand-400/15 blur-3xl" />
+        </div>
+        <div className="container relative z-10 py-10 lg:py-14">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-8 rounded-3xl border border-brand-500/30 bg-white/5 p-8 lg:p-10 backdrop-blur-md shadow-2xl">
+            <div className="space-y-4 text-center lg:text-left max-w-2xl">
+              <div className="inline-flex items-center gap-2.5 rounded-full border border-brand-400/40 bg-brand-500/20 px-4 py-1.5 backdrop-blur-md">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-400"></span>
+                </span>
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-300 font-display">
+                  Entries Open · National Qualifier
+                </span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-display tracking-tight text-white">
+                National Qualifier (NQ) — October 2026
+              </h2>
+              <p className="text-white/80 text-sm sm:text-base leading-relaxed font-body">
+                14th to 16th October 2026 · Dressage &amp; Show Jumping qualifier for JNEC under the aegis of EFI in association with TSEA. Entries close 13 October.
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row items-center gap-4 flex-shrink-0">
+              <Link
+                href="/events/oct-nq-2026"
+                className="group inline-flex items-center justify-center gap-3 rounded-2xl bg-brand-500 px-8 py-4 text-base font-bold text-white shadow-xl shadow-brand-500/30 transition-all duration-300 hover:bg-brand-600 hover:-translate-y-0.5 hover:shadow-2xl hover:shadow-brand-500/50 font-display"
+              >
+                <span>Register Online</span>
+                <svg className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
+              <Link
+                href="/events/oct-nq-2026#schedule"
+                className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-6 py-4 text-sm font-bold text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/20 font-display"
+              >
+                Schedule &amp; Fees
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* August 2026 Results — NQ & EC */}
       <section className="relative overflow-hidden bg-white">
         <div className="container relative z-10 py-12 lg:py-20">

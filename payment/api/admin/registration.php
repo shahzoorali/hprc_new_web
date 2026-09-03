@@ -21,7 +21,7 @@ if (!$cfg || $id <= 0) {
 
 $table = $cfg['table'];
 $map   = $cfg['map'];
-$isNq  = $event === 'nq';
+$isNq  = ($event === 'nq' || $event === 'oct_nq');
 
 $stmt = $conn->prepare("SELECT * FROM `$table` WHERE id = ? LIMIT 1");
 $stmt->bind_param('i', $id);

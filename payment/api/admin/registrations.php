@@ -21,7 +21,7 @@ if (!$cfg) {
 
 $table = $cfg['table'];
 $map   = $cfg['map'];
-$isNq  = $event === 'nq';
+$isNq  = ($event === 'nq' || $event === 'oct_nq');
 
 $where = [];
 

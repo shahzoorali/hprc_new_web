@@ -8,7 +8,8 @@ import { EventKey, getRegistrations } from "@/lib/admin-api";
 export const dynamic = "force-dynamic";
 
 const EVENT_TITLES: Record<EventKey, string> = {
-  nq: "National Qualifier 2026",
+  oct_nq: "National Qualifier — October 2026",
+  nq: "National Qualifier 2026 (August)",
   ec: "Equestrian Challenge — August",
 };
 
@@ -33,7 +34,7 @@ export default async function EventListPage({
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const { event } = await params;
-  if (event !== "nq" && event !== "ec") {
+  if (event !== "nq" && event !== "oct_nq" && event !== "ec") {
     notFound();
   }
   const eventKey = event as EventKey;
