@@ -52,11 +52,12 @@ export async function SiteFooter() {
               
               <div className="relative z-10 flex flex-col items-center justify-center space-y-5 text-center">
                 <div className="relative h-20 w-36 flex-shrink-0 transition-transform duration-700 ease-out group-hover:scale-105">
-                  <Image 
-                    src="/TIPA.png" 
-                    alt="The Indian Polo Awards" 
-                    fill 
-                    className="object-contain drop-shadow-2xl" 
+                  <Image
+                    src="/TIPA.png"
+                    alt="The Indian Polo Awards"
+                    fill
+                    sizes="144px"
+                    className="object-contain drop-shadow-2xl"
                   />
                 </div>
                 

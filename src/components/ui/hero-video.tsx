@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 
 // Extract YouTube video ID from various YouTube URL formats
@@ -26,6 +27,23 @@ type HeroVideoProps = {
 
 export function HeroVideo({ videoUrl, fallbackImage, imageAlt = "Hero video" }: HeroVideoProps) {
   const videoId = extractYouTubeId(videoUrl);
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
+
+  useEffect(() => {
+    if (!videoId) return;
+
+    // Defer the YouTube embed (500+ KiB of JS/CSS) until after the page has
+    // become interactive so it doesn't compete with LCP/critical rendering.
+    const ric = (window as typeof window & { requestIdleCallback?: typeof requestIdleCallback })
+      .requestIdleCallback;
+    if (ric) {
+      const id = ric(() => setShouldLoadVideo(true), { timeout: 2000 });
+      return () => window.cancelIdleCallback(id);
+    }
+
+    const timer = window.setTimeout(() => setShouldLoadVideo(true), 1500);
+    return () => window.clearTimeout(timer);
+  }, [videoId]);
 
   return (
     <section className="relative min-h-[74vh] w-full overflow-hidden" aria-label="Hero section">
@@ -39,16 +57,16 @@ export function HeroVideo({ videoUrl, fallbackImage, imageAlt = "Hero video" }: 
             fill
             className="object-cover"
             priority
-            quality={90}
+            quality={75}
           />
         )}
 
-        {/* YouTube Video Background */}
-        {videoId && (
+        {/* YouTube Video Background - mounted after idle to keep it off the critical path */}
+        {videoId && shouldLoadVideo && (
           <div className="absolute inset-0 h-full w-full overflow-hidden">
             <iframe
               className="absolute left-1/2 top-1/2 h-[56.25vw] min-h-full w-[177.78vh] min-w-full -translate-x-1/2 -translate-y-1/2"
-              src={`https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1&mute=1&controls=0&playlist=${videoId}&playsinline=1&modestbranding=1&rel=0&showinfo=0&enablejsapi=1&iv_load_policy=3`}
+              src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&loop=1&mute=1&controls=0&playlist=${videoId}&playsinline=1&modestbranding=1&rel=0&showinfo=0&enablejsapi=1&iv_load_policy=3`}
               title={imageAlt}
               allow="autoplay; encrypted-media; accelerometer; gyroscope; picture-in-picture"
               allowFullScreen={false}

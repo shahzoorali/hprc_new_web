@@ -21,7 +21,7 @@ export const homeContent = {
   heroSlides: [
     {
       video: "https://youtu.be/-N4h3tTNhKo?si=8LeEguH--TrEupfi",
-      image: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=1920&q=80", // Fallback image
+      image: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=1920&q=75&auto=format", // Fallback image
       imageAlt: "Polo and equestrian sports",
       title: "Where every experience ",
       titleHighlight: "is extraordinary",
