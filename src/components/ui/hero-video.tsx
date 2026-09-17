@@ -32,8 +32,14 @@ export function HeroVideo({ videoUrl, fallbackImage, imageAlt = "Hero video" }: 
   useEffect(() => {
     if (!videoId) return;
 
-    // Defer the YouTube embed (500+ KiB of JS/CSS) until after the page has
-    // become interactive so it doesn't compete with LCP/critical rendering.
+    // Skip the YouTube embed entirely on small viewports: it's a muted,
+    // control-less decorative loop, and on mobile it's pure bandwidth/CPU
+    // cost (~845 KiB of YouTube JS/CSS) for something users can't interact
+    // with anyway. The fallback image stays as the permanent background.
+    if (!window.matchMedia("(min-width: 768px)").matches) return;
+
+    // Defer the YouTube embed until after the page has become interactive
+    // so it doesn't compete with LCP/critical rendering.
     const ric = (window as typeof window & { requestIdleCallback?: typeof requestIdleCallback })
       .requestIdleCallback;
     if (ric) {

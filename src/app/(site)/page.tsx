@@ -614,7 +614,8 @@ export default async function HomePage() {
             alt="Polo event"
             fill
             className="object-cover"
-            quality={90}
+            quality={50}
+            loading="lazy"
           />
           <div className="absolute inset-0 bg-gradient-to-br from-brand-600/97 via-brand-700/97 to-brand-600/97"></div>
           {/* Elegant texture overlay */}

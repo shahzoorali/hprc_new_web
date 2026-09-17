@@ -45,6 +45,11 @@ export function HeroSlider({ slides, autoPlayInterval = 5000 }: HeroSliderProps)
   const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
 
   useEffect(() => {
+    // Skip the decorative YouTube embeds entirely on small viewports — they're
+    // muted/control-less loops, pure bandwidth/CPU cost on mobile. Slides keep
+    // their still image as the permanent background there.
+    if (!window.matchMedia("(min-width: 768px)").matches) return;
+
     const ric = (window as typeof window & { requestIdleCallback?: typeof requestIdleCallback })
       .requestIdleCallback;
     if (ric) {
