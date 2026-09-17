@@ -61,9 +61,10 @@ export function HeroVideo({ videoUrl, fallbackImage, imageAlt = "Hero video" }: 
             src={fallbackImage}
             alt={imageAlt}
             fill
+            sizes="100vw"
             className="object-cover"
             priority
-            quality={75}
+            quality={60}
           />
         )}
 

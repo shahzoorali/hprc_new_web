@@ -97,6 +97,8 @@ export default async function HomePage() {
                   src="/images/ec2026/aamir-shahnawaz-1.jpg"
                   alt="Dressage at the National Qualifier 2026"
                   fill
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  quality={60}
                   className="object-cover object-center transition-transform duration-1000 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/70 to-neutral-900/20"></div>
@@ -141,6 +143,8 @@ export default async function HomePage() {
                   src="/images/ec2026/action-1.jpg"
                   alt="Show Jumping action at the HPRC Equestrian Challenge 2026"
                   fill
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  quality={60}
                   className="object-cover object-center transition-transform duration-1000 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/70 to-neutral-900/20"></div>
