@@ -31,6 +31,16 @@ export const eventsContent = {
   },
   news: [
     {
+      title: "HPRC International Tour 2026: Spain & USA",
+      date: "22 September, 2026",
+      source: "HPRC",
+      excerpt:
+        "HPRC represents India on the global stage across San Diego, Hawaii, and Spain. Featuring international matches at Lakeside Polo Club and historic international polo exchanges.",
+      url: "/events/news/hprc-international-tour-2026-spain-usa",
+      category: "International",
+      imageUrl: "https://s3.ap-south-1.amazonaws.com/hprc.in/media/gallery/tour2026/team_mounted.jpg",
+    },
+    {
       title: "Results — 2nd HPRC Equestrian Challenge 2026",
       date: "18 August, 2026",
       source: "HPRC",
