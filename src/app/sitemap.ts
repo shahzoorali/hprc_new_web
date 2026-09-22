@@ -92,6 +92,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     url("/events/oct-nq-2026",      1.0,  "daily",   new Date("2026-09-03")),
     url("/events/nq-2026",          1.0,  "daily",   new Date("2026-06-23")),
     url("/events/2nd-equestrian-challenge-2026", 1.0, "daily", new Date("2026-06-23")),
+    url("/events/telangana-state-championship-2026", 1.0, "daily", new Date("2026-09-23")),
 
     // ── Past / archived events ────────────────────────────────────────────────
     url("/events/equestrian-challenge-2026",           0.6, "monthly", new Date("2026-06-01")),

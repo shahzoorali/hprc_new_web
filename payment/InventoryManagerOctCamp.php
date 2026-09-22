@@ -213,6 +213,7 @@ class InventoryManagerOctCamp {
 
         $sources = [
             ['table' => 'nq_oct_2026', 'source' => 'oct_nq'],
+            ['table' => 'tsec2026',    'source' => 'tsec'],
         ];
 
         foreach ($sources as $src) {

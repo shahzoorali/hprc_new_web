@@ -280,6 +280,13 @@ export const eventsContent = {
         "Dressage and Show Jumping qualifier for the Junior National Equestrian Championship (JNEC) under the aegis of EFI in association with TSEA. Entries close 13 October 2026.",
       link: "/events/oct-nq-2026",
     },
+    {
+      title: "IInd Telangana State Equestrian Championship",
+      date: "16 – 18 October 2026",
+      description:
+        "Hacks, Dressage and Show Jumping hosted by HPRC in association with the Telangana State Equestrian Association (TSEA), immediately following the October National Qualifier. Standard entries close 15 October 2026.",
+      link: "/events/telangana-state-championship-2026",
+    },
   ] as UpcomingEvent[],
   pastHighlights: [
     {
