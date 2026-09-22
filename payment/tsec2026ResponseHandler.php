@@ -97,8 +97,9 @@ if ($order_id) {
                     fastcgi_finish_request();
                 }
 
-                // PLACEHOLDER — replace with this event's own Apps Script /exec URL before go-live.
-                $webhook_url = "https://script.google.com/macros/s/REPLACE_WITH_TSEC2026_DEPLOYMENT_ID/exec";
+                // Reuses the ecaug2026 spreadsheet's existing Apps Script deployment — the sheet
+                // was cleared and repurposed for this event, so the /exec URL didn't change.
+                $webhook_url = "https://script.google.com/macros/s/AKfycbynK3pTkRLw4Oqp04kAlX0dh0C7_ed6G8P8f3LNrdbpHMTpmI-Q64XyuBDNKMsnuJeN/exec";
                 $ageProofLink = !empty($row['ageProofPath']) ? "https://hprc.in/payment/view_proof.php?file=" . urlencode(basename($row['ageProofPath'])) : "";
 
                 $eventMapping = [

@@ -7,10 +7,10 @@
 // NOTE: CCAvenue credentials below are the shared HDFC MID (same as ec2026 /
 // ecaug2026). If a separate settlement account is desired, swap merchant_id/
 // working_key/access_code here and in tsec2026ResponseHandler.php.
-// NOTE: $webhook_url below is a PLACEHOLDER — create a Google Sheet + Apps
-// Script Web App deployment for this event (see memory: google-sheets-per-event
-// / google-sheets-setup-gotchas) and paste the /exec URL in before go-live.
-// Both this file and tsec2026ResponseHandler.php must point to the SAME URL.
+// NOTE: $webhook_url reuses the ecaug2026 spreadsheet's existing Apps Script
+// deployment — that sheet was cleared and repurposed for this event (old data
+// archived to a separate copy first), so the /exec URL didn't change. Both this
+// file and tsec2026ResponseHandler.php must point to the SAME URL.
 
 set_time_limit(120);
 ignore_user_abort(true);
@@ -167,8 +167,9 @@ $eventMapping = [
     16 => "Practice Round 80-90cm"
 ];
 
-// PLACEHOLDER — replace with this event's own Apps Script /exec URL before go-live.
-$webhook_url = "https://script.google.com/macros/s/REPLACE_WITH_TSEC2026_DEPLOYMENT_ID/exec";
+// Reuses the ecaug2026 spreadsheet's existing Apps Script deployment — the sheet
+// was cleared and repurposed for this event, so the /exec URL didn't change.
+$webhook_url = "https://script.google.com/macros/s/AKfycbynK3pTkRLw4Oqp04kAlX0dh0C7_ed6G8P8f3LNrdbpHMTpmI-Q64XyuBDNKMsnuJeN/exec";
 
 // --- COMPLIMENTARY / CHEAT CODE BYPASS ---
 if ($amount <= 0) {
