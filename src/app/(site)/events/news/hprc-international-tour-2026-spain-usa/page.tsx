@@ -9,7 +9,7 @@ import { SectionHeading } from "@/components/ui/section-heading";
 
 const S3 = "https://s3.ap-south-1.amazonaws.com/hprc.in/media/gallery/tour2026";
 
-// All gallery images for lightbox
+// All gallery images for lightbox (unique list)
 const galleryImages = [
   { src: `${S3}/team_mounted.jpg`, alt: "The touring side under lights at HPRC: Saif Attari, Chaitania R. Kumar and Arsalan Khan" },
   { src: `${S3}/team_standing.jpg`, alt: "Saif Attari, Chaitania R. Kumar and Arsalan Khan in HPRC India kit" },
@@ -73,7 +73,7 @@ export default function HPRCInternationalTour2026Page() {
           <div className="flex flex-col sm:flex-row justify-center items-center gap-8 sm:gap-16">
             <div className="relative w-64 h-48 sm:w-72 sm:h-56">
               <Image
-                src={`${S3}/fx_spain.jpg`}
+                src={`${S3}/fx_spain.png`}
                 alt="HPRC India vs Madrid Polo Club"
                 fill
                 className="object-contain"
@@ -82,7 +82,7 @@ export default function HPRCInternationalTour2026Page() {
             </div>
             <div className="relative w-64 h-48 sm:w-72 sm:h-56">
               <Image
-                src={`${S3}/fx_usa.jpg`}
+                src={`${S3}/fx_usa.png`}
                 alt="HPRC Polo vs Commonwealth Polo"
                 fill
                 className="object-contain"
@@ -348,33 +348,36 @@ export default function HPRCInternationalTour2026Page() {
           <SectionHeading
             eyebrow="Gallery"
             title="Tour 2026 Photography"
-            description="Images from the touring side and previous international outings"
+            description="Additional photographs from the team and international tour archive"
             align="center"
           />
-          <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
-            {galleryImages.map((image, index) => (
-              <div
-                key={index}
-                onClick={() => openLightbox(index)}
-                className="relative aspect-square rounded-xl overflow-hidden group cursor-pointer"
-              >
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
-                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="rounded-full bg-white/20 backdrop-blur-sm p-3">
-                    <svg className="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
-                    </svg>
+          <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+            {galleryImages.slice(7).map((image, index) => {
+              const globalIndex = index + 7;
+              return (
+                <div
+                  key={globalIndex}
+                  onClick={() => openLightbox(globalIndex)}
+                  className="relative aspect-square rounded-xl overflow-hidden group cursor-pointer"
+                >
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    sizes="(max-width: 640px) 50vw, 25vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="rounded-full bg-white/20 backdrop-blur-sm p-3">
+                      <svg className="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                      </svg>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </section>
 
