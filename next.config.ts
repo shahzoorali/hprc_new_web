@@ -49,6 +49,13 @@ const nextConfig: NextConfig = {
         hostname: "lapoloin.s3.ap-south-1.amazonaws.com",
         pathname: "/**",
       },
+      // Gallery media. The bucket name contains dots, so the virtual-hosted URL
+      // fails TLS against the *.s3 wildcard cert — these must stay path-style.
+      {
+        protocol: "https",
+        hostname: "s3.ap-south-1.amazonaws.com",
+        pathname: "/hprc.in/**",
+      },
     ],
     unoptimized: false,
   },

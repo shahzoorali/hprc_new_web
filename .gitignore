@@ -49,3 +49,6 @@ admin-users.json
 
 # claude code local tooling
 .claude/
+
+# gallery photos are served from S3, never committed
+/public/images/gallery/
