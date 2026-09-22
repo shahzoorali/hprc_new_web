@@ -185,6 +185,144 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Featured Headline Article - HPRC International Tour 2026 (Spain & USA) */}
+      <section className="relative overflow-hidden bg-slate-950 py-16 sm:py-24 lg:py-28 border-b border-white/10">
+        <div className="absolute inset-0 opacity-15">
+          <Image
+            src="https://s3.ap-south-1.amazonaws.com/hprc.in/media/gallery/tour2026/team_mounted.jpg"
+            alt="HPRC International Tour 2026"
+            fill
+            className="object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-slate-950/80 backdrop-blur-sm" />
+        </div>
+
+        {/* Ambient glows */}
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-brand-600/15 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-blue-600/15 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="container relative z-10">
+          <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            {/* Content Side */}
+            <div className="lg:col-span-7 text-white space-y-6 sm:space-y-8">
+              <div className="inline-flex items-center gap-2 sm:gap-3 bg-brand-500/20 backdrop-blur-md border border-brand-400/30 px-3 sm:px-5 py-2 sm:py-2.5 rounded-full">
+                <span className="h-2 w-2 bg-brand-400 animate-ping rounded-full" />
+                <span className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-brand-300 font-display">
+                  International Tour · Autumn 2026
+                </span>
+              </div>
+
+              <div className="space-y-4">
+                <h2 className="text-[clamp(2.2rem,5vw,3.75rem)] font-extrabold leading-[1.08] font-display tracking-tight text-white">
+                  Flying the Flag in{" "}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 via-amber-300 to-brand-400">
+                    Spain &amp; USA
+                  </span>
+                </h2>
+                <p className="text-base sm:text-lg text-white/85 leading-relaxed font-light font-body max-w-2xl">
+                  HPRC India embarks on a historic two-country international tour taking on Madrid Polo Club and Commonwealth Polo Club (Kentucky) — the club&apos;s third overseas outing and the latest step in positioning Hyderabad as a premier global polo destination.
+                </p>
+              </div>
+
+              {/* Tournament Fixture Badges */}
+              <div className="flex flex-wrap items-center gap-6 sm:gap-10 pt-2 pb-2">
+                <div className="flex items-center gap-4 bg-white/5 border border-white/10 rounded-2xl px-5 py-3 backdrop-blur-md shadow-lg">
+                  <div className="relative w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0">
+                    <Image
+                      src="https://s3.ap-south-1.amazonaws.com/hprc.in/media/gallery/tour2026/fx_spain.png"
+                      alt="HPRC India vs Madrid Polo Club"
+                      fill
+                      className="object-contain"
+                      sizes="80px"
+                    />
+                  </div>
+                  <div>
+                    <span className="block text-xs font-bold uppercase tracking-wider text-brand-400 font-display">Leg 1 · Spain</span>
+                    <span className="text-sm sm:text-base font-bold text-white font-display">Madrid Polo Club</span>
+                    <span className="block text-xs text-white/60 font-body">26 – 27 September</span>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-4 bg-white/5 border border-white/10 rounded-2xl px-5 py-3 backdrop-blur-md shadow-lg">
+                  <div className="relative w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0">
+                    <Image
+                      src="https://s3.ap-south-1.amazonaws.com/hprc.in/media/gallery/tour2026/fx_usa.png"
+                      alt="HPRC Polo vs Commonwealth Polo"
+                      fill
+                      className="object-contain"
+                      sizes="80px"
+                    />
+                  </div>
+                  <div>
+                    <span className="block text-xs font-bold uppercase tracking-wider text-amber-400 font-display">Leg 2 · USA</span>
+                    <span className="text-sm sm:text-base font-bold text-white font-display">Commonwealth Polo</span>
+                    <span className="block text-xs text-white/60 font-body">3 October · Under Lights</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-wrap items-center gap-4 pt-2">
+                <Link
+                  href="/events/news/hprc-international-tour-2026-spain-usa"
+                  className="group inline-flex items-center justify-center gap-3 bg-brand-500 hover:bg-brand-600 px-8 py-4 text-base font-bold text-white shadow-2xl transition-all duration-300 hover:shadow-brand-500/30 hover:-translate-y-1 font-display rounded-full border border-white/10"
+                >
+                  <span>Read Full Article &amp; Coverage</span>
+                  <svg
+                    className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </Link>
+
+                <Link
+                  href="/events/news"
+                  className="inline-flex items-center justify-center border border-white/20 bg-white/5 backdrop-blur-md px-7 py-4 text-base font-bold text-white transition-all duration-300 hover:bg-white/10 hover:border-white/40 font-display rounded-full hover:-translate-y-1"
+                >
+                  All News
+                </Link>
+              </div>
+            </div>
+
+            {/* Media Card Side */}
+            <div className="lg:col-span-5">
+              <Link
+                href="/events/news/hprc-international-tour-2026-spain-usa"
+                className="group block relative rounded-[2.5rem] overflow-hidden border border-white/15 shadow-2xl transition-all duration-500 hover:shadow-brand-500/20 hover:border-brand-400/40"
+              >
+                <div className="aspect-[4/3] sm:aspect-[16/11] relative">
+                  <Image
+                    src="https://s3.ap-south-1.amazonaws.com/hprc.in/media/gallery/tour2026/team_standing.jpg"
+                    alt="Saif Attari, Chaitania R. Kumar and Arsalan Khan in HPRC India kit"
+                    fill
+                    className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                    sizes="(max-width: 1024px) 100vw, 40vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
+                </div>
+
+                <div className="absolute bottom-0 inset-x-0 p-6 sm:p-8">
+                  <div className="bg-slate-900/90 backdrop-blur-md border border-white/10 rounded-2xl p-5 shadow-2xl">
+                    <p className="text-xs font-bold uppercase tracking-widest text-brand-400 font-display mb-1">
+                      The Touring Side
+                    </p>
+                    <p className="text-base font-bold text-white font-display">
+                      Chaitania R. Kumar · Arsalan Khan · Saif Attari · Akash Reddy
+                    </p>
+                    <p className="text-xs text-white/60 font-body mt-1">
+                      Click to explore match reports, fixtures &amp; photo gallery →
+                    </p>
+                  </div>
+                </div>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Featured Award - Indian Polo Awards - Sophisticated Design */}
       <section className="relative overflow-hidden bg-gradient-to-br from-neutral-900 via-brand-900 to-neutral-900 py-16 sm:py-24 lg:py-32">
         {/* Subtle Background Image of the Award Ceremony */}
