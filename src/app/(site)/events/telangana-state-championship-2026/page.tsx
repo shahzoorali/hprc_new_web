@@ -1456,7 +1456,7 @@ export default function TelanganaStateChampionship2026Page() {
             <div className="absolute inset-0">
               <Image
                 src="/images/ec2026/action-1.jpg"
-                alt="IInd Telangana State Equestrian Championship — Show Jumping Competition"
+                alt="II Telangana State Equestrian Championship — Show Jumping Competition"
                 fill
                 className="object-cover object-center"
                 priority
@@ -1479,7 +1479,7 @@ export default function TelanganaStateChampionship2026Page() {
               <div className="inline-flex items-center gap-3 bg-gradient-to-r from-brand-500 to-brand-600 px-5 py-2.5 mb-6 shadow-xl shadow-brand-500/40">
                 <div className="h-1.5 w-1.5 bg-white" />
                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-white">
-                  IInd Edition · HPRC × TSEA
+                  II Edition · HPRC × TSEA
                 </span>
                 <div className="h-1.5 w-1.5 bg-white" />
               </div>
@@ -1570,10 +1570,10 @@ export default function TelanganaStateChampionship2026Page() {
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.3em] text-brand-500 mb-3">About the Event</p>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-brand-900 font-display leading-tight">
-                The IInd Telangana State Equestrian Championship
+                The II Telangana State Equestrian Championship
               </h2>
               <p className="mt-5 text-base sm:text-lg text-gray-700 leading-relaxed font-light">
-                The <strong>IInd Telangana State Equestrian Championship</strong> is hosted by the Hyderabad Polo &amp; Riding Club (HPRC), Gandipet, in association with the Telangana State Equestrian Association (TSEA), on {event.dates} — continuing the annual commitment made after the inaugural Championship held at HPRC in October 2025.
+                The <strong>II Telangana State Equestrian Championship</strong> is hosted by the Hyderabad Polo &amp; Riding Club (HPRC), Gandipet, in association with the Telangana State Equestrian Association (TSEA), on {event.dates} — continuing the annual commitment made after the inaugural Championship held at HPRC in October 2025.
               </p>
               <p className="mt-4 text-base text-gray-600 leading-relaxed font-light">
                 The competition is held across Hacks, Dressage and Show Jumping, following all EFI and FEI regulations and guidelines. It runs immediately after the National Qualifier (14–16 October), sharing the same camp at HPRC.
@@ -1627,7 +1627,7 @@ export default function TelanganaStateChampionship2026Page() {
                 <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-500">Official Document</span>
               </div>
               <a
-                href="/events/tsec2026/IInd_Telangana_State_Equestrian_Championship_Prospectus.pdf"
+                href="/events/tsec2026/II_Telangana_State_Equestrian_Championship_Prospectus.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group relative inline-flex flex-col sm:flex-row items-center gap-4 bg-brand-900 px-10 py-6 text-white shadow-[0_20px_50px_rgba(227,30,36,0.3)] transition-all duration-500 hover:shadow-[0_30px_60px_rgba(227,30,36,0.5)] hover:-translate-y-1"

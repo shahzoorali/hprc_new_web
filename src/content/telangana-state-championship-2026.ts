@@ -1,5 +1,5 @@
-// IInd Telangana State Equestrian Championship — Content Data
-// Source: "IInd Telangana State Equestrian Championship - Prospectus" (16–18 October 2026)
+// II Telangana State Equestrian Championship — Content Data
+// Source: "II Telangana State Equestrian Championship - Prospectus" (16–18 October 2026)
 //
 // Hosted by HPRC in association with the Telangana State Equestrian Association (TSEA),
 // immediately following the National Qualifier (NQ) October 2026 (14–16 Oct) at the same
@@ -8,13 +8,13 @@
 
 export const telanganaStateChampionship2026 = {
   meta: {
-    title: "IInd Telangana State Equestrian Championship | Hyderabad Polo & Riding Club",
+    title: "II Telangana State Equestrian Championship | Hyderabad Polo & Riding Club",
     description:
-      "Register for the IInd Telangana State Equestrian Championship — 16th to 18th October 2026 at Hyderabad Polo & Riding Club, Gandipet. Hacks, Dressage & Show Jumping, hosted by HPRC in association with TSEA.",
+      "Register for the II Telangana State Equestrian Championship — 16th to 18th October 2026 at Hyderabad Polo & Riding Club, Gandipet. Hacks, Dressage & Show Jumping, hosted by HPRC in association with TSEA.",
   },
 
   event: {
-    name: "IInd Telangana State Equestrian Championship",
+    name: "II Telangana State Equestrian Championship",
     tagline: "Hosted by HPRC in association with TSEA",
     dates: "16th to 18th October 2026",
     dateRange: { start: "2026-10-16T17:00:00+05:30", end: "2026-10-18T20:00:00+05:30" },

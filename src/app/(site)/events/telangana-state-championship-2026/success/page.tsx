@@ -107,11 +107,11 @@ function SuccessContent() {
     <div className="space-y-16 pb-24">
       <div className="container pt-16">
         <PageHero
-          eyebrow="IInd Telangana State Equestrian Championship — October 2026"
+          eyebrow="II Telangana State Equestrian Championship — October 2026"
           title={isSuccess ? "Entry Confirmed!" : "Payment Status"}
           description={
             isSuccess
-              ? "Thank you! Your entry for the IInd Telangana State Equestrian Championship has been received and verified."
+              ? "Thank you! Your entry for the II Telangana State Equestrian Championship has been received and verified."
               : "Let's review the status of your recent entry payment."
           }
           backgroundImage="/photo-1553531580-6520e75d0458.png"
@@ -199,7 +199,7 @@ function SuccessContent() {
           </Link>
           {isSuccess && (
             <a
-              href="/events/tsec2026/IInd_Telangana_State_Equestrian_Championship_Etiquette_Conduct_Guidelines.pdf"
+              href="/events/tsec2026/II_Telangana_State_Equestrian_Championship_Etiquette_Conduct_Guidelines.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 rounded-xl bg-white border-2 border-brand-900 px-8 py-4 text-sm font-bold tracking-widest text-brand-900 transition-all hover:bg-brand-50 shadow-md"

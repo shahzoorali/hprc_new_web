@@ -1,5 +1,5 @@
 <?php
-// IInd Telangana State Equestrian Championship 2026 — payment response handler.
+// II Telangana State Equestrian Championship 2026 — payment response handler.
 // Table `tsec2026`, InventoryManagerOctCamp (source 'tsec'), Championship fee/
 // deadline rules, and /events/telangana-state-championship-2026 redirects.
 
@@ -131,8 +131,8 @@ if ($order_id) {
                 if (!empty($userData['email'])) {
                     $details = ["events" => $eventList];
                     $htmlBody = get_success_email_body($userData['name'], $order_id, $mer_amount, $tracking_id, $details);
-                    $etiquettePath = __DIR__ . '/../public/events/tsec2026/IInd_Telangana_State_Equestrian_Championship_Etiquette_Conduct_Guidelines.pdf';
-                    send_hprc_email($userData['email'], $userData['name'], "Registration Confirmed - IInd Telangana State Equestrian Championship", $htmlBody, "", $etiquettePath);
+                    $etiquettePath = __DIR__ . '/../public/events/tsec2026/II_Telangana_State_Equestrian_Championship_Etiquette_Conduct_Guidelines.pdf';
+                    send_hprc_email($userData['email'], $userData['name'], "Registration Confirmed - II Telangana State Equestrian Championship", $htmlBody, "", $etiquettePath);
                 }
 
                 $adminData = $row;
@@ -187,7 +187,7 @@ if ($order_id) {
                         $jumpLabel = (count($horses) > 1) ? " - Jump $jumpNumber" : "";
 
                         $webhookData = array(
-                            "edition" => "IInd Telangana State Equestrian Championship",
+                            "edition" => "II Telangana State Equestrian Championship",
                             "name" => $row['name'],
                             "dob" => $row['dob'],
                             "parentName" => $row['parentName'],
@@ -220,7 +220,7 @@ if ($order_id) {
         } else {
             if (!empty($userData['email'])) {
                 $htmlBody = get_failed_email_body($userData['name'], $order_id, $status_message);
-                send_hprc_email($userData['email'], $userData['name'], "Payment Notification - IInd Telangana State Equestrian Championship", $htmlBody);
+                send_hprc_email($userData['email'], $userData['name'], "Payment Notification - II Telangana State Equestrian Championship", $htmlBody);
             }
 
             $adminHtml = get_admin_failed_notification_body($userData['name'], $order_id, $status_message, $userData['email'] ?: "No Email Provided");

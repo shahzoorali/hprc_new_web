@@ -281,7 +281,7 @@ export const eventsContent = {
       link: "/events/oct-nq-2026",
     },
     {
-      title: "IInd Telangana State Equestrian Championship",
+      title: "II Telangana State Equestrian Championship",
       date: "16 – 18 October 2026",
       description:
         "Hacks, Dressage and Show Jumping hosted by HPRC in association with the Telangana State Equestrian Association (TSEA), immediately following the October National Qualifier. Standard entries close 15 October 2026.",

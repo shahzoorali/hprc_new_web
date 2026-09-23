@@ -1,5 +1,5 @@
 <?php
-// IInd Telangana State Equestrian Championship 2026 — payment request handler.
+// II Telangana State Equestrian Championship 2026 — payment request handler.
 // Isolated table `tsec2026`. Shares the October camp stabling ledger with the
 // National Qualifier via InventoryManagerOctCamp (source 'tsec'), and redirects
 // to /events/telangana-state-championship-2026.
@@ -196,7 +196,7 @@ if ($amount <= 0) {
             $jumpLabel = (count($horses) > 1) ? " - Jump $jumpNumber" : "";
 
             $webhookPayloads[] = array(
-                "edition" => "IInd Telangana State Equestrian Championship",
+                "edition" => "II Telangana State Equestrian Championship",
                 "name" => $name,
                 "dob" => $dob,
                 "parentName" => $parentName,
@@ -225,8 +225,8 @@ if ($amount <= 0) {
     if (!empty($email)) {
         $details = ["events" => implode(" | ", $readableEvents)];
         $htmlBody = get_success_email_body($name, $order_id, "0 (COMP)", "COMP-ENTRY", $details);
-        $etiquettePath = __DIR__ . '/../public/events/tsec2026/IInd_Telangana_State_Equestrian_Championship_Etiquette_Conduct_Guidelines.pdf';
-        send_hprc_email($email, $name, "Registration Confirmed - IInd Telangana State Equestrian Championship", $htmlBody, "", $etiquettePath);
+        $etiquettePath = __DIR__ . '/../public/events/tsec2026/II_Telangana_State_Equestrian_Championship_Etiquette_Conduct_Guidelines.pdf';
+        send_hprc_email($email, $name, "Registration Confirmed - II Telangana State Equestrian Championship", $htmlBody, "", $etiquettePath);
     }
 
     $adminData = [
