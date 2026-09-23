@@ -848,7 +848,7 @@ function RegistrationForm() {
           
           <div className="bg-blue-100 border border-blue-200 text-blue-800 px-3 py-1.5 text-xs font-bold uppercase tracking-wider flex items-center gap-2">
             <span className="h-2 w-2 rounded-full bg-blue-500" />
-            Online entry only · Closes 12 Aug, 12 Noon
+            Online entry only · Closes 13 Oct, 23:59
           </div>
         </div>
 
@@ -997,7 +997,7 @@ function RegistrationForm() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             <p>
-              <strong>Horse limit:</strong> a horse may enter each category only once, and a maximum of three events per day (2 Dressage &amp; 1 Show Jumping, or 2 Show Jumping &amp; 1 Dressage). Riders may enter up to two horses per event. A mandatory Vet Check for all NQ horses is on 13 Aug at 7:30 AM.
+              <strong>Horse limit:</strong> a horse may enter each category only once, and a maximum of three events per day (2 Dressage &amp; 1 Show Jumping, or 2 Show Jumping &amp; 1 Dressage). Riders may enter up to two horses per event. A mandatory Vet Check for all NQ horses is on 13 Oct at 7:30 AM.
               {lockedAgeGroup && (
                 <> Your entry is locked to the <strong>{AGE_GROUP_LABELS[lockedAgeGroup ?? ""] ?? lockedAgeGroup}</strong> category — riders may compete in only one eligible age category and cannot mix categories across events.</>
               )}
@@ -1047,7 +1047,7 @@ function RegistrationForm() {
           </div>
         )}
         <div className="bg-blue-50/50 border border-blue-100 p-5 sm:p-6 rounded-2xl space-y-5">
-          <p className="text-xs text-blue-700 font-medium">Stables are limited and allocated first-come, first-served. Choose a package below — fees are per stable. Requests close 10th August 2026.</p>
+          <p className="text-xs text-blue-700 font-medium">Stables are limited and allocated first-come, first-served. Choose a package below — fees are per stable. Requests close 12th October 2026.</p>
 
           <div className="grid gap-5 sm:grid-cols-2">
             <div className="sm:col-span-2">
@@ -1055,9 +1055,9 @@ function RegistrationForm() {
               <div className="grid sm:grid-cols-4 gap-2">
                 {([
                   { type: "NONE", title: "No Stabling", sub: "—" },
-                  { type: "EARLY_ARRIVAL", title: "Earlier than 12 Aug", sub: "₹2,500 per day" },
-                  { type: "NQ_DATES", title: "NQ Dates · 12–14 Aug", sub: "₹4,000 for duration" },
-                  { type: "FULL_CAMP", title: "Full Camp · 12–17 Aug", sub: "₹10,000 for duration" },
+                  { type: "EARLY_ARRIVAL", title: "Earlier than 14 Oct", sub: "₹2,500 per day" },
+                  { type: "NQ_DATES", title: "NQ Dates · 14–16 Oct", sub: "₹4,000 for duration" },
+                  { type: "FULL_CAMP", title: "Full Camp · 14–19 Oct", sub: "₹10,000 for duration" },
                 ] as const).map((opt) => (
                   <button
                     key={opt.type}
@@ -1132,10 +1132,10 @@ function RegistrationForm() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
                 {form.stablingType === "EARLY_ARRIVAL"
-                  ? "Earlier than 12th August · ₹2,500 per stable per day"
+                  ? "Earlier than 14th October · ₹2,500 per stable per day"
                   : form.stablingType === "NQ_DATES"
-                  ? "NQ Dates · 12th – 14th August 2026 · ₹4,000 per stable for the duration"
-                  : "Full Camp · 12th – 17th August 2026 · ₹10,000 per stable for the duration — covers National Qualifier (NQ) + the HPRC Equestrian Challenge (14th–16th August) together"}
+                  ? "NQ Dates · 14th – 16th October 2026 · ₹4,000 per stable for the duration"
+                  : "Full Camp · 14th – 19th October 2026 · ₹10,000 per stable for the duration — covers the National Qualifier (NQ) + the TSEA State Equestrian Championship (16th–18th October) together"}
               </div>
             )}
           </div>
