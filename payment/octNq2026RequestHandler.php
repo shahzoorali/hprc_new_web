@@ -256,7 +256,7 @@ if ($amount <= 0) {
     ];
 
     $userSubject = "Entry Confirmation - National Qualifier (NQ) October 2026 - Order #$order_id";
-    $userBody = get_success_email_body($name, $order_id, 0, 'COMPLIMENTARY', $emailData);
+    $userBody = get_success_email_body($name, $order_id, 0, 'COMPLIMENTARY', $emailData, "National Qualifier (NQ) October 2026", "14th to 16th October 2026");
     $etiquettePath = __DIR__ . '/../public/events/oct-nq2026/HPRC_National_Qualifier_2026_Etiquette_Conduct_Guidelines.pdf';
     $attachment = file_exists($etiquettePath) ? $etiquettePath : null;
     send_hprc_email($email, $name, $userSubject, $userBody, "", $attachment);

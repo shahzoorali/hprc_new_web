@@ -3,7 +3,7 @@
  * Email Templates for Equestrian Challenge 2026
  */
 
-function get_success_email_body($name, $orderId, $amount, $trackingId, $details = []) {
+function get_success_email_body($name, $orderId, $amount, $trackingId, $details = [], $eventName = "HPRC Equestrian Challenge 2026", $eventDates = "14th to 16th August 2026") {
     $eventsHtml = "";
     if (!empty($details['events'])) {
         $eventsHtml = "<div style='margin-top: 15px; padding-top: 15px; border-top: 1px solid #eee;'>
@@ -23,7 +23,7 @@ function get_success_email_body($name, $orderId, $amount, $trackingId, $details 
         <div style='padding: 40px;'>
             <h2 style='color: #1a1a1a; margin-top: 0; font-size: 24px; font-weight: 700; border-bottom: 2px solid #f0f0f0; padding-bottom: 15px;'>Registration Confirmed!</h2>
             <p style='font-size: 16px;'>Dear <strong>{$name}</strong>,</p>
-            <p style='font-size: 16px;'>Thank you for registering for the <strong>HPRC Equestrian Challenge 2026</strong>. Your payment was successful and your entry has been secured.</p>
+            <p style='font-size: 16px;'>Thank you for registering for the <strong>{$eventName}</strong>. Your payment was successful and your entry has been secured.</p>
             
             <div style='background: #fdfaf4; border: 1px solid #f1e6cc; padding: 20px; border-radius: 8px; margin: 30px 0;'>
                 <table style='width: 100%;'>
@@ -40,7 +40,7 @@ function get_success_email_body($name, $orderId, $amount, $trackingId, $details 
                 {$eventsHtml}
             </div>
 
-            <p style='font-size: 16px;'>We look forward to seeing you at the event on <strong>14th to 16th August 2026</strong>.</p>
+            <p style='font-size: 16px;'>We look forward to seeing you at the event on <strong>{$eventDates}</strong>.</p>
             
             <div style='margin-top: 40px; padding-top: 25px; border-top: 1px solid #f0f0f0; color: #777; font-size: 14px; text-align: center;'>
                 <p style='margin-bottom: 5px;'>If you have any questions, please contact the club office for support.</p>
@@ -55,7 +55,7 @@ function get_success_email_body($name, $orderId, $amount, $trackingId, $details 
     ";
 }
 
-function get_failed_email_body($name, $orderId, $statusMessage) {
+function get_failed_email_body($name, $orderId, $statusMessage, $eventName = "HPRC Equestrian Challenge 2026") {
     $logoUrl = "https://hprc.in/hprc_logo.png";
     
     return "
@@ -67,7 +67,7 @@ function get_failed_email_body($name, $orderId, $statusMessage) {
         <div style='padding: 40px;'>
             <h2 style='color: #e74c3c; margin-top: 0; font-size: 24px; font-weight: 700; border-bottom: 2px solid #f0f0f0; padding-bottom: 15px;'>Payment Notification</h2>
             <p style='font-size: 16px;'>Dear <strong>{$name}</strong>,</p>
-            <p style='font-size: 16px;'>We noticed that your payment attempt for the <strong>HPRC Equestrian Challenge 2026</strong> (Order #{$orderId}) was unsuccessful.</p>
+            <p style='font-size: 16px;'>We noticed that your payment attempt for the <strong>{$eventName}</strong> (Order #{$orderId}) was unsuccessful.</p>
             
             <div style='background: #fff8f8; border: 1px solid #ffebeb; padding: 20px; border-radius: 8px; margin: 30px 0; border-left: 4px solid #e74c3c;'>
                 <p style='margin: 0; color: #666; font-size: 13px; text-transform: uppercase; font-weight: bold;'>Reason for failure:</p>

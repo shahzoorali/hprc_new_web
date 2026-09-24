@@ -130,7 +130,7 @@ if ($order_id) {
 
                 if (!empty($userData['email'])) {
                     $details = ["events" => $eventList];
-                    $htmlBody = get_success_email_body($userData['name'], $order_id, $mer_amount, $tracking_id, $details);
+                    $htmlBody = get_success_email_body($userData['name'], $order_id, $mer_amount, $tracking_id, $details, "II Telangana State Equestrian Championship", "16th to 18th October 2026");
                     $etiquettePath = __DIR__ . '/../public/events/tsec2026/II_Telangana_State_Equestrian_Championship_Etiquette_Conduct_Guidelines.pdf';
                     send_hprc_email($userData['email'], $userData['name'], "Registration Confirmed - II Telangana State Equestrian Championship", $htmlBody, "", $etiquettePath);
                 }
@@ -219,7 +219,7 @@ if ($order_id) {
             }
         } else {
             if (!empty($userData['email'])) {
-                $htmlBody = get_failed_email_body($userData['name'], $order_id, $status_message);
+                $htmlBody = get_failed_email_body($userData['name'], $order_id, $status_message, "II Telangana State Equestrian Championship");
                 send_hprc_email($userData['email'], $userData['name'], "Payment Notification - II Telangana State Equestrian Championship", $htmlBody);
             }
 

@@ -224,7 +224,7 @@ if ($amount <= 0) {
 
     if (!empty($email)) {
         $details = ["events" => implode(" | ", $readableEvents)];
-        $htmlBody = get_success_email_body($name, $order_id, "0 (COMP)", "COMP-ENTRY", $details);
+        $htmlBody = get_success_email_body($name, $order_id, "0 (COMP)", "COMP-ENTRY", $details, "II Telangana State Equestrian Championship", "16th to 18th October 2026");
         $etiquettePath = __DIR__ . '/../public/events/tsec2026/II_Telangana_State_Equestrian_Championship_Etiquette_Conduct_Guidelines.pdf';
         send_hprc_email($email, $name, "Registration Confirmed - II Telangana State Equestrian Championship", $htmlBody, "", $etiquettePath);
     }
