@@ -110,20 +110,14 @@ h1, h2, h3, h4, h5, h6 {
   unicode-bidi: bidi-override;
 }
 
-/* Layered as base so Tailwind text-color utilities (utilities layer) can
-   override this reset on individual links — unlayered CSS beats every layer
-   regardless of selector specificity, which was silently breaking every
-   colored link (e.g. text-brand-700) site-wide. */
-@layer base {
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
+a {
+  color: inherit;
+  text-decoration: none;
+}
 
-  a:hover {
-    text-decoration: underline;
-    text-decoration-color: var(--color-brand-500);
-  }
+a:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--color-brand-500);
 }
 
 main {

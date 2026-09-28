@@ -296,13 +296,15 @@ export async function RenderBlocks({ blocks }: { blocks?: PageBlock[] | null }) 
               {(block.actions ?? []).length > 0 ? (
                 <div className="mt-6 flex flex-wrap justify-center gap-3">
                   {(block.actions ?? []).map((a, j) => (
+                    // `!text-*` because a global `a { color: inherit }` reset otherwise
+                    // wins over a plain text-color utility on an anchor.
                     <Link
                       key={j}
                       href={a.href}
                       className={
                         a.variant === "outline"
-                          ? "border border-white/70 px-6 py-3 text-sm font-semibold hover:bg-white/10"
-                          : "bg-white px-6 py-3 text-sm font-semibold text-brand-800 hover:bg-white/90"
+                          ? "!text-white border border-white/70 px-6 py-3 text-sm font-semibold hover:bg-white/10"
+                          : "!text-brand-800 bg-white px-6 py-3 text-sm font-semibold hover:bg-white/90"
                       }
                     >
                       {a.label}
