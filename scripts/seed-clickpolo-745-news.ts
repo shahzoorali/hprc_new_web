@@ -87,7 +87,7 @@ const run = async () => {
     featured: true,
     linkType: "internal" as const,
     slug,
-    heroImagePath: `${IMG_BASE}/action-shot.jpg`,
+    heroImagePath: `${IMG_BASE}/hero-16x9.jpg`,
     _status: "published" as const,
     body: [
       {
