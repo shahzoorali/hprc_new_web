@@ -20,12 +20,15 @@ import {
 
 // Blocks offered for article bodies — news and blog posts. Deliberately smaller
 // than the page set: an article does not need a countdown or a pricing table.
+// CTA is included for the occasional "read the full piece elsewhere" button
+// (press-coverage articles linking out to the original publication).
 export const contentBlocks: Block[] = [
   RichTextBlock,
   ImageGalleryBlock,
   QuoteBlock,
   EmbedBlock,
   MediaTextBlock,
+  CtaBlock,
 ];
 
 // The full set for event and marketing pages. Every entry except richText,

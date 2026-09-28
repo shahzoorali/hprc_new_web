@@ -137,10 +137,16 @@ const run = async () => {
         attribution: "Lorenzo Soriano, Polo Manager, Madrid Polo Club",
       },
       {
-        blockType: "richText",
-        content: richText([
-          "Read the full feature in Clickpolo Issue #745 (pages 88–91): https://online.flippingbook.com/view/935575255/90/",
-        ]),
+        blockType: "cta",
+        heading: "Read the Full Feature",
+        description: "Clickpolo Issue #745, pages 88–91.",
+        actions: [
+          {
+            label: "Read on Clickpolo",
+            href: "https://online.flippingbook.com/view/935575255/90/",
+            variant: "primary",
+          },
+        ],
       },
     ],
   };
