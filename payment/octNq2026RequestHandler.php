@@ -125,9 +125,9 @@ if ($conn->query($sql) === TRUE) {
 // CCAvenue parameters
 $merchant_data='';
 $working_key='00A39923BC821061266C29348FF5A3F0';
-$access_code='AVDF80MG88BY84FDYB';
+$access_code='AVPP92NE85CC15PPCC';
 
-$merchant_data.='merchant_id=4481024&';
+$merchant_data.='merchant_id=4447589&';
 $merchant_data.='order_id='.$order_id.'&';
 $merchant_data.='amount='.$amount.'&';
 $merchant_data.='currency=INR&';
