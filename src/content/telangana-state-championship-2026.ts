@@ -10,7 +10,7 @@ export const telanganaStateChampionship2026 = {
   meta: {
     title: "II Telangana State Equestrian Championship | Hyderabad Polo & Riding Club",
     description:
-      "Register for the II Telangana State Equestrian Championship — 16th to 18th October 2026 at Hyderabad Polo & Riding Club, Gandipet. Hacks, Dressage & Show Jumping, hosted by HPRC in association with TSEA.",
+      "Register for the II Telangana State Equestrian Championship — 16th to 18th October 2026 at Hyderabad Polo & Riding Club, Gandipet. Dressage & Show Jumping, hosted by HPRC in association with TSEA, alongside an HPRC Hacks Show (not a State-level competition).",
   },
 
   event: {
@@ -29,7 +29,7 @@ export const telanganaStateChampionship2026 = {
       evening: "4:00 PM to 8:00 PM",
     },
     grounds: {
-      ground1: "Ground 1 — Hacks & Dressage",
+      ground1: "Ground 1 — Dressage & HPRC Hacks Show",
       mainArena: "Main Arena — Practice Round & Show Jumping (40–115 cm)",
     },
   },
@@ -74,7 +74,7 @@ export const telanganaStateChampionship2026 = {
         {
           time: "Followed By",
           venue: "Ground 1",
-          events: "Hacks — 12 years & Under, 13 to 16 years",
+          events: "Hacks (HPRC Show — not a State-level Competition) — 12 years & Under, 13 to 16 years",
         },
         {
           time: "Evening · 4:00 PM",
@@ -113,7 +113,7 @@ export const telanganaStateChampionship2026 = {
 
   // Each event has: fee (standard) and postFee (post-entry). Surcharge = postFee - fee.
   events: [
-    // HACKS — open ONLY to riders not participating in any other event/discipline
+    // HACKS — an HPRC Show, NOT a State-level competition; open ONLY to riders not participating in any other event/discipline
     { id: 1, discipline: "HACKS", category: "12 years & Under", date: "17 Oct", fee: 1500, postFee: 2000, minAge: 0, maxAge: 12 },
     { id: 2, discipline: "HACKS", category: "13 to 16 years", date: "17 Oct", fee: 1500, postFee: 2000, minAge: 13, maxAge: 16 },
     // DRESSAGE — per EFI National Qualifier Guidelines for JNEC 2026
@@ -214,6 +214,7 @@ export const telanganaStateChampionship2026 = {
 
   importantNotes: [
     "Number of Entries\n\nA horse may participate only once in each category within a given event or discipline.\nDay 1 & Day 3: maximum two (2) entries per horse per day.\nDay 2: up to three (3) entries per horse — 2 Dressage & 1 Show Jumping, or 2 Show Jumping & 1 Dressage — plus one (1) additional Hacks entry is permitted on the horse.",
+    "Hacks will be held as an HPRC Show, not a State-level Competition.",
     "Hacks classes are open ONLY to riders who are not participating in any other event or discipline.",
     "40-45 cms and 60 cms classes are conducted in the Table A Against the Clock, Without Jump-Off (FEI Art. 238.2.1) format.",
     "80-90 cms, 100-105 cms and 110-115 cms: clear rounds stay in the arena for an immediate jump-off. If more than 30 entries are received in any class, that class will instead be conducted in the Table A Against the Clock, Without Jump-Off format.",

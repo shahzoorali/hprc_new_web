@@ -1576,7 +1576,7 @@ export default function TelanganaStateChampionship2026Page() {
                 The <strong>II Telangana State Equestrian Championship</strong> is hosted by the Hyderabad Polo &amp; Riding Club (HPRC), Gandipet, in association with the Telangana State Equestrian Association (TSEA), on {event.dates} — continuing the annual commitment made after the inaugural Championship held at HPRC in October 2025.
               </p>
               <p className="mt-4 text-base text-gray-600 leading-relaxed font-light">
-                The competition is held across Hacks, Dressage and Show Jumping, following all EFI and FEI regulations and guidelines. It runs immediately after the National Qualifier (14–16 October), sharing the same camp at HPRC.
+                The Championship is held across Dressage and Show Jumping, with Hacks run alongside as an HPRC Show (not a State-level Competition), following all EFI and FEI regulations and guidelines. It runs immediately after the National Qualifier (14–16 October), sharing the same camp at HPRC.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 {["Open Competition", "3-Day Event", "HPRC × TSEA", "Cash Prizes in Open Show Jumping"].map((tag) => (
@@ -1592,7 +1592,7 @@ export default function TelanganaStateChampionship2026Page() {
                 { icon: "📍", label: "Venue", value: event.venueAddress },
                 { icon: "🌅", label: "Morning", value: event.sessions.morning },
                 { icon: "🌙", label: "Evening", value: event.sessions.evening },
-                { icon: "🏟️", label: "Ground 1", value: "Hacks & Dressage" },
+                { icon: "🏟️", label: "Ground 1", value: "Dressage & HPRC Hacks Show" },
                 { icon: "🏆", label: "Main Arena", value: "Practice Round & Show Jumping" },
               ].map((item) => (
                 <div key={item.label} className="flex items-start gap-4 bg-white border border-brand-100 p-4 shadow-sm">
@@ -1723,7 +1723,12 @@ export default function TelanganaStateChampionship2026Page() {
               <div key={disc} className={`border-2 ${theme.border} ${theme.bg} overflow-hidden`}>
                 <div className="flex items-center gap-3 p-4 sm:p-5 border-b border-current/20">
                   <DisciplineIcon discipline={disc} />
-                  <h3 className={`font-extrabold text-sm uppercase tracking-wider ${theme.color}`}>{disc}</h3>
+                  <div>
+                    <h3 className={`font-extrabold text-sm uppercase tracking-wider ${theme.color}`}>{disc}</h3>
+                    {disc === "HACKS" && (
+                      <p className="text-[11px] font-semibold text-amber-700 mt-0.5">HPRC Show · not a State-level Competition</p>
+                    )}
+                  </div>
                   <span className={`ml-auto text-xs font-bold px-2 py-0.5 bg-white border ${theme.border} ${theme.color}`}>
                     {discEvents.length} events
                   </span>
