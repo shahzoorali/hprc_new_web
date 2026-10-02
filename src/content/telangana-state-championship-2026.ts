@@ -7,6 +7,10 @@
 // backend and oct-national-qualifier-2026.ts's FULL_CAMP package for the combined dates.
 
 export const telanganaStateChampionship2026 = {
+  // Registration hold: set to true on release to show the entry form and Register CTAs.
+  // The server-side switch lives in payment/tsec2026RequestHandler.php ($registrationOpen).
+  registrationOpen: false,
+
   meta: {
     title: "II Telangana State Equestrian Championship | Hyderabad Polo & Riding Club",
     description:

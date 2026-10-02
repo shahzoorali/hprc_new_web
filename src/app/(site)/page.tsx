@@ -101,26 +101,17 @@ export default async function HomePage() {
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-400"></span>
                 </span>
                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-300 font-display">
-                  Entries Open · State Championship
+                  Registrations Opening Soon
                 </span>
               </div>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-display tracking-tight text-white">
                 II Telangana State Equestrian Championship
               </h2>
               <p className="text-white/80 text-sm sm:text-base leading-relaxed font-body">
-                16th to 18th October 2026 · Dressage &amp; Show Jumping, plus an HPRC Hacks Show, hosted by HPRC in association with TSEA. Entries close 15 October.
+                16th to 18th October 2026 · Dressage &amp; Show Jumping, plus an HPRC Hacks Show, hosted by HPRC in association with TSEA.
               </p>
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-4 flex-shrink-0">
-              <Link
-                href="/events/telangana-state-championship-2026#register"
-                className="group inline-flex items-center justify-center gap-3 rounded-2xl bg-brand-500 px-8 py-4 text-base font-bold text-white shadow-xl shadow-brand-500/30 transition-all duration-300 hover:bg-brand-600 hover:-translate-y-0.5 hover:shadow-2xl hover:shadow-brand-500/50 font-display"
-              >
-                <span>Register Online</span>
-                <svg className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </Link>
               <Link
                 href="/events/telangana-state-championship-2026#schedule"
                 className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-6 py-4 text-sm font-bold text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/20 font-display"

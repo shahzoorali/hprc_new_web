@@ -1423,7 +1423,7 @@ function RegistrationForm() {
 // ─── Main Page ────────────────────────────────────────────────────────────────
 
 export default function TelanganaStateChampionship2026Page() {
-  const { event, stats, schedule, events, prizeMoney, requirements, stabling, importantNotes } =
+  const { event, stats, schedule, events, prizeMoney, requirements, stabling, importantNotes, registrationOpen } =
     equestrianChallenge2026;
 
   const countdown = useCountdown(event.dateRange.start);
@@ -1522,6 +1522,7 @@ export default function TelanganaStateChampionship2026Page() {
 
               {/* CTAs */}
               <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+                {registrationOpen && (
                 <a
                   href="#register"
                   className="inline-flex items-center justify-center gap-2 bg-brand-500 !text-white px-8 py-4 text-base font-bold shadow-2xl transition-all duration-300 hover:bg-brand-600 hover:-translate-y-0.5 hover:shadow-brand-500/40"
@@ -1531,6 +1532,7 @@ export default function TelanganaStateChampionship2026Page() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </a>
+                )}
                 <a
                   href="#schedule"
                   className="inline-flex items-center justify-center gap-2 border-2 border-white !text-white px-8 py-4 text-base font-bold backdrop-blur-sm transition-all duration-300 hover:bg-white/10"
@@ -1884,6 +1886,7 @@ export default function TelanganaStateChampionship2026Page() {
       </section>
 
       {/* ═══════════════════════════════════════════════ REGISTER FORM */}
+      {registrationOpen ? (
       <section className="container mt-16" id="register">
         <div className="relative overflow-hidden border-2 border-brand-100 bg-white p-6 sm:p-10 md:p-14 shadow-2xl">
           <div className="absolute top-0 right-0 w-96 h-96 bg-brand-500/4 blur-[150px] pointer-events-none" />
@@ -1915,6 +1918,17 @@ export default function TelanganaStateChampionship2026Page() {
           </div>
         </div>
       </section>
+      ) : (
+      <section className="container mt-16" id="register">
+        <div className="border-2 border-brand-100 bg-white p-10 sm:p-14 text-center shadow-2xl">
+          <p className="text-xs font-bold uppercase tracking-[0.3em] text-brand-500 mb-3">Online Entry</p>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-brand-900 font-display">Registrations Opening Soon</h2>
+          <p className="mt-3 text-sm text-gray-600 max-w-lg mx-auto">
+            Online entries for the Championship have not opened yet. Please check back shortly, or call {event.contact.join(" / ")} for details.
+          </p>
+        </div>
+      </section>
+      )}
 
       {/* ═══════════════════════════════════════════════ CONTACT */}
       <section className="container mt-8">

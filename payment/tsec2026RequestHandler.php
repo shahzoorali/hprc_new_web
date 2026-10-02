@@ -12,6 +12,14 @@
 // archived to a separate copy first), so the /exec URL didn't change. Both this
 // file and tsec2026ResponseHandler.php must point to the SAME URL.
 
+// Registration hold: set to true on release (mirrors registrationOpen in
+// src/content/telangana-state-championship-2026.ts).
+$registrationOpen = false;
+if (!$registrationOpen) {
+    header("Location: /events/telangana-state-championship-2026#register");
+    exit();
+}
+
 set_time_limit(120);
 ignore_user_abort(true);
 ini_set('max_execution_time', 120);
