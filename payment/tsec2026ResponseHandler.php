@@ -103,14 +103,14 @@ if ($order_id) {
                 $ageProofLink = !empty($row['ageProofPath']) ? "https://hprc.in/payment/view_proof.php?file=" . urlencode(basename($row['ageProofPath'])) : "";
 
                 $eventMapping = [
-                    1 => "Hacks - 12y & Under", 2 => "Hacks - 13-16y",
-                    3 => "Dressage - Children II", 4 => "Dressage - Children I", 5 => "Dressage - Juniors",
-                    6 => "SJ 40-45cm - Under 12", 7 => "SJ 40-45cm - Open",
-                    8 => "SJ 60cm - Under 14", 9 => "SJ 60cm - Open",
-                    10 => "SJ 80-90cm - Children II", 11 => "SJ 80-90cm - Open",
-                    12 => "SJ 100-105cm - Children I", 13 => "SJ 100-105cm - Open",
-                    14 => "SJ 110-115cm - Juniors", 15 => "SJ 110-115cm - Open",
-                    16 => "Practice Round 80-90cm"
+                    1 => "Hacks (HPRC Show) - 12y & Under", 2 => "Hacks (HPRC Show) - 13-16y",
+                    3 => "Dressage - Children II", 4 => "Dressage - Children I", 5 => "Dressage - Juniors", 17 => "Dressage - Young Rider",
+                    6 => "SJ 40cm - Under 12 (HPRC Show)", 7 => "SJ 40cm - Open (HPRC Show)",
+                    8 => "SJ 60cm - Under 12 (TS Championship)", 9 => "SJ 60cm - Open (HPRC Show)",
+                    10 => "SJ 80-90cm - Under 12 (TS Championship)", 18 => "SJ 80-90cm - Under 14 (TS Championship)", 11 => "SJ 80-90cm - Open (HPRC Show)",
+                    12 => "SJ 100-105cm - Under 18 (TS Championship)", 13 => "SJ 100-105cm - Open (TS Championship)",
+                    15 => "SJ 110-115cm - Open (TS Championship)",
+                    16 => "Practice Round 80-90cm", 19 => "Practice Round 60cm"
                 ];
 
                 $selectedIds = json_decode($row['selectedEvents'], true) ?: [];

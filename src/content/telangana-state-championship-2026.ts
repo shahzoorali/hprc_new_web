@@ -12,9 +12,9 @@ export const telanganaStateChampionship2026 = {
   registrationOpen: false,
 
   meta: {
-    title: "II Telangana State Equestrian Championship | Hyderabad Polo & Riding Club",
+    title: "II Telangana State Equestrian Championship & HPRC Show | Hyderabad Polo & Riding Club",
     description:
-      "Register for the II Telangana State Equestrian Championship — 16th to 18th October 2026 at Hyderabad Polo & Riding Club, Gandipet. Dressage & Show Jumping, hosted by HPRC in association with TSEA, alongside an HPRC Hacks Show (not a State-level competition).",
+      "Register for the II Telangana State Equestrian Championship — 16th to 18th October 2026 at Hyderabad Polo & Riding Club, Gandipet. Dressage & Show Jumping, hosted by HPRC in association with TSEA, alongside the HPRC Show (including Hacks, not State-level competitions).",
   },
 
   event: {
@@ -34,7 +34,7 @@ export const telanganaStateChampionship2026 = {
     },
     grounds: {
       ground1: "Ground 1 — Dressage & HPRC Hacks Show",
-      mainArena: "Main Arena — Practice Round & Show Jumping (40–115 cm)",
+      mainArena: "Main Arena — Practice Rounds & Show Jumping (40–115 cm)",
     },
   },
 
@@ -45,11 +45,12 @@ export const telanganaStateChampionship2026 = {
     { years: "12 - 14 years", born: "2012 - 2014", category: "Children I & Open" },
     { years: "14 - 18 years", born: "2008 - 2012", category: "Junior & Open" },
     { years: "18+ years", born: "2008 & earlier", category: "Open" },
+    { years: "16 - 21 years", born: "2005 - 2010", category: "Young Rider (Dressage)" },
   ],
 
   stats: [
     { value: "3", label: "Disciplines" },
-    { value: "16", label: "Classes" },
+    { value: "18", label: "Classes" },
     { value: "3", label: "Days" },
     { value: "₹20K", label: "Top Prize" },
   ],
@@ -62,7 +63,7 @@ export const telanganaStateChampionship2026 = {
         {
           time: "Evening · 5:00 PM",
           venue: "Main Arena",
-          events: "Practice (Clear) Round — 80-90 cm. Two minutes from entering the course; riders may jump in any order.",
+          events: "Practice (Clear) Round — 60 cm, 80-90 cm. Two minutes from entering the course; riders may jump in any order.",
         },
       ],
     },
@@ -73,7 +74,7 @@ export const telanganaStateChampionship2026 = {
         {
           time: "Morning · 7:30 AM",
           venue: "Ground 1",
-          events: "Dressage — Children II, Children I, Juniors",
+          events: "Dressage — Children II, Children I, Juniors, Young Rider",
         },
         {
           time: "Followed By",
@@ -83,7 +84,7 @@ export const telanganaStateChampionship2026 = {
         {
           time: "Evening · 4:00 PM",
           venue: "Main Arena",
-          events: "Show Jumping — 40-45 cms, 100-105 cms",
+          events: "Show Jumping — 40 cms, 100-105 cms",
         },
         {
           time: "~7:00 PM",
@@ -116,37 +117,42 @@ export const telanganaStateChampionship2026 = {
   ],
 
   // Each event has: fee (standard) and postFee (post-entry). Surcharge = postFee - fee.
+  // `show` marks which event the class belongs to (SJ + Hacks only): "TS" = Telangana State
+  // Championship, "HPRC" = HPRC Show. "Under N" classes are N-1 and younger (age = event year - birth year).
+  // Ids 1-16 are stable; 14 (Juniors 110-115) retired; 17-19 are new. Keep the PHP eventMapping in sync.
   events: [
     // HACKS — an HPRC Show, NOT a State-level competition; open ONLY to riders not participating in any other event/discipline
-    { id: 1, discipline: "HACKS", category: "12 years & Under", date: "17 Oct", fee: 1500, postFee: 2000, minAge: 0, maxAge: 12 },
-    { id: 2, discipline: "HACKS", category: "13 to 16 years", date: "17 Oct", fee: 1500, postFee: 2000, minAge: 13, maxAge: 16 },
+    { id: 1, discipline: "HACKS", category: "12 years & Under", show: "HPRC", date: "17 Oct", fee: 1500, postFee: 2000, minAge: 0, maxAge: 12 },
+    { id: 2, discipline: "HACKS", category: "13 to 16 years", show: "HPRC", date: "17 Oct", fee: 1500, postFee: 2000, minAge: 13, maxAge: 16 },
     // DRESSAGE — per EFI National Qualifier Guidelines for JNEC 2026
     { id: 3, discipline: "DRESSAGE", category: "Children II (10 - 12 years)", date: "17 Oct", fee: 2000, postFee: 2500, minAge: 10, maxAge: 12 },
     { id: 4, discipline: "DRESSAGE", category: "Children I (12 - 14 years)", date: "17 Oct", fee: 2000, postFee: 2500, minAge: 12, maxAge: 14 },
     { id: 5, discipline: "DRESSAGE", category: "Juniors (14 - 18 years)", date: "17 Oct", fee: 2000, postFee: 2500, minAge: 14, maxAge: 18 },
-    // SHOW JUMPING 40-45 cm (Table A Against the Clock, Without Jump-Off)
-    { id: 6, discipline: "SHOW JUMPING", category: "Under 12 years (40-45 cm)", date: "17 Oct", fee: 2000, postFee: 2500, minAge: 0, maxAge: 11 },
-    { id: 7, discipline: "SHOW JUMPING", category: "Open (40-45 cm)", date: "17 Oct", fee: 2000, postFee: 2500, minAge: 0, maxAge: 99 },
-    // SHOW JUMPING 60 cm (Table A Against the Clock, Without Jump-Off)
-    { id: 8, discipline: "SHOW JUMPING", category: "Under 14 years (60 cm)", date: "18 Oct", fee: 2000, postFee: 2500, minAge: 0, maxAge: 14 },
-    { id: 9, discipline: "SHOW JUMPING", category: "Open (60 cm)", date: "18 Oct", fee: 2000, postFee: 2500, minAge: 0, maxAge: 99 },
-    // SHOW JUMPING 80-90 cm (clear rounds stay in arena for an immediate jump-off)
-    { id: 10, discipline: "SHOW JUMPING", category: "Children II (10 - 12 years) (80-90 cm)", date: "18 Oct", fee: 2000, postFee: 2500, minAge: 10, maxAge: 12 },
-    { id: 11, discipline: "SHOW JUMPING", category: "Open (80-90 cm)", date: "18 Oct", fee: 2000, postFee: 2500, minAge: 0, maxAge: 99 },
-    // SHOW JUMPING 100-105 cm (clear rounds stay in arena for an immediate jump-off)
-    { id: 12, discipline: "SHOW JUMPING", category: "Children I (12 - 14 years) (100-105 cm)", date: "17 Oct", fee: 2000, postFee: 2500, minAge: 12, maxAge: 14 },
-    { id: 13, discipline: "SHOW JUMPING", category: "Open (100-105 cm)", date: "17 Oct", fee: 2000, postFee: 2500, minAge: 0, maxAge: 99 },
-    // SHOW JUMPING 110-115 cm (clear rounds stay in arena for an immediate jump-off)
-    { id: 14, discipline: "SHOW JUMPING", category: "Juniors (14 - 18 years) (110-115 cm)", date: "18 Oct", fee: 2000, postFee: 2500, minAge: 14, maxAge: 18 },
-    { id: 15, discipline: "SHOW JUMPING", category: "Open (110-115 cm)", date: "18 Oct", fee: 2000, postFee: 2500, minAge: 0, maxAge: 99 },
+    { id: 17, discipline: "DRESSAGE", category: "Young Rider (16 - 21 years)", date: "17 Oct", fee: 2000, postFee: 2500, minAge: 16, maxAge: 21 },
+    // SHOW JUMPING 40 cm (Table A Against the Clock, Without Jump-Off) — HPRC Show
+    { id: 6, discipline: "SHOW JUMPING", category: "Under 12 years (40 cm)", show: "HPRC", date: "17 Oct", fee: 2000, postFee: 2500, minAge: 0, maxAge: 11 },
+    { id: 7, discipline: "SHOW JUMPING", category: "Open (40 cm)", show: "HPRC", date: "17 Oct", fee: 2000, postFee: 2500, minAge: 0, maxAge: 99 },
+    // SHOW JUMPING 60 cm (Table A Against the Clock, Without Jump-Off) — U-12 TS Championship, Open HPRC Show
+    { id: 8, discipline: "SHOW JUMPING", category: "Under 12 years (60 cm)", show: "TS", date: "18 Oct", fee: 2000, postFee: 2500, minAge: 0, maxAge: 11 },
+    { id: 9, discipline: "SHOW JUMPING", category: "Open (60 cm)", show: "HPRC", date: "18 Oct", fee: 2000, postFee: 2500, minAge: 0, maxAge: 99 },
+    // SHOW JUMPING 80-90 cm (clear rounds stay in arena for an immediate jump-off) — U-12/U-14 TS, Open HPRC Show
+    { id: 10, discipline: "SHOW JUMPING", category: "Under 12 years (80-90 cm)", show: "TS", date: "18 Oct", fee: 2000, postFee: 2500, minAge: 0, maxAge: 11 },
+    { id: 18, discipline: "SHOW JUMPING", category: "Under 14 years (80-90 cm)", show: "TS", date: "18 Oct", fee: 2000, postFee: 2500, minAge: 0, maxAge: 13 },
+    { id: 11, discipline: "SHOW JUMPING", category: "Open (80-90 cm)", show: "HPRC", date: "18 Oct", fee: 2000, postFee: 2500, minAge: 0, maxAge: 99 },
+    // SHOW JUMPING 100-105 cm — TS Championship; riders aged 10 and older only
+    { id: 12, discipline: "SHOW JUMPING", category: "Under 18 years (100-105 cm)", show: "TS", date: "17 Oct", fee: 2000, postFee: 2500, minAge: 10, maxAge: 17 },
+    { id: 13, discipline: "SHOW JUMPING", category: "Open (100-105 cm)", show: "TS", date: "17 Oct", fee: 2000, postFee: 2500, minAge: 10, maxAge: 99 },
+    // SHOW JUMPING 110-115 cm — TS Championship, Open only; riders aged 10 and older only
+    { id: 15, discipline: "SHOW JUMPING", category: "Open (110-115 cm)", show: "TS", date: "18 Oct", fee: 2000, postFee: 2500, minAge: 10, maxAge: 99 },
     // PRACTICE ROUND
+    { id: 19, discipline: "PRACTICE ROUND", category: "60 cm (Main Arena)", date: "16 Oct", fee: 1000, postFee: 1000, minAge: 0, maxAge: 99 },
     { id: 16, discipline: "PRACTICE ROUND", category: "80-90 cm (Main Arena)", date: "16 Oct", fee: 1000, postFee: 1000, minAge: 0, maxAge: 99 },
   ],
 
   // Height-based concurrency: the age category and the Open category at the same
   // height run concurrently — a rider in both jumps a single round scored for both.
   prizeMoney: {
-    note: "Prize money is awarded to Open category participants only in the 80-90 cms, 100-105 cms and 110-115 cms Show Jumping classes, provided there are a minimum of six riders in that category. The 40-45 cms and 60 cms classes and all age-category classes (Children I, Children II, Junior) receive medals and certificates only.",
+    note: "Prize money is awarded to Open category participants only in the 80-90 cms, 100-105 cms and 110-115 cms Show Jumping classes, provided there are a minimum of six riders in that category. The 40 cms and 60 cms classes and all age-category classes receive medals and certificates only.",
     table: [
       { height: "110-115 cms (Open)", gold: 20000, silver: 10000, bronze: 7500, fourth: 5000 },
       { height: "100-105 cms (Open)", gold: 15000, silver: 7500, bronze: 5000, fourth: 2500 },
@@ -220,8 +226,10 @@ export const telanganaStateChampionship2026 = {
     "Number of Entries\n\nA horse may participate only once in each category within a given event or discipline.\nDay 1 & Day 3: maximum two (2) entries per horse per day.\nDay 2: up to three (3) entries per horse — 2 Dressage & 1 Show Jumping, or 2 Show Jumping & 1 Dressage — plus one (1) additional Hacks entry is permitted on the horse.",
     "Hacks will be held as an HPRC Show, not a State-level Competition.",
     "Hacks classes are open ONLY to riders who are not participating in any other event or discipline.",
-    "40-45 cms and 60 cms classes are conducted in the Table A Against the Clock, Without Jump-Off (FEI Art. 238.2.1) format.",
-    "80-90 cms, 100-105 cms and 110-115 cms: clear rounds stay in the arena for an immediate jump-off. If more than 30 entries are received in any class, that class will instead be conducted in the Table A Against the Clock, Without Jump-Off format.",
+    "40 cms and 60 cms classes are conducted in the Table A Against the Clock, Without Jump-Off (FEI Art. 238.2.1) format.",
+    "Show Jumping is split between the Telangana State Equestrian Championship (60 cms U-12; 80-90 cms U-12 & U-14; 100-105 cms U-18 & Open; 110-115 cms Open) and the HPRC Show (40 cms U-12 & Open; 60 cms Open; 80-90 cms Open).",
+    "Only riders aged 10 years and older are permitted to participate in heights of 100 cms and above.",
+    "Heights of 80 cms and above: clear rounds stay in the arena for an immediate jump-off. If more than 30 entries are received in any class, that class will instead be conducted in the Table A Against the Clock, Without Jump-Off format.",
     "The age and Open categories at the same height run concurrently — riders entering both jump a single round, scored in both categories.",
     "Teams must collect their assigned HPRC Horse ID tags upon arrival. This tag must be visibly displayed on the horse throughout the event and returned prior to the issuance of the Clearance Certificate. Unreturned or lost tags will incur a replacement fee.",
     "Appropriate EFI dress code must be followed for all events. Non-compliance may result in disqualification.",

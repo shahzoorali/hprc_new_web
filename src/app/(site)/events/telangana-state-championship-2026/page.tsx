@@ -100,11 +100,12 @@ type FormData = {
 };
 
 const PAIR_GROUPS: Record<number, number> = {
-  6: 7, 7: 6,     // 40-45 cm  (Under 12 ↔ Open)
-  8: 9, 9: 8,     // 60 cm  (Under 14 ↔ Open)
-  10: 11, 11: 10, // 80-90 cm  (Children II ↔ Open)
-  12: 13, 13: 12, // 100-105 cm (Children I ↔ Open)
-  14: 15, 15: 14, // 110-115 cm (Juniors ↔ Open)
+  6: 7, 7: 6,     // 40 cm  (Under 12 ↔ Open)
+  8: 9, 9: 8,     // 60 cm  (Under 12 ↔ Open)
+  10: 11, 11: 10, // 80-90 cm  (Under 12 ↔ Open)
+  18: 11,         // 80-90 cm  (Under 14 → Open)
+  12: 13, 13: 12, // 100-105 cm (Under 18 ↔ Open)
+  // 110-115 cm is Open only — no pair
 };
 
 // Fixed stabling package date windows (per prospectus). PERMANENT and TEMPORARY
@@ -990,6 +991,11 @@ function RegistrationForm() {
                               <div className="flex-1 min-w-0">
                                 <p className="text-sm font-medium text-gray-900 leading-tight">{ev.category}</p>
                                 <p className="text-xs text-gray-500 mt-0.5">{ev.date}</p>
+                                {"show" in ev && ev.show && (
+                                  <span className={`inline-block mt-1 text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded ${ev.show === "TS" ? "bg-brand-100 text-brand-700" : "bg-amber-100 text-amber-700"}`}>
+                                    {ev.show === "TS" ? "TS Championship" : "HPRC Show"}
+                                  </span>
+                                )}
                                 {isHacks && (
                                   <span className="inline-block mt-1 text-[10px] font-bold uppercase tracking-wide bg-amber-100 text-amber-700 px-2 py-0.5 rounded">
                                     Hacks riders cannot enter other disciplines
@@ -1595,7 +1601,7 @@ export default function TelanganaStateChampionship2026Page() {
                 { icon: "🌅", label: "Morning", value: event.sessions.morning },
                 { icon: "🌙", label: "Evening", value: event.sessions.evening },
                 { icon: "🏟️", label: "Ground 1", value: "Dressage & HPRC Hacks Show" },
-                { icon: "🏆", label: "Main Arena", value: "Practice Round & Show Jumping" },
+                { icon: "🏆", label: "Main Arena", value: "Practice Rounds & Show Jumping" },
               ].map((item) => (
                 <div key={item.label} className="flex items-start gap-4 bg-white border border-brand-100 p-4 shadow-sm">
                   <span className="text-2xl leading-none flex-shrink-0 mt-0.5">{item.icon}</span>
@@ -1713,7 +1719,7 @@ export default function TelanganaStateChampionship2026Page() {
         <div className="text-center">
           <p className="text-xs font-bold uppercase tracking-[0.3em] text-brand-500 mb-3">Competitions</p>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-brand-900 font-display">Disciplines &amp; Entry Fees</h2>
-          <p className="mt-3 text-base text-gray-600 max-w-xl mx-auto">16 classes across 3 disciplines — hosted by HPRC in association with TSEA</p>
+          <p className="mt-3 text-base text-gray-600 max-w-xl mx-auto">18 classes across 3 disciplines — State Championship and HPRC Show, hosted by HPRC in association with TSEA</p>
         </div>
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
           {Object.entries(byDiscipline).sort(([a], [b]) => {
@@ -1740,7 +1746,14 @@ export default function TelanganaStateChampionship2026Page() {
                     <div key={ev.id} className="flex items-center justify-between px-4 sm:px-5 py-3 bg-white/60">
                       <div>
                         <p className="text-sm font-medium text-gray-900 leading-tight">{ev.category}</p>
-                        <p className="text-xs text-gray-500 mt-0.5">{ev.date}</p>
+                        <p className="text-xs text-gray-500 mt-0.5">
+                          {ev.date}
+                          {"show" in ev && ev.show && (
+                            <span className={`ml-2 text-[10px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded ${ev.show === "TS" ? "bg-brand-100 text-brand-700" : "bg-amber-100 text-amber-700"}`}>
+                              {ev.show === "TS" ? "TS Championship" : "HPRC Show"}
+                            </span>
+                          )}
+                        </p>
                       </div>
                       <span className="text-sm font-extrabold text-brand-600 flex-shrink-0 ml-3">
                         ₹{ev.fee.toLocaleString("en-IN")}
@@ -1817,7 +1830,7 @@ export default function TelanganaStateChampionship2026Page() {
               </tbody>
             </table>
           </div>
-          <p className="text-center mt-4 text-xs text-gray-400">Age-category class winners (Children I, Children II, Junior) receive Medals &amp; Certificates</p>
+          <p className="text-center mt-4 text-xs text-gray-400">Age-category class winners receive Medals &amp; Certificates</p>
         </div>
       </section>
 

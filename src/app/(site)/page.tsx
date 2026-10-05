@@ -105,10 +105,10 @@ export default async function HomePage() {
                 </span>
               </div>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-display tracking-tight text-white">
-                II Telangana State Equestrian Championship
+                II Telangana State Equestrian Championship &amp; HPRC Show
               </h2>
               <p className="text-white/80 text-sm sm:text-base leading-relaxed font-body">
-                16th to 18th October 2026 · Dressage &amp; Show Jumping, plus an HPRC Hacks Show, hosted by HPRC in association with TSEA.
+                16th to 18th October 2026 · Dressage &amp; Show Jumping, plus the HPRC Show, hosted by HPRC in association with TSEA.
               </p>
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-4 flex-shrink-0">
