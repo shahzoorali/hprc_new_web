@@ -31,6 +31,16 @@ export const eventsContent = {
   },
   news: [
     {
+      title: "Tour highlights: HPRC in Madrid and Kentucky",
+      date: "5 October, 2026",
+      source: "HPRC",
+      excerpt:
+        "A mixed-teams win in the Friendship Cup, a one-goal defeat in the Clubs Cup, a 10-10 draw with the USA under lights, and a Grade 1 trophy presentation at Keeneland: twelve days, two clubs, three matches, in pictures.",
+      url: "/events/news/hprc-tour-2026-highlights-madrid-kentucky",
+      category: "International",
+      imageUrl: "/events/tour2026-highlights/hero-clubs-cup-lineup.jpg",
+    },
+    {
       title: "HPRC International Tour 2026: Spain & USA",
       date: "22 September, 2026",
       source: "HPRC",
@@ -38,7 +48,8 @@ export const eventsContent = {
         "HPRC represents India on the global stage across San Diego, Hawaii, and Spain. Featuring international matches at Lakeside Polo Club and historic international polo exchanges.",
       url: "/events/news/hprc-international-tour-2026-spain-usa",
       category: "International",
-      imageUrl: "https://s3.ap-south-1.amazonaws.com/hprc.in/media/gallery/tour2026/team_mounted.jpg",
+      imageUrl:
+        "https://s3.ap-south-1.amazonaws.com/hprc.in/media/gallery/tour2026/team_mounted.jpg",
     },
     {
       title: "Results — 2nd HPRC Equestrian Challenge 2026",
@@ -64,7 +75,8 @@ export const eventsContent = {
       title: "HPRC Wins Arena Polo Club of the Season at The Indian Polo Awards",
       date: "March 24, 2026",
       source: "LA POLO",
-      excerpt: "A season defined by precision and poise. Hyderabad Polo & Riding Club (HPRC) takes home 'Arena Polo Club of the Season' at The Indian Polo Awards Season V, with Chaitania R. Kumar receiving the honour.",
+      excerpt:
+        "A season defined by precision and poise. Hyderabad Polo & Riding Club (HPRC) takes home 'Arena Polo Club of the Season' at The Indian Polo Awards Season V, with Chaitania R. Kumar receiving the honour.",
       url: "https://www.instagram.com/p/DWQf6T6COAc/",
       category: "Awards",
       imageUrl: "/documents/news/arena-polo-club-of-the-season.jpg",
