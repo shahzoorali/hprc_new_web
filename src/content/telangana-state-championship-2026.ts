@@ -9,7 +9,7 @@
 export const telanganaStateChampionship2026 = {
   // Registration hold: set to true on release to show the entry form and Register CTAs.
   // The server-side switch lives in payment/tsec2026RequestHandler.php ($registrationOpen).
-  registrationOpen: false,
+  registrationOpen: true,
 
   meta: {
     title: "II Telangana State Equestrian Championship & HPRC Show | Hyderabad Polo & Riding Club",
