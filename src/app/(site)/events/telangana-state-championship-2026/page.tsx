@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useMemo, useCallback } from "react";
 
+import { TsecBot } from "@/components/events/tsec-bot";
+
 import { telanganaStateChampionship2026 as equestrianChallenge2026 } from "@/content/telangana-state-championship-2026";
 
 // ─── Countdown Timer (Client Component) ───────────────────────────────────────
@@ -1970,6 +1972,7 @@ export default function TelanganaStateChampionship2026Page() {
         </div>
       </section>
 
+      <TsecBot />
     </div>
   );
 }

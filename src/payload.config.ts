@@ -18,16 +18,20 @@ import { Programmes } from "./collections/Programmes";
 import { ResultClasses } from "./collections/ResultClasses";
 import { ResultSets } from "./collections/ResultSets";
 import { Users } from "./collections/Users";
+import { VideoCategories } from "./collections/VideoCategories";
+import { Videos } from "./collections/Videos";
+import { BotAudit } from "./collections/bot/BotAudit";
+import { BotReviews } from "./collections/bot/BotReviews";
+import { BotTurns } from "./collections/bot/BotTurns";
 import { importResultsEndpoint } from "./endpoints/import-results";
 import { resultClassIndexEndpoint } from "./endpoints/result-class-index";
 import { AboutGlobal } from "./globals/AboutGlobal";
+import { BotSettings } from "./globals/BotSettings";
 import { HomepageGlobal } from "./globals/HomepageGlobal";
 import { HospitalityGlobal } from "./globals/HospitalityGlobal";
 import { MembershipGlobal } from "./globals/MembershipGlobal";
 import { NavigationGlobal } from "./globals/NavigationGlobal";
 import { SiteSettings } from "./globals/SiteSettings";
-import { VideoCategories } from "./collections/VideoCategories";
-import { Videos } from "./collections/Videos";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -51,6 +55,7 @@ export default buildConfig({
       afterNavLinks: [
         "/components/payload/RegistrationsNavLink#RegistrationsNavLink",
         "/components/payload/ImportResultsNavLink#ImportResultsNavLink",
+        "/components/payload/BotNavLink#BotNavLink",
       ],
       views: {
         importResults: {
@@ -80,6 +85,10 @@ export default buildConfig({
     ResultClasses,
     Media,
     Users,
+    // Event help bot logs — hidden from the CMS nav, viewed via /admin/bot.
+    BotTurns,
+    BotReviews,
+    BotAudit,
   ],
   // Cap uploads. Without this, one large file can fill the box's disk or push
   // sharp past available memory while generating the Media image sizes.
@@ -94,6 +103,7 @@ export default buildConfig({
     MembershipGlobal,
     NavigationGlobal,
     SiteSettings,
+    BotSettings,
   ],
   endpoints: [importResultsEndpoint, resultClassIndexEndpoint],
   editor: lexicalEditor(),

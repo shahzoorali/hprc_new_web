@@ -76,6 +76,9 @@ export default async function ManageLayout({
                   <Link href="/admin/registrations/ec" className="hover:text-brand-700">
                     EC August
                   </Link>
+                  <Link href="/admin/bot" className="hover:text-brand-700">
+                    Event bot
+                  </Link>
                   <span className="text-neutral-300">|</span>
                   <Link href="/admin" className="hover:text-brand-700">
                     ← Back to CMS

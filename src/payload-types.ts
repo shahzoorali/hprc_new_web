@@ -82,6 +82,9 @@ export interface Config {
     'result-classes': ResultClass;
     media: Media;
     users: User;
+    'bot-turns': BotTurn;
+    'bot-reviews': BotReview;
+    'bot-audit': BotAudit;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -104,6 +107,9 @@ export interface Config {
     'result-classes': ResultClassesSelect<false> | ResultClassesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
+    'bot-turns': BotTurnsSelect<false> | BotTurnsSelect<true>;
+    'bot-reviews': BotReviewsSelect<false> | BotReviewsSelect<true>;
+    'bot-audit': BotAuditSelect<false> | BotAuditSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -120,6 +126,7 @@ export interface Config {
     membership: Membership;
     navigation: Navigation;
     'site-settings': SiteSetting;
+    'bot-settings': BotSetting;
   };
   globalsSelect: {
     homepage: HomepageSelect<false> | HomepageSelect<true>;
@@ -128,6 +135,7 @@ export interface Config {
     membership: MembershipSelect<false> | MembershipSelect<true>;
     navigation: NavigationSelect<false> | NavigationSelect<true>;
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
+    'bot-settings': BotSettingsSelect<false> | BotSettingsSelect<true>;
   };
   locale: null;
   widgets: {
@@ -213,7 +221,7 @@ export interface News {
   /**
    * Build the article from blocks. Empty for link-only entries.
    */
-  body?: (RichTextBlock | ImageGalleryBlock | QuoteBlock | EmbedBlock | MediaTextBlock)[] | null;
+  body?: (RichTextBlock | ImageGalleryBlock | QuoteBlock | EmbedBlock | MediaTextBlock | CtaBlock)[] | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -393,6 +401,25 @@ export interface MediaTextBlock {
   blockType: 'mediaText';
 }
 /**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CtaBlock".
+ */
+export interface CtaBlock {
+  heading: string;
+  description?: string | null;
+  actions?:
+    | {
+        label: string;
+        href: string;
+        variant?: ('primary' | 'outline') | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'cta';
+}
+/**
  * Longer editorial pieces — riding advice, club stories.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -425,7 +452,7 @@ export interface BlogPost {
    * Legacy path under /public. Only used when no upload is set above.
    */
   heroImagePath?: string | null;
-  body: (RichTextBlock | ImageGalleryBlock | QuoteBlock | EmbedBlock | MediaTextBlock)[];
+  body: (RichTextBlock | ImageGalleryBlock | QuoteBlock | EmbedBlock | MediaTextBlock | CtaBlock)[];
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -714,25 +741,6 @@ export interface ResultSet {
   showPhotos?: boolean | null;
   updatedAt: string;
   createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "CtaBlock".
- */
-export interface CtaBlock {
-  heading: string;
-  description?: string | null;
-  actions?:
-    | {
-        label: string;
-        href: string;
-        variant?: ('primary' | 'outline') | null;
-        id?: string | null;
-      }[]
-    | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'cta';
 }
 /**
  * Sports centre facilities and their pages.
@@ -1239,6 +1247,88 @@ export interface User {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "bot-turns".
+ */
+export interface BotTurn {
+  id: string;
+  bot: string;
+  sessionId: string;
+  ipHash?: string | null;
+  question: string;
+  answer?: string | null;
+  toolCalls?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  status: 'ok' | 'error' | 'paused' | 'capped';
+  error?: string | null;
+  model?: string | null;
+  promptHash?: string | null;
+  latencyMs?: number | null;
+  inputTokens?: number | null;
+  outputTokens?: number | null;
+  costUsd?: number | null;
+  rating?: ('up' | 'down') | null;
+  analysis?: {
+    outcome?: ('answered' | 'partial' | 'failed' | 'declined' | 'off_topic' | 'asked_back') | null;
+    reason?: string | null;
+    topic?: string | null;
+    clusterKey?: string | null;
+    severity?: number | null;
+    flags?:
+      | {
+          [k: string]: unknown;
+        }
+      | unknown[]
+      | string
+      | number
+      | boolean
+      | null;
+    summary?: string | null;
+    gap?: string | null;
+    costUsd?: number | null;
+    analyzedAt?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "bot-reviews".
+ */
+export interface BotReview {
+  id: string;
+  bot: string;
+  clusterKey: string;
+  topic?: string | null;
+  status: 'planned' | 'fixed' | 'wontfix' | 'fine';
+  fixKind?: ('data' | 'prompt' | 'feature' | 'none') | null;
+  note?: string | null;
+  idealAnswer?: string | null;
+  reviewedBy?: string | null;
+  reviewedAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "bot-audit".
+ */
+export interface BotAudit {
+  id: string;
+  action: 'open_chat' | 'reveal_pii' | 'save_review' | 'reopen_review' | 'kill_switch' | 'set_cap';
+  user: string;
+  target?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -1320,6 +1410,18 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'users';
         value: string | User;
+      } | null)
+    | ({
+        relationTo: 'bot-turns';
+        value: string | BotTurn;
+      } | null)
+    | ({
+        relationTo: 'bot-reviews';
+        value: string | BotReview;
+      } | null)
+    | ({
+        relationTo: 'bot-audit';
+        value: string | BotAudit;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -1388,6 +1490,7 @@ export interface NewsSelect<T extends boolean = true> {
         quote?: T | QuoteBlockSelect<T>;
         embed?: T | EmbedBlockSelect<T>;
         mediaText?: T | MediaTextBlockSelect<T>;
+        cta?: T | CtaBlockSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1461,6 +1564,24 @@ export interface MediaTextBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CtaBlock_select".
+ */
+export interface CtaBlockSelect<T extends boolean = true> {
+  heading?: T;
+  description?: T;
+  actions?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        variant?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "blog-posts_select".
  */
 export interface BlogPostsSelect<T extends boolean = true> {
@@ -1482,6 +1603,7 @@ export interface BlogPostsSelect<T extends boolean = true> {
         quote?: T | QuoteBlockSelect<T>;
         embed?: T | EmbedBlockSelect<T>;
         mediaText?: T | MediaTextBlockSelect<T>;
+        cta?: T | CtaBlockSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1683,24 +1805,6 @@ export interface TimelineBlockSelect<T extends boolean = true> {
  */
 export interface ResultsBoardBlockSelect<T extends boolean = true> {
   resultSet?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "CtaBlock_select".
- */
-export interface CtaBlockSelect<T extends boolean = true> {
-  heading?: T;
-  description?: T;
-  actions?:
-    | T
-    | {
-        label?: T;
-        href?: T;
-        variant?: T;
-        id?: T;
-      };
   id?: T;
   blockName?: T;
 }
@@ -2060,6 +2164,71 @@ export interface UsersSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "bot-turns_select".
+ */
+export interface BotTurnsSelect<T extends boolean = true> {
+  bot?: T;
+  sessionId?: T;
+  ipHash?: T;
+  question?: T;
+  answer?: T;
+  toolCalls?: T;
+  status?: T;
+  error?: T;
+  model?: T;
+  promptHash?: T;
+  latencyMs?: T;
+  inputTokens?: T;
+  outputTokens?: T;
+  costUsd?: T;
+  rating?: T;
+  analysis?:
+    | T
+    | {
+        outcome?: T;
+        reason?: T;
+        topic?: T;
+        clusterKey?: T;
+        severity?: T;
+        flags?: T;
+        summary?: T;
+        gap?: T;
+        costUsd?: T;
+        analyzedAt?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "bot-reviews_select".
+ */
+export interface BotReviewsSelect<T extends boolean = true> {
+  bot?: T;
+  clusterKey?: T;
+  topic?: T;
+  status?: T;
+  fixKind?: T;
+  note?: T;
+  idealAnswer?: T;
+  reviewedBy?: T;
+  reviewedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "bot-audit_select".
+ */
+export interface BotAuditSelect<T extends boolean = true> {
+  action?: T;
+  user?: T;
+  target?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2487,6 +2656,23 @@ export interface SiteSetting {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "bot-settings".
+ */
+export interface BotSetting {
+  id: string;
+  /**
+   * Kill switch: the chat box answers with the club's phone numbers instead.
+   */
+  paused?: boolean | null;
+  /**
+   * Stop answering for the rest of the IST day once bot + analyzer spend reaches this.
+   */
+  dailyCapUsd?: number | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "homepage_select".
  */
 export interface HomepageSelect<T extends boolean = true> {
@@ -2788,6 +2974,17 @@ export interface SiteSettingsSelect<T extends boolean = true> {
         variant?: T;
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "bot-settings_select".
+ */
+export interface BotSettingsSelect<T extends boolean = true> {
+  paused?: T;
+  dailyCapUsd?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
