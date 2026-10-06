@@ -186,9 +186,11 @@ HORSE ENTRY LIMITS
 - A horse may enter each category of an event/discipline only once.
 - Day 1 and Day 3: max 2 entries per horse per day. Day 2: max 3 per horse (2 Dressage + 1 Show Jumping, or 2 Show Jumping + 1 Dressage), plus 1 additional Hacks entry is permitted on the horse.
 
-PRIZE MONEY (Show Jumping, Open only, minimum six riders in the class)
-${tsec.prizeMoney.table.map((p) => `- ${p.height}: 1st ₹${p.gold}, 2nd ₹${p.silver}, 3rd ₹${p.bronze}, 4th ₹${p.fourth}`).join("\n")}
-- 40 cm, 60 cm and all age-category classes: medals and certificates only.
+AWARDS — MEDALS AND PRIZE MONEY
+- EVERY class (Dressage, Hacks, all Show Jumping incl. Open) awards certificates and medals to its winners — from TSEA for TS Championship classes, from HPRC for HPRC Show classes. No class gets prize money instead of medals.
+- Prize money is an ADDITIONAL award, only in these three Open Show Jumping classes, and only if at least six riders compete in that class (with fewer than six, the class still gets medals and certificates, just no money):
+${tsec.prizeMoney.table.map((p) => `  - ${p.height}: 1st ₹${p.gold}, 2nd ₹${p.silver}, 3rd ₹${p.bronze}, 4th ₹${p.fourth}`).join("\n")}
+- All other classes (40 cm, 60 cm, every age-category class, Dressage, Hacks): medals and certificates, no prize money.
 
 STABLING
 - ${tsec.stabling.description}
