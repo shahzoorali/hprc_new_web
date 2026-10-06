@@ -1,4 +1,5 @@
 import { Geist, Geist_Mono, Inter, Playfair_Display } from "next/font/google";
+import { headers } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -39,7 +40,13 @@ export default async function ManageLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const user = await requireCmsUser("/admin/registrations");
+  // src/proxy.ts sets x-hprc-path so login returns to the page that was asked for.
+  // Only same-site /admin paths are accepted, so it can't become an open redirect.
+  const requested = (await headers()).get("x-hprc-path") ?? "";
+  const returnTo = /^\/admin\/(registrations|bot)(\/|\?|$)/.test(requested)
+    ? requested
+    : "/admin/registrations";
+  const user = await requireCmsUser(returnTo);
 
   return (
     <html lang="en" suppressHydrationWarning>
