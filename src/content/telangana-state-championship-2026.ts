@@ -118,7 +118,7 @@ export const telanganaStateChampionship2026 = {
 
   // Each event has: fee (standard) and postFee (post-entry). Surcharge = postFee - fee.
   // `show` marks which event the class belongs to (SJ + Hacks only): "TS" = Telangana State
-  // Championship, "HPRC" = HPRC Show. "Under N" classes are N-1 and younger (age = event year - birth year).
+  // Championship, "HPRC" = HPRC Show. "Under N" classes include riders turning N that year (maxAge = N) (age = event year - birth year).
   // Ids 1-16 are stable; 14 (Juniors 110-115) retired; 17-19 are new. Keep the PHP eventMapping in sync.
   events: [
     // HACKS — an HPRC Show, NOT a State-level competition; open ONLY to riders not participating in any other event/discipline
@@ -130,17 +130,17 @@ export const telanganaStateChampionship2026 = {
     { id: 5, discipline: "DRESSAGE", category: "Juniors (14 - 18 years)", date: "17 Oct", fee: 2000, postFee: 2500, minAge: 14, maxAge: 18 },
     { id: 17, discipline: "DRESSAGE", category: "Young Rider (16 - 21 years)", date: "17 Oct", fee: 2000, postFee: 2500, minAge: 16, maxAge: 21 },
     // SHOW JUMPING 40 cm (Table A Against the Clock, Without Jump-Off) — HPRC Show
-    { id: 6, discipline: "SHOW JUMPING", category: "Under 12 years (40 cm)", show: "HPRC", date: "17 Oct", fee: 2000, postFee: 2500, minAge: 0, maxAge: 11 },
+    { id: 6, discipline: "SHOW JUMPING", category: "Under 12 years (40 cm)", show: "HPRC", date: "17 Oct", fee: 2000, postFee: 2500, minAge: 0, maxAge: 12 },
     { id: 7, discipline: "SHOW JUMPING", category: "Open (40 cm)", show: "HPRC", date: "17 Oct", fee: 2000, postFee: 2500, minAge: 0, maxAge: 99 },
     // SHOW JUMPING 60 cm (Table A Against the Clock, Without Jump-Off) — U-12 TS Championship, Open HPRC Show
-    { id: 8, discipline: "SHOW JUMPING", category: "Under 12 years (60 cm)", show: "TS", date: "18 Oct", fee: 2000, postFee: 2500, minAge: 0, maxAge: 11 },
+    { id: 8, discipline: "SHOW JUMPING", category: "Under 12 years (60 cm)", show: "TS", date: "18 Oct", fee: 2000, postFee: 2500, minAge: 0, maxAge: 12 },
     { id: 9, discipline: "SHOW JUMPING", category: "Open (60 cm)", show: "HPRC", date: "18 Oct", fee: 2000, postFee: 2500, minAge: 0, maxAge: 99 },
     // SHOW JUMPING 80-90 cm (clear rounds stay in arena for an immediate jump-off) — U-12/U-14 TS, Open HPRC Show
-    { id: 10, discipline: "SHOW JUMPING", category: "Under 12 years (80-90 cm)", show: "TS", date: "18 Oct", fee: 2000, postFee: 2500, minAge: 0, maxAge: 11 },
-    { id: 18, discipline: "SHOW JUMPING", category: "Under 14 years (80-90 cm)", show: "TS", date: "18 Oct", fee: 2000, postFee: 2500, minAge: 0, maxAge: 13 },
+    { id: 10, discipline: "SHOW JUMPING", category: "Under 12 years (80-90 cm)", show: "TS", date: "18 Oct", fee: 2000, postFee: 2500, minAge: 0, maxAge: 12 },
+    { id: 18, discipline: "SHOW JUMPING", category: "Under 14 years (80-90 cm)", show: "TS", date: "18 Oct", fee: 2000, postFee: 2500, minAge: 0, maxAge: 14 },
     { id: 11, discipline: "SHOW JUMPING", category: "Open (80-90 cm)", show: "HPRC", date: "18 Oct", fee: 2000, postFee: 2500, minAge: 0, maxAge: 99 },
     // SHOW JUMPING 100-105 cm — TS Championship; riders aged 10 and older only
-    { id: 12, discipline: "SHOW JUMPING", category: "Under 18 years (100-105 cm)", show: "TS", date: "17 Oct", fee: 2000, postFee: 2500, minAge: 10, maxAge: 17 },
+    { id: 12, discipline: "SHOW JUMPING", category: "Under 18 years (100-105 cm)", show: "TS", date: "17 Oct", fee: 2000, postFee: 2500, minAge: 10, maxAge: 18 },
     { id: 13, discipline: "SHOW JUMPING", category: "Open (100-105 cm)", show: "TS", date: "17 Oct", fee: 2000, postFee: 2500, minAge: 10, maxAge: 99 },
     // SHOW JUMPING 110-115 cm — TS Championship, Open only; riders aged 10 and older only
     { id: 15, discipline: "SHOW JUMPING", category: "Open (110-115 cm)", show: "TS", date: "18 Oct", fee: 2000, postFee: 2500, minAge: 10, maxAge: 99 },

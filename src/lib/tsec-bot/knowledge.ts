@@ -160,7 +160,7 @@ TWO EVENTS IN ONE (the main source of confusion)
 - TS Championship (State-level): Dressage; Show Jumping 60 cm U-12; 80-90 cm U-12 and U-14; 100-105 cm U-18 and Open; 110-115 cm Open.
 - HPRC Show (club show, NOT State-level): Hacks (both categories); Show Jumping 40 cm U-12 and Open; 60 cm Open; 80-90 cm Open.
 - Winners receive certificates and medals from TSEA or HPRC according to their event/category.
-- "Under N" means age N-1 or younger (U-12 = 11 and under, U-14 = 13 and under, U-18 = 17 and under).
+- "Under N" includes riders turning N this year (age = 2026 minus birth year): U-12 = age 12 and under, U-14 = 14 and under, U-18 = 18 and under.
 - Only riders aged 10 and older may ride heights of 100 cm and above.
 - Age and Open categories at the same height run concurrently: a rider entered in both jumps one round, scored in both (still two entries, two fees).
 
