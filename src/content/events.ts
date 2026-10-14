@@ -31,6 +31,16 @@ export const eventsContent = {
   },
   news: [
     {
+      title: "Polo is the Passport to the World — HPRC in Madrid and Kentucky",
+      date: "October, 2026",
+      source: "HPRC",
+      excerpt:
+        "Spain on grass, the USA under lights — twelve days, two clubs, and why the polo world is coming to Hyderabad: the International Arena Polo Championship 2027 and a new 50-room hotel at the club.",
+      url: "/events/news/polo-is-the-passport-to-the-world-madrid-kentucky",
+      category: "International",
+      imageUrl: "/events/polo-passport/hero_madrid.jpg",
+    },
+    {
       title: "Tour highlights: HPRC in Madrid and Kentucky",
       date: "5 October, 2026",
       source: "HPRC",
