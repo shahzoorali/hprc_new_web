@@ -61,7 +61,8 @@ export default async function AdminOverviewPage() {
   };
 
   const nqStables = stats.nq?.stablesBooked ?? 0;
-  const octNqStables = stats.oct_nq?.stablesBooked ?? 0;
+  // The October camp ledger is shared by October NQ and TSEC.
+  const octNqStables = (stats.oct_nq?.stablesBooked ?? 0) + (stats.tsecCampStables ?? 0);
   const ecStables = stats.ec?.stablesBooked ?? 0;
   // NQ August and EC share one camp ledger; October NQ has its own isolated ledger.
   const expectedAugustCampStables = nqStables + ecStables;
@@ -88,7 +89,7 @@ export default async function AdminOverviewPage() {
 
       {octMismatch ? (
         <section className="border border-brand-200 bg-brand-50 p-4 text-sm text-brand-800">
-          <strong>October camp ledger out of sync.</strong> Registrations show {octNqStables}{" "}
+          <strong>October camp ledger out of sync.</strong> Registrations (Oct NQ + TSEC) show {octNqStables}{" "}
           stable box(es) requested, but the October camp ledger has {stablingOct.totalStablesBooked ?? 0}. Availability below may be inaccurate — rebuild the ledger from the database.
         </section>
       ) : null}

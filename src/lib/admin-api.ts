@@ -58,6 +58,8 @@ export interface StatsResponse {
   oct_nq?: EventStats;
   nq?: EventStats;
   ec?: EventStats;
+  /** TSEC stables booked against the October camp ledger. */
+  tsecCampStables?: number;
 }
 
 export interface RegistrationFilters {

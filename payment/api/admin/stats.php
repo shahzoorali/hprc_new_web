@@ -49,6 +49,21 @@ function admin_event_stats($conn, $cfg) {
     return $out;
 }
 
+// TSEC stabling shares the October camp ledger; count it the way the ledger rebuild does.
+function admin_tsec_camp_stables($conn) {
+    $total = 0;
+    $result = $conn->query("SELECT order_status, stablingCount, stablingFrom, stablingTo FROM `tsec2026` WHERE stablingType <> 'NONE' AND stablingCount > 0");
+    if (!$result) {
+        return 0;
+    }
+    while ($row = $result->fetch_assoc()) {
+        if (!admin_is_success($row['order_status'])) continue;
+        if (empty($row['stablingFrom']) || empty($row['stablingTo'])) continue;
+        $total += (int)$row['stablingCount'];
+    }
+    return $total;
+}
+
 $nqCfg = admin_event_config('nq');
 $octNqCfg = admin_event_config('oct_nq');
 $ecCfg = admin_event_config('ec');
@@ -64,6 +79,7 @@ if ($event === 'nq') {
         'oct_nq' => admin_event_stats($conn, $octNqCfg),
         'nq' => admin_event_stats($conn, $nqCfg),
         'ec' => admin_event_stats($conn, $ecCfg),
+        'tsecCampStables' => admin_tsec_camp_stables($conn),
     ]);
 } else {
     http_response_code(400);
