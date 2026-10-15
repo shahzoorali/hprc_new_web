@@ -131,7 +131,8 @@ export default async function AdminOverviewPage() {
           </p>
           <div className="flex flex-wrap gap-2">
             {Object.entries(stablingOct.dailyAvailability).map(([date, avail]) => {
-              const pct = stablingOct.permanentCapacity > 0 ? avail / stablingOct.permanentCapacity : 0;
+              const cap = stablingOct.dailyCapacity?.[date] ?? stablingOct.permanentCapacity;
+              const pct = cap > 0 ? avail / cap : 0;
               const tone =
                 avail === 0
                   ? "border-brand-200 bg-brand-50 text-brand-800"

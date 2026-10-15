@@ -124,6 +124,8 @@ export function getStats(event: EventKey | "all" = "all"): Promise<StatsResponse
 export interface StablingSnapshot {
   permanentCapacity: number;
   dailyAvailability: Record<string, number>;
+  /** Per-night capacity when it differs from permanentCapacity (October camp). */
+  dailyCapacity?: Record<string, number>;
   minAvailable: number;
   lastUpdated: string | null;
   lastRebuiltFromDB: string | null;

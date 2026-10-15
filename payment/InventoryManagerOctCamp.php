@@ -10,6 +10,17 @@ class InventoryManagerOctCamp {
     private $eventStartDate = '2026-10-14'; // Camp opens 14 Oct
     private $eventEndDate = '2026-10-19';   // Camp closes 19 Oct
     private $defaultCapacity = 30;
+    // Nights where fewer boxes are available than the camp default (16–19 Oct: 20).
+    private $capacityOverrides = [
+        '2026-10-16' => 20,
+        '2026-10-17' => 20,
+        '2026-10-18' => 20,
+        '2026-10-19' => 20,
+    ];
+
+    private function capacityFor($date) {
+        return isset($this->capacityOverrides[$date]) ? $this->capacityOverrides[$date] : $this->defaultCapacity;
+    }
 
     public function __construct($filepath = null) {
         $this->filepath = $filepath ?: __DIR__ . '/data/camp_oct2026_stabling_inventory.json';
@@ -36,7 +47,7 @@ class InventoryManagerOctCamp {
             $dailyOccupancy[$key] = [
                 'booked' => 0,
                 'manualReserved' => 0,
-                'available' => $this->defaultCapacity
+                'available' => $this->capacityFor($key)
             ];
         }
         return [
@@ -84,12 +95,14 @@ class InventoryManagerOctCamp {
         list($data) = $this->readFileLocked();
         $dates = $this->datesBetween($fromDate, $toDate);
         $dailyAvailability = [];
+        $dailyCapacity = [];
         $minAvailable = $data['permanentCapacity'];
 
         foreach ($dates as $date) {
+            $dailyCapacity[$date] = $this->capacityFor($date);
             $avail = isset($data['dailyOccupancy'][$date])
                 ? $data['dailyOccupancy'][$date]['available']
-                : $data['permanentCapacity'];
+                : $this->capacityFor($date);
             $dailyAvailability[$date] = $avail;
             if ($avail < $minAvailable) {
                 $minAvailable = $avail;
@@ -106,6 +119,7 @@ class InventoryManagerOctCamp {
         return [
             'permanentCapacity' => $data['permanentCapacity'],
             'dailyAvailability' => $dailyAvailability,
+            'dailyCapacity' => $dailyCapacity,
             'minAvailable' => max(0, $minAvailable),
             'lastUpdated' => isset($data['lastUpdated']) ? $data['lastUpdated'] : gmdate('c'),
             'lastRebuiltFromDB' => isset($data['lastRebuiltFromDB']) ? $data['lastRebuiltFromDB'] : null,
@@ -155,13 +169,13 @@ class InventoryManagerOctCamp {
                 $data['dailyOccupancy'][$date] = [
                     'booked' => 0,
                     'manualReserved' => 0,
-                    'available' => $data['permanentCapacity']
+                    'available' => $this->capacityFor($date)
                 ];
             }
             $data['dailyOccupancy'][$date]['booked'] += $count;
             $data['dailyOccupancy'][$date]['available'] = max(
                 0,
-                $data['permanentCapacity']
+                $this->capacityFor($date)
                     - $data['dailyOccupancy'][$date]['booked']
                     - $data['dailyOccupancy'][$date]['manualReserved']
             );
@@ -239,7 +253,7 @@ class InventoryManagerOctCamp {
                         $data['dailyOccupancy'][$date] = [
                             'booked' => 0,
                             'manualReserved' => 0,
-                            'available' => $data['permanentCapacity']
+                            'available' => $this->capacityFor($date)
                         ];
                     }
                     $data['dailyOccupancy'][$date]['booked'] += $count;
@@ -261,7 +275,7 @@ class InventoryManagerOctCamp {
 
         foreach ($data['dailyOccupancy'] as $date => $entry) {
             $data['dailyOccupancy'][$date]['available'] =
-                $data['permanentCapacity'] - $entry['booked'] - $entry['manualReserved'];
+                $this->capacityFor($date) - $entry['booked'] - $entry['manualReserved'];
         }
 
         $data['lastRebuiltFromDB'] = gmdate('c');
