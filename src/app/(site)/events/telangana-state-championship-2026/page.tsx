@@ -303,14 +303,14 @@ function RegistrationForm() {
     }
   }, [eligibleEvents, form.selectedEvents.length]);
 
-  // Standard entries close 18:00, Thu 15 Oct 2026. Post-entries accepted online
+  // Standard entries close 00:01, Fri 16 Oct 2026 (extended from 18:00 Thu 15 Oct). Post-entries accepted online
   // until noon, Fri 16 Oct 2026 (per prospectus §6c/d) — spot entries thereafter
   // are handled at the venue, not through this form.
   type EntryStatus = "STANDARD" | "POST_ENTRY" | "CLOSED";
   const entryStatus: EntryStatus = useMemo(() => {
     const now = new Date();
     if (now > new Date("2026-10-16T12:00:00+05:30")) return "CLOSED";
-    if (now > new Date("2026-10-15T18:00:00+05:30")) return "POST_ENTRY";
+    if (now > new Date("2026-10-16T00:01:00+05:30")) return "POST_ENTRY";
     return "STANDARD";
   }, []);
 
@@ -1917,7 +1917,7 @@ export default function TelanganaStateChampionship2026Page() {
               <div className="mt-8 max-w-sm mx-auto">
                 <div className="bg-brand-50 border-l-4 border-brand-500 p-4 text-left">
                   <p className="text-xs font-bold text-brand-700 uppercase tracking-wider mb-1">Standard Entries Close</p>
-                  <p className="text-sm font-bold text-brand-900">Thursday, 15 Oct · 6:00 PM</p>
+                  <p className="text-sm font-bold text-brand-900">Friday, 16 Oct · 12:01 AM</p>
                   <p className="text-xs text-brand-700 mt-1">Post-entries accepted until noon, Friday 16 Oct (surcharge applies).</p>
                 </div>
               </div>

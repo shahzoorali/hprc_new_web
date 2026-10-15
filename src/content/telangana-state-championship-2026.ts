@@ -161,7 +161,7 @@ export const telanganaStateChampionship2026 = {
   },
 
   requirements: [
-    "Closing Date: Entries close at 18:00 hrs (6 pm) on Thursday, 15 October 2026, after which entries are considered Post-Entries.",
+    "Closing Date: Entries close at 00:01 hrs (12:01 am) on Friday, 16 October 2026, after which entries are considered Post-Entries.",
     "Post-Entries: Accepted until 12:00 hrs (noon) on Friday, 16 October 2026. Spot entries are accepted no later than one hour before the start of the event.",
     "Age-specific Categories: A copy of the rider's birth certificate is mandatory, with the rider's age clearly indicated on the entry form. Entries for age-specific categories will not be accepted without it.",
     "Age Rule: A rider competes as the age they are turning in the calendar year (2026), regardless of birth month.",

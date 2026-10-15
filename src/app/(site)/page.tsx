@@ -108,7 +108,7 @@ export default async function HomePage() {
                 II Telangana State Equestrian Championship &amp; HPRC Show
               </h2>
               <p className="text-white/80 text-sm sm:text-base leading-relaxed font-body">
-                16th to 18th October 2026 · Dressage &amp; Show Jumping, plus the HPRC Show, hosted by HPRC in association with TSEA. Entries close 15 October.
+                16th to 18th October 2026 · Dressage &amp; Show Jumping, plus the HPRC Show, hosted by HPRC in association with TSEA. Entries close 12:01 am, 16 October.
               </p>
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-4 flex-shrink-0">

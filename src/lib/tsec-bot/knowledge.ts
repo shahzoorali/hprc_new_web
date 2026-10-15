@@ -7,7 +7,7 @@
 import { telanganaStateChampionship2026 as tsec } from "@/content/telangana-state-championship-2026";
 
 const EVENT_YEAR = 2026;
-const STANDARD_CLOSE = new Date("2026-10-15T18:00:00+05:30");
+const STANDARD_CLOSE = new Date("2026-10-16T00:01:00+05:30");
 const POST_ENTRY_CLOSE = new Date("2026-10-16T12:00:00+05:30");
 
 type TsecEvent = (typeof tsec.events)[number];
