@@ -14,7 +14,7 @@
 
 // Registration hold: set to true on release (mirrors registrationOpen in
 // src/content/telangana-state-championship-2026.ts).
-$registrationOpen = true;
+$registrationOpen = false;
 if (!$registrationOpen) {
     header("Location: /events/telangana-state-championship-2026#register");
     exit();

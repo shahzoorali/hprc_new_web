@@ -1530,6 +1530,14 @@ export default function TelanganaStateChampionship2026Page() {
 
               {/* CTAs */}
               <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+                {!registrationOpen && (
+                <a
+                  href="/events/news/tsec-2026-results"
+                  className="inline-flex items-center justify-center gap-2 bg-brand-500 !text-white px-8 py-4 text-base font-bold shadow-2xl transition-all duration-300 hover:bg-brand-600 hover:-translate-y-0.5 hover:shadow-brand-500/40"
+                >
+                  View Results
+                </a>
+                )}
                 {registrationOpen && (
                 <a
                   href="#register"
@@ -1937,10 +1945,16 @@ export default function TelanganaStateChampionship2026Page() {
       <section className="container mt-16" id="register">
         <div className="border-2 border-brand-100 bg-white p-10 sm:p-14 text-center shadow-2xl">
           <p className="text-xs font-bold uppercase tracking-[0.3em] text-brand-500 mb-3">Online Entry</p>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-brand-900 font-display">Registrations Opening Soon</h2>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-brand-900 font-display">Registrations Closed</h2>
           <p className="mt-3 text-sm text-gray-600 max-w-lg mx-auto">
-            Online entries for the Championship have not opened yet. Please check back shortly, or call {event.contact.join(" / ")} for details.
+            The II Telangana State Equestrian Championship concluded on 18 October 2026 and online entries are now closed. Thank you to every rider who competed. Call {event.contact.join(" / ")} for any queries.
           </p>
+          <a
+            href="/events/news/tsec-2026-results"
+            className="mt-6 inline-flex items-center justify-center gap-2 bg-brand-500 !text-white px-8 py-4 text-base font-bold shadow-xl transition-all duration-300 hover:bg-brand-600 hover:-translate-y-0.5"
+          >
+            View Results
+          </a>
         </div>
       </section>
       )}
