@@ -295,22 +295,22 @@ export const eventsContent = {
     },
   ] satisfies NewsArticle[],
   upcoming: [
-    {
-      title: "National Qualifier (NQ) — October 2026",
-      date: "14 – 16 October 2026",
-      description:
-        "Dressage and Show Jumping qualifier for the Junior National Equestrian Championship (JNEC) under the aegis of EFI in association with TSEA. Entries close 13 October 2026.",
-      link: "/events/oct-nq-2026",
-    },
-    {
-      title: "II Telangana State Equestrian Championship & HPRC Show",
-      date: "16 – 18 October 2026",
-      description:
-        "Dressage and Show Jumping hosted by HPRC in association with the Telangana State Equestrian Association (TSEA), plus the HPRC Show (Hacks and selected Show Jumping classes, not State-level competitions), immediately following the October National Qualifier. Standard entries close 12:01 am, 16 October 2026.",
-      link: "/events/telangana-state-championship-2026",
-    },
   ] as UpcomingEvent[],
   pastHighlights: [
+    {
+      title: "II Telangana State Equestrian Championship 2026",
+      description:
+        "The II Telangana State Equestrian Championship concluded 17–18 October with sixteen state titles decided across Hacks, Dressage and Show Jumping. Pothuraju Sridhar on Dilano won the 110–115 cm Open. View the official results.",
+      link: "/events/news/tsec-2026-results",
+      image: "/images/ec2026/action-1.jpg",
+    },
+    {
+      title: "National Qualifier (NQ) — October 2026",
+      description:
+        "The October National Qualifier, the Junior National Equestrian Championship (JNEC) qualifier under the aegis of EFI, concluded 14–16 October at Gandipet.",
+      link: "/events/oct-nq-2026",
+      image: "/images/ec2026/aamir-shahnawaz-1.jpg",
+    },
     {
       title: "National Qualifier (NQ) 2026",
       description:

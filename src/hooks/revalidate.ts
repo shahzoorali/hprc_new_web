@@ -109,6 +109,7 @@ export const [revalidateNewsletters, revalidateNewslettersAfterDelete] = makeRev
 
 export const [revalidateResults, revalidateResultsAfterDelete] = makeRevalidator([
   "/events/news/nq-2026-results",
+  "/events/news/tsec-2026-results",
   "/events/news/ec-aug-2026-results",
   "/events/news",
 ]);

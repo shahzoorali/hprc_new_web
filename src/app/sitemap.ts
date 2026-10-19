@@ -109,6 +109,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     url("/events/news/international-arena-polo-championship-2026-tshirt-unveiling", 0.7, "monthly", new Date("2026-06-01")),
     url("/events/news/ec-aug-2026-results",                     0.8, "monthly", new Date("2026-08-18")),
     url("/events/news/nq-2026-results",                          0.8, "monthly", new Date("2026-08-18")),
+    url("/events/news/tsec-2026-results",                        0.8, "monthly", new Date("2026-10-19")),
     url("/events/news/ec2026-results-16-may-evening-session",    0.7, "monthly", new Date("2026-05-17")),
     url("/events/news/ec2026-results-17-may-morning-session",    0.7, "monthly", new Date("2026-05-17")),
     url("/events/news/best-arena-polo-club-india-awards-2025",   0.7, "monthly"),
