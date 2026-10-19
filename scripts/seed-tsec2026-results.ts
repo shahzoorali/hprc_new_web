@@ -63,7 +63,6 @@ const CLASSES: {
         "rider": "Siddharth Dutta",
         "horse": "Wilbur",
         "club": "HPRC",
-        "photoPath": "/images/results/tsec-2026/siddharth-dutta.jpg",
         "score": "0.60658"
       },
       {
@@ -71,7 +70,6 @@ const CLASSES: {
         "rider": "Siddharth Dutta",
         "horse": "Burning Arrow",
         "club": "HPRC",
-        "photoPath": "/images/results/tsec-2026/siddharth-dutta.jpg",
         "score": "0.59632"
       },
       {
@@ -248,8 +246,7 @@ const CLASSES: {
         "pos": "3rd",
         "rider": "Aanya Rathi",
         "horse": "Mitchell Pride",
-        "club": "the ASHWA collective",
-        "photoPath": "/images/results/tsec-2026/aanya-rathi.jpg"
+        "club": "the ASHWA collective"
       },
       {
         "pos": "Highly Recommended",
@@ -576,7 +573,6 @@ const CLASSES: {
         "rider": "Bhanu Vathula",
         "horse": "Roxie",
         "club": "The ASHWA collective",
-        "photoPath": "/images/results/tsec-2026/bhanu-vathula.jpg",
         "prize": "₹5,000"
       },
       {
@@ -618,7 +614,6 @@ const CLASSES: {
         "rider": "Mohammed Amaan Ali",
         "horse": "Flying Champ",
         "club": "The ASHWA collective",
-        "photoPath": "/images/results/tsec-2026/mohammed-amaan-ali.jpg",
         "prize": "₹7,500"
       },
       {
