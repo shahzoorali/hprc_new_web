@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { Badge, BotTabs, istTime, secs, severityTone, usd } from "@/components/admin/bot-ui";
+import { Badge, BotTabs, istTime, secs, severityTone, shortId, usd } from "@/components/admin/bot-ui";
 import { RevealButton } from "@/components/admin/reveal-button";
 import { flagsOf, sessionTurns } from "@/lib/tsec-bot/admin-data";
 import { containsPii, maskPii } from "@/lib/tsec-bot/pii";
@@ -38,7 +38,10 @@ export default async function BotTranscriptPage({
           <Link href="/admin/bot/conversations" className="text-xs font-semibold text-brand-700">
             ← All conversations
           </Link>
-          <p className="mt-1 font-mono text-xs text-neutral-500 select-all">{sessionId}</p>
+          <h1 className="mt-1 font-mono text-base font-bold text-neutral-800">
+            Conversation <span className="select-all">{shortId(sessionId)}</span>
+          </h1>
+          <p className="font-mono text-[11px] text-neutral-400 select-all">{sessionId}</p>
           <p className="text-xs text-neutral-500">
             {turns.length} question(s) · {istTime(turns[0].createdAt)} –{" "}
             {istTime(turns[turns.length - 1].createdAt)} · {usd(total)}

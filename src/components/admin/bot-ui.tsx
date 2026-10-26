@@ -3,7 +3,10 @@
 import Link from "next/link";
 
 export const usd = (n: number) => (n < 0.01 && n > 0 ? `$${n.toFixed(4)}` : `$${n.toFixed(2)}`);
-export const pct = (n: number | null) => (n === null ? "—" : `${Math.round(n)}%`);
+// Short, quotable conversation ID: the first 8 characters of the chat's session ID.
+// Admin search matches any substring of the full ID, so this works as a lookup key.
+export const shortId = (sessionId: string) => sessionId.slice(0, 8);
+export const pct =(n: number | null) => (n === null ? "—" : `${Math.round(n)}%`);
 export const secs = (ms: number | null) => (ms === null ? "—" : `${(ms / 1000).toFixed(1)} s`);
 
 export function istTime(iso: string): string {

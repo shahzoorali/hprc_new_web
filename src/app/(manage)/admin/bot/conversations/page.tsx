@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { Badge, BotTabs, istTime, severityTone, usd } from "@/components/admin/bot-ui";
+import { Badge, BotTabs, istTime, severityTone, shortId, usd } from "@/components/admin/bot-ui";
 import { RANGE_MS, conversationRows, loadTurns, parseRange } from "@/lib/tsec-bot/admin-data";
 import { maskPii } from "@/lib/tsec-bot/pii";
 
@@ -134,6 +134,7 @@ export default async function BotConversationsPage({
         <table className="w-full text-sm">
           <thead className="bg-neutral-50 text-left text-xs text-neutral-500">
             <tr>
+              <th className="px-3 py-2">ID</th>
               <th className="px-3 py-2">Last message</th>
               <th className="px-3 py-2">First question</th>
               <th className="px-3 py-2 text-right">Qs</th>
@@ -147,6 +148,9 @@ export default async function BotConversationsPage({
           <tbody className="divide-y divide-neutral-100">
             {page.map((r) => (
               <tr key={r.sessionId} className="hover:bg-neutral-50">
+                <td className="whitespace-nowrap px-3 py-2 font-mono text-xs font-semibold text-neutral-700 select-all">
+                  {shortId(r.sessionId)}
+                </td>
                 <td className="whitespace-nowrap px-3 py-2 text-xs text-neutral-500">
                   {istTime(r.lastAt)}
                 </td>
@@ -186,7 +190,7 @@ export default async function BotConversationsPage({
             ))}
             {!page.length ? (
               <tr>
-                <td colSpan={8} className="px-3 py-8 text-center text-sm text-neutral-400">
+                <td colSpan={9} className="px-3 py-8 text-center text-sm text-neutral-400">
                   No chats match.
                 </td>
               </tr>
