@@ -25,12 +25,34 @@ if ($name === '' || $mobile === '' || $email === '' || $membershipNo === '' || $
     exit('Missing required fields.');
 }
 
-$sql = "INSERT INTO polo_oct2026 (name, mobile, email, membershipNo, handicap, amount, currency)
+// Player photo upload: images only, max 5 MB, validated by content not just name.
+$photoPath = '';
+if (isset($_FILES['photo']) && $_FILES['photo']['error'] == 0) {
+    $ext = strtolower(pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION));
+    $info = @getimagesize($_FILES['photo']['tmp_name']);
+    if (in_array($ext, ['jpg', 'jpeg', 'png', 'webp']) && $info !== false && $_FILES['photo']['size'] <= 5 * 1024 * 1024) {
+        $uploadDir = __DIR__ . '/uploads/polo_oct2026/photos/';
+        if (!is_dir($uploadDir) && !mkdir($uploadDir, 0755, true)) {
+            error_log("POLO_OCT2026: Failed to create upload directory: " . $uploadDir);
+        }
+        $fileName = preg_replace('/[^a-zA-Z0-9]/', '_', $name) . '_photo_' . time() . '.' . $ext;
+        if (move_uploaded_file($_FILES['photo']['tmp_name'], $uploadDir . $fileName)) {
+            $photoPath = 'uploads/polo_oct2026/photos/' . $fileName;
+        } else {
+            error_log("POLO_OCT2026: Failed to move photo to " . $uploadDir . $fileName);
+        }
+    } else {
+        error_log("POLO_OCT2026: Rejected photo upload for $name (type/size).");
+    }
+}
+
+$sql = "INSERT INTO polo_oct2026 (name, mobile, email, membershipNo, handicap, photoPath, amount, currency)
         VALUES ('".$conn->real_escape_string($name)."',
                 '".$conn->real_escape_string($mobile)."',
                 '".$conn->real_escape_string($email)."',
                 '".$conn->real_escape_string($membershipNo)."',
                 '".$conn->real_escape_string($handicap)."',
+                '".$conn->real_escape_string($photoPath)."',
                 '$amount', '$currency')";
 $conn->query($sql);
 $order_id = $conn->insert_id;

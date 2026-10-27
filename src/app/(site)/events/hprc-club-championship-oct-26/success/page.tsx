@@ -1,8 +1,9 @@
 "use client";
 
-import { Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
+
 import { PageHero } from "@/components/ui/page-hero";
 
 function SuccessContent() {
@@ -34,7 +35,9 @@ function SuccessContent() {
             isSuccess ? "bg-green-50 border-green-200" : "bg-red-50 border-red-200"
           }`}
         >
-          <h2 className={`text-3xl font-bold font-display ${isSuccess ? "text-green-900" : "text-red-900"}`}>
+          <h2
+            className={`text-3xl font-bold font-display ${isSuccess ? "text-green-900" : "text-red-900"}`}
+          >
             {isSuccess ? "Registration Successful" : "Payment Failed or Aborted"}
           </h2>
           <p className="mt-4 text-gray-700 text-lg">

@@ -49,7 +49,7 @@ if ($order_id) {
                     trans_date='".$conn->real_escape_string($trans_date)."'
                     WHERE id='$oid'");
 
-    $res = $conn->query("SELECT name, email, mobile, membershipNo, handicap FROM polo_oct2026 WHERE id='$oid'");
+    $res = $conn->query("SELECT name, email, mobile, membershipNo, handicap, photoPath FROM polo_oct2026 WHERE id='$oid'");
     $row = ($res && $res->num_rows > 0) ? $res->fetch_assoc() : null;
 
     if ($row && !$isDuplicateHit) {
@@ -64,12 +64,13 @@ if ($order_id) {
             $e = htmlspecialchars($row['email']);
             $mn = htmlspecialchars($row['membershipNo']);
             $h = htmlspecialchars($row['handicap']);
+            $attachment = !empty($row['photoPath']) ? __DIR__ . '/' . $row['photoPath'] : null;
             $adminHtml = "<h3>New polo registration (#$order_id)</h3><table cellpadding='6'>"
                 . "<tr><td>Name</td><td>$n</td></tr><tr><td>Mobile</td><td>$m</td></tr>"
                 . "<tr><td>Email</td><td>$e</td></tr><tr><td>Membership No.</td><td>$mn</td></tr>"
                 . "<tr><td>Handicap / level</td><td>$h</td></tr>"
                 . "<tr><td>Amount</td><td>Rs $mer_amount</td></tr><tr><td>Tracking ID</td><td>$tracking_id</td></tr></table>";
-            send_admin_notification("NEW REGISTRATION (POLO): {$row['name']} (#$order_id)", $adminHtml);
+            send_admin_notification("NEW REGISTRATION (POLO): {$row['name']} (#$order_id)", $adminHtml, $attachment);
         } else if (!empty($row['email'])) {
             $htmlBody = get_failed_email_body($row['name'], $order_id, $status_message, $eventName);
             send_hprc_email($row['email'], $row['name'], "Payment Notification - $eventName", $htmlBody);

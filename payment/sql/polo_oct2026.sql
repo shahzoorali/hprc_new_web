@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS `polo_oct2026` (
   `email`          VARCHAR(255) DEFAULT NULL,
   `membershipNo`   VARCHAR(64)  DEFAULT NULL,
   `handicap`       VARCHAR(64)  DEFAULT NULL,
+  `photoPath`      VARCHAR(512) DEFAULT NULL,
   `amount`         VARCHAR(32)  DEFAULT NULL,
   `currency`       VARCHAR(8)   DEFAULT 'INR',
   `order_status`   VARCHAR(64)  DEFAULT NULL,
@@ -20,3 +21,6 @@ CREATE TABLE IF NOT EXISTS `polo_oct2026` (
   KEY `idx_order_status` (`order_status`),
   KEY `idx_email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- If the table already exists (created before the photo field was added), run:
+-- ALTER TABLE `polo_oct2026` ADD COLUMN `photoPath` VARCHAR(512) DEFAULT NULL AFTER `handicap`;
