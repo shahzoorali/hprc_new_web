@@ -126,8 +126,7 @@ export default function HprcClubChampionshipPage() {
             Player Registration
           </h2>
           <p className="mt-2 text-sm text-gray-600">
-            Open to HPRC members only. Your membership number will be verified by the club; entries
-            from non-members will be refunded.
+            Open to HPRC members only. Your membership number will be verified by the club.
           </p>
 
           <form
