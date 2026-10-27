@@ -18,7 +18,7 @@ function SuccessContent() {
     <div className="space-y-16 pb-24">
       <div className="container pt-16">
         <PageHero
-          eyebrow="HPRC Club Championship — Polo Tournament · 30–31 October 2026"
+          eyebrow="HPRC Club Championship — Polo Tournament · 30 October – 1 November 2026"
           title={isSuccess ? "Entry Confirmed!" : "Payment Status"}
           description={
             isSuccess
