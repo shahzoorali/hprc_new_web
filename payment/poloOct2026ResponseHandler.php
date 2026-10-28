@@ -1,5 +1,5 @@
 <?php
-// HPRC Club Championship (Polo Tournament) 30 Oct - 1 Nov 2026 — payment response handler.
+// HPRC Club Championship (Polo Tournament) 29 Oct - 1 Nov 2026 — payment response handler.
 // Table `polo_oct2026`; redirects to /events/hprc-club-championship-oct-26/success.
 
 set_time_limit(120);
@@ -56,7 +56,7 @@ if ($order_id) {
         if ($order_status === "Success" || $order_status === "Successful") {
             if (!empty($row['email'])) {
                 $details = ["events" => "Polo Tournament, Handicap: " . $row['handicap']];
-                $htmlBody = get_success_email_body($row['name'], $order_id, $mer_amount, $tracking_id, $details, $eventName, "30th October to 1st November 2026");
+                $htmlBody = get_success_email_body($row['name'], $order_id, $mer_amount, $tracking_id, $details, $eventName, "29th October to 1st November 2026");
                 send_hprc_email($row['email'], $row['name'], "Registration Confirmed - $eventName", $htmlBody);
             }
             $n = htmlspecialchars($row['name']);

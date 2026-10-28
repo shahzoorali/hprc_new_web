@@ -100,16 +100,16 @@ export default function HprcClubChampionshipPage() {
     <div className="space-y-12 pb-24">
       <div className="container pt-16">
         <PageHero
-          eyebrow="30 October – 1 November 2026 · HPRC, Hyderabad"
+          eyebrow="29 October – 1 November 2026 · HPRC, Hyderabad"
           title="HPRC Club Championship — Polo Tournament"
-          description="A three-day polo tournament open exclusively to HPRC members. Register as an individual player; teams will be formed by the organisers."
+          description="A four-day polo tournament open exclusively to HPRC members. Register as an individual player; teams will be formed by the organisers."
           backgroundImage="/photo-1553531580-6520e75d0458.png"
         />
       </div>
 
       <section className="container max-w-3xl mx-auto grid gap-4 sm:grid-cols-3 text-center">
         {[
-          ["Dates", "30 October – 1 November 2026"],
+          ["Dates", "29 October – 1 November 2026"],
           ["Venue", "Hyderabad Polo & Riding Club"],
           ["Entry fee", `₹${ENTRY_FEE.toLocaleString("en-IN")} per player`],
         ].map(([k, v]) => (

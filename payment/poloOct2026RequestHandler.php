@@ -1,5 +1,5 @@
 <?php
-// HPRC Club Championship (Polo Tournament) 30 Oct - 1 Nov 2026 — payment request handler.
+// HPRC Club Championship (Polo Tournament) 29 Oct - 1 Nov 2026 — payment request handler.
 // Members only, individual players, fixed fee. Table `polo_oct2026`.
 // CCAvenue credentials are the shared HDFC MID (same as tsec2026).
 

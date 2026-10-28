@@ -1,4 +1,4 @@
--- HPRC Club Championship (Polo Tournament), 30 Oct - 1 Nov 2026. Members only.
+-- HPRC Club Championship (Polo Tournament), 29 Oct - 1 Nov 2026. Members only.
 -- Run once on the production MySQL server before go-live.
 CREATE TABLE IF NOT EXISTS `polo_oct2026` (
   `id`             INT(11) NOT NULL AUTO_INCREMENT,
