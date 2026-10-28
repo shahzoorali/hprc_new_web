@@ -12,7 +12,9 @@ export async function GET(req: NextRequest) {
 
   const sp = req.nextUrl.searchParams;
   const event = sp.get("event");
-  if (event !== "nq" && event !== "ec") {
+  const tournament = sp.get("tournament");
+  const isClub = event === "club" && !!tournament;
+  if (!isClub && event !== "nq" && event !== "ec") {
     return new NextResponse("Bad request", { status: 400 });
   }
 
@@ -23,13 +25,14 @@ export async function GET(req: NextRequest) {
   }
 
   // Forward the supported filters only.
-  const params = new URLSearchParams({ event });
+  const params = new URLSearchParams(isClub ? { tournament: tournament! } : { event: event! });
   for (const key of ["status", "q", "from", "to"]) {
     const v = sp.get(key);
     if (v) params.set(key, v);
   }
 
-  const url = `${base.replace(/\/$/, "")}/api/admin/export.php?${params.toString()}`;
+  const endpoint = isClub ? "tournament_export.php" : "export.php";
+  const url = `${base.replace(/\/$/, "")}/api/admin/${endpoint}?${params.toString()}`;
   const upstream = await fetch(url, {
     headers: { "X-Admin-Token": apiToken },
     cache: "no-store",
@@ -45,7 +48,7 @@ export async function GET(req: NextRequest) {
       "Content-Type": "text/csv; charset=utf-8",
       "Content-Disposition":
         upstream.headers.get("Content-Disposition") ||
-        `attachment; filename="${event}_registrations.csv"`,
+        `attachment; filename="${isClub ? tournament : event}_registrations.csv"`,
       "Cache-Control": "no-store",
     },
   });

@@ -6,7 +6,13 @@ import { useEffect, useState } from "react";
 // Filter controls for a registrations list. Reads current values from the URL
 // and pushes updates back as query params (the server component re-renders with
 // the new filters). Search is debounced so typing doesn't spam navigation.
-export function FilterBar({ exportHref }: { exportHref: string }) {
+export function FilterBar({
+  exportHref,
+  searchPlaceholder = "Name, email, mobile, club",
+}: {
+  exportHref: string;
+  searchPlaceholder?: string;
+}) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -62,7 +68,7 @@ export function FilterBar({ exportHref }: { exportHref: string }) {
           type="text"
           value={q}
           onChange={(e) => setQ(e.target.value)}
-          placeholder="Name, email, mobile, club"
+          placeholder={searchPlaceholder}
           className="mt-1 block w-56 border border-neutral-300 px-2 py-1.5 text-sm outline-none focus:border-brand-500"
         />
       </label>

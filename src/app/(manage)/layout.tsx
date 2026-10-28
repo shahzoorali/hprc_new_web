@@ -83,6 +83,9 @@ export default async function ManageLayout({
                   <Link href="/admin/registrations/ec" className="hover:text-brand-700">
                     EC August
                   </Link>
+                  <Link href="/admin/registrations/tournaments" className="hover:text-brand-700">
+                    Club tournaments
+                  </Link>
                   <Link href="/admin/bot" className="hover:text-brand-700">
                     Event bot
                   </Link>

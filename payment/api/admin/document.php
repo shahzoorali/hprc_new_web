@@ -23,7 +23,8 @@ if (!$cfg || $file === '') {
 $filename = basename($file);
 
 // Optional subdir, whitelisted to known upload categories. Defaults to age_proofs.
-$subDir = isset($_GET['dir']) && $_GET['dir'] === 'headshots' ? 'headshots' : 'age_proofs';
+$dirParam = isset($_GET['dir']) ? $_GET['dir'] : '';
+$subDir = in_array($dirParam, ['headshots', 'photos'], true) ? $dirParam : 'age_proofs';
 
 // payment/api/admin -> payment/uploads/{dir}/{subDir}/{filename}
 $filePath = __DIR__ . '/../../uploads/' . $cfg['uploadDir'] . '/' . $subDir . '/' . $filename;
@@ -35,7 +36,7 @@ if (!file_exists($filePath)) {
 }
 
 $mimeType = mime_content_type($filePath);
-$allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'application/pdf'];
+$allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'application/pdf'];
 if (!in_array($mimeType, $allowedTypes)) {
     http_response_code(415);
     die('Invalid file type.');

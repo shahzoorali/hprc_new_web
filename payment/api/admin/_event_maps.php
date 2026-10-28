@@ -34,6 +34,11 @@ function admin_event_config($event) {
     if ($event === 'ec') {
         return ['table' => 'ecaug2026', 'map' => $EC_EVENT_MAP, 'uploadDir' => 'ecaug2026'];
     }
+    // Club tournaments (all editions share one table). Only document.php uses this
+    // bundle, to serve uploaded player photos; the entry lists live in tournament*.php.
+    if ($event === 'club') {
+        return ['table' => 'club_tournament_entries', 'map' => [], 'uploadDir' => 'club_tournaments'];
+    }
     return null;
 }
 

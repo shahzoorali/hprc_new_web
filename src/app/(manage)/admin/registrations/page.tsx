@@ -1,7 +1,15 @@
 import Link from "next/link";
 
 import { StatCard } from "@/components/admin/stat-card";
-import { EventStats, getOctStablingSnapshot, getStablingSnapshot, getStats, StablingSnapshot } from "@/lib/admin-api";
+import {
+  EventStats,
+  getOctStablingSnapshot,
+  getStablingSnapshot,
+  getStats,
+  getTournaments,
+  StablingSnapshot,
+  TournamentSummary,
+} from "@/lib/admin-api";
 
 export const dynamic = "force-dynamic";
 
@@ -44,10 +52,12 @@ function relativeTime(iso: string | null): string {
 }
 
 export default async function AdminOverviewPage() {
-  const [stats, stablingAug, stablingOct] = await Promise.all([
+  const [stats, stablingAug, stablingOct, tournaments] = await Promise.all([
     getStats("all"),
     getStablingSnapshot(),
     getOctStablingSnapshot(),
+    // Best-effort: the overview still loads if the tournaments table isn't set up yet.
+    getTournaments().catch((): TournamentSummary[] => []),
   ]);
 
   const empty: EventStats = {
@@ -66,8 +76,14 @@ export default async function AdminOverviewPage() {
   const ecStables = stats.ec?.stablesBooked ?? 0;
   // NQ August and EC share one camp ledger; October NQ has its own isolated ledger.
   const expectedAugustCampStables = nqStables + ecStables;
-  const augMismatch = stablingAug !== null && typeof stablingAug.totalStablesBooked === "number" && stablingAug.totalStablesBooked !== expectedAugustCampStables;
-  const octMismatch = stablingOct !== null && typeof stablingOct.totalStablesBooked === "number" && stablingOct.totalStablesBooked !== octNqStables;
+  const augMismatch =
+    stablingAug !== null &&
+    typeof stablingAug.totalStablesBooked === "number" &&
+    stablingAug.totalStablesBooked !== expectedAugustCampStables;
+  const octMismatch =
+    stablingOct !== null &&
+    typeof stablingOct.totalStablesBooked === "number" &&
+    stablingOct.totalStablesBooked !== octNqStables;
 
   return (
     <div className="space-y-6">
@@ -80,20 +96,37 @@ export default async function AdminOverviewPage() {
 
       {augMismatch ? (
         <section className="border border-brand-200 bg-brand-50 p-4 text-sm text-brand-800">
-          <strong>August camp ledger out of sync.</strong> Registrations show {expectedAugustCampStables}{" "}
-          stable box(es) requested ({nqStables} NQ Aug + {ecStables} EC), but the shared August camp ledger has{" "}
-          {stablingAug.totalStablesBooked}. Availability below may be inaccurate — rebuild the ledger
-          from the database.
+          <strong>August camp ledger out of sync.</strong> Registrations show{" "}
+          {expectedAugustCampStables} stable box(es) requested ({nqStables} NQ Aug + {ecStables}{" "}
+          EC), but the shared August camp ledger has {stablingAug.totalStablesBooked}. Availability
+          below may be inaccurate — rebuild the ledger from the database.
         </section>
       ) : null}
 
       {octMismatch ? (
         <section className="border border-brand-200 bg-brand-50 p-4 text-sm text-brand-800">
-          <strong>October camp ledger out of sync.</strong> Registrations (Oct NQ + TSEC) show {octNqStables}{" "}
-          stable box(es) requested, but the October camp ledger has {stablingOct.totalStablesBooked ?? 0}. Availability below may be inaccurate — rebuild the ledger from the database.
+          <strong>October camp ledger out of sync.</strong> Registrations (Oct NQ + TSEC) show{" "}
+          {octNqStables} stable box(es) requested, but the October camp ledger has{" "}
+          {stablingOct.totalStablesBooked ?? 0}. Availability below may be inaccurate — rebuild the
+          ledger from the database.
         </section>
       ) : null}
 
+      {[...tournaments].reverse().map((t) => (
+        <EventSummary
+          key={t.slug}
+          title={`${t.name} — ${t.label} (${t.dates})`}
+          href={`/admin/registrations/tournaments/${t.slug}`}
+          stats={{
+            ...empty,
+            total: t.total,
+            success: t.success,
+            failed: t.failed,
+            pending: t.pending,
+            revenue: t.revenue,
+          }}
+        />
+      ))}
       <EventSummary
         title="National Qualifier — October 2026"
         href="/admin/registrations/oct_nq"
@@ -163,15 +196,16 @@ export default async function AdminOverviewPage() {
             </span>
           </div>
           <p className="mb-3 text-xs text-neutral-400">
-            Boxes occupied per day for August NQ &amp; EC (shared {stablingAug.permanentCapacity}-box camp) · ledger updated{" "}
-            {relativeTime(stablingAug.lastUpdated)}
+            Boxes occupied per day for August NQ &amp; EC (shared {stablingAug.permanentCapacity}
+            -box camp) · ledger updated {relativeTime(stablingAug.lastUpdated)}
             {stablingAug.lastRebuiltFromDB
               ? ` · last rebuilt from DB ${relativeTime(stablingAug.lastRebuiltFromDB)}`
               : ""}
           </p>
           <div className="flex flex-wrap gap-2">
             {Object.entries(stablingAug.dailyAvailability).map(([date, avail]) => {
-              const pct = stablingAug.permanentCapacity > 0 ? avail / stablingAug.permanentCapacity : 0;
+              const pct =
+                stablingAug.permanentCapacity > 0 ? avail / stablingAug.permanentCapacity : 0;
               const tone =
                 avail === 0
                   ? "border-brand-200 bg-brand-50 text-brand-800"

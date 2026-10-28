@@ -44,6 +44,44 @@ export interface RegistrationDetail extends Record<string, unknown> {
   horseBreeds: Record<string, string> | null;
 }
 
+// Club tournaments (polo etc.): one table for every edition, keyed by slug.
+export interface TournamentSummary {
+  slug: string;
+  name: string;
+  label: string;
+  sport: string;
+  dates: string;
+  fee: number;
+  pagePath: string;
+  total: number;
+  success: number;
+  failed: number;
+  pending: number;
+  revenue: number;
+}
+
+export interface TournamentEntryRow {
+  id: number;
+  name: string | null;
+  email: string | null;
+  mobile: string | null;
+  membershipNo: string | null;
+  handicap: string | null;
+  amount: string | null;
+  order_status: string | null;
+  isSuccess: boolean;
+  hasPhoto: boolean;
+  created_at: string;
+}
+
+export interface TournamentEntryDetail extends Record<string, unknown> {
+  id: number;
+  tournament: string;
+  tournamentName: string;
+  isSuccess: boolean;
+  photoPath: string | null;
+}
+
 export interface EventStats {
   total: number;
   success: number;
@@ -117,6 +155,23 @@ export function getRegistration(event: EventKey, id: number): Promise<Registrati
   return getJson<RegistrationDetail>(`registration.php?event=${event}&id=${id}`);
 }
 
+export function getTournaments(): Promise<TournamentSummary[]> {
+  return getJson<TournamentSummary[]>("tournaments.php");
+}
+
+export function getTournamentEntries(
+  tournament: string,
+  filters: RegistrationFilters = {},
+): Promise<TournamentEntryRow[]> {
+  return getJson<TournamentEntryRow[]>(
+    `tournament_entries.php?tournament=${encodeURIComponent(tournament)}${filterQuery(filters)}`,
+  );
+}
+
+export function getTournamentEntry(id: number): Promise<TournamentEntryDetail> {
+  return getJson<TournamentEntryDetail>(`tournament_entry.php?id=${id}`);
+}
+
 export function getStats(event: EventKey | "all" = "all"): Promise<StatsResponse> {
   return getJson<StatsResponse>(`stats.php?event=${event}`);
 }
@@ -148,7 +203,9 @@ export async function getStablingSnapshot(): Promise<StablingSnapshot | null> {
 
 export async function getOctStablingSnapshot(): Promise<StablingSnapshot | null> {
   try {
-    const res = await fetch(`${apiBase()}/api/stabling-available-oct-camp.php`, { cache: "no-store" });
+    const res = await fetch(`${apiBase()}/api/stabling-available-oct-camp.php`, {
+      cache: "no-store",
+    });
     if (!res.ok) return null;
     return (await res.json()) as StablingSnapshot;
   } catch {

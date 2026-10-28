@@ -12,8 +12,9 @@ export async function GET(req: NextRequest) {
 
   const event = req.nextUrl.searchParams.get("event");
   const file = req.nextUrl.searchParams.get("file");
-  const dir = req.nextUrl.searchParams.get("dir") === "headshots" ? "headshots" : null;
-  if ((event !== "nq" && event !== "ec") || !file) {
+  const dirParam = req.nextUrl.searchParams.get("dir");
+  const dir = dirParam === "headshots" || dirParam === "photos" ? dirParam : null;
+  if ((event !== "nq" && event !== "ec" && event !== "club") || !file) {
     return new NextResponse("Bad request", { status: 400 });
   }
 
