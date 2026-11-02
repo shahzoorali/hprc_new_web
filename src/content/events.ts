@@ -31,6 +31,16 @@ export const eventsContent = {
   },
   news: [
     {
+      title: "Artists crowned champions as arena polo comes of age at HPRC",
+      date: "2 November, 2026",
+      source: "HPRC",
+      excerpt:
+        "HPRC Arena Polo Tournament 2026: how it unfolded, the Final, the awards, and the way forward for arena polo at the Hyderabad Polo & Riding Club.",
+      url: "/events/news/artists-crowned-champions-arena-polo-2026",
+      category: "Results",
+      imageUrl: "/events/arena-polo-2026/hero.jpg",
+    },
+    {
       title: "Polo is the Passport to the World — HPRC in Madrid and Kentucky",
       date: "October, 2026",
       source: "HPRC",
